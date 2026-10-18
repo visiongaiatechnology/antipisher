@@ -23,7 +23,7 @@ function createDOMSandbox(locationHref) {
   const fakeDocument = {
     readyState: 'complete',
     getElementById(id) {
-      return null;
+      return attachedElements.find(e => e.id === id) || null;
     },
     querySelector(sel) {
       return null;
@@ -40,7 +40,7 @@ function createDOMSandbox(locationHref) {
             innerHTML: '',
             elements: {},
             getElementById(id) {
-              return this.elements[id] || { addEventListener: () => {} };
+              return this.elements[id] || { addEventListener: () => {}, classList: { add: () => {} } };
             }
           };
           el.shadowRoot = shadowRoot;
@@ -80,7 +80,9 @@ function createDOMSandbox(locationHref) {
     WeakSet,
     Set,
     Map,
-    console
+    console,
+    setTimeout,
+    clearTimeout
   };
   ctx.globalThis = ctx;
 
@@ -120,8 +122,8 @@ test('Content Shield intercepts form submissions targeting a phishing URL (closi
   const { prevented, stopped } = triggerSubmit(form);
   assert.equal(prevented, true, 'Form submission to paypa1.com must be prevented');
   assert.equal(stopped, true, 'Form event propagation must be stopped');
-  assert.ok(attachedElements.length >= 1, 'Warning dialog root must be injected');
-  assert.equal(attachedElements[0].id, 'antipisher-shield-root');
+  const modal = attachedElements.find(el => el.id === 'antipisher-shield-root');
+  assert.ok(modal, 'Warning dialog root must be injected');
 });
 
 test('Content Shield intercepts any form submission on a phishing site (even with relative action)', () => {
@@ -131,7 +133,8 @@ test('Content Shield intercepts any form submission on a phishing site (even wit
   const { prevented, stopped } = triggerSubmit(form);
   assert.equal(prevented, true, 'Form submission on paypa1.com must be prevented');
   assert.equal(stopped, true, 'Propagation must be stopped');
-  assert.ok(attachedElements.length >= 1, 'Warning dialog must be rendered');
+  const modal = attachedElements.find(el => el.id === 'antipisher-shield-root');
+  assert.ok(modal, 'Warning dialog must be rendered');
 });
 
 test('Content Shield allows legitimate form submissions without interference', () => {
@@ -140,7 +143,8 @@ test('Content Shield allows legitimate form submissions without interference', (
 
   const { prevented } = triggerSubmit(form);
   assert.equal(prevented, false, 'Legitimate PayPal submission must not be prevented');
-  assert.equal(attachedElements.length, 0, 'No warning dialog should be injected');
+  const modal = attachedElements.find(el => el.id === 'antipisher-shield-root');
+  assert.equal(modal, undefined, 'No warning dialog should be injected');
 });
 
 test('Content Shield does not hard-block forms on warning-level verdicts', () => {
@@ -150,5 +154,26 @@ test('Content Shield does not hard-block forms on warning-level verdicts', () =>
   const form = new FakeHTMLFormElement('/search');
   const { prevented } = triggerSubmit(form);
   assert.equal(prevented, false, 'warning-level page must not block unrelated forms');
-  assert.equal(attachedElements.length, 0);
+  const modal = attachedElements.find(el => el.id === 'antipisher-shield-root');
+  assert.equal(modal, undefined);
+});
+
+test('Content Shield shows Glass 2100 safe toast on verified benign domains', () => {
+  const { attachedElements } = createDOMSandbox('https://google.com/');
+  const toast = attachedElements.find(el => el.id === 'antipisher-safe-toast-root');
+  assert.ok(toast, 'Safe toast must be attached on clean benign domains');
+  assert.equal(toast.style.pointerEvents, 'none', 'Host must have pointer-events: none');
+  assert.ok(toast.shadowRoot, 'Toast must render in Shadow DOM');
+  assert.match(toast.shadowRoot.innerHTML, /toast-pill/);
+  assert.match(toast.shadowRoot.innerHTML, /Domain verified|Domain verifiziert|Домен проверен|域名已验证/);
+});
+
+test('Content Shield does not show safe toast on phishing or warning domains', () => {
+  const { attachedElements: fishEl } = createDOMSandbox('https://paypa1.com/login');
+  const fishToast = fishEl.find(el => el.id === 'antipisher-safe-toast-root');
+  assert.equal(fishToast, undefined, 'Safe toast must never show on phishing domains');
+
+  const { attachedElements: warnEl } = createDOMSandbox('https://evil.test/paypal/login');
+  const warnToast = warnEl.find(el => el.id === 'antipisher-safe-toast-root');
+  assert.equal(warnToast, undefined, 'Safe toast must never show on warning domains');
 });

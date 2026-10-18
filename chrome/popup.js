@@ -10,6 +10,8 @@
   let isStrict = true;
   let isDegraded = false;
 
+  let isShowSafeToast = true;
+
   function setStatus(state, title, sub, pill) {
     document.body.dataset.state = state;
     lastState = state;
@@ -28,22 +30,22 @@
         i18n ? i18n.t('pillDegraded', lang) : 'EINGESCHRÄNKT'
       );
       if ($('notice')) $('notice').textContent = i18n ? i18n.t('noticeInactive', lang) : 'Die DNR-Vorabprüfung konnte nicht installiert werden.';
-    } else if (!isStrict) {
+    } else if (isStrict) {
       setStatus(
-        'reduced',
-        i18n ? i18n.t('statusReduced', lang) : 'Best-Effort-Modus',
-        i18n ? i18n.t('statusReducedSub', lang) : 'Nur Beobachtung ohne präventive Blockade.',
-        i18n ? i18n.t('pillOff', lang) : 'AUS'
+        'active',
+        i18n ? i18n.t('statusActive', lang) : 'Schutz aktiv',
+        i18n ? i18n.t('noticeStrictActive', lang) : 'Streng: Jede Navigation durchläuft die Vollbild-Vorabprüfung.',
+        i18n ? i18n.t('pillOn', lang) : 'AN'
       );
-      if ($('notice')) $('notice').textContent = i18n ? i18n.t('noticeInactive', lang) : 'Inaktiv: keine präventive Blockade.';
+      if ($('notice')) $('notice').textContent = i18n ? i18n.t('noticeStrictActive', lang) : 'Streng: Jede Navigation durchläuft die Vollbild-Vorabprüfung.';
     } else {
       setStatus(
         'active',
         i18n ? i18n.t('statusActive', lang) : 'Schutz aktiv',
-        i18n ? i18n.t('statusActiveSub', lang) : 'GET-Navigationen werden lokal geprüft.',
+        i18n ? i18n.t('statusActiveSub', lang) : 'Verdächtige Seiten werden blockiert, sichere Seiten laden direkt.',
         i18n ? i18n.t('pillOn', lang) : 'AN'
       );
-      if ($('notice')) $('notice').textContent = i18n ? i18n.t('noticeActive', lang) : 'Aktiv: GET-Navigationen werden vor der Anfrage klassifiziert.';
+      if ($('notice')) $('notice').textContent = i18n ? i18n.t('noticeStrictInactive', lang) : 'Standard: Flüssiges Surfen ohne Vollbild-Unterbrechung bei sicheren Seiten.';
     }
   }
 
@@ -59,7 +61,9 @@
 
     if ($('lblBrands')) $('lblBrands').textContent = i18n ? i18n.t('metricBrands', lang) : 'Marken';
     if ($('lblBlocked')) $('lblBlocked').textContent = i18n ? i18n.t('metricBlocked', lang) : 'Abgewehrt';
-    if ($('settingTitle')) $('settingTitle').textContent = i18n ? i18n.t('settingPreflight', lang) : 'Vorabprüfung';
+    if ($('settingTitle')) $('settingTitle').textContent = i18n ? i18n.t('settingPreflight', lang) : 'Strenger Preflight-Modus';
+    if ($('toastSettingTitle')) $('toastSettingTitle').textContent = i18n ? i18n.t('settingSafeToast', lang) : 'Status-Toast bei sicheren Seiten';
+    if ($('toastNotice')) $('toastNotice').textContent = i18n ? i18n.t('noticeSafeToast', lang) : 'Blendet beim Öffnen verifizierter Websites kurz ein dezentes Glas-Badge ein.';
     if ($('urlLabel')) $('urlLabel').textContent = i18n ? i18n.t('checkLabel', lang) : 'Adresse prüfen';
     if ($('check')) $('check').textContent = i18n ? i18n.t('btnCheck', lang) : 'Prüfen';
     if ($('popupFooterOffline')) $('popupFooterOffline').textContent = 'AGPLv3 · ' + (i18n ? i18n.t('footerOffline', lang) : '100 % offline');
@@ -74,11 +78,13 @@
     $('sitecount').textContent = String(globalThis.VGT_SITES.length);
   }
 
-  api.storage.local.get(['blocked', 'strictMode', 'protectionDegraded', 'user_locale']).then(x => {
+  api.storage.local.get(['blocked', 'strictMode', 'showSafeToast', 'protectionDegraded', 'user_locale']).then(x => {
     $('blocked').textContent = String(x.blocked || 0);
-    isStrict = x.strictMode !== false;
+    isStrict = x.strictMode === true;
+    isShowSafeToast = x.showSafeToast !== false;
     isDegraded = !!x.protectionDegraded;
     $('strict').checked = isStrict;
+    if ($('safeToastToggle')) $('safeToastToggle').checked = isShowSafeToast;
 
     const savedLocale = x.user_locale;
     if (savedLocale && savedLocale !== 'auto') {
@@ -100,6 +106,13 @@
     await api.storage.local.set({ strictMode: isStrict });
     updateStatusDisplay();
   });
+
+  if ($('safeToastToggle')) {
+    $('safeToastToggle').addEventListener('change', async () => {
+      isShowSafeToast = $('safeToastToggle').checked;
+      await api.storage.local.set({ showSafeToast: isShowSafeToast });
+    });
+  }
 
   // Language bar buttons
   const langBar = $('popupLangBar');

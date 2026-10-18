@@ -151,7 +151,9 @@
       btnProceed: 'Send Anyway',
       footer: 'Verified locally · zero data transmitted to Antipisher · VisionGaiaTechnology',
       badge: 'Possible Phishing Site · Antipisher Warning',
-      defaultDesc: 'This address impersonates a protected brand or uses a deceptive domain structure.'
+      defaultDesc: 'This address impersonates a protected brand or uses a deceptive domain structure.',
+      toastTitle: 'Domain verified',
+      toastSub: 'Antipisher · Protected'
     },
     de: {
       tag: 'Formularschutz',
@@ -165,7 +167,9 @@
       btnProceed: 'Trotzdem senden',
       footer: 'Lokal geprüft · keine Übertragung an Antipisher · VisionGaiaTechnology',
       badge: 'Mögliche Phishing-Seite · Antipisher warnt',
-      defaultDesc: 'Diese Adresse imitiert eine geschützte Marke oder nutzt eine verdächtige Domainstruktur.'
+      defaultDesc: 'Diese Adresse imitiert eine geschützte Marke oder nutzt eine verdächtige Domainstruktur.',
+      toastTitle: 'Domain verifiziert',
+      toastSub: 'Antipisher · Geschützt'
     },
     ru: {
       tag: 'Защита форм',
@@ -179,7 +183,9 @@
       btnProceed: 'Все равно отправить',
       footer: 'Проверено локально · данные не передаются в Antipisher · VisionGaiaTechnology',
       badge: 'Возможный фишинг · Предупреждение Antipisher',
-      defaultDesc: 'Этот адрес имитирует защищенный бренд или использует подозрительную структуру домена.'
+      defaultDesc: 'Этот адрес имитирует защищенный бренд или использует подозрительную структуру домена.',
+      toastTitle: 'Домен проверен',
+      toastSub: 'Antipisher · Защищено'
     },
     zh: {
       tag: '表单防护',
@@ -193,7 +199,9 @@
       btnProceed: '仍然发送',
       footer: '本地验证 · 无数据传输至 Antipisher · VisionGaiaTechnology',
       badge: '疑似钓鱼网站 · Antipisher 提醒',
-      defaultDesc: '该地址假冒受保护的品牌或采用可疑的域名结构。'
+      defaultDesc: '该地址假冒受保护的品牌或采用可疑的域名结构。',
+      toastTitle: '域名已验证',
+      toastSub: 'Antipisher · 安全守护'
     }
   };
 
@@ -395,18 +403,168 @@
     document.documentElement.appendChild(bannerHost);
   }
 
+  function renderSafeToast() {
+    if (typeof document === 'undefined' || !document.documentElement) return null;
+    if (document.getElementById('antipisher-safe-toast-root')) return null;
+
+    const host = document.createElement('div');
+    host.id = 'antipisher-safe-toast-root';
+    host.style.position = 'fixed';
+    host.style.top = '16px';
+    host.style.right = '16px';
+    host.style.zIndex = '2147483647';
+    host.style.pointerEvents = 'none';
+
+    const shadow = host.attachShadow({ mode: 'closed' });
+    const lang = (globalThis.AntipisherI18n && typeof globalThis.AntipisherI18n.detectLanguage === 'function')
+      ? globalThis.AntipisherI18n.detectLanguage()
+      : detectShieldLang();
+    const str = SHIELD_I18N[lang] || SHIELD_I18N.en;
+    const titleText = (globalThis.AntipisherI18n ? globalThis.AntipisherI18n.t('toastSafeTitle', lang) : null) || str.toastTitle;
+    const subText = (globalThis.AntipisherI18n ? globalThis.AntipisherI18n.t('toastSafeSub', lang) : null) || str.toastSub;
+
+    shadow.innerHTML = `
+      <style>
+        :host { all: initial; }
+        @keyframes vgt-toast-in {
+          0% { opacity: 0; transform: translateY(-8px) scale(0.97); filter: blur(3px); }
+          100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        @keyframes vgt-toast-out {
+          0% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+          100% { opacity: 0; transform: translateY(-6px) scale(0.98); filter: blur(2px); }
+        }
+        .toast-pill {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 8px 14px 8px 10px;
+          border-radius: 999px;
+          border: 1px solid rgba(111, 227, 189, 0.35);
+          background: linear-gradient(135deg, rgba(16, 28, 24, 0.94), rgba(8, 16, 14, 0.96));
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+          -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          color: #f2f7f5;
+          user-select: none;
+          pointer-events: none;
+          animation: vgt-toast-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .toast-pill.fading {
+          animation: vgt-toast-out 0.35s cubic-bezier(0.4, 0, 1, 1) forwards;
+        }
+        .toast-mark {
+          width: 24px;
+          height: 24px;
+          flex: 0 0 auto;
+          display: grid;
+          place-items: center;
+          color: #6fe3bd;
+          border: 1px solid rgba(111, 227, 189, 0.4);
+          border-radius: 50%;
+          background: linear-gradient(145deg, rgba(111, 227, 189, 0.22), rgba(111, 227, 189, 0.05));
+          box-shadow: 0 0 10px rgba(111, 227, 189, 0.28);
+        }
+        .toast-mark svg {
+          width: 14px;
+          height: 14px;
+        }
+        .toast-copy {
+          display: flex;
+          flex-direction: column;
+          gap: 1px;
+          line-height: 1.2;
+        }
+        .toast-title {
+          font-size: 11px;
+          font-weight: 680;
+          letter-spacing: -0.01em;
+          color: #ffffff;
+          white-space: nowrap;
+        }
+        .toast-sub {
+          font-size: 8.5px;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          color: #6fe3bd;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+      </style>
+      <div class="toast-pill" id="pill" role="status" aria-live="polite">
+        <div class="toast-mark" aria-hidden="true">${BRAND_MARK}</div>
+        <div class="toast-copy">
+          <span class="toast-title">${escapeHtml(titleText)}</span>
+          <span class="toast-sub">${escapeHtml(subText)}</span>
+        </div>
+      </div>
+    `;
+
+    document.documentElement.appendChild(host);
+
+    const pill = shadow.getElementById('pill');
+    const timerFn = (typeof setTimeout === 'function' ? setTimeout : (typeof window !== 'undefined' && typeof window.setTimeout === 'function' ? window.setTimeout : null));
+    if (timerFn) {
+      timerFn(() => {
+        if (pill) pill.classList.add('fading');
+        timerFn(() => {
+          try { host.remove(); } catch {}
+        }, 360);
+      }, 2400);
+    }
+
+    return host;
+  }
+
+  function showSafeToast() {
+    if (typeof window === 'undefined' || !window.location) return;
+    const protocol = window.location.protocol;
+    if (protocol !== 'http:' && protocol !== 'https:') return;
+
+    const currentVerdict = getCurrentVerdict();
+    if (!currentVerdict || currentVerdict.status !== 'safe') return;
+
+    const api = globalThis.chrome || globalThis.browser;
+    if (api && api.storage && api.storage.local && typeof api.storage.local.get === 'function') {
+      try {
+        const getRes = api.storage.local.get(['showSafeToast'], (res) => {
+          if (res && res.showSafeToast === false) return;
+          renderSafeToast();
+        });
+        if (getRes && typeof getRes.then === 'function') {
+          getRes.then((res) => {
+            if (res && res.showSafeToast === false) return;
+            renderSafeToast();
+          }).catch(() => renderSafeToast());
+        }
+        return;
+      } catch {
+        // Fallback below
+      }
+    }
+    renderSafeToast();
+  }
+
+  function initContentShield() {
+    checkPasswordFields();
+    showSafeToast();
+  }
+
   window.addEventListener('submit', onFormSubmit, true);
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', checkPasswordFields);
+    document.addEventListener('DOMContentLoaded', initContentShield);
   } else {
-    checkPasswordFields();
+    initContentShield();
   }
 
   globalThis.AntipisherShield = {
     onFormSubmit,
     getCurrentVerdict,
     getTargetVerdict,
-    allowedForms
+    allowedForms,
+    showSafeToast,
+    renderSafeToast
   };
 })();

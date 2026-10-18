@@ -98,7 +98,7 @@ test('P0: German/EU bait and multiword-brand concatenations are covered', () => 
 test('P0: manifests keep WAR minimal and register the content shield', () => {
   for (const browser of ['chrome', 'firefox']) {
     const manifest = JSON.parse(fs.readFileSync(path.join(root, browser, 'manifest.json'), 'utf8'));
-    assert.equal(manifest.version, '0.1.1', browser);
+    assert.equal(manifest.version, '0.2.0', browser);
     const warResources = manifest.web_accessible_resources.flatMap(entry => entry.resources);
     assert.deepEqual(warResources, ['guard.html'], `${browser}: WAR must only expose guard.html`);
     const js = manifest.content_scripts[0].js.join(',');

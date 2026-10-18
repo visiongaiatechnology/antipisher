@@ -11,7 +11,7 @@ function fakeEvents(){
 }
 function sandbox(opts={}) {
  const events={installed:fakeEvents(),start:fakeEvents(),changed:fakeEvents(),removed:fakeEvents(),committed:fakeEvents(),before:fakeEvents(),message:fakeEvents()};
- const local={}; const dynamic=[];const session=[];const updated=[];
+ const local={ ...(opts.local || {}) }; const dynamic=[];const session=[];const updated=[];
  const chrome={
   runtime:{id:'fakeid',getURL:(p)=>'chrome-extension://fakeid/'+p,
     onInstalled:events.installed,onStartup:events.start,onMessage:events.message},
@@ -49,8 +49,23 @@ function sandbox(opts={}) {
  vm.runInContext(fs.readFileSync(path.join(root,'background.js'),'utf8'),context);
  return {chrome,local,dynamic,session,updated,events};
 }
-test('Chrome installs pre-request DNR gate and temporary exact-tab bypass',async()=>{
+
+test('Chrome defaults to standard quiet mode with direct navigation and targeted guard interception',async()=>{
  const x=sandbox();await delay();
+ assert.equal(x.dynamic.length,0,'Standard mode must not install global DNR redirect rule 1000');
+ x.events.before.listeners[0]({frameId:0,tabId:5,url:'https://paypa1.com/'});
+ await delay();
+ assert.equal(x.updated.length,1,'Suspicious domain must trigger guard redirect');
+ assert.match(x.updated[0].url,/chrome-extension:\/\/fakeid\/guard\.html/);
+
+ // Safe domain is not intercepted
+ x.events.before.listeners[0]({frameId:0,tabId:6,url:'https://google.com/'});
+ await delay();
+ assert.equal(x.updated.length,1,'Clean domain must not be redirected');
+});
+
+test('Chrome strict mode installs pre-request DNR gate and temporary exact-tab bypass',async()=>{
+ const x=sandbox({local:{strictMode:true}});await delay();
  assert.equal(x.dynamic.length,1);
  assert.equal(x.dynamic[0].action.type,'redirect');
  assert.equal(x.dynamic[0].condition.resourceTypes[0],'main_frame');
@@ -69,19 +84,22 @@ test('Chrome installs pre-request DNR gate and temporary exact-tab bypass',async
  await delay();
  assert.equal(x.session.length,0,'bypass is cleared on first navigation commit');
 });
-test('Chrome reduced mode removes DNR and only makes best-effort tab redirect',async()=>{
+
+test('Chrome dynamic mode toggle switches between standard direct browsing and strict preflight',async()=>{
  const x=sandbox();await delay();
+ assert.equal(x.dynamic.length,0);
+ x.local.strictMode=true;
+ for(const f of x.events.changed.listeners)f({strictMode:{newValue:true}},'local');
+ await delay();
+ assert.equal(x.dynamic.length,1,'Strict mode activation adds DNR rule 1000');
  x.local.strictMode=false;
  for(const f of x.events.changed.listeners)f({strictMode:{newValue:false}},'local');
  await delay();
- assert.equal(x.dynamic.length,0);
- x.events.before.listeners[0]({frameId:0,tabId:5,url:'https://paypa1.com/'});
- await delay();
- assert.equal(x.updated.length,1);
- assert.match(x.updated[0].url,/chrome-extension:\/\/fakeid\/guard\.html/);
+ assert.equal(x.dynamic.length,0,'Standard mode deactivates DNR rule 1000');
 });
+
 test('Chrome allows arbitrarily long URLs without the former 1900-char regex blocker',async()=>{
- const x=sandbox();await delay();
+ const x=sandbox({local:{strictMode:true}});await delay();
  const longUrl='https://example.com/?q='+('a'.repeat(5000));
  const messageListener=x.events.message.listeners[0];
  const response=await new Promise(resolve=>messageListener(
@@ -91,8 +109,9 @@ test('Chrome allows arbitrarily long URLs without the former 1900-char regex blo
  assert.equal(x.session.length,1);
  assert.deepEqual(JSON.parse(JSON.stringify(x.session[0].condition.tabIds)),[9]);
 });
+
 test('Chrome configure failure marks degraded and falls back to observer mode',async()=>{
- const x=sandbox({regexUnsupported:true});await delay();
+ const x=sandbox({regexUnsupported:true,local:{strictMode:true}});await delay();
  assert.equal(x.local.protectionDegraded,true,'degraded flag must be persisted for the popup');
  assert.equal(x.dynamic.length,0,'no redirect rule may be silently claimed');
  x.events.before.listeners[0]({frameId:0,tabId:11,url:'https://paypa1.com/'});
@@ -100,8 +119,9 @@ test('Chrome configure failure marks degraded and falls back to observer mode',a
  assert.equal(x.updated.length,1,'degraded mode must still perform best-effort guard redirect');
  assert.match(x.updated[0].url,/chrome-extension:\/\/fakeid\/guard\.html/);
 });
+
 test('Chrome concurrent startup/onInstalled configure calls do not produce duplicate rule errors',async()=>{
- const x=sandbox();await delay();
+ const x=sandbox({local:{strictMode:true}});await delay();
  await Promise.all([
   ...x.events.installed.listeners.map(l=>l()),
   ...x.events.start.listeners.map(l=>l())

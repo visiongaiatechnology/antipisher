@@ -6,9 +6,9 @@
 
 - **Produkt:** Antipisher (vormals VGT DomainGuard)
 - **Workspace:** `c:\Users\Masterboard\Downloads\VGT-DomainGuard-Source-v0.1.0\vgt-domainguard-src`
-- **Version:** `0.1.1` (Manifeste), Anzeige `0.1.1 Alpha`; ZIPs `v0.1.1-alpha`
+- **Version:** `0.2.0` (Manifeste), Anzeige `0.2.0 Alpha`; ZIPs `v0.2.0-alpha`
 - **Lizenz:** GNU Affero General Public License v3.0 (AGPLv3) — [`LICENSE`](LICENSE)
-- **Source Identity:** `UNVERSIONED_SNAPSHOT` — **kein Git-Repo/Commit/Tag**; Hashes siehe [`audit/verify/fix/P0_FIX_REPORT.md`](audit/verify/fix/P0_FIX_REPORT.md). Frühere „SOURCE_IDENTITY_CONFIRMED“-Angabe war unbelegt.
+- **Source Identity:** Git-Repository auf `main`, Remote `https://github.com/visiongaiatechnology/antipisher.git`.
 - **Zielplattformen:** Chrome MV3, Firefox MV3
 - **Dokumentation:** [`README.md`](README.md), [`ARCHITECTURE_AND_SECURITY_REVIEW.md`](ARCHITECTURE_AND_SECURITY_REVIEW.md), [`SECURITY.md`](SECURITY.md), [`audit/verify/fix/P0_FIX_REPORT.md`](audit/verify/fix/P0_FIX_REPORT.md)
 
@@ -107,23 +107,39 @@
   3. `tests/chrome-worker.test.cjs` erweitert um Unique-ID-Validierung im Mock und Concurrent-Startup-Test.
 - **Tests:** `node --test tests/*.test.cjs` → **39/39 PASS (100 %)**.
 
+### 2026-10-18 21:05 — Checkpoint 011: **Leises sicheres Surfen (Quiet Safe Browsing), Glass 2100 Status-Toast & Versionssprung auf 0.2.0 (Alpha)**
+- **Problemstellung & Nutzerfeedback:** Das Aufpoppen der Vollbild-Zwischenseite ("Adresse geprüft") bei absolut jedem regulären Seitenaufruf in Chrome störte den Nutzer erheblich ("nervt jedesmal :D"). Ziel: Sichere Seiten müssen flüssig und ohne Unterbrechung direkt laden; visuelle Bestätigung nur sanft und dezent als schwebender Glassmorphism-Badge.
+- **Implementierte Lösung:**
+  1. **Standard-Modus (`strictMode: false` als Standard):** In `chrome/background.js` wird die globale DNR-Redirect-Regel 1000 im Standardbetrieb nicht geladen. Sichere Seiten laden ohne jeden Zeitverlust direkt (0 ms zusätzliche Latenz).
+  2. **Gezielte Phishing-Blockade:** `webNavigation.onBeforeNavigate` fängt bösartige und verdächtige Domains (`status === 'block'`) sofort ab und leitet auf `guard.html` um. Einmalklicks ("Trotzdem fortfahren") werden via `observerBypass` tabgenau autorisiert.
+  3. **Strenger Preflight-Modus (`strictMode: true`):** Bleibt als optionaler Toggle im Popup erhalten für Hochsicherheitsumgebungen, die präventive Vollbild-Isolation vor jedem GET-Request wünschen.
+  4. **Glass 2100 Status-Toast (`shared/shield-content.js`):** Auf sauberen/verifizierten Domains wird im geschlossenen Shadow DOM (`attachShadow({ mode: 'closed' })`) ein zarter, schwebender Glas-Badge (*„Domain verifiziert · Antipisher · Geschützt“*) eingeblendet.
+     - Animiert sanft ein, bleibt ca. 2,4 Sekunden sichtbar, blendet sanft aus und entfernt sich rückstandslos aus dem DOM.
+     - `pointer-events: none` stellt sicher, dass Klicks auf der Zielseite niemals blockiert werden.
+     - Deaktivierbar über Popup-Einstellung (`showSafeToast: false`).
+  5. **100 % Key-Parität in `shared/i18n.js`:** Alle 4 Sprachen (EN, DE, RU, ZH) verfügen über die neuen Schlüssel `toastSafeTitle`, `toastSafeSub`, `settingSafeToast`, `noticeSafeToast`, `noticeStrictActive`, `noticeStrictInactive`.
+  6. **Popup & Manifeste aktualisiert:** Version `0.2.0` in `chrome/manifest.json`, `firefox/manifest.json`, `shared/popup.html`, `build.py`, `scripts/publish_github_releases.py`, `tests/p0-regressions.test.cjs`, `README.md`, `README.de.md`, `README.ru.md`, `README.zh.md`.
+- **Tests & Qualität:**
+  - `tests/shield-content.test.cjs`: Erweiterte Testabdeckung für Safe-Toast-Injektion, Shadow DOM, Pointer-Events und Einstellungsrespekt.
+  - `tests/chrome-worker.test.cjs`: Getrennte Verifikation von Standard-Quiet-Browsing (0 DNR-Regeln) und Strict-Preflight-Modus (1 DNR-Regel).
+  - `tests/p0-regressions.test.cjs`: Manifest-Versionsprüfung auf `0.2.0`.
+  - `node --test tests/*.test.cjs` → **42/42 PASS (100 %)**.
+
 ## Test-Ledger (zuletzt ausgeführt)
 
 | Befehl | Ergebnis |
 |---|---|
-| `node --test tests/*.test.cjs` (7 Dateien) | 39 pass / 0 fail, Exit 0 |
+| `node --test tests/*.test.cjs` (7 Dateien) | 42 pass / 0 fail, Exit 0 |
 | `node audit/verify/holdout/run_holdout.cjs` | 289/296, FN 0/166, FP 7/121, Exit 0 |
 | `node audit/verify/fix/fresh_sanity.cjs` | 42/44, Exit 0 |
 | `node audit/lead/lead_probe.cjs` | 0/26 FP, 0/40 FN, Exit 0 |
-| `python build.py` (2×) | byte-identische ZIPs, `SHA256SUMS.txt`, Exit 0 |
+| `python build.py` (2×) | byte-identische ZIPs (`v0.2.0-alpha`), `SHA256SUMS.txt`, Exit 0 |
 | `node --check` (detector/shield/guard/popup/i18n/background) | Exit 0 |
 
 ## Offene Risiken (nicht Release-blockierend für Alpha, aber vor Beta)
 
-- Chrome-Redirect-All + DNR-`regexSubstitution` (Store-/Runtime-Risiko).
-- Kein Browser-E2E; kein Firefox auf dem Host.
+- Echter Browser-E2E-Automatisierungstest; kein Firefox auf dem Host.
 - Offizielle Domaindaten unvollständig/nicht durchgängig verifiziert.
 - Rest-FPs (Marken-Subdomains, userinfo, Doku-Pfade) und Rest-FNs (Combosquat, 2-Edit, unbekannte Marken).
-- Keine Privacy-Policy/Store-Assets/Signierung/CI/Git.
 
-**Nächster atomarer Schritt:** Chrome-E2E manuell über `chrome://extensions` mit Testkatalog (harmlose Seite, `paypa1.com`, Warn-URL, POST, Fragment, Long-URL, SW-Restart, Popup-Status), danach Firefox `about:debugging`; Ergebnisse in `audit/verify/fix/BROWSER_E2E.md` dokumentieren.
+**Nächster atomarer Schritt:** Build ausführen, Checksums generieren, Git-Commit & Tags auf `v0.2.0-alpha` setzen, zu GitHub pushen und Release über GitHub API publizieren.

@@ -65,11 +65,11 @@
       // Footer
       footerOffline: '100% offline',
       footerZeroTelemetry: 'Zero telemetry',
-      versionText: 'Version 0.1.1 · Alpha',
+      versionText: 'Version 0.2.0 · Alpha',
 
       // Popup
       statusActive: 'Protection Active',
-      statusActiveSub: 'GET navigations and forms are verified locally.',
+      statusActiveSub: 'Suspicious domains are blocked, safe pages load instantly.',
       statusDegraded: 'Protection Degraded',
       statusDegradedSub: 'Preflight not active – best-effort mode. Please reload extension.',
       statusReduced: 'Best-Effort Mode',
@@ -81,9 +81,15 @@
       metricBrands: 'Brands',
       metricBlocked: 'Blocked',
 
-      settingPreflight: 'Preflight Check',
-      noticeActive: 'Active: GET navigations are classified before request.',
+      settingPreflight: 'Strict Preflight Mode',
+      noticeActive: 'Active: Suspicious sites are blocked, safe sites navigate directly without full-screen delay.',
       noticeInactive: 'Inactive: no preventive preflight.',
+      noticeStrictActive: 'Strict: All GET navigations are redirected through full-screen preflight gate.',
+      noticeStrictInactive: 'Standard: Smooth direct browsing without full-screen delay on safe sites.',
+      settingSafeToast: 'Status Toast on Safe Pages',
+      noticeSafeToast: 'Briefly displays a soft glass badge upon opening verified websites.',
+      toastSafeTitle: 'Domain verified',
+      toastSafeSub: 'Antipisher · Protected',
 
       checkLabel: 'Check Address',
       checkPlaceholder: 'paypa1.com',
@@ -172,10 +178,10 @@
 
       footerOffline: '100 % offline',
       footerZeroTelemetry: 'Zero telemetry',
-      versionText: 'Version 0.1.1 · Alpha',
+      versionText: 'Version 0.2.0 · Alpha',
 
       statusActive: 'Schutz aktiv',
-      statusActiveSub: 'GET-Navigationen werden lokal geprüft.',
+      statusActiveSub: 'Verdächtige Seiten werden blockiert, sichere Seiten laden direkt.',
       statusDegraded: 'Schutz eingeschränkt',
       statusDegradedSub: 'Vorabprüfung nicht installiert – Best-Effort-Erkennung aktiv. Bitte Erweiterung neu laden.',
       statusReduced: 'Best-Effort-Modus',
@@ -187,9 +193,15 @@
       metricBrands: 'Marken',
       metricBlocked: 'Abgewehrt',
 
-      settingPreflight: 'Vorabprüfung',
-      noticeActive: 'Aktiv: GET-Navigationen werden vor der Anfrage klassifiziert.',
+      settingPreflight: 'Strenger Preflight-Modus',
+      noticeActive: 'Aktiv: Verdächtige Seiten werden geblockt, sichere Seiten öffnen direkt ohne Vollbild-Redirect.',
       noticeInactive: 'Inaktiv: keine präventive Blockade.',
+      noticeStrictActive: 'Streng: Jede Navigation durchläuft die Vollbild-Vorabprüfung.',
+      noticeStrictInactive: 'Standard: Flüssiges Surfen ohne Vollbild-Unterbrechung bei sicheren Seiten.',
+      settingSafeToast: 'Status-Toast bei sicheren Seiten',
+      noticeSafeToast: 'Blendet beim Öffnen verifizierter Websites kurz ein dezentes Glas-Badge ein.',
+      toastSafeTitle: 'Domain verifiziert',
+      toastSafeSub: 'Antipisher · Geschützt',
 
       checkLabel: 'Adresse prüfen',
       checkPlaceholder: 'paypa1.com',
@@ -276,10 +288,10 @@
 
       footerOffline: '100% офлайн',
       footerZeroTelemetry: 'Без телеметрии',
-      versionText: 'Версия 0.1.1 · Альфа',
+      versionText: 'Версия 0.2.0 · Альфа',
 
       statusActive: 'Защита активна',
-      statusActiveSub: 'GET-навигация и формы проверяются локально.',
+      statusActiveSub: 'Подозрительные домены блокируются, безопасные сайты открываются мгновенно.',
       statusDegraded: 'Защита ограничена',
       statusDegradedSub: 'Предпроверка не установлена — режим наблюдения. Перезагрузите расширение.',
       statusReduced: 'Режим наблюдения',
@@ -291,9 +303,15 @@
       metricBrands: 'Бренды',
       metricBlocked: 'Отражено',
 
-      settingPreflight: 'Предпроверка',
-      noticeActive: 'Активно: GET-навигация проверяется перед отправкой запроса.',
+      settingPreflight: 'Строгий режим предпроверки',
+      noticeActive: 'Активно: Подозрительные сайты блокируются, безопасные открываются сразу без задержки.',
       noticeInactive: 'Неактивно: превентивная блокировка отключена.',
+      noticeStrictActive: 'Строгий: Все переходы проходят полноэкранную предпроверку.',
+      noticeStrictInactive: 'Стандартный: Плавный серфинг без полноэкранных задержек на безопасных сайтах.',
+      settingSafeToast: 'Уведомление для безопасных сайтов',
+      noticeSafeToast: 'Кратковременно показывает аккуратный стеклянный бейдж при открытии проверенных сайтов.',
+      toastSafeTitle: 'Домен проверен',
+      toastSafeSub: 'Antipisher · Защищено',
 
       checkLabel: 'Проверить адрес',
       checkPlaceholder: 'paypa1.com',
@@ -380,10 +398,10 @@
 
       footerOffline: '100% 离线运行',
       footerZeroTelemetry: '零遥测数据',
-      versionText: '版本 0.1.1 · Alpha',
+      versionText: '版本 0.2.0 · Alpha',
 
       statusActive: '防护已启用',
-      statusActiveSub: 'GET 导航与表单均在本地进行验证。',
+      statusActiveSub: '可疑域名被拦截，安全网页直接即时加载。',
       statusDegraded: '防护受限',
       statusDegradedSub: '预检规则未加载 — 当前为尽力检测模式。请重新加载扩展。',
       statusReduced: '尽力检测模式',
@@ -395,9 +413,15 @@
       metricBrands: '品牌数',
       metricBlocked: '已拦截',
 
-      settingPreflight: '预检拦截',
-      noticeActive: '已启用：GET 导航在发起网络请求前完成分类。',
+      settingPreflight: '严格预检模式',
+      noticeActive: '已启用：可疑网站被拦截，安全网站直接访问无全屏延迟。',
       noticeInactive: '已停用：不进行预防性预检拦截。',
+      noticeStrictActive: '严格：所有 GET 导航均通过全屏预检关卡。',
+      noticeStrictInactive: '标准：安全网站流畅直达，无全屏打扰。',
+      settingSafeToast: '安全网站状态气泡提示',
+      noticeSafeToast: '在访问已验证网站时短暂显示微晶毛玻璃徽标。',
+      toastSafeTitle: '域名已验证',
+      toastSafeSub: 'Antipisher · 安全守护',
 
       checkLabel: '检查网址',
       checkPlaceholder: 'paypa1.com',

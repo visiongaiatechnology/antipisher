@@ -5,7 +5,7 @@
 importScripts('shared/sites.js', 'shared/detector.js');
 const RULE_ID=1000;
 const ALLOW_START=10001;
-let strict=true;
+let strict=false;
 let degraded=false;
 let counter=ALLOW_START;
 const pending=new Map(); // tabId -> temporary DNR rule ID
@@ -30,7 +30,7 @@ function configure() {
 }
 
 async function doConfigure() {
-  const {strictMode=true}=await api.storage.local.get('strictMode');strict=strictMode;
+  const {strictMode=false}=await api.storage.local.get('strictMode');strict=strictMode;
   // Session allow rules can outlive MV3 service-worker instances. Fail closed on startup.
   const oldSessions=await api.declarativeNetRequest.getSessionRules();
   const stale=oldSessions.filter(r=>r.id>=ALLOW_START).map(r=>r.id);

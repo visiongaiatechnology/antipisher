@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.1.1 (Alpha)
+# 🛡️ Antipisher 0.2.0 (Alpha)
 
 **适用于 Google Chrome 与 Mozilla Firefox 的离线高精度反网络钓鱼、IDN 同形字与拼写抢注（Typosquatting）防护扩展**  
 *遵循 GNU Affero 通用公共许可证 v3.0 (AGPLv3) 开源*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.1.1-alpha](https://img.shields.io/badge/Version-0.1.1--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiaofficial/antipisher)
-[![Tests: 38/38 Passing](https://img.shields.io/badge/Tests-38%2F38_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
+[![Version: 0.2.0-alpha](https://img.shields.io/badge/Version-0.2.0--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 42/42 Passing](https://img.shields.io/badge/Tests-42%2F42_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge)](#隐私保护与离线保证)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_就绪-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,13 +22,15 @@
 
 </div>
 
-> **状态：** `SILVER` · 版本 `0.1.1` · 截至 2026-10-18 · P0 加固 Alpha 里程碑版本。  
+> **状态：** `SILVER` · 版本 `0.2.0` · 截至 2026-10-18 · 静默安全浏览 Alpha 里程碑版本。  
 > **非最终应用商店发行版：** 浏览器自动化端到端测试（E2E）、应用商店官方上架审核、签名更新分发流与完整的 V2 图引擎正在持续演进中（详见 [已知边界与限制](#已知边界与限制)）。
 
 ---
 
 ## ⚡ 核心能力与已实现特性
 
+- **静默安全浏览与 Glass 2100 状态提示气泡：** 干净、安全的正常网站直接即时加载（0 ms 额外延迟），彻底消除全屏拦截闪烁打扰。访问已验证网站时，屏幕右上角会短暂浮现轻盈雅致的微晶毛玻璃状态胶囊（*“域名已验证 · Antipisher”*），并自动淡出，且完全不阻碍网页鼠标点击（`pointer-events: none`）。
+- **标准模式与严格预检模式自由切换：** 默认标准模式提供无感顺畅的日常直达体验与精准钓鱼拦截；严格模式可为高风险安全需求者开启针对每一个 GET 导航的全屏预检关卡。
 - **多语言原生支持（4 种语言）：** 界面与检测原因全面支持**中文 (`zh`)**、**英语 (`en`)**、**德语 (`de`)** 和**俄语 (`ru`)**。扩展会自动根据浏览器首选语言设定默认显示，并支持随时手动切换。
 - **187 个严选知名品牌 / 353 个官方根域名：** 覆盖顶级金融机构、政府政务、加密货币交易平台、云与 AI 基础设施、物流快递及国际互联网巨头，详见 [`shared/sites.js`](shared/sites.js) / `sites-100.json`。
 - **共享托管命名空间隔离：** 严格隔离公共后缀与多租户平台域名（`force.com`、`github.io`、`vercel.app`、`netlify.app`、`wordpress.com` 等），绝不将其直接作为品牌根域名放行。例如：`paypal.force.com` 或 `paypal.github.io` 会被精确拦截，而真正的官方平台则正常访问。

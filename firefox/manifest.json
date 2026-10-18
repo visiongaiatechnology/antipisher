@@ -4,7 +4,7 @@
   "name": "Antipisher",
   "short_name": "Antipisher",
   "description": "__MSG_appDesc__",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "permissions": [
     "storage",
     "tabs",
@@ -40,6 +40,7 @@
       "js": [
         "shared/sites.js",
         "shared/detector.js",
+        "shared/i18n.js",
         "shared/shield-content.js"
       ],
       "run_at": "document_start",

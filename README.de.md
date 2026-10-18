@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.1.1 (Alpha)
+# 🛡️ Antipisher 0.2.0 (Alpha)
 
 **Offline-fähiger, hochpräziser Schutz vor Phishing, IDN-Homoglyphen & Typosquatting für Google Chrome & Mozilla Firefox**  
 *Lizenziert unter der GNU Affero General Public License v3.0 (AGPLv3)*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.1.1-alpha](https://img.shields.io/badge/Version-0.1.1--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiaofficial/antipisher)
-[![Tests: 38/38 Passing](https://img.shields.io/badge/Tests-38%2F38_Passing-2ea043.svg?style=for-the-badge)](#tests--entwicklung)
+[![Version: 0.2.0-alpha](https://img.shields.io/badge/Version-0.2.0--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 42/42 Passing](https://img.shields.io/badge/Tests-42%2F42_Passing-2ea043.svg?style=for-the-badge)](#tests--entwicklung)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Telemetrie-Keine_%2F_100%25_Offline-0284c7.svg?style=for-the-badge)](#datenschutz--offline-garantien)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Bereit-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_Bereit-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,13 +22,15 @@
 
 </div>
 
-> **Status:** `SILVER` · Version `0.1.1` · Stand: 18.10.2026 · P0-gehärteter Alpha-Meilenstein.  
+> **Status:** `SILVER` · Version `0.2.0` · Stand: 18.10.2026 · Leises sicheres Surfen Alpha-Meilenstein.  
 > **Kein finales Store-Produkt:** Browser-E2E-Tests, offizielle Store-Listung, signierte Update-Feeds und die vollständige V2-Graph-Engine sind laufende Entwicklungsziele (siehe [Bekannte Grenzen & Einschränkungen](#bekannte-grenzen--einschränkungen)).
 
 ---
 
 ## ⚡ Kernfunktionen & Umgesetzte Features
 
+- **Leises sicheres Surfen & Glass 2100 Status-Toast:** Saubere, verifizierte Webseiten öffnen direkt ohne zusätzliche Latenz (0 ms) und ohne störende Vollbild-Unterbrechungen. Beim Aufrufen verifizierter Webseiten erscheint kurz ein dezenter, schwebender Glass-2100-Status-Toast (*„Domain verifiziert · Antipisher“*), der sanft ausblendet, ohne Klicks zu blockieren (`pointer-events: none`).
+- **Standard-Modus vs. Strenger Preflight-Modus:** Der Standard-Modus ermöglicht flüssiges Surfen mit gezielter Phishing-Abwehr; der optionale strenge Modus schaltet eine vollständige Vollbild-Vorabprüfung vor jeden GET-Aufruf.
 - **Mehrsprachigkeit (4 Sprachen):** Vollständig lokalisierte Benutzeroberfläche und Erkennungserklärungen in **Deutsch (`de`)**, **Englisch (`en`)**, **Russisch (`ru`)** und **Chinesisch (`zh`)**. Die Erweiterung erkennt automatisch die Browsersprache als Standard, bietet jedoch jederzeit manuelles Umschalten.
 - **187 kuratierte Marken / 353 offizielle Domains:** Umfassende Abdeckung von Finanzinstituten (Sparkasse, Volksbank, ING, DKB, Deutsche Bank etc.), Behörden (Bund, Elster), Krypto-Börsen, Cloud/KI-Infrastruktur, Logistik (DHL, Hermes) sowie internationalen Konzernen in [`shared/sites.js`](shared/sites.js) / `sites-100.json`.
 - **Isolation von Shared-Hosting-Namespaces:** Public-Suffix- und Multi-Tenant-Domains (`force.com`, `github.io`, `vercel.app`, `netlify.app`, `wordpress.com` etc.) werden isoliert und niemals als exklusive Marken-Roots gewertet. Beispielsweise werden `paypal.force.com` oder `paypal.github.io` abgefangen, während die legitime Plattform selbst erreichbar bleibt.
