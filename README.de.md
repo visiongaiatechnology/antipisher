@@ -27,39 +27,57 @@
 
 ---
 
-## ⚡ Kernfunktionen & Umgesetzte Features
+## ⚡ Kernfunktionen & Architektur-Module
 
-- **Dediziertes Einstellungsmenü & Benutzerdefinierte Whitelist:** Vollständige Konfigurationsoberfläche (`options.html`), erreichbar über das Zahnrad-Symbol im Popup oder die Browser-Erweiterungsverwaltung. Steuert Standard- vs. strengen Modus, Safe-Toast, Badge-Zähler, Sprache und ermöglicht das lokale Pflegen einer benutzerdefinierten Domain-Whitelist (sofortige Freigabe ohne externe Abfragen).
-- **AEGIS Tracker Shield (uBlock-inspirierter lokaler Schutz):** Rein lokaler deklarativer Netzwerk-Filter (`rulesets/trackers.json`) kombiniert mit dynamischen Script-Surrogates für `ga`, `dataLayer`, `fbq`, `ttq`, `clarity`, `hj` und `navigator.sendBeacon`. Verhindert das Einfrieren von Checkouts und Logins bei vollständiger Unterbindung von Werbe- und Analysetelemetrie. Bereinigt URL-Tracking-Parameter (`utm_*`, `fbclid`, `gclid`).
-- **Echtzeit Live-Tracker-Zähler:** Toolbar-Icon-Badge und Popup zeigen in Echtzeit geblockte Tracker (`Tab: X · Gesamt: Y`) und erfassen präzise auch dynamisch oder asynchron nachladende Tracker-Skripte.
-- **GeDefense Light DOM-Hypervisor:** Self-XSS Konsole-Schutzwarnung gegen Social Engineering, kognitive Fast-Path Engine für HTML-Säuberung ohne Parsing-Overhead, Inline-Script- und Iframe-Injektions-Neutralisierung sowie Prototype-Level `javascript:` URI-Entschärfung.
-- **AEGIS Anti-Fingerprinting Cloaking:** Screen-Geometrie-Fuzzing und subtiles Canvas 1-Bit-Rauschen gegen geräte- und profilübergreifendes Browser-Fingerprinting.
-- **Leises sicheres Surfen & Glass 2100 Status-Toast:** Saubere, verifizierte Webseiten öffnen direkt ohne zusätzliche Latenz (0 ms) und ohne störende Vollbild-Unterbrechungen. Beim Aufrufen verifizierter Webseiten erscheint kurz ein dezenter, schwebender Glass-2100-Status-Toast (*„Domain verifiziert · Antipisher“*), der sanft ausblendet, ohne Klicks zu blockieren (`pointer-events: none`).
-- **Standard-Modus vs. Strenger Preflight-Modus:** Der Standard-Modus ermöglicht flüssiges Surfen mit gezielter Phishing-Abwehr; der optionale strenge Modus schaltet eine vollständige Vollbild-Vorabprüfung vor jeden GET-Aufruf.
-- **Mehrsprachigkeit (4 Sprachen):** Vollständig lokalisierte Benutzeroberfläche und Erkennungserklärungen in **Deutsch (`de`)**, **Englisch (`en`)**, **Russisch (`ru`)** und **Chinesisch (`zh`)**. Die Erweiterung erkennt automatisch die Browsersprache als Standard, bietet jedoch jederzeit manuelles Umschalten.
-- **187 kuratierte Marken / 353 offizielle Domains:** Umfassende Abdeckung von Finanzinstituten (Sparkasse, Volksbank, ING, DKB, Deutsche Bank etc.), Behörden (Bund, Elster), Krypto-Börsen, Cloud/KI-Infrastruktur, Logistik (DHL, Hermes) sowie internationalen Konzernen in [`shared/sites.js`](shared/sites.js) / `sites-100.json`.
-- **Isolation von Shared-Hosting-Namespaces:** Public-Suffix- und Multi-Tenant-Domains (`force.com`, `github.io`, `vercel.app`, `netlify.app`, `wordpress.com` etc.) werden isoliert und niemals als exklusive Marken-Roots gewertet. Beispielsweise werden `paypal.force.com` oder `paypal.github.io` abgefangen, während die legitime Plattform selbst erreichbar bleibt.
-- **Heuristische Analyse-Engine:**
-  - **Damerau-Levenshtein 1 & 2:** Erkennt Vertauschungen benachbarter Buchstaben (`amzaon.com`, `goolge.com`, `paypla.com`).
+### 🛡️ 1. Phishing-, Marken- & Domain-Schutz
+- **187 kuratierte Marken / 353 offizielle Domains:** Umfassende Offline-Datenbank für Finanzinstitute (Sparkasse, Volksbank, ING, DKB, Deutsche Bank etc.), Behörden (Bund, Elster), Krypto-Börsen, Cloud/KI-Infrastruktur, Logistik (DHL, Hermes) sowie internationale Plattformen in [`shared/sites.js`](shared/sites.js).
+- **Heuristische Multi-Vektor-Erkennungs-Engine:**
+  - **Tippfehler- & Buchstabendreher-Schutz:** Damerau-Levenshtein 1 & 2 Distanz fängt Vertauschungen benachbarter Buchstaben ab (`amzaon.com`, `goolge.com`, `paypla.com`).
   - **1-Bit Bitsquatting (`isBitFlip`):** Erkennt Bit-Flips durch Hardware- oder DNS-Speicherübertragungsfehler (`amaxon.com` → Amazon, `microsmft.com` → Microsoft, `gongle.com` → Google).
-  - **Visuelle Ligaturen & Substitutionen:** Deckt optische Zwillingszeichen auf (`arnazon.com` durch `rn→m`, `rnicrosoft.com`, `vv→w`, `cl→d`).
+  - **Visuelle Ligaturen & Zwillingszeichen:** Deckt optische 2-Edit-Ähnlichkeiten auf (`arnazon.com` durch `rn→m`, `rnicrosoft.com`, `vv→w`, `cl→d`).
   - **Unicode-Homoglyphen & Diakritika:** Identifiziert gemischte Schriftsysteme aus Kyrillisch, Griechisch, eingekreisten Zeichen und lateinischen Diakritika (`páypal.com`, `päypal.com`, `mïcrosoft.com`, `amazön.com`), ohne echte Begriffe wie `über.de` fälschlicherweise zu blockieren.
-  - **Bidirektionale Steuerzeichen (UTS #39 / RFC 8264):** Blockiert unsichtbare RTL/LTR-Richtungswechsler (`\u202E`, `\u202A`–`\u202E`, `\u2066`–`\u2069`).
+  - **Bidirektionale Steuerzeichen (UTS #39 / RFC 8264):** Blockiert unsichtbare RTL/LTR-Richtungswechsler zur Verschleierung von Dateiendungen und Domains (`\u202E`, `\u202A`–`\u202E`, `\u2066`–`\u2069`).
   - **Marken- & Credential-Ködersubstantive:** Fängt ungegliederte Keyword-Kombinationen ab (`paypalsupport.com`, `binancelogin.com`, `paypal-rechnung.com`, `dhl-sendung.de`, `sparkasse-kontoauszug.de`).
   - **Subdomain-Impersonation:** Erkennt missbrauchte Markennamen auf fremden Domains (`apple.attacker.com`, `paypal.evil.test`).
   - **RFC 3986 Userinfo-Täuschung:** Blockiert irreführende Benutzerinformations-Präfixe (`https://paypal.com@evil.com/`).
 - **Ebene 3: Pfad- & Query-Prüfung:** Erkennt gezielten Identitätsdiebstahl in URL-Pfaden auf fremden Hosts (z. B. `https://unrelated.com/paypal/login`, `https://phish-host.org/paypal.com/verify`), schützt jedoch legitime Entwickler-Dokumentationen, API-Referenzen und Nachrichtenartikel (`/docs/`, `/news/`, `/blog/`).
+- **Isolation von Shared-Hosting-Namespaces:** Public-Suffix- und Multi-Tenant-Domains (`force.com`, `github.io`, `vercel.app`, `netlify.app`, `wordpress.com` etc.) werden isoliert und niemals als exklusive Marken-Roots gewertet (`paypal.force.com` geblockt, Plattform-Root bleibt sicher erreichbar).
 - **Offizielle Länder-TLD-Intelligenz:** Erkennt offizielle Ländervertretungen globaler Marken als legitim an (`google.co.jp`, `amazon.se`, `ing.nl`, `visa.de`); warnt informativ bei uneindeutigen TLDs und blockiert strikt verdächtige generische TLDs.
 - **In-Page Content Shield (`shared/shield-content.js`):**
   - Schließt die POST-Navigationslücke von Chrome MV3 declarativeNetRequest (DNR).
   - Fängt Formularabsendungen (`submit`-Event in der DOM-Capture-Phase) ab, bevor Zugangsdaten den Browser verlassen können.
   - Rendert ein manipulationssicheres Glass-2100-Warn-Modal in einem geschlossenen Shadow DOM (`attachShadow({ mode: 'closed' })`), immun gegen CSS-Resets und Skriptangriffe der Hostseite.
   - Hebt Passwortfelder auf verdächtigen Domains automatisch mit einem dezenten Schutz-Badge hervor.
-- **Firefox MV3 Konformität:** Deklariert `web_accessible_resources` für `guard.html` und setzt `data_collection_permissions: {"required":["none"]}` gemäß MDN- und AMO-Richtlinien.
+
+### 🚫 2. Tracker- & Telemetrie-Abwehr (AEGIS Tracker Shield)
+- **Lokale deklarative Netzwerksperren:** Native deklarative Regelsätze (`rulesets/trackers.json`) zur Blockade kommerzieller Werbe-, Analyse- und Telemetrienetzwerke in Chrome MV3 (DNR) und Firefox (webRequest).
+- **Dynamische Skript-Surrogates (uBlock-Prinzip):** In-Page Funktions-Ersatz für `window.ga`, `window.dataLayer`, `window.fbq`, `window.ttq`, `window.clarity`, `window.hj` und `navigator.sendBeacon`. Verhindert das Einfrieren von Checkouts, Formularen und Logins bei vollständiger Unterbindung von Telemetriedaten.
+- **URL-Tracking-Parameter-Sanitizer:** Bereinigt kommerzielle Tracking-Tokens (`utm_source`, `utm_medium`, `fbclid`, `gclid` etc.) automatisch und nahtlos via `history.replaceState`.
+- **Echtzeit Live-Tracker-Zähler:** Toolbar-Icon-Badge und Popup zeigen in Echtzeit geblockte Tracker (`Tab: X · Gesamt: Y`) und erfassen präzise auch dynamisch oder asynchron nachladende Tracker-Skripte.
+
+### ⚡ 3. DOM- & Skript-Sicherheit (GeDefense Light)
+- **Self-XSS Konsole-Schutz:** Warnt Anwender in den Entwicklertools mit einer deutlichen Sicherheitswarnung vor Social-Engineering-Paste-Attacken.
+- **Cognitive Fast-Path Engine:** Extrem performante Heuristik-Prüfung auf potenziell schädliche Tags (`<script>`, `<iframe>`) ohne unnötigen DOM-Parsing-Overhead.
+- **Dynamische Injektions- & Protokoll-Neutralisierung:** Entschärft gefährliche Script- und Iframe-Injektionen, entfernt Inline-Handler (`onerror`, `onclick`) und unterbindet `javascript:` URI-Ausführungen auf Prototyp-Ebene (`Element.prototype.setAttribute`).
+
+### 🎭 4. Privatsphäre & Anti-Fingerprinting
+- **Canvas & WebGL Cloaking:** Injiziert subtiles, unmerkliches 1-Bit-Rauschen bei Canvas-Ausleseoperationen und maskiert WebGL-Renderer-Strings gegen geräteübergreifendes Fingerprinting.
+- **Screen-Geometrie-Fuzzing:** Normalisiert und fuzzt Bildschirmmaße zur Verhinderung hardwarebasierter Geräte-Wiedererkennung.
+- **Rotierender digitaler Identitäts-Seed:** Generiert eine kryptografische Sitzungsidentität mit 1-Klick-Neu-Würfeln direkt im Popup oder Einstellungsmenü.
+- **100 % Offline & Null Telemetrie:** Keine externen HTTP-Aufrufe, keine Cloud-Abhängigkeiten, keine API-Schlüssel, keine Speicherung des Browserverlaufs.
+
+### ⚙️ 5. Benutzerfreundlichkeit, Einstellungen & Whitelist
+- **Dediziertes Einstellungsmenü (`options.html`):** Vollständiges Glass-2100-Options-Dashboard, erreichbar über das Zahnrad-Symbol im Popup oder die Browser-Erweiterungsverwaltung.
+- **Benutzerdefinierte Domain-Whitelist:** Schnelles Pflegen vertrauenswürdiger Domains und Intranet-Portale (z. B. Firmen-SSO), mit sofortiger lokaler Freigabe ohne externe Abfragen.
+- **Leises sicheres Surfen & Glass 2100 Status-Toast:** Saubere, verifizierte Webseiten öffnen direkt ohne zusätzliche Latenz (0 ms) und ohne störende Vollbild-Unterbrechungen. Beim Aufrufen verifizierter Webseiten erscheint kurz ein dezenter, schwebender Glass-2100-Status-Toast (*„Domain verifiziert · Antipisher“*), der sanft ausblendet, ohne Klicks zu blockieren (`pointer-events: none`).
+- **Standard- vs. Strenger Preflight-Modus:** Der Standard-Modus ermöglicht flüssiges Surfen mit gezielter Phishing-Abwehr; der optionale strenge Modus schaltet eine vollständige Vollbild-Vorabprüfung vor jeden GET-Aufruf.
+- **4 Muttersprachen:** 100 % Parität in Deutsch (`de`), Englisch (`en`), Russisch (`ru`) und Chinesisch (`zh`), automatische Erkennung der Browsersprache mit manuellem Override.
+
+### 🏗️ 6. Architektur, Barrierefreiheit & Build-Integrität
 - **Chrome MV3 Preflight & Beseitigung von Fail-Open:** Führt GET-Anfragen über DNR; bei einem DNR-Konfigurationsfehler schaltet Antipisher sofort in einen klar signalisierten Degraded-Modus mit Observer-Fallback. Beseitigt willkürliche URL-Längenbeschränkungen.
-- **Glass 2100 UI & Barrierefreiheit:** Gemeinsame Design-Tokens (`shared/design-tokens.css`), WCAG-AA-konforme Kontrastwerte, vollständige Tastatursteuerung mit Fokusringen, ARIA `alertdialog`, Unterstützung für Prefers-Reduced-Motion und Forced-Colors.
+- **Firefox MV3 Konformität:** Synchrones `webRequestBlocking` + In-Page Shield mit deklarierten `web_accessible_resources` und `data_collection_permissions: {"required":["none"]}` gemäß MDN- und AMO-Richtlinien.
+- **Glass 2100 Design System:** Gemeinsame Design-Tokens (`shared/design-tokens.css`), WCAG-AA-konforme Kontrastwerte (≥ 4.5:1), vollständige Tastatursteuerung mit 2px Fokusringen, ARIA `alertdialog`, Unterstützung für Prefers-Reduced-Motion und Forced-Colors.
 - **100 % bit-identische reproduzierbare Builds:** Deterministische ZIP-Erstellung mit festen Zeitstempeln via `build.py` und zentrale Prüfsummen in [`SHA256SUMS.txt`](SHA256SUMS.txt).
-- **Zero-Telemetrie & Offline-Datenschutz:** Keine externen Netzwerkaufrufe, keine externen CDNs, keine API-Schlüssel, keine Speicherung des Browserverlaufs.
 
 ---
 

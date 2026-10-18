@@ -27,39 +27,57 @@
 
 ---
 
-## ⚡ 核心能力与已实现特性
+## ⚡ 核心能力与架构模块
 
-- **独立设置控制面板与自定义白名单：** 具备完整的选项设置中心（`options.html`），可直接通过弹出菜单齿轮按钮或扩展管理面板进入。支持切换标准/严格模式、安全提示气泡、角标计数、首选语言，并可在本地管理自定义域名白名单（无需联网、即时跳过检测）。
-- **AEGIS Tracker Shield（灵感源自 uBlock 的纯本地防护）：** 纯本地声明式网络规则拦截（`rulesets/trackers.json`）与针对 `ga`、`dataLayer`、`fbq`、`ttq`、`clarity`、`hj` 及 `navigator.sendBeacon` 的动态脚本替代替身（Surrogates），在彻底阻断商业追踪遥测的同时确保在线结账与登录永不卡顿挂起。自动净化 URL 追踪查询参数（`utm_*`、`fbclid`、`gclid`）。
-- **实时动态追踪器计数器：** 浏览器工具栏图标角标与弹出菜单实时展示拦截数字（`标签页: X · 总计: Y`），精准追踪包括动态与延迟加载在内的第三方追踪脚本。
-- **GeDefense Light DOM 超级卫士：** 控制台防社工钓鱼 Self-XSS 警示横幅、认知快速通道零开销 HTML 过滤净化、内联脚本与 iframe 恶意注入中和，以及原型链层面的 `javascript:` 伪协议执行拦截。
-- **AEGIS 反指纹追踪（Anti-Fingerprinting）：** 屏幕几何尺寸混淆与微幅 Canvas 1-bit 噪声注入，有效抵御跨站浏览器指纹追踪。
-- **静默安全浏览与 Glass 2100 状态提示气泡：** 干净、安全的正常网站直接即时加载（0 ms 额外延迟），彻底消除全屏拦截闪烁打扰。访问已验证网站时，屏幕右上角会短暂浮现轻盈雅致的微晶毛玻璃状态胶囊（*“域名已验证 · Antipisher”*），并自动淡出，且完全不阻碍网页鼠标点击（`pointer-events: none`）。
-- **标准模式与严格预检模式自由切换：** 默认标准模式提供无感顺畅的日常直达体验与精准钓鱼拦截；严格模式可为高风险安全需求者开启针对每一个 GET 导航的全屏预检关卡。
-- **多语言原生支持（4 种语言）：** 界面与检测原因全面支持**中文 (`zh`)**、**英语 (`en`)**、**德语 (`de`)** 和**俄语 (`ru`)**。扩展会自动根据浏览器首选语言设定默认显示，并支持随时手动切换。
-- **187 个严选知名品牌 / 353 个官方根域名：** 覆盖顶级金融机构、政府政务、加密货币交易平台、云与 AI 基础设施、物流快递及国际互联网巨头，详见 [`shared/sites.js`](shared/sites.js) / `sites-100.json`。
-- **共享托管命名空间隔离：** 严格隔离公共后缀与多租户平台域名（`force.com`、`github.io`、`vercel.app`、`netlify.app`、`wordpress.com` 等），绝不将其直接作为品牌根域名放行。例如：`paypal.force.com` 或 `paypal.github.io` 会被精确拦截，而真正的官方平台则正常访问。
-- **启发式检测核心引擎：**
-  - **Damerau-Levenshtein 1 & 2 距离：** 拦截相邻字符移位与拼写变体（`amzaon.com`、`goolge.com`、`paypla.com`）。
-  - **单比特位翻转攻击（`isBitFlip`）：** 识别由硬件辐射或 DNS 内存传输引发的单比特位跳变（`amaxon.com` → Amazon、`microsmft.com` → Microsoft、`gongle.com` → Google）。
-  - **视觉连字与形态替换：** 发现视觉孪生字符（`arnazon.com` 的 `rn→m`、`rnicrosoft.com`、`vv→w`、`cl→d`）。
+### 🛡️ 1. 反钓鱼、品牌仿冒与域名防护
+- **187 个严选知名品牌与 353 个官方根域名：** 纯离线完备数据库，涵盖顶级金融机构、政府政务、加密货币交易平台、云与 AI 基础设施、物流快递及国际互联网巨头，详见 [`shared/sites.js`](shared/sites.js)。
+- **多维度启发式检测核心引擎：**
+  - **拼写移位与邻键纠错防御：** Damerau-Levenshtein 1 与 2 编辑距离拦截相邻字符移位与拼写变体（`amzaon.com`、`goolge.com`、`paypla.com`）。
+  - **单比特位翻转防御（`isBitFlip`）：** 识别由硬件辐射或内存/DNS传输引发的 1-bit 跳变抢注（`amaxon.com` → Amazon、`microsmft.com` → Microsoft、`gongle.com` → Google）。
+  - **视觉连字与形态孪生替换：** 发现视觉孪生伪装字符（`arnazon.com` 的 `rn→m`、`rnicrosoft.com`、`vv→w`、`cl→d`）。
   - **Unicode 国际化同形异义与变音符号：** 精准识别西里尔字母、希腊字母、带圈字符和拉丁变音符号（`páypal.com`、`päypal.com`、`mïcrosoft.com`、`amazön.com`），同时避免误报合法的本土词汇（如 `über.de`）。
-  - **双向文字控制字符欺骗（UTS #39 / RFC 8264）：** 拦截不可见的 RTL/LTR 控制符（`\u202E`、`\u202A`–`\u202E`、`\u2066`–`\u2069`）。
+  - **双向文字控制字符欺骗（UTS #39 / RFC 8264）：** 拦截用于篡改文件和域名视觉扩展名的不可见 RTL/LTR 控制符（`\u202E`、`\u202A`–`\u202E`、`\u2066`–`\u2069`）。
   - **品牌与凭据关键词组合词欺诈：** 拦截未经分割的钓鱼组合域名（`paypalsupport.com`、`binancelogin.com`、`paypal-rechnung.com`、`dhl-sendung.de`、`sparkasse-kontoauszug.de`）。
   - **子域名伪装利用：** 拦截将知名品牌伪装为第三方域名子域的行为（`apple.attacker.com`、`paypal.evil.test`）。
   - **RFC 3986 用户信息字段欺诈：** 拦截带有欺骗性凭据前缀的 URL 结构（`https://paypal.com@evil.com/`）。
 - **第 3 层：URL 路径与查询参数深度审查：** 识别在第三方外链主机的 URL 路径中针对品牌的钓鱼诱导（如 `https://unrelated.com/paypal/login`、`https://phish-host.org/paypal.com/verify`），同时放行合法的开发者文档、API 教程与新闻科技报道（`/docs/`、`/news/`、`/blog/`）。
+- **共享托管命名空间隔离：** 严格隔离公共后缀与多租户平台域名（`force.com`、`github.io`、`vercel.app`、`netlify.app`、`wordpress.com` 等），绝不将其直接作为品牌根域名放行（`paypal.force.com` 精确拦截，主平台正常可用）。
 - **官方国家顶级域名（ccTLD）智能识别：** 正确放行跨国品牌的合法分支机构（`google.co.jp`、`amazon.se`、`ing.nl`、`visa.de`）；对歧义国家后缀给出提示性安全警报，对可疑通用顶级域名（gTLD）执行严格拦截。
 - **页面内嵌防护盾（`shared/shield-content.js`）：**
   - 填补 Chrome MV3 declarativeNetRequest (DNR) 机制无法拦截 POST 表单提交的安全真空。
   - 在 DOM 捕获阶段（Capture Phase）拦截表单提交事件，确保敏感凭据不会离开浏览器。
   - 在封闭的 Shadow DOM（`attachShadow({ mode: 'closed' })`）中渲染防篡改的 Glass 2100 警告模态框，彻底免疫目标网页的 CSS 重置与 JavaScript 恶意篡改。
   - 在可疑风险域名的密码输入框上自动显示不侵入式的安全警示徽章。
-- **Firefox MV3 规范对接：** 为 `guard.html` 明确配置 `web_accessible_resources`，并在 manifest 中按 MDN 与 AMO 官方标准声明 `data_collection_permissions: {"required":["none"]}`。
-- **Chrome MV3 预检与消除安全静默失效（Fail-Open）：** 通过 DNR 进行 GET 预检；若 DNR 发生系统性配置异常，Antipisher 会即时进入持久化降级状态并激活备用观察者模式，在弹出菜单中清晰告警，同时消除了任意 URL 长度截断风险。
-- **Glass 2100 界面设计与无障碍访问（a11y）：** 共享设计令牌（`shared/design-tokens.css`），严格满足 WCAG-AA 级对比度标准，具备全键盘无障碍焦点轮廓指示、ARIA `alertdialog`、平滑动画抑制（prefers-reduced-motion）及高对比度系统色彩适配。
-- **100% 确定性、位一致的可重现构建：** 通过 `build.py` 生成固定时间戳的确定性 ZIP 发行包，并在代码仓库根目录提供 [`SHA256SUMS.txt`](SHA256SUMS.txt) 校验清单。
-- **零遥测与完全离线隐私保证：** 无外部网络调用、无远程 CDN 依赖、无需 API 密钥、绝不记录用户浏览历史。
+
+### 🚫 2. 追踪器与商业遥测防御 (AEGIS Tracker Shield)
+- **本地声明式网络规则拦截：** 纯本地规则集（`rulesets/trackers.json`），在 Chrome MV3 (DNR) 与 Firefox (webRequest) 中精确拦截商业广告、行为分析与遥测追踪网络。
+- **动态脚本替代替身（启发自 uBlock）：** 针对 `window.ga`、`window.dataLayer`、`window.fbq`、`window.ttq`、`window.clarity`、`window.hj` 及 `navigator.sendBeacon` 的轻量替身函数，在彻底阻断数据外泄的同时保证网站购物车结账、表单提交与身份登录畅通无阻。
+- **URL 追踪查询参数智能净化：** 通过 `history.replaceState` 自动无痕剥离商业追踪参数（`utm_source`、`utm_medium`、`fbclid`、`gclid` 等）。
+- **实时动态追踪器计数器：** 工具栏扩展图标角标与弹出菜单实时展示拦截总数（`标签页: X · 总计: Y`），即使对于延迟加载或异步动态注入的脚本也能即时捕捉并刷新。
+
+### ⚡ 3. DOM 与前端脚本安全 (GeDefense Light)
+- **控制台防社工钓鱼 Self-XSS 警示：** 在开发者工具控制台输出醒目的安全警告横幅，防范诱导用户粘贴恶意代码的社工盗号攻击。
+- **认知快速通道（Cognitive Fast-Path）：** 超低开销启发式扫描引擎，无需对整个 DOM 树进行昂贵的二次解析即可高速验证安全 HTML。
+- **动态恶意注入与伪协议中和：** 拆解拦截恶意 `<script>` 与 `<iframe>` 注入，自动剥离内联事件处理器（`onerror`、`onclick`），并在原型链层级（`Element.prototype.setAttribute`）阻断 `javascript:` 伪协议执行。
+
+### 🎭 4. 隐私保护与反浏览器指纹 (Anti-Fingerprinting)
+- **Canvas 与 WebGL 伪装保护：** 在 Canvas 像素读取中注入肉眼完全不可见的 1-bit 微量平滑噪声，并伪装 WebGL 渲染器字符串，粉碎跨站指纹追踪。
+- **屏幕几何参数混淆：** 对屏幕视口与分辨率指标进行归一化混淆，挫败基于硬件设备属性的指纹关联。
+- **轮换会话数字身份种子：** 生成加密会话凭证，支持在弹出菜单与设置页面一键点击“重新生成身份”。
+- **100% 离线与零遥测：** 零外部网络请求、零云端依赖、无需 API 密钥、绝不收集与保存浏览历史。
+
+### ⚙️ 5. 用户体验、设置面板与白名单
+- **独立设置控制面板 (`options.html`)：** 采用完整 Glass 2100 玻璃拟物风格的偏好设置中心，可通过弹出菜单齿轮按钮或浏览器扩展管理直接访问。
+- **本地自定义域名白名单：** 方便快捷地维护受信任域名与内网系统（如企业 SSO），即时放行且无需任何网络外联。
+- **静默安全浏览与 Glass 2100 状态提示气泡：** 安全合规网站直接瞬间加载（0 ms 额外延迟）。访问验证网站时在角落优雅浮现微晶毛玻璃状态胶囊（*“域名已验证 · Antipisher”*），并在数秒后自动隐退，不干扰鼠标操作（`pointer-events: none`）。
+- **标准直达 vs. 严格预检自由切换：** 默认标准模式确保顺畅无感的浏览与按需拦截；严格模式可为高威胁环境提供全屏隔离预检。
+- **4 种母语原生支持：** 中文（`zh`）、德语（`de`）、英语（`en`）、俄语（`ru`）实现 100% 词条对齐，支持自动跟随浏览器语言或手动锁定。
+
+### 🏗️ 6. 浏览器架构、无障碍设计与构建保证
+- **Chrome MV3 预检与消除安全静默失效（Fail-Open）：** 基于 DNR 机制过滤 GET 请求；若遇到配置异常立即持久化降级状态并启动备用观察模式，并在界面明确告警。消除 URL 长度限制。
+- **Firefox MV3 规范对接：** 同步 `webRequestBlocking` + 页面内嵌防护盾，严格配置 `web_accessible_resources` 并声明 `data_collection_permissions: {"required":["none"]}`，符合 AMO 与 MDN 规范。
+- **Glass 2100 设计系统：** 统一设计令牌（`shared/design-tokens.css`），深邃矿物玻璃材质，符合 WCAG-AA 级对比度（≥ 4.5:1），配备清晰的 2px 键盘焦点轮廓环，支持减少动效与高对比度模式。
+- **100% 确定性、位一致的可重现构建：** 通过 `build.py` 自动化打包固定时间戳的确定性 ZIP 文件，并在仓库根目录提供 [`SHA256SUMS.txt`](SHA256SUMS.txt) 校验。
 
 ---
 
