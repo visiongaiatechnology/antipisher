@@ -30,7 +30,7 @@ jobs:
 
       - name: Syntax checks
         run: |
-          for file in shared/detector.js shared/shield-content.js shared/guard.js shared/popup.js chrome/background.js firefox/background.js; do
+          for file in shared/detector.js shared/shield-content.js shared/i18n.js shared/guard.js shared/popup.js chrome/background.js firefox/background.js; do
             node --check "$file"
           done
           python -m py_compile build.py build_sites.py
@@ -57,7 +57,7 @@ jobs:
           for path in glob.glob('../Antipisher-Chrome-*.zip') + glob.glob('../Antipisher-Firefox-*.zip'):
               with zipfile.ZipFile(path) as z:
                   names = set(z.namelist())
-                  for required in ('manifest.json', 'guard.html', 'popup.html', 'design-tokens.css', 'popup.css', 'shared/detector.js', 'shared/shield-content.js'):
+                  for required in ('manifest.json', 'guard.html', 'popup.html', 'design-tokens.css', 'popup.css', 'shared/detector.js', 'shared/shield-content.js', 'shared/i18n.js'):
                       if required not in names:
                           print(f"FAIL {path}: missing {required}"); ok = False
           with zipfile.ZipFile(glob.glob('../Antipisher-Source-*.zip')[0]) as z:
