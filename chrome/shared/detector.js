@@ -480,11 +480,47 @@
     };
   }
 
-  function classify(input) {
+  let activeWhitelist = new Set();
+
+  function setWhitelist(list) {
+    if (Array.isArray(list)) {
+      activeWhitelist = new Set(list.map(s => String(s || '').trim().toLowerCase().replace(/\.$/, '')).filter(Boolean));
+    } else if (list instanceof Set) {
+      activeWhitelist = new Set(Array.from(list).map(s => String(s || '').trim().toLowerCase().replace(/\.$/, '')).filter(Boolean));
+    }
+  }
+
+  function getWhitelist() {
+    return Array.from(activeWhitelist);
+  }
+
+  function isWhitelisted(host, customList) {
+    let list = activeWhitelist;
+    if (Array.isArray(customList)) {
+      list = new Set(customList.map(s => String(s || '').trim().toLowerCase().replace(/\.$/, '')).filter(Boolean));
+    } else if (customList && typeof customList === 'object' && Array.isArray(customList.whitelist)) {
+      list = new Set(customList.whitelist.map(s => String(s || '').trim().toLowerCase().replace(/\.$/, '')).filter(Boolean));
+    }
+    if (!list || list.size === 0) return false;
+    const cleanHost = String(host || '').trim().toLowerCase().replace(/\.$/, '');
+    if (!cleanHost) return false;
+    if (list.has(cleanHost)) return true;
+    for (const item of list) {
+      if (cleanHost === item || withinDomain(cleanHost, item)) return true;
+    }
+    return false;
+  }
+
+  function classify(input, options) {
     const url = validPublicUrl(input);
     if (!url) return formatVerdict({ status: 'skip' });
 
     const host = url.hostname.toLowerCase().replace(/\.$/, '');
+
+    // User-configured Whitelist exemption: trusted domains are never flagged
+    if (isWhitelisted(host, options)) {
+      return formatVerdict({ status: 'safe', host, decodedHost: host, isIDN: false });
+    }
 
     // Check RFC 3986 userinfo deception: https://brand.com@evil.com/
     // Skip this on the brand's own official domains (e.g. https://paypal@paypal.com/)
@@ -905,6 +941,9 @@
 
   const Antipisher = Object.freeze({
     classify,
+    setWhitelist,
+    getWhitelist,
+    isWhitelisted,
     punycodeDecode,
     skeleton,
     editDistanceOne: damerauDistanceOne, // backwards compatible export name

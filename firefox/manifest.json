@@ -4,7 +4,7 @@
   "name": "Antipisher",
   "short_name": "Antipisher",
   "description": "__MSG_appDesc__",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "permissions": [
     "storage",
     "tabs",
@@ -31,6 +31,10 @@
       "128": "icons/icon128.png"
     }
   },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "content_scripts": [
     {
       "matches": [
@@ -45,6 +49,18 @@
       ],
       "run_at": "document_start",
       "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "shared/aegis-engine.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
     }
   ],
   "web_accessible_resources": [

@@ -4,99 +4,88 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Antipisher · Sicherheitsprüfung</title>
+  <link rel="stylesheet" href="design-tokens.css">
   <link rel="stylesheet" href="guard.css">
 </head>
-<body class="vgt-environment">
-  <main class="vgt-glass-surface wrap" role="main" aria-labelledby="title">
-    <header class="header">
-      <div class="symbol-container">
-        <div class="symbol" id="symbol" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <path d="m9 12 2 2 4-4"/>
+<body class="vgt-env vgt-guard" data-state="idle">
+  <div class="guard-ambient" aria-hidden="true"></div>
+  <div class="guard-shell">
+    <header class="brandbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.6 20 5.6v6.1c0 5-3.4 8.2-8 9.7-4.6-1.5-8-4.7-8-9.7V5.6L12 2.6Z"/>
+            <path d="M8.4 8.8 12 14l3.6-5.2"/>
           </svg>
         </div>
-        <div class="status-badge" id="badge">ANTIPISHER SHIELD</div>
+        <div class="brand-copy">
+          <span class="brand-org">VisionGaiaTechnology</span>
+          <span class="brand-product">Antipisher <span class="brand-tag">Domain Trust</span></span>
+        </div>
       </div>
-      <div class="kicker">VISIONGAIATECHNOLOGY · ANTIPISHER DEFENSE</div>
-      <h1 id="title">Adresse wird überprüft</h1>
-      <p class="intro" id="description">Sicherheitsheuristik prüft die Zieladresse lokal im Browser.</p>
+      <div class="lang-switcher" id="guardLangSwitcher" aria-label="Language selection">
+        <button type="button" class="lang-btn" data-lang="en" title="English">EN</button>
+        <button type="button" class="lang-btn" data-lang="de" title="Deutsch">DE</button>
+        <button type="button" class="lang-btn" data-lang="ru" title="Русский">RU</button>
+        <button type="button" class="lang-btn" data-lang="zh" title="中文">ZH</button>
+      </div>
+      <span class="status-chip" id="badge">Sicherheitsprüfung</span>
     </header>
 
-    <section id="danger" class="danger-panel" hidden aria-live="assertive">
-      <div class="card suspicious-card">
-        <div class="card-header">
-          <span class="eyebrow danger-eyebrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
-              <line x1="12" y1="9" x2="12" y2="13"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-            Verdächtige Zieladresse
-          </span>
-        </div>
-        <div id="host" class="host-display" aria-label="Aufgerufene Webadresse"></div>
-        <p class="reasons" id="reason"></p>
+    <main class="guard-panel vgt-glass" role="main" aria-labelledby="title">
+      <div class="state-head">
+        <span class="vgt-eyebrow"><span class="state-dot" aria-hidden="true"></span><span id="stateLabel">Sicherheitsprüfung läuft</span></span>
+        <h1 id="title">Adresse wird überprüft</h1>
+        <p class="lead" id="description">Die Zieladresse wird lokal im Browser geprüft – ohne Cloud, ohne Verlauf.</p>
       </div>
 
-      <div class="card official-card">
-        <div class="card-header">
-          <span class="eyebrow official-eyebrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
-            Bekannte Originaldomain
-          </span>
-        </div>
-        <div class="official-info">
-          <span id="official" class="official-name"></span>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button class="btn btn-primary" id="safe">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-            <polyline points="15 3 21 3 21 9"/>
-            <line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-          Offizielle Seite öffnen
-        </button>
-        <button class="btn btn-secondary" id="back">Zurück zur vorherigen Seite</button>
-      </div>
-
-      <div class="continue-section">
-        <button id="reveal" class="btn-link" aria-expanded="false" aria-controls="confirm">
-          Erweitert: Verdächtige Seite dennoch öffnen
-        </button>
-        <div id="confirm" class="confirm-dialog" hidden>
-          <div class="confirm-content">
-            <strong>Warnung vor Datenverlust:</strong>
-            <p>Du beabsichtigst, eine potenziell gefälschte Website aufzurufen. Phishing-Seiten imitieren vertraute Eingabemasken, um Passwörter, Sitzungscookies oder 2FA-Codes abzufangen.</p>
-            <button id="proceed" class="btn btn-critical">Risiko akzeptieren und einmalig fortfahren</button>
+      <section id="danger" class="state-body" hidden aria-live="assertive">
+        <div class="data-grid">
+          <div class="data-row">
+            <span class="vgt-label" id="labelTarget">Zieladresse</span>
+            <span class="data-value vgt-mono" id="host"></span>
+          </div>
+          <div class="data-row">
+            <span class="vgt-label" id="labelFinding">Befund</span>
+            <p class="data-reason" id="reason"></p>
+          </div>
+          <div class="data-row official">
+            <span class="vgt-label" id="labelOfficial">Offizielle Domain</span>
+            <span class="official-value" id="official"></span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <p id="error" class="error-banner" role="status" hidden></p>
+        <div class="actions">
+          <button class="vgt-btn vgt-btn-primary" id="safe">Offizielle Seite öffnen</button>
+          <button class="vgt-btn vgt-btn-ghost" id="back">Zurück</button>
+        </div>
 
-    <footer class="footer">
-      <div class="footer-badges">
-        <span>AGPLv3 Lizenz</span>
-        <span class="dot">·</span>
-        <span>Alpha 0.1</span>
-        <span class="dot">·</span>
-        <span>100% Offline</span>
-        <span class="dot">·</span>
-        <span>Zero-Telemetry</span>
-      </div>
-    </footer>
-  </main>
+        <div class="disclosure">
+          <button class="disclosure-toggle" id="reveal" aria-expanded="false" aria-controls="confirm">
+            Erweitert: Risiko verstehen und fortfahren
+          </button>
+          <div class="disclosure-panel" id="confirm" role="alertdialog" aria-labelledby="confirm-heading" hidden>
+            <strong id="confirm-heading">Warnung vor Datenverlust</strong>
+            <p id="confirm-desc">Die Seite kann Anmeldedaten, Sitzungscookies oder 2FA-Codes abfangen. Öffne sie nur, wenn du die Domain selbst kontrollierst.</p>
+            <button class="vgt-btn vgt-btn-critical" id="proceed">Einmalig fortfahren</button>
+          </div>
+        </div>
+      </section>
+
+      <p id="error" class="error" role="status" hidden></p>
+
+      <footer class="panel-footer">
+        <span>AGPLv3</span><span class="dot" aria-hidden="true"></span>
+        <span id="footerOffline">100 % offline</span><span class="dot" aria-hidden="true"></span>
+        <span id="footerZero">Zero telemetry</span>
+        <span class="panel-meta" id="footerMeta">Version 0.1.1 · Alpha</span>
+      </footer>
+    </main>
+  </div>
 
   
   
+  <script src="shared/i18n.js"></script>
   
 <script>
 document.getElementById('title').textContent = 'Ungültige Webadresse';

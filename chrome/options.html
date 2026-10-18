@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antipisher — Einstellungen</title>
+  <link rel="stylesheet" href="design-tokens.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="vgt-env vgt-options">
+  <div class="options-ambient" aria-hidden="true"></div>
+  
+  <div class="options-shell">
+    <header class="options-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.6 20 5.6v6.1c0 5-3.4 8.2-8 9.7-4.6-1.5-8-4.7-8-9.7V5.6L12 2.6Z"/>
+            <path d="M8.4 8.8 12 14l3.6-5.2"/>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <span class="brand-org">VisionGaiaTechnology</span>
+          <h1 class="options-title" id="optionsTitle">Einstellungen</h1>
+          <span class="options-sub" id="optionsSubtitle">Lokale Konfiguration & VGT Schutzparameter</span>
+        </div>
+      </div>
+      <div class="header-pills">
+        <span class="version-chip">0.2.1 Alpha</span>
+        <span class="offline-chip" id="lblOfflineChip">100% Offline</span>
+      </div>
+    </header>
+
+    <nav class="options-tabs" role="tablist" aria-label="Kategorien">
+      <button type="button" class="tab-btn active" role="tab" id="tabGeneral" aria-selected="true" aria-controls="panelGeneral">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2.6 20 5.6v6.1c0 5-3.4 8.2-8 9.7-4.6-1.5-8-4.7-8-9.7V5.6L12 2.6Z"/>
+        </svg>
+        <span id="tabLblGeneral">Phishing & Basis</span>
+      </button>
+
+      <button type="button" class="tab-btn" role="tab" id="tabTrackers" aria-selected="false" aria-controls="panelTrackers">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/>
+        </svg>
+        <span id="tabLblTrackers">Tracker & Telemetrie</span>
+      </button>
+
+      <button type="button" class="tab-btn" role="tab" id="tabGeDefense" aria-selected="false" aria-controls="panelGeDefense">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+        <span id="tabLblGeDefense">GeDefense Light</span>
+      </button>
+
+      <button type="button" class="tab-btn" role="tab" id="tabFingerprinting" aria-selected="false" aria-controls="panelFingerprinting">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/>
+        </svg>
+        <span id="tabLblFingerprinting">Anti-Fingerprinting</span>
+      </button>
+
+      <button type="button" class="tab-btn" role="tab" id="tabWhitelist" aria-selected="false" aria-controls="panelWhitelist">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+        <span id="tabLblWhitelist">Ausnahmen</span>
+      </button>
+
+      <button type="button" class="tab-btn" role="tab" id="tabData" aria-selected="false" aria-controls="panelData">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span id="tabLblData">System & Daten</span>
+      </button>
+    </nav>
+
+    <main class="options-content vgt-glass">
+      <!-- 1. GENERAL / PHISHING -->
+      <section class="tab-panel active" id="panelGeneral" role="tabpanel" aria-labelledby="tabGeneral">
+        <div class="section-lead">
+          <h2 id="lblSecGeneral">Phishing- & Basis-Schutz</h2>
+          <p id="lblSecGeneralNote">Steuere das Verhalten bei verdächtigen Webseiten, Login-Masken und verifizierten Domains.</p>
+        </div>
+
+        <div class="opt-card">
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optStrictTitle">Strenger Preflight-Modus</span>
+              <span class="opt-note" id="optStrictNote">Jede Navigation durchläuft eine Vollbild-Vorabprüfung. Deaktiviert (Standard): Schnelles direktes Surfen, Unterbrechung nur bei erkannter Gefahr.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkStrictMode">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optFormShieldTitle">In-Page Form Shield</span>
+              <span class="opt-note" id="optFormShieldNote">Fängt verdächtige Passworteingaben und Formulare ab, bevor sie an Phishing-Ziele gesendet werden.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkFormShield">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optSafeToastTitle">Status-Toast bei sicheren Seiten</span>
+              <span class="opt-note" id="optSafeToastNote">Blendet beim Öffnen verifizierter Websites kurz ein dezentes Glas-Badge ein.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkSafeToast">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optToastDurationTitle">Toast-Anzeigedauer</span>
+              <span class="opt-note" id="optToastDurationNote">Wie lange das dezente Glas-Badge auf verifizierten Seiten sichtbar bleibt.</span>
+            </div>
+            <select id="selToastDuration" class="vgt-select">
+              <option value="1500" id="optDurFast">Schnell (1.5 Sekunden)</option>
+              <option value="2500" selected id="optDurNormal">Standard (2.5 Sekunden)</option>
+              <option value="4000" id="optDurLong">Lang (4 Sekunden)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. TRACKERS -->
+      <section class="tab-panel" id="panelTrackers" role="tabpanel" aria-labelledby="tabTrackers" hidden>
+        <div class="section-lead">
+          <h2 id="lblSecTrackers">AEGIS Tracker- &amp; Telemetrie-Schutz</h2>
+          <p id="lblSecTrackersNote">Netzwerk- und Skript-Entschärfung für Analyse-Dienste, Tracking-Token und Telemetrie.</p>
+        </div>
+
+        <div class="opt-card">
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optTrackerMasterTitle">AEGIS Tracker-Schutz</span>
+              <span class="opt-note" id="optTrackerMasterNote">Blockiert Analyse-Netzwerke (Google Analytics, Meta Pixel, TikTok, Hotjar, Clarity etc.) auf Netzwerkebene.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkTrackerShield">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optUrlStripTitle">URL-Tracking-Token Stripper</span>
+              <span class="opt-note" id="optUrlStripNote">Entfernt utm_*, fbclid, gclid und 16 weitere Parameter automatisch aus der Adresszeile.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkUrlStrip">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optBeaconTitle">sendBeacon-Abfang</span>
+              <span class="opt-note" id="optBeaconNote">Verwirft Hintergrund-Telemetriedaten und schützt vor stillen Tracking-Requests beim Schließen von Seiten.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkBeacon">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optBadgeTitle">Toolbar-Badge Zähler</span>
+              <span class="opt-note" id="optBadgeNote">Zeigt die Anzahl abgewehrter Tracker live auf dem Browser-Icon an.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkBadge">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. GEDEFENSE LIGHT -->
+      <section class="tab-panel" id="panelGeDefense" role="tabpanel" aria-labelledby="tabGeDefense" hidden>
+        <div class="section-lead">
+          <h2 id="lblSecGeDefense">GeDefense Light (DOM- &amp; Skript-Schutz)</h2>
+          <p id="lblSecGeDefenseNote">DOM-Hypervisor zur Härtung von JavaScript-Umgebungen gegen XSS und schädliche Manipulationen.</p>
+        </div>
+
+        <div class="opt-card">
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optGeDefenseMasterTitle">GeDefense Light Master-Schutz</span>
+              <span class="opt-note" id="optGeDefenseMasterNote">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkGeDefense">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optSelfXssTitle">Self-XSS DevTools-Schutz</span>
+              <span class="opt-note" id="optSelfXssNote">Warnt in der Entwickler-Konsole vor betrügerischen Copy-Paste-Skripten.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkSelfXss">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optProtocolTitle">DOM-Protokoll-Schutz</span>
+              <span class="opt-note" id="optProtocolNote">Blockiert gefährliche javascript:- und vbscript:-Injektionen in Links und Attributen.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkProtocol">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. ANTI-FINGERPRINTING -->
+      <section class="tab-panel" id="panelFingerprinting" role="tabpanel" aria-labelledby="tabFingerprinting" hidden>
+        <div class="section-lead">
+          <h2 id="lblSecFingerprinting">AEGIS Anti-Fingerprinting</h2>
+          <p id="lblSecFingerprintingNote">Verhindert geräteübergreifendes Tracking über Hardware-, Canvas-, WebGL- und Audio-Merkmale.</p>
+        </div>
+
+        <div class="opt-card">
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optAegisMasterTitle">AEGIS Anti-Fingerprinting Master-Schutz</span>
+              <span class="opt-note" id="optAegisMasterNote">Aktiviert die globale Farbling- und Maskierungs-Engine für alle nicht-sensiblen Websites.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkAegis">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optCanvasTitle">Canvas Farbling</span>
+              <span class="opt-note" id="optCanvasNote">Subtile, deterministische Rausch-Injektion gegen Canvas-Fingerprinting.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkCanvas">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optWebGLTitle">WebGL GPU-Maskierung</span>
+              <span class="opt-note" id="optWebGLNote">Tarnt den Grafikchip-Hersteller und Renderer mit neutralen Werten.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkWebGL">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optAudioTitle">AudioContext Farbling</span>
+              <span class="opt-note" id="optAudioNote">Verhindert akustisches Hardware-Fingerprinting über Web Audio.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkAudio">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row opt-action-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optSeedTitle">Digitaler Identitäts-Seed</span>
+              <span class="opt-note" id="optSeedNote">Aktueller Sitzungs-Fingerprint-Schlüssel. Kann jederzeit manuell neu gewürfelt werden.</span>
+            </div>
+            <div class="seed-control">
+              <span class="seed-badge" id="lblSeedVal">••••••••</span>
+              <button type="button" class="vgt-btn vgt-btn-primary btn-compact" id="btnRotateSeedOpt">
+                <span id="lblBtnRotate">Neu würfeln</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. WHITELIST / EXCEPTIONS -->
+      <section class="tab-panel" id="panelWhitelist" role="tabpanel" aria-labelledby="tabWhitelist" hidden>
+        <div class="section-lead">
+          <h2 id="optWhitelistTitle">Benutzerdefinierte Ausnahmen (Whitelist)</h2>
+          <p id="optWhitelistNote">Domains in dieser Liste werden niemals als Phishing eingestuft oder geblockt.</p>
+        </div>
+
+        <div class="opt-card">
+          <div class="whitelist-input-row">
+            <input type="text" id="txtWhitelistInput" class="vgt-input" placeholder="z. B. intern.meinefirma.de" spellcheck="false" autocomplete="off">
+            <button type="button" class="vgt-btn vgt-btn-primary" id="btnAddWhitelist">
+              <span id="lblBtnAddWhitelist">Hinzufügen</span>
+            </button>
+          </div>
+
+          <div class="whitelist-list" id="whitelistContainer">
+            <div class="whitelist-empty" id="lblWhitelistEmpty">Keine benutzerdefinierten Ausnahmen vorhanden.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. SYSTEM & DATA -->
+      <section class="tab-panel" id="panelData" role="tabpanel" aria-labelledby="tabData" hidden>
+        <div class="section-lead">
+          <h2 id="lblSecData">System, Sprache &amp; Daten</h2>
+          <p id="lblSecDataNote">Verwalte Oberflächensprache, Statistiken, Backups und Konfigurations-Resets.</p>
+        </div>
+
+        <div class="opt-card">
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optLangTitle">Sprache</span>
+              <span class="opt-note" id="optLangNote">Wähle die Sprache der Benutzeroberfläche.</span>
+            </div>
+            <select id="selLocale" class="vgt-select">
+              <option value="auto">Auto (Browser Default)</option>
+              <option value="de">Deutsch</option>
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optStatsTitle">Schutzstatistiken</span>
+              <span class="opt-note" id="optStatsDesc">0 Phishing-Versuche abgewehrt · 0 Tracker neutralisiert</span>
+            </div>
+            <button type="button" class="vgt-btn vgt-btn-ghost btn-compact" id="btnResetStats">
+              <span id="lblBtnResetStats">Statistiken zurücksetzen</span>
+            </button>
+          </div>
+
+          <div class="opt-row opt-action-grid">
+            <button type="button" class="vgt-btn vgt-btn-ghost" id="btnExportConfig">
+              <span id="lblBtnExport">Konfiguration exportieren</span>
+            </button>
+            <label class="vgt-btn vgt-btn-ghost file-label">
+              <span id="lblBtnImport">Konfiguration importieren</span>
+              <input type="file" id="fileImportConfig" accept=".json" hidden>
+            </label>
+            <button type="button" class="vgt-btn vgt-btn-danger" id="btnResetDefaults">
+              <span id="lblBtnResetDefaults">Auf Werkseinstellungen zurücksetzen</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="options-footer">
+      <span>Antipisher v0.2.1-Alpha · AGPLv3 · 100% Offline · Zero Telemetry</span>
+      <span>VisionGaiaTechnology</span>
+    </footer>
+  </div>
+
+  <div class="saved-toast" id="savedToast" role="status" aria-live="polite">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    <span id="lblSavedToast">Einstellungen gespeichert</span>
+  </div>
+
+  <script src="shared/sites.js"></script>
+  <script src="shared/detector.js"></script>
+  <script src="shared/i18n.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

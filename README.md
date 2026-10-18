@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.0 (Alpha)
+# 🛡️ Antipisher 0.2.1 (Alpha)
 
 **Offline, High-Precision Anti-Phishing, IDN Homograph & Typosquatting Protection for Google Chrome & Mozilla Firefox**  
 *Licensed under the GNU Affero General Public License v3.0 (AGPLv3)*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.0-alpha](https://img.shields.io/badge/Version-0.2.0--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 42/42 Passing](https://img.shields.io/badge/Tests-42%2F42_Passing-2ea043.svg?style=for-the-badge)](#tests--development)
+[![Version: 0.2.1-alpha](https://img.shields.io/badge/Version-0.2.1--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 69/69 Passing](https://img.shields.io/badge/Tests-69%2F69_Passing-2ea043.svg?style=for-the-badge)](#tests--development)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Telemetry-Zero_%2F_100%25_Offline-0284c7.svg?style=for-the-badge)](#privacy)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Ready-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_Ready-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,13 +22,18 @@
 
 </div>
 
-> **Status:** `SILVER` · Version `0.2.0` · As of 18.10.2026 · Quiet Safe Browsing Alpha milestone.  
+> **Status:** `SILVER` · Version `0.2.1` · As of 18.10.2026 · AEGIS Tracker Shield & Options Milestone.  
 > **Not a store-release product:** Browser E2E, official store submission, signed update feeds, and full V2 graph engine are ongoing milestones (see [Known Boundaries & Limitations](#known-boundaries--limitations)).
 
 ---
 
 ## ⚡ Key Capabilities & Implemented Features
 
+- **Dedicated Options Dashboard & Custom Whitelist:** Full preferences center (`options.html`) accessible directly via popup gear icon or extension management. Toggle Standard vs. Strict navigation modes, Safe Toast, badge counter, preferred locale, and manage a local, custom domain whitelist (bypassing detection immediately without remote calls).
+- **AEGIS Tracker Shield (uBlock-Inspired Local Defense):** Pure local declarative network blocking (`rulesets/trackers.json`) combined with dynamic surrogate function defusers for `ga`, `dataLayer`, `fbq`, `ttq`, `clarity`, `hj`, and `navigator.sendBeacon`. Guarantees checkouts and logins never hang while blocking telemetry. Strips URL query tracking parameters (`utm_*`, `fbclid`, `gclid`).
+- **Live Real-Time Tracker Counter:** Extension action icon badge and popup menu display real-time live metrics (`Tab: X · Total: Y`), accurately tracking and updating even late-loading or dynamically injected third-party tracker scripts.
+- **GeDefense Light DOM Hypervisor:** Developer console Self-XSS scam defense banner, Cognitive Fast-Path engine for zero-overhead HTML sanitization, inline script & iframe injection neutralization, and prototype-level `javascript:` URI disarming.
+- **AEGIS Anti-Fingerprinting Cloaking:** Screen geometry fuzzing and Canvas 1-bit noise mitigation to foil cross-site browser fingerprinting.
 - **Quiet Safe Browsing & Glass 2100 Status Toast:** Clean, verified websites load immediately with zero added latency (0 ms) and without any disruptive full-screen interstitials. A sleek, floating Glass 2100 status toast (*"Domain verified · Antipisher"*) briefly appears in the screen corner and gently auto-fades without blocking mouse interactions (`pointer-events: none`).
 - **Standard Mode vs. Strict Preflight Mode:** Standard mode enables frictionless direct browsing with targeted threat interception; Strict mode offers optional full-screen pre-request declarativeNetRequest gate for users in high-risk threat environments.
 - **Multilingual Support (4 Languages):** Native user interface and detection explanations in **English (`en`)**, **German (`de`)**, **Russian (`ru`)**, and **Chinese (`zh`)**. The extension automatically defaults to the user's browser language, with optional manual switching.
@@ -60,13 +65,17 @@
 
 ## 📸 Interface & Visual Preview
 
+| Options Dashboard (v0.2.1) | Custom Domain Whitelist (v0.2.1) |
+|:---:|:---:|
+| ![Options Dashboard](audit/verify/fix/screenshots/v2-options.png) | ![Custom Whitelist](audit/verify/fix/screenshots/v2-options-whitelist.png) |
+
+| Extension Popup Menu (v0.2.1) | In-Page Content Shield (Form Interception) |
+|:---:|:---:|
+| ![Extension Popup](audit/verify/fix/screenshots/v2-popup.png) | ![In-Page Shield](audit/verify/fix/screenshots/v2-shield-modal.png) |
+
 | Threat Interception (Block Interstitial) | Ambiguous Domain (Warning Interstitial) |
 |:---:|:---:|
 | ![Threat Interception](audit/verify/fix/screenshots/v2-guard-block.png) | ![Warning Interstitial](audit/verify/fix/screenshots/v2-guard-warn.png) |
-
-| In-Page Content Shield (Form Interception) | Extension Popup Menu |
-|:---:|:---:|
-| ![In-Page Shield](audit/verify/fix/screenshots/v2-shield-modal.png) | ![Extension Popup](audit/verify/fix/screenshots/v2-popup.png) |
 
 | Compact View (500px) | Mobile View (390px) |
 |:---:|:---:|
@@ -82,7 +91,7 @@
 | Fresh Uncalibrated 44-case Sanity Corpus | **42/44 = 95.5%** (2 FN on unlisted combosquats: `tiktok-coin.com`, `ledger-live.com`) |
 | Public 184-URL Audit Corpus | 183/184 detected (1 FN, 0 FP) |
 | Adversarial Lead Probe (66 cases) | **0/26 False Positives (0%)**, **0/40 False Negatives (0%)** — 100% pass |
-| Node.js Unit & Regression Test Suite | **38/38 passing (100%)** |
+| Node.js Unit & Regression Test Suite | **69/69 passing (100%)** |
 
 > [!NOTE]
 > These figures reflect empirical testing and do not constitute an absolute guarantee. Continued expansion toward full machine-readable UTS-39 tables and graph-based brand models is scheduled for V2.

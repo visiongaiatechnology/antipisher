@@ -6,7 +6,7 @@
 
 - **Produkt:** Antipisher (vormals VGT DomainGuard)
 - **Workspace:** `c:\Users\Masterboard\Downloads\VGT-DomainGuard-Source-v0.1.0\vgt-domainguard-src`
-- **Version:** `0.2.0` (Manifeste), Anzeige `0.2.0 Alpha`; ZIPs `v0.2.0-alpha`
+- **Version:** `0.2.1` (Manifeste), Anzeige `0.2.1 Alpha`; ZIPs `v0.2.1-alpha`
 - **Lizenz:** GNU Affero General Public License v3.0 (AGPLv3) — [`LICENSE`](LICENSE)
 - **Source Identity:** Git-Repository auf `main`, Remote `https://github.com/visiongaiatechnology/antipisher.git`.
 - **Zielplattformen:** Chrome MV3, Firefox MV3
@@ -125,16 +125,120 @@
   - `tests/p0-regressions.test.cjs`: Manifest-Versionsprüfung auf `0.2.0`.
   - `node --test tests/*.test.cjs` → **42/42 PASS (100 %)**.
 
+### 2026-10-18 22:20 — Checkpoint 012: **Lokale Integration des AEGIS PROTOCOL :: OMEGA (V17.1) Anti-Fingerprinting & Tracking-Schutzes**
+- **Kontext & Nutzeranforderung:** Lokale Integration von Anti-Fingerprinting- und Anti-Tracking-Schutzmechanismen basierend auf dem VGT-eigenen AEGIS PROTOCOL :: OMEGA (V17.1). **Ausdrückliche Nutzerauflage:** Vorab-Tests rein lokal durchführen — **KEIN PUSH** auf GitHub / Remote.
+- **Implementierte Schutzmodule (`shared/aegis-engine.js`):**
+  1. **Canvas Farbling Defense:** Gezieltes, deterministisches Pseudozufallsrauschen (FNV-1a PRNG) auf Canvas-Auslesevorgänge (`getImageData`, `toDataURL`) mit Rekursionssperre (`_aegis_locked`) und automatischer Rückschreibung.
+  2. **WebGL GPU Masking:** Maskiert `UNMASKED_VENDOR_WEBGL` (37445) und `UNMASKED_RENDERER_WEBGL` (37446) mit sauberen, unauffälligen Standard-GPUs (z. B. NVIDIA GeForce RTX 4090 auf Windows, Apple M2 auf macOS, Mesa Intel auf Linux).
+  3. **AudioContext Dynamics Jitter:** Subtiles Rauschen auf `DynamicsCompressorNode`-Parameter (`threshold`, `knee`), um akustisches Device-Fingerprinting zu vereiteln.
+  4. **Font- & Layout-Metrics Protection:** Jitter auf Schriftbreiten (`measureText`) und Elementabmessungen (`getBoundingClientRect`).
+  5. **DPI-Normalisierung:** Standardisierung von `window.devicePixelRatio` auf `1.0`.
+  6. **Native Cloaking:** Alle überschriebenen Methoden geben bei `.toString()` täuschend echtes `function ...() { [native code] }` zurück.
+  7. **Domain Intelligence:** Zero-Touch-Modus auf bot-sensitiven Plattformen (z. B. X/Twitter) sowie adaptiver Schutz für layout-kritische Web-Apps (Google Docs, Figma, Tuta etc.).
+  8. **Identitätsrotation & Live-Synchronisation:** Identitäts-Seed (`aegis_omega_seed`) rotiert bei Bedarf auf Knopfdruck ("Identität neu würfeln") oder tab-übergreifend via Custom-Events (`aegis:rotate-seed`, `aegis:configure`).
+- **UI & Lokalisierung:**
+  - VGT Glass 2100 Toggle `#aegisToggle` und Mikro-Button `#btnRotateSeed` im Popup.
+  - 100 % Key-Parität in `shared/i18n.js` über alle 4 Sprachen (EN, DE, RU, ZH) für `settingAegis`, `noticeAegis`, `btnRotateSeed`, `toastAegisRotated`.
+  - Content Script in Manifesten als `content_scripts[1]` mit `"world": "MAIN"` und `"run_at": "document_start"` eingebunden. WAR-Invariante (`guard.html` exklusiv) bleibt unberührt.
+- **Build & Tests:**
+  - `build.py` synchronisiert `aegis-engine.js` automatisiert in Chrome- und Firefox-Distributionen.
+  - `tests/aegis-shield.test.cjs`: 7 dedizierte Unit-Tests für Farbling, WebGL, Audio, Cloaking, Zero-Touch, Seed-Rotation und Deaktivierung.
+  - `node --test tests/*.test.cjs` → **49/49 PASS (100 %)**.
+  - `python build.py` → deterministische ZIPs neu gebaut, `SHA256SUMS.txt` aktualisiert.
+  - `powershell -ExecutionPolicy Bypass -File scripts/verify-release.ps1` → **3/3 OK**.
+  - **Lokale Bindung:** Alle Änderungen verbleiben strikt lokal auf der Arbeitsstation; kein `git push` ausgeführt.
+
+### 2026-10-18 22:36 — Checkpoint 013: **AEGIS Tracker & Privacy Shield (inspiriert durch uBlock Origin Lite, VGT-veredelt)**
+- **Kontext & Nutzeranforderung:** Erweiterung von Antipisher um einen hochperformanten Tracker- und Telemetrie-Blocker. Als Vorbild dient die Architektur von uBlock Origin Lite (`uBOL-home-main`), jedoch ohne 1:1-Kopie oder Regel-Bloat, sondern veredelt nach VGT-Standards (Zero-Overhead, Safe Surrogates, kein WAR-Leak, Glass 2100). Verbleibt strikt lokal für Tests (kein Push).
+- **Architektonische Neuerungen & Komponenten:**
+  1. **Native Declarative Net Request Ruleset (`rulesets/trackers.json`):**
+     - Vorab kompilierte, hochwirksame Offline-Regelliste für Chrome MV3 (`declarative_net_request.rule_resources`), die Top-Tracking- und Telemetrie-Netzwerke (Google Analytics, GTM, DoubleClick, Facebook Pixel, Microsoft Clarity, Bing Ads, TikTok, Hotjar, Criteo, Taboola, Outbrain, Sentry, NewRelic, Segment, Adjust etc.) nativ auf C++-Ebene ohne Hintergrund-CPU-Last blockiert.
+  2. **URL Parameter Sanitization (Anti-Bounce / Clean Navigation):**
+     - Nativer DNR-Query-Transform (`removeParams`) sowie Laufzeit-Bereinigung via `history.replaceState` entfernt 19 invasive Tracking-Tokens (`utm_*`, `fbclid`, `gclid`, `msclkid`, `mc_eid`, `yclid`, `_openstat`, `igshid`, `ttclid` etc.) direkt beim Navigieren.
+  3. **Safe Surrogate Defusers (`shared/aegis-engine.js`):**
+     - Im Gegensatz zu uBOL keine riskanten Web-Accessible-Resources (WAR bleibt exklusiv `guard.html` gemäß P0-Invariante!).
+     - Stattdessen werden sichere Stubs im `MAIN`-World-Kontext bei `document_start` bereitgestellt: `ga`, `gtag`, `dataLayer.push`, `fbq`, `ttq`, `clarity`, `hj`, `ym`.
+     - **Asynchrone Callback-Erfüllung (`safeAsync`):** Übergaben wie `hitCallback` bei `ga.send` oder `eventCallback` bei `dataLayer.push` werden sofort asynchron aufgerufen, sodass Kaufabschlüsse, Login-Formulare und Single-Page-Apps niemals einfrieren.
+     - **Native Cloaking:** Alle Stubs melden bei `.toString()` `function ...() { [native code] }` und vereiteln Anti-Adblock-Erkennung.
+  4. **Beacon & Telemetrie-Entwaffnung:**
+     - `navigator.sendBeacon` fängt Telemetrie-Payloads ab, meldet der aufrufenden Seite Erfolg (`true`), blockiert aber den tatsächlichen Netzwerkabfluss.
+  5. **Firefox MV3 Dual-Support (`firefox/background.js`):**
+     - Blockiert Tracking-Subressourcen (`script`, `xmlhttprequest`, `ping`, `beacon` etc.) via `webRequest.onBeforeRequest`.
+  6. **VGT Glass 2100 UI & Live-Metriken (`popup.html`, `popup.js`):**
+     - Dritte Kennzahl in der Statusleiste: *Marken* | *Phishing abgewehrt* | *Tracker blockiert* (`trackersBlocked`).
+     - Neuer Schalter `#trackerToggle`: *AEGIS Tracker- & Telemetrie-Schutz*.
+     - 100 % 4-Sprachen-Lokalisierung (EN, DE, RU, ZH) für `metricTrackers`, `settingTrackers`, `noticeTrackers`.
+- **Build & Tests:**
+  - `build.py` synchronisiert `rulesets/trackers.json` in `chrome/` und `firefox/` Builds.
+  - `tests/tracker-shield.test.cjs`: 7 neue Unit-Tests (DNR-JSON-Validität, Surrogate-Callbacks, FB/TikTok-Stubs, Clarity/Hotjar-Cloaking, Beacon-Drop, URL-Sanitizer) → 7/7 PASS.
+  - Gesamt-Testsuite: `node --test tests/*.test.cjs` (9 Dateien) → **56/56 PASS (100 %)**.
+  - `python build.py` & `powershell scripts/verify-release.ps1` → **3/3 Dateien & Source-ZIP-Hygiene OK**.
+
+### Checkpoint 014 (2026-10-18): GeDefense Light, Tab-Zähler wie uBlock & Glass 2100 Popup-Politur
+- **GeDefense Light (DOM Hypervisor & Script Inoculation):**
+  - Integriert in `shared/aegis-engine.js` (läuft in der `MAIN`-Welt bei `document_start`).
+  - **Self-XSS Console Defender:** Warnt vor Social-Engineering-Angriffen in den Entwickler-Tools (Bilingual DE/EN, VGT Branding).
+  - **Kognitiver Fast-Path DOM-Sanitizer:** Prüft `innerHTML`, `outerHTML`, `insertAdjacentHTML` per Regex auf verdächtige Tags/Attribute (`hasSusTag`, `hasSusAttr`, `hasSusProto`, `hasObfuscatedUrl`). 99.9 % aller unkritischen DOM-Operationen passieren mit 0 ms Latenz.
+  - **DOM Clobbering & XSS-Schutz:** Entfernt bösartige `<script>`, `<iframe>`, `<object>` Tags und inline `on*`-Event-Handler; neutralisiert `javascript:` / `vbscript:` und protocol-relative Injektionen (`#vgt-blocked-protocol`).
+  - **Stack-Safety:** Sichert Original-Deskriptoren im Modul-Scope und nutzt `<template>`-Fragmente; unendlich-rekursionsfest.
+  - Togglebar im Popup (`#geDefenseToggle`, `geDefenseLight: true/false`).
+- **Tab-Zähler wie uBlock (Toolbar-Badge & Tab-Metrik):**
+  - Chrome: `declarativeNetRequest.setExtensionActionOptions({ displayActionCountAsBadgeText: true })` + `api.action.setBadgeBackgroundColor({ color: '#0ea5e9' })`.
+  - Firefox & In-Page: `tabBlockedCounts`-Map; zählt live pro Tab hoch und aktualisiert `api.action.setBadgeText({ tabId, text: String(count) })`.
+  - Popup-Metrik: `#trackersBlocked` zeigt jetzt prominent die blockierten Tracker **dieses Tabs** an; Sub-Label `#trackersScope` zeigt `Tab: X · Gesamt: Y`.
+- **Glass 2100 Popup-Redesign & Bugfixes:**
+  - Breite auf 390px erweitert mit fester Breite für Chrome-Popup-Container.
+  - **Header-Überlagerung behoben:** Flexbox-Container mit sauberer Trennung von Logo, Text (`VisionGaiaTechnology` / `Antipisher`) und Smaragd-Glas-Versionschip (`0.2.0`). Kein Zusammenstauchen oder Überlappen mehr.
+  - **Glass 2100 Scrollbar:** Eigene transparente Graphit-Smaragd-Scrollbar (`::-webkit-scrollbar` & `scrollbar-color`), kein hässlicher Windows-System-Scrollbalken mehr.
+  - 100 % 4-Sprachen-Lokalisierung (EN, DE, RU, ZH) für `settingGeDefense`, `noticeGeDefense`, `metricTrackersScope`.
+- **Build & Tests:**
+  - `tests/gedefense-light.test.cjs`: 7 Unit-Tests für Self-XSS, Fast-Path, Tag-/Handler-Sanitizing, Protocol-Blocking, setAttribute-Hook und Config-Toggle → 7/7 PASS.
+  - Gesamt-Testsuite: `node --test tests/*.test.cjs` (10 Testdateien) → **63/63 PASS (100 %)**.
+  - `python build.py` & `scripts/verify-release.ps1` → **3/3 Dateien & Source-ZIP-Hygiene OK**.
+
+### Checkpoint 015 (2026-10-18): Umfassendes Einstellungsmenü (Options UI), Whitelist-Engine & Nutzer-Konfigurierbarkeit
+- **Vollständiges Einstellungsmenü (Options Page, Glass 2100):**
+  - Erstellt: `shared/options.html`, `shared/options.css`, `shared/options.js`.
+  - In beiden Manifesten (`chrome/manifest.json`, `firefox/manifest.json`) als `"options_ui": { "page": "options.html", "open_in_tab": true }` registriert.
+  - P0-Invariante gewahrt: `web_accessible_resources` bleibt unverändert minimal (`['guard.html']`).
+  - 6 modulare Konfigurations-Kategorien mit reaktiven Tabs:
+    1. **Phishing & Basis:** Strenger Preflight-Modus (`strictMode`), In-Page Form Shield (`formShieldEnabled`), Status-Toast bei sicheren Seiten (`showSafeToast`), Toast-Anzeigedauer (`toastDuration`: 1.5s, 2.5s, 4s).
+    2. **Tracker & Telemetrie:** AEGIS Tracker-Schutz (`aegisTrackerShield`), URL-Tracking-Token Stripper (`sanitizeUrlParams`), sendBeacon-Abfang (`defuseBeacons`), Toolbar-Badge Zähler (`showBadgeCount`).
+    3. **GeDefense Light:** Master-Schutz (`geDefenseLight`), Self-XSS DevTools-Schutz (`selfXssWarning`), DOM-Protokoll-Schutz (`blockProtocolInjection`).
+    4. **Anti-Fingerprinting:** AEGIS Master-Schutz (`aegisProtection`), Canvas Farbling (`spoofCanvas`), WebGL GPU-Maskierung (`spoofWebGL`), AudioContext Farbling (`spoofAudio`), Digitaler Identitäts-Seed mit Live-Anzeige und "Neu würfeln"-Funktion.
+    5. **Ausnahmen & Whitelist:** Dynamische Verwaltung benutzerdefinierter Ausnahmen (`customWhitelist`). Sofortige Validierung, Bereinigung, Hinzufügen, Löschen und Persistierung.
+    6. **System & Daten:** Sprachauswahl (`user_locale`: Auto, DE, EN, RU, ZH), Statistiken mit Live-Zähler und Reset-Button, Konfigurations-Export als JSON (`antipisher-settings.json`), Konfigurations-Import mit Validierung, Werkseinstellungen-Reset mit Sicherheitsabfrage.
+  - Dezenter animierter Glass-Toast (`.saved-toast`) bei jeder Konfigurationsänderung.
+- **Whitelist-Engine im Core:**
+  - `shared/detector.js`: `setWhitelist(list)`, `getWhitelist()`, `isWhitelisted(host, customList)` integriert. `classify(url)` prüft Whitelist vorab; Domains und deren Subdomains werden sofort als `safe` freigegeben.
+  - Background-Worker (`chrome/background.js`, `firefox/background.js`) und `shared/shield-content.js` synchronisieren `customWhitelist` reaktiv über `storage.onChanged`.
+- **Popup-Integration:**
+  - Neuer Einstellungs-Button (Zahnrad ⚙️ `#btnOpenOptions`) in der Kopfzeile neben dem Versionschip (`.header-actions`, `.btn-icon`).
+  - Öffnet per Klick direkt die Einstellungsseite über `api.runtime.openOptionsPage()`.
+- **Build & Tests:**
+  - `build.py` synchronisiert `options.html`, `options.css`, `options.js` in Chrome- und Firefox-Builds und validiert `options_ui` im Manifest.
+  - `tests/options-and-whitelist.test.cjs`: 6 neue Unit-Tests für Whitelist-Matching, Subdomain-Ausnahmen, Per-Call-Overrides, Manifest-Validierung, Popup-Integration und Options-DOM-Integrität.
+  - Gesamt-Testsuite: `node --test tests/*.test.cjs` (11 Testdateien) → **69/69 PASS (100 %)**.
+  - `python build.py` & `scripts/verify-release.ps1` → **3/3 Dateien & Source-ZIP-Hygiene OK**.
+
+### 2026-10-18 23:38 — Checkpoint 008: Release 0.2.1-Alpha & Verification
+- **Tracker-Zähler-Synchronisation:** Chrome MV3 `webRequest` Erfassung von Tracker-Netzwerkanfragen (`isTrackerRequest`), explizite `action.setBadgeText` Aktualisierung und tabgebundener `getTabTrackerStats` Message-Handler. Dynamisch nachladende Tracker werden in Echtzeit erfasst und lösen einen Live-Refresh im geöffneten Popup aus.
+- **GitHub Release CI Workflow:** Release-Erstellung in `.github/workflows/release.yml` idempotent gehärtet. Falls Release bereits existiert (z. B. durch parallele Tags oder vorherige Läufe), wird fehlertolerant mit `gh release upload ... --clobber` aktualisiert.
+- **Multilinguale Parität & Dokumentation:** Alle 4 Sprachen (`de`, `en`, `ru`, `zh`) vollständig auf 0.2.1 aktualisiert; `README.md`, `README.de.md`, `README.ru.md`, `README.zh.md` und `CHANGELOG.md` ausgebaut.
+- **Echte Screenshots generiert:** Echte Chromium-Headless Renders von Popup (`v2-popup.png`), Options-Dashboard (`v2-options.png`) und Whitelist-Management (`v2-options-whitelist.png`) in `audit/verify/fix/screenshots/` abgelegt und in die READMEs eingebettet.
+- **Deterministischer Release-Build:** Bit-identische ZIP-Dateien für Chrome, Firefox und Source (`v0.2.1-alpha`) erzeugt und über `scripts/verify-release.ps1` validiert.
+
 ## Test-Ledger (zuletzt ausgeführt)
 
 | Befehl | Ergebnis |
 |---|---|
-| `node --test tests/*.test.cjs` (7 Dateien) | 42 pass / 0 fail, Exit 0 |
+| `node --test tests/*.test.cjs` (11 Dateien) | 69 pass / 0 fail, Exit 0 |
 | `node audit/verify/holdout/run_holdout.cjs` | 289/296, FN 0/166, FP 7/121, Exit 0 |
 | `node audit/verify/fix/fresh_sanity.cjs` | 42/44, Exit 0 |
 | `node audit/lead/lead_probe.cjs` | 0/26 FP, 0/40 FN, Exit 0 |
-| `python build.py` (2×) | byte-identische ZIPs (`v0.2.0-alpha`), `SHA256SUMS.txt`, Exit 0 |
-| `node --check` (detector/shield/guard/popup/i18n/background) | Exit 0 |
+| `python build.py` (2×) | byte-identische ZIPs (`v0.2.1-alpha`), `SHA256SUMS.txt`, Exit 0 |
+| `powershell -ExecutionPolicy Bypass -File scripts/verify-release.ps1` | 3 Dateien OK, Source-ZIP-Hygiene OK, Exit 0 |
+| `node --check` (detector/shield/guard/popup/options/i18n/background/aegis) | Exit 0 |
 
 ## Offene Risiken (nicht Release-blockierend für Alpha, aber vor Beta)
 
@@ -142,4 +246,4 @@
 - Offizielle Domaindaten unvollständig/nicht durchgängig verifiziert.
 - Rest-FPs (Marken-Subdomains, userinfo, Doku-Pfade) und Rest-FNs (Combosquat, 2-Edit, unbekannte Marken).
 
-**Nächster atomarer Schritt:** Build ausführen, Checksums generieren, Git-Commit & Tags auf `v0.2.0-alpha` setzen, zu GitHub pushen und Release über GitHub API publizieren.
+

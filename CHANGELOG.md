@@ -1,7 +1,35 @@
 # Changelog
 
 Alle wesentlichen Änderungen an Antipisher. Format orientiert an Keep a Changelog;
-Versionierung folgt der Alpha-Reihe `0.1.x`.
+Versionierung folgt der Alpha-Reihe `0.2.x`.
+
+## [0.2.1] — 2026-10-18 (Alpha)
+
+### Features & Security
+- **Dediziertes Einstellungsmenü (`options.html`):** Vollständiges Options-Dashboard zur Konfiguration von Preflight-Modus (Standard vs. Streng), Status-Toast, Badge-Zähler und Sprache.
+- **Benutzerdefinierte Whitelist:** Lokales Verwalten und sofortiges Freigeben vertrauenswürdiger Domains ohne externe Abfragen oder Latenz.
+- **AEGIS Tracker Shield (uBlock-inspiriert):**
+  - Deklarative Netzwerkblockade (`rulesets/trackers.json`) gängiger Analyse- und Werbenetzwerke in Chrome MV3 (DNR) und Firefox (webRequest).
+  - Dynamische Script-Surrogates für unterbrechungsfreie Funktionalität: `window.ga`, `window.dataLayer`, `window.fbq`, `window.ttq`, `window.clarity`, `window.hj` und `navigator.sendBeacon`.
+  - Bereinigung von URL-Tracking-Parametern (`utm_*`, `fbclid`, `gclid`).
+- **Echtzeit Live-Tracker-Zähler:** Toolbar-Icon-Badge und Popup zeigen in Echtzeit geblockte Tracker (`Tab: X · Gesamt: Y`) und erfassen präzise auch dynamisch oder asynchron nachladende Tracker-Skripte.
+- **GeDefense Light DOM-Hypervisor:**
+  - Self-XSS Konsole-Schutzwarnung gegen Social-Engineering-Angriffe.
+  - Kognitive Fast-Path Engine für HTML-Säuberung ohne Parsing-Overhead.
+  - Inline-Script- und Iframe-Injektions-Neutralisierung sowie Prototype-Level `javascript:` URI-Entschärfung.
+- **AEGIS Anti-Fingerprinting Cloaking:** Screen-Geometrie-Fuzzing und subtiles Canvas 1-Bit-Rauschen.
+- **UI / Usability:**
+  - Popup-Breite auf 380px erweitert mit dezenter Glassmorphism-Scrollbar und optimierter Typografie.
+  - Versions-Chip sauber neben Marken-Titel positioniert (Überlagerung behoben).
+- **CI / CD Fix:** GitHub Release Action-Schritt auf idempotente Verifikation und Fallback zu `gh release upload ... --clobber` umgestellt.
+
+## [0.2.0] — 2026-10-18 (Alpha)
+
+### Features
+- **Leises sicheres Surfen:** Saubere, verifizierte Webseiten öffnen direkt ohne Latenz (0 ms) und ohne störende Vollbild-Unterbrechungen.
+- **Glass 2100 Status-Toast:** Nicht-blockierender, schwebender Status-Pill beim Öffnen verifizierter Domains.
+- **Mehrsprachigkeit (4 Sprachen):** Vollständige Lokalisierung für Deutsch (`de`), Englisch (`en`), Russisch (`ru`) und Chinesisch (`zh`).
+- **Standard vs. Strenger Preflight-Modus:** Umschaltbar über Popup.
 
 ## [0.1.1] — 2026-10-18 (Alpha)
 

@@ -23,7 +23,15 @@
           <span class="brand-product">Antipisher</span>
         </div>
       </div>
-      <span class="version-chip">0.2.0</span>
+      <div class="header-actions">
+        <span class="version-chip">0.2.1</span>
+        <button type="button" class="btn-icon" id="btnOpenOptions" title="Einstellungen" aria-label="Einstellungen">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <main class="popup-panel vgt-glass" aria-label="Antipisher Schutzstatus">
@@ -45,6 +53,33 @@
           <span class="metric-value" id="blocked">0</span>
           <span class="metric-label" id="lblBlocked">Abgewehrt</span>
         </div>
+        <div class="metric">
+          <span class="metric-value" id="trackersBlocked">0</span>
+          <span class="metric-label" id="lblTrackers">Tracker</span>
+          <span class="metric-sub" id="trackersScope">Tab: 0 · Gesamt: 0</span>
+        </div>
+      </div>
+
+      <div class="setting-row" id="trackerOption">
+        <div class="setting-copy">
+          <span class="setting-title" id="trackerSettingTitle">AEGIS Tracker- &amp; Telemetrie-Schutz</span>
+          <span class="setting-note" id="trackerNotice">Blockiert Analyse-Netzwerke, Werbe-Telemetrie und entfernt Tracking-Parameter aus URLs.</span>
+        </div>
+        <label class="switch" aria-label="AEGIS Tracker-Schutz">
+          <input type="checkbox" id="trackerToggle" aria-describedby="trackerNotice">
+          <span class="switch-track" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div class="setting-row" id="geDefenseOption">
+        <div class="setting-copy">
+          <span class="setting-title" id="geDefenseSettingTitle">GeDefense Light (DOM- &amp; Script-Schutz)</span>
+          <span class="setting-note" id="geDefenseNotice">Schützt JavaScript vor schädlicher DOM-Manipulation, Self-XSS, Prototypen-Angriffen und bösartigen Skript-Injektionen.</span>
+        </div>
+        <label class="switch" aria-label="GeDefense Light Schutz">
+          <input type="checkbox" id="geDefenseToggle" aria-describedby="geDefenseNotice">
+          <span class="switch-track" aria-hidden="true"></span>
+        </label>
       </div>
 
       <div class="setting-row" id="toastOption">
@@ -54,6 +89,25 @@
         </div>
         <label class="switch" aria-label="Status-Toast">
           <input type="checkbox" id="safeToastToggle" aria-describedby="toastNotice">
+          <span class="switch-track" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div class="setting-row" id="aegisOption">
+        <div class="setting-copy">
+          <span class="setting-title" id="aegisSettingTitle">AEGIS Anti-Fingerprinting</span>
+          <span class="setting-note" id="aegisNotice">Offline-Schutz vor Canvas-, WebGL-, Audio- & Schriftarten-Fingerprinting und Tracking.</span>
+          <div style="margin-top: 6px;">
+            <button type="button" class="vgt-btn vgt-btn-ghost btn-micro" id="btnRotateSeed" aria-label="Identität neu würfeln">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+              <span id="lblRotateSeed">Identität neu würfeln</span>
+            </button>
+          </div>
+        </div>
+        <label class="switch" aria-label="AEGIS Anti-Fingerprinting">
+          <input type="checkbox" id="aegisToggle" aria-describedby="aegisNotice">
           <span class="switch-track" aria-hidden="true"></span>
         </label>
       </div>

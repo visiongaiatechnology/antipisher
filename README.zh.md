@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.0 (Alpha)
+# 🛡️ Antipisher 0.2.1 (Alpha)
 
 **适用于 Google Chrome 与 Mozilla Firefox 的离线高精度反网络钓鱼、IDN 同形字与拼写抢注（Typosquatting）防护扩展**  
 *遵循 GNU Affero 通用公共许可证 v3.0 (AGPLv3) 开源*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.0-alpha](https://img.shields.io/badge/Version-0.2.0--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 42/42 Passing](https://img.shields.io/badge/Tests-42%2F42_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
+[![Version: 0.2.1-alpha](https://img.shields.io/badge/Version-0.2.1--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 69/69 Passing](https://img.shields.io/badge/Tests-69%2F69_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge)](#隐私保护与离线保证)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_就绪-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,13 +22,18 @@
 
 </div>
 
-> **状态：** `SILVER` · 版本 `0.2.0` · 截至 2026-10-18 · 静默安全浏览 Alpha 里程碑版本。  
+> **状态：** `SILVER` · 版本 `0.2.1` · 截至 2026-10-18 · AEGIS 追踪器防护与设置面板里程碑版本。  
 > **非最终应用商店发行版：** 浏览器自动化端到端测试（E2E）、应用商店官方上架审核、签名更新分发流与完整的 V2 图引擎正在持续演进中（详见 [已知边界与限制](#已知边界与限制)）。
 
 ---
 
 ## ⚡ 核心能力与已实现特性
 
+- **独立设置控制面板与自定义白名单：** 具备完整的选项设置中心（`options.html`），可直接通过弹出菜单齿轮按钮或扩展管理面板进入。支持切换标准/严格模式、安全提示气泡、角标计数、首选语言，并可在本地管理自定义域名白名单（无需联网、即时跳过检测）。
+- **AEGIS Tracker Shield（灵感源自 uBlock 的纯本地防护）：** 纯本地声明式网络规则拦截（`rulesets/trackers.json`）与针对 `ga`、`dataLayer`、`fbq`、`ttq`、`clarity`、`hj` 及 `navigator.sendBeacon` 的动态脚本替代替身（Surrogates），在彻底阻断商业追踪遥测的同时确保在线结账与登录永不卡顿挂起。自动净化 URL 追踪查询参数（`utm_*`、`fbclid`、`gclid`）。
+- **实时动态追踪器计数器：** 浏览器工具栏图标角标与弹出菜单实时展示拦截数字（`标签页: X · 总计: Y`），精准追踪包括动态与延迟加载在内的第三方追踪脚本。
+- **GeDefense Light DOM 超级卫士：** 控制台防社工钓鱼 Self-XSS 警示横幅、认知快速通道零开销 HTML 过滤净化、内联脚本与 iframe 恶意注入中和，以及原型链层面的 `javascript:` 伪协议执行拦截。
+- **AEGIS 反指纹追踪（Anti-Fingerprinting）：** 屏幕几何尺寸混淆与微幅 Canvas 1-bit 噪声注入，有效抵御跨站浏览器指纹追踪。
 - **静默安全浏览与 Glass 2100 状态提示气泡：** 干净、安全的正常网站直接即时加载（0 ms 额外延迟），彻底消除全屏拦截闪烁打扰。访问已验证网站时，屏幕右上角会短暂浮现轻盈雅致的微晶毛玻璃状态胶囊（*“域名已验证 · Antipisher”*），并自动淡出，且完全不阻碍网页鼠标点击（`pointer-events: none`）。
 - **标准模式与严格预检模式自由切换：** 默认标准模式提供无感顺畅的日常直达体验与精准钓鱼拦截；严格模式可为高风险安全需求者开启针对每一个 GET 导航的全屏预检关卡。
 - **多语言原生支持（4 种语言）：** 界面与检测原因全面支持**中文 (`zh`)**、**英语 (`en`)**、**德语 (`de`)** 和**俄语 (`ru`)**。扩展会自动根据浏览器首选语言设定默认显示，并支持随时手动切换。
@@ -60,13 +65,17 @@
 
 ## 📸 界面预览与屏幕截图
 
+| 设置控制面板 (v0.2.1) | 自定义域名白名单 (v0.2.1) |
+|:---:|:---:|
+| ![设置面板](audit/verify/fix/screenshots/v2-options.png) | ![白名单管理](audit/verify/fix/screenshots/v2-options-whitelist.png) |
+
+| 扩展程序弹出菜单 (v0.2.1) | 页面内嵌防护盾（表单提交拦截） |
+|:---:|:---:|
+| ![弹出菜单](audit/verify/fix/screenshots/v2-popup.png) | ![页面内嵌防护盾](audit/verify/fix/screenshots/v2-shield-modal.png) |
+
 | 威胁精准拦截（全屏拦截页） | 歧义域名提醒（告警提示页） |
 |:---:|:---:|
 | ![威胁精准拦截](audit/verify/fix/screenshots/v2-guard-block.png) | ![告警提示页](audit/verify/fix/screenshots/v2-guard-warn.png) |
-
-| 页面内嵌防护盾（表单提交拦截） | 扩展程序弹出菜单 |
-|:---:|:---:|
-| ![页面内嵌防护盾](audit/verify/fix/screenshots/v2-shield-modal.png) | ![弹出菜单](audit/verify/fix/screenshots/v2-popup.png) |
 
 | 紧凑视口视图 (500px) | 移动端视图 (390px) |
 |:---:|:---:|
@@ -82,7 +91,7 @@
 | 全新未经标定的 44 例健全性校验集 | **42/44 = 95.5%**（在未收录的组合词 `tiktok-coin.com`、`ledger-live.com` 上出现 2 例漏报） |
 | 公开 184 例 URL 审计测试集 | 183/184 检出（1 例漏报，0 例误报） |
 | 主任审计员 66 例对抗性探针 | **0/26 误报（0%）**，**0/40 漏报（0%）** —— 100% 全数通过 |
-| Node.js 单元与回归测试套件 | **38/38 全部通过（100%）** |
+| Node.js 单元与回归测试套件 | **69/69 全部通过（100%）** |
 
 > [!NOTE]
 > 以上数据基于实证测试，并不构成绝对零风险担保。在即将到来的 V2 版本中，将进一步引入完整的 UTS-39 机器对照表和基于图谱的品牌实体知识库。

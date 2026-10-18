@@ -16,6 +16,7 @@
   const engine = globalThis.Antipisher || globalThis.VGT_DomainGuard;
   const engineAvailable = Boolean(engine && typeof engine.classify === 'function');
   const allowedForms = new WeakSet();
+  let isFormShieldEnabled = true;
 
   function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, (ch) => ({
@@ -310,6 +311,7 @@
   }
 
   function onFormSubmit(e) {
+    if (!isFormShieldEnabled) return;
     const form = e.target;
     if (!form || !(form instanceof HTMLFormElement)) return;
     if (allowedForms.has(form)) return;
@@ -506,12 +508,13 @@
     const pill = shadow.getElementById('pill');
     const timerFn = (typeof setTimeout === 'function' ? setTimeout : (typeof window !== 'undefined' && typeof window.setTimeout === 'function' ? window.setTimeout : null));
     if (timerFn) {
+      const displayMs = (typeof duration === 'number' && duration > 0) ? duration : 2500;
       timerFn(() => {
         if (pill) pill.classList.add('fading');
         timerFn(() => {
           try { host.remove(); } catch {}
         }, 360);
-      }, 2400);
+      }, displayMs);
     }
 
     return host;
@@ -528,28 +531,152 @@
     const api = globalThis.chrome || globalThis.browser;
     if (api && api.storage && api.storage.local && typeof api.storage.local.get === 'function') {
       try {
-        const getRes = api.storage.local.get(['showSafeToast'], (res) => {
+        const getRes = api.storage.local.get(['showSafeToast', 'toastDuration', 'customWhitelist'], (res) => {
           if (res && res.showSafeToast === false) return;
-          renderSafeToast();
+          if (Array.isArray(res?.customWhitelist) && engine && engine.setWhitelist) {
+            engine.setWhitelist(res.customWhitelist);
+          }
+          const dur = (res && typeof res.toastDuration === 'number') ? res.toastDuration : 2500;
+          renderSafeToast(dur);
         });
         if (getRes && typeof getRes.then === 'function') {
           getRes.then((res) => {
             if (res && res.showSafeToast === false) return;
-            renderSafeToast();
-          }).catch(() => renderSafeToast());
+            if (Array.isArray(res?.customWhitelist) && engine && engine.setWhitelist) {
+              engine.setWhitelist(res.customWhitelist);
+            }
+            const dur = (res && typeof res.toastDuration === 'number') ? res.toastDuration : 2500;
+            renderSafeToast(dur);
+          }).catch(() => renderSafeToast(2500));
         }
         return;
       } catch {
         // Fallback below
       }
     }
-    renderSafeToast();
+    renderSafeToast(2500);
+  }
+
+  function syncAegisConfig() {
+    const api = globalThis.chrome || globalThis.browser;
+    if (api && api.storage && api.storage.local && typeof api.storage.local.get === 'function') {
+      try {
+        const handler = (res) => {
+          const enabled = res?.aegisProtection !== false;
+          const defuseTrackers = res?.aegisTrackerShield !== false;
+          const sanitizeParams = res?.sanitizeUrlParams !== false;
+          const defuseBeacons = res?.defuseBeacons !== false;
+          const geDefense = res?.geDefenseLight !== false;
+          const selfXss = res?.selfXssWarning !== false;
+          const blockProto = res?.blockProtocolInjection !== false;
+          const spoofCanvas = res?.spoofCanvas !== false;
+          const spoofWebGL = res?.spoofWebGL !== false;
+          const spoofAudio = res?.spoofAudio !== false;
+
+          if (typeof res?.formShieldEnabled === 'boolean') {
+            isFormShieldEnabled = res.formShieldEnabled;
+          }
+          if (Array.isArray(res?.customWhitelist) && engine && engine.setWhitelist) {
+            engine.setWhitelist(res.customWhitelist);
+          }
+
+          try {
+            if (typeof window !== 'undefined' && window.sessionStorage) {
+              window.sessionStorage.setItem('aegis_protection_enabled', enabled ? 'true' : 'false');
+              window.sessionStorage.setItem('aegis_trackers_enabled', defuseTrackers ? 'true' : 'false');
+              window.sessionStorage.setItem('aegis_gedefense_enabled', geDefense ? 'true' : 'false');
+            }
+          } catch { /* ignore */ }
+          if (typeof document !== 'undefined' && typeof document.dispatchEvent === 'function') {
+            try {
+              document.dispatchEvent(new CustomEvent('aegis:configure', {
+                detail: {
+                  ENABLED: enabled,
+                  DEFUSE_TRACKERS: defuseTrackers,
+                  SANITIZE_URL_PARAMS: sanitizeParams,
+                  DEFUSE_BEACONS: defuseBeacons,
+                  GEDEFENSE_LIGHT: geDefense,
+                  SELF_XSS_WARNING: selfXss,
+                  BLOCK_PROTOCOL_INJECTION: blockProto,
+                  SPOOF_CANVAS: spoofCanvas,
+                  SPOOF_WEBGL: spoofWebGL,
+                  SPOOF_AUDIO: spoofAudio
+                }
+              }));
+            } catch { /* ignore */ }
+          }
+        };
+        const r = api.storage.local.get([
+          'aegisProtection', 'aegisTrackerShield', 'sanitizeUrlParams', 'defuseBeacons',
+          'geDefenseLight', 'selfXssWarning', 'blockProtocolInjection',
+          'spoofCanvas', 'spoofWebGL', 'spoofAudio', 'customWhitelist', 'formShieldEnabled'
+        ], handler);
+        if (r && typeof r.then === 'function') {
+          r.then(handler).catch(() => {});
+        }
+      } catch { /* ignore */ }
+    }
+  }
+
+  function setupAegisListeners() {
+    const api = globalThis.chrome || globalThis.browser;
+    if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+      try {
+        document.addEventListener('aegis:tracker-blocked', (e) => {
+          if (api && api.storage && api.storage.local && typeof api.storage.local.get === 'function') {
+            try {
+              api.storage.local.get(['trackersBlocked'], (res) => {
+                const count = (res?.trackersBlocked || 0) + 1;
+                api.storage.local.set({ trackersBlocked: count }).catch(() => {});
+              });
+            } catch { /* ignore */ }
+          }
+          if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {
+            try {
+              api.runtime.sendMessage({ type: 'tracker-blocked-event', detail: e?.detail }).catch(() => {});
+            } catch { /* ignore */ }
+          }
+        });
+      } catch { /* ignore */ }
+    }
+    if (api && api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {
+      try {
+        api.runtime.onMessage.addListener((msg) => {
+          if (msg && msg.type === 'aegis:rotate-seed') {
+            try {
+              if (typeof window !== 'undefined' && window.sessionStorage) {
+                window.sessionStorage.removeItem('aegis_omega_seed');
+              }
+            } catch { /* ignore */ }
+            if (typeof document !== 'undefined' && typeof document.dispatchEvent === 'function') {
+              try {
+                document.dispatchEvent(new CustomEvent('aegis:rotate-seed'));
+              } catch { /* ignore */ }
+            }
+          }
+        });
+      } catch { /* ignore */ }
+    }
+    if (api && api.storage && api.storage.onChanged && typeof api.storage.onChanged.addListener === 'function') {
+      try {
+        api.storage.onChanged.addListener((changes, area) => {
+          if (area === 'local') {
+            syncAegisConfig();
+          }
+        });
+      } catch { /* ignore */ }
+    }
   }
 
   function initContentShield() {
     checkPasswordFields();
     showSafeToast();
+    syncAegisConfig();
+    setupAegisListeners();
   }
+
+  syncAegisConfig();
+  setupAegisListeners();
 
   window.addEventListener('submit', onFormSubmit, true);
 

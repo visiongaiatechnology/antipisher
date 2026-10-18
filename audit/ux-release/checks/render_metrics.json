@@ -1,6 +1,6 @@
 {
   "tool": "render_harness.py",
-  "generated": "2026-10-18T17:29:18.684305+02:00",
+  "generated": "2026-10-18T23:32:09.717465+02:00",
   "type": "STATIC_RENDER_HARNESS (kein Extension-E2E)",
   "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
   "pages": [
@@ -25,7 +25,7 @@
         "document": {
           "scrollWidth": 1267,
           "scrollHeight": 900,
-          "bodyScrollWidth": 1267,
+          "bodyScrollWidth": 1251,
           "horizontalOverflow": false
         },
         "headings": [
@@ -40,6 +40,41 @@
             "tabIndex": -1
           },
           {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "DE",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "RU",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ZH",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
             "tag": "BUTTON",
             "id": "safe",
             "text": "Offizielle Seite öffnen",
@@ -49,61 +84,56 @@
           {
             "tag": "BUTTON",
             "id": "back",
-            "text": "Zurück zur vorherigen Seite",
+            "text": "Zurück",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "reveal",
-            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "text": "Erweitert: Risiko verstehen und fortfahren",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "proceed",
-            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "text": "Einmalig fortfahren",
             "visible": false,
             "tabIndex": 0
           }
         ],
         "rects": {
-          "wrap": {
-            "x": 294,
-            "y": 68,
-            "w": 680,
-            "h": 764
-          },
+          "wrap": null,
           "danger": {
-            "x": 333,
-            "y": 301,
-            "w": 602,
-            "h": 421
+            "x": 320,
+            "y": 327,
+            "w": 628,
+            "h": 261
           },
           "actions": {
-            "x": 333,
-            "y": 596,
-            "w": 602,
-            "h": 48
+            "x": 320,
+            "y": 511,
+            "w": 628,
+            "h": 21
           },
           "safeBtn": {
-            "x": 333,
-            "y": 596,
-            "w": 216,
-            "h": 48
+            "x": 320,
+            "y": 511,
+            "w": 141,
+            "h": 21
           },
           "backBtn": {
-            "x": 560,
-            "y": 596,
-            "w": 231,
-            "h": 48
+            "x": 471,
+            "y": 511,
+            "w": 57,
+            "h": 21
           },
           "reveal": {
-            "x": 333,
-            "y": 699,
-            "w": 273,
-            "h": 23
+            "x": 320,
+            "y": 572,
+            "w": 220,
+            "h": 16
           },
           "confirm": {
             "x": 0,
@@ -118,10 +148,10 @@
             "h": 0
           },
           "popupBody": {
-            "x": 0,
-            "y": 0,
-            "w": 1267,
-            "h": 900
+            "x": 8,
+            "y": 8,
+            "w": 1251,
+            "h": 727
           },
           "glassCard": null,
           "urlInput": null,
@@ -129,16 +159,11 @@
           "toggleRow": null,
           "checkbox": null,
           "result": null,
-          "footer": {
-            "x": 333,
-            "y": 750,
-            "w": 602,
-            "h": 37
-          },
+          "footer": null,
           "h1": {
-            "x": 333,
+            "x": 320,
             "y": 203,
-            "w": 602,
+            "w": 628,
             "h": 43
           }
         },
@@ -146,8 +171,8 @@
           "#title": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "36px",
-            "fontWeight": "750",
+            "fontSize": "40px",
+            "fontWeight": "680",
             "lineHeight": "43.2px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
@@ -156,112 +181,76 @@
             "backdropFilter": "none"
           },
           "#description": {
-            "color": "rgb(156, 181, 175)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "15px",
             "fontWeight": "400",
-            "lineHeight": "22.5px",
+            "lineHeight": "23.25px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(156, 181, 175)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#host": {
-            "color": "rgb(255, 184, 194)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "22px",
-            "fontWeight": "750",
-            "lineHeight": "33px",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 184, 194)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#official": {
-            "color": "rgb(168, 245, 223)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "700",
-            "lineHeight": "27px",
+            "fontSize": "15px",
+            "fontWeight": "640",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(168, 245, 223)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#reason": {
-            "color": "rgb(223, 206, 207)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13.5px",
             "fontWeight": "400",
-            "lineHeight": "19.575px",
+            "lineHeight": "20.925px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(223, 206, 207)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#error": {
-            "color": "rgb(255, 209, 216)",
-            "background": "rgba(70, 18, 26, 0.85)",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13px",
             "fontWeight": "400",
-            "lineHeight": "19.5px",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(255, 92, 115, 0.4)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".kicker": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "11px",
-            "fontWeight": "700",
-            "lineHeight": "16.5px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".footer": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "12px",
-            "fontWeight": "400",
-            "lineHeight": "18px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "h1": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "36px",
-            "fontWeight": "750",
+            "fontSize": "40px",
+            "fontWeight": "680",
             "lineHeight": "43.2px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
             "borderColor": "rgb(255, 255, 255)",
             "boxShadow": "none",
             "backdropFilter": "none"
-          },
-          ".wrap": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(16, 28, 26, 0.82)",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "lineHeight": "24px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.12)",
-            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
-            "backdropFilter": "blur(18px) saturate(1.15)"
           }
         },
         "focusTest": null
@@ -271,7 +260,7 @@
         "exit": 0,
         "file": "guard-danger-1280x900.png",
         "exists": true,
-        "bytes": 283534
+        "bytes": 94426
       }
     },
     {
@@ -293,9 +282,9 @@
         "hasFocus": false,
         "activeElement": "BODY",
         "document": {
-          "scrollWidth": 375,
-          "scrollHeight": 984,
-          "bodyScrollWidth": 375,
+          "scrollWidth": 390,
+          "scrollHeight": 844,
+          "bodyScrollWidth": 374,
           "horizontalOverflow": false
         },
         "headings": [
@@ -310,6 +299,41 @@
             "tabIndex": -1
           },
           {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "DE",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "RU",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ZH",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
             "tag": "BUTTON",
             "id": "safe",
             "text": "Offizielle Seite öffnen",
@@ -319,61 +343,56 @@
           {
             "tag": "BUTTON",
             "id": "back",
-            "text": "Zurück zur vorherigen Seite",
+            "text": "Zurück",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "reveal",
-            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "text": "Erweitert: Risiko verstehen und fortfahren",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "proceed",
-            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "text": "Einmalig fortfahren",
             "visible": false,
             "tabIndex": 0
           }
         ],
         "rects": {
-          "wrap": {
-            "x": 16,
-            "y": 24,
-            "w": 343,
-            "h": 936
-          },
+          "wrap": null,
           "danger": {
-            "x": 37,
-            "y": 324,
-            "w": 301,
-            "h": 514
+            "x": 40,
+            "y": 282,
+            "w": 310,
+            "h": 379
           },
           "actions": {
-            "x": 37,
-            "y": 652,
-            "w": 301,
-            "h": 108
+            "x": 40,
+            "y": 553,
+            "w": 310,
+            "h": 52
           },
           "safeBtn": {
-            "x": 37,
-            "y": 652,
-            "w": 301,
-            "h": 48
+            "x": 40,
+            "y": 553,
+            "w": 310,
+            "h": 21
           },
           "backBtn": {
-            "x": 37,
-            "y": 712,
-            "w": 301,
-            "h": 48
+            "x": 40,
+            "y": 584,
+            "w": 310,
+            "h": 21
           },
           "reveal": {
-            "x": 37,
-            "y": 815,
-            "w": 273,
-            "h": 23
+            "x": 40,
+            "y": 645,
+            "w": 220,
+            "h": 16
           },
           "confirm": {
             "x": 0,
@@ -388,10 +407,10 @@
             "h": 0
           },
           "popupBody": {
-            "x": 0,
-            "y": 0,
-            "w": 375,
-            "h": 984
+            "x": 8,
+            "y": 8,
+            "w": 374,
+            "h": 779
           },
           "glassCard": null,
           "urlInput": null,
@@ -399,26 +418,21 @@
           "toggleRow": null,
           "checkbox": null,
           "result": null,
-          "footer": {
-            "x": 37,
-            "y": 866,
-            "w": 301,
-            "h": 63
-          },
+          "footer": null,
           "h1": {
-            "x": 37,
-            "y": 162,
-            "w": 301,
-            "h": 62
+            "x": 40,
+            "y": 143,
+            "w": 310,
+            "h": 58
           }
         },
         "computed": {
           "#title": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "26px",
-            "fontWeight": "750",
-            "lineHeight": "31.2px",
+            "fontSize": "27px",
+            "fontWeight": "680",
+            "lineHeight": "29.16px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
             "borderColor": "rgb(255, 255, 255)",
@@ -426,112 +440,76 @@
             "backdropFilter": "none"
           },
           "#description": {
-            "color": "rgb(156, 181, 175)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "15px",
             "fontWeight": "400",
-            "lineHeight": "22.5px",
+            "lineHeight": "23.25px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(156, 181, 175)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#host": {
-            "color": "rgb(255, 184, 194)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "750",
-            "lineHeight": "27px",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 184, 194)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#official": {
-            "color": "rgb(168, 245, 223)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "700",
-            "lineHeight": "27px",
+            "fontSize": "15px",
+            "fontWeight": "640",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(168, 245, 223)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#reason": {
-            "color": "rgb(223, 206, 207)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13.5px",
             "fontWeight": "400",
-            "lineHeight": "19.575px",
+            "lineHeight": "20.925px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(223, 206, 207)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#error": {
-            "color": "rgb(255, 209, 216)",
-            "background": "rgba(70, 18, 26, 0.85)",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13px",
             "fontWeight": "400",
-            "lineHeight": "19.5px",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(255, 92, 115, 0.4)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".kicker": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "11px",
-            "fontWeight": "700",
-            "lineHeight": "16.5px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".footer": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "12px",
-            "fontWeight": "400",
-            "lineHeight": "18px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "h1": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "26px",
-            "fontWeight": "750",
-            "lineHeight": "31.2px",
+            "fontSize": "27px",
+            "fontWeight": "680",
+            "lineHeight": "29.16px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
             "borderColor": "rgb(255, 255, 255)",
             "boxShadow": "none",
             "backdropFilter": "none"
-          },
-          ".wrap": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(16, 28, 26, 0.82)",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "lineHeight": "24px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.12)",
-            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
-            "backdropFilter": "blur(18px) saturate(1.15)"
           }
         },
         "focusTest": null
@@ -541,7 +519,7 @@
         "exit": 0,
         "file": "guard-danger-390x844.png",
         "exists": true,
-        "bytes": 71412
+        "bytes": 71644
       }
     },
     {
@@ -565,7 +543,7 @@
         "document": {
           "scrollWidth": 1267,
           "scrollHeight": 1120,
-          "bodyScrollWidth": 1267,
+          "bodyScrollWidth": 1251,
           "horizontalOverflow": false
         },
         "headings": [
@@ -580,6 +558,41 @@
             "tabIndex": -1
           },
           {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "DE",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "RU",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ZH",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
             "tag": "BUTTON",
             "id": "safe",
             "text": "Offizielle Seite öffnen",
@@ -589,79 +602,74 @@
           {
             "tag": "BUTTON",
             "id": "back",
-            "text": "Zurück zur vorherigen Seite",
+            "text": "Zurück",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "reveal",
-            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "text": "Erweitert: Risiko verstehen und fortfahren",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "proceed",
-            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "text": "Einmalig fortfahren",
             "visible": true,
             "tabIndex": 0
           }
         ],
         "rects": {
-          "wrap": {
-            "x": 294,
-            "y": 96,
-            "w": 680,
-            "h": 928
-          },
+          "wrap": null,
           "danger": {
-            "x": 333,
-            "y": 329,
-            "w": 602,
-            "h": 585
+            "x": 320,
+            "y": 327,
+            "w": 628,
+            "h": 401
           },
           "actions": {
-            "x": 333,
-            "y": 624,
-            "w": 602,
-            "h": 48
+            "x": 320,
+            "y": 511,
+            "w": 628,
+            "h": 21
           },
           "safeBtn": {
-            "x": 333,
-            "y": 624,
-            "w": 216,
-            "h": 48
+            "x": 320,
+            "y": 511,
+            "w": 141,
+            "h": 21
           },
           "backBtn": {
-            "x": 560,
-            "y": 624,
-            "w": 231,
-            "h": 48
+            "x": 471,
+            "y": 511,
+            "w": 57,
+            "h": 21
           },
           "reveal": {
-            "x": 333,
-            "y": 727,
-            "w": 273,
-            "h": 23
+            "x": 320,
+            "y": 572,
+            "w": 220,
+            "h": 16
           },
           "confirm": {
-            "x": 333,
-            "y": 762,
-            "w": 602,
-            "h": 152
+            "x": 320,
+            "y": 602,
+            "w": 628,
+            "h": 127
           },
           "proceed": {
-            "x": 350,
-            "y": 851,
-            "w": 315,
-            "h": 46
+            "x": 338,
+            "y": 691,
+            "w": 128,
+            "h": 21
           },
           "popupBody": {
-            "x": 0,
-            "y": 0,
-            "w": 1267,
-            "h": 1120
+            "x": 8,
+            "y": 8,
+            "w": 1251,
+            "h": 867
           },
           "glassCard": null,
           "urlInput": null,
@@ -669,16 +677,11 @@
           "toggleRow": null,
           "checkbox": null,
           "result": null,
-          "footer": {
-            "x": 333,
-            "y": 942,
-            "w": 602,
-            "h": 37
-          },
+          "footer": null,
           "h1": {
-            "x": 333,
-            "y": 231,
-            "w": 602,
+            "x": 320,
+            "y": 203,
+            "w": 628,
             "h": 43
           }
         },
@@ -686,8 +689,8 @@
           "#title": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "36px",
-            "fontWeight": "750",
+            "fontSize": "40px",
+            "fontWeight": "680",
             "lineHeight": "43.2px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
@@ -696,112 +699,76 @@
             "backdropFilter": "none"
           },
           "#description": {
-            "color": "rgb(156, 181, 175)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "15px",
             "fontWeight": "400",
-            "lineHeight": "22.5px",
+            "lineHeight": "23.25px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(156, 181, 175)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#host": {
-            "color": "rgb(255, 184, 194)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "22px",
-            "fontWeight": "750",
-            "lineHeight": "33px",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 184, 194)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#official": {
-            "color": "rgb(168, 245, 223)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "700",
-            "lineHeight": "27px",
+            "fontSize": "15px",
+            "fontWeight": "640",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(168, 245, 223)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#reason": {
-            "color": "rgb(223, 206, 207)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13.5px",
             "fontWeight": "400",
-            "lineHeight": "19.575px",
+            "lineHeight": "20.925px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(223, 206, 207)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#error": {
-            "color": "rgb(255, 209, 216)",
-            "background": "rgba(70, 18, 26, 0.85)",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13px",
             "fontWeight": "400",
-            "lineHeight": "19.5px",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(255, 92, 115, 0.4)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".kicker": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "11px",
-            "fontWeight": "700",
-            "lineHeight": "16.5px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".footer": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "12px",
-            "fontWeight": "400",
-            "lineHeight": "18px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "h1": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "36px",
-            "fontWeight": "750",
+            "fontSize": "40px",
+            "fontWeight": "680",
             "lineHeight": "43.2px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
             "borderColor": "rgb(255, 255, 255)",
             "boxShadow": "none",
             "backdropFilter": "none"
-          },
-          ".wrap": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(16, 28, 26, 0.82)",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "lineHeight": "24px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.12)",
-            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
-            "backdropFilter": "blur(18px) saturate(1.15)"
           }
         },
         "focusTest": null
@@ -811,7 +778,7 @@
         "exit": 0,
         "file": "guard-confirm-1280x1120.png",
         "exists": true,
-        "bytes": 351555
+        "bytes": 105468
       }
     },
     {
@@ -835,7 +802,7 @@
         "document": {
           "scrollWidth": 1267,
           "scrollHeight": 900,
-          "bodyScrollWidth": 1267,
+          "bodyScrollWidth": 1251,
           "horizontalOverflow": false
         },
         "headings": [
@@ -850,6 +817,41 @@
             "tabIndex": -1
           },
           {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "DE",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "RU",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ZH",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
             "tag": "BUTTON",
             "id": "safe",
             "text": "Offizielle Seite öffnen",
@@ -859,61 +861,56 @@
           {
             "tag": "BUTTON",
             "id": "back",
-            "text": "Zurück zur vorherigen Seite",
+            "text": "Zurück",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "reveal",
-            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "text": "Erweitert: Risiko verstehen und fortfahren",
             "visible": true,
             "tabIndex": 0
           },
           {
             "tag": "BUTTON",
             "id": "proceed",
-            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "text": "Einmalig fortfahren",
             "visible": false,
             "tabIndex": 0
           }
         ],
         "rects": {
-          "wrap": {
-            "x": 294,
-            "y": 120,
-            "w": 680,
-            "h": 659
-          },
+          "wrap": null,
           "danger": {
-            "x": 333,
-            "y": 354,
-            "w": 602,
-            "h": 316
+            "x": 320,
+            "y": 327,
+            "w": 628,
+            "h": 237
           },
           "actions": {
-            "x": 333,
-            "y": 544,
-            "w": 602,
-            "h": 48
+            "x": 320,
+            "y": 487,
+            "w": 628,
+            "h": 21
           },
           "safeBtn": {
-            "x": 333,
-            "y": 544,
-            "w": 216,
-            "h": 48
+            "x": 320,
+            "y": 487,
+            "w": 141,
+            "h": 21
           },
           "backBtn": {
-            "x": 560,
-            "y": 544,
-            "w": 231,
-            "h": 48
+            "x": 471,
+            "y": 487,
+            "w": 57,
+            "h": 21
           },
           "reveal": {
-            "x": 333,
-            "y": 647,
-            "w": 273,
-            "h": 23
+            "x": 320,
+            "y": 548,
+            "w": 220,
+            "h": 16
           },
           "confirm": {
             "x": 0,
@@ -928,10 +925,10 @@
             "h": 0
           },
           "popupBody": {
-            "x": 0,
-            "y": 0,
-            "w": 1267,
-            "h": 900
+            "x": 8,
+            "y": 8,
+            "w": 1251,
+            "h": 703
           },
           "glassCard": null,
           "urlInput": null,
@@ -939,16 +936,11 @@
           "toggleRow": null,
           "checkbox": null,
           "result": null,
-          "footer": {
-            "x": 333,
-            "y": 698,
-            "w": 602,
-            "h": 37
-          },
+          "footer": null,
           "h1": {
-            "x": 333,
-            "y": 256,
-            "w": 602,
+            "x": 320,
+            "y": 203,
+            "w": 628,
             "h": 43
           }
         },
@@ -956,8 +948,8 @@
           "#title": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "36px",
-            "fontWeight": "750",
+            "fontSize": "40px",
+            "fontWeight": "680",
             "lineHeight": "43.2px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
@@ -966,112 +958,76 @@
             "backdropFilter": "none"
           },
           "#description": {
-            "color": "rgb(156, 181, 175)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "15px",
             "fontWeight": "400",
-            "lineHeight": "22.5px",
+            "lineHeight": "23.25px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(156, 181, 175)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#host": {
-            "color": "rgb(255, 184, 194)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "22px",
-            "fontWeight": "750",
-            "lineHeight": "33px",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 184, 194)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#official": {
-            "color": "rgb(168, 245, 223)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "700",
-            "lineHeight": "27px",
+            "fontSize": "15px",
+            "fontWeight": "640",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(168, 245, 223)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#reason": {
-            "color": "rgb(223, 206, 207)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13.5px",
             "fontWeight": "400",
-            "lineHeight": "19.575px",
+            "lineHeight": "20.925px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(223, 206, 207)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#error": {
-            "color": "rgb(255, 209, 216)",
-            "background": "rgba(70, 18, 26, 0.85)",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13px",
             "fontWeight": "400",
-            "lineHeight": "19.5px",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(255, 92, 115, 0.4)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".kicker": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "11px",
-            "fontWeight": "700",
-            "lineHeight": "16.5px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".footer": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "12px",
-            "fontWeight": "400",
-            "lineHeight": "18px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "h1": {
             "color": "rgb(255, 255, 255)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "36px",
-            "fontWeight": "750",
+            "fontSize": "40px",
+            "fontWeight": "680",
             "lineHeight": "43.2px",
             "outlineStyle": "none",
             "outlineWidth": "3px",
             "borderColor": "rgb(255, 255, 255)",
             "boxShadow": "none",
             "backdropFilter": "none"
-          },
-          ".wrap": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(16, 28, 26, 0.82)",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "lineHeight": "24px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.12)",
-            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
-            "backdropFilter": "blur(18px) saturate(1.15)"
           }
         },
         "focusTest": null
@@ -1081,7 +1037,7 @@
         "exit": 0,
         "file": "guard-invalid-1280x900.png",
         "exists": true,
-        "bytes": 275872
+        "bytes": 84933
       }
     },
     {
@@ -1103,15 +1059,69 @@
         "hasFocus": false,
         "activeElement": "BODY",
         "document": {
-          "scrollWidth": 350,
-          "scrollHeight": 620,
-          "bodyScrollWidth": 350,
+          "scrollWidth": 335,
+          "scrollHeight": 702,
+          "bodyScrollWidth": 319,
           "horizontalOverflow": false
         },
-        "headings": [
-          "H1:Antipisher"
-        ],
+        "headings": [],
         "focusables": [
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btnOpenOptions",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "trackerToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "geDefenseToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "safeToastToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btnRotateSeed",
+            "text": "Identität neu würfeln",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "aegisToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
           {
             "tag": "INPUT",
             "id": "strict",
@@ -1122,7 +1132,7 @@
           {
             "tag": "INPUT",
             "id": "url",
-            "text": "Webadresse zur Prüfung",
+            "text": "",
             "visible": true,
             "tabIndex": 0
           },
@@ -1130,6 +1140,41 @@
             "tag": "BUTTON",
             "id": "check",
             "text": "Prüfen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Auto",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "DE",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "RU",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ZH",
             "visible": true,
             "tabIndex": 0
           }
@@ -1144,204 +1189,136 @@
           "confirm": null,
           "proceed": null,
           "popupBody": {
-            "x": 0,
-            "y": 0,
-            "w": 350,
-            "h": 445
+            "x": 8,
+            "y": 8,
+            "w": 319,
+            "h": 686
           },
-          "glassCard": {
-            "x": 18,
-            "y": 18,
-            "w": 314,
-            "h": 409
-          },
+          "glassCard": null,
           "urlInput": {
-            "x": 35,
-            "y": 290,
-            "w": 203,
-            "h": 36
+            "x": 8,
+            "y": 613,
+            "w": 177,
+            "h": 21
           },
           "checkBtn": {
-            "x": 246,
-            "y": 290,
-            "w": 69,
-            "h": 36
+            "x": 189,
+            "y": 613,
+            "w": 55,
+            "h": 21
           },
-          "toggleRow": {
-            "x": 48,
-            "y": 185,
-            "w": 254,
-            "h": 18
-          },
+          "toggleRow": null,
           "checkbox": {
-            "x": 286,
-            "y": 186,
-            "w": 16,
-            "h": 16
+            "x": 12,
+            "y": 578,
+            "w": 13,
+            "h": 13
           },
           "result": {
-            "x": 35,
-            "y": 334,
-            "w": 280,
-            "h": 38
+            "x": 8,
+            "y": 634,
+            "w": 319,
+            "h": 21
           },
-          "footer": {
-            "x": 35,
-            "y": 384,
-            "w": 280,
-            "h": 26
-          },
-          "h1": {
-            "x": 69,
-            "y": 36,
-            "w": 75,
-            "h": 23
-          }
+          "footer": null,
+          "h1": null
         },
         "computed": {
           "#url": {
-            "color": "rgb(255, 255, 255)",
-            "background": "rgba(10, 18, 17, 0.75)",
-            "fontSize": "12.5px",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgb(255, 255, 255)",
+            "fontSize": "13.3333px",
             "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.15)",
+            "borderColor": "rgb(118, 118, 118)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#check": {
-            "color": "rgb(255, 255, 255)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "12.5px",
-            "fontWeight": "650",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgb(240, 240, 240)",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(62, 202, 168, 0.45)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#strict": {
-            "color": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13.3333px",
             "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 255, 255)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#notice": {
-            "color": "rgb(156, 181, 175)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "11px",
+            "fontSize": "16px",
             "fontWeight": "400",
-            "lineHeight": "15.4px",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(156, 181, 175)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#sitecount": {
-            "color": "rgb(62, 202, 168)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "750",
-            "lineHeight": "26.1px",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(62, 202, 168)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#blocked": {
-            "color": "rgb(62, 202, 168)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "750",
-            "lineHeight": "26.1px",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(62, 202, 168)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#result": {
-            "color": "rgb(255, 196, 204)",
-            "background": "rgba(54, 18, 26, 0.75)",
-            "fontSize": "12px",
-            "fontWeight": "400",
-            "lineHeight": "16.8px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 92, 115, 0.35)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".kicker": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "10px",
-            "fontWeight": "700",
-            "lineHeight": "14.5px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".footer": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "10.5px",
-            "fontWeight": "400",
-            "lineHeight": "15.225px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          "h1": {
-            "color": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "16px",
-            "fontWeight": "750",
-            "lineHeight": "23.2px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 255, 255)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
-          },
-          ".glass-card": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(16, 28, 26, 0.88)",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "lineHeight": "23.2px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.12)",
-            "boxShadow": "rgba(0, 0, 0, 0.45) 0px 16px 40px 0px",
-            "backdropFilter": "blur(16px) saturate(1.15)"
           }
         },
         "focusTest": {
           "activeIsInput": true,
           "matchesFocusVisible": true,
           "matchesFocus": true,
-          "outlineStyle": "none",
-          "outlineWidth": "3px",
-          "outlineColor": "rgb(255, 255, 255)",
-          "outlineOffset": "2px",
-          "borderColor": "rgba(255, 255, 255, 0.15)",
-          "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px",
+          "outlineColor": "rgb(16, 16, 16)",
+          "outlineOffset": "0px",
+          "borderColor": "rgb(118, 118, 118)",
+          "boxShadow": "none",
           "hasVisibleOutline": false
         }
       },
@@ -1350,7 +1327,7 @@
         "exit": 0,
         "file": "popup-danger-350x620.png",
         "exists": true,
-        "bytes": 68840
+        "bytes": 40499
       }
     },
     {
@@ -1372,15 +1349,69 @@
         "hasFocus": false,
         "activeElement": "BODY",
         "document": {
-          "scrollWidth": 350,
-          "scrollHeight": 620,
-          "bodyScrollWidth": 350,
+          "scrollWidth": 335,
+          "scrollHeight": 720,
+          "bodyScrollWidth": 319,
           "horizontalOverflow": false
         },
-        "headings": [
-          "H1:Antipisher"
-        ],
+        "headings": [],
         "focusables": [
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btnOpenOptions",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "trackerToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "geDefenseToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "safeToastToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btnRotateSeed",
+            "text": "Identität neu würfeln",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "aegisToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
           {
             "tag": "INPUT",
             "id": "strict",
@@ -1391,7 +1422,7 @@
           {
             "tag": "INPUT",
             "id": "url",
-            "text": "Webadresse zur Prüfung",
+            "text": "",
             "visible": true,
             "tabIndex": 0
           },
@@ -1399,6 +1430,41 @@
             "tag": "BUTTON",
             "id": "check",
             "text": "Prüfen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Auto",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "DE",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "RU",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ZH",
             "visible": true,
             "tabIndex": 0
           }
@@ -1413,204 +1479,136 @@
           "confirm": null,
           "proceed": null,
           "popupBody": {
-            "x": 0,
-            "y": 0,
-            "w": 350,
-            "h": 461
+            "x": 8,
+            "y": 8,
+            "w": 319,
+            "h": 704
           },
-          "glassCard": {
-            "x": 18,
-            "y": 18,
-            "w": 314,
-            "h": 425
-          },
+          "glassCard": null,
           "urlInput": {
-            "x": 35,
-            "y": 290,
-            "w": 203,
-            "h": 36
+            "x": 8,
+            "y": 613,
+            "w": 177,
+            "h": 21
           },
           "checkBtn": {
-            "x": 246,
-            "y": 290,
-            "w": 69,
-            "h": 36
+            "x": 189,
+            "y": 613,
+            "w": 55,
+            "h": 21
           },
-          "toggleRow": {
-            "x": 48,
-            "y": 185,
-            "w": 254,
-            "h": 18
-          },
+          "toggleRow": null,
           "checkbox": {
-            "x": 286,
-            "y": 186,
-            "w": 16,
-            "h": 16
+            "x": 12,
+            "y": 578,
+            "w": 13,
+            "h": 13
           },
           "result": {
-            "x": 35,
-            "y": 334,
-            "w": 280,
-            "h": 54
+            "x": 8,
+            "y": 634,
+            "w": 319,
+            "h": 39
           },
-          "footer": {
-            "x": 35,
-            "y": 399,
-            "w": 280,
-            "h": 26
-          },
-          "h1": {
-            "x": 69,
-            "y": 36,
-            "w": 75,
-            "h": 23
-          }
+          "footer": null,
+          "h1": null
         },
         "computed": {
           "#url": {
-            "color": "rgb(255, 255, 255)",
-            "background": "rgba(10, 18, 17, 0.75)",
-            "fontSize": "12.5px",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgb(255, 255, 255)",
+            "fontSize": "13.3333px",
             "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.15)",
+            "borderColor": "rgb(118, 118, 118)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#check": {
-            "color": "rgb(255, 255, 255)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "12.5px",
-            "fontWeight": "650",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgb(240, 240, 240)",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(62, 202, 168, 0.45)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#strict": {
-            "color": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13.3333px",
             "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 255, 255)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#notice": {
-            "color": "rgb(156, 181, 175)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "11px",
+            "fontSize": "16px",
             "fontWeight": "400",
-            "lineHeight": "15.4px",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(156, 181, 175)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#sitecount": {
-            "color": "rgb(62, 202, 168)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "750",
-            "lineHeight": "26.1px",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(62, 202, 168)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#blocked": {
-            "color": "rgb(62, 202, 168)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "750",
-            "lineHeight": "26.1px",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(62, 202, 168)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#result": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(14, 43, 37, 0.75)",
-            "fontSize": "12px",
-            "fontWeight": "400",
-            "lineHeight": "16.8px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(62, 202, 168, 0.35)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".kicker": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "10px",
-            "fontWeight": "700",
-            "lineHeight": "14.5px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".footer": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "10.5px",
-            "fontWeight": "400",
-            "lineHeight": "15.225px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          "h1": {
-            "color": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "16px",
-            "fontWeight": "750",
-            "lineHeight": "23.2px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 255, 255)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
-          },
-          ".glass-card": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(16, 28, 26, 0.88)",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "lineHeight": "23.2px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.12)",
-            "boxShadow": "rgba(0, 0, 0, 0.45) 0px 16px 40px 0px",
-            "backdropFilter": "blur(16px) saturate(1.15)"
           }
         },
         "focusTest": {
           "activeIsInput": true,
           "matchesFocusVisible": true,
           "matchesFocus": true,
-          "outlineStyle": "none",
-          "outlineWidth": "3px",
-          "outlineColor": "rgb(255, 255, 255)",
-          "outlineOffset": "2px",
-          "borderColor": "rgba(255, 255, 255, 0.15)",
-          "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px",
+          "outlineColor": "rgb(16, 16, 16)",
+          "outlineOffset": "0px",
+          "borderColor": "rgb(118, 118, 118)",
+          "boxShadow": "none",
           "hasVisibleOutline": false
         }
       },
@@ -1619,7 +1617,7 @@
         "exit": 0,
         "file": "popup-safe-350x620.png",
         "exists": true,
-        "bytes": 68073
+        "bytes": 40499
       }
     },
     {
@@ -1641,15 +1639,69 @@
         "hasFocus": false,
         "activeElement": "BODY",
         "document": {
-          "scrollWidth": 350,
-          "scrollHeight": 605,
-          "bodyScrollWidth": 350,
+          "scrollWidth": 185,
+          "scrollHeight": 1299,
+          "bodyScrollWidth": 177,
           "horizontalOverflow": true
         },
-        "headings": [
-          "H1:Antipisher"
-        ],
+        "headings": [],
         "focusables": [
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btnOpenOptions",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "trackerToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "geDefenseToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "safeToastToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "btnRotateSeed",
+            "text": "Identität neu würfeln",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "aegisToggle",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
           {
             "tag": "INPUT",
             "id": "strict",
@@ -1660,7 +1712,7 @@
           {
             "tag": "INPUT",
             "id": "url",
-            "text": "Webadresse zur Prüfung",
+            "text": "",
             "visible": true,
             "tabIndex": 0
           },
@@ -1668,6 +1720,41 @@
             "tag": "BUTTON",
             "id": "check",
             "text": "Prüfen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "Auto",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "EN",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "DE",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "RU",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "text": "ZH",
             "visible": true,
             "tabIndex": 0
           }
@@ -1682,204 +1769,136 @@
           "confirm": null,
           "proceed": null,
           "popupBody": {
-            "x": 0,
-            "y": 0,
-            "w": 350,
-            "h": 445
+            "x": 8,
+            "y": 8,
+            "w": 144,
+            "h": 1283
           },
-          "glassCard": {
-            "x": 18,
-            "y": 18,
-            "w": 314,
-            "h": 409
-          },
+          "glassCard": null,
           "urlInput": {
-            "x": 35,
-            "y": 290,
-            "w": 203,
-            "h": 36
+            "x": 8,
+            "y": 1096,
+            "w": 177,
+            "h": 21
           },
           "checkBtn": {
-            "x": 246,
-            "y": 290,
-            "w": 69,
-            "h": 36
+            "x": 8,
+            "y": 1117,
+            "w": 55,
+            "h": 21
           },
-          "toggleRow": {
-            "x": 48,
-            "y": 185,
-            "w": 254,
-            "h": 18
-          },
+          "toggleRow": null,
           "checkbox": {
-            "x": 286,
-            "y": 186,
-            "w": 16,
-            "h": 16
+            "x": 12,
+            "y": 1061,
+            "w": 13,
+            "h": 13
           },
           "result": {
-            "x": 35,
-            "y": 334,
-            "w": 280,
-            "h": 38
+            "x": 8,
+            "y": 1138,
+            "w": 144,
+            "h": 57
           },
-          "footer": {
-            "x": 35,
-            "y": 384,
-            "w": 280,
-            "h": 26
-          },
-          "h1": {
-            "x": 69,
-            "y": 36,
-            "w": 75,
-            "h": 23
-          }
+          "footer": null,
+          "h1": null
         },
         "computed": {
           "#url": {
-            "color": "rgb(255, 255, 255)",
-            "background": "rgba(10, 18, 17, 0.75)",
-            "fontSize": "12.5px",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgb(255, 255, 255)",
+            "fontSize": "13.3333px",
             "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.15)",
+            "borderColor": "rgb(118, 118, 118)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#check": {
-            "color": "rgb(255, 255, 255)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "12.5px",
-            "fontWeight": "650",
+            "color": "rgb(0, 0, 0)",
+            "background": "rgb(240, 240, 240)",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgba(62, 202, 168, 0.45)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#strict": {
-            "color": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "13.3333px",
             "fontWeight": "400",
             "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 255, 255)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#notice": {
-            "color": "rgb(156, 181, 175)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "11px",
+            "fontSize": "16px",
             "fontWeight": "400",
-            "lineHeight": "15.4px",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(156, 181, 175)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#sitecount": {
-            "color": "rgb(62, 202, 168)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "750",
-            "lineHeight": "26.1px",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(62, 202, 168)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#blocked": {
-            "color": "rgb(62, 202, 168)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "18px",
-            "fontWeight": "750",
-            "lineHeight": "26.1px",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(62, 202, 168)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
           },
           "#result": {
-            "color": "rgb(255, 196, 204)",
-            "background": "rgba(54, 18, 26, 0.75)",
-            "fontSize": "12px",
-            "fontWeight": "400",
-            "lineHeight": "16.8px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 92, 115, 0.35)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".kicker": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "10px",
-            "fontWeight": "700",
-            "lineHeight": "14.5px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          ".footer": {
-            "color": "rgb(107, 133, 127)",
-            "background": "rgba(0, 0, 0, 0)",
-            "fontSize": "10.5px",
-            "fontWeight": "400",
-            "lineHeight": "15.225px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
-            "boxShadow": "none",
-            "backdropFilter": "none"
-          },
-          "h1": {
-            "color": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)",
             "background": "rgba(0, 0, 0, 0)",
             "fontSize": "16px",
-            "fontWeight": "750",
-            "lineHeight": "23.2px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
             "outlineStyle": "none",
             "outlineWidth": "3px",
-            "borderColor": "rgb(255, 255, 255)",
+            "borderColor": "rgb(0, 0, 0)",
             "boxShadow": "none",
             "backdropFilter": "none"
-          },
-          ".glass-card": {
-            "color": "rgb(242, 248, 246)",
-            "background": "rgba(16, 28, 26, 0.88)",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "lineHeight": "23.2px",
-            "outlineStyle": "none",
-            "outlineWidth": "3px",
-            "borderColor": "rgba(255, 255, 255, 0.12)",
-            "boxShadow": "rgba(0, 0, 0, 0.45) 0px 16px 40px 0px",
-            "backdropFilter": "blur(16px) saturate(1.15)"
           }
         },
         "focusTest": {
           "activeIsInput": true,
           "matchesFocusVisible": true,
           "matchesFocus": true,
-          "outlineStyle": "none",
-          "outlineWidth": "3px",
-          "outlineColor": "rgb(255, 255, 255)",
-          "outlineOffset": "2px",
-          "borderColor": "rgba(255, 255, 255, 0.15)",
-          "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+          "outlineStyle": "auto",
+          "outlineWidth": "1px",
+          "outlineColor": "rgb(16, 16, 16)",
+          "outlineOffset": "0px",
+          "borderColor": "rgb(118, 118, 118)",
+          "boxShadow": "none",
           "hasVisibleOutline": false
         }
       },
@@ -1888,38 +1907,38 @@
         "exit": 0,
         "file": "popup-zoom-sim-200pct-175x620.png",
         "exists": true,
-        "bytes": 23359
+        "bytes": 19743
       }
     }
   ],
   "screenshots": [
     {
       "file": "guard-danger-1280x900.png",
-      "bytes": 283534
+      "bytes": 94426
     },
     {
       "file": "guard-danger-390x844.png",
-      "bytes": 71412
+      "bytes": 71644
     },
     {
       "file": "guard-confirm-1280x1120.png",
-      "bytes": 351555
+      "bytes": 105468
     },
     {
       "file": "guard-invalid-1280x900.png",
-      "bytes": 275872
+      "bytes": 84933
     },
     {
       "file": "popup-danger-350x620.png",
-      "bytes": 68840
+      "bytes": 40499
     },
     {
       "file": "popup-safe-350x620.png",
-      "bytes": 68073
+      "bytes": 40499
     },
     {
       "file": "popup-zoom-sim-200pct-175x620.png",
-      "bytes": 23359
+      "bytes": 19743
     }
   ],
   "summary": {
@@ -1947,6 +1966,41 @@
           "tabIndex": -1
         },
         {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "EN",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "DE",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "RU",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "ZH",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
           "tag": "BUTTON",
           "id": "safe",
           "text": "Offizielle Seite öffnen",
@@ -1956,21 +2010,21 @@
         {
           "tag": "BUTTON",
           "id": "back",
-          "text": "Zurück zur vorherigen Seite",
+          "text": "Zurück",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "reveal",
-          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "text": "Erweitert: Risiko verstehen und fortfahren",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "proceed",
-          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "text": "Einmalig fortfahren",
           "visible": false,
           "tabIndex": 0
         }
@@ -1979,41 +2033,36 @@
         "H1:Möglicher Domain-Betrug abgewehrt"
       ],
       "rects": {
-        "wrap": {
-          "x": 294,
-          "y": 68,
-          "w": 680,
-          "h": 764
-        },
+        "wrap": null,
         "danger": {
-          "x": 333,
-          "y": 301,
-          "w": 602,
-          "h": 421
+          "x": 320,
+          "y": 327,
+          "w": 628,
+          "h": 261
         },
         "actions": {
-          "x": 333,
-          "y": 596,
-          "w": 602,
-          "h": 48
+          "x": 320,
+          "y": 511,
+          "w": 628,
+          "h": 21
         },
         "safeBtn": {
-          "x": 333,
-          "y": 596,
-          "w": 216,
-          "h": 48
+          "x": 320,
+          "y": 511,
+          "w": 141,
+          "h": 21
         },
         "backBtn": {
-          "x": 560,
-          "y": 596,
-          "w": 231,
-          "h": 48
+          "x": 471,
+          "y": 511,
+          "w": 57,
+          "h": 21
         },
         "reveal": {
-          "x": 333,
-          "y": 699,
-          "w": 273,
-          "h": 23
+          "x": 320,
+          "y": 572,
+          "w": 220,
+          "h": 16
         },
         "confirm": {
           "x": 0,
@@ -2028,10 +2077,10 @@
           "h": 0
         },
         "popupBody": {
-          "x": 0,
-          "y": 0,
-          "w": 1267,
-          "h": 900
+          "x": 8,
+          "y": 8,
+          "w": 1251,
+          "h": 727
         },
         "glassCard": null,
         "urlInput": null,
@@ -2039,16 +2088,11 @@
         "toggleRow": null,
         "checkbox": null,
         "result": null,
-        "footer": {
-          "x": 333,
-          "y": 750,
-          "w": 602,
-          "h": 37
-        },
+        "footer": null,
         "h1": {
-          "x": 333,
+          "x": 320,
           "y": 203,
-          "w": 602,
+          "w": 628,
           "h": 43
         }
       }
@@ -2063,8 +2107,8 @@
         "h": 844
       },
       "horizontalOverflow": false,
-      "scrollWidth": 375,
-      "scrollHeight": 984,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
       "activeElement": "BODY",
       "hasFocus": false,
       "focusTest": null,
@@ -2077,6 +2121,41 @@
           "tabIndex": -1
         },
         {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "EN",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "DE",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "RU",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "ZH",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
           "tag": "BUTTON",
           "id": "safe",
           "text": "Offizielle Seite öffnen",
@@ -2086,21 +2165,21 @@
         {
           "tag": "BUTTON",
           "id": "back",
-          "text": "Zurück zur vorherigen Seite",
+          "text": "Zurück",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "reveal",
-          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "text": "Erweitert: Risiko verstehen und fortfahren",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "proceed",
-          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "text": "Einmalig fortfahren",
           "visible": false,
           "tabIndex": 0
         }
@@ -2109,41 +2188,36 @@
         "H1:Möglicher Domain-Betrug abgewehrt"
       ],
       "rects": {
-        "wrap": {
-          "x": 16,
-          "y": 24,
-          "w": 343,
-          "h": 936
-        },
+        "wrap": null,
         "danger": {
-          "x": 37,
-          "y": 324,
-          "w": 301,
-          "h": 514
+          "x": 40,
+          "y": 282,
+          "w": 310,
+          "h": 379
         },
         "actions": {
-          "x": 37,
-          "y": 652,
-          "w": 301,
-          "h": 108
+          "x": 40,
+          "y": 553,
+          "w": 310,
+          "h": 52
         },
         "safeBtn": {
-          "x": 37,
-          "y": 652,
-          "w": 301,
-          "h": 48
+          "x": 40,
+          "y": 553,
+          "w": 310,
+          "h": 21
         },
         "backBtn": {
-          "x": 37,
-          "y": 712,
-          "w": 301,
-          "h": 48
+          "x": 40,
+          "y": 584,
+          "w": 310,
+          "h": 21
         },
         "reveal": {
-          "x": 37,
-          "y": 815,
-          "w": 273,
-          "h": 23
+          "x": 40,
+          "y": 645,
+          "w": 220,
+          "h": 16
         },
         "confirm": {
           "x": 0,
@@ -2158,10 +2232,10 @@
           "h": 0
         },
         "popupBody": {
-          "x": 0,
-          "y": 0,
-          "w": 375,
-          "h": 984
+          "x": 8,
+          "y": 8,
+          "w": 374,
+          "h": 779
         },
         "glassCard": null,
         "urlInput": null,
@@ -2169,17 +2243,12 @@
         "toggleRow": null,
         "checkbox": null,
         "result": null,
-        "footer": {
-          "x": 37,
-          "y": 866,
-          "w": 301,
-          "h": 63
-        },
+        "footer": null,
         "h1": {
-          "x": 37,
-          "y": 162,
-          "w": 301,
-          "h": 62
+          "x": 40,
+          "y": 143,
+          "w": 310,
+          "h": 58
         }
       }
     },
@@ -2207,6 +2276,41 @@
           "tabIndex": -1
         },
         {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "EN",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "DE",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "RU",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "ZH",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
           "tag": "BUTTON",
           "id": "safe",
           "text": "Offizielle Seite öffnen",
@@ -2216,21 +2320,21 @@
         {
           "tag": "BUTTON",
           "id": "back",
-          "text": "Zurück zur vorherigen Seite",
+          "text": "Zurück",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "reveal",
-          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "text": "Erweitert: Risiko verstehen und fortfahren",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "proceed",
-          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "text": "Einmalig fortfahren",
           "visible": true,
           "tabIndex": 0
         }
@@ -2239,59 +2343,54 @@
         "H1:Möglicher Domain-Betrug abgewehrt"
       ],
       "rects": {
-        "wrap": {
-          "x": 294,
-          "y": 96,
-          "w": 680,
-          "h": 928
-        },
+        "wrap": null,
         "danger": {
-          "x": 333,
-          "y": 329,
-          "w": 602,
-          "h": 585
+          "x": 320,
+          "y": 327,
+          "w": 628,
+          "h": 401
         },
         "actions": {
-          "x": 333,
-          "y": 624,
-          "w": 602,
-          "h": 48
+          "x": 320,
+          "y": 511,
+          "w": 628,
+          "h": 21
         },
         "safeBtn": {
-          "x": 333,
-          "y": 624,
-          "w": 216,
-          "h": 48
+          "x": 320,
+          "y": 511,
+          "w": 141,
+          "h": 21
         },
         "backBtn": {
-          "x": 560,
-          "y": 624,
-          "w": 231,
-          "h": 48
+          "x": 471,
+          "y": 511,
+          "w": 57,
+          "h": 21
         },
         "reveal": {
-          "x": 333,
-          "y": 727,
-          "w": 273,
-          "h": 23
+          "x": 320,
+          "y": 572,
+          "w": 220,
+          "h": 16
         },
         "confirm": {
-          "x": 333,
-          "y": 762,
-          "w": 602,
-          "h": 152
+          "x": 320,
+          "y": 602,
+          "w": 628,
+          "h": 127
         },
         "proceed": {
-          "x": 350,
-          "y": 851,
-          "w": 315,
-          "h": 46
+          "x": 338,
+          "y": 691,
+          "w": 128,
+          "h": 21
         },
         "popupBody": {
-          "x": 0,
-          "y": 0,
-          "w": 1267,
-          "h": 1120
+          "x": 8,
+          "y": 8,
+          "w": 1251,
+          "h": 867
         },
         "glassCard": null,
         "urlInput": null,
@@ -2299,16 +2398,11 @@
         "toggleRow": null,
         "checkbox": null,
         "result": null,
-        "footer": {
-          "x": 333,
-          "y": 942,
-          "w": 602,
-          "h": 37
-        },
+        "footer": null,
         "h1": {
-          "x": 333,
-          "y": 231,
-          "w": 602,
+          "x": 320,
+          "y": 203,
+          "w": 628,
           "h": 43
         }
       }
@@ -2337,6 +2431,41 @@
           "tabIndex": -1
         },
         {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "EN",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "DE",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "RU",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "ZH",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
           "tag": "BUTTON",
           "id": "safe",
           "text": "Offizielle Seite öffnen",
@@ -2346,21 +2475,21 @@
         {
           "tag": "BUTTON",
           "id": "back",
-          "text": "Zurück zur vorherigen Seite",
+          "text": "Zurück",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "reveal",
-          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "text": "Erweitert: Risiko verstehen und fortfahren",
           "visible": true,
           "tabIndex": 0
         },
         {
           "tag": "BUTTON",
           "id": "proceed",
-          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "text": "Einmalig fortfahren",
           "visible": false,
           "tabIndex": 0
         }
@@ -2369,41 +2498,36 @@
         "H1:Ungültige Webadresse"
       ],
       "rects": {
-        "wrap": {
-          "x": 294,
-          "y": 120,
-          "w": 680,
-          "h": 659
-        },
+        "wrap": null,
         "danger": {
-          "x": 333,
-          "y": 354,
-          "w": 602,
-          "h": 316
+          "x": 320,
+          "y": 327,
+          "w": 628,
+          "h": 237
         },
         "actions": {
-          "x": 333,
-          "y": 544,
-          "w": 602,
-          "h": 48
+          "x": 320,
+          "y": 487,
+          "w": 628,
+          "h": 21
         },
         "safeBtn": {
-          "x": 333,
-          "y": 544,
-          "w": 216,
-          "h": 48
+          "x": 320,
+          "y": 487,
+          "w": 141,
+          "h": 21
         },
         "backBtn": {
-          "x": 560,
-          "y": 544,
-          "w": 231,
-          "h": 48
+          "x": 471,
+          "y": 487,
+          "w": 57,
+          "h": 21
         },
         "reveal": {
-          "x": 333,
-          "y": 647,
-          "w": 273,
-          "h": 23
+          "x": 320,
+          "y": 548,
+          "w": 220,
+          "h": 16
         },
         "confirm": {
           "x": 0,
@@ -2418,10 +2542,10 @@
           "h": 0
         },
         "popupBody": {
-          "x": 0,
-          "y": 0,
-          "w": 1267,
-          "h": 900
+          "x": 8,
+          "y": 8,
+          "w": 1251,
+          "h": 703
         },
         "glassCard": null,
         "urlInput": null,
@@ -2429,16 +2553,11 @@
         "toggleRow": null,
         "checkbox": null,
         "result": null,
-        "footer": {
-          "x": 333,
-          "y": 698,
-          "w": 602,
-          "h": 37
-        },
+        "footer": null,
         "h1": {
-          "x": 333,
-          "y": 256,
-          "w": 602,
+          "x": 320,
+          "y": 203,
+          "w": 628,
           "h": 43
         }
       }
@@ -2453,23 +2572,79 @@
         "h": 620
       },
       "horizontalOverflow": false,
-      "scrollWidth": 350,
-      "scrollHeight": 620,
+      "scrollWidth": 335,
+      "scrollHeight": 702,
       "activeElement": "BODY",
       "hasFocus": false,
       "focusTest": {
         "activeIsInput": true,
         "matchesFocusVisible": true,
         "matchesFocus": true,
-        "outlineStyle": "none",
-        "outlineWidth": "3px",
-        "outlineColor": "rgb(255, 255, 255)",
-        "outlineOffset": "2px",
-        "borderColor": "rgba(255, 255, 255, 0.15)",
-        "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "outlineColor": "rgb(16, 16, 16)",
+        "outlineOffset": "0px",
+        "borderColor": "rgb(118, 118, 118)",
+        "boxShadow": "none",
         "hasVisibleOutline": false
       },
       "focusables": [
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnOpenOptions",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "trackerToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "geDefenseToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "safeToastToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnRotateSeed",
+          "text": "Identität neu würfeln",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "aegisToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
         {
           "tag": "INPUT",
           "id": "strict",
@@ -2480,7 +2655,7 @@
         {
           "tag": "INPUT",
           "id": "url",
-          "text": "Webadresse zur Prüfung",
+          "text": "",
           "visible": true,
           "tabIndex": 0
         },
@@ -2490,11 +2665,44 @@
           "text": "Prüfen",
           "visible": true,
           "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Auto",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "EN",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "DE",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "RU",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "ZH",
+          "visible": true,
+          "tabIndex": 0
         }
       ],
-      "headings": [
-        "H1:Antipisher"
-      ],
+      "headings": [],
       "rects": {
         "wrap": null,
         "danger": null,
@@ -2505,59 +2713,39 @@
         "confirm": null,
         "proceed": null,
         "popupBody": {
-          "x": 0,
-          "y": 0,
-          "w": 350,
-          "h": 445
+          "x": 8,
+          "y": 8,
+          "w": 319,
+          "h": 686
         },
-        "glassCard": {
-          "x": 18,
-          "y": 18,
-          "w": 314,
-          "h": 409
-        },
+        "glassCard": null,
         "urlInput": {
-          "x": 35,
-          "y": 290,
-          "w": 203,
-          "h": 36
+          "x": 8,
+          "y": 613,
+          "w": 177,
+          "h": 21
         },
         "checkBtn": {
-          "x": 246,
-          "y": 290,
-          "w": 69,
-          "h": 36
+          "x": 189,
+          "y": 613,
+          "w": 55,
+          "h": 21
         },
-        "toggleRow": {
-          "x": 48,
-          "y": 185,
-          "w": 254,
-          "h": 18
-        },
+        "toggleRow": null,
         "checkbox": {
-          "x": 286,
-          "y": 186,
-          "w": 16,
-          "h": 16
+          "x": 12,
+          "y": 578,
+          "w": 13,
+          "h": 13
         },
         "result": {
-          "x": 35,
-          "y": 334,
-          "w": 280,
-          "h": 38
+          "x": 8,
+          "y": 634,
+          "w": 319,
+          "h": 21
         },
-        "footer": {
-          "x": 35,
-          "y": 384,
-          "w": 280,
-          "h": 26
-        },
-        "h1": {
-          "x": 69,
-          "y": 36,
-          "w": 75,
-          "h": 23
-        }
+        "footer": null,
+        "h1": null
       }
     },
     "popup-safe": {
@@ -2570,23 +2758,79 @@
         "h": 620
       },
       "horizontalOverflow": false,
-      "scrollWidth": 350,
-      "scrollHeight": 620,
+      "scrollWidth": 335,
+      "scrollHeight": 720,
       "activeElement": "BODY",
       "hasFocus": false,
       "focusTest": {
         "activeIsInput": true,
         "matchesFocusVisible": true,
         "matchesFocus": true,
-        "outlineStyle": "none",
-        "outlineWidth": "3px",
-        "outlineColor": "rgb(255, 255, 255)",
-        "outlineOffset": "2px",
-        "borderColor": "rgba(255, 255, 255, 0.15)",
-        "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "outlineColor": "rgb(16, 16, 16)",
+        "outlineOffset": "0px",
+        "borderColor": "rgb(118, 118, 118)",
+        "boxShadow": "none",
         "hasVisibleOutline": false
       },
       "focusables": [
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnOpenOptions",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "trackerToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "geDefenseToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "safeToastToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnRotateSeed",
+          "text": "Identität neu würfeln",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "aegisToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
         {
           "tag": "INPUT",
           "id": "strict",
@@ -2597,7 +2841,7 @@
         {
           "tag": "INPUT",
           "id": "url",
-          "text": "Webadresse zur Prüfung",
+          "text": "",
           "visible": true,
           "tabIndex": 0
         },
@@ -2607,11 +2851,44 @@
           "text": "Prüfen",
           "visible": true,
           "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Auto",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "EN",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "DE",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "RU",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "ZH",
+          "visible": true,
+          "tabIndex": 0
         }
       ],
-      "headings": [
-        "H1:Antipisher"
-      ],
+      "headings": [],
       "rects": {
         "wrap": null,
         "danger": null,
@@ -2622,59 +2899,39 @@
         "confirm": null,
         "proceed": null,
         "popupBody": {
-          "x": 0,
-          "y": 0,
-          "w": 350,
-          "h": 461
+          "x": 8,
+          "y": 8,
+          "w": 319,
+          "h": 704
         },
-        "glassCard": {
-          "x": 18,
-          "y": 18,
-          "w": 314,
-          "h": 425
-        },
+        "glassCard": null,
         "urlInput": {
-          "x": 35,
-          "y": 290,
-          "w": 203,
-          "h": 36
+          "x": 8,
+          "y": 613,
+          "w": 177,
+          "h": 21
         },
         "checkBtn": {
-          "x": 246,
-          "y": 290,
-          "w": 69,
-          "h": 36
+          "x": 189,
+          "y": 613,
+          "w": 55,
+          "h": 21
         },
-        "toggleRow": {
-          "x": 48,
-          "y": 185,
-          "w": 254,
-          "h": 18
-        },
+        "toggleRow": null,
         "checkbox": {
-          "x": 286,
-          "y": 186,
-          "w": 16,
-          "h": 16
+          "x": 12,
+          "y": 578,
+          "w": 13,
+          "h": 13
         },
         "result": {
-          "x": 35,
-          "y": 334,
-          "w": 280,
-          "h": 54
+          "x": 8,
+          "y": 634,
+          "w": 319,
+          "h": 39
         },
-        "footer": {
-          "x": 35,
-          "y": 399,
-          "w": 280,
-          "h": 26
-        },
-        "h1": {
-          "x": 69,
-          "y": 36,
-          "w": 75,
-          "h": 23
-        }
+        "footer": null,
+        "h1": null
       }
     },
     "popup-zoom175": {
@@ -2687,23 +2944,79 @@
         "h": 620
       },
       "horizontalOverflow": true,
-      "scrollWidth": 350,
-      "scrollHeight": 605,
+      "scrollWidth": 185,
+      "scrollHeight": 1299,
       "activeElement": "BODY",
       "hasFocus": false,
       "focusTest": {
         "activeIsInput": true,
         "matchesFocusVisible": true,
         "matchesFocus": true,
-        "outlineStyle": "none",
-        "outlineWidth": "3px",
-        "outlineColor": "rgb(255, 255, 255)",
-        "outlineOffset": "2px",
-        "borderColor": "rgba(255, 255, 255, 0.15)",
-        "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+        "outlineStyle": "auto",
+        "outlineWidth": "1px",
+        "outlineColor": "rgb(16, 16, 16)",
+        "outlineOffset": "0px",
+        "borderColor": "rgb(118, 118, 118)",
+        "boxShadow": "none",
         "hasVisibleOutline": false
       },
       "focusables": [
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnOpenOptions",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "trackerToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "geDefenseToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "safeToastToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "btnRotateSeed",
+          "text": "Identität neu würfeln",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "aegisToggle",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
         {
           "tag": "INPUT",
           "id": "strict",
@@ -2714,7 +3027,7 @@
         {
           "tag": "INPUT",
           "id": "url",
-          "text": "Webadresse zur Prüfung",
+          "text": "",
           "visible": true,
           "tabIndex": 0
         },
@@ -2724,11 +3037,44 @@
           "text": "Prüfen",
           "visible": true,
           "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "Auto",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "EN",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "DE",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "RU",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "ZH",
+          "visible": true,
+          "tabIndex": 0
         }
       ],
-      "headings": [
-        "H1:Antipisher"
-      ],
+      "headings": [],
       "rects": {
         "wrap": null,
         "danger": null,
@@ -2739,59 +3085,39 @@
         "confirm": null,
         "proceed": null,
         "popupBody": {
-          "x": 0,
-          "y": 0,
-          "w": 350,
-          "h": 445
+          "x": 8,
+          "y": 8,
+          "w": 144,
+          "h": 1283
         },
-        "glassCard": {
-          "x": 18,
-          "y": 18,
-          "w": 314,
-          "h": 409
-        },
+        "glassCard": null,
         "urlInput": {
-          "x": 35,
-          "y": 290,
-          "w": 203,
-          "h": 36
+          "x": 8,
+          "y": 1096,
+          "w": 177,
+          "h": 21
         },
         "checkBtn": {
-          "x": 246,
-          "y": 290,
-          "w": 69,
-          "h": 36
+          "x": 8,
+          "y": 1117,
+          "w": 55,
+          "h": 21
         },
-        "toggleRow": {
-          "x": 48,
-          "y": 185,
-          "w": 254,
-          "h": 18
-        },
+        "toggleRow": null,
         "checkbox": {
-          "x": 286,
-          "y": 186,
-          "w": 16,
-          "h": 16
+          "x": 12,
+          "y": 1061,
+          "w": 13,
+          "h": 13
         },
         "result": {
-          "x": 35,
-          "y": 334,
-          "w": 280,
-          "h": 38
+          "x": 8,
+          "y": 1138,
+          "w": 144,
+          "h": 57
         },
-        "footer": {
-          "x": 35,
-          "y": 384,
-          "w": 280,
-          "h": 26
-        },
-        "h1": {
-          "x": 69,
-          "y": 36,
-          "w": 75,
-          "h": 23
-        }
+        "footer": null,
+        "h1": null
       }
     }
   }

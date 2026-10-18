@@ -1,0 +1,133 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "requestDomains": [
+        "google-analytics.com",
+        "googletagmanager.com",
+        "doubleclick.net",
+        "googleadservices.com",
+        "adservice.google.com",
+        "2mdn.net",
+        "googlesyndication.com",
+        "analytics.google.com",
+        "connect.facebook.net",
+        "pixel.facebook.com",
+        "an.facebook.com",
+        "clarity.ms",
+        "c.clarity.ms",
+        "bat.bing.com",
+        "static.ads-twitter.com",
+        "analytics.twitter.com",
+        "analytics.tiktok.com",
+        "mc.yandex.ru",
+        "metrika.yandex.net",
+        "an.yandex.ru",
+        "static.hotjar.com",
+        "script.hotjar.com",
+        "vars.hotjar.com",
+        "mouseflow.com",
+        "fullstory.com",
+        "smartlook.com",
+        "crazyegg.com",
+        "luckyorange.com",
+        "criteo.com",
+        "criteo.net",
+        "static.criteo.net",
+        "bidder.criteo.com",
+        "dis.criteo.com",
+        "scorecardresearch.com",
+        "sb.scorecardresearch.com",
+        "trc.taboola.com",
+        "widgets.outbrain.com",
+        "log.outbrain.com",
+        "quantserve.com",
+        "pixel.quantserve.com",
+        "adnxs.com",
+        "rubiconproject.com",
+        "pubmatic.com",
+        "openx.net",
+        "casalemedia.com",
+        "smartadserver.com",
+        "adform.net",
+        "yieldmo.com",
+        "teads.tv",
+        "aax.amazon-adsystem.com",
+        "c.amazon-adsystem.com",
+        "fls-na.amazon.com",
+        "api.segment.io",
+        "api.mixpanel.com",
+        "appboy.com",
+        "braze.com",
+        "branch.io",
+        "app.adjust.com",
+        "onelink.appsflyer.com",
+        "optimizely.com",
+        "logx.optimizely.com",
+        "browser.sentry-cdn.com",
+        "bam.nr-data.net",
+        "omtrdc.net",
+        "demdex.net",
+        "everesttech.net",
+        "krxd.net",
+        "chartbeat.com",
+        "chartbeat.net",
+        "newrelic.com"
+      ],
+      "resourceTypes": [
+        "script",
+        "xmlhttprequest",
+        "sub_frame",
+        "ping",
+        "image",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 2,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "queryTransform": {
+            "removeParams": [
+              "utm_source",
+              "utm_medium",
+              "utm_campaign",
+              "utm_term",
+              "utm_content",
+              "fbclid",
+              "gclid",
+              "gclsrc",
+              "dclid",
+              "msclkid",
+              "mc_eid",
+              "yclid",
+              "_openstat",
+              "igshid",
+              "ttclid",
+              "twclid",
+              "_hsenc",
+              "_hsmi",
+              "sc_customer",
+              "mkt_tok"
+            ]
+          }
+        }
+      }
+    },
+    "condition": {
+      "urlFilter": "|https?://*",
+      "resourceTypes": [
+        "main_frame",
+        "sub_frame"
+      ]
+    }
+  }
+]

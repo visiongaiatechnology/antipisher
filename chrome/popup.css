@@ -2,10 +2,47 @@
  * Antipisher — Popup layout (GLASS 2100).
  */
 
+html {
+  width: 390px;
+  min-width: 390px;
+  max-width: 390px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(111, 227, 189, 0.28) rgba(10, 18, 16, 0.65);
+}
+
 body.vgt-popup {
-  width: min(380px, 100vw);
+  width: 100%;
+  min-width: 390px;
+  max-width: 390px;
   min-height: 0;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Glass 2100 Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(8, 15, 13, 0.65);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(111, 227, 189, 0.24);
+  border-radius: var(--vgt-radius-pill);
+  border: 1px solid rgba(111, 227, 189, 0.14);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(111, 227, 189, 0.44);
+  border-color: rgba(111, 227, 189, 0.34);
 }
 
 .popup-ambient {
@@ -27,19 +64,91 @@ body.vgt-popup {
 }
 
 .popup-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 12px;
-  padding: 0 2px;
+  padding: 0 4px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.15;
+}
+
+.brand-org {
+  font-size: 8.5px;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vgt-text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand-product {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--vgt-text);
+  line-height: 1.15;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
 }
 
 .version-chip {
+  flex: 0 0 auto;
   font-family: var(--vgt-font-mono);
   font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--vgt-text-3);
-  border: 1px solid var(--vgt-hairline-2);
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  color: var(--vgt-accent);
+  background: var(--vgt-accent-soft);
+  border: 1px solid var(--vgt-accent-line);
   border-radius: var(--vgt-radius-pill);
-  padding: 4px 9px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.btn-icon {
+  background: rgba(14, 26, 23, 0.7);
+  border: 1px solid var(--vgt-glass-border);
+  border-radius: var(--vgt-radius-sm);
+  color: var(--vgt-text-2);
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--vgt-trans-fast);
+}
+
+.btn-icon:hover {
+  color: var(--vgt-accent);
+  background: rgba(111, 227, 189, 0.12);
+  border-color: var(--vgt-accent-line);
+  box-shadow: var(--vgt-glow-subtle);
+  transform: translateY(-1px);
 }
 
 .popup-panel {
@@ -116,10 +225,11 @@ body[data-state="degraded"] .status-pill {
   flex: 1;
   flex-direction: column;
   gap: 1px;
+  min-width: 0;
 }
 
 .metric + .metric {
-  padding-left: 18px;
+  padding-left: 14px;
   border-left: 1px solid var(--vgt-hairline);
 }
 
@@ -129,14 +239,29 @@ body[data-state="degraded"] .status-pill {
   letter-spacing: -0.02em;
   color: var(--vgt-text);
   font-variant-numeric: tabular-nums;
+  line-height: 1.1;
 }
 
 .metric-label {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 650;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--vgt-text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metric-sub {
+  font-size: 8.5px;
+  font-weight: 500;
+  color: var(--vgt-text-3);
+  opacity: 0.8;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  margin-top: 2px;
 }
 
 .setting-row {
@@ -267,6 +392,15 @@ input[type="text"]:focus-visible {
   padding: 0 14px;
   font-size: 12.5px;
   flex: 0 0 auto;
+}
+
+.btn-micro {
+  min-height: 24px;
+  padding: 0 10px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: var(--vgt-radius-pill);
+  gap: 5px;
 }
 
 .result {

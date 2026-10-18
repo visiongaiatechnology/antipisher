@@ -20,3 +20,4 @@ node_modules/
 # Temporary
 *.tmp
 *.log
+_metadata/

@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.0 (Alpha)
+# 🛡️ Antipisher 0.2.1 (Alpha)
 
 **Offline-fähiger, hochpräziser Schutz vor Phishing, IDN-Homoglyphen & Typosquatting für Google Chrome & Mozilla Firefox**  
 *Lizenziert unter der GNU Affero General Public License v3.0 (AGPLv3)*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.0-alpha](https://img.shields.io/badge/Version-0.2.0--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 42/42 Passing](https://img.shields.io/badge/Tests-42%2F42_Passing-2ea043.svg?style=for-the-badge)](#tests--entwicklung)
+[![Version: 0.2.1-alpha](https://img.shields.io/badge/Version-0.2.1--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 69/69 Passing](https://img.shields.io/badge/Tests-69%2F69_Passing-2ea043.svg?style=for-the-badge)](#tests--entwicklung)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Telemetrie-Keine_%2F_100%25_Offline-0284c7.svg?style=for-the-badge)](#datenschutz--offline-garantien)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Bereit-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_Bereit-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,13 +22,18 @@
 
 </div>
 
-> **Status:** `SILVER` · Version `0.2.0` · Stand: 18.10.2026 · Leises sicheres Surfen Alpha-Meilenstein.  
+> **Status:** `SILVER` · Version `0.2.1` · Stand: 18.10.2026 · AEGIS Tracker Shield & Options Meilenstein.  
 > **Kein finales Store-Produkt:** Browser-E2E-Tests, offizielle Store-Listung, signierte Update-Feeds und die vollständige V2-Graph-Engine sind laufende Entwicklungsziele (siehe [Bekannte Grenzen & Einschränkungen](#bekannte-grenzen--einschränkungen)).
 
 ---
 
 ## ⚡ Kernfunktionen & Umgesetzte Features
 
+- **Dediziertes Einstellungsmenü & Benutzerdefinierte Whitelist:** Vollständige Konfigurationsoberfläche (`options.html`), erreichbar über das Zahnrad-Symbol im Popup oder die Browser-Erweiterungsverwaltung. Steuert Standard- vs. strengen Modus, Safe-Toast, Badge-Zähler, Sprache und ermöglicht das lokale Pflegen einer benutzerdefinierten Domain-Whitelist (sofortige Freigabe ohne externe Abfragen).
+- **AEGIS Tracker Shield (uBlock-inspirierter lokaler Schutz):** Rein lokaler deklarativer Netzwerk-Filter (`rulesets/trackers.json`) kombiniert mit dynamischen Script-Surrogates für `ga`, `dataLayer`, `fbq`, `ttq`, `clarity`, `hj` und `navigator.sendBeacon`. Verhindert das Einfrieren von Checkouts und Logins bei vollständiger Unterbindung von Werbe- und Analysetelemetrie. Bereinigt URL-Tracking-Parameter (`utm_*`, `fbclid`, `gclid`).
+- **Echtzeit Live-Tracker-Zähler:** Toolbar-Icon-Badge und Popup zeigen in Echtzeit geblockte Tracker (`Tab: X · Gesamt: Y`) und erfassen präzise auch dynamisch oder asynchron nachladende Tracker-Skripte.
+- **GeDefense Light DOM-Hypervisor:** Self-XSS Konsole-Schutzwarnung gegen Social Engineering, kognitive Fast-Path Engine für HTML-Säuberung ohne Parsing-Overhead, Inline-Script- und Iframe-Injektions-Neutralisierung sowie Prototype-Level `javascript:` URI-Entschärfung.
+- **AEGIS Anti-Fingerprinting Cloaking:** Screen-Geometrie-Fuzzing und subtiles Canvas 1-Bit-Rauschen gegen geräte- und profilübergreifendes Browser-Fingerprinting.
 - **Leises sicheres Surfen & Glass 2100 Status-Toast:** Saubere, verifizierte Webseiten öffnen direkt ohne zusätzliche Latenz (0 ms) und ohne störende Vollbild-Unterbrechungen. Beim Aufrufen verifizierter Webseiten erscheint kurz ein dezenter, schwebender Glass-2100-Status-Toast (*„Domain verifiziert · Antipisher“*), der sanft ausblendet, ohne Klicks zu blockieren (`pointer-events: none`).
 - **Standard-Modus vs. Strenger Preflight-Modus:** Der Standard-Modus ermöglicht flüssiges Surfen mit gezielter Phishing-Abwehr; der optionale strenge Modus schaltet eine vollständige Vollbild-Vorabprüfung vor jeden GET-Aufruf.
 - **Mehrsprachigkeit (4 Sprachen):** Vollständig lokalisierte Benutzeroberfläche und Erkennungserklärungen in **Deutsch (`de`)**, **Englisch (`en`)**, **Russisch (`ru`)** und **Chinesisch (`zh`)**. Die Erweiterung erkennt automatisch die Browsersprache als Standard, bietet jedoch jederzeit manuelles Umschalten.
@@ -60,13 +65,17 @@
 
 ## 📸 Benutzeroberfläche & Screenshots
 
+| Einstellungs-Menü (v0.2.1) | Benutzerdefinierte Whitelist (v0.2.1) |
+|:---:|:---:|
+| ![Einstellungs-Menü](audit/verify/fix/screenshots/v2-options.png) | ![Benutzerdefinierte Whitelist](audit/verify/fix/screenshots/v2-options-whitelist.png) |
+
+| Erweiterungs-Popup (v0.2.1) | In-Page Content Shield (Formular-Schutz) |
+|:---:|:---:|
+| ![Erweiterungs-Popup](audit/verify/fix/screenshots/v2-popup.png) | ![In-Page Shield](audit/verify/fix/screenshots/v2-shield-modal.png) |
+
 | Bedrohung abgefangen (Block-Interstitial) | Unklare Domain (Warn-Interstitial) |
 |:---:|:---:|
 | ![Block-Interstitial](audit/verify/fix/screenshots/v2-guard-block.png) | ![Warn-Interstitial](audit/verify/fix/screenshots/v2-guard-warn.png) |
-
-| In-Page Content Shield (Formular-Schutz) | Erweiterungs-Popup |
-|:---:|:---:|
-| ![In-Page Shield](audit/verify/fix/screenshots/v2-shield-modal.png) | ![Erweiterungs-Popup](audit/verify/fix/screenshots/v2-popup.png) |
 
 | Kompakt-Ansicht (500px) | Mobile Ansicht (390px) |
 |:---:|:---:|
@@ -82,7 +91,7 @@
 | Frischer unkalibrierter 44-Fälle Sanity-Korpus | **42/44 = 95,5 %** (2 FN bei nicht gelisteten Combosquats: `tiktok-coin.com`, `ledger-live.com`) |
 | Öffentlicher 184-URL Audit-Korpus | 183/184 erkannt (1 FN, 0 FP) |
 | Adversarial Lead Probe (66 Fälle) | **0/26 False Positives (0 %)**, **0/40 False Negatives (0 %)** — 100 % bestanden |
-| Node.js Unit- & Regressionstest-Suite | **38/38 bestanden (100 %)** |
+| Node.js Unit- & Regressionstest-Suite | **69/69 bestanden (100 %)** |
 
 > [!NOTE]
 > Diese Zahlen spiegeln empirische Testergebnisse wider und stellen keine absolute Garantie dar. Der kontinuierliche Ausbau hin zu vollständigen UTS-39-Tabellen und graphenbasierten Markenmodellen ist für V2 geplant.

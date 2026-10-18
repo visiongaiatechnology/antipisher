@@ -48,11 +48,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "$GITHUB_REF_NAME" \
-            ../Antipisher-Chrome-v*.zip \
-            ../Antipisher-Firefox-v*.zip \
-            ../Antipisher-Source-v*.zip \
-            ../SHA256SUMS.txt \
-            --title "Antipisher $GITHUB_REF_NAME (Alpha)" \
-            --generate-notes \
-            --prerelease
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release $GITHUB_REF_NAME already exists; uploading/updating release assets..."
+            gh release upload "$GITHUB_REF_NAME" \
+              ../Antipisher-Chrome-v*.zip \
+              ../Antipisher-Firefox-v*.zip \
+              ../Antipisher-Source-v*.zip \
+              ../SHA256SUMS.txt \
+              --clobber
+          else
+            echo "Creating new release $GITHUB_REF_NAME..."
+            gh release create "$GITHUB_REF_NAME" \
+              ../Antipisher-Chrome-v*.zip \
+              ../Antipisher-Firefox-v*.zip \
+              ../Antipisher-Source-v*.zip \
+              ../SHA256SUMS.txt \
+              --title "Antipisher $GITHUB_REF_NAME (Alpha)" \
+              --generate-notes \
+              --prerelease
+          fi

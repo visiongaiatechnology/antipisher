@@ -34,9 +34,9 @@ REPO = "visiongaiatechnology/antipisher"
 ROOT = Path(__file__).resolve().parent.parent
 DIST_DIR = ROOT.parent
 
-CHROME_ZIP = DIST_DIR / "Antipisher-Chrome-v0.2.0-alpha.zip"
-FIREFOX_ZIP = DIST_DIR / "Antipisher-Firefox-v0.2.0-alpha.zip"
-SOURCE_ZIP = DIST_DIR / "Antipisher-Source-v0.2.0-alpha.zip"
+CHROME_ZIP = DIST_DIR / "Antipisher-Chrome-v0.2.1-alpha.zip"
+FIREFOX_ZIP = DIST_DIR / "Antipisher-Firefox-v0.2.1-alpha.zip"
+SOURCE_ZIP = DIST_DIR / "Antipisher-Source-v0.2.1-alpha.zip"
 SHA256_FILE = DIST_DIR / "SHA256SUMS.txt"
 
 sha_text = SHA256_FILE.read_text(encoding="utf-8") if SHA256_FILE.exists() else ""
@@ -210,15 +210,15 @@ def main():
 """
 
     print("\n--- Publishing Chrome Release ---")
-    rel_chrome = create_or_get_release("chrome-v0.2.0-alpha", "Antipisher for Google Chrome v0.2.0-alpha", chrome_body)
+    rel_chrome = create_or_get_release("chrome-v0.2.1-alpha", "Antipisher for Google Chrome v0.2.1-alpha", chrome_body)
     sync_release_assets(rel_chrome, [(CHROME_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Firefox Release ---")
-    rel_firefox = create_or_get_release("firefox-v0.2.0-alpha", "Antipisher for Mozilla Firefox v0.2.0-alpha", firefox_body)
+    rel_firefox = create_or_get_release("firefox-v0.2.1-alpha", "Antipisher for Mozilla Firefox v0.2.1-alpha", firefox_body)
     sync_release_assets(rel_firefox, [(FIREFOX_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Unified Release ---")
-    rel_unified = create_or_get_release("v0.2.0-alpha", "Antipisher v0.2.0-alpha (Quiet Safe Browsing)", unified_body)
+    rel_unified = create_or_get_release("v0.2.1-alpha", "Antipisher v0.2.1-alpha (AEGIS Tracker Shield & GeDefense Light)", unified_body)
     sync_release_assets(rel_unified, [
         (CHROME_ZIP, "application/zip"),
         (FIREFOX_ZIP, "application/zip"),
