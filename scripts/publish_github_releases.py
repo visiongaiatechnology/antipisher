@@ -1,0 +1,229 @@
+import os
+import sys
+import json
+import urllib.request
+import urllib.error
+from pathlib import Path
+
+import subprocess
+
+def get_token():
+    env_token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if env_token:
+        return env_token
+    try:
+        proc = subprocess.run(
+            ["git", "credential", "fill"],
+            input="protocol=https\nhost=github.com\n\n",
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        for line in proc.stdout.splitlines():
+            if line.startswith("password="):
+                return line.split("=", 1)[1]
+    except Exception as e:
+        print("Could not retrieve token from git credential fill:", e)
+    return None
+
+TOKEN = get_token()
+if not TOKEN:
+    print("Error: Could not retrieve GitHub token.")
+    sys.exit(1)
+REPO = "visiongaiatechnology/antipisher"
+ROOT = Path(__file__).resolve().parent.parent
+DIST_DIR = ROOT.parent
+
+CHROME_ZIP = DIST_DIR / "Antipisher-Chrome-v0.1.1-alpha.zip"
+FIREFOX_ZIP = DIST_DIR / "Antipisher-Firefox-v0.1.1-alpha.zip"
+SOURCE_ZIP = DIST_DIR / "Antipisher-Source-v0.1.1-alpha.zip"
+SHA256_FILE = DIST_DIR / "SHA256SUMS.txt"
+
+sha_text = SHA256_FILE.read_text(encoding="utf-8") if SHA256_FILE.exists() else ""
+
+def api_request(url, method="GET", data=None, content_type="application/json"):
+    headers = {
+        "Authorization": f"token {TOKEN}",
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "Antipisher-Publisher"
+    }
+    if content_type:
+        headers["Content-Type"] = content_type
+    
+    body = None
+    if data is not None:
+        if isinstance(data, (dict, list)):
+            body = json.dumps(data).encode("utf-8")
+        elif isinstance(data, (bytes, bytearray)):
+            body = data
+        else:
+            body = str(data).encode("utf-8")
+
+    req = urllib.request.Request(url, data=body, headers=headers, method=method)
+    try:
+        with urllib.request.urlopen(req) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        err_msg = e.read().decode("utf-8", errors="replace")
+        print(f"HTTPError {e.code} on {url}: {err_msg}")
+        raise
+
+def upload_asset(upload_url_template, file_path, content_type="application/octet-stream"):
+    base_url = upload_url_template.split("{")[0]
+    name = file_path.name
+    upload_url = f"{base_url}?name={name}"
+    print(f"Uploading asset {name} to {upload_url}...")
+    data = file_path.read_bytes()
+    headers = {
+        "Authorization": f"token {TOKEN}",
+        "Accept": "application/vnd.github.v3+json",
+        "Content-Type": content_type,
+        "User-Agent": "Antipisher-Publisher"
+    }
+    req = urllib.request.Request(upload_url, data=data, headers=headers, method="POST")
+    with urllib.request.urlopen(req) as resp:
+        res = json.loads(resp.read().decode("utf-8"))
+        print(f"Uploaded {name}: ID={res.get('id')}")
+        return res
+
+def create_or_get_release(tag, name, body):
+    releases_url = f"https://api.github.com/repos/{REPO}/releases"
+    try:
+        tag_url = f"{releases_url}/tags/{tag}"
+        existing = api_request(tag_url)
+        print(f"Release for {tag} exists. ID={existing['id']}. Updating metadata...")
+        patch_url = f"{releases_url}/{existing['id']}"
+        updated = api_request(patch_url, method="PATCH", data={
+            "name": name,
+            "body": body,
+            "draft": False,
+            "prerelease": True
+        })
+        return updated
+    except urllib.error.HTTPError as e:
+        if e.code != 404:
+            raise
+
+    payload = {
+        "tag_name": tag,
+        "target_commitish": "main",
+        "name": name,
+        "body": body,
+        "draft": False,
+        "prerelease": True
+    }
+    created = api_request(releases_url, method="POST", data=payload)
+    print(f"Created release '{name}' ({tag}). ID={created['id']}")
+    return created
+
+def main():
+    print("Verifying build assets...")
+    assert CHROME_ZIP.exists(), f"Missing {CHROME_ZIP}"
+    assert FIREFOX_ZIP.exists(), f"Missing {FIREFOX_ZIP}"
+    assert SOURCE_ZIP.exists(), f"Missing {SOURCE_ZIP}"
+    assert SHA256_FILE.exists(), f"Missing {SHA256_FILE}"
+
+    # 1. Chrome Release
+    chrome_body = f"""# 🛡️ Antipisher for Google Chrome v0.1.1-alpha (MV3)
+
+**High-precision offline anti-phishing, IDN homograph & typosquatting protection extension for Google Chrome.**
+
+### 🌟 Highlights
+- **4 Languages Native Support:** English (`en`), Deutsch (`de`), Русский (`ru`), 中文 (`zh`). Defaults to browser language.
+- **In-Page Content Shield:** Intercepts credential theft during form submission (DOM Capture phase), closing Chrome MV3 DNR POST gap.
+- **Fail-Open Elimination:** Preflight GET via DNR; degrades gracefully with visual indicator on configuration errors.
+- **Glass 2100 Design:** WCAG-AA compliant contrast, dark mineral aesthetics, keyboard navigation.
+- **100% Offline & Zero Telemetry:** No external network requests, no analytics, no credentials stored.
+
+### 📦 Installation (Google Chrome)
+1. Download `Antipisher-Chrome-v0.1.1-alpha.zip` below and unzip it.
+2. Open `chrome://extensions` in Google Chrome.
+3. Enable **Developer mode** (top right toggle).
+4. Click **Load unpacked** and select the extracted folder.
+
+### 🔒 Checksums (SHA-256)
+```
+{sha_text.strip()}
+```
+"""
+
+    # 2. Firefox Release
+    firefox_body = f"""# 🛡️ Antipisher for Mozilla Firefox v0.1.1-alpha (MV3)
+
+**High-precision offline anti-phishing, IDN homograph & typosquatting protection extension for Mozilla Firefox.**
+
+### 🌟 Highlights
+- **4 Languages Native Support:** English (`en`), Deutsch (`de`), Русский (`ru`), 中文 (`zh`). Defaults to browser language.
+- **Synchronous Protection:** Uses `webRequestBlocking` for immediate synchronous URL interception before network dispatch.
+- **In-Page Content Shield:** Closed Shadow DOM modal protection with zero style leakage.
+- **AMO MV3 Compliance:** Declares `web_accessible_resources` for `guard.html` and explicit `data_collection_permissions: {{"required":["none"]}}`.
+- **100% Offline & Zero Telemetry:** Pure local heuristic engine, zero tracking, zero external dependencies.
+
+### 📦 Installation (Mozilla Firefox)
+1. Download `Antipisher-Firefox-v0.1.1-alpha.zip` below and unzip it.
+2. Open `about:debugging#/runtime/this-firefox` in Firefox.
+3. Click **Load Temporary Add-on…**.
+4. Select `manifest.json` from the extracted directory.
+
+### 🔒 Checksums (SHA-256)
+```
+{sha_text.strip()}
+```
+"""
+
+    # 3. Unified Release
+    unified_body = f"""# 🛡️ Antipisher v0.1.1-alpha — Universal Alpha Milestone
+
+**Offline, High-Precision Anti-Phishing, IDN Homograph & Typosquatting Protection for Google Chrome & Mozilla Firefox.**
+
+*Licensed under the GNU Affero General Public License v3.0 (AGPLv3)*
+
+### 🌐 Multilingual (4 Languages)
+Fully localized UI, settings, and heuristic explanation verdicts in **English (`en`)**, **Deutsch (`de`)**, **Русский (`ru`)**, and **中文 (`zh`)**. Defaults automatically to the user's browser language with manual toggle.
+
+### ⚡ Key Capabilities
+- **187 Brands & 353 Official Domains:** Financial institutions, crypto platforms, cloud/AI infrastructure, logistics, governments.
+- **Multi-Tenant Platform Isolation:** `force.com`, `github.io`, `vercel.app`, `netlify.app` isolated to prevent subdomain impersonation.
+- **Detection Primitives:** Damerau-Levenshtein 1 & 2, 1-bit bitsquatting, Unicode confusable/homoglyphs, Latin diacritics, bidi control spoofing (UTS #39), bait word concatenations.
+- **In-Page Content Shield:** Intercepts form submission credential phishing in closed Shadow DOM (`attachShadow({{ mode: 'closed' }})`).
+- **Reproducible Builds:** Bit-identical deterministic ZIP packages.
+
+### 🔒 SHA-256 Verification
+```
+{sha_text.strip()}
+```
+"""
+
+    print("\n--- Publishing Chrome Release ---")
+    rel_chrome = create_or_get_release("chrome-v0.1.1-alpha", "Antipisher for Google Chrome v0.1.1-alpha", chrome_body)
+    upload_url_chrome = rel_chrome["upload_url"]
+    existing_chrome_assets = {a["name"] for a in rel_chrome.get("assets", [])}
+    print(f"Current Chrome assets: {existing_chrome_assets}")
+    if CHROME_ZIP.name not in existing_chrome_assets:
+        upload_asset(upload_url_chrome, CHROME_ZIP, "application/zip")
+    if SHA256_FILE.name not in existing_chrome_assets:
+        upload_asset(upload_url_chrome, SHA256_FILE, "text/plain")
+
+    print("\n--- Publishing Firefox Release ---")
+    rel_firefox = create_or_get_release("firefox-v0.1.1-alpha", "Antipisher for Mozilla Firefox v0.1.1-alpha", firefox_body)
+    upload_url_firefox = rel_firefox["upload_url"]
+    existing_firefox_assets = {a["name"] for a in rel_firefox.get("assets", [])}
+    print(f"Current Firefox assets: {existing_firefox_assets}")
+    if FIREFOX_ZIP.name not in existing_firefox_assets:
+        upload_asset(upload_url_firefox, FIREFOX_ZIP, "application/zip")
+    if SHA256_FILE.name not in existing_firefox_assets:
+        upload_asset(upload_url_firefox, SHA256_FILE, "text/plain")
+
+    print("\n--- Publishing Unified Release ---")
+    rel_unified = create_or_get_release("v0.1.1-alpha", "Antipisher v0.1.1-alpha (Universal Alpha)", unified_body)
+    upload_url_unified = rel_unified["upload_url"]
+    existing_unified_assets = {a["name"] for a in rel_unified.get("assets", [])}
+    print(f"Current Unified assets: {existing_unified_assets}")
+    for asset, mime in [(CHROME_ZIP, "application/zip"), (FIREFOX_ZIP, "application/zip"), (SOURCE_ZIP, "application/zip"), (SHA256_FILE, "text/plain")]:
+        if asset.name not in existing_unified_assets:
+            upload_asset(upload_url_unified, asset, mime)
+
+    print("\nAll releases successfully published to GitHub!")
+
+if __name__ == "__main__":
+    main()
