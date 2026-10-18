@@ -1,0 +1,211 @@
+{
+  "artifacts": {
+    "chrome": {
+      "new": "Antipisher-Chrome-v0.1.0-alpha.zip",
+      "new_sha256": "00ab658d2db26fefd5f5d7595d447706260c78d95fd17123b3daef30316cf477",
+      "old": "VGT-DomainGuard-Chrome-v0.1.0.zip",
+      "old_sha256": "00ab658d2db26fefd5f5d7595d447706260c78d95fd17123b3daef30316cf477",
+      "identical": true,
+      "new_mtime": 1792336416.0300245,
+      "entries": 12,
+      "first_entries": [
+        "background.js",
+        "guard.css",
+        "guard.html",
+        "guard.js"
+      ],
+      "zip_manifest": "{\n  \"manifest_version\": 3,\n  \"name\": \"Antipisher\",\n  \"short_name\": \"Antipisher\",\n  \"description\": \"Lokaler Offline-Schutz vor Phishing, gefälschten Domains, IDN-Homographen und Typosquatting. Alpha 0.1.\",\n  \"version\": \"0.1.0\",\n  \"version_name\": \"0.1 Alpha\",\n  \"minimum_chrome_version\": \"121\",\n  \"permissions\": [\n    \"storage\",\n    \"tabs\",\n    \"webNavigation\",\n    \"declarativeNetRequest\"\n  ],\n  \"host_permissions\": [\n    \"http://*/*\",\n    \"https://*/*\"\n  ],\n  \"background\": {\n    \"service_worker\": \"background.js\"\n  },\n  \"action\": {\n    \"default_title\": \"Antipisher\",\n    \"default_popup\": \"popup.html\",\n    \"default_icon\": {\n      \"16\": \"icons/icon16.png\",\n      \"48\": \"icons/icon48.png\",\n      \"128\": \"icons/icon128.png\"\n    }\n  },\n  \"web_accessible_resources\": [\n    {\n      \"resources\": [\n        \"guard.html\"\n      ],\n      \"matches\": [\n        \"http://*/*\",\n        \"https://*/*\"\n      ]\n    }\n  ],\n  \"icons\": {\n    \"16\": \"icons/icon16.png\",\n    \"48\": \"icons/icon48.png\",\n    \"128\": \"icons/icon128.png\"\n  }\n}\n",
+      "identity": [
+        {
+          "file": "guard.html",
+          "zip_sha": "2f77cf6504e3a079",
+          "source_sha": "2f77cf6504e3a079",
+          "match": true
+        },
+        {
+          "file": "guard.css",
+          "zip_sha": "2e45e75e9e1b20e9",
+          "source_sha": "2e45e75e9e1b20e9",
+          "match": true
+        },
+        {
+          "file": "guard.js",
+          "zip_sha": "f259d0434eb71903",
+          "source_sha": "f259d0434eb71903",
+          "match": true
+        },
+        {
+          "file": "popup.html",
+          "zip_sha": "06220ceb7c31208c",
+          "source_sha": "06220ceb7c31208c",
+          "match": true
+        },
+        {
+          "file": "popup.js",
+          "zip_sha": "6b6e77ab79cc78c5",
+          "source_sha": "6b6e77ab79cc78c5",
+          "match": true
+        },
+        {
+          "file": "shared/sites.js",
+          "zip_sha": "c814babb52790eeb",
+          "source_sha": "c814babb52790eeb",
+          "match": true
+        },
+        {
+          "file": "shared/detector.js",
+          "zip_sha": "41bf609836bb480a",
+          "source_sha": "41bf609836bb480a",
+          "match": true
+        },
+        {
+          "file": "manifest.json",
+          "zip_sha": "f29a264849f34103",
+          "source_sha": "f29a264849f34103",
+          "match": true
+        }
+      ]
+    },
+    "firefox": {
+      "new": "Antipisher-Firefox-v0.1.0-alpha.zip",
+      "new_sha256": "9ad5d472bc317cf0d9dfbd3aa671e953dfbd06762ac636acefea508824d4e049",
+      "old": "VGT-DomainGuard-Firefox-v0.1.0.zip",
+      "old_sha256": "9ad5d472bc317cf0d9dfbd3aa671e953dfbd06762ac636acefea508824d4e049",
+      "identical": true,
+      "new_mtime": 1792336416.1186817,
+      "entries": 12,
+      "first_entries": [
+        "background.js",
+        "guard.css",
+        "guard.html",
+        "guard.js"
+      ],
+      "zip_manifest": "{\n  \"manifest_version\": 3,\n  \"name\": \"Antipisher\",\n  \"short_name\": \"Antipisher\",\n  \"description\": \"Lokaler Offline-Schutz vor Phishing, gefälschten Domains, IDN-Homographen und Typosquatting. Alpha 0.1.\",\n  \"version\": \"0.1.0\",\n  \"permissions\": [\n    \"storage\",\n    \"tabs\",\n    \"webRequest\",\n    \"webRequestBlocking\"\n  ],\n  \"host_permissions\": [\n    \"http://*/*\",\n    \"https://*/*\"\n  ],\n  \"background\": {\n    \"scripts\": [\n      \"shared/sites.js\",\n      \"shared/detector.js\",\n      \"background.js\"\n    ]\n  },\n  \"action\": {\n    \"default_title\": \"Antipisher\",\n    \"default_popup\": \"popup.html\",\n    \"default_icon\": {\n      \"16\": \"icons/icon16.png\",\n      \"48\": \"icons/icon48.png\",\n      \"128\": \"icons/icon128.png\"\n    }\n  },\n  \"browser_specific_settings\": {\n    \"gecko\": {\n      \"id\": \"antipisher@visiongaia.example\",\n      \"strict_min_version\": \"128.0\"\n    }\n  },\n  \"icons\": {\n    \"16\": \"icons/icon16.png\",\n    \"48\": \"icons/icon48.png\",\n    \"128\": \"icons/icon128.png\"\n  }\n}\n",
+      "identity": [
+        {
+          "file": "guard.html",
+          "zip_sha": "2f77cf6504e3a079",
+          "source_sha": "2f77cf6504e3a079",
+          "match": true
+        },
+        {
+          "file": "guard.css",
+          "zip_sha": "2e45e75e9e1b20e9",
+          "source_sha": "2e45e75e9e1b20e9",
+          "match": true
+        },
+        {
+          "file": "guard.js",
+          "zip_sha": "f259d0434eb71903",
+          "source_sha": "f259d0434eb71903",
+          "match": true
+        },
+        {
+          "file": "popup.html",
+          "zip_sha": "06220ceb7c31208c",
+          "source_sha": "06220ceb7c31208c",
+          "match": true
+        },
+        {
+          "file": "popup.js",
+          "zip_sha": "6b6e77ab79cc78c5",
+          "source_sha": "6b6e77ab79cc78c5",
+          "match": true
+        },
+        {
+          "file": "shared/sites.js",
+          "zip_sha": "c814babb52790eeb",
+          "source_sha": "c814babb52790eeb",
+          "match": true
+        },
+        {
+          "file": "shared/detector.js",
+          "zip_sha": "41bf609836bb480a",
+          "source_sha": "41bf609836bb480a",
+          "match": true
+        },
+        {
+          "file": "manifest.json",
+          "zip_sha": "d9cafec3049214e6",
+          "source_sha": "d9cafec3049214e6",
+          "match": true
+        }
+      ]
+    },
+    "source": {
+      "new": "Antipisher-Source-v0.1.0-alpha.zip",
+      "new_sha256": "85cbbc88352f6c5e2b0813e530b1d507d41961ac652f656b8f8191360d6b0f00",
+      "old": "VGT-DomainGuard-Source-v0.1.0.zip",
+      "old_sha256": "85cbbc88352f6c5e2b0813e530b1d507d41961ac652f656b8f8191360d6b0f00",
+      "identical": true,
+      "new_mtime": 1792336416.1616912,
+      "entries": 44,
+      "first_entries": [
+        "vgt-domainguard-src/build.py",
+        "vgt-domainguard-src/build_sites.py",
+        "vgt-domainguard-src/chrome/background.js",
+        "vgt-domainguard-src/chrome/guard.css"
+      ]
+    }
+  },
+  "identity": {
+    "source_zip": {
+      "prefixes": [
+        "vgt-domainguard-src"
+      ],
+      "files": [
+        {
+          "file": "README.md",
+          "zip_entry": "vgt-domainguard-src/README.md",
+          "match": true
+        },
+        {
+          "file": "Next.md",
+          "zip_entry": "vgt-domainguard-src/Next.md",
+          "match": true
+        },
+        {
+          "file": "SECURITY.md",
+          "zip_entry": "vgt-domainguard-src/SECURITY.md",
+          "match": true
+        },
+        {
+          "file": "build.py",
+          "zip_entry": "vgt-domainguard-src/build.py",
+          "match": true
+        },
+        {
+          "file": "shared/guard.html",
+          "zip_entry": "vgt-domainguard-src/shared/guard.html",
+          "match": true
+        },
+        {
+          "file": "shared/popup.html",
+          "zip_entry": "vgt-domainguard-src/shared/popup.html",
+          "match": true
+        },
+        {
+          "file": "shared/sites.js",
+          "zip_entry": "vgt-domainguard-src/chrome/shared/sites.js",
+          "match": true
+        },
+        {
+          "file": "sites-100.json",
+          "zip_entry": "vgt-domainguard-src/sites-100.json",
+          "match": true
+        }
+      ],
+      "entries": 44
+    },
+    "repo_state": {
+      "git_dir_exists": false,
+      "package_json_exists": false,
+      "gitignore_exists": false,
+      "changelog_exists": false,
+      "architecture_doc_exists": false,
+      "privacy_policy_exists": false,
+      "store_assets_dirs": [],
+      "ci_dirs": []
+    }
+  }
+}

@@ -1,0 +1,2174 @@
+{
+  "meta": {
+    "name": "Antipisher 0.1 unabhaengiger Holdout-Korpus (Verifier)",
+    "version": "1.3.0",
+    "created_utc": "2026-10-18T16:18:17.160Z",
+    "author": "holdout-verifier (unabhaengig vom Remediation-Agenten)",
+    "purpose": "Holdout-Verifikation der Detektor-Generaliserung/Overfitting nach Gemini-Remediation",
+    "methodology": [
+      "Erwartungen fachlich/security-first aus Kategorie-Semantik abgeleitet, NICHT aus dem Detektor.",
+      "KEINE URL aus audit/code/corpus.json oder audit/lead/lead_probe.cjs uebernommen.",
+      "Schwerpunkt: neue Marken (DE/EU-Behorden, Banken, Versicherer, Paketdienste), neue Baitwoerter,",
+      "Varianten jenseits der veroeffentlichten Tuning-Muster (IDN-Diakritika ausserhalb der Homoglyph-Tabelle,",
+      "Kurzmarken, 2-Edit, TLD-Swap, Bitsquatting, Combosquat ohne Bait, Multi-Tenant, userinfo, RTL/IDN,",
+      "offizielle Regionaldomains ausserhalb von sites.js, legitime Drittseiten mit Marke+login im Pfad).",
+      "conf = Sicherheitsgrad der Erwartung (hoch/mittel); mittel = Grauzone/Policy-Trade-off.",
+      "Status-Mapping: expect block => Detektor-Status block (action block ODER warn); safe; skip."
+    ],
+    "expectations_note": "FN = erwartet block, erhalten safe/skip. FP = erwartet safe, erhalten block.",
+    "changelog": "v1.1.0: Unicode-Korrektur H058 (kyrillisch о statt п); im Auftrag genannte offizielle DE/EU-Kontrollen (Versicherer/Behoerden/EU/Paketdienste) und weitere geplante Phishing-Varianten ergaenzt. Keine Erwartung an Detektor-Ausgaben angepasst. v1.2.0: im Audit dokumentierte Klasse \"Typosquat als Subdomain-Label auf Fremdhost\" ergaenzt (6 Faelle). v1.3.0: versehentliche exakte URL-Ueberschneidungen mit veroeffentlichten Korpora (10 kanonische Kontroll-/Skip-URLs) durch gleichwertige Varianten ersetzt; Ziel: 0 exakte URL-Overlaps."
+  },
+  "counts": {
+    "total": 296,
+    "block": 166,
+    "safe": 121,
+    "skip": 9,
+    "categories": 38
+  },
+  "cases": [
+    {
+      "id": "H001",
+      "cat": "de_eu_typo",
+      "url": "https://commerzbnak.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H002",
+      "cat": "de_eu_typo",
+      "url": "https://comdirectx.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H003",
+      "cat": "de_eu_typo",
+      "url": "https://consorsbnak.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H004",
+      "cat": "de_eu_typo",
+      "url": "https://traderepubilc.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H005",
+      "cat": "de_eu_typo",
+      "url": "https://revolet.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H006",
+      "cat": "de_eu_typo",
+      "url": "https://sclable.capital/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H007",
+      "cat": "de_eu_typo",
+      "url": "https://klarmo.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Zwei-Edit (n->m, a->o)"
+    },
+    {
+      "id": "H008",
+      "cat": "de_eu_typo",
+      "url": "https://wisee.com/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke wise + Insertion"
+    },
+    {
+      "id": "H009",
+      "cat": "bait_new_de",
+      "url": "https://sparkasse-rechnung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H010",
+      "cat": "bait_new_de",
+      "url": "https://sparkasse-mahnung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H011",
+      "cat": "bait_new_de",
+      "url": "https://sparkasse-gesperrt.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H012",
+      "cat": "bait_new_de",
+      "url": "https://postbank-kontoauszug.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H013",
+      "cat": "bait_new_de",
+      "url": "https://comdirect-ueberweisung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H014",
+      "cat": "bait_new_de",
+      "url": "https://volksbank-bestaetigen.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H015",
+      "cat": "bait_new_de",
+      "url": "https://ing-tan.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke ing + tan"
+    },
+    {
+      "id": "H016",
+      "cat": "bait_new_de",
+      "url": "https://ing-pin.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke ing + pin"
+    },
+    {
+      "id": "H017",
+      "cat": "bait_new_de",
+      "url": "https://n26-verifizieren.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H018",
+      "cat": "bait_new_de",
+      "url": "https://klarna-rueckerstattung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H019",
+      "cat": "bait_new_de",
+      "url": "https://paypal-rueckerstattung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H020",
+      "cat": "bait_new_de",
+      "url": "https://dhl-paket.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke dhl + paket"
+    },
+    {
+      "id": "H021",
+      "cat": "bait_new_de",
+      "url": "https://gls-sendung.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke gls + sendung"
+    },
+    {
+      "id": "H022",
+      "cat": "bait_new_de",
+      "url": "https://dpd-zollgebuehr.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke dpd + zollgebuehr"
+    },
+    {
+      "id": "H023",
+      "cat": "bait_new_de",
+      "url": "https://hermes-rechnung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H024",
+      "cat": "bait_new_de",
+      "url": "https://commerzbank-kundennummer.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H025",
+      "cat": "bait_concat_new",
+      "url": "https://sparkasserechnung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H026",
+      "cat": "bait_concat_new",
+      "url": "https://paypalrechnung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H027",
+      "cat": "bait_concat_new",
+      "url": "https://dhlpaket.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H028",
+      "cat": "bait_concat_new",
+      "url": "https://klarnarechnung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H029",
+      "cat": "bait_concat_new",
+      "url": "https://commerzbankmahnung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H030",
+      "cat": "bait_concat_new",
+      "url": "https://netflixinvoice.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H031",
+      "cat": "bait_concat_new",
+      "url": "https://amazonrefund.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H032",
+      "cat": "bait_concat_new",
+      "url": "https://paypaldelivery.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H033",
+      "cat": "bait_concat_new",
+      "url": "https://sparkassekuendigung.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H034",
+      "cat": "bait_concat_new",
+      "url": "https://dhlzollgebuehr.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H035",
+      "cat": "bait_concat_new",
+      "url": "https://hermespaket.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H036",
+      "cat": "bait_concat_new",
+      "url": "https://comdirectkontoauszug.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H037",
+      "cat": "homoglyph_cyr_gr",
+      "url": "https://spаrkasse.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "kyrillisches a"
+    },
+    {
+      "id": "H038",
+      "cat": "homoglyph_cyr_gr",
+      "url": "https://cоmmerzbank.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "kyrillisches o"
+    },
+    {
+      "id": "H039",
+      "cat": "homoglyph_cyr_gr",
+      "url": "https://dеutschebank.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "kyrillisches e"
+    },
+    {
+      "id": "H040",
+      "cat": "homoglyph_cyr_gr",
+      "url": "https://spαrkasse.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "griechisches alpha"
+    },
+    {
+      "id": "H041",
+      "cat": "homoglyph_cyr_gr",
+      "url": "https://vοdafone.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "griechisches omicron"
+    },
+    {
+      "id": "H042",
+      "cat": "homoglyph_cyr_gr",
+      "url": "https://tеlekom.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "kyrillisches e"
+    },
+    {
+      "id": "H043",
+      "cat": "homoglyph_cyr_gr",
+      "url": "https://pоstbank.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "kyrillisches o"
+    },
+    {
+      "id": "H044",
+      "cat": "idn_diacritic_new",
+      "url": "https://spärkasse.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ä"
+    },
+    {
+      "id": "H045",
+      "cat": "idn_diacritic_new",
+      "url": "https://göogle.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ö"
+    },
+    {
+      "id": "H046",
+      "cat": "idn_diacritic_new",
+      "url": "https://visä.com/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ä"
+    },
+    {
+      "id": "H047",
+      "cat": "idn_diacritic_new",
+      "url": "https://revolüt.com/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ü"
+    },
+    {
+      "id": "H048",
+      "cat": "idn_diacritic_new",
+      "url": "https://ëbay.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ë"
+    },
+    {
+      "id": "H049",
+      "cat": "idn_diacritic_new",
+      "url": "https://klarnä.com/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ä"
+    },
+    {
+      "id": "H050",
+      "cat": "idn_diacritic_new",
+      "url": "https://zalandö.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ö"
+    },
+    {
+      "id": "H051",
+      "cat": "idn_diacritic_new",
+      "url": "https://commerzbänk.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "ä"
+    },
+    {
+      "id": "H052",
+      "cat": "punycode_phish",
+      "url": "https://xn--sprkasse-26g.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "sparkasse mit kyrillischem a"
+    },
+    {
+      "id": "H053",
+      "cat": "punycode_phish",
+      "url": "https://xn--dutschebank-okj.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "deutschebank mit kyrillischem e"
+    },
+    {
+      "id": "H054",
+      "cat": "punycode_phish",
+      "url": "https://xn--sprkasse-1za.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "sparkasse mit ä"
+    },
+    {
+      "id": "H055",
+      "cat": "punycode_phish",
+      "url": "https://xn--ggle-55da.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "google-Homograph (hier auf g-Homoglyph)"
+    },
+    {
+      "id": "H056",
+      "cat": "mixed_script",
+      "url": "https://spаrkаsse.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "zwei kyrillische a"
+    },
+    {
+      "id": "H057",
+      "cat": "mixed_script",
+      "url": "https://dеutschеbank.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "zwei kyrillische e"
+    },
+    {
+      "id": "H058",
+      "cat": "mixed_script",
+      "url": "https://vоdafоne.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "zwei kyrillische o"
+    },
+    {
+      "id": "H059",
+      "cat": "tld_swap",
+      "url": "https://sparkasse.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H060",
+      "cat": "tld_swap",
+      "url": "https://dhl.co/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H061",
+      "cat": "tld_swap",
+      "url": "https://klarna.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H062",
+      "cat": "tld_swap",
+      "url": "https://otto.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H063",
+      "cat": "tld_swap",
+      "url": "https://comdirect.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H064",
+      "cat": "tld_swap",
+      "url": "https://ing.co/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H065",
+      "cat": "tld_swap",
+      "url": "https://n26.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H066",
+      "cat": "tld_swap",
+      "url": "https://traderepublic.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H067",
+      "cat": "tld_swap",
+      "url": "https://consorsbank.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H068",
+      "cat": "bitsquat",
+      "url": "https://coimbase.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H069",
+      "cat": "bitsquat",
+      "url": "https://netfliy.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H070",
+      "cat": "bitsquat",
+      "url": "https://spotifx.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H071",
+      "cat": "bitsquat",
+      "url": "https://sparjasse.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H072",
+      "cat": "bitsquat",
+      "url": "https://binanbe.com/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H073",
+      "cat": "combosquat_nobait",
+      "url": "https://paypal-bonus.com/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H074",
+      "cat": "combosquat_nobait",
+      "url": "https://amazon-shop.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H075",
+      "cat": "combosquat_nobait",
+      "url": "https://netflix-deals.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H076",
+      "cat": "combosquat_nobait",
+      "url": "https://sparkasse-beratung.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H077",
+      "cat": "combosquat_nobait",
+      "url": "https://ing-kundencenter.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H078",
+      "cat": "combosquat_nobait",
+      "url": "https://klarna-ratgeber.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H079",
+      "cat": "combosquat_nobait",
+      "url": "https://otto-sale.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H080",
+      "cat": "combosquat_nobait",
+      "url": "https://dhl-schnell.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H081",
+      "cat": "concat_brandcom",
+      "url": "https://paypalcom.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H082",
+      "cat": "concat_brandcom",
+      "url": "https://sparkassede.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H083",
+      "cat": "concat_brandcom",
+      "url": "https://dhlcom.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H084",
+      "cat": "concat_brandcom",
+      "url": "https://netflixcom.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H085",
+      "cat": "concat_brandcom",
+      "url": "https://amazoncom.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H086",
+      "cat": "concat_brandcom",
+      "url": "https://paypalde.net/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H087",
+      "cat": "short_brand",
+      "url": "https://lng.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H088",
+      "cat": "short_brand",
+      "url": "https://dbk.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H089",
+      "cat": "short_brand",
+      "url": "https://m26.com/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H090",
+      "cat": "short_brand",
+      "url": "https://gls-paket.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H091",
+      "cat": "short_brand",
+      "url": "https://dpd-paket.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H092",
+      "cat": "short_brand",
+      "url": "https://ups-lieferung.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H093",
+      "cat": "short_brand",
+      "url": "https://dhl-rechnung.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H094",
+      "cat": "short_brand",
+      "url": "https://hp-anmeldung.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H095",
+      "cat": "two_edit",
+      "url": "https://peypel.com/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "zwei Substitutionen (a->e, a->e)"
+    },
+    {
+      "id": "H096",
+      "cat": "two_edit",
+      "url": "https://geegle.com/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "zwei Substitutionen (o->e, o->e)"
+    },
+    {
+      "id": "H097",
+      "cat": "two_edit",
+      "url": "https://sparkazze.com/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "zwei Substitutionen (s->z, s->z)"
+    },
+    {
+      "id": "H098",
+      "cat": "two_edit",
+      "url": "https://paypaai.com/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Insertion + Substitution"
+    },
+    {
+      "id": "H099",
+      "cat": "ligature",
+      "url": "https://arnazon.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H100",
+      "cat": "ligature",
+      "url": "https://rnicrosoft.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H101",
+      "cat": "ligature",
+      "url": "https://tvvitter.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H102",
+      "cat": "ligature",
+      "url": "https://vvhatsapp.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H103",
+      "cat": "ligature",
+      "url": "https://www.appIe.com/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "grosses I als l-Ersatz (nicht in Tabelle)"
+    },
+    {
+      "id": "H104",
+      "cat": "ligature",
+      "url": "https://arnazon-login.de/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H105",
+      "cat": "subdomain_chain",
+      "url": "https://konto.ing.de.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H106",
+      "cat": "subdomain_chain",
+      "url": "https://secure.traderepublic.com.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H107",
+      "cat": "subdomain_chain",
+      "url": "https://www.dhl.de.sendungsverfolgung.track/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H108",
+      "cat": "subdomain_chain",
+      "url": "https://sparkasse.de.login-sicherheit.net/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H109",
+      "cat": "subdomain_chain",
+      "url": "https://visa.com.payment-check.net/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H110",
+      "cat": "subdomain_chain",
+      "url": "https://login.sparkasse.de.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H111",
+      "cat": "foreign_in_host",
+      "url": "https://dhl.de.zoll.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H112",
+      "cat": "foreign_in_host",
+      "url": "https://comdirect.de.kontoauszug.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H113",
+      "cat": "foreign_in_host",
+      "url": "https://n26.com.login.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H114",
+      "cat": "foreign_in_host",
+      "url": "https://volksbank.de.sicherheit.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H115",
+      "cat": "foreign_in_host",
+      "url": "https://paypal.me.evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H116",
+      "cat": "userinfo_phish",
+      "url": "https://sparkasse.de@konto-sicherheit.net/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H117",
+      "cat": "userinfo_phish",
+      "url": "https://ing.de@evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H118",
+      "cat": "userinfo_phish",
+      "url": "https://visa.com@evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H119",
+      "cat": "userinfo_phish",
+      "url": "https://paypal.com:login@evil.test/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H120",
+      "cat": "userinfo_phish",
+      "url": "https://www.commerzbank.de@commerzbank-support.com/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H121",
+      "cat": "userinfo_phish",
+      "url": "https://dhl.de@paket-track.net/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H122",
+      "cat": "multi_tenant_phish",
+      "url": "https://sparkasse.pages.dev/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H123",
+      "cat": "multi_tenant_phish",
+      "url": "https://paypal-login.netlify.app/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H124",
+      "cat": "multi_tenant_phish",
+      "url": "https://ing-verify.vercel.app/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H125",
+      "cat": "multi_tenant_phish",
+      "url": "https://sparkasse-login.github.io/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H126",
+      "cat": "multi_tenant_phish",
+      "url": "https://dhl-paket.vercel.app/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "neues Baitwort paket"
+    },
+    {
+      "id": "H127",
+      "cat": "multi_tenant_phish",
+      "url": "https://targobank.vercel.app/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Marke nicht in DB"
+    },
+    {
+      "id": "H128",
+      "cat": "multi_tenant_phish",
+      "url": "https://visa-support.web.app/",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H129",
+      "cat": "path_phish",
+      "url": "https://files.example.org/sparkasse/verify",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H130",
+      "cat": "path_phish",
+      "url": "https://mirror.example.net/ing/banking",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H131",
+      "cat": "path_phish",
+      "url": "https://cloud.example.net/commerzbank/signin",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H132",
+      "cat": "path_phish",
+      "url": "https://evil.example/visa/unlock",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H133",
+      "cat": "path_phish",
+      "url": "https://evil.example/n26/password",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H134",
+      "cat": "path_phish",
+      "url": "https://evil.example/targobank/login",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Marke nicht in DB"
+    },
+    {
+      "id": "H135",
+      "cat": "path_phish",
+      "url": "https://evil.example/dhl/konto",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke <4 im Pfad-Check"
+    },
+    {
+      "id": "H136",
+      "cat": "path_phish",
+      "url": "https://download.example.org/sparkasse/verify",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H137",
+      "cat": "path_phish",
+      "url": "https://evil.example/paypal.com/verify",
+      "expect": "block",
+      "conf": "hoch"
+    },
+    {
+      "id": "H138",
+      "cat": "path_blog_evasion",
+      "url": "https://evil.example/blog/sparkasse/login",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H139",
+      "cat": "path_blog_evasion",
+      "url": "https://evil.example/news/paypal/verify",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H140",
+      "cat": "path_blog_evasion",
+      "url": "https://download.example.org/articles/commerzbank/password-reset",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H141",
+      "cat": "official_regional_missing",
+      "url": "https://www.google.com.tw/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H142",
+      "cat": "official_regional_missing",
+      "url": "https://www.google.com.hk/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H143",
+      "cat": "official_regional_missing",
+      "url": "https://www.google.co.th/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H144",
+      "cat": "official_regional_missing",
+      "url": "https://www.amazon.com.be/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H145",
+      "cat": "official_regional_missing",
+      "url": "https://www.ing.it/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H146",
+      "cat": "official_regional_missing",
+      "url": "https://www.ing.es/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H147",
+      "cat": "official_regional_missing",
+      "url": "https://www.ing.pl/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H148",
+      "cat": "official_regional_missing",
+      "url": "https://www.ing.com.au/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H149",
+      "cat": "official_regional_missing",
+      "url": "https://www.telekom.at/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H150",
+      "cat": "official_regional_missing",
+      "url": "https://www.vodafone.pt/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H151",
+      "cat": "official_controls",
+      "url": "https://www.aok.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H152",
+      "cat": "official_controls",
+      "url": "https://www.tk.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H153",
+      "cat": "official_controls",
+      "url": "https://www.arbeitsagentur.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H154",
+      "cat": "official_controls",
+      "url": "https://www.deutsche-rentenversicherung.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H155",
+      "cat": "official_controls",
+      "url": "https://www.zoll.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H156",
+      "cat": "official_controls",
+      "url": "https://www.bzst.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H157",
+      "cat": "official_controls",
+      "url": "https://www.bawag.at/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H158",
+      "cat": "official_controls",
+      "url": "https://www.erstebank.at/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H159",
+      "cat": "official_controls",
+      "url": "https://www.raiffeisen.at/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H160",
+      "cat": "official_controls",
+      "url": "https://www.post.at/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H161",
+      "cat": "official_controls",
+      "url": "https://www.oebb.at/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H162",
+      "cat": "official_controls",
+      "url": "https://www.sbb.ch/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H163",
+      "cat": "official_controls",
+      "url": "https://www.swisscom.ch/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H164",
+      "cat": "official_controls",
+      "url": "https://www.sparda.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H165",
+      "cat": "official_controls",
+      "url": "https://www.psd-bank.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H166",
+      "cat": "official_controls",
+      "url": "https://www.hanseaticbank.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H167",
+      "cat": "official_controls",
+      "url": "https://www.check24.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H168",
+      "cat": "official_controls",
+      "url": "https://www.immobilienscout24.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H169",
+      "cat": "official_controls",
+      "url": "https://www.ebay-kleinanzeigen.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H170",
+      "cat": "official_subdomain_bait",
+      "url": "https://login.sparkasse.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H171",
+      "cat": "official_subdomain_bait",
+      "url": "https://konto.sparkasse.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H172",
+      "cat": "official_subdomain_bait",
+      "url": "https://anmelden.ing.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H173",
+      "cat": "official_subdomain_bait",
+      "url": "https://secure.commerzbank.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H174",
+      "cat": "official_subdomain_bait",
+      "url": "https://login.dhl.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H175",
+      "cat": "official_subdomain_bait",
+      "url": "https://kundencenter.targobank.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H176",
+      "cat": "official_subdomain_bait",
+      "url": "https://id.bund.de/anmelden",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H177",
+      "cat": "official_subdomain_bait",
+      "url": "https://accounts.google.com/signin/v2",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H178",
+      "cat": "official_subdomain_bait",
+      "url": "https://appleid.apple.com/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H179",
+      "cat": "official_subdomain_bait",
+      "url": "https://www.paypal.com/us/signin",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H180",
+      "cat": "legit_thirdparty_listed",
+      "url": "https://de.wikipedia.org/wiki/PayPal",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H181",
+      "cat": "legit_thirdparty_listed",
+      "url": "https://www.reddit.com/r/paypal/comments/abc123/login_problem/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H182",
+      "cat": "legit_thirdparty_listed",
+      "url": "https://stackoverflow.com/questions/123456/paypal-login-api",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H183",
+      "cat": "legit_thirdparty_listed",
+      "url": "https://github.com/paypal/PayPal-PHP-SDK",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H184",
+      "cat": "legit_thirdparty_listed",
+      "url": "https://medium.com/@autor/paypal-login-problem-erklaert",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H185",
+      "cat": "legit_thirdparty_listed",
+      "url": "https://de.wikipedia.org/wiki/Phishing",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H186",
+      "cat": "legit_thirdparty_path",
+      "url": "https://www.heise.de/ratgeber/paypal-login-problem-123.html",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H187",
+      "cat": "legit_thirdparty_path",
+      "url": "https://www.verbraucherzentrale.de/wissen/digitale-welt/paypal-login-12345",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H188",
+      "cat": "legit_thirdparty_path",
+      "url": "https://www.focus.de/finanzen/paypal-login-gesperrt_id_123.html",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H189",
+      "cat": "legit_thirdparty_path",
+      "url": "https://www.chip.de/artikel/paypal-login_123.html",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H190",
+      "cat": "legit_thirdparty_path",
+      "url": "https://www.ionos.de/hilfe/paypal-login",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H191",
+      "cat": "legit_thirdparty_path",
+      "url": "https://www.golem.de/news/paypal-login-problem-119.html",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H192",
+      "cat": "legit_thirdparty_path",
+      "url": "https://support.mozilla.org/de/kb/apple-login",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H193",
+      "cat": "search_query",
+      "url": "https://duckduckgo.com/?q=paypal+login",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H194",
+      "cat": "search_query",
+      "url": "https://www.ecosia.org/search?q=paypal%20login",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H195",
+      "cat": "search_query",
+      "url": "https://search.brave.com/search?q=paypal+login",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H196",
+      "cat": "search_query",
+      "url": "https://www.startpage.com/sp/search?query=paypal+login",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H197",
+      "cat": "search_query",
+      "url": "https://www.google.com/search?q=paypal+login",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H198",
+      "cat": "bidi_rtl_legit",
+      "url": "https://www.aljazeera.net/news/%D8%BA%D8%B2%D8%A9%E2%80%8F",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "RLM im Pfad (legitimes RTL-Formatierungszeichen)"
+    },
+    {
+      "id": "H199",
+      "cat": "bidi_rtl_legit",
+      "url": "https://www.bbc.co.uk/arabic/%D8%B9%D8%B1%D8%A8%D9%8A%E2%80%8F",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "RLM im Pfad"
+    },
+    {
+      "id": "H200",
+      "cat": "bidi_rtl_legit",
+      "url": "https://www.ynet.co.il/news/article/%D7%A9%D7%9C%D7%95%D7%9D%E2%80%8F",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "RLM im Pfad"
+    },
+    {
+      "id": "H201",
+      "cat": "bidi_rtl_legit",
+      "url": "https://www.tagesschau.de/suche?q=%D8%B9%D8%B1%D8%A8%D9%8A%E2%80%8F",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "RLM in Query"
+    },
+    {
+      "id": "H202",
+      "cat": "bidi_rtl_legit",
+      "url": "https://www.aljazeera.net/%D8%B1%D9%85%D8%B6%D8%A7%D9%86",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "arabischer Pfad ohne Steuerzeichen"
+    },
+    {
+      "id": "H203",
+      "cat": "bidi_rtl_legit",
+      "url": "https://xn--mgbh0fb.xn--kgbechtv/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "arabische IDN-Domain (Beispiel-Domain)"
+    },
+    {
+      "id": "H204",
+      "cat": "legit_idn",
+      "url": "https://www.bücher.de/shop",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H205",
+      "cat": "legit_idn",
+      "url": "https://www.über.de/impressum",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H206",
+      "cat": "legit_idn",
+      "url": "https://www.kölner-dom.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H207",
+      "cat": "legit_idn",
+      "url": "https://www.xn--bcher-kva.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H208",
+      "cat": "legit_idn",
+      "url": "https://xn--4gbrim.xn--mgbexc3i.xn--wgbh1c/",
+      "expect": "safe",
+      "conf": "hoch",
+      "note": "arabische IDN (Regierungsdomain Muster)"
+    },
+    {
+      "id": "H209",
+      "cat": "multi_tenant_legit",
+      "url": "https://my-project.github.io/docs/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H210",
+      "cat": "multi_tenant_legit",
+      "url": "https://portfolio.vercel.app/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H211",
+      "cat": "multi_tenant_legit",
+      "url": "https://tinyblog.netlify.app/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H212",
+      "cat": "multi_tenant_legit",
+      "url": "https://someone.blogspot.com/2024/01/post.html",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H213",
+      "cat": "multi_tenant_legit",
+      "url": "https://shop.myshopify.com/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H214",
+      "cat": "multi_tenant_legit",
+      "url": "https://demo.firebaseapp.com/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H215",
+      "cat": "multi_tenant_legit",
+      "url": "https://bucket.s3.amazonaws.com/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H216",
+      "cat": "multi_tenant_legit",
+      "url": "https://example.wordpress.com/2024/01/01/post/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H217",
+      "cat": "userinfo_legit",
+      "url": "https://user:paypal@example.com/",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H218",
+      "cat": "userinfo_legit",
+      "url": "https://apple:pass@example.com/",
+      "expect": "safe",
+      "conf": "mittel"
+    },
+    {
+      "id": "H219",
+      "cat": "userinfo_legit",
+      "url": "https://appleid:secret@apple.com/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "userinfo auf offizieller Domain"
+    },
+    {
+      "id": "H220",
+      "cat": "userinfo_legit",
+      "url": "https://paypal.de:token@paypal.de/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "userinfo auf offizieller Domain"
+    },
+    {
+      "id": "H221",
+      "cat": "edge_cases",
+      "url": "https://93.184.216.34/about",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H222",
+      "cat": "edge_cases",
+      "url": "https://[2001:db8::1]/about",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H223",
+      "cat": "edge_cases",
+      "url": "https://example.com:8443/about",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H224",
+      "cat": "edge_cases",
+      "url": "https://www.paypal.com.:443/login",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H225",
+      "cat": "edge_cases",
+      "url": "HTTPS://WWW.PAYPAL.COM/Login",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H226",
+      "cat": "edge_cases",
+      "url": "https://www.paypal.com/de/home",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H227",
+      "cat": "edge_cases",
+      "url": "https://example.com./",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H228",
+      "cat": "edge_cases",
+      "url": "https://user@example.com/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H229",
+      "cat": "edge_cases",
+      "url": "https://example.com/path?q=1",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H230",
+      "cat": "edge_cases",
+      "url": "https://www.bücher.de./",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H231",
+      "cat": "skip_cases",
+      "url": "file:///C:/x.html",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H232",
+      "cat": "skip_cases",
+      "url": "chrome://version/",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H233",
+      "cat": "skip_cases",
+      "url": "about:blank",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H234",
+      "cat": "skip_cases",
+      "url": "definitely not a url",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H235",
+      "cat": "skip_cases",
+      "url": "ftp://example.com/",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H236",
+      "cat": "skip_cases",
+      "url": "mailto:a@b.de",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H237",
+      "cat": "skip_cases",
+      "url": "javascript:void(0)",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H238",
+      "cat": "skip_cases",
+      "url": "https://",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H239",
+      "cat": "skip_cases",
+      "url": "view-source:https://example.com/",
+      "expect": "skip",
+      "conf": "hoch"
+    },
+    {
+      "id": "H240",
+      "cat": "whitelist_risk",
+      "url": "https://evil.force.com/paypal/login",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "force.com ist Multi-Tenant-Plattform (Salesforce Sites) und in sites.js als Salesforce-Domain gelistet"
+    },
+    {
+      "id": "H241",
+      "cat": "whitelist_risk",
+      "url": "https://evil.my.salesforce.com/paypal/login",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "*.my.salesforce.com sind kundenkontrollierte Org-Tenants"
+    },
+    {
+      "id": "H242",
+      "cat": "whitelist_risk",
+      "url": "https://tenant.anything.force.com/login",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "beliebiger Tenant unter force.com"
+    },
+    {
+      "id": "H243",
+      "cat": "generic_word_subdomain_ok",
+      "url": "https://medium.example.org/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H244",
+      "cat": "generic_word_subdomain_ok",
+      "url": "https://zoom.example.org/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H245",
+      "cat": "generic_word_subdomain_ok",
+      "url": "https://notion.example.org/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H246",
+      "cat": "generic_word_subdomain_ok",
+      "url": "https://office.example.org/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H247",
+      "cat": "brand_as_subdomain_legit",
+      "url": "https://signal.example.org/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "signal ist Alltagswort (z.B. Signal-Iduna)"
+    },
+    {
+      "id": "H248",
+      "cat": "brand_as_subdomain_legit",
+      "url": "https://box.example.org/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "box ist Alltagswort"
+    },
+    {
+      "id": "H249",
+      "cat": "brand_as_subdomain_legit",
+      "url": "https://chase.example.org/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "chase ist englisches Alltagswort"
+    },
+    {
+      "id": "H250",
+      "cat": "brand_as_subdomain_legit",
+      "url": "https://line.example.org/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "line ist Alltagswort (generische Ausnahme greift)"
+    },
+    {
+      "id": "H251",
+      "cat": "brand_as_subdomain_legit",
+      "url": "https://target.example.org/",
+      "expect": "safe",
+      "conf": "mittel",
+      "note": "target ist englisches Alltagswort (generische Ausnahme greift)"
+    },
+    {
+      "id": "H252",
+      "cat": "doc_exception_legit",
+      "url": "https://docs.vendor.example/guides/paypal/verify",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H253",
+      "cat": "doc_exception_legit",
+      "url": "https://techblog.example/blog/amazon-login-tutorial",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H254",
+      "cat": "doc_exception_legit",
+      "url": "https://devnews.example/articles/apple-login-guide",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H255",
+      "cat": "db_coverage_gap",
+      "url": "https://targobank-login.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H256",
+      "cat": "db_coverage_gap",
+      "url": "https://hanseaticbank-sicherheit.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H257",
+      "cat": "db_coverage_gap",
+      "url": "https://sparda-konto.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H258",
+      "cat": "db_coverage_gap",
+      "url": "https://aok-rueckerstattung.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H259",
+      "cat": "db_coverage_gap",
+      "url": "https://tk-bonus.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Kurzmarke tk"
+    },
+    {
+      "id": "H260",
+      "cat": "db_coverage_gap",
+      "url": "https://arbeitsagentur-termin.de/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Behoerde"
+    },
+    {
+      "id": "H261",
+      "cat": "db_coverage_gap",
+      "url": "https://bawag-login.at/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H262",
+      "cat": "db_coverage_gap",
+      "url": "https://raiffeisen-online.at/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H263",
+      "cat": "db_coverage_gap",
+      "url": "https://sbb-konto.ch/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H264",
+      "cat": "db_coverage_gap",
+      "url": "https://swisscom-rechnung.ch/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H265",
+      "cat": "db_coverage_gap",
+      "url": "https://check24-rueckerstattung.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H266",
+      "cat": "db_coverage_gap",
+      "url": "https://immoscout24-konto.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H267",
+      "cat": "db_coverage_gap",
+      "url": "https://finanzamt-bescheid.de/",
+      "expect": "block",
+      "conf": "mittel"
+    },
+    {
+      "id": "H268",
+      "cat": "official_controls",
+      "url": "https://www.signal-iduna.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H269",
+      "cat": "official_controls",
+      "url": "https://www.huk.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H270",
+      "cat": "official_controls",
+      "url": "https://www.allianz.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H271",
+      "cat": "official_controls",
+      "url": "https://www.ergo.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H272",
+      "cat": "official_controls",
+      "url": "https://www.axa.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H273",
+      "cat": "official_controls",
+      "url": "https://www.bahn.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H274",
+      "cat": "official_controls",
+      "url": "https://www.bundesregierung.de/presse",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H275",
+      "cat": "official_controls",
+      "url": "https://www.bundestag.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H276",
+      "cat": "official_controls",
+      "url": "https://www.ecb.europa.eu/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H277",
+      "cat": "official_controls",
+      "url": "https://www.trans-o-flex.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H278",
+      "cat": "official_controls",
+      "url": "https://www.microsoft365.com/",
+      "expect": "safe",
+      "conf": "hoch",
+      "note": "offizielle Microsoft-365-Domain, nicht in sites.js"
+    },
+    {
+      "id": "H279",
+      "cat": "official_controls",
+      "url": "https://www.mozilla.org/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H280",
+      "cat": "official_controls",
+      "url": "https://www.debian.org/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H281",
+      "cat": "official_controls",
+      "url": "https://www.commerzbank.de/",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H282",
+      "cat": "official_controls",
+      "url": "https://www.sparkasse.de/ifiliale",
+      "expect": "safe",
+      "conf": "hoch"
+    },
+    {
+      "id": "H283",
+      "cat": "official_subdomain_bait",
+      "url": "https://www.sparkasse.de/online-banking/login/",
+      "expect": "safe",
+      "conf": "hoch",
+      "note": "offizielle Domain mit Login-Pfad"
+    },
+    {
+      "id": "H284",
+      "cat": "doc_exception_legit",
+      "url": "https://www.golem.de/news/amazon-login-problem-118.html",
+      "expect": "safe",
+      "conf": "hoch",
+      "note": "News-Pfad (Ausnahme)"
+    },
+    {
+      "id": "H285",
+      "cat": "doc_exception_legit",
+      "url": "https://www.heise.de/blog/paypal-login-erklaert",
+      "expect": "safe",
+      "conf": "hoch",
+      "note": "Blog-Pfad (Ausnahme)"
+    },
+    {
+      "id": "H286",
+      "cat": "userinfo_legit",
+      "url": "https://user:password@example.com/",
+      "expect": "safe",
+      "conf": "hoch",
+      "note": "userinfo ohne Markenbezug"
+    },
+    {
+      "id": "H287",
+      "cat": "bait_new_de",
+      "url": "https://visa-zollgebuehr.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "neues Baitwort zollgebuehr"
+    },
+    {
+      "id": "H288",
+      "cat": "bait_new_de",
+      "url": "https://ups-ueberweisung.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "Kurzmarke ups + ueberweisung"
+    },
+    {
+      "id": "H289",
+      "cat": "bait_new_de",
+      "url": "https://targobank-kuendigung.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "Marke nicht in DB"
+    },
+    {
+      "id": "H290",
+      "cat": "bait_new_de",
+      "url": "https://aok-verifizieren.de/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "Behoerde/Krankenkasse nicht in DB"
+    },
+    {
+      "id": "H291",
+      "cat": "subdomain_typosquat",
+      "url": "https://paypa1.evil.test/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "Baselabel-Typosquat als Subdomain"
+    },
+    {
+      "id": "H292",
+      "cat": "subdomain_typosquat",
+      "url": "https://g00gle.evil.test/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "Leetspeak als Subdomain"
+    },
+    {
+      "id": "H293",
+      "cat": "subdomain_typosquat",
+      "url": "https://amaz0n.evil.test/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "Leetspeak als Subdomain"
+    },
+    {
+      "id": "H294",
+      "cat": "subdomain_typosquat",
+      "url": "https://rnicrosoft.evil.test/",
+      "expect": "block",
+      "conf": "hoch",
+      "note": "Ligatur als Subdomain"
+    },
+    {
+      "id": "H295",
+      "cat": "subdomain_typosquat",
+      "url": "https://appleid.evil.test/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Marken-Submarke als Subdomain"
+    },
+    {
+      "id": "H296",
+      "cat": "subdomain_typosquat",
+      "url": "https://microsoft365.evil.test/",
+      "expect": "block",
+      "conf": "mittel",
+      "note": "Marken-Submarke als Subdomain"
+    }
+  ]
+}

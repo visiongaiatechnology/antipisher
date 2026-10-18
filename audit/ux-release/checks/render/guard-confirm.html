@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antipisher · Sicherheitsprüfung</title>
+  <link rel="stylesheet" href="guard.css">
+</head>
+<body class="vgt-environment">
+  <main class="vgt-glass-surface wrap" role="main" aria-labelledby="title">
+    <header class="header">
+      <div class="symbol-container">
+        <div class="symbol" id="symbol" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="status-badge" id="badge">ANTIPISHER SHIELD</div>
+      </div>
+      <div class="kicker">VISIONGAIATECHNOLOGY · ANTIPISHER DEFENSE</div>
+      <h1 id="title">Adresse wird überprüft</h1>
+      <p class="intro" id="description">Sicherheitsheuristik prüft die Zieladresse lokal im Browser.</p>
+    </header>
+
+    <section id="danger" class="danger-panel" hidden aria-live="assertive">
+      <div class="card suspicious-card">
+        <div class="card-header">
+          <span class="eyebrow danger-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            Verdächtige Zieladresse
+          </span>
+        </div>
+        <div id="host" class="host-display" aria-label="Aufgerufene Webadresse"></div>
+        <p class="reasons" id="reason"></p>
+      </div>
+
+      <div class="card official-card">
+        <div class="card-header">
+          <span class="eyebrow official-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            Bekannte Originaldomain
+          </span>
+        </div>
+        <div class="official-info">
+          <span id="official" class="official-name"></span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="safe">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Offizielle Seite öffnen
+        </button>
+        <button class="btn btn-secondary" id="back">Zurück zur vorherigen Seite</button>
+      </div>
+
+      <div class="continue-section">
+        <button id="reveal" class="btn-link" aria-expanded="false" aria-controls="confirm">
+          Erweitert: Verdächtige Seite dennoch öffnen
+        </button>
+        <div id="confirm" class="confirm-dialog" hidden>
+          <div class="confirm-content">
+            <strong>Warnung vor Datenverlust:</strong>
+            <p>Du beabsichtigst, eine potenziell gefälschte Website aufzurufen. Phishing-Seiten imitieren vertraute Eingabemasken, um Passwörter, Sitzungscookies oder 2FA-Codes abzufangen.</p>
+            <button id="proceed" class="btn btn-critical">Risiko akzeptieren und einmalig fortfahren</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p id="error" class="error-banner" role="status" hidden></p>
+
+    <footer class="footer">
+      <div class="footer-badges">
+        <span>AGPLv3 Lizenz</span>
+        <span class="dot">·</span>
+        <span>Alpha 0.1</span>
+        <span class="dot">·</span>
+        <span>100% Offline</span>
+        <span class="dot">·</span>
+        <span>Zero-Telemetry</span>
+      </div>
+    </footer>
+  </main>
+
+  
+  
+  
+<script>
+document.getElementById('title').textContent = 'Möglicher Domain-Betrug abgewehrt';
+document.getElementById('description').textContent = 'Diese Webadresse weist verdächtige Ähnlichkeiten mit einer geschützten Marke auf.';
+document.getElementById('host').textContent = 'xn--pypal-4ve.com';
+document.getElementById('official').textContent = 'PayPal (paypal.com)';
+document.getElementById('reason').textContent = 'Die Webadresse enthält unsichtbare oder nicht druckbare Unicode-Steuerzeichen zur Verschleierung.';
+var b = document.getElementById('badge');
+b.textContent = 'ABWEHR AKTIV'; b.style.color = 'var(--vgt-danger)';
+b.style.borderColor = 'var(--vgt-danger-stroke)'; b.style.background = 'rgba(255, 92, 115, 0.15)';
+document.getElementById('danger').hidden = false;
+document.getElementById('confirm').hidden = false;
+document.getElementById('reveal').setAttribute('aria-expanded', 'true');
+</script>
+<script>
+(function () {
+  function rect(sel) {
+    var el = document.querySelector(sel);
+    if (!el) return null;
+    var r = el.getBoundingClientRect();
+    return {x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height)};
+  }
+  var metrics = {
+    page: location.pathname.split('/').pop(),
+    viewport: {w: window.innerWidth, h: window.innerHeight},
+    hasFocus: document.hasFocus(),
+    activeElement: document.activeElement ? (document.activeElement.id || document.activeElement.tagName) : null,
+    document: {
+      scrollWidth: document.documentElement.scrollWidth,
+      scrollHeight: document.documentElement.scrollHeight,
+      bodyScrollWidth: document.body.scrollWidth,
+      horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1
+    },
+    headings: Array.prototype.map.call(document.querySelectorAll('h1,h2,h3,h4,h5,h6'),
+      function (h) { return h.tagName + ':' + (h.textContent || '').trim().slice(0, 80); }),
+    focusables: Array.prototype.map.call(
+      document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'),
+      function (el) {
+        var r = el.getBoundingClientRect();
+        return {tag: el.tagName, id: el.id || '', text: (el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 50),
+                visible: !!(r.width && r.height), tabIndex: el.tabIndex};
+      }),
+    rects: {
+      wrap: rect('.wrap'), danger: rect('#danger'), actions: rect('.actions'),
+      safeBtn: rect('#safe'), backBtn: rect('#back'), reveal: rect('#reveal'),
+      confirm: rect('#confirm'), proceed: rect('#proceed'),
+      popupBody: rect('body'), glassCard: rect('.glass-card'), urlInput: rect('#url'),
+      checkBtn: rect('#check'), toggleRow: rect('.toggle-row'), checkbox: rect('#strict'),
+      result: rect('#result'), footer: rect('.footer'), h1: rect('h1')
+    },
+    computed: {},
+    focusTest: null
+  };
+  ['#title', '#description', '#host', '#official', '#reason', '#error',
+   '#url', '#check', '#strict', '#notice', '#sitecount', '#blocked',
+   '#result', '.kicker', '.footer', 'h1', '.wrap', '.glass-card'].forEach(function (sel) {
+    var el = document.querySelector(sel);
+    if (!el) return;
+    var cs = getComputedStyle(el);
+    metrics.computed[sel] = {
+      color: cs.color, background: cs.backgroundColor, fontSize: cs.fontSize,
+      fontWeight: cs.fontWeight, lineHeight: cs.lineHeight,
+      outlineStyle: cs.outlineStyle, outlineWidth: cs.outlineWidth,
+      borderColor: cs.borderColor, boxShadow: cs.boxShadow,
+      backdropFilter: cs.backdropFilter || cs.webkitBackdropFilter
+    };
+  });
+  var urlInput = document.querySelector('#url');
+  if (urlInput) {
+    urlInput.focus();
+    var cs2 = getComputedStyle(urlInput);
+    metrics.focusTest = {
+      activeIsInput: document.activeElement === urlInput,
+      matchesFocusVisible: urlInput.matches(':focus-visible'),
+      matchesFocus: urlInput.matches(':focus'),
+      outlineStyle: cs2.outlineStyle, outlineWidth: cs2.outlineWidth,
+      outlineColor: cs2.outlineColor, outlineOffset: cs2.outlineOffset,
+      borderColor: cs2.borderColor, boxShadow: cs2.boxShadow,
+      hasVisibleOutline: cs2.outlineStyle !== 'none' && parseFloat(cs2.outlineWidth) >= 2
+    };
+  }
+  var pre = document.createElement('pre');
+  pre.id = 'audit-metrics';
+  pre.style.display = 'none';
+  pre.textContent = 'AUDIT_METRICS_JSON:' + JSON.stringify(metrics);
+  document.body.appendChild(pre);
+})();
+</script>
+</body>
+</html>

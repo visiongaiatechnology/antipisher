@@ -1,0 +1,337 @@
+{
+  "tool": "detector_probe.cjs",
+  "probes": [
+    {
+      "group": "Datenbank",
+      "claim": "README:8 \"165 Marken\"",
+      "expected": 165,
+      "actual": 165,
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Datenbank",
+      "claim": "sites-100.json = 165",
+      "expected": 165,
+      "actual": 165,
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "office.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"office\" (Microsoft 365) ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "target.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"target\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "medium.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"medium\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "zoom.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"zoom\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "notion.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"notion\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "line.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"line\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "apple.attacker.com",
+      "expected": "block",
+      "actual": "block",
+      "verdict": "MATCH",
+      "note": "Kontrollfall (Behauptung gilt fuer Apple)"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "chase.attacker.com",
+      "expected": "block",
+      "actual": "block",
+      "verdict": "MATCH",
+      "note": "Kontrollfall"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "steam.attacker.com",
+      "expected": "block",
+      "actual": "block",
+      "verdict": "MATCH",
+      "note": "Kontrollfall"
+    },
+    {
+      "group": "Multi-Tenant",
+      "claim": "README:11 / Tests",
+      "input": "https://microsoft.github.io/",
+      "expected": "safe",
+      "actual": "safe",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Multi-Tenant",
+      "claim": "README:11 / Tests",
+      "input": "https://google.github.io/",
+      "expected": "safe",
+      "actual": "safe",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Multi-Tenant",
+      "claim": "README:11 / Tests",
+      "input": "https://paypal.github.io/",
+      "expected": "block",
+      "actual": "block",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Multi-Tenant",
+      "claim": "README:11 / Tests",
+      "input": "https://chase-login.pages.dev/",
+      "expected": "block",
+      "actual": "block",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://apple.stackexchange.com/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Apple"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://visa.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Visa"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://box.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Box"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://steam.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Steam"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://signal.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Signal"
+    },
+    {
+      "group": "Mikrocopy",
+      "claim": "guard.js reasonNames deckt alle detector-reasons ab",
+      "expected": [],
+      "actual": [
+        "https://paypal.com@evil.test/ -> userinfo"
+      ],
+      "verdict": "CONFLICT",
+      "note": "Unabgedeckte reasons erhalten den Fallback-Text \"Verdaechtige Domain-Manipulation erkannt.\""
+    },
+    {
+      "group": "Guard-Fehlerpfad",
+      "claim": "guard.js:19 ruft engine.classify(target) vor der Zielpruefung auf",
+      "input": "undefined",
+      "expected": "skip",
+      "actual": "skip",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Guard-Fehlerpfad",
+      "claim": "guard.js:19 ruft engine.classify(target) vor der Zielpruefung auf",
+      "input": "null",
+      "expected": "skip",
+      "actual": "skip",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Guard-Fehlerpfad",
+      "claim": "guard.js:19 ruft engine.classify(target) vor der Zielpruefung auf",
+      "input": "leer",
+      "expected": "skip",
+      "actual": "skip",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Guard-Fehlerpfad",
+      "claim": "guard.js:19 ruft engine.classify(target) vor der Zielpruefung auf",
+      "input": "kein URL",
+      "expected": "skip",
+      "actual": "skip",
+      "verdict": "MATCH"
+    },
+    {
+      "group": "Determinismus",
+      "claim": "Test \"confusable module is deterministic\"",
+      "expected": true,
+      "actual": true,
+      "verdict": "MATCH"
+    }
+  ],
+  "conflicts": [
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "office.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"office\" (Microsoft 365) ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "target.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"target\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "medium.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"medium\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "zoom.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"zoom\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "notion.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"notion\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "Subdomain-Schutz",
+      "claim": "README:10/Next.md:23 \"lueckenloser Subdomain-Schutz fuer ALLE Marken\" (Doku-Erwartung: block)",
+      "input": "line.attacker.com",
+      "expected": "block",
+      "actual": "safe",
+      "verdict": "CONFLICT",
+      "note": "Marke \"line\" ist in genericSubdomains ausgenommen -> Engine blockt bewusst nicht"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://apple.stackexchange.com/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Apple"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://visa.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Visa"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://box.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Box"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://steam.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Steam"
+    },
+    {
+      "group": "False-Positive-Risiko",
+      "claim": "README:59 \"Falschpositive sind moeglich\" (kein Anspruch, aber UX-relevant)",
+      "input": "https://signal.example.test/",
+      "expected": "safe",
+      "actual": "block",
+      "verdict": "CONFLICT",
+      "note": "reason=foreign-domain, site=Signal"
+    },
+    {
+      "group": "Mikrocopy",
+      "claim": "guard.js reasonNames deckt alle detector-reasons ab",
+      "expected": [],
+      "actual": [
+        "https://paypal.com@evil.test/ -> userinfo"
+      ],
+      "verdict": "CONFLICT",
+      "note": "Unabgedeckte reasons erhalten den Fallback-Text \"Verdaechtige Domain-Manipulation erkannt.\""
+    }
+  ]
+}

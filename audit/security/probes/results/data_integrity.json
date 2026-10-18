@@ -1,0 +1,96 @@
+{
+  "probe": "probe08_data_integrity",
+  "timestamp_utc": "2026-10-18T15:35:38.434Z",
+  "brand_count": 165,
+  "domain_count": 257,
+  "duplicate_brands": [],
+  "duplicate_domains": [],
+  "invalid_records": [],
+  "invalid_domains": [],
+  "wrongly_blocked_official_hosts": [],
+  "generic_brand_subdomain_fp_candidates": [
+    "box (foreign-domain/Box)",
+    "hp (foreign-domain/HP)",
+    "visa (foreign-domain/Visa)",
+    "ing (foreign-domain/ING)",
+    "ups (foreign-domain/UPS)",
+    "amd (foreign-domain/AMD)",
+    "sap (foreign-domain/SAP)",
+    "ibm (foreign-domain/IBM)",
+    "dhl (foreign-domain/DHL)",
+    "dpd (foreign-domain/DPD)",
+    "gls (foreign-domain/GLS)",
+    "wise (foreign-domain/Wise)",
+    "temu (foreign-domain/Temu)",
+    "cursor (foreign-domain/Cursor)",
+    "gemini (foreign-domain/Gemini)",
+    "signal (foreign-domain/Signal)"
+  ],
+  "brand_label_collisions": [
+    "google.github.io (Brand \"github\" von GitHub)",
+    "facebook.github.io (Brand \"github\" von GitHub)",
+    "microsoft.github.io (Brand \"github\" von GitHub)"
+  ],
+  "assertions_total": 8,
+  "assertions_failed": 0,
+  "assertions": [
+    {
+      "name": "data:sites.js-equals-sites-100.json",
+      "ok": true,
+      "detail": "sites.js und sites-100.json divergieren (165 vs 165)"
+    },
+    {
+      "name": "data:brand-count>=100",
+      "ok": true,
+      "detail": "165"
+    },
+    {
+      "name": "data:no-duplicate-brands",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "data:no-duplicate-domains",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "data:records-valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "data:domains-valid-hostname",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "data:all-official-hosts-safe",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "docs:README-brand-count-matches",
+      "ok": true,
+      "detail": "README behauptet 165, Daten=165"
+    }
+  ],
+  "observations": [
+    {
+      "name": "data:brand-statistics",
+      "detail": "Marken=165, Domains=257, Marken mit Brand <=3 Zeichen=15 [box,npm,vk,amd,hp,sap,ibm,dhl,ups,dpd,gls,ing,dkb,n26,okx], Typosquat-Prüfung inaktiv (brand.length>=5) für 34 Marken."
+    },
+    {
+      "name": "docs:brand-count-claims",
+      "detail": "Tatsächliche Marken=165 | README \"165\": true | Next.md \"165\": true | build_sites.py \"140+\": true — Ansprüche gedeckt."
+    },
+    {
+      "name": "data:subdomain-fp-candidates",
+      "detail": "16 kurze/generische Markenlabels werden als Subdomain fremder Domains blockiert: box (foreign-domain/Box), hp (foreign-domain/HP), visa (foreign-domain/Visa), ing (foreign-domain/ING), ups (foreign-domain/UPS), amd (foreign-domain/AMD), sap (foreign-domain/SAP), ibm (foreign-domain/IBM), dhl (foreign-domain/DHL), dpd (foreign-domain/DPD), gls (foreign-domain/GLS), wise (foreign-domain/Wise), temu (foreign-domain/Temu), cursor (foreign-domain/Cursor), gemini (foreign-domain/Gemini), signal (foreign-domain/Signal)"
+    },
+    {
+      "name": "data:brand-label-collisions",
+      "detail": "3 Kollisionen (offizielle Domain enthält fremdes Brand-Label): google.github.io (Brand \"github\" von GitHub); facebook.github.io (Brand \"github\" von GitHub); microsoft.github.io (Brand \"github\" von GitHub)"
+    }
+  ]
+}

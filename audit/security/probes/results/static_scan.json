@@ -1,0 +1,1077 @@
+{
+  "probe": "probe09_static_scan",
+  "timestamp_utc": "2026-10-18T15:35:38.811558+00:00",
+  "python": "3.14.2",
+  "root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+  "file_count": 44,
+  "inventory": [
+    {
+      "path": "build.py",
+      "size": 1925,
+      "sha256": "d96f55257f575d3114b50a623f2501a0ceb416a29a6b8e6df15254be7e084405"
+    },
+    {
+      "path": "build_sites.py",
+      "size": 6867,
+      "sha256": "88652ff44d27105105b71701d7f438e3bfe68bbf5296a23fde0fbaadc3eacdfb"
+    },
+    {
+      "path": "chrome/background.js",
+      "size": 5171,
+      "sha256": "c3523551c18ac7564fc4631d38806ddcf9140956dbade3f32c0a39832d2e9653"
+    },
+    {
+      "path": "chrome/guard.css",
+      "size": 7715,
+      "sha256": "2e45e75e9e1b20e9f531393bee1c05ddfa7c0b0775203ef7d9204044d86bff82"
+    },
+    {
+      "path": "chrome/guard.html",
+      "size": 4447,
+      "sha256": "2f77cf6504e3a079b40acb5320445fecb9fe1327596815a0634836763b9edc11"
+    },
+    {
+      "path": "chrome/guard.js",
+      "size": 3671,
+      "sha256": "f259d0434eb7190331273b9ebdc77271c13de65d1115ee72053770942bb090e8"
+    },
+    {
+      "path": "chrome/icons/icon128.png",
+      "size": 9114,
+      "sha256": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+    },
+    {
+      "path": "chrome/icons/icon16.png",
+      "size": 813,
+      "sha256": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+    },
+    {
+      "path": "chrome/icons/icon48.png",
+      "size": 3323,
+      "sha256": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+    },
+    {
+      "path": "chrome/manifest.json",
+      "size": 1015,
+      "sha256": "f29a264849f341039491c294baecf0a8b2215ff58f0c254dd0c82574fda708bd"
+    },
+    {
+      "path": "chrome/popup.html",
+      "size": 8716,
+      "sha256": "06220ceb7c31208c3c2c9a27f29f29463ca1fefa6946687848ea4adfa8839446"
+    },
+    {
+      "path": "chrome/popup.js",
+      "size": 1952,
+      "sha256": "6b6e77ab79cc78c585c8ee6baa643d3727c383865a3cbffaec09414f4a22610b"
+    },
+    {
+      "path": "chrome/shared/detector.js",
+      "size": 12668,
+      "sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9"
+    },
+    {
+      "path": "chrome/shared/sites.js",
+      "size": 19460,
+      "sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d"
+    },
+    {
+      "path": "firefox/background.js",
+      "size": 1591,
+      "sha256": "487efa13fea2916fb45726a0388c29ded7fc16c1086e25dd7279bd8edd488f87"
+    },
+    {
+      "path": "firefox/guard.css",
+      "size": 7715,
+      "sha256": "2e45e75e9e1b20e9f531393bee1c05ddfa7c0b0775203ef7d9204044d86bff82"
+    },
+    {
+      "path": "firefox/guard.html",
+      "size": 4447,
+      "sha256": "2f77cf6504e3a079b40acb5320445fecb9fe1327596815a0634836763b9edc11"
+    },
+    {
+      "path": "firefox/guard.js",
+      "size": 3671,
+      "sha256": "f259d0434eb7190331273b9ebdc77271c13de65d1115ee72053770942bb090e8"
+    },
+    {
+      "path": "firefox/icons/icon128.png",
+      "size": 9114,
+      "sha256": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+    },
+    {
+      "path": "firefox/icons/icon16.png",
+      "size": 813,
+      "sha256": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+    },
+    {
+      "path": "firefox/icons/icon48.png",
+      "size": 3323,
+      "sha256": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+    },
+    {
+      "path": "firefox/manifest.json",
+      "size": 972,
+      "sha256": "d9cafec3049214e67058f923ef6ead2e913bb8ce215867e9f11ec5a45c1bcd74"
+    },
+    {
+      "path": "firefox/popup.html",
+      "size": 8716,
+      "sha256": "06220ceb7c31208c3c2c9a27f29f29463ca1fefa6946687848ea4adfa8839446"
+    },
+    {
+      "path": "firefox/popup.js",
+      "size": 1952,
+      "sha256": "6b6e77ab79cc78c585c8ee6baa643d3727c383865a3cbffaec09414f4a22610b"
+    },
+    {
+      "path": "firefox/shared/detector.js",
+      "size": 12668,
+      "sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9"
+    },
+    {
+      "path": "firefox/shared/sites.js",
+      "size": 19460,
+      "sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d"
+    },
+    {
+      "path": "icons/icon128.png",
+      "size": 9114,
+      "sha256": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+    },
+    {
+      "path": "icons/icon16.png",
+      "size": 813,
+      "sha256": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+    },
+    {
+      "path": "icons/icon48.png",
+      "size": 3323,
+      "sha256": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+    },
+    {
+      "path": "LICENSE",
+      "size": 34427,
+      "sha256": "aeb232b45ff5002d448f5344f99d89c861ce2f93bb69fefaf9add60384b6b08a"
+    },
+    {
+      "path": "Next.md",
+      "size": 5079,
+      "sha256": "f852aa9db83089c86b7653550aafce2a1bbe444b5982e8b7f17e8e1d9104bcc9"
+    },
+    {
+      "path": "README.md",
+      "size": 6695,
+      "sha256": "f954ac35696163de7fd3fd144b4df5ed518e4a9298f8294521f154c48271c6bf"
+    },
+    {
+      "path": "SECURITY.md",
+      "size": 1185,
+      "sha256": "a05461d7083ccd7e94ff9ae1c442d97e451f83d6aedd3ab2364de5a7f548fc26"
+    },
+    {
+      "path": "shared/detector.js",
+      "size": 12668,
+      "sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9"
+    },
+    {
+      "path": "shared/guard.css",
+      "size": 7715,
+      "sha256": "2e45e75e9e1b20e9f531393bee1c05ddfa7c0b0775203ef7d9204044d86bff82"
+    },
+    {
+      "path": "shared/guard.html",
+      "size": 4447,
+      "sha256": "2f77cf6504e3a079b40acb5320445fecb9fe1327596815a0634836763b9edc11"
+    },
+    {
+      "path": "shared/guard.js",
+      "size": 3671,
+      "sha256": "f259d0434eb7190331273b9ebdc77271c13de65d1115ee72053770942bb090e8"
+    },
+    {
+      "path": "shared/popup.html",
+      "size": 8716,
+      "sha256": "06220ceb7c31208c3c2c9a27f29f29463ca1fefa6946687848ea4adfa8839446"
+    },
+    {
+      "path": "shared/popup.js",
+      "size": 1952,
+      "sha256": "6b6e77ab79cc78c585c8ee6baa643d3727c383865a3cbffaec09414f4a22610b"
+    },
+    {
+      "path": "shared/sites.js",
+      "size": 19460,
+      "sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d"
+    },
+    {
+      "path": "sites-100.json",
+      "size": 19368,
+      "sha256": "2296c7b1aa8f0265558774ded4b17535223a047fc75d88993ca4f7ff5e7989cd"
+    },
+    {
+      "path": "tests/chrome-worker.test.cjs",
+      "size": 3867,
+      "sha256": "cfd78f7fdfc9b74bdba071bde30c7ba357a613751bbd10b284d731632c83c938"
+    },
+    {
+      "path": "tests/detector.test.cjs",
+      "size": 4636,
+      "sha256": "58d6feff42c85ee9c9550e1010952251656d00684adbcacb22201793c19beed3"
+    },
+    {
+      "path": "tests/firefox-worker.test.cjs",
+      "size": 1883,
+      "sha256": "f470aef248eaaa8c14b722ff9b4c94dbd4e935168ab636c1b7b1fb7d9be02844"
+    }
+  ],
+  "sink_hits": {
+    "network_fetch": [],
+    "eval_like": [],
+    "html_sinks": [],
+    "dom_url_sinks": [
+      {
+        "file": "chrome/background.js",
+        "line": 32,
+        "code": "redirect: { regexSubstitution: api.runtime.getURL('guard.html') + '#\\\\1' }"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 86,
+        "code": "api.tabs.update(info.tabId,{url:api.runtime.getURL('guard.html')+'?url='+encodeURIComponent(info.url)}).catch(()=>{});"
+      },
+      {
+        "file": "chrome/guard.js",
+        "line": 15,
+        "code": "const fromQuery = new URL(location.href).searchParams.get('url');"
+      },
+      {
+        "file": "chrome/guard.js",
+        "line": 37,
+        "code": "location.replace(url);"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 15,
+        "code": "return {redirectUrl:gate};"
+      },
+      {
+        "file": "firefox/guard.js",
+        "line": 15,
+        "code": "const fromQuery = new URL(location.href).searchParams.get('url');"
+      },
+      {
+        "file": "firefox/guard.js",
+        "line": 37,
+        "code": "location.replace(url);"
+      },
+      {
+        "file": "shared/guard.js",
+        "line": 15,
+        "code": "const fromQuery = new URL(location.href).searchParams.get('url');"
+      },
+      {
+        "file": "shared/guard.js",
+        "line": 37,
+        "code": "location.replace(url);"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 28,
+        "code": "assert.match(blocked.redirectUrl,/^moz-extension:\\/\\/fake\\/guard\\.html/);"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 34,
+        "code": "assert.ok(listener({url:'https://paypa1.com/',tabId:7}).redirectUrl,"
+      }
+    ],
+    "code_imports": [
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "line": 1,
+        "code": "const test=require('node:test');"
+      },
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "line": 2,
+        "code": "const assert=require('node:assert/strict');"
+      },
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "line": 3,
+        "code": "const fs=require('node:fs');"
+      },
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "line": 4,
+        "code": "const vm=require('node:vm');"
+      },
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "line": 5,
+        "code": "const path=require('node:path');"
+      },
+      {
+        "file": "tests/detector.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/detector.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/detector.test.cjs",
+        "line": 3,
+        "code": "require('../shared/sites.js');"
+      },
+      {
+        "file": "tests/detector.test.cjs",
+        "line": 4,
+        "code": "const d = require('../shared/detector.js');"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 1,
+        "code": "const test=require('node:test');"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 2,
+        "code": "const assert=require('node:assert/strict');"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 3,
+        "code": "const fs=require('node:fs');"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 4,
+        "code": "const vm=require('node:vm');"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 5,
+        "code": "const path=require('node:path');"
+      }
+    ],
+    "storage_access": [
+      {
+        "file": "chrome/background.js",
+        "line": 15,
+        "code": "const {strictMode=true}=await api.storage.local.get('strictMode');strict=strictMode;"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 67,
+        "code": "try{const {blocked=0}=await api.storage.local.get('blocked');await api.storage.local.set({blocked:blocked+1});}catch{}"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 10,
+        "code": "api.storage.local.get(['blocked', 'strictMode']).then(x => {"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 22,
+        "code": "await api.storage.local.set({ strictMode: isStrict });"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 13,
+        "code": "api.storage.local.get('blocked').then(({blocked=0})=>api.storage.local.set({blocked:blocked+1})).catch(()=>{});"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 10,
+        "code": "api.storage.local.get(['blocked', 'strictMode']).then(x => {"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 22,
+        "code": "await api.storage.local.set({ strictMode: isStrict });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 10,
+        "code": "api.storage.local.get(['blocked', 'strictMode']).then(x => {"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 22,
+        "code": "await api.storage.local.set({ strictMode: isStrict });"
+      }
+    ],
+    "runtime_message": [
+      {
+        "file": "chrome/background.js",
+        "line": 88,
+        "code": "api.runtime.onMessage.addListener((request,sender,reply)=>{"
+      },
+      {
+        "file": "chrome/guard.js",
+        "line": 30,
+        "code": "const response = await api.runtime.sendMessage({"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 23,
+        "code": "api.runtime.onMessage.addListener(async(req,sender)=>{"
+      },
+      {
+        "file": "firefox/guard.js",
+        "line": 30,
+        "code": "const response = await api.runtime.sendMessage({"
+      },
+      {
+        "file": "shared/guard.js",
+        "line": 30,
+        "code": "const response = await api.runtime.sendMessage({"
+      }
+    ],
+    "webrequest": [
+      {
+        "file": "firefox/background.js",
+        "line": 17,
+        "code": "api.webRequest.onBeforeRequest.addListener("
+      },
+      {
+        "file": "README.md",
+        "line": 33,
+        "code": "4. Die Konfiguration arbeitet mit `webRequest.onBeforeRequest` und blockiert Hauptdokument-Anfragen vor dem Absenden."
+      }
+    ],
+    "dnr": [
+      {
+        "file": "chrome/background.js",
+        "line": 17,
+        "code": "const oldSessions=await api.declarativeNetRequest.getSessionRules();"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 19,
+        "code": "if(stale.length)await api.declarativeNetRequest.updateSessionRules({removeRuleIds:stale});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 21,
+        "code": "const existing=await api.declarativeNetRequest.getDynamicRules();"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 23,
+        "code": "if(!strict){await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:ids});return;}"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 25,
+        "code": "const supported=await api.declarativeNetRequest.isRegexSupported({regex,requireCapturing:true});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 40,
+        "code": "await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:ids,addRules:[rule]});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 51,
+        "code": "if(old) await api.declarativeNetRequest.updateSessionRules({removeRuleIds:[old]});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 53,
+        "code": "const supported=await api.declarativeNetRequest.isRegexSupported({regex:regexp});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 55,
+        "code": "await api.declarativeNetRequest.updateSessionRules({addRules:[{"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 64,
+        "code": "try{await api.declarativeNetRequest.updateSessionRules({removeRuleIds:[id]});}catch{}"
+      }
+    ],
+    "tab_access": [
+      {
+        "file": "chrome/background.js",
+        "line": 86,
+        "code": "api.tabs.update(info.tabId,{url:api.runtime.getURL('guard.html')+'?url='+encodeURIComponent(info.url)}).catch(()=>{});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 94,
+        "code": "const tab=await api.tabs.get(tabId);"
+      },
+      {
+        "file": "chrome/guard.js",
+        "line": 28,
+        "code": "const tab = await api.tabs.getCurrent();"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 27,
+        "code": "const tab=await api.tabs.get(tabId);"
+      },
+      {
+        "file": "firefox/guard.js",
+        "line": 28,
+        "code": "const tab = await api.tabs.getCurrent();"
+      },
+      {
+        "file": "shared/guard.js",
+        "line": 28,
+        "code": "const tab = await api.tabs.getCurrent();"
+      }
+    ],
+    "dangerous_shell": [],
+    "file_io": [
+      {
+        "file": "build.py",
+        "line": 11,
+        "code": "shutil.copyfile(ROOT/'shared'/f,path)"
+      },
+      {
+        "file": "build.py",
+        "line": 15,
+        "code": "shutil.copyfile(ROOT/'icons'/f,path)"
+      },
+      {
+        "file": "build.py",
+        "line": 28,
+        "code": "shutil.copyfile(zip_path, legacy_zip)"
+      },
+      {
+        "file": "build.py",
+        "line": 35,
+        "code": "shutil.copyfile(src_zip, ROOT.parent / 'VGT-DomainGuard-Source-v0.1.0.zip')"
+      },
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "line": 41,
+        "code": "for(const file of names)vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context);"
+      },
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "line": 43,
+        "code": "vm.runInContext(fs.readFileSync(path.join(root,'background.js'),'utf8'),context);"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 19,
+        "code": "vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),context);"
+      }
+    ]
+  },
+  "secret_pattern_hits": [],
+  "external_url_occurrences": [
+    {
+      "file": "chrome/manifest.json",
+      "line": 16,
+      "url": "http://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 17,
+      "url": "https://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 37,
+      "url": "http://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 38,
+      "url": "https://*/*"
+    },
+    {
+      "file": "chrome/shared/detector.js",
+      "line": 207,
+      "url": "https://brand.com@evil.com/"
+    },
+    {
+      "file": "firefox/background.js",
+      "line": 19,
+      "url": "http://*/*"
+    },
+    {
+      "file": "firefox/background.js",
+      "line": 19,
+      "url": "https://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 14,
+      "url": "http://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 15,
+      "url": "https://*/*"
+    },
+    {
+      "file": "firefox/shared/detector.js",
+      "line": 207,
+      "url": "https://brand.com@evil.com/"
+    },
+    {
+      "file": "README.md",
+      "line": 26,
+      "url": "https://paypa1.com`"
+    },
+    {
+      "file": "README.md",
+      "line": 26,
+      "url": "https://amzaon.com`"
+    },
+    {
+      "file": "README.md",
+      "line": 76,
+      "url": "https://www.unicode.org/reports/tr39/"
+    },
+    {
+      "file": "README.md",
+      "line": 77,
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
+    },
+    {
+      "file": "README.md",
+      "line": 78,
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
+    },
+    {
+      "file": "README.md",
+      "line": 79,
+      "url": "https://tranco-list.eu/"
+    },
+    {
+      "file": "README.md",
+      "line": 80,
+      "url": "https://blog.cloudflare.com/radar-2025-year-in-review-internet-services/"
+    },
+    {
+      "file": "shared/detector.js",
+      "line": 207,
+      "url": "https://brand.com@evil.com/"
+    },
+    {
+      "file": "tests/chrome-worker.test.cjs",
+      "line": 22,
+      "url": "https://paypa1.com"
+    },
+    {
+      "file": "tests/chrome-worker.test.cjs",
+      "line": 54,
+      "url": "https://paypa1.com/#fragment"
+    },
+    {
+      "file": "tests/chrome-worker.test.cjs",
+      "line": 59,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/chrome-worker.test.cjs",
+      "line": 60,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/chrome-worker.test.cjs",
+      "line": 70,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 14,
+      "url": "https://accounts."
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 21,
+      "url": "https://pаypal.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 22,
+      "url": "https://xn--pypal-4ve.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 23,
+      "url": "https://аmazon.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 24,
+      "url": "https://gοogle.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 25,
+      "url": "https://g00gle.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 26,
+      "url": "https://micr0soft.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 34,
+      "url": "https://amzaon.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 35,
+      "url": "https://goolge.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 36,
+      "url": "https://paypla.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 37,
+      "url": "https://yuotube.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 38,
+      "url": "https://netlfix.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 48,
+      "url": "https://paypa1.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 49,
+      "url": "https://amaz0n.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 50,
+      "url": "https://google.com.login-billing.evil.test"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 51,
+      "url": "https://paypal.com.evil.test"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 52,
+      "url": "https://mail.ru.evil.test"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 53,
+      "url": "https://paypal-security.example.test"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 54,
+      "url": "https://secure-paypal.example.test"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 55,
+      "url": "https://microsft.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 56,
+      "url": "https://www.revoluт.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 57,
+      "url": "https://paypal.com@evil.test/"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 65,
+      "url": "https://apple.attacker.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 66,
+      "url": "https://chase.attacker.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 67,
+      "url": "https://steam.attacker.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 68,
+      "url": "https://paypal.attacker.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 69,
+      "url": "https://binance.attacker.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 79,
+      "url": "https://microsoft.github.io"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 80,
+      "url": "https://google.github.io"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 83,
+      "url": "https://paypal.github.io"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 87,
+      "url": "https://paypa1.github.io"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 91,
+      "url": "https://chase-login.pages.dev"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 98,
+      "url": "https://www.xn--bcher-kva.de"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 99,
+      "url": "https://www.über.de"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 100,
+      "url": "https://paypaⅼ.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 101,
+      "url": "https://docs.mozilla.org"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 102,
+      "url": "https://mail.google.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 103,
+      "url": "https://mail.proton.me"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 104,
+      "url": "https://office.example.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 105,
+      "url": "https://line.example.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 106,
+      "url": "https://example.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 107,
+      "url": "https://PAYPAL.COM"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 108,
+      "url": "https://www.paypal.com."
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 109,
+      "url": "https://google.de"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 110,
+      "url": "https://www.amazon.co.jp"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 111,
+      "url": "https://paypal-guides.example.test"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 112,
+      "url": "https://oldpaypalarchives.example.test"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 113,
+      "url": "https://visualstudio.com"
+    },
+    {
+      "file": "tests/detector.test.cjs",
+      "line": 136,
+      "url": "https://paypa1.com"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 25,
+      "url": "https://paypal.com/"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 27,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 29,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 32,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 34,
+      "url": "https://paypa1.com/"
+    }
+  ],
+  "todo_markers": [],
+  "html_report": [
+    {
+      "file": "chrome/guard.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
+      "file": "chrome/popup.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
+      "file": "firefox/guard.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
+      "file": "firefox/popup.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
+      "file": "shared/guard.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
+      "file": "shared/popup.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    }
+  ],
+  "manifests": {
+    "chrome": {
+      "manifest_version": 3,
+      "version": "0.1.0",
+      "permissions": [
+        "declarativeNetRequest",
+        "storage",
+        "tabs",
+        "webNavigation"
+      ],
+      "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "web_accessible_resources": [
+        {
+          "resources": [
+            "guard.html"
+          ],
+          "matches": [
+            "http://*/*",
+            "https://*/*"
+          ]
+        }
+      ],
+      "externally_connectable": null,
+      "content_security_policy": null,
+      "background": {
+        "service_worker": "background.js"
+      },
+      "minimum_chrome_version": "121",
+      "gecko": null
+    },
+    "firefox": {
+      "manifest_version": 3,
+      "version": "0.1.0",
+      "permissions": [
+        "storage",
+        "tabs",
+        "webRequest",
+        "webRequestBlocking"
+      ],
+      "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "web_accessible_resources": [],
+      "externally_connectable": null,
+      "content_security_policy": null,
+      "background": {
+        "scripts": [
+          "shared/sites.js",
+          "shared/detector.js",
+          "background.js"
+        ]
+      },
+      "minimum_chrome_version": null,
+      "gecko": {
+        "id": "antipisher@visiongaia.example",
+        "strict_min_version": "128.0"
+      }
+    }
+  },
+  "supply_chain": {
+    "vcs_present": false,
+    "release_config_present": [],
+    "ci_dirs_present": [],
+    "lockfiles": [],
+    "sbom_present": false
+  },
+  "version_claims": {
+    "README.md": "0.1.0",
+    "Next.md": "0.1.0",
+    "chrome/manifest.json": "0.1.0",
+    "firefox/manifest.json": "0.1.0",
+    "SECURITY.md": null
+  },
+  "license_present": true,
+  "license_size": 34427
+}

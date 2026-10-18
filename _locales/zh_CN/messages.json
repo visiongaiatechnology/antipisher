@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "Antipisher",
+    "description": "扩展名称。"
+  },
+  "appShortName": {
+    "message": "Antipisher",
+    "description": "工具栏简短名称。"
+  },
+  "appDesc": {
+    "message": "本地离线防护，抵御钓鱼网站、仿冒域名、IDN 同形异义词攻击和误植域名。零遥测、纯本地。",
+    "description": "扩展描述。"
+  },
+  "actionTitle": {
+    "message": "Antipisher Domain Trust",
+    "description": "工具栏图标提示文本。"
+  }
+}

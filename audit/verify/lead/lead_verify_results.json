@@ -1,0 +1,1075 @@
+{
+  "generated": "2026-10-18T16:16:35.687Z",
+  "results": [
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://stackoverflow.com/questions/19012345/how-to-fix-paypal-login-error",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://www.reddit.com/r/paypal/comments/abc123/cant_login_to_my_account/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://en.wikipedia.org/wiki/PayPal_login",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://medium.com/@user/paypal-login-problem-abc123",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://www.heise.de/ratgeber/paypal-login-problem-123.html",
+      "got": "block",
+      "reason": "path-impersonation",
+      "action": "warn",
+      "site": "PayPal",
+      "ok": false
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://www.verbraucherzentrale.de/wissen/paypal-login-12345",
+      "got": "block",
+      "reason": "path-impersonation",
+      "action": "warn",
+      "site": "PayPal",
+      "ok": false
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://github.com/paypal/paypal-js/issues/123",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://www.paypal.com/signin",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://docs.stripe.com/payments/checkout",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://www.sparkasse.de/service/login-hilfe.html",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-path",
+      "expected": "safe",
+      "url": "https://www.test.de/paypal-login-problem-12345/",
+      "got": "block",
+      "reason": "path-impersonation",
+      "action": "warn",
+      "site": "PayPal",
+      "ok": false
+    },
+    {
+      "cat": "fn-doc-bypass",
+      "expected": "block",
+      "url": "https://evil.test/blog/paypal/login",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-doc-bypass",
+      "expected": "block",
+      "url": "https://evil.test/docs/paypal/login",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-doc-bypass",
+      "expected": "block",
+      "url": "https://evil.test/api/paypal/signin",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-doc-bypass",
+      "expected": "block",
+      "url": "https://evil.test/tutorials/paypal/verify",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://paypal-rechnung.com",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://amazon-paket.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://sparkasse-kontoauszug.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://dhl-sendung.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://telekom-rechnung.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://paypal-rueckerstattung.com",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://netflix-abo.com",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://microsoft-refund.com",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://binance-verifizierung.com",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://coinbase-auszahlung.com",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://klarna-rechnung.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://ing-tan.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://sparkasse-ueberweisung.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fn-bait",
+      "expected": "block",
+      "url": "https://paypal-zahlung.de",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.pe/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.co/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.eg/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.sa/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.co.il/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.ua/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.ru/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.kz/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.pk/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.my/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.vn/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.co.th/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.ng/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.co.ke/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Google",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.google.com.au/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.amazon.com.be/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Amazon",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.amazon.co.za/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Amazon",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.amazon.com.eg/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Amazon",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.microsoft.fr/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.microsoft.co.uk/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.microsoft.com.au/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.apple.co.jp/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Apple",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.apple.co.uk/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.apple.com.br/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Apple",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.visa.com.mx/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Visa",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.visa.com.br/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Visa",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.visa.ca/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.visa.com.au/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.ing.fr/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "ING",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.ing.it/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "ING",
+      "ok": false
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.walmart.com.mx/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.walmart.ca/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.hsbc.co.uk/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.barclays.co.uk/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.santander.co.uk/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.dhl.co.uk/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.pinterest.co.uk/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-official-new",
+      "expected": "safe",
+      "url": "https://www.airbnb.co.uk/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "Airbnb",
+      "ok": false
+    },
+    {
+      "cat": "fp-bidi",
+      "expected": "safe",
+      "url": "https://example.com/‏",
+      "got": "block",
+      "reason": "bidi-override",
+      "action": "block",
+      "site": "Sicherheitswarnung",
+      "ok": false
+    },
+    {
+      "cat": "fp-bidi",
+      "expected": "safe",
+      "url": "https://example.com/path?q=%E2%80%8F",
+      "got": "block",
+      "reason": "bidi-override",
+      "action": "block",
+      "site": "Sicherheitswarnung",
+      "ok": false
+    },
+    {
+      "cat": "fp-bidi",
+      "expected": "safe",
+      "url": "https://fa.wikipedia.org/wiki/%D8%B5%D9%81%D8%AD%D9%87%D9%94_%D8%A7%D8%B5%D9%84%DB%8C",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-userinfo",
+      "expected": "safe",
+      "url": "https://paypal@paypal.com/",
+      "got": "block",
+      "reason": "userinfo",
+      "action": "block",
+      "site": "PayPal",
+      "ok": false
+    },
+    {
+      "cat": "fp-userinfo",
+      "expected": "safe",
+      "url": "https://user:paypal@paypal.com/",
+      "got": "block",
+      "reason": "userinfo",
+      "action": "block",
+      "site": "PayPal",
+      "ok": false
+    },
+    {
+      "cat": "fp-userinfo",
+      "expected": "safe",
+      "url": "https://max.com@example.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-userinfo",
+      "expected": "safe",
+      "url": "https://testing.developer@example.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "fp-userinfo",
+      "expected": "safe",
+      "url": "https://mixing.delivery@example.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "tp-userinfo",
+      "expected": "block",
+      "url": "https://paypal.com@evil.test/",
+      "got": "block",
+      "reason": "userinfo",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "tp-userinfo",
+      "expected": "block",
+      "url": "https://paypal@evil.test/",
+      "got": "block",
+      "reason": "userinfo",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "multi-tenant",
+      "expected": "safe",
+      "url": "https://github.io/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "multi-tenant",
+      "expected": "safe",
+      "url": "https://vercel.app/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "multi-tenant",
+      "expected": "safe",
+      "url": "https://netlify.app/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "multi-tenant",
+      "expected": "safe",
+      "url": "https://microsoft.github.io/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "multi-tenant",
+      "expected": "safe",
+      "url": "https://evil.github.io/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "multi-tenant",
+      "expected": "block",
+      "url": "https://paypal.github.io/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "multi-tenant",
+      "expected": "block",
+      "url": "https://paypa1.github.io/",
+      "got": "block",
+      "reason": "brand-variant",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "short-brand",
+      "expected": "block",
+      "url": "https://vlsa.com/",
+      "got": "block",
+      "reason": "brand-variant",
+      "action": "block",
+      "site": "Visa",
+      "ok": true
+    },
+    {
+      "cat": "short-brand",
+      "expected": "block",
+      "url": "https://wlse.com/",
+      "got": "block",
+      "reason": "brand-variant",
+      "action": "block",
+      "site": "Wise",
+      "ok": true
+    },
+    {
+      "cat": "short-brand",
+      "expected": "block",
+      "url": "https://ubr.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "short-brand",
+      "expected": "block",
+      "url": "https://hp-login.com/",
+      "got": "block",
+      "reason": "credential-bait",
+      "action": "block",
+      "site": "HP",
+      "ok": true
+    },
+    {
+      "cat": "two-edit",
+      "expected": "block",
+      "url": "https://arnazon.com/",
+      "got": "block",
+      "reason": "brand-variant",
+      "action": "block",
+      "site": "Amazon",
+      "ok": true
+    },
+    {
+      "cat": "two-edit",
+      "expected": "block",
+      "url": "https://rnicrosoft.com/",
+      "got": "block",
+      "reason": "brand-variant",
+      "action": "block",
+      "site": "Microsoft",
+      "ok": true
+    },
+    {
+      "cat": "bitsquat",
+      "expected": "block",
+      "url": "https://amaxon.com/",
+      "got": "block",
+      "reason": "bitsquat",
+      "action": "block",
+      "site": "Amazon",
+      "ok": true
+    },
+    {
+      "cat": "bitsquat",
+      "expected": "block",
+      "url": "https://microsmft.com/",
+      "got": "block",
+      "reason": "bitsquat",
+      "action": "block",
+      "site": "Microsoft",
+      "ok": true
+    },
+    {
+      "cat": "bitsquat",
+      "expected": "block",
+      "url": "https://gongle.com/",
+      "got": "block",
+      "reason": "bitsquat",
+      "action": "block",
+      "site": "Google",
+      "ok": true
+    },
+    {
+      "cat": "idn-diacritic",
+      "expected": "block",
+      "url": "https://paypäl.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "idn-diacritic",
+      "expected": "block",
+      "url": "https://päypal.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "idn-diacritic",
+      "expected": "block",
+      "url": "https://applè.com/",
+      "got": "block",
+      "reason": "unicode",
+      "action": "block",
+      "site": "Apple",
+      "ok": true
+    },
+    {
+      "cat": "idn-diacritic",
+      "expected": "block",
+      "url": "https://mïcrosoft.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "idn-diacritic",
+      "expected": "block",
+      "url": "https://amazön.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": false
+    },
+    {
+      "cat": "idn-diacritic",
+      "expected": "block",
+      "url": "https://páypal.com/",
+      "got": "block",
+      "reason": "unicode",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "block",
+      "url": "https://paypa1.com/",
+      "got": "block",
+      "reason": "brand-variant",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "block",
+      "url": "https://amzaon.com/",
+      "got": "block",
+      "reason": "typosquat",
+      "action": "block",
+      "site": "Amazon",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "block",
+      "url": "https://pаypal.com/",
+      "got": "block",
+      "reason": "unicode",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "block",
+      "url": "https://paypal.com.evil.test/",
+      "got": "block",
+      "reason": "foreign-domain",
+      "action": "block",
+      "site": "PayPal",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "safe",
+      "url": "https://www.google.de/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "safe",
+      "url": "https://www.paypal.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "safe",
+      "url": "https://github.com/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    },
+    {
+      "cat": "regression",
+      "expected": "safe",
+      "url": "https://www.amazon.co.jp/",
+      "got": "safe",
+      "reason": "",
+      "action": "allow",
+      "site": "",
+      "ok": true
+    }
+  ]
+}

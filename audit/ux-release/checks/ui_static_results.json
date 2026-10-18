@@ -1,0 +1,526 @@
+{
+  "tool": "ui_static_check.py",
+  "generated": "2026-10-18T17:36:05.300704+02:00",
+  "source_root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+  "status_counts": {
+    "PASS": 23,
+    "FAIL": 33,
+    "NOT_TESTED": 3
+  },
+  "findings": [
+    {
+      "category": "A11y-Basis",
+      "item": "html lang=de (guard.html)",
+      "status": "PASS",
+      "evidence": "shared/guard.html:2",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "A11y-Basis",
+      "item": "html lang=de (popup.html)",
+      "status": "PASS",
+      "evidence": "shared/popup.html:2",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "A11y-Basis",
+      "item": "genau eine h1 je Seite",
+      "status": "PASS",
+      "evidence": "guard.html h1=1, popup.html h1=1",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "A11y-Basis",
+      "item": "Heading-Hierarchie unter h1 (h2/h3 fuer Karten/Abschnitte)",
+      "status": "FAIL",
+      "evidence": "Keine h2/h3 in beiden Seiten; Karten/Ueberschriften sind <span class=eyebrow>/<div class=section-title>",
+      "severity": "P2",
+      "detail": "Screenreader-Heading-Navigation springt direkt von h1 zu Fliesstext."
+    },
+    {
+      "category": "A11y-Basis",
+      "item": "Landmark-Struktur",
+      "status": "PASS",
+      "evidence": "<main role=main aria-labelledby=title>: shared/guard.html:10 (role=main auf <main> redundant, aber unschaedlich); popup.html hat keine Landmark/kein <main>",
+      "severity": "P2",
+      "detail": "Popup braucht keine Landmarks, guard.html ist ok."
+    },
+    {
+      "category": "A11y-Basis",
+      "item": "Viewport ohne user-scalable=no / maximum-scale",
+      "status": "PASS",
+      "evidence": "viewport nur width=device-width, initial-scale=1",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "sichtbarer :focus-visible-Stil definiert (guard)",
+      "status": "PASS",
+      "evidence": "shared/guard.css:329 (3px outline, offset 3px)",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "sichtbarer :focus-visible-Stil definiert (popup)",
+      "status": "PASS",
+      "evidence": "shared/popup.html:274 (2px outline)",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "Fokusindikator des Textfelds (#url) wird nicht durch outline:none ueberschrieben",
+      "status": "FAIL",
+      "evidence": "shared/popup.html:206 - input[type=text] setzt outline:none mit Spezifitaet (0,1,1); die :where(...):focus-visible-Regel hat (0,1,0) und verliert -> nur 1px Border + 25%-Schatten als Fokus",
+      "severity": "P1",
+      "detail": "WCAG 2.4.11 (AA): Fokusflaeche soll >=2px Perimeter mit 3:1 Kontrast sein; 1px-Border + rgba(.25)-Ring erfuellt das nicht sicher. Empfehlung: Fokus-Styling per Semantik-Token ohne outline:none, z.B. input:focus-visible { outline: 3px solid var(--vgt-focus); outline-offset: 2px; }."
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "Tastaturbedienbarkeit aller Aktionen",
+      "status": "PASS",
+      "evidence": "Alle Aktionen sind native <button>/<input>; keine tabindex-Fallen; hidden-Bereich nicht fokussierbar",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "Escape/Back-Verhalten im Confirm-Bereich",
+      "status": "FAIL",
+      "evidence": "shared/guard.js:74 toggelt nur per Klick; kein keydown-Escape-Handler, kein Fokus-Transfer in den Warnbereich, keine Esc-Rueckkehr",
+      "severity": "P2",
+      "detail": "Kein modaler Dialog => Fokus-Trap nicht erforderlich; aber Warnung wird bei Tastaturbedienung nicht angekuendigt und Escape schliesst sie nicht."
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "Confirm-Bereich semantisch als Dialog/Warnung ausgezeichnet",
+      "status": "FAIL",
+      "evidence": "shared/guard.html:73 (.confirm-dialog ohne role/aria-modal/aria-describedby; #proceed ohne beschreibende Verknuepfung)",
+      "severity": "P2",
+      "detail": "Empfehlung: Warnung vor dem Fortfahren als role='alertdialog' mit aria-labelledby/aria-describedby, oder (besser, da nicht modal) als role='alert' mit Fokus auf #proceed."
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "aria-live auf grossem interaktiven Panel",
+      "status": "FAIL",
+      "evidence": "shared/guard.html:26 section#danger aria-live='assertive' enthaelt Buttons und langen Fliesstext",
+      "severity": "P2",
+      "detail": "Assertive Live-Regionen sollten kurze, statusartige Aenderungen ankuendigen. Besser: eigene role='alert'-Zeile fuer den Befund, Rest statisch."
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "aria-expanded/aria-controls fuer Disclosure",
+      "status": "PASS",
+      "evidence": "shared/guard.html:70 und shared/guard.js:77 konsistent gepflegt",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "Touch-Targets >= 24px (WCAG 2.5.8 AA)",
+      "status": "FAIL",
+      "evidence": "shared/popup.html:168: 16x16px Checkbox in einer ~18px hohen Label-Zeile; die klickbare Zeile ist damit <24px hoch",
+      "severity": "P2",
+      "detail": "Empfehlung: .toggle-row { min-height: 32px } und Checkbox/Toggle-Flaeche >= 24px."
+    },
+    {
+      "category": "Tastatur/Fokus",
+      "item": "Guard-Buttons ausreichend gross",
+      "status": "PASS",
+      "evidence": "shared/guard.css:.btn padding:13px 20px -> ~45px Hoehe; volle Breite unter 540px",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Theme",
+      "item": "Light/Dark/System-Umschaltung",
+      "status": "FAIL",
+      "evidence": "guard.html/popup.html: data-theme=\"dark\" hart im <html>, color-scheme:dark, keine prefers-color-scheme-Regel, kein Theme-Umschalter; data-theme wird von keiner CSS-Regel gelesen",
+      "severity": "P1",
+      "detail": "GLASS 2100 fordert Light/Dark als echte Systeme, sofern beide angeboten werden. Hier ist Dark-only eine legitime Security-Entscheidung - dann aber als Dark-only dokumentieren, data-theme entfernen und prefers-color-scheme nicht vortaeuschen."
+    },
+    {
+      "category": "Theme",
+      "item": "prefers-reduced-transparency (guard)",
+      "status": "PASS",
+      "evidence": "shared/guard.css:346 ersetzt Glas durch Fallback-Oberflaeche",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Theme",
+      "item": "prefers-reduced-transparency (popup)",
+      "status": "FAIL",
+      "evidence": "shared/popup.html: keine Regel vorhanden",
+      "severity": "P2",
+      "detail": "Gleiche Materialsprache wie guard: Fallback-Flaeche + kein backdrop-filter."
+    },
+    {
+      "category": "Theme",
+      "item": "prefers-reduced-motion (guard)",
+      "status": "PASS",
+      "evidence": "shared/guard.css:357 deaktiviert Transitions/Animationen",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Theme",
+      "item": "prefers-reduced-motion (popup)",
+      "status": "FAIL",
+      "evidence": "shared/popup.html: keine Regel vorhanden (nur .15s-Transitions; Impact gering)",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Theme",
+      "item": "forced-colors/high-contrast (guard)",
+      "status": "PASS",
+      "evidence": "shared/guard.css:364 setzt Canvas/CanvasText fuer Surface und Buttons",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Theme",
+      "item": "forced-colors/high-contrast (popup)",
+      "status": "FAIL",
+      "evidence": "shared/popup.html: keine Regel vorhanden",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Theme",
+      "item": "backdrop-filter-Fallback ohne Support",
+      "status": "PASS",
+      "evidence": "@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) in guard.css:69 und popup.html:62; Fallback = opake Flaeche",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Materialsprache",
+      "item": "Blur hat eine sichtbare Funktion",
+      "status": "FAIL",
+      "evidence": "Hinter beiden Glasflaechen liegt ausschliesslich ein glatter radial-gradient (guard.css:51, popup.html:48). backdrop-filter blurrt damit eine bereits weiche Flaeche -> kein wahrnehmbarer Materialeffekt, nur GPU-Kosten; Glaswirkung entsteht allein aus Fill/Stroke.",
+      "severity": "P2",
+      "detail": "GLASS 2100: 'Blur nur auf tatsaechlich ueberlagernden, dafuer geeigneten Flaechen'. Entweder Inhalt hinter dem Interstitial zulassen oder Blur streichen und Material ueber Tonwert/Stroke/Highlight definieren."
+    },
+    {
+      "category": "Design-Tokens",
+      "item": "Token-Paritaet guard.css <-> popup.html",
+      "status": "FAIL",
+      "evidence": "Abweichende Werte: --vgt-danger-bg: guard=rgba(54, 18, 26, 0.72) popup=rgba(54, 18, 26, 0.75); --vgt-glass-blur: guard=18px popup=16px; --vgt-glass-fill: guard=rgba(16, 28, 26, 0.82) popup=rgba(16, 28, 26, 0.88); --vgt-glass-shadow: guard=0 28px 72px rgba(0, 0, 0, 0.55) popup=0 16px 40px rgba(0, 0, 0, 0.45); --vgt-official-bg: guard=rgba(14, 43, 37, 0.72) popup=rgba(14, 43, 37, 0.75); --vgt-radius-btn: guard=10px popup=9px; --vgt-radius-card: guard=14px popup=12px; --vgt-radius-surface: guard=24px popup=18px; --vgt-type-ui: guard=system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif popup=system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Arial, sans-serif",
+      "severity": "P2",
+      "detail": "GLASS 2100/§20: Tokens zentral, keine Magic Values. Popup dupliziert das komplette Token-Set im Inline-<style>; Radien/Blur/Fill driften (24/14/10/18 vs 18/12/9/16). Empfehlung: gemeinsame tokens.css + popup.css, oder Build-Schritt, der Tokens extrahiert."
+    },
+    {
+      "category": "Design-Tokens",
+      "item": "popup.html verwendet Inline-<style> statt Design-System-CSS",
+      "status": "FAIL",
+      "evidence": "shared/popup.html:7-278 (~270 Zeilen inline)",
+      "severity": "P2",
+      "detail": "CSP-konform (MV3 erlaubt Inline-Styles), aber GLASS 2100 §7 verlangt CSP-kompatiblen, tokenisierten Aufbau ohne Inline-CSS als schnelle Glas-Loesung."
+    },
+    {
+      "category": "Design-Tokens",
+      "item": "Inline-Scripte (MV3-CSP-Risiko)",
+      "status": "PASS",
+      "evidence": "Nur externe <script src> in guard.html:98-100 / popup.html:327-329",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Design-Tokens",
+      "item": "Externe CDN-/Font-Abhaengigkeiten",
+      "status": "PASS",
+      "evidence": "System-Font-Stack in guard.css:36 und popup.html:35; keine externen Assets",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Design-Tokens",
+      "item": "Radius-System funktional differenziert",
+      "status": "PASS",
+      "evidence": "guard.css: surface=24, card=14, btn=10; Symbol=14; Badge=20",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Design-Tokens",
+      "item": "Signature-Element / eigenstaendige Produktidentitaet",
+      "status": "FAIL",
+      "evidence": "Shield-Icon + Glass-Card + Teal-Akzent ist ein generisches Security-Muster. Es gibt kein produktspezifisches Signature-Element (keine Domain-Zerlegung, keine Zeichen-Hervorhebung des Homoglyphen, keine eigene Befund-Visualisierung).",
+      "severity": "P2",
+      "detail": "GLASS 2100 §5/§26: Der Screenshot-Recognition-Test ist ohne Logo nicht erfuellbar. Empfehlung: Host-vs-Original als Char-Diff visualisieren (z.B. paypa**1**.com mit markiertem '1'), als Signature fuer guard + popup."
+    },
+    {
+      "category": "Design-Tokens",
+      "item": "Statusfarbe nicht allein als Informationstraeger",
+      "status": "PASS",
+      "evidence": "Danger/Official-Karten tragen Text-Eyebrows; Badge wechselt Text UND Farbe; Ergebniszeilen im Popup tragen Text (nicht nur Farbe)",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Layout",
+      "item": "Guard-Layout responsiv (Breakpoint + fluide Breiten)",
+      "status": "PASS",
+      "evidence": "shared/guard.css:334 stapelt Buttons und reduziert Padding; wrap width:min(680px,100%)",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Layout",
+      "item": "Popup-Layout responsive / Zoom-robust",
+      "status": "FAIL",
+      "evidence": "shared/popup.html:45 body hat feste Breite 350px, keine Media-Query, keine min/max-Breite; bei Browser-Zoom >100% bzw. schmalem Popup droht horizontaler Overflow",
+      "severity": "P2",
+      "detail": "body{width:350px; padding:18px} -> Inhaltsbreite 314px. Empfehlung: width:min(350px,100%) + box-sizing + @media oder min-width; Popup real testen."
+    },
+    {
+      "category": "Layout",
+      "item": "Zoom/Reflow 200% (guard)",
+      "status": "NOT_TESTED",
+      "evidence": "Kein Browser-E2E; statisch: Reflow bei 320 CSS-px ueber Media-Query abgedeckt, aber 200%-Textzoom nicht verifiziert",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Layout",
+      "item": "Mobile/Touch-Verhalten",
+      "status": "NOT_TESTED",
+      "evidence": "Chrome-Android unterstuetzt keine Extensions; Firefox-Android ist im Manifest nicht freigeschaltet (gecko_android fehlt) -> Mobile = nicht Zielplattform, aber auch nicht als Nicht-Ziel dokumentiert",
+      "severity": "P3",
+      "detail": ""
+    },
+    {
+      "category": "Layout",
+      "item": "Kleines Popup / maximale Hoehe",
+      "status": "NOT_TESTED",
+      "evidence": "popup.html hat keine max-height/Scroll-Strategie; Chrome begrenzt Popup auf 600px Hoehe -> im Fehlerfall/bei langem Ergebnis nicht verifiziert",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Mikrocopy",
+      "item": "Konkrete, handlungsorientierte Button-Labels",
+      "status": "PASS",
+      "evidence": "'Offizielle Seite oeffnen', 'Zurueck zur vorherigen Seite', 'Risiko akzeptieren und einmalig fortfahren', 'Pruefen'",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Mikrocopy",
+      "item": "Jargon/Implementierungsdetails in Nutzertexten",
+      "status": "FAIL",
+      "evidence": "shared/popup.html:311 'Aktiv: HTTP(S)-GET-Navigationen werden vor der Netzwerkanfrage klassifiziert.'; shared/popup.js:25 'Nur best-effort Erkennung via webNavigation ohne praeventive Blockade.'; Label 'Vorabpruefung (Chrome)'",
+      "severity": "P1",
+      "detail": "Nutzer verstehen 'GET-Navigation', 'webNavigation', 'praeventive Blockade' nicht. Vorschlag: Label 'Schutz vor dem Seitenaufruf'; Beschreibung 'Aktiv: Jede neue Seite wird vor dem Laden geprueft.' bzw. 'Aus: Seiten werden erst nach dem Laden geprueft - weniger Schutz, dafuer keine Umleitung.'"
+    },
+    {
+      "category": "Mikrocopy",
+      "item": "Konsistente Anrede/Tonalitaet",
+      "status": "PASS",
+      "evidence": "Beide Oberflaechen duzen ('Du beabsichtigst...'); README/SECURITY duzen ebenfalls",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Mikrocopy",
+      "item": "Statuszahlen kontextualisiert",
+      "status": "FAIL",
+      "evidence": "shared/popup.html:297 'Schutzmarken' (Liste enthaelt Dienste, Banken, Carrier), :301 'Abgewehrt' ohne Zeitraum/Bezug; bei fehlendem sites.js bleibt '0' stehen (popup.js:6-8)",
+      "severity": "P2",
+      "detail": "Vorschlag: 'Geschuetzte Marken' + 'Seit Installation abgewehrt'; Fallback 'Liste nicht geladen'."
+    },
+    {
+      "category": "Mikrocopy",
+      "item": "Emoji/Glyphen als Status-Icons",
+      "status": "FAIL",
+      "evidence": "shared/popup.js:40 '⚠ Verdaechtig...' und :43 '✓ Kein Treffer...' - Textglyphen statt Icon-System; Screenreader-Aussprache inkonsistent",
+      "severity": "P2",
+      "detail": "GLASS 2100/S17: Emoji ersetzen kein Icon-System. Empfehlung: SVG-Icon + Text."
+    },
+    {
+      "category": "i18n",
+      "item": "Mehrsprachigkeit/Lokalisierung",
+      "status": "FAIL",
+      "evidence": "Keine _locales/default_locale; alle Strings hart auf Deutsch in HTML und JS (guard.js:6-13, popup.js:24-25,40,43). Chromium/Firefox zeigen die UI nur auf Deutsch.",
+      "severity": "P2",
+      "detail": "Fuer Alpha akzeptabel (deutschsprachige Zielgruppe), aber Store-Listing/Texte muessen das dokumentieren; Chrome-Web-Store-Reichweite leidet. Mindestmassnahme: String-Katalog zentralisieren (z.B. shared/messages.de.js), damit V2 lokalisierbar ist."
+    },
+    {
+      "category": "Marke",
+      "item": "Marken-/Schreibweisen-Konsistenz",
+      "status": "FAIL",
+      "evidence": "Kicker 'VISIONGAIATECHNOLOGY · ANTIPISHER' (guard.html:21, popup.html:293) vs. 'VisionGaiaTechnology' in CSS/JS-Headern vs. Legacy 'VGT DomainGuard' in Kommentaren (guard.css:2, build_sites.py:2) und Legacy-ZIPs (build.py:27,35)",
+      "severity": "P2",
+      "detail": "Einheitliche Wortmarke 'VisionGaiaTechnology' (Eigenschreibweise) + Produktname 'Antipisher' definieren; Legacy-Strings nur in Migrationshinweisen."
+    },
+    {
+      "category": "Marke",
+      "item": "Icon-/Branding-Eignung",
+      "status": "FAIL",
+      "evidence": "icon16/48/128 = generischer Schild mit Haekchen auf dunklem App-Icon-Quadrat. Haekchen semantisch 'geprueft/sicher', widerspricht der Warnfunktion des Produkts; kein transparentes Toolbar-Glyph, kein 32px/96px-Satz fuer HiDPI/Toolbar",
+      "severity": "P2",
+      "detail": "Empfehlung: neutrales Schutzschild ohne Haekchen (oder Halb-Schild/Halb-Warnung), transparenter Hintergrund fuer Toolbar, zusaetzlich 32px (und 96px fuer Firefox)."
+    },
+    {
+      "category": "Onboarding",
+      "item": "Erststart-/Onboarding-Erlebnis",
+      "status": "FAIL",
+      "evidence": "Kein onInstalled-Onboarding, keine options_ui, kein Erststart-Dialog; einzige Erklaerung ist das Popup. Manifeste haben kein onboarding-Feld",
+      "severity": "P1",
+      "detail": "Chrome-Web-Store-Review + Nutzervertrauen: Nach Installation sollte ein kurzer Onboarding-Screen erklaeren, was geprueft wird, welche Daten NICHT gesendet werden (Privacy), und wie man Fehlalarme meldet. Mindestens im README/Store-Listing prominent."
+    },
+    {
+      "category": "Onboarding",
+      "item": "Fehlalarm-/Rueckgewinnungspfad (False Positive)",
+      "status": "FAIL",
+      "evidence": "guard.html bietet 'Risiko akzeptieren', aber keinen 'Das ist ein Fehlalarm'-Pfad (kein Melde-Link, keine Ausnahme pro Domain, kein Kontakt)",
+      "severity": "P1",
+      "detail": "Vertrauensaufbau: 'Fehlalarm melden' + Kopie der Pruefdaten (Host, Grund) ohne Netzwerkversand (z.B. in Clipboard) anbieten; alternativ Link auf Support-Seite."
+    },
+    {
+      "category": "Zustaende",
+      "item": "Fehlerzustand bei fehlender Engine/defektem Skript",
+      "status": "FAIL",
+      "evidence": "guard.js:18-19 ruft engine.classify(target) ohne Existenzpruefung; fehlt shared/detector.js, bleibt die Seite stumm auf 'Adresse wird ueberprueft' stehen (kein Error-Banner wegen Top-Level-Throw). popup.js:35-36 identisch; popup zeigt dann dauerhaft 0/Dummy",
+      "severity": "P1",
+      "detail": "try/catch um den Klassifizierer + sichtbarer Fehlerzustand ('Schutzpruefung nicht verfuegbar' mit Handlung) - Security-UI muss degraded states gestalten."
+    },
+    {
+      "category": "Zustaende",
+      "item": "Ungueltige/leere Zieladresse im Guard (skip)",
+      "status": "FAIL",
+      "evidence": "guard.js:43-48 setzt nur Titel/Description; Danger-Panel bleibt hidden -> Seite hat keinen einzigen Button (kein Zurueck) = Dead End",
+      "severity": "P2",
+      "detail": "Bei skip/error mindestens 'Zurueck' und 'Startseite' anbieten."
+    },
+    {
+      "category": "Zustaende",
+      "item": "Safe-Zustand (Auto-Redirect)",
+      "status": "FAIL",
+      "evidence": "guard.js:50-54 zeigt 'Adresse geprueft' und navigiert sofort; kein sichtbarer Fortschritt, bei sendMessage-Fehler nur Fehlerbanner ohne Retry/Back",
+      "severity": "P2",
+      "detail": "Falls Auto-Redirect scheitert: Button 'Weiter zu <host>' + 'Zurueck' anbieten."
+    },
+    {
+      "category": "Zustaende",
+      "item": "Ladezustand",
+      "status": "FAIL",
+      "evidence": "Kein Skeleton/Progress; das Interstitial ist entweder statisch oder navigiert sofort. Fuer Alpha tolerierbar, aber der Chrome-Umleitungs-Flash bleibt unerklaert",
+      "severity": "P3",
+      "detail": ""
+    },
+    {
+      "category": "Zustaende",
+      "item": "Empty-State im Popup (leere Eingabe)",
+      "status": "PASS",
+      "evidence": "popup.js:30-32 blendet Ergebnis aus; Feld ist sichtbar, Aktion klar",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "Zustaende",
+      "item": "Storage-Fehler im Popup",
+      "status": "FAIL",
+      "evidence": "popup.js:10-13 .catch(()=>{}) schluckt Fehler still; Zaehler/Toggle bleiben auf Default-Anzeige ohne Hinweis",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "UX-Fluss",
+      "item": "Alert-Fatigue / Interstitial-Haeufigkeit",
+      "status": "FAIL",
+      "evidence": "Chrome: DNR-Redirect auf JEDE Top-Level-GET-Navigation (background.js:24-38) -> jedes Oeffnen einer Seite laeuft ueber die Erweiterungsseite (Flash, History-/Referer-Aenderung); kein Freigabe-/Ausnahme-Modell, kein 'diese Domain nicht mehr pruefen'",
+      "severity": "P1",
+      "detail": "Fuer V2: stilles Allow-Fast-Path (z.B. Service-Worker-basierter Lookup mit sofortigem Weiterleiten per location.replace statt sichtbarem Interstitial) oder natives Proxy/DNS-Konstrukt; zumindest ein 'Interstitial nur bei Block' erreichen."
+    },
+    {
+      "category": "UX-Fluss",
+      "item": "Entscheidungsfuehrung im Guard",
+      "status": "PASS",
+      "evidence": "Primaeraktion 'Offizielle Seite oeffnen' zuerst, 'Zurueck' zweitens, Risiko-Pfad als  Tertiaer-Disclosure (guard.html:57-80) - entspricht Sicherheits-Hierarchie",
+      "severity": "P2",
+      "detail": ""
+    },
+    {
+      "category": "UX-Fluss",
+      "item": "Vertrauensaufbau/Begruendung des Befunds",
+      "status": "FAIL",
+      "evidence": "Grund ist ein Satz aus reasonNames (guard.js:6-13); Host wird als Punycode-String angezeigt (result.host = url.hostname, detector.js:205) - Nutzer sehen 'xn--pypal-4ve.com' ohne decodierte Darstellung und ohne visuellen Zeichen-Vergleich zum Original",
+      "severity": "P1",
+      "detail": "Trust-Building: Host dekodiert + markierte abweichende Zeichen + 'Original: paypal.com' als Char-Diff; zusaetzlich 'Warum wurde ich hierher umgeleitet?' als Kurzzeile."
+    },
+    {
+      "category": "UX-Fluss",
+      "item": "reason-Abdeckung in der UI",
+      "status": "FAIL",
+      "evidence": "detector.js liefert auch reason='userinfo' (detector.js:207-223); reasonNames (guard.js:6-13) kennt diesen Grund nicht -> Fallback-Text 'Verdaechtige Domain-Manipulation erkannt.'",
+      "severity": "P2",
+      "detail": "reasonNames um 'userinfo' ergaenzen ('Die Adresse tarnt sich mit einem Benutzernamen-Trick: der echte Host steht nach dem @-Zeichen')."
+    },
+    {
+      "category": "UX-Fluss",
+      "item": "Statusanzeige 'Ist der Schutz aktiv?'",
+      "status": "FAIL",
+      "evidence": "Popup zeigt keinen Gesamtzustand (aktiv/inaktiv/fehlerhaft), nur Zaehler und Chrome-Toggle; Firefox-Nutzer sehen keine Aussage zur Schutzart",
+      "severity": "P1",
+      "detail": "Statuszeile: 'Schutz aktiv - lokale Pruefung, keine Datenuebertragung' plus Fehlerzustand, wenn Regeln nicht geladen werden konnten."
+    },
+    {
+      "category": "UX-Fluss",
+      "item": "Sicherheits-/Datenschutz-Transparenz in der UI",
+      "status": "FAIL",
+      "evidence": "Popup erwaehnt weder, dass jede Navigation lokal bewertet wird (Chrome Web Store Limited-Use verlangt prominente Beschreibung im UI und Listing), noch Link zu Datenschutz/Impressum",
+      "severity": "P0_Store",
+      "detail": "Store-Gate: Privacy-Policy-URL + prominente Datenverarbeitungsbeschreibung im UI ergaenzen (siehe UX_RELEASE.md Release-Gate-Tabelle)."
+    }
+  ],
+  "token_drift": {
+    "--vgt-danger-bg": [
+      "rgba(54, 18, 26, 0.72)",
+      "rgba(54, 18, 26, 0.75)"
+    ],
+    "--vgt-glass-blur": [
+      "18px",
+      "16px"
+    ],
+    "--vgt-glass-fill": [
+      "rgba(16, 28, 26, 0.82)",
+      "rgba(16, 28, 26, 0.88)"
+    ],
+    "--vgt-glass-shadow": [
+      "0 28px 72px rgba(0, 0, 0, 0.55)",
+      "0 16px 40px rgba(0, 0, 0, 0.45)"
+    ],
+    "--vgt-official-bg": [
+      "rgba(14, 43, 37, 0.72)",
+      "rgba(14, 43, 37, 0.75)"
+    ],
+    "--vgt-radius-btn": [
+      "10px",
+      "9px"
+    ],
+    "--vgt-radius-card": [
+      "14px",
+      "12px"
+    ],
+    "--vgt-radius-surface": [
+      "24px",
+      "18px"
+    ],
+    "--vgt-type-ui": [
+      "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+      "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Arial, sans-serif"
+    ]
+  },
+  "tokens_missing_in_popup": [
+    "--vgt-danger-text",
+    "--vgt-official-text"
+  ]
+}

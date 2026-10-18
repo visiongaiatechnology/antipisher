@@ -1,0 +1,127 @@
+{
+  "tool": "reproducibility_check.py",
+  "generated": "2026-10-18T17:27:25.978077+02:00",
+  "source_root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+  "runs": {
+    "A_same_tree_twice": {
+      "same_hash_per_zip": {
+        "Antipisher-Chrome-v0.1.0-alpha.zip": false,
+        "Antipisher-Firefox-v0.1.0-alpha.zip": false,
+        "Antipisher-Source-v0.1.0-alpha.zip": false,
+        "VGT-DomainGuard-Chrome-v0.1.0.zip": false,
+        "VGT-DomainGuard-Firefox-v0.1.0.zip": false,
+        "VGT-DomainGuard-Source-v0.1.0.zip": false
+      },
+      "deterministic_within_same_tree": false,
+      "zip_hashes_run1": {
+        "Antipisher-Chrome-v0.1.0-alpha.zip": "2e2566e804edcf5abc24725aa75db1dfa98870cdec6811d4bdb59b0d0df21e8c",
+        "Antipisher-Firefox-v0.1.0-alpha.zip": "8bbb27fc8ff230daae0ee098d87b4b6f34381f4c8d6f4b050099400fe7c3df32",
+        "Antipisher-Source-v0.1.0-alpha.zip": "0007f523fb552efe682a73c46857a7bb9dd28a8f709295226e386ab61a32ed8d",
+        "VGT-DomainGuard-Chrome-v0.1.0.zip": "2e2566e804edcf5abc24725aa75db1dfa98870cdec6811d4bdb59b0d0df21e8c",
+        "VGT-DomainGuard-Firefox-v0.1.0.zip": "8bbb27fc8ff230daae0ee098d87b4b6f34381f4c8d6f4b050099400fe7c3df32",
+        "VGT-DomainGuard-Source-v0.1.0.zip": "0007f523fb552efe682a73c46857a7bb9dd28a8f709295226e386ab61a32ed8d"
+      },
+      "zip_hashes_run2": {
+        "Antipisher-Chrome-v0.1.0-alpha.zip": "2c66cb59ac6f5a8ee4b6bd543492a422b0f501bbae8b9edf9cc315ec0d3c6858",
+        "Antipisher-Firefox-v0.1.0-alpha.zip": "cc8e491d6031e1c63119adc1c5df02894cf1ee682113aa103dcb8fde6de17691",
+        "Antipisher-Source-v0.1.0-alpha.zip": "92be0788db9e86ac853468b79262b52c8edff1bc3ec0104ab76755699f830d43",
+        "VGT-DomainGuard-Chrome-v0.1.0.zip": "2c66cb59ac6f5a8ee4b6bd543492a422b0f501bbae8b9edf9cc315ec0d3c6858",
+        "VGT-DomainGuard-Firefox-v0.1.0.zip": "cc8e491d6031e1c63119adc1c5df02894cf1ee682113aa103dcb8fde6de17691",
+        "VGT-DomainGuard-Source-v0.1.0.zip": "92be0788db9e86ac853468b79262b52c8edff1bc3ec0104ab76755699f830d43"
+      }
+    },
+    "B_other_checkout_dir_name": {
+      "folder_name_A": "vgt-domainguard-src",
+      "folder_name_B": "Antipisher-Source-Checkout-Name",
+      "source_zip_hash_A": "0007f523fb552efe682a73c46857a7bb9dd28a8f709295226e386ab61a32ed8d",
+      "source_zip_hash_B": "c94850caac22dd8c2cc622e9359cc51362e0200c1a566e1b7b0d0183c0bb8ef4",
+      "source_zip_identical": false,
+      "zip_root_prefix_A": [
+        "vgt-domainguard-src"
+      ],
+      "zip_root_prefix_B": [
+        "Antipisher-Source-Checkout-Name"
+      ],
+      "conclusion": "Source-ZIP ist NICHT checkout-namen-unabhaengig"
+    },
+    "C_mtime_only_change": {
+      "action": "touch shared/guard.css (kein Inhaltsunterschied)",
+      "chrome_zip_hash_before_touch": "2c66cb59ac6f5a8ee4b6bd543492a422b0f501bbae8b9edf9cc315ec0d3c6858",
+      "chrome_zip_hash_after_touch": "161358d5ef7e7066f11303ee0475d45df24e589cd7c2f7a0e53c43bdafc0f9c9",
+      "zip_bytes_changed": true,
+      "zip_entry_guard.css_date_time": [
+        2026,
+        10,
+        18,
+        17,
+        27,
+        32
+      ],
+      "source_file_mtime_local": "2026-10-18T17:27:30",
+      "conclusion": "ZIP-Byte-Inhalt haengt vom Build-Zeitpunkt ab: build.py kopiert shared->chrome/firefox per shutil.copyfile (Setzen der mtime auf 'jetzt') und zipfile schreibt diese mtimes als DOS-Zeit; kein SOURCE_DATE_EPOCH, keine Normalisierung"
+    },
+    "D_audit_folder_in_source_zip": {
+      "action": "audit/lead/dummy_finding.md im Quellbaum angelegt, build.py erneut ausgefuehrt",
+      "audit_entries_in_source_zip": [
+        "vgt-domainguard-src/audit/lead/dummy_finding.md"
+      ],
+      "source_zip_hash_before": "90ffaa5e8ca79a6023b5e63d9bd50e7f19c32ff76710c519efa2344ff13497ee",
+      "source_zip_hash_after": "424115d10c6792e1f6a8cb0ae54562e402dad9df7da9bf1dc6828b726eee9061",
+      "conclusion": "build.py zippt ROOT.rglob('*') ungefiltert -> Audit-/Log-Artefakte gelangen ins Source-Release"
+    },
+    "E_legacy_duplicates": {
+      "Antipisher-Chrome-v0.1.0-alpha.zip": {
+        "old_name": "VGT-DomainGuard-Chrome-v0.1.0.zip",
+        "identical_bytes": true,
+        "sha256": "161358d5ef7e7066f11303ee0475d45df24e589cd7c2f7a0e53c43bdafc0f9c9"
+      },
+      "Antipisher-Firefox-v0.1.0-alpha.zip": {
+        "old_name": "VGT-DomainGuard-Firefox-v0.1.0.zip",
+        "identical_bytes": true,
+        "sha256": "c41fe7f7b2ebd7d68c7a03e70531bf70faf8f3ddc477bc4e707bf035d01bfca7"
+      },
+      "Antipisher-Source-v0.1.0-alpha.zip": {
+        "old_name": "VGT-DomainGuard-Source-v0.1.0.zip",
+        "identical_bytes": true,
+        "sha256": "424115d10c6792e1f6a8cb0ae54562e402dad9df7da9bf1dc6828b726eee9061"
+      }
+    }
+  },
+  "artifacts": {
+    "chrome_zip_entries": [
+      "background.js",
+      "guard.css",
+      "guard.html",
+      "guard.js",
+      "icons/icon128.png",
+      "icons/icon16.png",
+      "icons/icon48.png",
+      "manifest.json",
+      "popup.html",
+      "popup.js",
+      "shared/detector.js",
+      "shared/sites.js"
+    ],
+    "chrome_zip_contains_manifest": true,
+    "expected_files_per_build_py_assert": [
+      "guard.html",
+      "guard.js",
+      "popup.html",
+      "popup.js",
+      "background.js",
+      "shared/sites.js",
+      "shared/detector.js",
+      "manifest.json",
+      "popup.css?"
+    ],
+    "note": "build.py:18-19 prueft nur Existenz von 7 Dateien; der Chrome-ZIP enthaelt genau diese + Icons; popup.css existiert nicht, weil popup.html sein CSS inline traegt."
+  },
+  "overall": {
+    "reproducible_across_checkouts": false,
+    "byte_identical_rebuilds_in_same_tree": false,
+    "timestamps_normalized": false,
+    "finding": "build.py erzeugt bei jedem Lauf andere ZIP-Bytes (Build-Zeitstempel); Source-ZIP-Prefix haengt vom Checkout-Ordnernamen ab; Next.md:31 ('reproduzierbare Build-Artefakte') ist damit widerlegt.",
+    "source_zip_hygiene": "FAIL (audit/ wird mitgepackt)",
+    "legacy_duplicate_artifacts": true
+  }
+}

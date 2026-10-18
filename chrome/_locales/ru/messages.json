@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "Antipisher",
+    "description": "Название расширения."
+  },
+  "appShortName": {
+    "message": "Antipisher",
+    "description": "Краткое название."
+  },
+  "appDesc": {
+    "message": "Локальная офлайн-защита от фишинга, поддельных доменов, IDN-гомографов и тайпосквоттинга.",
+    "description": "Описание расширения."
+  },
+  "actionTitle": {
+    "message": "Antipisher Domain Trust",
+    "description": "Подсказка для значка в панели инструментов."
+  }
+}

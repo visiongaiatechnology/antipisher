@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antipisher · Sicherheitsprüfung</title>
+  <link rel="stylesheet" href="design-tokens.css">
+  <link rel="stylesheet" href="guard.css">
+</head>
+<body class="vgt-env vgt-guard" data-state="idle">
+  <div class="guard-ambient" aria-hidden="true"></div>
+  <div class="guard-shell">
+    <header class="brandbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.6 20 5.6v6.1c0 5-3.4 8.2-8 9.7-4.6-1.5-8-4.7-8-9.7V5.6L12 2.6Z"/>
+            <path d="M8.4 8.8 12 14l3.6-5.2"/>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <span class="brand-org">VisionGaiaTechnology</span>
+          <span class="brand-product">Antipisher <span class="brand-tag">Domain Trust</span></span>
+        </div>
+      </div>
+      <div class="lang-switcher" id="guardLangSwitcher" aria-label="Language selection">
+        <button type="button" class="lang-btn" data-lang="en" title="English">EN</button>
+        <button type="button" class="lang-btn" data-lang="de" title="Deutsch">DE</button>
+        <button type="button" class="lang-btn" data-lang="ru" title="Русский">RU</button>
+        <button type="button" class="lang-btn" data-lang="zh" title="中文">ZH</button>
+      </div>
+      <span class="status-chip" id="badge">Sicherheitsprüfung</span>
+    </header>
+
+    <main class="guard-panel vgt-glass" role="main" aria-labelledby="title">
+      <div class="state-head">
+        <span class="vgt-eyebrow"><span class="state-dot" aria-hidden="true"></span><span id="stateLabel">Sicherheitsprüfung läuft</span></span>
+        <h1 id="title">Adresse wird überprüft</h1>
+        <p class="lead" id="description">Die Zieladresse wird lokal im Browser geprüft – ohne Cloud, ohne Verlauf.</p>
+      </div>
+
+      <section id="danger" class="state-body" hidden aria-live="assertive">
+        <div class="data-grid">
+          <div class="data-row">
+            <span class="vgt-label" id="labelTarget">Zieladresse</span>
+            <span class="data-value vgt-mono" id="host"></span>
+          </div>
+          <div class="data-row">
+            <span class="vgt-label" id="labelFinding">Befund</span>
+            <p class="data-reason" id="reason"></p>
+          </div>
+          <div class="data-row official">
+            <span class="vgt-label" id="labelOfficial">Offizielle Domain</span>
+            <span class="official-value" id="official"></span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="vgt-btn vgt-btn-primary" id="safe">Offizielle Seite öffnen</button>
+          <button class="vgt-btn vgt-btn-ghost" id="back">Zurück</button>
+        </div>
+
+        <div class="disclosure">
+          <button class="disclosure-toggle" id="reveal" aria-expanded="false" aria-controls="confirm">
+            Erweitert: Risiko verstehen und fortfahren
+          </button>
+          <div class="disclosure-panel" id="confirm" role="alertdialog" aria-labelledby="confirm-heading" hidden>
+            <strong id="confirm-heading">Warnung vor Datenverlust</strong>
+            <p id="confirm-desc">Die Seite kann Anmeldedaten, Sitzungscookies oder 2FA-Codes abfangen. Öffne sie nur, wenn du die Domain selbst kontrollierst.</p>
+            <button class="vgt-btn vgt-btn-critical" id="proceed">Einmalig fortfahren</button>
+          </div>
+        </div>
+      </section>
+
+      <p id="error" class="error" role="status" hidden></p>
+
+      <footer class="panel-footer">
+        <span>AGPLv3</span><span class="dot" aria-hidden="true"></span>
+        <span id="footerOffline">100 % offline</span><span class="dot" aria-hidden="true"></span>
+        <span id="footerZero">Zero telemetry</span>
+        <span class="panel-meta" id="footerMeta">Version 0.1.1 · Alpha</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="shared/sites.js"></script>
+  <script src="shared/detector.js"></script>
+  <script src="shared/i18n.js"></script>
+  <script src="guard.js"></script>
+</body>
+</html>

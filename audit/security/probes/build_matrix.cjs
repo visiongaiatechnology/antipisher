@@ -1,0 +1,484 @@
+#!/usr/bin/env node
+/* Erzeugt audit/security/AUDIT_MATRIX.json (VGT-100, 100 IDs, Findings, Chains, Test-Runs).
+ * Die Inhalte stammen ausschließlich aus der in diesem Audit durchgeführten
+ * statischen Analyse und den nichtdestruktiven Probes unter audit/security/probes/.
+ */
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+
+const OUT = path.resolve(__dirname, '..', 'AUDIT_MATRIX.json');
+const PROJECT = 'Antipisher 0.1 Alpha (ehem. VGT DomainGuard) — Chrome MV3 + Firefox MV3 Browser-Extension';
+const TS = new Date().toISOString();
+
+function E(location, observation) { return { location, observation }; }
+
+/* ---------------- Test-Runs (tatsächlich ausgeführt) ---------------- */
+const TEST_RUNS = [
+  { id: 'TR-01', command: 'node --test tests/detector.test.cjs tests/chrome-worker.test.cjs tests/firefox-worker.test.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 13, fail: 0, skip: 0, duration_ms: 501, notes: 'Produkt-Baseline-Tests (Mocks), 13/13 PASS, 0 skip.' },
+  { id: 'TR-02', command: 'node --check chrome/background.js && node --check firefox/background.js && node --check chrome/guard.js && node --check chrome/popup.js && node --check shared/detector.js && node --check shared/sites.js', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 6, fail: 0, skip: 0, notes: 'Syntaxprüfung aller produktiven JS-Dateien (Exit 0).' },
+  { id: 'TR-03', command: 'node audit/security/probes/probe01_manifest_integrity.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 25, fail: 0, skip: 0, notes: 'Manifest-/Datei-/WAR-/Drift-/Permissions-Integrität (25/25 Assertions).' },
+  { id: 'TR-04', command: 'node audit/security/probes/probe02_detector_corpus.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 0, fail: 0, skip: 0, notes: 'Messlauf: 43 synthetische Angriffs-URLs (37 geblockt), 553 eindeutige Benign-URLs (18 geblockt).' },
+  { id: 'TR-05', command: 'node audit/security/probes/probe03_punycode_parity.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 0, fail: 0, skip: 0, notes: 'Messlauf: 165 Confusable-Substitutionen (100% block), 480 gültige IDN-Decoder-Fälle (0 Abweichungen).' },
+  { id: 'TR-06', command: 'node audit/security/probes/probe04_chrome_background_mock.cjs', platform: 'Windows / Node v24.13.0 (vm + chrome-API-Mock)', actually_executed: true, exit_code: 0, pass: 46, fail: 0, skip: 0, notes: 'Chrome-SW-Logik: DNR-Regel, Messaging-Auth, Einmal-Freigabe, Startup-Purge, Reduced Mode (46/46).' },
+  { id: 'TR-07', command: 'node audit/security/probes/probe05_firefox_background_mock.cjs', platform: 'Windows / Node v24.13.0 (vm + browser-API-Mock)', actually_executed: true, exit_code: 0, pass: 14, fail: 0, skip: 0, notes: 'Firefox-Background: Blocking, Messaging-Auth, Einmal-Bypass, Tab-Lebensdauer (14/14).' },
+  { id: 'TR-08', command: 'node audit/security/probes/probe06_guard_render_mock.cjs', platform: 'Windows / Node v24.13.0 (vm + DOM-Stub)', actually_executed: true, exit_code: 0, pass: 38, fail: 0, skip: 0, notes: 'Guard-Page: Query/Hash, XSS-Sinks, Auto-Navigation, Fehlerpfade (38/38).' },
+  { id: 'TR-09', command: 'node audit/security/probes/probe07_fuzz_perf.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 10, fail: 0, skip: 0, notes: 'Fuzz 20.000 Eingaben (0 Throws), Extremlängen, Determinismus, Latenz p95 0,60–1,81 ms über Läufe (Budget <5 ms, 10/10).' },
+  { id: 'TR-10', command: 'node audit/security/probes/probe08_data_integrity.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 8, fail: 0, skip: 0, notes: 'Brand-DB: 165 Marken/257 Domains, sites.js==sites-100.json, alle offiziellen Hosts safe (8/8).' },
+  { id: 'TR-11', command: 'python audit/security/probes/probe09_static_scan.py', platform: 'Windows / Python 3.14.2', actually_executed: true, exit_code: 0, pass: 0, fail: 0, skip: 0, notes: 'Unabhängiger statischer Scan: 44 Dateien, 0 Netzwerk-Sinks, 0 eval/HTML-Sinks, 0 Secret-Treffer, kein VCS/CI/SBOM.' },
+  { id: 'TR-12', command: 'python "C:\\Users\\Masterboard\\.dsh\\skills\\vgt-security-master\\scripts\\validate_audit.py" audit/security/AUDIT_MATRIX.json', platform: 'Windows / Python 3.14.2', actually_executed: true, exit_code: 0, pass: 0, fail: 0, skip: 0, notes: 'Struktur-/Evidenzvalidierung der Matrix (Exitcode 0, validiert Struktur, nicht Sicherheitskorrektheit).' }
+];
+
+/* ---------------- Findings ---------------- */
+const FINDINGS = [
+  {
+    id: 'FIND-001', title: 'Chrome-Fail-open-Pfade: Nur GET-Navigationen werden geprüft; Reduced Mode und Safe-Auto-Navigation ohne Bestätigung',
+    severity: 'MEDIUM', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['chrome/background.js', 'chrome/guard.js', 'chrome/popup.js', 'README.md', 'Next.md'],
+    trust_boundary: 'Browser-Navigation -> Extension-Preflight (DNR/Guard) -> Zielwebsite',
+    root_cause: 'DNR-Redirect-Regel ist auf resourceTypes [main_frame] und requestMethods [get] beschränkt (chrome/background.js:34-38). POST-/Nicht-GET-Hauptnavigationen werden nie klassifiziert. strictMode=false entfernt die DNR-Regel vollständig (chrome/background.js:23,79-87). Bei status "safe" navigiert guard.js ohne Nutzerbestätigung automatisch (chrome/guard.js:50-54).',
+    preconditions: 'Chrome, Schutz aktiv. (a) Opfer löst POST-Hauptnavigation aus (Formular/kompromittierte Seite) oder (b) Ziel-URL wird vom Detektor als "safe" klassifiziert (u. a. FIND-007-Lücken).',
+    evidence: [
+      E('chrome/background.js:34-38', 'Rule-Condition: resourceTypes ["main_frame"], requestMethods ["get"] — POST-Hauptnavigationen werden nicht erfasst (durch probe04/TR-06 als Assertion bestätigt: install:requestMethods-only-get).'),
+      E('chrome/background.js:23,79-87', 'strictMode=false: updateDynamicRules entfernt die komplette präventive Regel; danach nur best-effort webNavigation/tabs.update.'),
+      E('chrome/guard.js:50-54', 'status "safe" => go(target,false) ohne Klick: allow-once + location.replace.'),
+      E('README.md:13,42; Next.md:27-28; chrome/popup.js:24-25', 'Doku/UI formulieren POST als "geschützt"/"abgesichert" bzw. "bleibt erhalten"; tatsächlich findet keine POST-Prüfung statt.'),
+      E('audit/security/probes/results/chrome_background_mock.json', 'probe04: Reduced Mode entfernt DNR-Regel; Safe-Ziel wird ohne Interaktion freigegeben (OBS reduced:fail-open-by-design).'),
+      E('audit/security/probes/results/guard_render_mock.json', 'probe06: safe-Klassifikation -> sofortige allow-once-Nachricht + location.replace ohne Nutzerinteraktion.')
+    ],
+    impact: 'Phishing-Ziele, die per POST-Navigation erreicht werden oder als "safe" fehlklassifiziert sind, umgehen die präventive Prüfung vollständig und still. Der Reduced Mode ist ein bewusster, aber nicht als Sicherheits-Degradierung gekennzeichneter Fail-open-Modus.',
+    cwe_owasp: 'CWE-693 (Protection Mechanism Failure); OWASP A06:2025 Insecure Design',
+    chain_ids: ['CHAIN-001', 'CHAIN-003'],
+    remediation: 'DNR-Regel auf alle Hauptnavigationen ausweiten oder POST-Navigationen separat abfangen (z. B. webRequest in Firefox, Navigation-Preflight-API/DNR-Methoden-Erweiterung in Chrome); "safe" ohne Bestätigung nur mit sichtbarem Status-Indikator bzw. nachvollziehbarem Auto-Allow-Log; Reduced Mode als explizite Schutz-Degradierung mit Warnung/Trust-Indikator; Doku/UI-Claims korrigieren.',
+    regression: 'Negativtest: POST-Hauptnavigation auf Test-Phishing-Domain muss Interstitial erzeugen oder dokumentiert als Risiko akzeptiert sein; Reduced Mode darf nicht als gleichwertiger Schutz erscheinen.',
+    residual_risk: 'Browser-Plattformgrenzen (DNR kann kein JS-Ergebnis synchron pro Request auswerten) bleiben; ohne Browser-E2E ist das reale Navigationsverhalten (POST/History/Referer) NOT_TESTED.'
+  },
+  {
+    id: 'FIND-002', title: 'Initialisierungs-/Konfigurationsfehler führen zu stillem Fail-open der Primärschutzschicht',
+    severity: 'MEDIUM', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['chrome/background.js', 'firefox/background.js', 'chrome/popup.js'],
+    trust_boundary: 'Extension-Start/Konfiguration -> Enforcement-Zustand -> Browser-Navigation',
+    root_cause: 'configure() wird nur mit .catch(console.error) aufgerufen (chrome/background.js:69-73,104). Bei Fehler (storage/DNR/isRegexSupported) bleibt strict===true, sodass der Observer-Fallback nicht greift und keine DNR-Regel existiert: Navigationen laufen ungeprüft, ohne Nutzeranzeige. Firefox: analyzeRequest greift ungeprüft auf globalThis.Antipisher/engine.classify zu (firefox/background.js:10-11); fehlt die Engine, wirft der Handler.',
+    preconditions: 'Konfigurations-/API-Fehler beim Start oder bei Moduswechsel (z. B. storage.local.get-Fehler, DNR-Quota/Regex-Fehler, beschädigtes Bundle).',
+    evidence: [
+      E('chrome/background.js:14-26,69-73,104', 'configure(): Storage lesen, isRegexSupported, updateDynamicRules; Fehler werden ausschließlich per console.error verschluckt; kein Fail-closed/Statusindikator.'),
+      E('audit/security/probes/results/chrome_background_mock.json', 'probe04 OBS failopen:config-error-no-rule: storage.get-Fehler => keine DNR-Regel, kein Nutzerhinweis, Observer-Pfad inaktiv (Mock-Nachweis, TR-06 exit 0).'),
+      E('firefox/background.js:10-15', 'Kein Guard um engine.classify; fehlende Engine führt zu Throw im blocking-Listener (probe05 OBS engine:missing-engine-throws); Browser-Reaktion NICHT_TESTED.'),
+      E('chrome/background.js:16-20', 'Nur stale Session-Allow-Regeln werden beim Start fail-closed entfernt — die Konfiguration selbst wird nicht als sicherer Fehlerzustand behandelt.')
+    ],
+    impact: 'Stiller Totalverlust der präventiven Prüfung ohne sichtbaren Zustand (Blindspot); Nutzer kann sich auf nicht vorhandenen Schutz verlassen.',
+    cwe_owasp: 'CWE-636 (Not Failing Securely); OWASP A10:2025 Mishandling of Exceptional Conditions',
+    chain_ids: ['CHAIN-002'],
+    remediation: 'Expliziten Schutzstatus (OK/DEGRADED/FAILED) führen und im Popup anzeigen; bei Init-Fehler sicherer Fallback (z. B. konservativer Beobachtermodus + Warnung) statt stiller Untätigkeit; Firefox-Engine-Zugriff absichern (try/catch mit definierter Fail-closed-Policy); Fehler testen (Storage/DNR-Mocks).',
+    regression: 'Fehlerinjektionstest: storage/API-Fehler => definierter Zustand FAILED/DEGRADED mit sichtbarem Indikator; kein ungeprüfter Navigationsfluss ohne Kennzeichnung.',
+    residual_risk: 'Reales Eintreten solcher API-Fehler im Browser ist nicht beobachtet; Mock-Nachweis zeigt nur den Logikpfad.'
+  },
+  {
+    id: 'FIND-003', title: 'Allow-once-Lebenszyklus und Zustand: kein TTL, volatile In-Memory-Ausnahmen, fehlende Reconciliation, nicht serialisierte configure()-Läufe',
+    severity: 'LOW', confidence: 'MEDIUM', state: 'OPEN',
+    affected_assets: ['chrome/background.js', 'firefox/background.js'],
+    trust_boundary: 'Guard-Page -> Service Worker/Event-Page -> DNR-Session-Regel/Bypass-Map',
+    root_cause: 'Chrome: pending-Map (In-Memory) und persistente Session-Regel können desynchronisieren; Kommentar verspricht Timeout, im Code existiert keiner (chrome/background.js:42-65). Firefox: bypass-Map nur im Event-Page-Speicher, ohne TTL (firefox/background.js:6-9,29-34). configure() ist nicht serialisiert (chrome/background.js:14-41,71-73); parallel laufende Läufe können die DNR-Regel gegenseitig entfernen. Zähler ist Read-Modify-Write ohne Atomarität (chrome/background.js:66-68).',
+    preconditions: 'Service-Worker/Event-Page-Suspend, überlappende configure()-Läufe, abgebrochene Navigation oder Tab-Schließen zwischen Freigabe und Commit.',
+    evidence: [
+      E('chrome/background.js:42-65', 'Kommentar "Remove at first commit, timeout/next navigation, and on tab close"; es existieren weder setTimeout noch Alarme/TTL; pending.clear() nur in configure().'),
+      E('audit/security/probes/results/chrome_background_mock.json', 'probe04 OBS allow:no-timeout-implementation und OBS race:configure-interleaving: simuliertes Interleaving (strict false->true, 80 ms verzögerter Remove) entfernt die gerade hinzugefügte DNR-Regel => Regel vorhanden=false bei strictMode=true (synthetisch, reales Auftreten NICHT_TESTED).'),
+      E('firefox/background.js:6-9,22,29-34', 'bypass-Map ohne TTL; probe05 OBS once:no-ttl-stale-bypass: Einmal-Freigabe bleibt scharf, wenn die Navigation ausbleibt.'),
+      E('chrome/background.js:16-20', 'Stale Session-Regeln werden nur beim Service-Worker-Start bereinigt; keine Reconciliation während der Laufzeit.')
+    ],
+    impact: 'Über die beabsichtigte Einmal-Freigabe hinaus können Freigaben länger als vorgesehen scharf bleiben (Richtung fail-closed für Blockaden, aber Zustandsinkonsistenz); bei Race kann die präventive DNR-Regel trotz aktivem Schutz fehlen (Fail-open-Fenster). Blockzähler kann durch Race verloren gehen (Integrität, nicht sicherheitskritisch).',
+    cwe_owasp: 'CWE-362 (Race Condition); CWE-664 (Improper Control of a Resource Through its Lifetime); OWASP A10:2025',
+    chain_ids: [],
+    remediation: 'TTL/Alarm für Allow-Regeln implementieren; pending-/session-Zustand periodisch reconciliieren; configure()-Läufe serialisieren (Mutex/Generation-Counter, last-writer-wins mit Zustandsprüfung); Zähler atomar bzw. über storage-Transaktion/Inkrement-API.',
+    regression: 'Mocks: parallele configure()-Läufe dürfen die Regel nicht verlieren; Allow-Regel muss nach TTL verschwinden; Event-Page-Suspend simuliert.',
+    residual_risk: 'Reale SW-/Event-Page-Suspends sind ohne Browser-E2E nicht reproduzierbar.'
+  },
+  {
+    id: 'FIND-004', title: 'Chrome-/Firefox-Paritätslücken und fehlender Browser-E2E-Nachweis für das Kernschutzverfahren',
+    severity: 'LOW', confidence: 'MEDIUM', state: 'OPEN',
+    affected_assets: ['firefox/manifest.json', 'chrome/manifest.json', 'firefox/background.js', 'README.md'],
+    trust_boundary: 'Extension-Manifest/Plattform -> Schutzmechanik pro Browser',
+    root_cause: 'Firefox-Manifest deklariert kein web_accessible_resources für guard.html, obwohl guard.html das Redirect-Ziel des webRequest-Blockers ist (firefox/manifest.json:1-44); Chrome deklariert es (chrome/manifest.json:31-41). Firefox MV3 background.scripts ist ohne persistent:true eine Event-Page (volatile bypass-Map); Firefox ignoriert strictMode; README räumt fehlenden Browser-E2E-Lauf ein (README.md:62); im Repo existieren nur Mock-Tests (tests/*.cjs).',
+    preconditions: 'Firefox-Einsatz der Erweiterung; kein funktionaler Browser-Integrationstest vorhanden.',
+    evidence: [
+      E('firefox/manifest.json:1-44', 'Kein web_accessible_resources-Block; kein persistent:true; Guard-Page wird ausschließlich per webRequest-redirectUrl angesteuert (firefox/background.js:14-15).'),
+      E('chrome/manifest.json:31-41', 'Chrome deklariert guard.html in WAR für http/https — Paritätsunterschied.'),
+      E('audit/security/probes/results/manifest_integrity.json', 'probe01 OBS firefox:WAR-guard.html-missing und OBS manifest:background-models (TR-03 exit 0).'),
+      E('audit/security/probes/results/firefox_background_mock.json', 'probe05 OBS state:volatile-event-page und OBS strict:ignored-in-firefox (TR-07 exit 0).'),
+      E('README.md:62', 'Dokumentierte Grenze: "Firefox und Chrome haben aus dem Container heraus keinen erfolgreichen End-to-End-Browser-Lauf geliefert."')
+    ],
+    impact: 'Unbekannt, ob das Interstitial in realem Firefox zuverlässig lädt und die Einmal-Freigabe funktioniert (mögliche Redirect-Fehler/Nichtschutz); keine Plattform-Verhaltensabsicherung, keine History/Referer/POST-E2E-Evidenz.',
+    cwe_owasp: 'CWE-1059 (Incomplete Documentation/Verification); OWASP A06:2025 Insecure Design',
+    chain_ids: [],
+    remediation: 'Firefox-WAR für guard.html explizit deklarieren oder dokumentiert begründen; persistent-Event-Page-Verhalten testen; Browser-E2E-Suite (Selenium/Playwright mit geladenem unpacked extension) für beide Plattformen in Release-Gate aufnehmen.',
+    regression: 'E2E: blockierte Testdomain -> Guard-Seite -> Allow-once -> Ziel lädt; POST-Navigation; History/Fragment; Firefox/Chrome je ein Lauf, dokumentiert mit Version.',
+    residual_risk: 'Ohne Browser im Audit-Container bleibt die Laufzeitwirkung NOT_TESTED; Firefox-Redirect-Verhalten ist nur statisch/hypothetisch bewertet.'
+  },
+  {
+    id: 'FIND-005', title: 'Build-/Release-/Test-Gate-Hygiene: keine Provenance, keine signierten/verifizierbaren Artefakte, keine CI-Regressionsbasis, keine ZIP-Inhaltsallowlist',
+    severity: 'LOW', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['build.py', 'build_sites.py', 'tests/*.cjs', 'sites-100.json', 'shared/sites.js'],
+    trust_boundary: 'Quellcode -> Build -> ZIP/Store-Artefakt -> Nutzer',
+    root_cause: 'Kein VCS/Commit (kein .git), kein CI, keine Checksums/Signaturen, kein SBOM/Lockfile (probe09 supply_chain). build.py packt den gesamten Zielordner per rglob ohne Datei-Allowlist (build.py:20-24). Brand-DB wird von build_sites.py generiert; die Domänen werden nicht gegen ein Hostname-Schema validiert. Repo-Tests decken keine Negativfälle der Messaging-Autorisierung/Konfigurationsfehler/Races ab.',
+    preconditions: 'Release-/Distributionsprozess; kompromittierter Maintainer/Build-Umgebung oder unbemerkte zusätzliche Datei im Extension-Verzeichnis.',
+    evidence: [
+      E('audit/security/probes/results/static_scan.json', 'probe09 supply_chain: vcs_present=false, release_config_present=[], ci_dirs_present=[], lockfiles=[], sbom_present=false (TR-11 exit 0).'),
+      E('build.py:20-28', 'zipfile schreibt sorted(dst.rglob("*")) — alle Dateien im Zielordner, keine Allowlist/Manifestprüfung; kein Hash/keine Signatur; Legacy-ZIP-Kopie aus demselben Inhalt.'),
+      E('build_sites.py:179-190', 'Marken/Domains aus Rohstring; asserts nur auf Anzahl/Duplikate der Brands, keine Hostname-/Schema-Validierung der Domains.'),
+      E('tests/chrome-worker.test.cjs, tests/firefox-worker.test.cjs, tests/detector.test.cjs', 'Tests decken Happy-Path + einzelne Negativfälle; keine Tests für fremde Sender-Origins, Tab-Bindung, Konfigurationsfehler, Races, TTL.'),
+      E('Next.md:13', 'Verweist auf ARCHITECTURE_AND_SECURITY_REVIEW.md, die im Repo nicht existiert (probe09 Inventar, 44 Dateien).')
+    ],
+    impact: 'Release-Artefakt ist nicht zu einer überprüfbaren Quelle/Signatur zuordenbar; unbemerkte Zusatzdateien könnten mitverpackt werden; sicherheitsrelevante Regressionen werden nicht dauerhaft gegated.',
+    cwe_owasp: 'CWE-345 (Insufficient Verification of Data Authenticity); CWE-1059; OWASP A03:2025 Software Supply Chain Failures',
+    chain_ids: ['CHAIN-004'],
+    remediation: 'VCS/Commit-Hashes + reproduzierbaren Build + SHA-256-Manifest + Store-Signaturprozess dokumentieren; explizite Datei-Allowlist/Manifestvalidierung vor ZIP-Erstellung; CI mit Tests inkl. Negativ-/Sicherheitsfällen; SBOM (auch "leer") erzeugen; Domänen beim DB-Build validieren.',
+    regression: 'CI-Job: matrix-Validierung + Testsuite + Build-Hashvergleich zweier Läufe; Test, dass unerwartete Datei den Build fehlschlagen lässt.',
+    residual_risk: 'Store-Signierung und Update-Kanal sind außerhalb des Repos und ohne Netzwerk/Store-Zugriff nicht verifizierbar (VGT-056 BLOCKED).'
+  },
+  {
+    id: 'FIND-006', title: 'Keine Audit-/Security-Events: Blockaden, Freigaben und Konfigurationsfehler werden nicht nachvollziehbar protokolliert',
+    severity: 'LOW', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['chrome/background.js', 'firefox/background.js', 'chrome/popup.js'],
+    trust_boundary: 'Sicherheitsentscheidung -> lokale Beobachtbarkeit/Incident-Analyse',
+    root_cause: 'Einziger persistierter Zustand ist ein Blockzähler (chrome/background.js:66-68; firefox/background.js:13) und strictMode. Block-/Allow-Entscheidungen, Freigaben, Konfigurationsfehler und Moduswechsel werden nicht als strukturierte Events erfasst; kein correlation-/Zeitstempel-Trail.',
+    preconditions: 'Auftreten eines Fehlalarms, Bypasses oder Fehlverhaltens, das nachträglich bewertet werden müsste.',
+    evidence: [
+      E('chrome/background.js:66-68', 'countBlock(): nur blocked-Zähler, best-effort, Race-anfällig; keine Eventdaten.'),
+      E('firefox/background.js:13', 'analog nur blocked-Zähler.'),
+      E('audit/security/probes/results/static_scan.json', 'probe09 storage_access: ausschließlich Keys blocked/strictMode; keine Event-/Log-Persistenz (TR-11 exit 0).'),
+      E('chrome/popup.js:10-13', 'Popup zeigt nur Zähler; kein Verlauf/Status/Fehlerzustand.')
+    ],
+    impact: 'Fehlalarme, Umgehungen und stille Schutzausfälle sind lokal nicht rekonstruierbar; erschwert Incident-Triage und False-Positive-Kalibrierung. Bewusste Privacy-Entscheidung (keine URL-Speicherung), aber ohne kompensierende Status-/Fehler-Events.',
+    cwe_owasp: 'CWE-778 (Insufficient Logging); OWASP A09:2025 Security Logging & Alerting Failures',
+    chain_ids: ['CHAIN-002'],
+    remediation: 'Datensparsame strukturierte Events (Zeitstempel, Ereignistyp, Domain-Hash statt URL, Grund, Modus, Fehlerzustand) lokal mit Retention/Reset; Status-/Fehleranzeige im Popup; optional Export für Nutzer.',
+    regression: 'Test: Block, Allow-once, Konfigurationsfehler erzeugen jeweils genau ein Event mit definiertem Schema; keine URL-Klartext-Persistenz.',
+    residual_risk: 'Privacy-Anforderung (keine URL-Historie) begrenzt die Forensik dauerhaft; Restrisiko dokumentiert.'
+  },
+  {
+    id: 'FIND-007', title: 'Erkennungslücken (False Negatives): verdünnte Marken-/Bait-Kombinationen, Brand-only-Userinfo, Marke nur in Pfad/Query',
+    severity: 'MEDIUM', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['shared/detector.js', 'shared/sites.js'],
+    trust_boundary: 'Untrusted-URL -> Heuristik -> Schutzentscheidung',
+    root_cause: 'Prüfung erfolgt ausschließlich auf Host-Labels; Bait-Wort-Erkennung verlangt das Brand-Segment als exaktes Segment (shared/detector.js:302-320), Typosquatting nur auf dem Basislabel und nur Brand-Länge >=5 (shared/detector.js:322-329); Userinfo-Deception erkennt nur vollständige offizielle Domains, nicht den Markennamen allein (shared/detector.js:207-223); Pfad/Query werden nicht geprüft.',
+    preconditions: 'Phishing-Domain, die nicht als exakte Marke/Subdomain/Tippfehler des Basislabels erscheint (z. B. Homograph + Bait-Wort im selben Label oder Marke im Pfad).',
+    evidence: [
+      E('shared/detector.js:201-345', 'classify() arbeitet nur auf url.hostname; Pfad/Query werden nie inspiziert.'),
+      E('shared/detector.js:302-320', 'credential-bait: segments.includes(brand) — "paypa1-login" enthält das exakte Segment "paypal" nicht.'),
+      E('shared/detector.js:207-223', 'userinfo: nur wenn vollständige offizielle Domain (z. B. paypal.com) in Userinfo vorkommt.'),
+      E('audit/security/probes/results/detector_corpus.json', 'probe02/TR-04: 37/43 synthetische Angriffs-URLs geblockt (86,1%); verfehlt u. a. paypa1-login.com, paypal-me.com, g00gle-login.com, https://paypal@evil.test/ sowie Marke nur in Pfad/Query.')
+    ],
+    impact: 'Eine Klasse plausibler Phishing-Domains wird nicht erkannt; in Chrome führt die Safe-Auto-Navigation zusätzlich zu stiller Weiterleitung ohne Interstitial (CHAIN-001), per POST ohne jede Prüfung (CHAIN-003).',
+    cwe_owasp: 'CWE-184 (Incomplete List of Disallowed Inputs); OWASP A06:2025 Insecure Design',
+    chain_ids: ['CHAIN-001', 'CHAIN-003'],
+    remediation: 'Segmentweise Skeleton-/Typosquat-Analyse über alle Labels (nicht nur exakte Segmente); Userinfo-Brand-Erkennung; optional Pfad-/Query-Bait-Heuristik; FN-Korpus als Regressionstest verankern; Erkennungsgrenzen transparent kommunizieren.',
+    regression: 'Detektor-Regressionstest um die in probe02 verfehlten Klassen erweitern (erwartet: block) und FP-Korpus als Gegentest (FIND-008).',
+    residual_risk: 'Heuristische Erkennung bleibt unvollständig; kein Reputations-Feed/keine Inhaltsanalyse (bewusst offline).'
+  },
+  {
+    id: 'FIND-008', title: 'False Positives: kurze/generische Markennamen als Subdomain-Label und Wort-Domains nahe Marken werden blockiert',
+    severity: 'LOW', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['shared/detector.js', 'shared/sites.js'],
+    trust_boundary: 'Untrusted-URL -> Heuristik -> Schutzentscheidung',
+    root_cause: 'Exakte Brand-Labels werden als Subdomain beliebiger Fremddomains blockiert, sofern die Marke nicht in der kleinen genericSubdomains-Ausnahmeliste steht (shared/detector.js:49,286-300); Damerau-Distanz-1-Typosquatting auf dem Basislabel erzeugt Treffer für gewöhnliche Wörter (shared/detector.js:322-329).',
+    preconditions: 'Legitime URL mit Subdomain-Label wie "box"/"hp"/"ing"/"visa" auf fremder Domain oder Wortdomain wie apply.com/applet.com.',
+    evidence: [
+      E('shared/detector.js:49,286-300', 'genericSubdomains enthält nur office,line,medium,zoom,notion,target; alle anderen Marken (z. B. box, hp, visa, ing, ups) blockieren als Subdomain-Label.'),
+      E('shared/detector.js:322-329', 'Typosquat-Zweig: apple vs. apply/applet (Distanz 1) => block.'),
+      E('audit/security/probes/results/detector_corpus.json', 'probe02/TR-04: 18/553 Benign-URLs fälschlich blockiert; 16 kurze Marken-Subdomains + apply.com + applet.com.')
+    ],
+    impact: 'Legitime Seiten werden auf eine Warnseite umgeleitet (Verfügbarkeit/UX); wiederholte Fehlalarme trainieren Nutzer zum Wegklicken und schwächen die Warnwirkung.',
+    cwe_owasp: 'CWE-1023 (Incomplete Comparison with Missing Factors); OWASP A06:2025 Insecure Design',
+    chain_ids: [],
+    remediation: 'Generische Wörter/Short-Brands aus der Subdomain-Regel nehmen bzw. kontextabhängig behandeln (nur bei zusätzlichem Bait-/Kombinationssignal blockieren); FP-Korpus als Regressionstest; Nutzer-Feedback/Allowlist für offizielle Domains.',
+    regression: 'FP-Korpus (box.firma.example, apply.com) muss safe sein; gleichzeitig Subdomain-Schutz für eindeutige Marken (apple.attacker.test) erhalten.',
+    residual_risk: 'Trade-off FP vs. FN ist prinzipiell unvermeidbar; Kurationsqualität der Brand-Liste bleibt manuell.'
+  },
+  {
+    id: 'FIND-009', title: 'Kein Eingabe-/Längenbudget im Detektor: sehr lange Host-Labels erzeugen hohe CPU-Last',
+    severity: 'LOW', confidence: 'MEDIUM', state: 'OPEN',
+    affected_assets: ['shared/detector.js', 'chrome/guard.js', 'chrome/popup.js'],
+    trust_boundary: 'Untrusted-URL-Länge -> classify()-Ressourcenverbrauch',
+    root_cause: 'classify() iteriert für jede der 165 Marken über die Labels und führt NFKD/Skeleton-Transformationen über den gesamten Label-Text aus; es gibt keine Längen-/Budgetprüfung vorab (shared/detector.js:201-345). Guard-Page übernimmt Ziel aus URL-Hash/Query (shared/guard.js:15-17), Popup aus freiem Eingabefeld (shared/popup.js:28-34).',
+    preconditions: 'Sehr langes Host-Label in einer an die Extension übergebenen URL (Guard-Hash/Query) oder Eingabe im Popup-Testfeld.',
+    evidence: [
+      E('shared/detector.js:201-345', 'Keine Eingabelängen-/Zeitbudget-Prüfung; Kosten skalieren mit Host-Länge × Markenanzahl.'),
+      E('audit/security/probes/results/fuzz_perf.json', 'probe07/TR-09: Host-Label mit 100.000 Zeichen => ca. 1,1 s CPU in classify() (OBS bounds:no-input-length-budget); reguläre Latenz p95 0,60–1,81 ms (lastabhängig).'),
+      E('shared/guard.js:15-19', 'Ziel-URL wird ohne Längenprüfung aus location.hash/searchParams übernommen und klassifiziert.'),
+      E('shared/popup.js:28-36', 'Freies Textfeld wird ohne Längenlimit an classify() übergeben.')
+    ],
+    impact: 'Lokale CPU-/UI-Blockade durch präparierte Links (Guard-Hash) oder lange Eingaben; keine Datenwirkung. Reale Erreichbarkeit hängt vom Browser-URL-Längenlimit für Hostnamen ab — ohne Browser-E2E NOT_TESTED.',
+    cwe_owasp: 'CWE-770 (Allocation of Resources Without Limits); OWASP A06:2025 Insecure Design',
+    chain_ids: [],
+    remediation: 'Harte Längen-/Zeitbudgets vor der Klassifikation (z. B. Host > 253 Zeichen => skip/block-Warnung, Label > 63 => begrenzen); Early-Exit; Popup-Eingabe limitieren.',
+    regression: 'Fuzz-/Latenztest mit Extremlängen; Budget > X ms/URL muss verhindert werden; keine funktionale Regression bei normalen URLs (< 253 Zeichen).',
+    residual_risk: 'Browser-seitige Host-Längenlimits sind nicht verifiziert; Angreifbarkeit daher unsicher (Confidence MEDIUM).'
+  },
+  {
+    id: 'FIND-010', title: 'Least Privilege/Exposure: breite host_permissions+tabs, guard.html web-accessible für alle HTTP(S)-Origins, Fingerprinting-Claim nur teilweise zutreffend',
+    severity: 'INFO', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['chrome/manifest.json', 'firefox/manifest.json', 'README.md'],
+    trust_boundary: 'Web-Origin -> Extension-Ressourcen/Permissions -> Nutzer-Browser',
+    root_cause: 'host_permissions http://*/* + https://*/* und tabs sind für den Domainvergleich funktional begründet, erlauben aber Zugriff auf alle Tab-URLs; guard.html ist in Chrome für alle http(s)-Origins web-accessible (chrome/manifest.json:31-41). README behauptet, Manifest-Fingerprinting-Vektoren seien geschlossen (README.md:15), obwohl guard.html selbst exponiert bleibt.',
+    preconditions: 'Beliebige Webseite, die Erweiterungspräsenz erkennen oder guard.html einbetten will.',
+    evidence: [
+      E('chrome/manifest.json:9-18,31-41', 'permissions storage,tabs,webNavigation,declarativeNetRequest; host_permissions alle http/https; WAR guard.html für alle http/https.'),
+      E('README.md:15', 'Claim "Interne Skripte aus web_accessible_resources entfernt, um Extension-Fingerprinting zu verhindern" — Skripte entfernt, guard.html bleibt exponiert.'),
+      E('audit/security/probes/results/manifest_integrity.json', 'probe01 OBS chrome:WAR-exposes-guard.html-to-all-http(s) und permissions:inventory (TR-03 exit 0).'),
+      E('audit/security/probes/results/guard_render_mock.json', 'probe06 OBS clickjacking:tab-binding: Einbettung denkbar, aber allow-once an sender.url+tab.url gebunden; kein Bypass nachgewiesen.')
+    ],
+    impact: 'Erweiterungs-Fingerprinting und UI-Redressing-Oberfläche; breite Berechtigungen erhöhen den Vertrauensradius bei Kompromittierung (Privacy/Exposure, kein bestätigter Bypass).',
+    cwe_owasp: 'CWE-250 (Execution with Unnecessary Privileges); OWASP A01:2025 Broken Access Control (Exposure)',
+    chain_ids: ['CHAIN-005'],
+    remediation: 'guard.html aus WAR entfernen und Redirect über internes Verhalten/anders benannte Ressource lösen oder Notwendigkeit dokumentieren; frame-ancestors-Policy/Clickjacking-Schutz prüfen; tabs-Zugriff minimieren (activeTab + webNavigation, wo möglich); README-Claim korrigieren.',
+    regression: 'Test, dass Web-Origins guard.html nicht einbetten können (bzw. dokumentierte Ausnahme); Permission-Inventar im CI prüfen.',
+    residual_risk: 'Funktionaler Bedarf (Interstitial als Top-Level-Navigation) kann WAR erforderlich machen — Trade-off dokumentieren und E2E prüfen.'
+  },
+  {
+    id: 'FIND-011', title: 'Dokumentationsintegrität: irreführende POST-/Fingerprint-Claims und Referenz auf nicht existierende Architekturdatei',
+    severity: 'INFO', confidence: 'HIGH', state: 'OPEN',
+    affected_assets: ['README.md', 'Next.md', 'SECURITY.md'],
+    trust_boundary: 'Dokumentation -> Betreiber-/Nutzerentscheidung -> Risikobewertung',
+    root_cause: 'README/Next.md bezeichnen POST-Navigationen als "geschützt"/"abgesichert" bzw. "bleiben erhalten" (README.md:13,42; Next.md:27-28), obwohl keine POST-Prüfung existiert; Next.md:13 verweist auf ARCHITECTURE_AND_SECURITY_REVIEW.md, die nicht im Repo liegt; Next.md:30 bestätigt 13/13 Tests — dieser Claim ist korrekt (TR-01). Next.md:33 wirbt mit "< 1 ms Erkennungszeit"; gemessen wurden p95 0,60–1,81 ms (lastabhängig) — Claim nicht durchgängig reproduzierbar.',
+    preconditions: 'Betreiber/Reviewer liest Sicherheitsversprechen und verzichtet auf eigene Browser-E2E-Prüfung.',
+    evidence: [
+      E('README.md:13,42', 'POST-Claims "Chrome MV3 POST-Schutz"/"Geschützt: POST-Navigationen umgehen den DNR-Redirect".'),
+      E('Next.md:27-28,30,33,13', 'TASK-06 "Absicherung von HTTP POST", Testzahlen 13/13 (korrekt), "< 1 ms"-Performance-Claim (nicht durchgängig reproduziert), Verweis auf fehlende ARCHITECTURE_AND_SECURITY_REVIEW.md.'),
+      E('audit/security/probes/results/static_scan.json', 'probe09 Inventar: 44 Dateien, ARCHITECTURE_AND_SECURITY_REVIEW.md nicht vorhanden (TR-11 exit 0).'),
+      E('audit/security/probes/logs/baseline_tests.log', 'TR-01: 13/13 Tests PASS bestätigt den Testzahlen-Claim.')
+    ],
+    impact: 'Falsches Sicherheitsvertrauen bei Nutzern/Reviewern; verringert die Chance, dass Schutzlücken vor Release bemerkt werden.',
+    cwe_owasp: 'CWE-1059 (Incomplete Documentation); OWASP A06:2025 Insecure Design',
+    chain_ids: [],
+    remediation: 'Doku präzisieren (POST = ungeprüft/keine Prävention; WAR-Exposure benennen); fehlende Referenzdatei ergänzen oder Referenz entfernen; Claims mit Testbelegen verlinken.',
+    regression: 'Doku-Claims gegen Testmatrix prüfen (Release-Checkliste).',
+    residual_risk: 'Reine Dokumentationslücke, keine Laufzeitwirkung.'
+  }
+];
+
+/* ---------------- Chains ---------------- */
+const CHAINS = [
+  {
+    id: 'CHAIN-001', title: 'Heuristik-FN + Safe-Auto-Navigation => stiller Phishing-Besuch ohne Interstitial',
+    parent_findings: ['FIND-007'],
+    preconditions: 'Chrome mit aktivem strict-Modus; Phishing-URL, die von der Heuristik als "safe" klassifiziert wird (z. B. verdünnte Marken-/Bait-Kombination aus FIND-007).',
+    path: 'Nutzer folgt präpariertem Link -> DNR-Redirect auf guard.html#<URL> (redirect-all) -> classify() liefert "safe" (FN) -> guard.js:50-54 ruft go(target,false) -> allow-once-Session-Regel für exakte URL -> location.replace(target) -> keine Warnung, direkte Navigation zur Phishing-Seite.',
+    impact: 'Das einzige präventive Schutzinterstitial wird für eine plausible Phishing-Klasse vollständig und ohne Interaktion umgangen; der Nutzer erhält keinerlei Warnsignal.',
+    breakpoint: 'Zwei unabhängige Breakpoints: (1) Detektor muss diese Klasse als "block" klassifizieren (FIND-007 Fix/Regression), (2) guard.js darf "safe" nicht ohne sichtbaren Status/Trust-Indikator auto-navigieren (FIND-001).',
+    severity: 'MEDIUM', confidence: 'HIGH', state: 'OPEN',
+    evidence: [E('chrome/guard.js:50-54', 'Auto-allow+Navigation bei safe.'), E('chrome/background.js:31-38', 'redirect-all-DNR-Regel bringt jede GET-Navigation auf die Guard-Page.'), E('audit/security/probes/results/detector_corpus.json', 'FN-Korpus: 6/43 Angriffe nicht erkannt (probe02).')],
+    countercontrols: 'Exakte URL-Freigabe (kein Bypass für als block klassifizierte URLs); identische Klassifikation unicode/punycode (probe03); Block-Page weiter sichtbar bei erkannten Treffern.',
+    residual_risk: 'Offline-Heuristik ohne Reputation/Inhaltsanalyse bleibt grundsätzlich FN-anfällig.'
+  },
+  {
+    id: 'CHAIN-002', title: 'Init-/Konfig-Fehler + fehlende Events/Statusanzeige => stiller Schutzausfall (Blindspot)',
+    parent_findings: ['FIND-002', 'FIND-006'],
+    preconditions: 'Fehler in configure()/Engine-Initialisierung (Storage, DNR, Bundle) oder suspendierte/neustartende Hintergrundseite; Nutzer bemerkt keinen Fehler, weil nur console.error/kein Event existiert.',
+    path: 'Extension-Start -> configure() rejected / Engine fehlt -> keine DNR-Regel bzw. werfender webRequest-Handler -> Navigationen laufen ungeprüft (Chrome: strict=true unterdrückt Observer-Fallback) -> kein Event, keine UI-Anzeige -> Nutzer glaubt weiter an aktiven Schutz.',
+    impact: 'Vollständiger Verlust der Primärschutzschicht ohne jede Nutzerwahrnehmung; Incident-/Fehlalarm-Analyse unmöglich.',
+    breakpoint: 'Definierter Schutzstatus + sichtbare Degradierung + Fail-closed-Fallback (FIND-002) sowie strukturierte Status-Events (FIND-006).',
+    severity: 'MEDIUM', confidence: 'MEDIUM', state: 'OPEN',
+    evidence: [E('chrome/background.js:69-73,104', 'configure()-Fehler nur console.error.'), E('audit/security/probes/results/chrome_background_mock.json', 'OBS failopen:config-error-no-rule.'), E('audit/security/probes/results/firefox_background_mock.json', 'OBS engine:missing-engine-throws.')],
+    countercontrols: 'startup-Purge stale Session-Allow-Regeln (fail-closed für alte Freigaben); Default strict=true.',
+    residual_risk: 'Reales Fehlerauftreten im Browser nicht beobachtet (Mock/simuliert).'
+  },
+  {
+    id: 'CHAIN-003', title: 'POST-Navigationslücke + Heuristik-FN => preflight-freie Zustellung einer Phishing-Seite',
+    parent_findings: ['FIND-001', 'FIND-007'],
+    preconditions: 'Chrome; Angreifer kontrolliert/kompromittiert eine Seite, die eine POST-Hauptnavigation auslösen kann (Auto-Submit-Formular), Ziel ist eine heuristisch unerkannte Phishing-Domain.',
+    path: 'Opfer besucht Angreiferseite -> Auto-Submit-POST auf Phishing-Domain -> DNR-Regel greift nur bei requestMethods ["get"] -> keine Guard-Page, keine Klassifikation, keine Warnung -> direkte Zustellung der Phishing-Seite.',
+    impact: 'Kompletter Preflight-Bypass unabhängig von der Detektorqualität; die einzige präventive Schicht wird durch die Methode umgangen.',
+    breakpoint: 'DNR-/Navigation-Schutz auf Nicht-GET-Hauptnavigationen erweitern (oder POST-basierte Navigationen explizit risikobewusst dokumentieren/akzeptieren) — FIND-001; zusätzlich Detektor-FN schließen (FIND-007).',
+    severity: 'MEDIUM', confidence: 'MEDIUM', state: 'OPEN',
+    evidence: [E('chrome/background.js:34-38', 'requestMethods ["get"] schließt POST aus.'), E('README.md:13,42', 'POST wird als "geschützt" kommuniziert.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertion install:requestMethods-only-get bestätigt die Methodenlücke.')],
+    countercontrols: 'Firefox blockiert alle main_frame-Methoden (webRequest ohne Methodenfilter) — Lücke ist Chrome-spezifisch.',
+    residual_risk: 'Realer Auto-Submit-Ablauf im Browser nicht E2E getestet (NOT_TESTED); Angreifer benötigt kontrollierte Seite.'
+  },
+  {
+    id: 'CHAIN-004', title: 'Build-/Provenance-Lücke + generierte Brand-DB + fehlender Signatur-Nachweis => manipulierbares Schutz-Update',
+    parent_findings: ['FIND-005'],
+    preconditions: 'Zugriff auf Build-/Release-Kette (kompromittierter Maintainer, Build-Umgebung oder Store-Kanal); keine verifizierbaren Checksums/Signaturen/CI im Repo vorhanden; Brand-DB wird von einem Skript ohne Hostname-Validierung erzeugt.',
+    path: 'Manipulation an shared/detector.js oder build_sites.py/sites.js -> build.py verpackt Verzeichnis ohne Allowlist -> kein Hash-/Signatur-Nachweis im Repo -> Verteilung über Browser-Store -> Nutzer erhält geschwächte/geänderte Erkennung ohne Verifikationsmöglichkeit.',
+    impact: 'Theoretisch vollständige Subversion des Schutzprodukts (Detektion deaktivierbar/manipulierbar), ohne dass Nutzer oder Reviewer dies am Artefakt nachvollziehen können.',
+    breakpoint: 'Store-Signatur + reproduzierbarer Build + SHA-256-Manifest + Datei-Allowlist + CI-Regressionstests (alles derzeit nicht im Repo nachweisbar; VGT-056 BLOCKED).',
+    severity: 'MEDIUM', confidence: 'LOW', state: 'OPEN',
+    evidence: [E('audit/security/probes/results/static_scan.json', 'Kein VCS/CI/Checksum/SBOM (probe09).'), E('build.py:20-28', 'ZIP ohne Allowlist/Hash.'), E('build_sites.py:179-199', 'DB-Generator ohne Domänenvalidierung.'), E('shared/detector.js:1-362', 'Erkennungslogik als unsigniertes Klartext-JS im Paket.')],
+    countercontrols: 'Browser-Store-Signatur/Review (außerhalb Repo, nicht verifiziert); Alpha-Status begrenzt Verbreitung.',
+    residual_risk: 'Kein Hinweis auf tatsächliche Kompromittierung; Kette ist Kontrollabwesenheits-Hypothese (Confidence LOW).'
+  },
+  {
+    id: 'CHAIN-005', title: 'WAR-Exposure guard.html + Clickjacking-Versuch auf Allow-once => durch Tab-Bindung abgewehrt',
+    parent_findings: ['FIND-010'],
+    preconditions: 'Chrome; beliebige Webseite bettet guard.html ein/öffnet sie und versucht, die Freigabe (allow-once) auszulösen.',
+    path: 'Web-Origin -> iframe/Navigation auf chrome-extension://<id>/guard.html#<ziel> (WAR erlaubt Einbettung) -> Nutzer klickt ggf. "Risiko akzeptieren" im iframe -> guard.js sendet allow-once mit tabId des aktuellen Tabs -> Background prüft sender.url UND tabs.get(tabId).url auf guard.html -> tab.url ist die Web-Origin-Seite => Ablehnung (Fehlermeldung, keine Freigabe).',
+    impact: 'Kein Bypass erreichbar; verbleibendes Risiko ist UI-Redressing/Fingerprinting ohne Berechtigungswirkung.',
+    breakpoint: 'Bereits implementierte Doppelbindung sender.url + tab.url (chrome/background.js:91-95) sowie fehlendes externally_connectable; zusätzlich empfehlenswert: WAR-/frame-ancestors-Härtung.',
+    severity: 'LOW', confidence: 'HIGH', state: 'MITIGATED_BY_CONTROL_MOCK_VERIFIED',
+    evidence: [E('chrome/background.js:88-102', 'sender.url-StartsWith-Prüfung und tab.url-Prüfung vor allowOne.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions msg:web-origin-rejected und msg:tab-not-on-guard-rejected (TR-06 exit 0).'), E('chrome/manifest.json:31-41', 'WAR exponiert guard.html für http/https.')],
+    countercontrols: 'Doppelte Origin-/Tab-Bindung; kein externally_connectable; exakte URL-Freigabe.',
+    residual_risk: 'Iframe-Clickjacking kann Nutzer verwirren/Fehlermeldungen erzeugen; kein Browser-E2E für das reale Frame-/Tab-Verhalten.'
+  }
+];
+
+/* ---------------- Controls ---------------- */
+const CONTROLS = [];
+function pass(id, rationale, evidence, method, testRunId, observed) {
+  const v = { method, observed };
+  if (testRunId) v.test_run_id = testRunId;
+  CONTROLS.push({ id, status: 'PASS', rationale, evidence, verification: v, finding_ids: [], blocker: '' });
+}
+function fail(id, rationale, evidence, findingIds, method, observed) {
+  CONTROLS.push({ id, status: 'FAIL', rationale, evidence, verification: { method, observed }, finding_ids: findingIds, blocker: '' });
+}
+function nt(id, rationale) { CONTROLS.push({ id, status: 'NOT_TESTED', rationale, evidence: [], verification: {}, finding_ids: [], blocker: '' }); }
+function na(id, rationale) { CONTROLS.push({ id, status: 'NOT_APPLICABLE', rationale, evidence: [], verification: {}, finding_ids: [], blocker: '' }); }
+function blocked(id, rationale, blocker) { CONTROLS.push({ id, status: 'BLOCKED', rationale, evidence: [], verification: {}, finding_ids: [], blocker }); }
+
+/* Block 01 — Identität, Autorisierung, Vertrauensgrenzen */
+pass('VGT-001', 'Vertrauensgrenzen und Assets wurden inventarisiert (Web-Origin -> Guard-Page -> Service Worker/Event-Page -> DNR/WebRequest-Enforcement -> Browser-Navigation; Popup -> Detektor; gebündelte Brand-DB). Für die Messaging-Grenze wurden erlaubte und abgewiesene Flüsse real ausgeführt (probe04/05).', [E('chrome/manifest.json:9-41', 'Permissions/WAR/Host-Permissions = Auth- und Datenflussgrenzen der Extension.'), E('chrome/background.js:88-102', 'Enforcement-Punkt für privilegierte allow-once-Operation.'), E('audit/security/probes/results/chrome_background_mock.json', 'Erlaubter Fluss (Guard+Guard-Tab) akzeptiert, abgewiesene Flüsse (Web-Origin, falscher Tab) rejected.')], 'command', 'TR-06', '46/46 Assertions PASS: allow-once akzeptiert nur mit sender.url=guard.html UND tab.url=guard.html; Web-Origin und Tab-Mismatch werden abgewiesen.');
+fail('VGT-002', 'Deny-by-default für sensible Operationen: Die privilegierte allow-once-Operation ist zwar explizit deny-by-default geschützt (Sender-/Tab-/Schema-Prüfungen, Mock bestätigt), aber ein defekter/fehlender Policy-Zustand wird nicht verweigert: Bei configure()-Fehlern bleibt strict=true, keine DNR-Regel existiert und Navigationen laufen ungeprüft (FIND-002). Damit ist die Härtungsinvariante "defekte Policy muss verweigert werden" verletzt.', [E('chrome/background.js:91-97', 'Messaging-Pfad selbst ist deny-by-default (unbekannte Sender => Throw).'), E('chrome/background.js:19-26,104', 'Policy-Defekt (configure reject) führt zu keiner Regel und keinem sicheren Fehlerzustand.'), E('audit/security/probes/results/chrome_background_mock.json', 'OBS failopen:config-error-no-rule: defekte Policy => Navigationen ungeprüft (TR-06 exit 0).')], ['FIND-002'], 'mock_execution', 'Messaging-Grenze deny-by-default PASS; Policy-Defekt-Pfad fail-open im Mock reproduziert.');
+pass('VGT-003', 'Objektbezogene Zugriffskontrolle: Die Einmal-Freigabe ist ein Tab-Objekt (tabIds-Bedingung der DNR-Session-Regel) und wird nur für den Tab erzeugt, dessen tab.url auf der Schutzseite liegt; fremde Tabs werden nicht mitfreigegeben (Mock verifiziert tabIds [7]).', [E('chrome/background.js:55-57', 'Session-Allow-Regel mit condition.tabIds:[tabId].'), E('chrome/background.js:93-95', 'tabId wird gegen tabs.get(tabId).url validiert.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions allow:tab-scoped und msg:tab-not-on-guard-rejected (TR-06 exit 0).')], 'command', 'TR-06', 'Allow-Regel tabIds=[7]; Tab-Mismatch wird abgewiesen; keine Cross-Tab-Freigabe im Mock beobachtet.');
+pass('VGT-004', 'Funktionsbezogene Berechtigungen: Die privilegierte Funktion allow-once ist ausschließlich von der Schutzseite (guard.html) und nur für einen Tab auf der Schutzseite aufrufbar; Web-Origins können die Funktion nicht aufrufen (kein externally_connectable, Sender-Prüfung).', [E('chrome/background.js:88-96', 'Handler akzeptiert nur type=allow-once und sender.url beginnend mit runtime.getURL("guard.html").'), E('chrome/manifest.json:1-47', 'Kein externally_connectable => Webseiten können keine runtime-Messages senden.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions msg:web-origin-rejected, msg:missing-sender-url-rejected, msg:tab-not-on-guard-rejected.')], 'command', 'TR-06', 'Alle fremden Aufrufer wurden abgewiesen; kein privilegierter Pfad ohne Guard-Kontext erreichbar.');
+pass('VGT-005', 'Feldebene/Mass Assignment: Die allow-once-Nachricht trägt nur url, tabId, recordBlock. url wird per URL-Parser auf http/https beschränkt, tabId über tabs.get validiert, recordBlock beeinflusst ausschließlich den Blockzähler. Kein Feld mappt auf sicherheitsrelevante Konfiguration/Policy.', [E('chrome/background.js:93-98', 'Nur url/tabId/recordBlock werden verwendet; url-Validierung in allowOne (44-49).'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions zur Schema-/Längen-/Tab-Validierung; recordBlock inkrementiert nur blocked.')], 'command', 'TR-06', 'Unbekannte/ungültige Felder führen zu Fehlern, nicht zu Policy-Änderungen; Mock bestätigt.');
+fail('VGT-006', 'Sitzungs-/Tokenlebenszyklus: Die temporäre Freigabe wird als Session-Regel mit exakter URL + Tab erzeugt, bei Commit/Tab-Schließen/nächster Freigabe entfernt und beim Service-Worker-Start bereinigt (Mock 46/46). Es fehlt jedoch eine garantierte Lebensdauer (kein TTL), die In-Memory-pending-Map ist volatil und kann gegenüber der persistenten Session-Regel veralten (FIND-003). Damit ist die Härtungsinvariante "kurze Lebensdauer/Rotation/Revoke" nicht vollständig erfüllt.', [E('chrome/background.js:44-65', 'allowOne/clearOne: exakte URL, Tab-Scope, Entfernen bei Commit/Tab-Ende/Ersetzen — aber kein Timeout.'), E('chrome/background.js:16-20', 'Startup-Purge stale Allow-Session-Regeln (einzige Zeit-/Neustart-Bereinigung).'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions allow:cleared-on-commit/-tab-close/-startup PASS; OBS allow:no-timeout-implementation (TR-06 exit 0).'), E('audit/security/probes/results/firefox_background_mock.json', 'OBS once:no-ttl-stale-bypass: Einmal-Freigabe bleibt ohne Navigation unbegrenzt scharf (TR-07 exit 0).')], ['FIND-003'], 'mock_execution', 'Revoke bei Commit/Tab-Ende/Startup verifiziert; TTL/Lebensdauerbegrenzung fehlt und ist im Mock als stale-bypass reproduziert.');
+na('VGT-007', 'Keine Konten, MFA-, Recovery- oder Step-up-Workflows im Produkt vorhanden: lokale Browser-Extension ohne Auth-Backend, keine Login-/Reset-Pfade im Code. Die Grenze existiert im Scope nicht.');
+na('VGT-008', 'Nur eine Edition (Alpha 0.1), keine Mandanten, keine Premium-/Feature-Flag- oder Open-Core-Importpfade: keine Editionslogik in Manifesten oder Code vorhanden.');
+na('VGT-009', 'Keine Dienstkonten, mTLS- oder Service-zu-Service-Kommunikation: Die Extension spricht ausschließlich mit Browser-APIs, es gibt kein Backend und keine Maschinenidentitäten.');
+pass('VGT-010', 'Confused-Deputy/Privilegienerhöhung: Web-Origins können die privilegierte Extension-Funktion nicht instrumentalisieren; selbst eine per WAR eingebettete Guard-Page scheitert an der Tab-Bindungsprüfung (Mock). Ursprungsidentität (sender.url) wird bis zur Freigabe geprüft.', [E('chrome/background.js:91-95', 'Ursprungsprüfung sender.url + Ziel-Tab-Prüfung vor privilegierter Aktion.'), E('chrome/manifest.json:1-47', 'Kein externally_connectable/externer Message-Kanal.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions msg:web-origin-rejected, msg:tab-not-on-guard-rejected; probe06 OBS clickjacking:tab-binding.')], 'command', 'TR-06', 'Niedrigprivilegierter Web-Origin konnte den privilegierten Helper nicht instrumentalisieren; Doppelbindung greift.');
+
+/* Block 02 — Eingaben, Parser, Dateisystem */
+na('VGT-011', 'Keine Datenbank-, ORM- oder Query-Pfade im Produktcode: Persistenz erfolgt ausschließlich über chrome.storage.local mit flachen Schlüsseln (blocked als Zahl, strictMode als Boolean), kein SQL/NoSQL.');
+na('VGT-012', 'Keine exec/spawn/system/subprocess-Aufrufe im Produktcode; Shell-/Prozess-Sinks existieren nur in Build-Skripten (Python) ohne Untrusted-Input.');
+pass('VGT-013', 'Code-/Template-Injection: Kein eval, new Function, dynamischer Import oder dynamisch geladener Code im Produkt. Alle Skripte sind statische lokale Bundle-Dateien; MV3-Default-CSP (script-src self; object-src self) bleibt aktiv (kein CSP-Override in den Manifesten).', [E('audit/security/probes/results/static_scan.json', 'probe09: eval_like=0 Treffer in 44 Dateien (TR-11 exit 0).'), E('chrome/manifest.json:1-47', 'Kein content_security_policy-Override; MV3-Default-CSP aktiv.'), E('chrome/guard.html:98-100', 'Nur statische Same-Extension-Skripte.')], 'command', 'TR-11', 'Statischer Scan: 0 eval-/Function-/dynamic-import-Sinks; keine Inline-Skripte in HTML (probe09).');
+pass('VGT-014', 'XSS/DOM-Sinks: Alle untrusted Werte (Host, Begründung, offizielle Domain, Fehlermeldung) werden ausschließlich per textContent gesetzt; kein innerHTML/outerHTML/insertAdjacentHTML/document.write im gesamten Repo; MV3-Default-CSP. DOM-Stub-Mock mit XSS-Payloads zeigt keine HTML-Interpretation.', [E('shared/guard.js:21-24,44-45,60-62', 'textContent-Zuweisungen für alle URL-/Domain-abhängigen Werte; no HTML-Sinks.'), E('audit/security/probes/results/static_scan.json', 'probe09: html_sinks=0 Treffer; HTML ohne Inline-Skripte/Handler (TR-11 exit 0).'), E('audit/security/probes/results/guard_render_mock.json', 'probe06: XSS-Payloads im Hash/Pfad werden nicht als HTML interpretiert (no innerHTML writes, TR-08 exit 0).')], 'command', 'TR-11', '0 HTML-Sinks statisch; 0 innerHTML-Writes in 38 Mock-Assertions; untrusted Werte bleiben Text.');
+na('VGT-015', 'Kein Laufzeit-Dateisystemzugriff: Die Extension verarbeitet keine Pfade; Pfadmanipulation betrifft nur Build-Skripte mit festen, repo-internen Zielpfaden ohne Untrusted-Input.');
+na('VGT-016', 'Keine Datei-Operationen mit Untrusted-Input oder TOCTOU-Risiko zur Laufzeit; build.py nutzt feste Kopierlisten ohne Symlink-Auflösung/Check-then-Open.');
+na('VGT-017', 'Keine Deserialisierung fremder Daten: Gespeicherte Werte (Zahl/Boolean) werden ausschließlich von der Extension selbst geschrieben; Bundles sind statisch; es existieren keine Schema-Parser für Untrusted-Daten.');
+na('VGT-018', 'Keine Archivextraktion zur Laufzeit: build.py erzeugt ZIPs, entpackt aber keine fremden Archive; keine Zip-Slip-/Bomben-Pfade im Produktcode.');
+na('VGT-019', 'Kein Datei-Upload-/Download-/Content-Sniffing-Pfad: Die Extension verarbeitet nur Navigations-URLs und lokale Bundle-Ressourcen.');
+fail('VGT-020', 'Ressourcenlimits: classify() hat kein Eingabe-/Längen-/Zeitbudget und skaliert mit Host-Länge × Markenanzahl; ein 100.000-Zeichen-Host-Label kostete ~1,1 s CPU (probe07). Reguläre URLs liegen p95 bei 0,60–1,81 ms (lastabhängig). Keine katastrophalen Regex-Backtracking-Muster gefunden, aber kein Early-Exit/Budget.', [E('shared/detector.js:201-345', 'Keine Längen-/Budgetprüfung vor der Markenschleife.'), E('audit/security/probes/results/fuzz_perf.json', 'probe07/TR-09: 100k-Host-Label ≈1,1 s; 20.000 Fuzz-Inputs ohne Throw; p95 0,60–1,81 ms.'), E('shared/guard.js:15-19', 'Ziel-URL aus Hash/Query ohne Längenlimit an classify() übergeben.')], ['FIND-009'], 'measurement', 'Oversize-Input 1.097 ms bei 100k-Label; reguläre Latenz p95 0,82 ms; kein Budget im Code.');
+
+/* Block 03 — Krypto, Schlüssel, Datenschutz */
+na('VGT-021', 'Keine Kryptografie im Produktcode (keine Verschlüsselung, Hashing, Signaturen, Random-Nonces); Crypto-APIs kommen im statischen Scan nicht vor.');
+na('VGT-022', 'Keine Schlüsselverwaltung/KMS/HSM/Rotation: Es existieren keine kryptografischen Schlüssel oder Secrets im Repo (Secret-Muster-Scan 0 Treffer).');
+na('VGT-023', 'Keine Passwort-/Credential-Ablage und keine Secrets: Der Secret-Muster-Scan (AWS/GitHub/Slack/Google/OpenAI/Private-Key/JWT) lieferte 0 Treffer; es gibt keine authentifizierten Nutzerkonten.');
+na('VGT-024', 'Keine Netzwerkkommunikation und damit keine TLS-/Zertifikatsprüfung im Produktcode: Der Scan zeigt keine Fetch-/TLS-APIs; die Extension führt keine Remote-Requests aus.');
+na('VGT-025', 'Keine Signaturen, Feeds oder Anti-Rollback-Logik im Repo: Die Softwaredistribution/-signierung liegt beim Browser-Store und ist außerhalb des Scopes; Verifikationsgrenze siehe VGT-056 (BLOCKED).');
+na('VGT-026', 'Keine kryptografischen Zufallswerte, Nonces oder Sicherheits-Tokens: DNR-Regel-IDs sind rein interne, fortlaufende Zähler ohne Sicherheitswirkung.');
+pass('VGT-027', 'Datenminimierung: Persistiert werden ausschließlich der Blockzähler (number) und die Chrome-Einstellung strictMode (boolean); besuchte URLs/Domains werden nicht gespeichert oder übertragen. Der statische Scan bestätigt alle storage-Zugriffe auf genau diese zwei Schlüssel.', [E('chrome/background.js:15,66-68', 'storage.local ausschließlich strictMode/blocked.'), E('audit/security/probes/results/static_scan.json', 'probe09 storage_access: alle Treffer = blocked/strictMode (TR-11 exit 0).'), E('README.md:47-53', 'Datenschutzaussage: keine Telemetrie, kein URL-Speicher; durch Scan bestätigt.')], 'command', 'TR-11', 'Keine URL-/Domain-Persistenz, keine Telemetrie-/Netzwerk-Sinks; nur zwei nicht-sensitive Storage-Keys.');
+na('VGT-028', 'Keine sensitiven Daten at rest: storage.local enthält nur einen Zähler und einen Boolean (keine PII, Secrets oder URLs); damit existiert keine Schutzpflicht für ruhende Daten im Scope.');
+na('VGT-029', 'Keine personenbezogenen Daten und keine Retention-Pflichten im Produkt: Nur nicht-sensitive Zähler; Löschung erfolgt durch Browser-Deinstallation/Storage-Clear, kein serverseitiger Löschpfad vorhanden.');
+pass('VGT-030', 'Sensitive Error-/Log-Leakage: Die Schutzseite gibt nur generische Fehlertexte aus (keine Ziel-URL, keine internen Pfade); Hintergrundfehler gehen ausschließlich an die lokale DevTools-Konsole. Keine Secrets in Ausgaben/Logs (Secret-Scan 0).', [E('shared/guard.js:21-24,39', 'error() setzt generische textContent-Meldung + e.message ohne URL-Echo.'), E('audit/security/probes/results/guard_render_mock.json', 'probe06 failclosed-Assertions: Rejected/Send-Fehler zeigen generische Meldung, keine Ziel-URL (TR-08 exit 0).'), E('audit/security/probes/results/static_scan.json', 'keine Log-/Netzwerk-Sinks; keine Secrets (TR-11 exit 0).')], 'command', 'TR-08', '38/38 Assertions PASS; Fehlerausgabe generisch, keine URL-/Pfad-Leaks im Mock beobachtet.');
+
+/* Block 04 — Web/API/Business-Logik */
+pass('VGT-031', 'CSRF/Request-Origin: Es existieren keine Cookies/Sessions/HTTP-Endpunkte. Die einzige zustandsändernde Operation (allow-once) ist per sender.url- und tab.url-Prüfung origin-/kontextgebunden; Web-Origins werden abgewiesen (Mock). CORS ist kein Auth-Ersatz, weil kein HTTP-API existiert.', [E('chrome/background.js:88-96', 'Origin-/Kontextprüfung vor Zustandsänderung.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertion msg:web-origin-rejected (TR-06 exit 0).'), E('chrome/manifest.json:1-47', 'Keine Cookies-/Host-API, kein HTTP-Endpunkt.')], 'command', 'TR-06', 'Cross-Origin-Mutation (Web-Origin -> allow-once) wird abgewiesen; 46/46 Mock-Assertions.');
+pass('VGT-032', 'Browser-Isolation/Sicherheitsheader: Extension-Seiten werden nicht über HTTP ausgeliefert (kein CORS/CDN/Header-Angriff); MV3-Default-CSP ist aktiv, da kein content_security_policy-Override existiert. verbleibende Exposure: guard.html ist web-accessible (FIND-010) — ein Einbetten ist möglich, die Freigabe bleibt aber durch Tab-Bindung geschützt.', [E('chrome/manifest.json:1-47; firefox/manifest.json:1-44', 'Kein CSP-Override; Permissions/WAR dokumentiert.'), E('audit/security/probes/results/manifest_integrity.json', 'probe01: no-CSP-override assertion PASS (TR-03 exit 0).'), E('audit/security/probes/results/guard_render_mock.json', 'probe06 OBS clickjacking:tab-binding; keine privilegierte Cross-Origin-Antwort möglich.')], 'static_analysis', null, 'Kein CSP-Override; keine HTTP-Header-Angriffsfläche; Frame-Einbettung möglich, aber ohne Rechtewirkung (Mock).');
+pass('VGT-033', 'SSRF/Redirect-Ketten: Die Extension führt keine ausgehenden Fetches aus (SSRF nicht anwendbar). HTTP-Redirect-Ketten werden dadurch fail-closed behandelt, dass jede neue main_frame-Anfrage erneut die DNR-Regel/den webRequest-Filter durchläuft und die Allow-Session-Regel nur exakt die ursprüngliche URL freigibt.', [E('chrome/background.js:31-40,44-57', 'Redirect-Regel für jede main_frame-GET-Anfrage; Allow nur exakte URL in einem Tab.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertion allow:regex-matches-exact-url / not-other-path / not-other-host (TR-06 exit 0).'), E('audit/security/probes/results/static_scan.json', 'network_fetch=0 Sinks (TR-11 exit 0).')], 'command', 'TR-06', 'Keine SSRF-Sinks; exakte URL-Freigabe verhindert Ketten-Mitfreigabe statisch/logisch; Browser-Redirect-E2E NOT_TESTED.');
+pass('VGT-034', 'Open Redirect/URL-Schemata: Beide Hintergründe validieren die Ziel-URL per URL-Parser und lassen ausschließlich http/https zu (javascript:, file:, data:, chrome: werden abgewiesen). Die Guard-Seite navigiert nur nach erfolgreicher allow-once und klassifiziert zuvor; die "offizielle Seite"-URL stammt aus der gebündelten Brand-DB.', [E('chrome/background.js:44-49', 'Protokoll-Allowlist http/https; Längenprüfung.'), E('firefox/background.js:30-33', 'Analoge Protokoll-Allowlist.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions msg:scheme-rejected für javascript/file/data/chrome// (TR-06 exit 0).'), E('audit/security/probes/results/guard_render_mock.json', 'probe06: ungültige Schemata => keine Message/Navigation (TR-08 exit 0).')], 'command', 'TR-06', 'Nicht-HTTP(S)-Ziele werden in beiden Mock-Suiten abgewiesen; offizielle-Ziel-URL aus statischer DB (probe08: 257 Domains validiert).');
+pass('VGT-035', 'API-Inventar/Schattenendpunkte: Die einzige definierte Nachrichten-API ist runtime.onMessage mit type=allow-once; es existieren keine HTTP-/GraphQL-/WebSocket-Endpunkte, keine Debug-/Legacy-Routen und kein externer Message-Kanal (kein externally_connectable).', [E('chrome/background.js:88-102; firefox/background.js:23-35', 'Genau ein onMessage-Handler mit einem Typ.'), E('chrome/guard.js:30-35', 'Einziger sendMessage-Aufruf (allow-once).'), E('audit/security/probes/results/static_scan.json', 'probe09 runtime_message: 5 Treffer, ausschließlich allow-once-Pfade; keine HTTP/WS-Sinks (TR-11 exit 0).')], 'command', 'TR-11', 'Nachrichtenfläche vollständig inventarisiert (1 Typ); keine Schatten-Endpunkte im Scan.');
+na('VGT-036', 'Keine GraphQL-, gRPC- oder WebSocket-Schnittstellen: Kommunikation ausschließlich über interne runtime-Messages innerhalb des Browser-Extension-Kontexts.');
+pass('VGT-037', 'Business-Flow-Missbrauch/Replay: Die Einmal-Freigabe ist per exakter URL + Tab gebunden; eine zweite Freigabe ersetzt die erste; Commit/Tab-Schließen räumen auf. Parallele/doppelte Freigaben erzeugen keine dauerhafte Ausnahme (Mock). kein TTL ist als Einschränkung in FIND-003 dokumentiert.', [E('chrome/background.js:44-65', 'Ersetzen/Entfernen der Freigabe; exact-URL-Regel.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions allow:second-replaces-first, allow:cleared-on-commit, allow:cleared-on-tab-close (TR-06 exit 0).'), E('audit/security/probes/results/firefox_background_mock.json', 'Assertion once:second-retry-blocked (TR-07 exit 0).')], 'command', 'TR-06', 'Replay/Doppel-Freigabe führt nicht zu dauerhafter Aufweichung; Einmal-Semantik in beiden Mocks bestätigt.');
+na('VGT-038', 'Kein Rate-Limit-/Quota-Backend und keine entfernten APIs im Produkt: Es existieren keine User-/IP-/Token-Limits. Lokale Ressourcenerschöpfung wird unter VGT-020/VGT-064 bewertet; die Grenze "Rate Limits" existiert im Scope nicht.');
+na('VGT-039', 'Keine HTTP-Caches/CDNs/Service-Worker-Caches mit Authentifizierungsdaten: Die Extension lädt ausschließlich lokale Bundle-Ressourcen; keine gecachten API-Antworten oder Nutzerdaten.');
+na('VGT-040', 'Keine Webhooks oder externen Integrationen: Keine Signaturen, Zeitfenster, Event-Replays oder Drittanbieterantworten vorhanden.');
+
+/* Block 05 — Host, Container, Netzwerk */
+na('VGT-041', 'Keine OS-Privilegien, Serviceaccounts, setuid oder Capabilities: Die Extension läuft im Browser-Sandbox-Modell; ihre Privilegien sind ausschließlich Manifest-Permissions (bewertet in VGT-010/027/032).');
+pass('VGT-042', 'Sandbox-/Prozessisolierung: Die Extension basiert auf dem Chrome/Firefox-MV3-Sandboxmodell, enthält keinen nativen Code, kein WASM, keine Plugins und keine eval-Pfade; alle Seiten laufen unter der Default-CSP. Ein Worker außerhalb des Browser-Modells existiert nicht.', [E('chrome/manifest.json:19-21; firefox/manifest.json:17-23', 'Nur background service_worker/scripts, keine nativen Hosts.'), E('audit/security/probes/results/static_scan.json', 'probe09: eval_like=0, dangerous_shell=0, keine nativen Bindings (TR-11 exit 0).'), E('chrome/guard.html:98-100', 'Nur Same-Extension-Skripte; keine Remote-Ressourcen.')], 'command', 'TR-11', 'Keine nicht-sandboxed Ausführungspfade gefunden; 0 native Sinks.');
+pass('VGT-043', 'IPC-Authentisierung: Die interne runtime-Messaging-Schnittstelle prüft Sender-URL und Ziel-Tab; einen externen IPC-/Localhost-Endpunkt gibt es nicht. Fremdkontexte (Web-Origins, falsche Tabs) werden abgewiesen (Mock).', [E('chrome/background.js:88-102', 'sender.url- und tab.url-Prüfung.'), E('chrome/manifest.json:1-47', 'Kein externally_connectable, keine nativen Messaging-Hosts.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions msg:web-origin-rejected, msg:tab-not-on-guard-rejected; probe05 analog (TR-06/TR-07 exit 0).')], 'command', 'TR-07', '14/14 Firefox- und 46/46 Chrome-Mock-Assertions PASS; fremde Aufrufer abgewiesen.');
+pass('VGT-044', 'Netzwerkausgang/Egress: Es existiert keine ausgehende Netzwerkkommunikation. Der statische Scan über alle 44 Dateien findet 0 Fetch-/XHR-/WebSocket-/Beacon-/EventSource-Sinks; alle externen URL-Vorkommen sind Kommentare/Doku/Manifest-Muster.', [E('audit/security/probes/results/static_scan.json', 'probe09: network_fetch=0; 77 externe URL-Vorkommen ausschließlich Doku/Manifest-Muster/Testdaten (TR-11 exit 0).'), E('shared/detector.js:1-6', 'Header: "No remote requests, no telemetry, no tracking".'), E('README.md:49-53', 'Offline-/Datenschutzaussage durch Scan bestätigt.')], 'command', 'TR-11', 'Kein Egress-Pfad statisch nachweisbar (0 Sinks); Offline-Versprechen verifiziert.');
+na('VGT-045', 'Keine Server-Bindings, Ports, Debugserver oder lokalen Dienste im Produktcode; die Extension bietet keine Netzwerkexposition.');
+na('VGT-046', 'Keine Container-/Build-Isolation im Repo (kein Dockerfile, keine CI-Images); reine Browser-Extension, Container-Betrieb nicht vorgesehen.');
+na('VGT-047', 'Keine Cloud-IAM-, Metadata-Endpunkt- oder Storage-Bucket-Nutzung: Es existiert kein Cloud-Backend im Scope.');
+na('VGT-048', 'Kein Reverse-Proxy/DNS-/TLS-Terminierungs-Code und keine Forwarded-Header-Verarbeitung; die Extension läuft ausschließlich clientseitig.');
+na('VGT-049', 'Keine Laufzeit-Tempfiles, Logs, PID-/Lockfiles oder Shared Directories; Build-Skripte erzeugen nur statische ZIPs/Verzeichnisse.');
+fail('VGT-050', 'OS-/Plattform-Portabilität: Es gibt keinen plattformspezifischen Code, aber die tatsächlichen Sicherheitsregeln unterscheiden sich zwischen Chrome (DNR-GET-Redirect) und Firefox (webRequest-Blocking); Paritätslücken (fehlendes Firefox-WAR, volatile Event-Page-Bypass, ignoriertes strictMode) und fehlender Browser-E2E-Nachweis auf jeder Plattform. Der Audit-Host war Windows; macOS/Linux-Verhalten nicht getestet.', [E('firefox/manifest.json:1-44 vs. chrome/manifest.json:31-41', 'WAR-Paritätslücke; unterschiedliche Background-Modelle.'), E('audit/security/probes/results/firefox_background_mock.json', 'probe05 OBS state:volatile-event-page, OBS strict:ignored-in-firefox (TR-07 exit 0).'), E('README.md:62', 'Kein erfolgreicher Browser-E2E-Lauf für Chrome/Firefox dokumentiert.')], ['FIND-004'], 'static_analysis', 'Plattformspezifische Laufzeitwirkung NOT_TESTED; dokumentierte Unterschiede + Mock-Evidenz belegen fehlende Plattform-Parität.');
+
+/* Block 06 — Build, Lieferkette, Updates */
+pass('VGT-051', 'Dependency-Inventar/SBOM: Das Produkt hat keine Third-Party-Dependencies (kein package.json/Lockfile, keine npm-Installation); require/import-Aufrufe existieren ausschließlich in Tests und nur für Node-Builtins. Damit ist das Inventar vollständig bestimmbar ("keine Dependencies"); ein SBOM wäre leer. Kein Lockfile nötig.', [E('audit/security/probes/results/static_scan.json', 'probe09: code_imports ausschließlich node:*-Module in tests/; keine package.json/Lockfiles (TR-11 exit 0).'), E('build.py:1-37', 'Build nutzt nur Python-Stdlib (pathlib/json/shutil/zipfile).')], 'command', 'TR-11', 'Keine Third-Party-Dependency im Scan; vollständiges Inventar = leer; SBOM-Artefakt fehlt (FIND-005).');
+na('VGT-052', 'Keine Third-Party-Dependencies (direkt/transitiv), daher keine CVE-/KEV-/Advisory-Triage im Repo-Scope. Browser-Plattform-CVEs (Chrome/Firefox) liegen außerhalb des auditierbaren Artefakts.');
+na('VGT-053', 'Keine Package-Manager-Installationen, Registry-Auflösung oder Installhooks: Dependency-Confusion-/Typosquatting-Risiko besteht im Build nicht (keine Dependencies).');
+na('VGT-054', 'Keine CI/CD-Konfiguration im Repo (kein .github/workflows, .gitlab-ci.yml o. ä.); es existieren keine Workflow-Secrets, PR-Trust- oder Cache-Pfade zu prüfen.');
+fail('VGT-055', 'Build-Provenance/Reproduzierbarkeit: Kein VCS/Commit, keine CI, keine Checksums/Signatur, kein reproduzierbarer Build-Nachweis; build.py schreibt ZIPs ohne Hash-Metadaten und ohne Datei-Allowlist. Eine Zuordnung Release -> überprüfbare Quelle ist nicht möglich.', [E('audit/security/probes/results/static_scan.json', 'probe09 supply_chain: vcs_present=false, release_config=[], lockfiles=[], sbom=false (TR-11 exit 0).'), E('build.py:20-35', 'ZIP-Erzeugung ohne Hash/Attestation; Legacy-Dateiname aus gleichem Inhalt.')], ['FIND-005'], 'static_analysis', 'Keine Provenance-Nachweise vorhanden; Reproduzierbarkeit nicht belegt.');
+blocked('VGT-056', 'Code-Signing/Release-Artefakte sind ohne Store-/Netzwerkzugriff nicht verifizierbar.', 'Kein signiertes Artefakt, Store-Eintrag oder Signaturmaterial im Scope; Testlimits erlauben keine Netzwerk-/Store-Aktionen -> Verifikation unmöglich.');
+na('VGT-057', 'Kein Auto-Updater/Update-Manifest im Produktcode: Updates laufen ausschließlich über die Browser-Store-Mechanismen (außerhalb des Repo-Scopes).');
+na('VGT-058', 'Keine Threat-Feeds oder signierten Policy-Updates: Die Brand-Liste ist statisch gebündelt; damit existiert keine Feed-Signatur-/TTL-/Rollback-Grenze. Datenintegrität wird unter VGT-051/VGT-055 bewertet.');
+fail('VGT-059', 'Release-Kanal-/Artefakt-Isolation: Nur ein Alpha-Kanal, keine Premium-/Debug-Code-Trennung; es fehlt eine buildzeitliche Artefakt-Prüfung/Datei-Allowlist — build.py verpackt alles, was im Zielordner liegt (derzeit keine Fremddateien, aber ungeschützt).', [E('build.py:20-24', 'zip aller Dateien via rglob ohne Allowlist/Manifestprüfung.'), E('audit/security/probes/results/manifest_integrity.json', 'probe01/build:no-copy-drift = PASS (aktuell konsistent); Allowlist-Kontrolle fehlt dennoch (TR-03 exit 0).')], ['FIND-005'], 'static_analysis', 'Aktueller Artefaktinhalt konsistent, aber ohne buildzeitliche Allowlist-/Kanalprüfung.');
+na('VGT-060', 'Keine eigenen Schlüssel, Registry- oder Builder-Infrastruktur im Scope; damit ist kein Key-Rotations-/Supply-Chain-Incident-Prozess implementiert.');
+
+/* Block 07 — Verfügbarkeit, Fehlermodi */
+fail('VGT-061', 'Fail-Secure State Machine: Unklarer/fehlerhafter Sicherheitszustand führt in mehreren Pfaden zur stillen Nicht-Prüfung: configure()-Fehler lassen keine DNR-Regel und keinen Observer-Fallback zurück (FIND-002); strictMode=false ist ein expliziter Fail-open-Modus (FIND-001); der Detektor behandelt unbekannte Domains per Design als "safe". Sichere Zustände mit sichtbarer Degradierung fehlen.', [E('chrome/background.js:15-41,79-87,104', 'Fehlerpfade/Fail-open-Modus.'), E('audit/security/probes/results/chrome_background_mock.json', 'OBS failopen:config-error-no-rule und OBS reduced:fail-open-by-design (TR-06 exit 0).'), E('audit/security/probes/results/firefox_background_mock.json', 'OBS engine:missing-engine-throws (TR-07 exit 0).')], ['FIND-001', 'FIND-002'], 'mock_execution', 'Zwei Fail-open-Pfade im Mock reproduziert; Nutzer erhält keinen Fehler-/Degradationshinweis.');
+fail('VGT-062', 'Transaktions-/Datenintegrität: Der Freigabezustand ist auf zwei nicht-atomare Speicher verteilt (In-Memory pending-Map + persistente Session-Regel) und wird nur beim Service-Worker-Start reconciliiert; configure()-Läufe und Allow-Erzeugung sind nicht serialisiert; der Blockzähler ist ein Read-Modify-Write ohne Atomarität. Crash/Suspend zwischen den Schritten kann inkonsistente Zustände hinterlassen (FIND-003).', [E('chrome/background.js:10,16-20,44-65,66-68', 'Zwei Zustandsspeicher, Startup-Purge, nicht-atomarer Zähler.'), E('audit/security/probes/results/chrome_background_mock.json', 'OBS allow:no-timeout-implementation / race:configure-interleaving (TR-06 exit 0).')], ['FIND-003'], 'mock_execution', 'Race-Simulation: DNR-Regel kann trotz aktivem Schutz fehlen; Zustandsdesync plausibel, reales Auftreten NOT_TESTED.');
+fail('VGT-063', 'Race Conditions: configure() wird von Install/Startup/storage.onChanged ohne Serialisierung aufgerufen; ein überlappendes remove kann eine gerade hinzugefügte DNR-Regel löschen (synthetisch reproduziert). allow-once/Commit/Tab-Close laufen parallel ohne Lock; In-Memory-pending kann gegenüber Session-Regeln veralten. Keine Locks/CAS/Unique-Constraints für Sicherheitsinvarianten.', [E('chrome/background.js:14-41,44-65,69-74', 'Keine Synchronisation zwischen configure()->Läufen und Allow-Lifecycle.'), E('audit/security/probes/results/chrome_background_mock.json', 'OBS race:configure-interleaving: Regel vorhanden=false bei strictMode=true im simulierten Interleaving (TR-06 exit 0).')], ['FIND-003'], 'mock_execution', 'Race im kontrollierten Scheduling reproduziert (80 ms verzögerter Remove); reales Browser-Verhalten NOT_TESTED.');
+pass('VGT-064', 'Denial-of-Service/Backpressure: Es gibt keine Queues/Thread-Pools/Netzwerkabhängigkeiten; die Verarbeitung ist lokal und kurz (p95 0,60–1,81 ms über Läufe, 5.000 Klassifikationen). Die redirect-all-Regel kostet eine zusätzliche lokale Guard-Page-Navigation pro GET-Hauptnavigation, bleibt aber linear/begrenzt. Blockzähler ist best-effort (kein Kollaps). Übersize-Input ist als eigenes Risiko in VGT-020/FIND-009 erfasst.', [E('audit/security/probes/results/fuzz_perf.json', 'probe07/TR-09: p95 0,60–1,81 ms (Budget <5 ms), 20.000 Fuzz-Inputs ohne Throw, Extremfälle gemessen.'), E('chrome/background.js:14-41', 'Konstante Anzahl DNR-Regeln (1 dynamisch + max. 1 Allow pro Tab).')], 'command', 'TR-09', 'Latenz p95 0,60–1,81 ms (Budget <5 ms); kein Queue-/Thread-/Netzwerkpfad; Ressourcenverbrauch begrenzt (Ausnahme Extrem-Input, VGT-020).');
+na('VGT-065', 'Keine Retry-Policies, Netzwerkabhängigkeiten oder Control-Plane: Es existieren keine Retry-/Backoff-/Circuit-Breaker-Pfade, die geprüft werden müssten.');
+fail('VGT-066', 'Konfigurationsintegrität/sichere Defaults: Defaults sind sicher (strictMode default true, Abwesenheit = Schutz an). Aber ein Fehler beim Laden/Anwenden der Konfiguration resultiert nicht in einem sicheren, gekennzeichneten Zustand, sondern in stiller Untätigkeit (configure reject, strict bleibt true => auch Observer inaktiv); ungültige/fehlende Policy aktiviert damit implizit "keine Prüfung".', [E('chrome/background.js:15', 'Default strictMode=true (sicher).'), E('chrome/background.js:19-26,104', 'Konfigurationsfehler => reject ohne Regel/Fallback.'), E('audit/security/probes/results/chrome_background_mock.json', 'OBS failopen:config-error-no-rule (TR-06 exit 0).')], ['FIND-002'], 'mock_execution', 'Sichere Defaults vorhanden; Fehlerzustand nicht fail-secure (Mock).');
+na('VGT-067', 'Kein Rollback-/Snapshot-/Migrationssystem: Der Produktzustand besteht aus zwei lokalen Setting-Werten; ein Restore unsicherer Policy ist nicht implementiert.');
+pass('VGT-068', 'Offline-/Airgap-Verhalten: Die Kernfunktion arbeitet vollständig offline (interner Detektor + gebündelte Brand-DB); es gibt keine Telemetrie-, Lizenz- oder Remote-Abhängigkeit, die beim Netzausfall degradieren könnte. Der statische Scan bestätigt 0 Netzwerk-Sinks.', [E('audit/security/probes/results/static_scan.json', 'probe09: network_fetch=0 (TR-11 exit 0).'), E('shared/detector.js:1-6', 'Offline-Header/Bundle-Detektor.'), E('README.md:8,47-53', '100% Offline/keine Telemetrie; durch Scan bestätigt.')], 'command', 'TR-11', 'Kernschutz ohne Netzwerk/resourcenfremde Abhängigkeiten nachweisbar.');
+pass('VGT-069', 'Zeit/Ablauf/Replay: Es gibt keine sicherheitsrelevanten Zeit-/Fristentscheidungen (kein Token, keine Zertifikate, kein TTL-Feature); Replay-Schutz der allow-once-Nachricht ist an exakte URL + Tab + Senderkontext gebunden und die Einmal-Session-Regel wird nach Commit/Tab-Ende entfernt (Mock). Fehlender TTL ist separat in VGT-006/FIND-003 erfasst.', [E('chrome/background.js:44-65', 'One-Shot-Regel + Aufräumpunkte; keine zeitabhängige Logik.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertions allow:regex-matches-exact-url, allow:cleared-on-commit (TR-06 exit 0).')], 'command', 'TR-06', 'Keine clock-abhängige Sicherheitsentscheidung; Replay nur im gebundenen Guard-Kontext möglich.');
+pass('VGT-070', 'Ressourcenerschöpfung durch Sekundärsysteme: Es gibt kein Logging/Quarantäne/Backup/Metrics-Subsystem; der einzige Speicher-Schreibvorgang (Zähler) ist mit catch gekapselt und kann den Schutzpfad nicht kollabieren lassen. Storage-/DNR-Quota-Fehler führen zu abgewiesener Freigabe (fail-closed) statt zu ungeprüfter Navigation.', [E('chrome/background.js:66-68', 'countBlock mit try/catch; Schutzpfad unabhängig vom Zähler.'), E('chrome/background.js:44-57', 'DNR-Quota-/Regex-Fehler => Fehler an Guard-Seite, keine Freigabe.'), E('audit/security/probes/results/chrome_background_mock.json', 'Assertion allow:overlong-url-rejected (TR-06 exit 0).')], 'static_analysis', null, 'Kein Sekundärsystem, das volllaufen könnte; Fehler wirken fail-closed auf die Freigabe.');
+
+/* Block 08 — Erkennung, Logging, Security-Produktverhalten */
+fail('VGT-071', 'Security-Event-Vollständigkeit: Nur ein globaler Blockzähler wird persistiert; Block-/Allow-Entscheidungen, Einmal-Freigaben, Konfigurationsfehler, Moduswechsel und Update-/Statusänderungen erzeugen keine strukturierten Events mit Zeitstempel/Kontext. Nachvollziehbarkeit von Fehlalarmen/Umgehungen ist nicht gegeben (FIND-006).', [E('chrome/background.js:66-68; firefox/background.js:13', 'Nur Zähler, kein Event-Schema/correlation-ID.'), E('audit/security/probes/results/static_scan.json', 'probe09 storage_access: ausschließlich blocked/strictMode (TR-11 exit 0).')], ['FIND-006'], 'static_analysis', 'Keine strukturierten Security-Events im Code; nur aggregierter Zähler.');
+na('VGT-072', 'Kein Auditlog/Log-Sink vorhanden, dessen Integrität/Vertraulichkeit zu schützen wäre; die fehlende Event-Erfassung wird unter VGT-071/FIND-006 bewertet.');
+na('VGT-073', 'Kein Alert-Pipeline-/Threshold-/Dedup-System: Der einzige Alarm ist die lokale Interstitial-Seite (Erzeugung in VGT-074/075-Kontext, UI in VGT-090); es gibt keine Severity-/Acknowledge-/Escalation-Logik.');
+pass('VGT-074', 'Detection-Normalisierung: Unicode-/Punycode-Äquivalente werden konsistent bewertet — 165/165 Confusable-Substitutionen (Kyrillisch/Griechisch) wurden sowohl als UTF-8-URL als auch als IDNA-Punycode-URL blockiert; der eigene Punycode-Decoder stimmt in 480 gültigen IDN-Fällen mit der Node-IDNA-Referenz überein (0 Abweichungen). Groß-/Kleinschreibung, Trailing-Dot, IPv4/IPv6 und IDNA-Normalisierung werden konsistent behandelt.', [E('audit/security/probes/results/punycode_parity.json', 'probe03/TR-05: 165/165 erkannt (Unicode+Punycode je 165), 480 IDN-Decoder-Fälle ohne Abweichung.'), E('shared/detector.js:201-247', 'URL-Parser, lowercase, Trailing-Dot, IPv4/IPv6-Skip, Punycode-Decode je Label.'), E('tests/detector.test.cjs:96-117', 'Benign-Normalisierungstests (IDN, Großschreibung, Trailing-Dot).')], 'command', 'TR-05', 'Normalisierungsparität 165/165 + 480/480; keine Unicode/Punycode-Inkonsistenz. Rest-Evasion (Bait/path/userinfo) ist Erkennungsabdeckung, siehe VGT-080/FIND-007.');
+na('VGT-075', 'Keine persistente Quarantäne-/Autopunisher-Architektur: Die Blockade ist ein einmaliges Navigations-Interstitial ohne dauerhaftes Blocklisting; TTL/Allowlist/Appeals-Logik existiert nicht. Umkehrbarkeit wurde in VGT-006/VGT-090 betrachtet.');
+na('VGT-076', 'Kein Threat-Feed/keine Feed-Freshness-Mechanik: Die Brand-Liste ist statisch gebündelt (keine Version/TTL/Quelle im Datensatz); Feed-Signatur-/Rollback-Grenze existiert nicht. Datenintegrität und Provenance werden unter VGT-051/VGT-055/FIND-005 bewertet.');
+na('VGT-077', 'Keine Control Plane, kein Agent-Enrollment, kein Heartbeat und keine Mutual-TLS-Kanäle: Es existiert kein Server-Gegenüber im Scope.');
+pass('VGT-078', 'Admin-Dashboard/Telemetrie: Es gibt kein Remote-Dashboard und keine Telemetrie; das Popup zeigt ausschließlich lokale Werte (Markenanzahl, Blockzähler, Modus) per textContent. Keine rollen-/stream-basierten Datenlecks, kein Live-Feed, keine externe Datenquelle.', [E('chrome/popup.js:6-13', 'Nur lokale VGT_SITES-Anzahl + storage-Werte; textContent.'), E('audit/security/probes/results/static_scan.json', 'probe09: network_fetch=0, keine Telemetrie-Sinks (TR-11 exit 0).'), E('chrome/popup.html:295-319', 'Anzeige lokaler Zähler; keine Remote-Daten/Streams.')], 'static_analysis', null, 'Popup zeigt ausschließlich lokale, unkritische Daten; keine Telemetrie-/Rollen-/Stream-Pfade.');
+nt('VGT-079', 'Incident-Response-Readiness ist nicht nachweisbar: Es existiert kein IR-Runbook, kein Notfallprozess und keine forensische Belegsicherung im Repo (SECURITY.md nennt nur Meldeweg); ein Tabletop/Test war im Audit nicht möglich. Nutzer können die Extension deaktivieren, aber ein dokumentierter Kill-Switch-Prozess fehlt.');
+fail('VGT-080', 'False-Positive/False-Negative-Bilanz: Die Erkennung ist messbar unausgewogen — im synthetischen Angriffskorpus wurden 37/43 (86,1%) geblockt, u. a. verdünnte Homograph-/Bait-Kombinationen und Brand-only-Userinfo entgingen; im Benign-Korpus wurden 18/553 (3,3%) fälschlich blockiert (16 kurze Marken-Subdomains, apply.com/applet.com). Es gibt kein kalibriertes Regression-Dataset/keine Metriken im Repo.', [E('audit/security/probes/results/detector_corpus.json', 'probe02/TR-04: FN-Liste + FP-Liste mit Beispielen.'), E('shared/detector.js:286-329', 'Subdomain- und Typosquat-Regeln erzeugen beide Fehlerklassen.'), E('README.md:57-60', 'README räumt Falschpositive/ungeschützte Marken als bekannte Grenze ein.')], ['FIND-007', 'FIND-008'], 'measurement', 'FN 6/43, FP 18/553 gemessen; keine Metrik-/Kalibrierungspfade im Repo.');
+
+/* Block 09 — Plattformen, Plugins, KI, UX */
+na('VGT-081', 'Kein WordPress-Kontext: keine PHP-Hooks, REST-Routen, admin-ajax, Nonces oder current_user_can-Pfade im Repo.');
+na('VGT-082', 'Keine WordPress-Persistenz: keine wpdb-/Options-/Transient-/Cron-Operationen im Code.');
+na('VGT-083', 'Keine Desktop-App/Electron/Tauri/WebView-Integration: reine Browser-Extension ohne Node-Integration, Context-Isolation oder native IPC.');
+na('VGT-084', 'Keine lokale Dokument-/Office-/PDF-Verarbeitung: Die Extension verarbeitet ausschließlich Navigations-URLs und lokale Bundle-Assets.');
+na('VGT-085', 'Keine Mobile-App/App-Store-Berechtigungen: kein Android/iOS-Code, keine Keystore-/Deep-Link-/Intent-Pfade.');
+na('VGT-086', 'Kein Plugin-/Erweiterungssystem innerhalb des Produkts: keine Plugin-API, keine Plugin-Signaturen oder Updatekanäle zu bewerten.');
+na('VGT-087', 'Keine KI/LLM/Agent-Komponente im Produktcode: keine Prompts, RAG-Pfade, Tool-Dispatcher oder Agent-Workflows, daher keine Prompt-Injection-Grenze im Scope.');
+na('VGT-088', 'Keine LLM-Ausgaben, Modell-Sinks oder KI-Konfiguration/Secrets im Produkt.');
+na('VGT-089', 'Keine Modelle, Datasets, Embeddings, Vektorspeicher oder KI-Connectoren im Produkt.');
+nt('VGT-090', 'A11y-/UX-Sicherheitsbypass ist ohne Browser nicht abschließend prüfbar: Statisch vorhanden sind ARIA-Attribute, aria-live, Fokus-Styles, Tastatur-Buttons und ein zweistufiger Bestätigungsdialog; die Enforcement-Entscheidung liegt unabhängig von der UI im Hintergrund (Mock). Eine reale Tastatur-/Screenreader-/Zoom-Prüfung und die Frage, ob die Warnung in allen Bedienpfaden wahrnehmbar ist, konnten ohne Browser-E2E nicht getestet werden.');
+
+/* Block 10 — Kettenrisiken, Regression, Freigabe */
+pass('VGT-091', 'Cross-Component-Attack-Path-Graph: Die Vertrauensgrenzen wurden zu gerichteten Ketten verbunden (DNR-Redirect -> Guard -> Detektor -> allow-once -> Navigation; Build -> Store -> Nutzer). Es wurden fünf Ketten mit Preconditions, Endwirkung und Breakpoints dokumentiert (darunter eine durch Kontrolle abgewehrte Chain-005).', [E('audit/security/AUDIT_SECURITY.md', 'CHAIN-001..CHAIN-005 mit Pfad/Impact/Breakpoint.'), E('audit/security/AUDIT_MATRIX.json:chains', 'Maschinenlesbare Ketten mit parent_findings.'), E('chrome/background.js:14-102; shared/guard.js:15-79', 'Realer Kontrollfluss der Kette.')], 'static_analysis', null, '5 Ketten dokumentiert (4 offene Risikopfade, 1 durch Control abgewehrt); keine mathematische Risikoaddition.');
+pass('VGT-092', 'Combination Bugs/Preconditions: Findings wurden paar-/tripelweise auf kumulative Wirkung geprüft; jede Kette referenziert Parent-Findings, validiert Ausführbarkeit/Timing (z. B. POST-Methodenlücke nur Chrome; FN nur für nicht abgedeckte Domainklassen) und trennt belegt von hypothetisch.', [E('audit/security/AUDIT_MATRIX.json:chains', 'parent_findings, preconditions, path, impact, breakpoint je Kette.'), E('audit/security/AUDIT_SECURITY.md', 'CHAIN FUSION mit Belegt/Hypothetisch-Trennung.')], 'static_analysis', null, 'Ketten mit Preconditions/Breakpoints dokumentiert; Hypothese vs. Beweis getrennt (CHAIN-004 als Kontrollabwesenheits-Hypothese markiert).');
+nt('VGT-093', 'Privilege/Integrity Pivot ist nicht abschließend testbar: Der einzig relevante Aufwertungspfad führt über Build/Store (Quellcode -> Artefakt -> Nutzer). Signatur-/Provenance-Nachweise fehlen im Repo, ein Store-Artefakt ist nicht verfügbar, und ohne Netzwerk-/Store-Zugriff konnte kein Test durchgeführt werden; das Modell ist in CHAIN-004 beschrieben.');
+pass('VGT-094', 'Cross-Layer Input Transformation: URL -> URL-Parser -> Detektor -> Guard -> allow-once -> DNR-Navigation wurde auf Transformationslücken geprüft. Unicode/Punycode/IDN werden konsistent normalisiert (probe03), der Guard setzt untrusted Werte nur als Text (probe06), und die Freigabe ist exakt URL-/Tab-gebunden. Randbeobachtung: allow-one nutzt die rohe Ziel-URL, während DNR die kanonisierte Netzwerk-URL matcht — das kann bei IDN/Sonderfällen einen zusätzlichen Guard-Zyklus erzeugen (fail-closed, Verhalten NOT_TESTED).', [E('audit/security/probes/results/punycode_parity.json', 'probe03: 165/165 Unicode<->Punycode konsistent, 480 IDN-Paritätsfälle (TR-05 exit 0).'), E('audit/security/probes/results/guard_render_mock.json', 'probe06: Payload bleibt Text, keine HTML-/URL-Reinterpretation (TR-08 exit 0).'), E('chrome/background.js:44-49', 'allowOne validiert per URL-Parser, verwendet aber die rohe Zeichenkette für regexFilter.')], 'command', 'TR-05', 'Keine sicherheitsrelevante Transformationsabweichung nachgewiesen; möglicher Extra-Guard-Zyklus bei raw-vs-kanonisch ist NOT_TESTED und fail-closed.');
+na('VGT-095', 'MODE=AUDIT_ONLY: Es wurde kein Patch erstellt und es durften keine Quellcode-Änderungen vorgenommen werden; Patch-Vollständigkeit/Root-Cause-Beseitigung ist damit im Rahmen dieses Audits nicht bewertbar.');
+fail('VGT-096', 'Negative Testing/Property-Tests: Die Repo-Tests (13/13) decken Happy Paths und einzelne Negativfälle ab, aber nicht die sicherheitskritischen Verweigerungsfälle: fremde Sender-Origins, Tab-Mismatch, Nicht-HTTP-Schemata, Konfigurationsfehler-Fail-open, Race-/TTL-Verhalten, Übersize-Input. Diese Fälle existieren nur als Audit-Probes (nicht im Produkt-CI).', [E('tests/chrome-worker.test.cjs; tests/firefox-worker.test.cjs', 'Mocks testen Allow-Pfad/Reduced Mode/Once-Bypass, aber keine Messaging-Negativfälle oder Fehlerinjektion.'), E('audit/security/probes/probe04_chrome_background_mock.cjs', 'Die fehlenden Negativfälle mussten als Audit-Probes neu erstellt werden (46 Assertions).'), E('audit/security/probes/results/chrome_background_mock.json; firefox_background_mock.json', 'Probes decken Negativfälle ab; Integration in Produkt-Testsuite fehlt (TR-06/TR-07 exit 0).')], ['FIND-005'], 'static_analysis', 'Sicherheits-Negativtests nur als Audit-Probes vorhanden, nicht als Produkt-Regressionstests.');
+blocked('VGT-097', 'SAST/DAST/SCA-Fundabgleich nicht durchführbar: Kein Scanner-Tooling im Offline-Scope verfügbar/installierbar.', 'Kein SAST/DAST/SCA-Tool im Audit-Container; es stehen nur manuelle Analyse und eigene Node-/Python-Probes zur Verfügung (kein externer Scanner-Fundabgleich, keine Advisory-Datenbank).');
+na('VGT-098', 'MODE=AUDIT_ONLY: Es wurde kein Sicherheitsfix angewendet, daher ist eine Performance-/Availability-Regression nach Patch nicht bewertbar. Die Baseline-Latenz wurde stattdessen gemessen (VGT-064, probe07).');
+pass('VGT-099', 'Release-Blocker/Risk Acceptance/Audit-Trace: Der Bericht dokumentiert Gate-Urteil, harte Blocker, Restlücken und offene Findings mit Evidenz; es wird keine Freigabe behauptet. Die Matrix ist maschinenlesbar validiert (validate_audit.py Exit 0).', [E('audit/security/AUDIT_SECURITY.md', 'Release-Gate BLOCKED, Blocker-/Restlücken-Abschnitt.'), E('audit/security/AUDIT_MATRIX.json', '100 IDs + Findings + Chains + Test-Runs.'), E('audit/security/probes/logs/validate_audit.log', 'validate_audit.py Exit 0 (TR-12).')], 'command', 'TR-12', 'Gate BLOCKED mit begründeten Blockern dokumentiert; Matrix-Validierung Exit 0.');
+fail('VGT-100', 'Langfristige Security-Regressionsbasis: Es gibt keine CI und kein dauerhaftes Regression-Gate; die im Audit gefundenen Klassen (Messaging-Auth-Negativfälle, Fail-open, Races, FN/FP-Korpus, Übersize-Input) sind nicht als permanente Produkt-Tests verankert. Ohne VCS/CI können Befunde nicht dauerhaft nachgetestet werden.', [E('audit/security/probes/results/static_scan.json', 'probe09: keine CI-Verzeichnisse, kein VCS (TR-11 exit 0).'), E('tests/*.cjs', 'Nur 3 Testdateien mit Mock-Happy-Paths; keine Regression für Audit-Findings.'), E('Next.md:47-48', 'Fortschrittsbehauptung "DONE_VERIFIED" ohne CI-/Regression-Gate.')], ['FIND-005'], 'static_analysis', 'Keine dauerhafte Regression-/CI-Basis vorhanden; Audit-Befunde nur einmalig geprüft.');
+
+/* ---------------- Matrix schreiben ---------------- */
+CONTROLS.sort((a, b) => a.id.localeCompare(b.id));
+if (CONTROLS.length !== 100) throw new Error('Erwartet 100 Controls, erzeugt: ' + CONTROLS.length);
+const ids = new Set(CONTROLS.map(c => c.id));
+for (let i = 1; i <= 100; i++) { const id = 'VGT-' + String(i).padStart(3, '0'); if (!ids.has(id)) throw new Error('Fehlende ID: ' + id); }
+
+const summary = {};
+for (const c of CONTROLS) summary[c.status] = (summary[c.status] || 0) + 1;
+const matrix = {
+  schema_version: '1.0',
+  audit_id: 'VGT-AUDIT-20261018-0001',
+  project: PROJECT,
+  profile: 'GENERIC',
+  mode: 'AUDIT_ONLY',
+  timestamp_utc: TS,
+  repo_commit: 'Kein Git-Repository vorhanden (Arbeitskopie/-Snapshot v0.1.0, Dirty State nicht ermittelbar)',
+  scope: 'Vollständiger Quellcode-Snapshot C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src (44 Dateien): Chrome- und Firefox-MV3-Extension, shared Detektor/Brand-DB, Guard-/Popup-Seiten, Build-Skripte, Tests, Doku. Kein echter Browser-E2E, keine Netzwerk-/Store-Aktionen, keine Quellcode-Änderungen (AUDIT_ONLY).',
+  release_gate: 'BLOCKED',
+  status_summary: summary,
+  controls: CONTROLS,
+  findings: FINDINGS,
+  chains: CHAINS,
+  test_runs: TEST_RUNS
+};
+fs.writeFileSync(OUT, JSON.stringify(matrix, null, 2) + '\n', 'utf8');
+console.log('[build_matrix] geschrieben: ' + OUT);
+console.log('[build_matrix] Statusverteilung: ' + JSON.stringify(summary));
+console.log('[build_matrix] Findings: ' + FINDINGS.length + ', Chains: ' + CHAINS.length + ', Test-Runs: ' + TEST_RUNS.length);

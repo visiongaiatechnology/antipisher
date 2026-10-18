@@ -1,0 +1,205 @@
+{
+  "probe": "probe01_manifest_integrity",
+  "timestamp_utc": "2026-10-18T15:35:29.453Z",
+  "root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+  "assertions_total": 25,
+  "assertions_failed": 0,
+  "checks": [
+    {
+      "name": "manifest:chrome:json-valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest:firefox:json-valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest:mv3-both",
+      "ok": true,
+      "detail": "chrome=3 firefox=3"
+    },
+    {
+      "name": "manifest:version-consistent",
+      "ok": true,
+      "detail": "chrome=0.1.0 firefox=0.1.0"
+    },
+    {
+      "name": "manifest:name-consistent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "chrome:referenced-files-exist",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "firefox:referenced-files-exist",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "chrome:background-imports-exist",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "chrome:guard-subresources-exist",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "chrome:WAR-guard.html-present",
+      "ok": true,
+      "detail": "guard.html"
+    },
+    {
+      "name": "chrome:WAR-no-internal-scripts",
+      "ok": true,
+      "detail": "guard.html"
+    },
+    {
+      "name": "permissions:shared-storage-tabs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "permissions:chrome-has-DNR",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "permissions:firefox-has-blocking-webRequest",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "permissions:host-broad-both",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "permissions:no-externally-connectable",
+      "ok": true,
+      "detail": "externe Web-Origins können keine runtime-Messages senden"
+    },
+    {
+      "name": "manifest:no-CSP-override",
+      "ok": true,
+      "detail": "MV3-Default-CSP (script-src self; object-src self) bleibt aktiv"
+    },
+    {
+      "name": "html:no-inline-scripts",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "html:no-inline-event-handlers",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "html:no-remote-resource-refs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "css:no-remote-refs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build:no-copy-drift",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build:no-icon-drift",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "chrome:min-version-121",
+      "ok": true,
+      "detail": "121"
+    },
+    {
+      "name": "firefox:gecko-id-and-min-version",
+      "ok": true,
+      "detail": "{\"id\":\"antipisher@visiongaia.example\",\"strict_min_version\":\"128.0\"}"
+    }
+  ],
+  "observations": [
+    {
+      "name": "firefox:WAR-guard.html-missing",
+      "detail": "Firefox-Manifest deklariert kein web_accessible_resources für guard.html, obwohl guard.html das Redirect-Ziel des webRequest-Blockers ist. Dynamisches Firefox-Verhalten ist ohne Browser-E2E NICHT getestet."
+    },
+    {
+      "name": "chrome:WAR-exposes-guard.html-to-all-http(s)",
+      "detail": "guard.html ist für alle http/https-Origins web-accessible (Chrome). README behauptet \"interne Skripte aus WAR entfernt\" — Skripte sind entfernt, aber guard.html selbst bleibt exponiert (Extension-Fingerprinting/iframe-Einbettung möglich)."
+    },
+    {
+      "name": "permissions:inventory",
+      "detail": "Chrome: declarativeNetRequest,storage,tabs,webNavigation | Firefox: storage,tabs,webRequest,webRequestBlocking | host_permissions beide http://*/* + https://*/* (breit, funktional begründet: Domainvergleich aller Navigationen)"
+    },
+    {
+      "name": "permissions:parity-diff",
+      "detail": "nur Chrome: declarativeNetRequest,webNavigation | nur Firefox: webRequest,webRequestBlocking"
+    },
+    {
+      "name": "manifest:background-models",
+      "detail": "Chrome: service_worker (MV3, nicht persistent) | Firefox: background.scripts-Event-Page (MV3, nicht persistent ohne persistent:true) — globale In-Memory-Zustände können bei Suspend verloren gehen."
+    }
+  ],
+  "manifests": {
+    "chrome": {
+      "permissions": {
+        "permissions": [
+          "declarativeNetRequest",
+          "storage",
+          "tabs",
+          "webNavigation"
+        ],
+        "host_permissions": [
+          "http://*/*",
+          "https://*/*"
+        ]
+      },
+      "war": [
+        "guard.html"
+      ],
+      "background": {
+        "service_worker": "background.js"
+      },
+      "min_version": "121"
+    },
+    "firefox": {
+      "permissions": {
+        "permissions": [
+          "storage",
+          "tabs",
+          "webRequest",
+          "webRequestBlocking"
+        ],
+        "host_permissions": [
+          "http://*/*",
+          "https://*/*"
+        ]
+      },
+      "war": [],
+      "background": {
+        "scripts": [
+          "shared/sites.js",
+          "shared/detector.js",
+          "background.js"
+        ]
+      },
+      "gecko": {
+        "id": "antipisher@visiongaia.example",
+        "strict_min_version": "128.0"
+      }
+    }
+  }
+}

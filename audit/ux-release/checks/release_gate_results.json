@@ -1,0 +1,496 @@
+{
+  "tool": "manifest_check.py",
+  "generated": "2026-10-18T17:26:16.433068+02:00",
+  "source_root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+  "official_sources": {
+    "chrome_mv3_dnr": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest",
+    "chrome_war": "https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources",
+    "cws_policies": "https://developer.chrome.com/docs/webstore/program-policies/policies",
+    "cws_listing": "https://developer.chrome.com/docs/webstore/program-policies/policies#listing-requirements",
+    "cws_mv3": "https://developer.chrome.com/docs/webstore/program-policies/policies#additional-requirements-for-manifest-v3",
+    "mdn_onbeforerequest": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest",
+    "mdn_bss": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings",
+    "mdn_background": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background",
+    "mdn_permissions": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions",
+    "amo_policies": "https://extensionworkshop.com/documentation/publish/add-on-policies/",
+    "amo_signing": "https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/"
+  },
+  "summary": {
+    "Chrome-MV3": {
+      "FAIL": 5,
+      "REVIEW": 3,
+      "NOT_TESTED": 1,
+      "PASS": 7
+    },
+    "Firefox-MV3": {
+      "FAIL": 4,
+      "REVIEW": 3,
+      "NOT_TESTED": 0,
+      "PASS": 5
+    },
+    "Build/Release": {
+      "FAIL": 6,
+      "REVIEW": 1,
+      "NOT_TESTED": 1,
+      "PASS": 1
+    },
+    "Doku": {
+      "FAIL": 7,
+      "REVIEW": 1,
+      "NOT_TESTED": 0,
+      "PASS": 5
+    }
+  },
+  "findings": [
+    {
+      "gate": "Chrome-MV3",
+      "item": "manifest_version == 3",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "chrome/manifest.json:2",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies#additional-requirements-for-manifest-v3",
+      "detail": ""
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "version-Format (1-4 Punkt-Zahlen, CWS-konform)",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "chrome/manifest.json version='0.1.0'; version_name='0.1 Alpha'",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "background.service_worker vorhanden",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "chrome/manifest.json:19-21 -> {'service_worker': 'background.js'}",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "WAR fuer DNR-Redirect-Ziel guard.html deklariert",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "chrome/manifest.json:31-41",
+      "source": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest",
+      "detail": "DNR: 'A declarativeNetRequest rule cannot redirect from a public resource request to a resource that is not web accessible.' -> WAR ist technisch erforderlich."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "WAR-Fingerprinting-Restrisiko (alle http/https-Origins)",
+      "status": "FAIL",
+      "severity": "P2",
+      "evidence": "chrome/manifest.json:36-39 matches=['http://*/*','https://*/*'] fuer guard.html; Datei-Hash 2f77cf6504e3a079",
+      "source": "https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources",
+      "detail": "Chrome-Doku: 'By default no resources are web accessible, as this allows a malicious website to fingerprint extensions that a user has installed'. Da der DNR-Redirect WAR verlangt, ist das Vektor-Restrisiko nicht 'geschlossen' (Widerspruch zu README:15 / Next.md:28). Minderung: `use_dynamic_url` pruefen (mit DNR-Redirect vereinbar?), generische guard-Seite ohne produktspezifische Strings, oder dokumentiertes Restrisiko."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "DNR-Preflight: GET-only, main_frame (POST-Schutz)",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "chrome/background.js:27-39",
+      "source": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest",
+      "detail": "Redirect wirkt auf alle Top-Level-GETs; POST bleibt unberuehrt (README:13 / Next.md:27 bestaetigt)."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "DNR-Redirect per regexSubstitution auf chrome-extension-URL in offizieller Doku belegt",
+      "status": "NOT_TESTED",
+      "severity": "P0_RUNTIME",
+      "evidence": "chrome/background.js:30-38 nutzt regexSubstitution = runtime.getURL('guard.html') + '#\\1'",
+      "source": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest",
+      "detail": "Offizielle Chrome-Doku zeigt fuer Extension-Ziele ausschliesslich das Muster redirect.extensionPath ('/a.jpg' -> chrome-extension://ID/a.jpg); regexSubstitution wird nur mit http(s)-Ziel gezeigt. Ob Scheme-Wechsel + Fragmentuebergabe an eine WAR-Seite in Chrome tatsaechlich funktioniert, ist ohne Browser-E2E nicht belegt => vor Store-Submission in realem Chrome verifizieren (Test: DNR-Redirect -> guard.html#<url>)."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "Host-Permissions nur so weit noetig",
+      "status": "REVIEW",
+      "severity": "P1",
+      "evidence": "chrome/manifest.json:15-18 host_permissions=['http://*/*','https://*/*']",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies",
+      "detail": "CWS 'Use of Permissions': narrowest necessary. Redirect-Action braucht Host-Permissions (declarativeNetRequest gibt implizit nur allow/allowAllRequests/block), daher funktional begruendbar - aber Begruendung im Developer Dashboard + Privacy-Policy sind Pflicht."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "'tabs'-Permission begruendbar minimiert",
+      "status": "REVIEW",
+      "severity": "P2",
+      "evidence": "chrome/manifest.json:9-14 permissions=[storage,tabs,webNavigation,declarativeNetRequest]",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions",
+      "detail": "Chrome zeigt fuer 'tabs' den Warnhinweis 'Read your browsing history'. tabs.getCurrent braucht die Permission nicht; fuer tab.url der eigenen guard-Seite koennte sender.tab ausreichen. Pruefen und ggf. entfernen, um Install-Warnungen und Review-Risiko zu reduzieren."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "Kein Remote-Code / kein eval",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "importScripts nur lokal (chrome/background.js:5); kein eval/Function/Remote-Import",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies#additional-requirements-for-manifest-v3",
+      "detail": ""
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "Inhaltliche Single-Purpose-Pruefung moeglich",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "Ein Zweck: lokale Phishing-/Homograph-/Typosquat-Erkennung + Warnseite",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies",
+      "detail": ""
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "CWS-Policy 'Misleading or Unexpected Behavior' (Redirect aller GET-Navigationen)",
+      "status": "REVIEW",
+      "severity": "P1",
+      "evidence": "chrome/background.js:24-40: jede Top-Level-GET-Navigation wird auf die Erweiterungsseite umgeleitet (auch unverdaechtige Seiten), bevor sie ihr Ziel erreicht.",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies",
+      "detail": "CWS Quality Guidelines: 'Extensions ... should actively enhance the user's current task while causing minimal distractions.' Das Vorab-Interstitial fuer JEDE Seite ist das groesste Store-Review-Risiko; README:45 nennt es selbst 'Technik-Prototyp'. Fuer eine Einreichung empfohlen: Default = nur bei Block warnen (webNavigation + DNR-block), optionaler 'Strenger Modus' mit explizitem Consent + Onboarding."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "Privacy-Policy vorhanden (CWS-Pflicht bei User-Data)",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "Kein PRIVACY.md/keine URL, keine homepage_url im Manifest, kein Developer-Dashboard-Feld; README:47-53 ersetzt keine gehostete Policy.",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies",
+      "detail": "CWS: 'If your Product handles any user data, then you must post an accurate and up to date privacy policy ... accessible by providing a link in the designated Chrome Web Store Developer Dashboard field.' Die Extension liest jede Navigations-URL -> Browsing-Aktivitaet."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "Limited-Use-Disclosure von Browsing-Aktivitaet in UI/Listing",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "Weder Popup noch Guard-Seite beschreiben, dass jede Navigation lokal bewertet wird; keine Affirmative-Limited-Use-Aussage/Website.",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies",
+      "detail": "CWS Limited Use: 'Collection and use of web browsing activity is prohibited, except to the extent required for a user-facing feature described prominently in the Product's Chrome Web Store page and in the Product's user interface.'"
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "Store-Listing-Assets (Screenshots 1280x800, Icons 128, Promo 440x280, Kategorie, Support-Kontakt, Beschreibung)",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "Keine screenshots/, keine promo/, keine store-listing.md, kein Support-Kontakt in README/SECURITY; manifest.json enthaelt keine homepage_url/author.",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies#listing-requirements",
+      "detail": "CWS: 'If your product has a blank description field or is missing an icon or screenshots, it will be rejected.' Screenshots sind im Repo komplett absent."
+    },
+    {
+      "gate": "Chrome-MV3",
+      "item": "Manifest-Metadaten fuer Listing (homepage_url/author/support)",
+      "status": "FAIL",
+      "severity": "P2",
+      "evidence": "chrome/manifest.json: keine homepage_url/author",
+      "source": "https://developer.chrome.com/docs/webstore/program-policies/policies",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "manifest_version == 3",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "firefox/manifest.json:2",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "background.scripts (Firefox unterstuetzt kein service_worker)",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "firefox/manifest.json:18-23 -> {'scripts': ['shared/sites.js', 'shared/detector.js', 'background.js']}",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background",
+      "detail": "MDN: Firefox unterstuetzt background.service_worker nicht, aber background.scripts."
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "gecko.id vorhanden (Pflicht fuer MV3-Signierung)",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "firefox/manifest.json:35 -> 'antipisher@visiongaia.example'",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "gecko.id Format + Domain-Eignung",
+      "status": "REVIEW",
+      "severity": "P2",
+      "evidence": "id='antipisher@visiongaia.example' matcht das erlaubte E-Mail-Format, nutzt aber die reservierte TLD .example (RFC 2606) - keine erreichbare Domain, keine Kontrolle ueber die Identitaet; AMO prueft nur Eindeutigkeit.",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings",
+      "detail": "AMO-IDs sind dauerhaft. Empfehlung: echte, kontrollierte Domain (z.B. antipisher@visiongaiatechnology.<tld>) vor der ersten Einreichung festlegen."
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "browser_specific_settings.gecko.data_collection_permissions deklariert",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "firefox/manifest.json:33-38: Schluessel fehlt",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings",
+      "detail": "MDN: 'Must be provided ... for new extension submitted to addons.mozilla.org from November 3, 2025.' Fuer dieses Add-on ist `required: ['none']` korrekt (keine Uebertragung/Speicherung ausserhalb der Extension), da alle Verarbeitung lokal bleibt."
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "web_accessible_resources fuer Redirect auf Erweiterungsseite",
+      "status": "FAIL",
+      "severity": "P0_Block",
+      "evidence": "firefox/manifest.json: keine web_accessible_resources; firefox/background.js:14-15 leitet main_frame-Requests auf moz-extension://.../guard.html um",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest",
+      "detail": "MDN onBeforeRequest: 'If an extension wants to redirect a public (e.g., HTTPS) URL to an extension page, the extension's manifest.json file must contain a web_accessible_resources key that lists the URL for the extension page.' Ohne WAR ist die Firefox-Warnseite voraussichtlich nicht erreichbar (Redirect geblockt) => Firefox-Build funktional blockiert. Vor Release in realem Firefox verifizieren; Fix: WAR-Eintrag fuer guard.html (matches http/https) ergaenzen."
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "webRequestBlocking in Firefox-MV3 nutzbar",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "permissions=['storage','tabs','webRequest','webRequestBlocking']; MDN-BCD fuehrt webRequestBlocking fuer Firefox ohne MV3-Einschraenkung (Chrome-V3-Einschraenkung gilt nur dort).",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "strict_min_version gultig und aktuell",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "firefox/manifest.json:37 strict_min_version=128.0; MDN nennt 128.0 als aktuelles Minimum fuer signierte Updates.",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "Firefox-Android-Freigabe",
+      "status": "REVIEW",
+      "severity": "P3",
+      "evidence": "browser_specific_settings.gecko_android fehlt -> MDN: 'the extension is only made available on desktop Firefox'. Mobile ist damit faktisch nicht Zielplattform, wird aber nirgends dokumentiert.",
+      "source": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "Signiertes XPI / AMO-Submission-Artefakt",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "Nur unsignierte ZIPs (billd.py:20-38); kein XPI, kein web-ext-Config/-Lint-Ergebnis, keine Signatur, keine Checksummen.",
+      "source": "https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "AMO-Listing-Assets + Support + Privacy-Policy",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "Keine AMO-Beschreibung/Screenshots/Privacy-Policy-URL/Support-Kontakt im Repo; SECURITY.md:9 verweist auf 'einen privaten Kanal' ohne Kontaktangabe.",
+      "source": "https://extensionworkshop.com/documentation/publish/add-on-policies/",
+      "detail": ""
+    },
+    {
+      "gate": "Firefox-MV3",
+      "item": "AMO 'No Surprises' / Informationspflicht",
+      "status": "REVIEW",
+      "severity": "P1",
+      "evidence": "Firefox blockt nur verdaechtige Requests (firefox/background.js:7-16) - deutlich weniger invasiv als Chrome. Aber: keine Onboarding-Erklaerung, kein In-UI-Hinweis auf URL-Verarbeitung, keine Privacy-Policy-URL.",
+      "source": "https://extensionworkshop.com/documentation/publish/add-on-policies/",
+      "detail": ""
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Build-Artefakte vorhanden",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "Antipisher-Chrome-v0.1.0-alpha.zip (33816 B, sha256=00ab658d2db26fef); Antipisher-Firefox-v0.1.0-alpha.zip (32565 B, sha256=9ad5d472bc317cf0); Antipisher-Source-v0.1.0-alpha.zip (129396 B, sha256=85cbbc88352f6c5e); VGT-DomainGuard-Chrome-v0.1.0.zip (33816 B, sha256=00ab658d2db26fef); VGT-DomainGuard-Firefox-v0.1.0.zip (32565 B, sha256=9ad5d472bc317cf0); VGT-DomainGuard-Source-v0.1.0.zip (129396 B, sha256=85cbbc88352f6c5e)",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Legacy-ZIP-Duplikate",
+      "status": "FAIL",
+      "severity": "P2",
+      "evidence": "build.py:26-35 erzeugt je 3 Antipisher-ZIPs zusaetzlich identische VGT-DomainGuard-Kopien: {\"Antipisher-Chrome-v0.1.0-alpha.zip\": true, \"Antipisher-Firefox-v0.1.0-alpha.zip\": true, \"Antipisher-Source-v0.1.0-alpha.zip\": true}",
+      "source": "",
+      "detail": "Doppelte, veraltete Artefaktnamen im Release-Verzeichnis erzeugen Verwechslungs- und Signierungsrisiko. Empfehlung: Legacy-Kopien entfernen, Release-Ordner versionieren."
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Versionsquelle / Single Source of Truth",
+      "status": "FAIL",
+      "severity": "P1",
+      "evidence": "version steht in chrome/manifest.json:6, firefox/manifest.json:6, UI (popup.html:291 'ALPHA 0.1', guard.html:89 'Alpha 0.1'), ZIP-Namen in build.py:20,30, README:86, Next.md:9. Kein package.json/version.js/build-Envs.",
+      "source": "",
+      "detail": "Drift ist vorprogrammiert; nÃ¤chstes Release erzeugt inkonsistente Stores/Artefakte. Empfehlung: version.json als Quelle, Build injiziert Manifeste + UI."
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Reproduzierbarkeit der Builds",
+      "status": "NOT_TESTED",
+      "severity": "P1",
+      "evidence": "Siehe checks/reproducibility.png/log: build.py normalisiert ZIP-Timestamps nicht und der Source-ZIP-Prefix haengt vom Checkout-Ordnernamen ab.",
+      "source": "",
+      "detail": "Next.md:31/48 behauptet 'Reproduzierbare Build-Artefakte'. Beweis siehe checks/reproducibility_results.json (dieser Audit fuehrt den Test aus)."
+    },
+    {
+      "gate": "Build/Release",
+      "item": "CI/Pipeline, Lint/Test-Gate, Checksummen, SBOM",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "Kein .github/workflows, kein CI-Skript, keine *.sha256, kein SBOM, keine Signierung. Tests laufen nur manuell (README:67-72).",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Git-Repository / Source-Identity-Baseline",
+      "status": "FAIL",
+      "severity": "P0_Doc",
+      "evidence": "Kein .git im Workspace (Test-Path .git = False), keine Commit-/Branch-Information; Next.md:11 behauptet SOURCE_IDENTITY_CONFIRMED. Keine package.json, keine .gitignore, kein CHANGELOG.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Audit-/Build-Ausschluss (versehentliche Paketierung)",
+      "status": "REVIEW",
+      "severity": "P1",
+      "evidence": "build.py:31-34 zippt ROOT.rglob('*') ungefiltert (nur __pycache__ ausgeschlossen) -> vorhandene audit/-Ordner, Logs, temporÃ¤re Checks landen im Source-Release-ZIP.",
+      "source": "",
+      "detail": "Belegt durch checks/reproducibility_results.json (audit/ erscheint im Source-ZIP). Empfehlung: explizite Include-Liste statt rglob."
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Store-Pakete (CRX/XPI) / Signierung",
+      "status": "FAIL",
+      "severity": "P0_Store",
+      "evidence": "Keine CRX/XPI/Signaturdateien; CWS signiert beim Upload (kein CRX noetig), AMO verlangt signiertes XPI bzw. web-ext sign im Release-Prozess - beides fehlt.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Build/Release",
+      "item": "Changelog / Release-Notes",
+      "status": "FAIL",
+      "severity": "P2",
+      "evidence": "Kein CHANGELOG.md; Next.md-Checkpoints 002/003 sind Arbeitsnotizen, keine Release-Notes (u.a. mit teils veralteten Testzahlen 9/9 und 12/12).",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "Referenzierte Datei ARCHITECTURE_AND_SECURITY_REVIEW.md existiert",
+      "status": "FAIL",
+      "severity": "P1_Doc",
+      "evidence": "Next.md:13 und Next.md:39 referenzieren sie; im Workspace nicht vorhanden (C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src)",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "SOURCE_IDENTITY_CONFIRMED belastbar",
+      "status": "FAIL",
+      "severity": "P0_Doc",
+      "evidence": "Next.md:11 'SOURCE_IDENTITY_CONFIRMED' vs. kein Git-Repo, kein Commit, kein Tag, uncommitted v0.1.0 (Next.md:53 selbst: 'v0.1.0 uncommitted')",
+      "source": "",
+      "detail": "VGT-Qualitaetsmodell Gate 1 verlangt Source-Identity + Git-/Dirty-Baseline. Korrekt waere SOURCE_IDENTITY: NOT_VERIFIABLE."
+    },
+    {
+      "gate": "Doku",
+      "item": "Qualitaetsklassifikation 'PLATIN VGT SUPREME'",
+      "status": "FAIL",
+      "severity": "P0_Doc",
+      "evidence": "Next.md:71; 'PLATIN VGT SUPREME' ist keine definierte Klasse des VGT-Modells (SILBER/GOLD/PLATIN/DIAMANT VGT SUPREME). Kein E2E-, Performance-, Recovery- oder Zielplattform-Beweis; README:62 und SECURITY.md:3 schliessen Zertifizierung selbst aus.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "13/13 PASS behauptet",
+      "status": "PASS",
+      "severity": "P2",
+      "evidence": "Testlauf in diesem Audit: node --test tests/*.test.cjs -> 13 tests, 13 pass, 0 fail, duration 385ms (checks/logs/tests.log). Die Zahl ist korrekt; die Zeitangabe '422 ms' (Next.md:70) ist nicht reproduzierbar (durations variieren), aber unkritisch.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "165 Marken behauptet",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "shared/sites.js/VGT_SITES.length = 165; sites-100.json = 165; 257 Domains; unique brands/names = 165 (checks/logs/claims.log)",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "Manifest-Fingerprinting 'geschlossen'",
+      "status": "FAIL",
+      "severity": "P1_Doc",
+      "evidence": "README:15 'um Extension-Fingerprinting ... zu verhindern' und Next.md:28 '[x] Manifest-Fingerprinting-Vektoren geschlossen' vs. WAR guard.html (chrome/manifest.json:31-41).",
+      "source": "",
+      "detail": "Skripte sind korrekt nicht mehr WAR, aber guard.html muss WAR bleiben (DNR-Redirect) und ist damit ein Fingerprint-Vektor (siehe Chrome-Doku)."
+    },
+    {
+      "gate": "Doku",
+      "item": "100% Offline / Zero-Telemetry behauptet",
+      "status": "PASS",
+      "severity": "P2",
+      "evidence": "Keine fetch/XHR/WebSocket/sendBeacon in Runtime-Dateien (grep). build_sites.py ebenfalls ohne Netzwerk. Keine externen Assets/Fonts.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "Lueckenloser Subdomain-Schutz behauptet",
+      "status": "FAIL",
+      "severity": "P1_Doc",
+      "evidence": "README:10 und Next.md:23 ('Lueckenloser Subdomain-Schutz fuer alle Marken') vs. detector.js:49 genericSubdomains (office,line,medium,zoom,notion,target) => office.attacker.com/target.attacker.com/medium.attacker.com/zoom.attacker.com werden NICHT geblockt; zudem False Positive auf apple.stackexchange.com (Beleg: checks/logs/detector_probe.log).",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "Versionierung '0.1.0-alpha konsistent implementiert'",
+      "status": "FAIL",
+      "severity": "P2",
+      "evidence": "Next.md:21; String '0.1.0-alpha' existiert nur in ZIP-Namen (build.py:20,30) und Next.md, nicht in den Manifesten (0.1.0) und nicht in der UI. version_name ist Chrome-only ('0.1 Alpha'); Firefox-Manifest hat keinen Alpha-Marker ausser Description.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "Marken-/Produktname konsistent 'Antipisher'",
+      "status": "REVIEW",
+      "severity": "P2",
+      "evidence": "README:1, Manifeste, UI = Antipisher; aber detector.js:357 Alias VGT_DomainGuard, guard.css:2/build_sites.py:2 'VGT DomainGuard', parent-Ordner + Legacy-ZIPs 'VGT-DomainGuard-*', Next.md:7 'vormals VGT DomainGuard'.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "sites-100.json vs. shared/sites.js konsistent",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "165 Eintraege, identische Reihenfolge/Werte in beiden Dateien",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "build_sites.py Docstring aktuell",
+      "status": "FAIL",
+      "severity": "P3",
+      "evidence": "build_sites.py:3 'Generates sites-100.json and shared/sites.js with 140+ ...' vs. 165 Eintraege; Dateiname sites-100.json vs. 165 Marken.",
+      "source": "",
+      "detail": ""
+    },
+    {
+      "gate": "Doku",
+      "item": "README-Testbefehle funktionieren",
+      "status": "PASS",
+      "severity": "P1",
+      "evidence": "node --check chrome/background.js, node --check firefox/background.js, python build.py (nur in Kopie ausgefuehrt, siehe reproducibility)",
+      "source": "",
+      "detail": ""
+    }
+  ]
+}

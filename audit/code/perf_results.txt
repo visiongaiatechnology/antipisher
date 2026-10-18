@@ -1,0 +1,28 @@
+ANTIPISHER 0.1 ALPHA - PERFORMANCE-MESSUNG DER ERKENNUNG (AUDIT)
+Erzeugt: 2026-10-18T16:15:35.615Z | Node v24.13.0 | win32 10.0.26100
+CPU: AMD Ryzen 5 4600H with Radeon Graphics          (12 logische Kerne)
+Engine: shared/detector.js SHA256 9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07
+Befehl: node audit/code/run_corpus.cjs
+
+Methodik:
+  - je Aufruf process.hrtime.bigint() vor/nach engine.classify(url); Umrechnung ns -> ms
+  - 500 Warmup-Aufrufe, dann Messung; keine I/O im Messpfad
+  - Hauptmessung: 5 Wiederholungen a 10.000 Aufrufe (50.000 Proben), round-robin ueber 184 Korpus-URLs
+  - Zusatzmessungen: gleichfoermige URL-Typen (worst-case Safe = voller 165-Sites-Scan), je 3 Wiederholungen
+  - Audit-Container mit paralleler Last: p95/p99 streuen; Median ist die robusteste Kennzahl
+
+Ergebnisse (ms pro classify-Aufruf, aggregiert ueber alle Wiederholungen):
+  Kaltstart (1. Aufruf nach Modul-Laden): 1.2018
+  Korpus-Mix 50.000 Proben        : min=0.0008  median=0.0896  mean=0.2493  p95=0.9860  p99=1.3755  max=5.4208
+    p95 je Wiederholung: 1.014, 0.997, 0.985, 1.007, 0.920 (min=0.920, max=1.014)
+    Median je Wiederholung: 0.094, 0.090, 0.088, 0.091, 0.088
+  Safe 2-Label 30.000 (worst)    : median=1.0561  p95=1.7247  p99=2.3990  max=71.5915  p95-Laeufe: 1.807, 1.621, 1.732
+  Safe 3-Label 30.000            : median=0.7337  p95=1.3697  p99=2.0709  max=12.4783
+  Blockiert (paypa1) 30.000      : median=0.1060  p95=0.2244  p99=0.4233  max=4.6424
+  Langer Host (3x60 Zeichen) 1000: median=4.9927  p95=6.1749  max=10.2034
+
+Speicher: RSS vor=50.5 MiB, nach=86.5 MiB, Delta=36.0 MiB (JIT/GC, kein Cache)
+
+Behauptung: "Performancebudget: < 1 ms Erkennungszeit pro URL" (Next.md Z.33)
+Befund: Median 0.090 ms, p95 0.986 ms (Laufspanne p95 0.920-1.014 ms), p99 1.375 ms
+Bewertung: TEILWEISE: Median < 1 ms, aber p95 in mindestens einem Lauf >= 1 ms - Budgetaussage "< 1 ms" nicht belastbar. Kaltstart 1.202 ms und Lastspitzen (max 5.421 ms) kommen hinzu. Die Budgetaussage ist damit nur fuer den Median (und bei unbelasteter CPU evtl. fuer p95) haltbar, nicht generell.

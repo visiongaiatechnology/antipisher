@@ -1,0 +1,2192 @@
+{
+  "probe": "probe_shield_content_browser_integration",
+  "generated_utc": "2026-10-18T16:29:46.136Z",
+  "auditor": "shield-verifier (teammate)",
+  "mode": "VERIFY_ONLY – keine Produktänderung; Schreiben ausschließlich audit/verify/shield/",
+  "browser_e2e_available": false,
+  "environment": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "arch": "x64",
+    "python": "Python 3.14.2",
+    "chrome": "155.0.8059.85 (C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe) – Headless nur für DOM/CSS-Semantik, kein Extension-E2E"
+  },
+  "evidence_legend": {
+    "STATIC": "Quelltext-/Manifest-/Doku-Analyse mit Datei:Zeile",
+    "HASH": "SHA-256-Vergleich gegen eingefrorene Audit-Snapshots (Unverändert-Nachweis)",
+    "MOCK": "Node-vm-DOM-Stub (präzise für Interzeptionslogik, kein Browser-E2E)",
+    "BROWSER": "Headless Chrome 155 – reale DOM/CSS-Semantik, aber kein geladenes Extension-E2E",
+    "DOC": "externe Doku/Standard (URL im Datensatz)",
+    "NOT_TESTED": "in dieser Session nicht ausführbar"
+  },
+  "shield_behavior": [
+    {
+      "id": "baseline_action_phish",
+      "desc": "Legitime Seite, Formular-Action auf Phishing-Domain (POST)",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "BLOCKED",
+      "detail": {
+        "prevented": true,
+        "modal": true,
+        "shadowMode": "closed"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "baseline_page_phish_relative_action",
+      "desc": "Phishing-Seite, relatives Formularziel",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "BLOCKED",
+      "detail": {
+        "prevented": true,
+        "modal": true
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "baseline_legit_official",
+      "desc": "Offizielle PayPal-Seite, offizielles Formularziel",
+      "expectation": "SHOULD_ALLOW",
+      "observed": "ALLOWED",
+      "detail": {
+        "prevented": false,
+        "modal": false
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "baseline_requestSubmit_intercepted",
+      "desc": "requestSubmit() feuert submit-Event → wird interzeptiert",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "BLOCKED",
+      "detail": {
+        "prevented": true,
+        "modal": true
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "baseline_dynamic_form",
+      "desc": "Dynamisch/nachträglich erzeugtes Formular (Listener sitzt auf window)",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "BLOCKED",
+      "detail": {
+        "prevented": true
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "baseline_get_form_intercepted",
+      "desc": "GET-Formular auf Phishing-Ziel (submit-Event existiert auch bei GET)",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "BLOCKED",
+      "detail": {
+        "prevented": true
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "baseline_phish_page_no_action",
+      "desc": "Phishing-Seite, Formular ohne action (Ziel = Seiten-URL)",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "BLOCKED",
+      "detail": {
+        "prevented": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "post_bypass_cases": [
+    {
+      "id": "BYP-01",
+      "desc": "HTMLFormElement.submit() / form.submit(): browser-nativer Submit OHNE submit-Event",
+      "vector": "form.submit()",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "MOCK+DOC",
+        "nativeSubmits": [
+          {
+            "via": "HTMLFormElement.submit()",
+            "target": "https://paypa1.com/login",
+            "eventFired": false
+          }
+        ],
+        "doc_url": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event",
+        "doc_quote": "the event is not sent to the form when a script calls the form.submit() method directly"
+      },
+      "evidence_class": "MOCK+DOC",
+      "status": "SECURITY_VIOLATION"
+    },
+    {
+      "id": "BYP-02",
+      "desc": "HTMLFormElement.prototype.submit.call(form) (Profil-/Fremdcode-Muster)",
+      "vector": "prototype.submit.call",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "detail": {
+        "nativeSubmits": [
+          {
+            "via": "HTMLFormElement.submit()",
+            "target": "https://paypa1.com/login",
+            "eventFired": false
+          }
+        ]
+      },
+      "evidence_class": "MOCK",
+      "status": "SECURITY_VIOLATION"
+    },
+    {
+      "id": "BYP-03",
+      "desc": "fetch()/XHR-POST an Sammel-Endpoint – Shield hat keinen Netzwerk-/Exfil-Hook",
+      "vector": "network-post",
+      "expectation": "INFO",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "STATIC+MOCK",
+        "classification": "BYPASS_AUSSERHALB_DER_SCHUTZGRENZE",
+        "note": "Ein DOM-Content-Script kann fetch/XHR/beacon nicht verhindern; das widerlegt die pauschale POST-Schutz-Behauptung, ist aber kein neuer Defekt des Shields (kein Netzwerk-Sink vorhanden)."
+      },
+      "evidence_class": "STATIC+MOCK",
+      "status": "INFO"
+    },
+    {
+      "id": "BYP-04",
+      "desc": "navigator.sendBeacon() – Shield hat keinen Netzwerk-/Exfil-Hook",
+      "vector": "network-post",
+      "expectation": "INFO",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "STATIC+MOCK",
+        "classification": "BYPASS_AUSSERHALB_DER_SCHUTZGRENZE",
+        "note": "Ein DOM-Content-Script kann fetch/XHR/beacon nicht verhindern; das widerlegt die pauschale POST-Schutz-Behauptung, ist aber kein neuer Defekt des Shields (kein Netzwerk-Sink vorhanden)."
+      },
+      "evidence_class": "STATIC+MOCK",
+      "status": "INFO"
+    },
+    {
+      "id": "BYP-05",
+      "desc": "fetch Keepalive/Blob-POST – Shield hat keinen Netzwerk-/Exfil-Hook",
+      "vector": "network-post",
+      "expectation": "INFO",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "STATIC+MOCK",
+        "classification": "BYPASS_AUSSERHALB_DER_SCHUTZGRENZE",
+        "note": "Ein DOM-Content-Script kann fetch/XHR/beacon nicht verhindern; das widerlegt die pauschale POST-Schutz-Behauptung, ist aber kein neuer Defekt des Shields (kein Netzwerk-Sink vorhanden)."
+      },
+      "evidence_class": "STATIC+MOCK",
+      "status": "INFO"
+    },
+    {
+      "id": "BYP-06",
+      "desc": "Formular in iframe/Subframe (content_scripts all_frames:false) – Shield läuft nur im Top-Frame",
+      "vector": "iframe(all_frames:false)",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "MOCK+STATIC",
+        "all_frames": false,
+        "topFrameProtected": true,
+        "subFrameProtected": false,
+        "note": "Subframe-Simulation: Shield nicht injiziert; reale Subframe-Injektion hängt an all_frames:false"
+      },
+      "evidence_class": "MOCK+STATIC",
+      "status": "SECURITY_VIOLATION"
+    },
+    {
+      "id": "BYP-07",
+      "desc": "Submit-Button mit formaction=\"https://paypa1.com/login\" überschreibt das harmlose form action",
+      "vector": "submitter.formAction",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "MOCK+STATIC",
+        "intercepted": false,
+        "shieldClassifiedTarget": "nur form.getAttribute(\"action\") = \"/search\"",
+        "actualNavigationTarget": "https://paypa1.com/login"
+      },
+      "evidence_class": "MOCK+STATIC",
+      "status": "SECURITY_VIOLATION"
+    },
+    {
+      "id": "BYP-08",
+      "desc": "Ziel wird nach Modal-Anzeige geändert; \"Trotzdem senden\" + WeakSet-Freigabe verhindert Reklassifikation",
+      "vector": "proceed/TOCTOU",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "MOCK+STATIC",
+        "modalShownBeforeChange": true,
+        "proceedClicked": true,
+        "nativeSubmits": [
+          {
+            "via": "requestSubmit()",
+            "target": "https://attacker-collector.example/steal",
+            "eventFired": true
+          },
+          {
+            "via": "submit-event",
+            "target": "https://attacker-collector.example/steal",
+            "eventFired": true
+          }
+        ],
+        "note": "allowedForms wird vor der Klassifikation geprüft (shield-content.js:240) und beim Fortfahren persistent gesetzt (:271)."
+      },
+      "evidence_class": "MOCK+STATIC",
+      "status": "SECURITY_VIOLATION"
+    },
+    {
+      "id": "BYP-09",
+      "desc": "Chrome-DNR: POST-/Nicht-GET-Hauptnavigation erreicht die Phishing-Seite ohne Preflight (Regel unverändert GET-only)",
+      "vector": "chrome-dnr-requestMethods",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "STATIC+HASH",
+        "dnr_rule_line": 37,
+        "dnr_rule_sha256_unchanged": true,
+        "explanation": "DNR-Regel matcht nur requestMethods:[\"get\"]; Content-Script läuft erst im Ziel-Dokument NACH der POST-Navigation und kann die Navigation nicht verhindern.",
+        "doc_test_catalog": "audit/00_GESAMTAUDIT_ANTIPISHER_V2_FAHRPLAN.md §8.3 Punkt 4 (POST-Formular) – Browser-E2E NOT_TESTED"
+      },
+      "evidence_class": "STATIC+HASH",
+      "status": "SECURITY_VIOLATION"
+    },
+    {
+      "id": "BYP-10",
+      "desc": "Programmatische Navigation (window.open/location.href/meta refresh) – kein submit-Event",
+      "vector": "navigation",
+      "expectation": "INFO",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "STATIC+MOCK",
+        "classification": "BYPASS_AUSSERHALB_DER_SCHUTZGRENZE",
+        "pageNavigateCalls": [
+          {
+            "via": "window.open",
+            "url": "https://paypa1.com/login"
+          }
+        ],
+        "note": "Shield besitzt keinerlei Navigations-Hook (kein webNavigation, kein beforeunload, keine DNR-Regel im Content-Script)."
+      },
+      "evidence_class": "STATIC+MOCK",
+      "status": "INFO"
+    },
+    {
+      "id": "BYP-11",
+      "desc": "Phishing-Kit exfiltriert per same-origin fetch/XHR (kein Formular) – Shield sieht nichts",
+      "vector": "fetch-same-origin",
+      "expectation": "INFO",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "STATIC",
+        "classification": "BYPASS_AUSSERHALB_DER_SCHUTZGRENZE",
+        "note": "Kein einziger Netzwerk-Sink im Shield; Schutzversprechen \"POST geschützt\" ist damit nicht haltbar."
+      },
+      "evidence_class": "STATIC",
+      "status": "INFO"
+    },
+    {
+      "id": "BYP-12",
+      "desc": "Bedrohungsmodell: die zu schützende Seite ist selbst der Angreifer – Content-Script ist keine Sicherheitsgrenze gegen Seiten-JS",
+      "vector": "threat-model",
+      "expectation": "INFO",
+      "observed": "ALLOWED",
+      "detail": {
+        "evidence_class": "STATIC",
+        "classification": "THREAT_MODEL",
+        "note": "Seiten-JS kann form.submit(), fetch, Overlay entfernen, CSS überschreiben; Capture-Listener ist nur eine UX-Barriere. Die Behauptung \"geschlossen\" ist damit falsch."
+      },
+      "evidence_class": "STATIC",
+      "status": "INFO"
+    }
+  ],
+  "documents_read": [
+    "shared/shield-content.js",
+    "tests/shield-content.test.cjs",
+    "shared/detector.js",
+    "shared/sites.js",
+    "shared/guard.js",
+    "shared/guard.html",
+    "chrome/manifest.json",
+    "firefox/manifest.json",
+    "chrome/background.js",
+    "firefox/background.js",
+    "build.py",
+    "README.md",
+    "Next.md",
+    "tests/v2-scoring.test.cjs",
+    "audit/00_GESAMTAUDIT_ANTIPISHER_V2_FAHRPLAN.md",
+    "audit/security/probes/results/static_scan.json",
+    "audit/code/results.json",
+    "audit/security/probes/results/manifest_integrity.json"
+  ],
+  "external_docs": [
+    {
+      "topic": "Chrome DNR: Redirect auf Extension-Ressource benötigt web_accessible_resources",
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest",
+      "quote": "A declarativeNetRequest rule cannot redirect from a public resource request to a resource that is not web accessible. … To declare resources for declarativeNetRequest, use the manifest's \"web_accessible_resources\" array.",
+      "consequence": "guard.html MUSS in WAR stehen (ist erfüllt); guard.js/guard.css/shared/*.js werden von der Extension-Seite selbst geladen und benötigen KEIN WAR."
+    },
+    {
+      "topic": "MDN WAR: Content Scripts benötigen kein WAR; WAR-Skripte sind CORS/CSP-frei und werden ausdrücklich als Risiko benannt",
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/web_accessible_resources",
+      "quote": "Note that content scripts don't need to be listed as web accessible resources. … Web-accessible extension resources are not blocked by CORS or CSP. … A web-accessible extension script can unexpectedly be misused by malicious websites to weaken the security of other websites.",
+      "consequence": "shared/sites.js, shared/detector.js, shared/shield-content.js, guard.js und guard.css zusätzlich als WAR zu listen, ist unnötig und erhöht Exposition/Fingerprinting."
+    },
+    {
+      "topic": "MDN onBeforeRequest: Firefox-Redirect auf Extension-Seite benötigt WAR",
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest",
+      "quote": "If an extension wants to redirect a public (e.g., HTTPS) URL to an extension page, the extension's manifest.json file must contain a web_accessible_resources key that lists the URL for the extension page.",
+      "consequence": "Der Firefox-Blocker B1 (fehlendes WAR) ist statisch behoben, sofern der Redirect zur guard.html tatsächlich greift (Runtime: NOT_TESTED)."
+    },
+    {
+      "topic": "MDN HTMLFormElement submit event: form.submit() löst KEIN submit-Event aus",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event",
+      "quote": "However, the event is not sent to the form when a script calls the form.submit() method directly.",
+      "consequence": "Jede Seite kann per form.submit()/HTMLFormElement.prototype.submit an der Capture-Interzeption des Shields vorbeisubmittieren."
+    },
+    {
+      "topic": "MDN browser_specific_settings: data_collection_permissions-Pflicht für neue AMO-Einreichungen ab 03.11.2025; ID-Format frei wählbar",
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings",
+      "quote": "Must be provided with details specified for browser_specific_settings.gecko.data_collection_permissions for new extension submitted to addons.mozilla.org from November 3, 2025. … any correctly formatted string can be used. For example, great_app@developers.company.",
+      "consequence": "Schema {\"required\":[\"none\"]} ist formal korrekt. Die gecko-ID belegt KEINE Domain-Inhaberschaft; AMO prüft nur Eindeutigkeit/Format."
+    },
+    {
+      "topic": "Mozilla Add-ons Blog: data_collection_permissions wird ab Firefox 140 (Desktop) ausgewertet; bei Unterstützung älterer Versionen muss der Entwickler eigene Kontrolle liefern",
+      "url": "https://blog.mozilla.org/addons/2025/10/23/data-collection-consent-changes-for-new-firefox-extensions/",
+      "quote": "If an extension supports versions of Firefox prior to 140 for Desktop, or 142 for Android, then the developer will need to continue to provide the user with a clear way to control the add-on's data collection and transmission immediately after installation of the add-on.",
+      "consequence": "strict_min_version \"128.0\" bedeutet: auf Firefox 128–139 wird das Feld ignoriert. Da deklariert \"none\" und keine Transmission stattfindet, ist das voraussichtlich zulässig – AMO-Review bleibt NOT_TESTED."
+    }
+  ],
+  "static_review": {
+    "shield": {
+      "sha256": "b1efb0d4e825c24c98d946817962452cf12fd13f35ed053dc42a92488476356c",
+      "lines": 341,
+      "bytes": 10991,
+      "guard_global": {
+        "line": 15,
+        "code": "Doppel-Injektions-Guard im Isolated World (pro Frame)"
+      },
+      "engine_handoff": {
+        "line": 18,
+        "fail_open": true
+      },
+      "current_verdict": {
+        "line_start": 26,
+        "input": "window.location.href (volle URL inkl. Pfad/Query)"
+      },
+      "target_verdict": {
+        "line_start": 34,
+        "input": "form.getAttribute('action') – NICHT event.submitter.formAction und NICHT Formular-Methode"
+      },
+      "intercept": {
+        "line_onFormSubmit": 237,
+        "listener_line": 325,
+        "capture": true,
+        "prevent_default_line": 252,
+        "stop_immediate_line": 254,
+        "suspicious_condition_line": 245,
+        "only_status_block": true,
+        "action_warn_ignored": true,
+        "allowed_forms_weakset_line": 24,
+        "early_return_allowed_line": 240
+      },
+      "modal": {
+        "line_show_warning": 45,
+        "host_created_line": 49,
+        "host_appended_line": 224,
+        "shadow_mode_line": 59,
+        "zindex_line": 52,
+        "inline_style_keys": [
+          "position",
+          "zIndex",
+          "top",
+          "left",
+          "width",
+          "height",
+          "pointerEvents"
+        ],
+        "inline_display_set": false,
+        "uses_important": false,
+        "mutationobserver": false,
+        "reappend_on_tamper": false,
+        "tag_javascript_sink": true,
+        "innerHTML_sinks": [
+          66,
+          296
+        ],
+        "explanation_unescaped_line": 190,
+        "escaped_fields": [
+          "targetUrl",
+          "brandName",
+          "officialDomain"
+        ],
+        "escapeHtml_function_line": 227,
+        "banner_root_line": 289,
+        "banner_listener_missing": true,
+        "banner_only_domcontentloaded": [
+          328
+        ],
+        "password_query_line": 286,
+        "password_value_read": false
+      },
+      "proceed_path": {
+        "line_mark_allowed": 271,
+        "line_request_submit": 273,
+        "line_proto_submit_fallback": 275,
+        "revalidates_target_on_proceed": false,
+        "event_submitter_used": false,
+        "formaction_used": false,
+        "method_used": false,
+        "iframe_aware": false
+      },
+      "error_paths": {
+        "engine_missing_returns_silently": 19,
+        "current_verdict_catch": 30,
+        "target_verdict_catch": null,
+        "fail_open_on_engine_error": true
+      },
+      "network_sinks": {
+        "fetch": 0,
+        "xhr": 0,
+        "sendBeacon": 0,
+        "websocket": 0,
+        "runtimeSendMessage": 0,
+        "postMessage": 0,
+        "localStorage": 0,
+        "eval": 0,
+        "newFunction": 0
+      }
+    },
+    "detector_path_rule": {
+      "start_line": 632,
+      "sensitive_action_line": 638,
+      "doc_blog_exemption_line": 635,
+      "official_domain_in_path_line": 653,
+      "brand_path_regex_line": 652,
+      "returns_action_warn_line": 658,
+      "official_domain_precheck_line": 409,
+      "action_warn_never_used_by_shield": true,
+      "doc_blog_exemption_is_attack_friendly": true
+    },
+    "guard": {
+      "guard_js_classifies_target_line": 19,
+      "guard_js_treats_all_non_safe_as_block_line": 59,
+      "guard_js_ignores_action_warn": true,
+      "guard_js_allows_official_link": 74
+    },
+    "source_scan_quotes": {
+      "innerHTML_at": [
+        66,
+        296
+      ],
+      "explanation_interpolation": "${explanation} (unmasked)",
+      "zindex": "2147483647",
+      "host_append": "document.documentElement.appendChild(rootHost)",
+      "listener": "window.addEventListener('submit', onFormSubmit, true)"
+    }
+  },
+  "hash_evidence": {
+    "reference_snapshot": {
+      "file": "audit/security/probes/results/static_scan.json",
+      "probe": "probe09_static_scan",
+      "timestamp_utc": "2026-10-18T15:35:38.811558+00:00",
+      "note": "Pre-Remediation-Security-Scan (15:35 UTC) – Hashes vor der Gemini-Remediation"
+    },
+    "comparisons": [
+      {
+        "path": "chrome/background.js",
+        "current": {
+          "sha256": "c3523551c18ac7564fc4631d38806ddcf9140956dbade3f32c0a39832d2e9653",
+          "size": 5171
+        },
+        "pre_remediation": {
+          "sha256": "c3523551c18ac7564fc4631d38806ddcf9140956dbade3f32c0a39832d2e9653",
+          "size": 5171
+        },
+        "unchanged": true,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "firefox/background.js",
+        "current": {
+          "sha256": "487efa13fea2916fb45726a0388c29ded7fc16c1086e25dd7279bd8edd488f87",
+          "size": 1591
+        },
+        "pre_remediation": {
+          "sha256": "487efa13fea2916fb45726a0388c29ded7fc16c1086e25dd7279bd8edd488f87",
+          "size": 1591
+        },
+        "unchanged": true,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "shared/guard.js",
+        "current": {
+          "sha256": "745c6d610865520e89595f4d6fee6a949e825476223b23ed90e675f370910afc",
+          "size": 3769
+        },
+        "pre_remediation": {
+          "sha256": "f259d0434eb7190331273b9ebdc77271c13de65d1115ee72053770942bb090e8",
+          "size": 3671
+        },
+        "unchanged": false,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "shared/guard.html",
+        "current": {
+          "sha256": "20a8063881b881d9823ded6a1efd59dac36fc1c4abe9caa4e65ee078d2c1efb3",
+          "size": 4521
+        },
+        "pre_remediation": {
+          "sha256": "2f77cf6504e3a079b40acb5320445fecb9fe1327596815a0634836763b9edc11",
+          "size": 4447
+        },
+        "unchanged": false,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "chrome/manifest.json",
+        "current": {
+          "sha256": "e6d4fa8dafb8ea0f191fdd04ca17a3c581bf377f46864d4428eef844c0131102",
+          "size": 1436
+        },
+        "pre_remediation": {
+          "sha256": "f29a264849f341039491c294baecf0a8b2215ff58f0c254dd0c82574fda708bd",
+          "size": 1015
+        },
+        "unchanged": false,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "firefox/manifest.json",
+        "current": {
+          "sha256": "e1b94b1d4d05540afc61b3606487665d7d1244cc0abaa0b9808d1c087c1f97f4",
+          "size": 1637
+        },
+        "pre_remediation": {
+          "sha256": "d9cafec3049214e67058f923ef6ead2e913bb8ce215867e9f11ec5a45c1bcd74",
+          "size": 972
+        },
+        "unchanged": false,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "shared/detector.js",
+        "current": {
+          "sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+          "size": 26949
+        },
+        "pre_remediation": {
+          "sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9",
+          "size": 12668
+        },
+        "unchanged": false,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "shared/sites.js",
+        "current": {
+          "sha256": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+          "size": 21547
+        },
+        "pre_remediation": {
+          "sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d",
+          "size": 19460
+        },
+        "unchanged": false,
+        "evidence_class": "HASH"
+      },
+      {
+        "path": "shared/shield-content.js",
+        "current": {
+          "sha256": "b1efb0d4e825c24c98d946817962452cf12fd13f35ed053dc42a92488476356c",
+          "size": 10991
+        },
+        "pre_remediation": null,
+        "unchanged": null,
+        "evidence_class": "HASH"
+      }
+    ],
+    "build_copies_in_sync": [
+      {
+        "file": "shared/shield-content.js",
+        "shared": "b1efb0d4e825c24c98d946817962452cf12fd13f35ed053dc42a92488476356c",
+        "chrome": "b1efb0d4e825c24c98d946817962452cf12fd13f35ed053dc42a92488476356c",
+        "firefox": "b1efb0d4e825c24c98d946817962452cf12fd13f35ed053dc42a92488476356c",
+        "in_sync": true
+      },
+      {
+        "file": "shared/detector.js",
+        "shared": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "chrome": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "firefox": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "in_sync": true
+      },
+      {
+        "file": "shared/sites.js",
+        "shared": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+        "chrome": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+        "firefox": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+        "in_sync": true
+      }
+    ],
+    "zip_artifacts": {
+      "Antipisher-Source-v0.1.0-alpha.zip": {
+        "sha256": "a24b76085b861865dbcf114280ed870bef11f33aaa7cc4f9a1a0391138239a6e",
+        "size": 165229
+      },
+      "Antipisher-Chrome-v0.1.0-alpha.zip": {
+        "sha256": "80889d851dc20f13356b91f78af1d88ad1c7c7f37066858f52e9d290cf76af97",
+        "size": 41817
+      },
+      "Antipisher-Firefox-v0.1.0-alpha.zip": {
+        "sha256": "5d12cc3f0aedda50f3c7eaface3b4fcedf9d452d9cc56b5954cba755452fdc1e",
+        "size": 40627
+      }
+    }
+  },
+  "manifests": {
+    "chrome": {
+      "manifest_version": 3,
+      "minimum_chrome_version": "121",
+      "permissions": [
+        "storage",
+        "tabs",
+        "webNavigation",
+        "declarativeNetRequest"
+      ],
+      "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "content_scripts": {
+        "matches": [
+          "http://*/*",
+          "https://*/*"
+        ],
+        "js": [
+          "shared/sites.js",
+          "shared/detector.js",
+          "shared/shield-content.js"
+        ],
+        "run_at": "document_start",
+        "all_frames": false
+      },
+      "content_script_matches_all_http_https": true,
+      "content_script_injects_engine_order_correct": true,
+      "content_script_all_frames_false": true,
+      "content_script_run_at_document_start": true,
+      "war": {
+        "entries": 1,
+        "resources": [
+          "guard.html",
+          "guard.js",
+          "guard.css",
+          "shared/sites.js",
+          "shared/detector.js",
+          "shared/shield-content.js"
+        ],
+        "matches": [
+          "http://*/*",
+          "https://*/*"
+        ]
+      },
+      "war_guard_html_present": true,
+      "war_unnecessary_resources": [
+        "guard.js",
+        "guard.css",
+        "shared/sites.js",
+        "shared/detector.js",
+        "shared/shield-content.js"
+      ],
+      "war_matches_all_http_https": true,
+      "var_dynamic_url_used": false,
+      "dnr_redirect_needs_war_guard_html": true
+    },
+    "firefox": {
+      "manifest_version": 3,
+      "permissions": [
+        "storage",
+        "tabs",
+        "webRequest",
+        "webRequestBlocking"
+      ],
+      "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "background": {
+        "scripts": [
+          "shared/sites.js",
+          "shared/detector.js",
+          "background.js"
+        ]
+      },
+      "content_scripts": {
+        "matches": [
+          "http://*/*",
+          "https://*/*"
+        ],
+        "js": [
+          "shared/sites.js",
+          "shared/detector.js",
+          "shared/shield-content.js"
+        ],
+        "run_at": "document_start",
+        "all_frames": false
+      },
+      "content_script_matches_all_http_https": true,
+      "content_script_all_frames_false": true,
+      "content_script_run_at_document_start": true,
+      "war": {
+        "entries": 1,
+        "resources": [
+          "guard.html",
+          "guard.js",
+          "guard.css",
+          "shared/sites.js",
+          "shared/detector.js",
+          "shared/shield-content.js"
+        ],
+        "matches": [
+          "http://*/*",
+          "https://*/*"
+        ]
+      },
+      "war_guard_html_present": true,
+      "war_unnecessary_resources": [
+        "guard.js",
+        "guard.css",
+        "shared/sites.js",
+        "shared/detector.js",
+        "shared/shield-content.js"
+      ],
+      "war_matches_all_http_https": true,
+      "browser_specific_settings": {
+        "gecko": {
+          "id": "antipisher@visiongaia.org",
+          "strict_min_version": "128.0",
+          "data_collection_permissions": {
+            "required": [
+              "none"
+            ]
+          }
+        }
+      },
+      "gecko_id": "antipisher@visiongaia.org",
+      "gecko_id_format_valid": true,
+      "gecko_id_uses_reserved_example_tld": false,
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      },
+      "data_collection_schema_valid": true,
+      "data_collection_supported_from_firefox": "140 Desktop / 142 Android (Mozilla Add-ons Blog 2025-10-23)",
+      "impl_note": "Deklaration \"none\" ist plausibel, da kein Netzwerk-/Telemetrie-Sink im Content-Script/Detector nachgewiesen; AMO-Review und Verhalten <Firefox 140 = NOT_TESTED"
+    },
+    "comparison_pre_remediation": {
+      "source": "audit/security/probes/results/manifest_integrity.json (15:35:29Z) + static_scan.json (15:35:38Z) – Pre-Remediation-Snapshots",
+      "chrome_war_before": [
+        "guard.html"
+      ],
+      "chrome_war_after": [
+        "guard.html",
+        "guard.js",
+        "guard.css",
+        "shared/sites.js",
+        "shared/detector.js",
+        "shared/shield-content.js"
+      ],
+      "chrome_war_regression_exposure": true,
+      "chrome_manifest_sha256_before": "f29a264849f341039491c294baecf0a8b2215ff58f0c254dd0c82574fda708bd",
+      "chrome_manifest_sha256_after": "e6d4fa8dafb8ea0f191fdd04ca17a3c581bf377f46864d4428eef844c0131102",
+      "chrome_manifest_size_before": 1015,
+      "chrome_manifest_size_after": 1436,
+      "firefox_war_before": [],
+      "firefox_war_after": [
+        "guard.html",
+        "guard.js",
+        "guard.css",
+        "shared/sites.js",
+        "shared/detector.js",
+        "shared/shield-content.js"
+      ],
+      "firefox_war_gap_before": true,
+      "firefox_war_gap_after_static": "closed_static",
+      "firefox_manifest_sha256_before": "d9cafec3049214e67058f923ef6ead2e913bb8ce215867e9f11ec5a45c1bcd74",
+      "firefox_manifest_sha256_after": "e1b94b1d4d05540afc61b3606487665d7d1244cc0abaa0b9808d1c087c1f97f4",
+      "firefox_manifest_size_before": 972,
+      "firefox_manifest_size_after": 1637,
+      "gecko_id_before": "antipisher@visiongaia.example",
+      "gecko_id_after": "antipisher@visiongaia.org",
+      "gecko_id_domain_ownership_proven": false,
+      "background_sha256_unchanged_vs_pre": {
+        "chrome": true,
+        "firefox": true
+      }
+    },
+    "build_sync": {
+      "shield_in_build_py_files_list": true,
+      "shield_copied_to_browser_dirs": true,
+      "build_assert_lists_shield": true,
+      "content_script_files_exist": true
+    }
+  },
+  "old_blockers": {
+    "chrome": {
+      "sha256": "c3523551c18ac7564fc4631d38806ddcf9140956dbade3f32c0a39832d2e9653",
+      "hash_equals_pre_remediation_snapshot": true,
+      "unchanged_since_audit": true,
+      "get_only": {
+        "line": 37,
+        "code": "requestMethods: ['get']",
+        "dnr_rule_matches_only_get": true
+      },
+      "redirect_all_rule": {
+        "line": 24,
+        "regex": "^(https?://.+)$",
+        "resource_types": [
+          "main_frame"
+        ],
+        "redirect_all_get_navigations": true
+      },
+      "fail_open": {
+        "catch_console_error_lines": [
+          69,
+          70,
+          72,
+          104
+        ],
+        "silent_fail_open": true,
+        "status_ui_contract": "Popup behauptet weiter \"aktiv\" (nicht in diesem Scope erneut getestet)"
+      },
+      "long_url_limit": {
+        "line": 49,
+        "limit": 1900
+      },
+      "regex_substitution_pattern": {
+        "line": 32,
+        "value": "api.runtime.getURL('guard.html') + '#\\\\1'",
+        "chrome_documented": false,
+        "runtime_verified": false
+      },
+      "fragment_stripped_in_allowone": {
+        "line": 47
+      },
+      "design_note": "DNR-Regel ist unverändert: kein Preflight für POST/Nicht-GET-Navigationen; Shield ändert daran nichts (läuft erst nach dem Laden der Zielseite)."
+    },
+    "firefox": {
+      "sha256": "487efa13fea2916fb45726a0388c29ded7fc16c1086e25dd7279bd8edd488f87",
+      "hash_equals_pre_remediation_snapshot": true,
+      "unchanged_since_audit": true,
+      "intercepts_all_methods": {
+        "line": 19,
+        "method_filter": false,
+        "evidence": "Listener-Filter enthält nur urls/types, keinen methods-Filter – fängt damit auch POST-Hauptnavigationen ab (unverändert)."
+      },
+      "redirect_target": {
+        "line": 14,
+        "value": "moz-extension://…/guard.html?url=…"
+      },
+      "post_becomes_get_on_proceed": {
+        "mechanism": "blockierte POST-Navigation wird auf guard.html umgeleitet; nach Freigabe navigiert guard.js per location.replace(url) als GET → POST-Body/Formulardaten gehen verloren",
+        "evidence": "firefox/background.js:14-16 + shared/guard.js:37 + MDN webRequest.BlockingResponse redirectUrl Semantik"
+      },
+      "bypass_lifecycle": {
+        "line": 22,
+        "clears_on_navigation": false,
+        "clear_on_tab_close_only": true
+      },
+      "strict_mode_ignored": true,
+      "war_requirement_now_satisfied_static": true,
+      "runtime_redirect_verified": false
+    }
+  },
+  "fp": {
+    "page_verdict_and_shield": [
+      {
+        "cat": "official-curated",
+        "url": "https://github.com/login",
+        "formAction": "/session",
+        "humanExpected": "SAFE",
+        "note": "GitHub Login-Formular",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://github.com/paypal/paypal-js/issues/123",
+        "formAction": "/comment",
+        "humanExpected": "SAFE",
+        "note": "GitHub Marken-Repo (Lead-Hypothese: Warnung) – Official-Precheck greift",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://www.reddit.com/login/",
+        "formAction": "/login",
+        "humanExpected": "SAFE",
+        "note": "Reddit Login",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://www.reddit.com/r/paypal/comments/abc123/login_problem/",
+        "formAction": "/comment",
+        "humanExpected": "SAFE",
+        "note": "Reddit r/paypal Post",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://stackoverflow.com/users/login",
+        "formAction": "/users/login",
+        "humanExpected": "SAFE",
+        "note": "StackOverflow Login",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://stackoverflow.com/questions/47507937/paypal-login-api",
+        "formAction": "/questions/47507937/answer/submit",
+        "humanExpected": "SAFE",
+        "note": "SO-Frage mit Marke+login im Pfad",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://en.wikipedia.org/w/index.php?search=paypal.com+login",
+        "formAction": "/w/index.php",
+        "humanExpected": "SAFE",
+        "note": "Wikipedia-Suche",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://www.chase.com/paypal/login",
+        "formAction": "/login",
+        "humanExpected": "SAFE",
+        "note": "Chase (Task-Beispiel)",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://www.sparkasse.de/redirect?url=https://paypal.com/login",
+        "formAction": "/service",
+        "humanExpected": "SAFE",
+        "note": "Sparkasse Redirect-URL",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://www.amazon.de/s?k=paypal.com+login",
+        "formAction": "/s",
+        "humanExpected": "SAFE",
+        "note": "Amazon-Suche",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "official-curated",
+        "url": "https://www.zalando.de/login/",
+        "formAction": "/login",
+        "humanExpected": "SAFE",
+        "note": "Shop-Login",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "PASS"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://duckduckgo.com/?q=paypal.com+login",
+        "formAction": "/",
+        "humanExpected": "SAFE",
+        "note": "Suche auf DuckDuckGo",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://lite.duckduckgo.com/lite/?q=paypal.com+login",
+        "formAction": "/lite/",
+        "humanExpected": "SAFE",
+        "note": "DuckDuckGo Lite",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://search.brave.com/search?q=paypal.com+login",
+        "formAction": "/search",
+        "humanExpected": "SAFE",
+        "note": "Brave Search",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://www.ecosia.org/search?q=paypal.com+login",
+        "formAction": "/search",
+        "humanExpected": "SAFE",
+        "note": "Ecosia",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://www.startpage.com/sp/search?query=paypal.com+login",
+        "formAction": "/sp/search",
+        "humanExpected": "SAFE",
+        "note": "Startpage",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://www.heise.de/ratgeber/PayPal-Login-so-funktioniert-es-1234567.html",
+        "formAction": "/suche",
+        "humanExpected": "SAFE",
+        "note": "Heise-Ratgeberartikel",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://www.chip.de/ratgeber/paypal-login-so-gehts_123456.html",
+        "formAction": "/suche",
+        "humanExpected": "SAFE",
+        "note": "Chip-Ratgeber",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://forum.beispiel.de/threads/paypal-login-funktioniert-nicht.123/",
+        "formAction": "/threads/123/reply",
+        "humanExpected": "SAFE",
+        "note": "Forum-Thread (XenForo-Muster)",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "Threads"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "third-party-path-fp",
+        "url": "https://www.verbraucherzentrale.de/wissen/paypal-login-12345",
+        "formAction": "/suche",
+        "humanExpected": "SAFE",
+        "note": "Verbraucherzentrale-Ratgeber",
+        "pageVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation",
+          "site": "PayPal"
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "target-query-fp",
+        "url": "https://www.mediamarkt.de/checkout",
+        "formAction": "https://www.mediamarkt.de/checkout/login?returnUrl=https%3A%2F%2Fpaypal.com%2Fcheckout",
+        "humanExpected": "SAFE",
+        "note": "Shop-Checkout mit PayPal-Return-URL (konstruiert, realistisches OAuth-Muster)",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "block",
+          "action": "warn",
+          "reason": "path-impersonation"
+        },
+        "shieldObserved": "BLOCKED",
+        "status": "FALSE_POSITIVE"
+      },
+      {
+        "cat": "fn-doc-bypass",
+        "url": "https://evil-phish.example/docs/paypal/login",
+        "formAction": "/collect",
+        "humanExpected": "BLOCK",
+        "note": "Angreifer nutzt isDocOrBlog-Ausnahme (/docs/)",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "SECURITY_VIOLATION"
+      },
+      {
+        "cat": "fn-doc-bypass",
+        "url": "https://evil-phish.example/news/paypal/signin",
+        "formAction": "/collect",
+        "humanExpected": "BLOCK",
+        "note": "Angreifer nutzt /news/-Ausnahme",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "SECURITY_VIOLATION"
+      },
+      {
+        "cat": "fn-doc-bypass",
+        "url": "https://evil-phish.example/blog/chase/verify",
+        "formAction": "/collect",
+        "humanExpected": "BLOCK",
+        "note": "Angreifer nutzt /blog/-Ausnahme",
+        "pageVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null,
+          "site": null
+        },
+        "targetVerdict": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldObserved": "ALLOWED",
+        "status": "SECURITY_VIOLATION"
+      }
+    ],
+    "summary": {
+      "total": 24,
+      "PASS": 11,
+      "SECURITY_VIOLATION": 3,
+      "FALSE_POSITIVE": 10,
+      "INFO": 0
+    },
+    "official_domain_sweep": {
+      "sites": 169,
+      "urls_checked": 273,
+      "shield_blocked_count": 0,
+      "failures": [],
+      "note": "Official-Domain-Precheck (detector.js:408) verhindert Path-/Query-FPs auf kuratierten Marken-Domains – die im Auftrag vermutete Warnung auf github.com/paypal/... bzw. reddit.com/r/paypal/... tritt NICHT auf."
+    }
+  },
+  "overlay": [
+    {
+      "id": "OVL-01",
+      "evidence_class": "MOCK",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Host-Element im Seiten-DOM vorhanden und identifizierbar",
+      "observed": {
+        "hostPresent": true,
+        "hostId": "antipisher-shield-root",
+        "appendedToDocumentElement": true,
+        "shadowMode": "closed",
+        "shadowModeClosed": true,
+        "inlineStyleKeys": [
+          "position",
+          "zIndex",
+          "top",
+          "left",
+          "width",
+          "height",
+          "pointerEvents"
+        ]
+      },
+      "note": "Closed Shadow DOM schützt nur den Inhalt des Roots, nicht das Host-Element. Next.md:99 behauptet \"gegen Seiten-CSS und Script-Zugriffe vollständig immun\" – das ist falsch."
+    },
+    {
+      "id": "OVL-02",
+      "evidence_class": "MOCK",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Seiten-JS kann den Overlay-Host jederzeit entfernen (kein MutationObserver, keine Re-Append-Logik)",
+      "observed": {
+        "hostPresentAfterPageRemove": false,
+        "mutationObserverInShield": false,
+        "reappendLogicInShield": false
+      },
+      "note": "getElementById/remove() sind Seiten-APIs; closed Shadow DOM verhindert das nicht. Ein MutationObserver der Seite kann den Host sofort nach Einfügen entfernen."
+    },
+    {
+      "id": "OVL-03",
+      "evidence_class": "STATIC+BROWSER",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Overlay-Host setzt kein display und kein !important → simple Seiten-CSS-Regel blendet ihn aus",
+      "observed": {
+        "inline_display_set": false,
+        "uses_setProperty_important": false,
+        "css_snippet": "#antipisher-shield-root { display: none; }",
+        "chrome_155_computed_display": "none",
+        "chrome_155_evidence_file": "audit/verify/shield/chrome_css_dump.html"
+      },
+      "note": "Real in Headless-Chrome 155 gemessen: display-Wert ist \"none\", sobald die Seite #antipisher-shield-root{display:none} setzt."
+    },
+    {
+      "id": "OVL-04",
+      "evidence_class": "STATIC+BROWSER",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Gegenmaßnahme-Kandidat: inline display:block via setProperty(...,\"important\") widersteht Seiten-CSS ohne !important",
+      "observed": [
+        {
+          "id": "host_found_by_page_js",
+          "observed": true,
+          "detail": null
+        },
+        {
+          "id": "page_css_display_none_wins_without_inline_display",
+          "observed": "none",
+          "detail": "erwartet none"
+        },
+        {
+          "id": "closed_shadow_host_removable_by_page_js",
+          "observed": true,
+          "detail": null
+        },
+        {
+          "id": "inline_important_display_beats_page_css",
+          "observed": "block",
+          "detail": "erwartet block"
+        },
+        {
+          "id": "page_css_important_vs_inline_important",
+          "observed": "block",
+          "detail": "erwartet none"
+        }
+      ],
+      "note": "Chrome-155-Befund: inline-!important gewinnt hier auch gegen Seiten-!important (getComputedStyle display = \"block\"), d. h. ein Fix via setProperty(\"display\",\"block\",\"important\") wäre wirksam; zusätzlich Re-Append per MutationObserver gegen Host-Removal nötig."
+    },
+    {
+      "id": "OVL-05",
+      "evidence_class": "STATIC",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "z-index 2147483647 ist kein Schutz: später eingefügte/positionierte Seiten-Overlays zeichnen darüber; transform/filter auf html/body verschiebt fixed-Containing-Block",
+      "observed": {
+        "zindex_line": 52,
+        "host_parent": "document.documentElement"
+      },
+      "note": "Seiten-CSS kann html/body transformieren (fixed wird relativ zum transformierten Vorfahren) oder gleichwertige Overlays später einhängen."
+    },
+    {
+      "id": "OVL-06",
+      "evidence_class": "STATIC",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Spoofing: Struktur/IDs/Design des Overlays sind öffentlich (AGPL-Quelle + WAR-exponiert) und durch die Seite nachbaubar",
+      "observed": {
+        "predictableIds": [
+          "antipisher-shield-root",
+          "antipisher-badge-root",
+          "btn-cancel",
+          "btn-proceed"
+        ],
+        "wart_exposed_source": true
+      },
+      "note": "Nach Entfernen des echten Overlays kann die Seite ein täuschend ähnliches \"Antipisher\"-Overlay zeigen (Marken-Spoofing gegen das Schutzprodukt selbst) – Design-Risiko, nicht durch closed Shadow DOM adressiert."
+    }
+  ],
+  "browser_semantics": {
+    "engine": "HeadlessChrome/155.0.0.0 (C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe)",
+    "evidence_file": "audit/verify/shield/chrome_css_dump.html",
+    "probe_file": "audit/verify/shield/browser_probe_css.html",
+    "load_extension_e2e": "NOT_TESTED – Chrome 155 hat --load-extension entfernt; CDP-Ansatz in der Session instabil (Lead-Befund). Der BROWSER-Teil prüft nur reale DOM/CSS-Semantik ohne Extension-Injektion.",
+    "css_and_dom_cases": [
+      {
+        "id": "host_found_by_page_js",
+        "observed": true,
+        "detail": null
+      },
+      {
+        "id": "page_css_display_none_wins_without_inline_display",
+        "observed": "none",
+        "detail": "erwartet none"
+      },
+      {
+        "id": "closed_shadow_host_removable_by_page_js",
+        "observed": true,
+        "detail": null
+      },
+      {
+        "id": "inline_important_display_beats_page_css",
+        "observed": "block",
+        "detail": "erwartet block"
+      },
+      {
+        "id": "page_css_important_vs_inline_important",
+        "observed": "block",
+        "detail": "erwartet none"
+      }
+    ],
+    "submit_event_composed_probe": {
+      "status": "NOT_TESTED",
+      "probe_file": "audit/verify/shield/browser_probe_submit.html",
+      "reason": "Headless --dump-dom beendet sich in dieser Umgebung nicht zuverlässig, sobald eine Seite requestSubmit()/Formular-Submit ausführt (beobachteter Hang, Prozess manuell beendet). Keine belastbare Aussage zum composed-Flag des submit-Events aus Shadow-Roots; als Restrisiko dokumentiert."
+    },
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+  },
+  "injection": [
+    {
+      "id": "INJ-01",
+      "evidence_class": "MOCK",
+      "expectation": "SHOULD_BLOCK",
+      "status": "PASS",
+      "title": "targetUrl wird HTML-escaped gerendert (Angriffspayload im Formular-action)",
+      "observed": {
+        "intercepted": true,
+        "modalPresent": true,
+        "rawImgTagInModal": false,
+        "escapedAmp": true,
+        "uses_escapeHtml_function": true,
+        "escapeHtml_usage_lines": [
+          194,
+          198,
+          203,
+          227,
+          317
+        ]
+      },
+      "note": "Payload landet escaped im Shadow-HTML; kein <img>-Tag. Escape-Funktion deckt & < > \" ' ab (Zeilen 227-234)."
+    },
+    {
+      "id": "INJ-02",
+      "evidence_class": "MOCK+STATIC",
+      "expectation": "SHOULD_BLOCK",
+      "status": "SECURITY_VIOLATION",
+      "title": "explanation_de wird UNESCAPED in shadow.innerHTML interpoliert (Zeile 190)",
+      "observed": {
+        "explanation_unescaped_in_template": true,
+        "rawImgTagInModal": true,
+        "escapedFields": {
+          "targetUrl": true,
+          "site": true
+        },
+        "note": "Mit fake engine (dynamische Strings) führt unescaped explanation zu DOM-Injection im Shadow-Root. Mit dem gebündelten Detector sind explanation-Strings statisch bzw. host-abgeleitet; Browser-URL-Parser verbietet HTML-Zeichen im Host → derzeit nicht ausnutzbar, aber latenter CWE-79-Sink."
+      }
+    },
+    {
+      "id": "INJ-03",
+      "evidence_class": "STATIC+MOCK",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Realer Detector: explanation_de enthält bei den geprüften URL-Angriffen kein HTML-Markup (URL-Parser begrenzt Host)",
+      "observed": [
+        {
+          "url": "https://paypal.com%3Cimg%3E@evil.example/",
+          "verdict": "block",
+          "reason": "userinfo",
+          "explanationContainsMarkup": false
+        },
+        {
+          "url": "https://xn--pypal-4ve%3Cimg%3E.example/",
+          "verdict": "skip",
+          "explanationContainsMarkup": false
+        },
+        {
+          "url": "https://paypal%3Cscript%3E.example/",
+          "verdict": "skip",
+          "explanationContainsMarkup": false
+        },
+        {
+          "url": "https://<img>.paypal.com.evil.example/",
+          "verdict": "skip",
+          "explanationContainsMarkup": false
+        },
+        {
+          "url": "https://evil.example/%3Cimg%20src=x%3E",
+          "verdict": "safe",
+          "explanationContainsMarkup": false
+        }
+      ],
+      "note": "Entlastet den Ist-Zustand, ersetzt aber kein Escaping: DetectorVerdicts sollten generell als untrusted behandelt werden."
+    }
+  ],
+  "fail_open": [
+    {
+      "id": "FO-01",
+      "evidence_class": "MOCK",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "title": "classify() wirft (Engine-Fehler) → Shield lässt Submit durch (fail-open, Zeilen 26-32/34-42)",
+      "detail": {
+        "prevented": false,
+        "modal": false,
+        "catch_returns_safe_line": [
+          30,
+          40
+        ]
+      },
+      "status": "SECURITY_VIOLATION"
+    },
+    {
+      "id": "FO-02",
+      "evidence_class": "MOCK",
+      "expectation": "SHOULD_BLOCK",
+      "observed": "ALLOWED",
+      "title": "Engine fehlt (Ladereihenfolge/Fehler) → Shield kehrt still zurück, kein Listener aktiv (Zeile 18-21)",
+      "detail": {
+        "prevented": false,
+        "modal": false,
+        "submitListenerCount": 0
+      },
+      "status": "SECURITY_VIOLATION"
+    }
+  ],
+  "duplicate_injection": {
+    "evidence_class": "MOCK",
+    "expectation": "INFO",
+    "status": "INFO",
+    "submit_listener_before": 1,
+    "submit_listener_after": 1,
+    "duplicate_guard_effective": true,
+    "note": "Doppel-Injektion ist im Isolated World per globalThis-Flag abgewehrt (Zeile 15-16). Ein erneutes Laden nach Extension-Update/Reload erzeugt keinen zweiten Listener pro Frame."
+  },
+  "classification_calls": {
+    "evidence_class": "MOCK",
+    "expectation": "INFO",
+    "status": "INFO",
+    "calls_per_submit": 2,
+    "urls": [
+      "https://legit-blog.example/page",
+      "https://legit-blog.example/search"
+    ],
+    "note": "Pro Submit werden aktuelle Seiten-URL UND Formular-action klassifiziert (2 classify-Aufrufe), zusätzlich ein Aufruf bei DOMContentLoaded für den Passwort-Banner."
+  },
+  "password_banner": [
+    {
+      "id": "PW-01",
+      "evidence_class": "MOCK",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Banner wird bei block-Verdict + Passwortfeld beim Load eingehängt",
+      "observed": {
+        "bannerPresentAtLoad": true,
+        "bannerId": "antipisher-badge-root",
+        "bannerHasClickListener": false
+      },
+      "note": "Nur bei readyState === complete nach DOMContentLoaded; kein MutationObserver für nachgeladene Passwortfelder (SPA)."
+    },
+    {
+      "id": "PW-02",
+      "evidence_class": "MOCK",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Kein Banner auf legitimen Seiten",
+      "observed": {
+        "bannerPresent": false
+      }
+    },
+    {
+      "id": "PW-03",
+      "evidence_class": "MOCK",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Passwortwert wird NICHT gelesen (nur Existenz via querySelector); kein Wert-Zugriff im Code",
+      "observed": {
+        "pwValueReadsByShield": 0,
+        "password_value_sink_in_source": false,
+        "query_selector_line": 286
+      }
+    },
+    {
+      "id": "PW-04",
+      "evidence_class": "STATIC",
+      "expectation": "INFO",
+      "status": "INFO",
+      "title": "Nachgeladene Passwortfelder (SPA/JS-Formulare) erhalten keinen Banner (kein MutationObserver)",
+      "observed": {
+        "bannerAfterLateField": false,
+        "mutationObserverInShield": false
+      }
+    }
+  ],
+  "privacy": {
+    "content_script_scope": {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start",
+      "reads_page_url": "bei jedem Submit (window.location.href) + beim Load für Passwort-Banner-Check",
+      "reads_dom": "nur Existenz von input[type=password] auf block-Seiten",
+      "reads_password_value": false,
+      "network_sinks_in_shield": 0,
+      "telemetry": false,
+      "persisted_urls": false
+    },
+    "store_disclosure": {
+      "issue": "Content-Script auf ALLEN http/https-Seiten + Host-Permissions; CWS/AMO-Disclosure-Pflichten (Browsing-Activity/Website-Content) und Limited-Use müssen außerhalb des Codes erfüllt werden.",
+      "privacy_policy_file_in_repo": false,
+      "readme_privacy_section_line": 49,
+      "firefox_data_collection_declaration": {
+        "required": [
+          "none"
+        ]
+      },
+      "cws_submission_verified": "NOT_TESTED",
+      "password_manager_conflict": "MÖGLICH (z-index-max Overlay, DOM-Mutation); kein Test mit realen Passwort-Managern möglich → NOT_TESTED"
+    }
+  },
+  "performance": {
+    "evidence_class": "STATIC+MOCK (Node, keine Browser-E2E)",
+    "content_scripts_per_page_load": [
+      {
+        "file": "shared/sites.js",
+        "bytes": 21547,
+        "gzip_bytes": 3558
+      },
+      {
+        "file": "shared/detector.js",
+        "bytes": 26949,
+        "gzip_bytes": 8396
+      },
+      {
+        "file": "shared/shield-content.js",
+        "bytes": 10991,
+        "gzip_bytes": 3506
+      }
+    ],
+    "total_raw_bytes": 59487,
+    "total_gzip_bytes": 15460,
+    "claim_about_60kb": {
+      "raw": 59487,
+      "claim": "~60 KB",
+      "matches": true
+    },
+    "script_load_ms_samples": [
+      5.4177,
+      5.2749,
+      4.4578,
+      3.4907,
+      2.7994
+    ],
+    "script_load_ms_median": 4.4578,
+    "classify_ms": {
+      "samples": 3000,
+      "median": 0.0442,
+      "p95": 6.133,
+      "p99": 9.3609,
+      "max": 15.8436
+    },
+    "classify_calls_per_submit": 2,
+    "injected_overhead_note": "Zusätzlich pro Submit: 2× classify (Median oben) + DOM-Abfragen + Shadow-DOM-Aufbau nur im Warnfall.",
+    "memory_delta_heap_bytes_50_contexts": 16819768,
+    "browser_runtime_NOT_TESTED": true
+  },
+  "test_quality": {
+    "file": "tests/shield-content.test.cjs",
+    "sha256": "43daca0a112a1d37c2cb98bd2e0bb6b6ee1a7d2283c3e2d3c845d86bf647a1fa",
+    "test_count_in_file": 3,
+    "test_names": [
+      "Content Shield intercepts form submissions targeting a phishing URL (closing POST gap)",
+      "Content Shield intercepts any form submission on a phishing site (even with relative action)",
+      "Content Shield allows legitimate form submissions without interference"
+    ],
+    "probes_covered": [
+      "XSS/HTML-Escaping"
+    ],
+    "probes_missing": [
+      "form.submit()/native Submit-Bypass",
+      "requestSubmit()",
+      "Submitter/formaction",
+      "iframe/all_frames",
+      "fetch/XHR/sendBeacon",
+      "Overlay-Manipulation/Entfernen",
+      "Fehlerpfad/Fail-open",
+      "False-Positive-Korpus",
+      "Passwort-Banner/DOMContentLoaded",
+      "Doppel-Injektion"
+    ],
+    "fixture_character": {
+      "fake_dom": true,
+      "fake_event_loop": "triggerSubmit ruft registrierte Listener direkt auf; kein Browser-Default-Verhalten, kein form.submit()-Pfad",
+      "asserts_only": [
+        "prevented",
+        "stopped",
+        "attachedElements"
+      ],
+      "loads_shared_sources": true,
+      "browser_e2e": false
+    },
+    "executed_by_auditor": {
+      "command": "node --test tests/*.test.cjs",
+      "cwd": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+      "exit_code": 0,
+      "result": "tests 21, pass 21, fail 0 (Node v24.13.0)",
+      "observed_utc": "2026-10-18T16:29:46.136Z",
+      "note": "Die 21/21-Aussage ist reproduzierbar – sie belegt aber nur Fixture-Verhalten, nicht die Wirksamkeit der POST-Behauptung."
+    },
+    "verdict": "Die Shield-Tests prüfen ausschließlich den Fixture-Pfad (synthetisches submit-Event mit Fake-Formular). Sie können die im Audit dokumentierten Bypässe (form.submit(), iframe, formaction, Overlay-Manipulation, fetch-Exfiltration, FP) prinzipiell nicht erkennen. \"POST-Lücke geschlossen\" ist durch diese Tests NICHT belegt."
+  },
+  "docs_claims": [
+    {
+      "file": "README.md",
+      "line": 42,
+      "claim_text": "Tabelle: HTTP POST / Formulare = \"Geschützt: In-Page Content Shield fängt submit-Events ab\"",
+      "verdict": "CONFLICT – kein Schutz gegen form.submit()/fetch/iframe; keine Navigations-/Preflight-Wirkung",
+      "status": "CONFLICT"
+    },
+    {
+      "file": "README.md",
+      "line": 47,
+      "claim_text": "schützt Formular-Übertragungen (POST/GET) direkt im DOM",
+      "verdict": "CONFLICT – nur submit-Event-Pfad, umgehbar",
+      "status": "CONFLICT"
+    },
+    {
+      "file": "README.md",
+      "line": 67,
+      "claim_text": "node --test tests/*.test.cjs (21/21 PASS)",
+      "verdict": "CONFIRMED – reproduziert Exit 0 / 21 pass; Aussagekraft der Shield-Tests aber auf Fixtures begrenzt",
+      "status": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "file": "Next.md",
+      "line": 95,
+      "claim_text": "Schließt die fundamentale Lücke von Chrome DNR bezüglich Formular-POST-Navigationen",
+      "verdict": "CONFLICT – Navigationslücke bleibt offen (Hash: background.js unverändert GET-only); der Shield läuft erst nach der POST-Navigation",
+      "status": "CONFLICT"
+    },
+    {
+      "file": "Next.md",
+      "line": 99,
+      "claim_text": "manipulationssicheres Sicherheits-Interstitial in Closed-Mode Shadow DOM",
+      "verdict": "CONFLICT – Host per Seiten-JS entfernbar, per Seiten-CSS (real Chrome 155: display:none) ausblendbar, kein Re-Append",
+      "status": "CONFLICT"
+    },
+    {
+      "file": "Next.md",
+      "line": 99,
+      "claim_text": "gegen Seiten-CSS und Script-Zugriffe vollständig immun",
+      "verdict": "CONFLICT – closed Shadow DOM schützt nur den Root-Inhalt, nicht das Host-Element",
+      "status": "CONFLICT"
+    },
+    {
+      "file": "Next.md",
+      "line": 108,
+      "claim_text": "21/21 Unit-Tests erfolgreich",
+      "verdict": "CONFIRMED – reproduziert; belegt aber nur Fixture-Verhalten",
+      "status": "CONFIRMED_WITH_CAVEAT"
+    }
+  ],
+  "efficacy": {
+    "evidence_class": "MOCK (realer Detector + Shield)",
+    "rows": [
+      {
+        "url": "https://paypa1.com/login",
+        "human": "PHISH",
+        "detector": {
+          "status": "block",
+          "action": "block",
+          "reason": "brand-variant"
+        },
+        "shieldBlockedSubmit": true,
+        "bannerShown": true,
+        "protected": true
+      },
+      {
+        "url": "https://paypalsupport.com",
+        "human": "PHISH",
+        "detector": {
+          "status": "block",
+          "action": "block",
+          "reason": "credential-bait"
+        },
+        "shieldBlockedSubmit": true,
+        "bannerShown": true,
+        "protected": true
+      },
+      {
+        "url": "https://g00gle-login.com",
+        "human": "PHISH",
+        "detector": {
+          "status": "block",
+          "action": "block",
+          "reason": "credential-bait"
+        },
+        "shieldBlockedSubmit": true,
+        "bannerShown": true,
+        "protected": true
+      },
+      {
+        "url": "https://appleid-apple.com",
+        "human": "PHISH",
+        "detector": {
+          "status": "block",
+          "action": "block",
+          "reason": "credential-bait"
+        },
+        "shieldBlockedSubmit": true,
+        "bannerShown": true,
+        "protected": true
+      },
+      {
+        "url": "https://sparkasse-sicherheit.de",
+        "human": "PHISH",
+        "detector": {
+          "status": "block",
+          "action": "block",
+          "reason": "credential-bait"
+        },
+        "shieldBlockedSubmit": true,
+        "bannerShown": true,
+        "protected": true
+      },
+      {
+        "url": "https://paypal-rechnung.com/login",
+        "human": "PHISH",
+        "detector": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldBlockedSubmit": false,
+        "bannerShown": false,
+        "protected": false
+      },
+      {
+        "url": "https://paypal-rueckerstattung.com",
+        "human": "PHISH",
+        "detector": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldBlockedSubmit": false,
+        "bannerShown": false,
+        "protected": false
+      },
+      {
+        "url": "https://dhl-sendung.de",
+        "human": "PHISH",
+        "detector": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldBlockedSubmit": false,
+        "bannerShown": false,
+        "protected": false
+      },
+      {
+        "url": "https://amazon-paket.de",
+        "human": "PHISH",
+        "detector": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldBlockedSubmit": false,
+        "bannerShown": false,
+        "protected": false
+      },
+      {
+        "url": "https://netflix-abo.com",
+        "human": "PHISH",
+        "detector": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldBlockedSubmit": false,
+        "bannerShown": false,
+        "protected": false
+      },
+      {
+        "url": "https://microsoft-refund.com",
+        "human": "PHISH",
+        "detector": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldBlockedSubmit": false,
+        "bannerShown": false,
+        "protected": false
+      },
+      {
+        "url": "https://binance-verifizierung.com",
+        "human": "PHISH",
+        "detector": {
+          "status": "safe",
+          "action": "allow",
+          "reason": null
+        },
+        "shieldBlockedSubmit": false,
+        "bannerShown": false,
+        "protected": false
+      }
+    ],
+    "phish_total": 12,
+    "phish_protected": 5,
+    "phish_unprotected": 7,
+    "note": "Das Shield kann nur eingreifen, wenn der Detector status \"block\" liefert. Bei den nicht erkannten Bait-/Kombinationsdomains (z. B. paypal-rechnung.com, dhl-sendung.de) gibt es weder Overlay noch Banner noch Submit-Block – die POST-Mitigation ist damit von der (im Lead-Audit als lückenhaft belegten) Erkennung abhängig."
+  },
+  "post_gap_verdict": {
+    "original_finding": "Audit-Befund CHAIN-002 / B3: POST-Hauptnavigationen umgehen den Chrome-DNR-Preflight (DNR nur requestMethods:[\"get\"])",
+    "verdict": "NICHT_GESCHLOSSEN (nur teilweise UI-Mitigation nach dem Laden der Zielseite)",
+    "chrome": {
+      "preflight_for_post_navigation": false,
+      "evidence": "chrome/background.js:37 requestMethods:['get']; SHA-256 unverändert gegenüber Pre-Remediation-Snapshot",
+      "effect": "POST-Navigation (auto-submittiertes Formular einer kompromittierten/angreifenden Seite) erreicht die Phishing-Seite weiterhin ohne Guard-Interstitial."
+    },
+    "firefox": {
+      "preflight_for_post_navigation": true,
+      "evidence": "firefox/background.js:19 ohne Methodenfilter; blockierender webRequest (unverändert)",
+      "effect": "POST wird prä-request abgefangen, aber beim Fortfahren via location.replace als GET neu geladen → Formulardaten gehen verloren; Runtime-Redirect/WAR = NOT_TESTED."
+    },
+    "shield_contribution": "Formular-Submit-Events werden im bereits geladenen Dokument geblockt (UX-Barriere, keine Navigations-/Exfiltrationskontrolle). Gegen einen bösartigen Seiten-JS-Angreifer beliebig umgehbar: form.submit(), fetch/XHR/beacon, iframe (all_frames:false), formaction, Overlay entfernen/ausblenden.",
+    "residual_bypasses": [
+      {
+        "id": "BYP-01",
+        "title": "HTMLFormElement.submit() / form.submit(): browser-nativer Submit OHNE submit-Event",
+        "vector": "form.submit()"
+      },
+      {
+        "id": "BYP-02",
+        "title": "HTMLFormElement.prototype.submit.call(form) (Profil-/Fremdcode-Muster)",
+        "vector": "prototype.submit.call"
+      },
+      {
+        "id": "BYP-06",
+        "title": "Formular in iframe/Subframe (content_scripts all_frames:false) – Shield läuft nur im Top-Frame",
+        "vector": "iframe(all_frames:false)"
+      },
+      {
+        "id": "BYP-07",
+        "title": "Submit-Button mit formaction=\"https://paypa1.com/login\" überschreibt das harmlose form action",
+        "vector": "submitter.formAction"
+      },
+      {
+        "id": "BYP-08",
+        "title": "Ziel wird nach Modal-Anzeige geändert; \"Trotzdem senden\" + WeakSet-Freigabe verhindert Reklassifikation",
+        "vector": "proceed/TOCTOU"
+      },
+      {
+        "id": "BYP-09",
+        "title": "Chrome-DNR: POST-/Nicht-GET-Hauptnavigation erreicht die Phishing-Seite ohne Preflight (Regel unverändert GET-only)",
+        "vector": "chrome-dnr-requestMethods"
+      }
+    ],
+    "claim_status": {
+      "README: POST geschützt": "FALSCH",
+      "Next.md: POST-Lücke geschlossen": "FALSCH",
+      "Next.md: manipulationssicher / vollständig immun": "FALSCH"
+    },
+    "required_fix": "Claims korrigieren + echtes Preflight für Known-Bad-Domains via DNR-Blockregeln für ALLE Methoden; Content-Script ausdrücklich als Defense-in-Depth/UX kennzeichnen (nicht als Sicherheitsgrenze); Firefox-POST-Datenverlust beheben (nur blocken/anzeigen statt POST→GET umzuschreiben)."
+  },
+  "summary": {
+    "counts_by_group": {
+      "baseline_shield": {
+        "total": 7,
+        "PASS": 7,
+        "SECURITY_VIOLATION": 0,
+        "FALSE_POSITIVE": 0,
+        "INFO": 0
+      },
+      "post_bypass": {
+        "total": 12,
+        "PASS": 0,
+        "SECURITY_VIOLATION": 6,
+        "FALSE_POSITIVE": 0,
+        "INFO": 6
+      },
+      "fail_open": {
+        "total": 2,
+        "PASS": 0,
+        "SECURITY_VIOLATION": 2,
+        "FALSE_POSITIVE": 0,
+        "INFO": 0
+      },
+      "fp_page_cases": {
+        "total": 24,
+        "PASS": 11,
+        "SECURITY_VIOLATION": 3,
+        "FALSE_POSITIVE": 10,
+        "INFO": 0
+      }
+    },
+    "security_violations": [
+      "BYP-01",
+      "BYP-02",
+      "BYP-06",
+      "BYP-07",
+      "BYP-08",
+      "BYP-09",
+      "FO-01",
+      "FO-02",
+      "https://evil-phish.example/docs/paypal/login",
+      "https://evil-phish.example/news/paypal/signin",
+      "https://evil-phish.example/blog/chase/verify"
+    ],
+    "false_positives": [
+      "https://duckduckgo.com/?q=paypal.com+login",
+      "https://lite.duckduckgo.com/lite/?q=paypal.com+login",
+      "https://search.brave.com/search?q=paypal.com+login",
+      "https://www.ecosia.org/search?q=paypal.com+login",
+      "https://www.startpage.com/sp/search?query=paypal.com+login",
+      "https://www.heise.de/ratgeber/PayPal-Login-so-funktioniert-es-1234567.html",
+      "https://www.chip.de/ratgeber/paypal-login-so-gehts_123456.html",
+      "https://forum.beispiel.de/threads/paypal-login-funktioniert-nicht.123/",
+      "https://www.verbraucherzentrale.de/wissen/paypal-login-12345",
+      "https://www.mediamarkt.de/checkout"
+    ],
+    "hash_unchanged_backgrounds": {
+      "chrome": true,
+      "firefox": true
+    },
+    "decisive_findings": [
+      "POST-/Navigations-Lücke nicht geschlossen: Chrome-DNR-Regel unverändert GET-only (Hash-Beweis), Shield läuft erst nach dem Laden.",
+      "form.submit()/prototype.submit umgeht die Capture-Interzeption vollständig (MDN-dokumentiert, MOCK-belegt).",
+      "iframe-Formulare ungeschützt wegen content_scripts all_frames:false.",
+      "formaction des Submit-Buttons wird nicht klassifiziert (MOCK-Bypass).",
+      "Overlay ist nicht manipulationssicher: Host per Seiten-JS entfernbar; Seiten-CSS display:none blendet ihn real in Chrome 155 aus; kein MutationObserver/kein Re-Append/kein inline display.",
+      "explanation_de wird unescaped in shadow.innerHTML interpoliert (latenter DOM-XSS-Sink, derzeit durch URL-Host-Grammatik entschärft).",
+      "Seiten-URL-Klassifikation erzeugt neue FPs durch V2-Pfad-/Query-Regel auf nicht-kuratierte Drittseiten (Suchmaschinen/Ratgeber/Foren); official-domain-Precheck schützt kuratierte Marken (github/reddit/stackoverflow/wikipedia/bank/shop-Beispiele SAFE) – die im Auftrag vermuteten FPs auf github.com/paypal/... treten NICHT auf.",
+      "V2-Pfadregel hat /docs|/news|/blog-Ausnahme → Angreifer kann Marken-Login-Pfade dort verstecken (FN-Evasion) und den Shield so umgehen.",
+      "WAR-Exposition ausgeweitet (shared/*.js, guard.js, guard.css) obwohl laut MDN für Content Scripts nicht nötig; Chrome-Extension-ID fest → Fingerprinting/Regel-Offenlegung; Widerspruch zur \"Manifest-Härtung\".",
+      "Firefox-Blocker B1 (WAR) statisch behoben; gecko-ID auf @visiongaia.org geändert, Domain-Inhaberschaft aber nicht belegt/nicht prüfbar; data_collection_permissions-Schema korrekt, AMO-Review NOT_TESTED.",
+      "21/21-Tests sind Fixture-Tests und belegen die POST-Claims nicht.",
+      "Wirksamkeit: nur 5/12 realistische Phishing-Bait-Domains werden vom Detector geblockt – bei den übrigen greift das Shield überhaupt nicht (kein Overlay, kein Banner, kein Submit-Block)."
+    ],
+    "release_gate": "BLOCKED (Content-Shield-/POST-Claims nicht belegt; alte Chrome-Blocker offen; Browser-E2E fehlt)"
+  }
+}

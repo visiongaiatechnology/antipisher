@@ -1,0 +1,123 @@
+{
+  "probe": "probe07_fuzz_perf",
+  "timestamp_utc": "2026-10-18T15:35:37.786Z",
+  "environment": "Node v24.13.0 (single process)",
+  "fuzz": {
+    "iterations": 20000,
+    "throws": 0,
+    "enum_violations": 0,
+    "first_error": null
+  },
+  "large_inputs": [
+    {
+      "name": "1k path",
+      "status": "safe",
+      "error": null,
+      "ms": 0.762
+    },
+    {
+      "name": "100k host-label",
+      "status": "safe",
+      "error": null,
+      "ms": 1355.748
+    },
+    {
+      "name": "100k query",
+      "status": "safe",
+      "error": null,
+      "ms": 0.562
+    },
+    {
+      "name": "64 labels",
+      "status": "safe",
+      "error": null,
+      "ms": 6.706
+    },
+    {
+      "name": "idn 1k",
+      "status": "safe",
+      "error": null,
+      "ms": 10.052
+    }
+  ],
+  "latency": {
+    "n": 5000,
+    "p50_ms": 0.4951,
+    "p95_ms": 0.7807,
+    "p99_ms": 1.109,
+    "max_ms": 1.8453,
+    "mean_ms": 0.4864
+  },
+  "assertions_total": 10,
+  "assertions_failed": 0,
+  "assertions": [
+    {
+      "name": "fuzz:no-throw",
+      "ok": true,
+      "detail": "0 Throws; erster=null"
+    },
+    {
+      "name": "fuzz:status-enum-valid",
+      "ok": true,
+      "detail": "0 Verletzungen"
+    },
+    {
+      "name": "large-input:no-throw:1k path",
+      "ok": true,
+      "detail": "null"
+    },
+    {
+      "name": "large-input:no-throw:100k host-label",
+      "ok": true,
+      "detail": "null"
+    },
+    {
+      "name": "large-input:no-throw:100k query",
+      "ok": true,
+      "detail": "null"
+    },
+    {
+      "name": "large-input:no-throw:64 labels",
+      "ok": true,
+      "detail": "null"
+    },
+    {
+      "name": "large-input:no-throw:idn 1k",
+      "ok": true,
+      "detail": "null"
+    },
+    {
+      "name": "large-input:no-throw-all",
+      "ok": true,
+      "detail": "[{\"name\":\"1k path\",\"status\":\"safe\",\"error\":null,\"ms\":0.762},{\"name\":\"100k host-label\",\"status\":\"safe\",\"error\":null,\"ms\":1355.748},{\"name\":\"100k query\",\"status\":\"safe\",\"error\":null,\"ms\":0.562},{\"name\":\"64 labels\",\"status\":\"safe\",\"error\":null,\"ms\":6.706},{\"name\":\"idn 1k\",\"status\":\"safe\",\"error\":null,\"ms\":10.052}]"
+    },
+    {
+      "name": "perf:p95-bounded-5ms",
+      "ok": true,
+      "detail": "{\"n\":5000,\"p50_ms\":0.4951,\"p95_ms\":0.7807,\"p99_ms\":1.109,\"max_ms\":1.8453,\"mean_ms\":0.4864}"
+    },
+    {
+      "name": "determinism:stable",
+      "ok": true,
+      "detail": "[[\"block\",\"brand-variant\"],[\"block\",\"foreign-domain\"],[\"safe\",null],[\"block\",\"unicode\"],[\"safe\",null]]"
+    }
+  ],
+  "observations": [
+    {
+      "name": "bounds:no-input-length-budget",
+      "detail": "Detektor hat kein Eingabe-/Längenbudget: [{\"name\":\"100k host-label\",\"status\":\"safe\",\"error\":null,\"ms\":1355.748}] — classify() verarbeitet den Hostnamen pro Marke (165x) mit NFKD/Skeleton; Kosten wachsen mit Host-Länge. Erreichbarkeit im Browser (URL-Host-Längenlimit) ist NOT_TESTED."
+    },
+    {
+      "name": "perf:classify-latency",
+      "detail": "5.000 Klassifikationen: {\"n\":5000,\"p50_ms\":0.4951,\"p95_ms\":0.7807,\"p99_ms\":1.109,\"max_ms\":1.8453,\"mean_ms\":0.4864} — README/Next.md werben mit \"< 1 ms Erkennungszeit pro URL\" (Next.md:33). Gemessene p95-Werte über mehrere Audit-Läufe: 0,60–1,81 ms (Audit-Container teils unter Last durch parallele Prozesse); der <1-ms-Claim ist damit nicht durchgängig reproduzierbar, die Latenz bleibt aber im niedrigen Millisekundenbereich."
+    },
+    {
+      "name": "regex:inventory",
+      "detail": "Verwendete Regexe: /[.*+?^${}()|[\\]\\\\]/g (Escape), /[\\u00AD...]/u (Invisible), /^[a-z]{2}$/, /^\\d+(?:\\.\\d+){3}$/, /[^\\x00-\\x7F]/, /\\p{M}/u, Levenshtein-Loop (keine Regex). Keine Backtracking-Konstrukte wie (a+)+ mit Untrusted-Input gefunden."
+    },
+    {
+      "name": "perf:no-catastrophic-regex",
+      "detail": "Invisible-Char- und Skeleton-Pfade sind linear über Label-Länge; punycodeDecode ist begrenzt (result.length>64, Number.isSafeInteger). Extremtests ohne Absturz/Timeout."
+    }
+  ]
+}

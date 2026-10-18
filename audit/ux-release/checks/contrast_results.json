@@ -1,0 +1,783 @@
+{
+  "tool": "contrast_check.py",
+  "wcag": "2.2 AA",
+  "source_root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+  "cases": [
+    {
+      "group": "guard",
+      "element": "h1 #ffffff",
+      "foreground": "#ffffff",
+      "required": 3.0,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 17.05,
+      "status": "PASS",
+      "note": "gross 26-36px",
+      "per_env": {
+        "env-top #162a26": 17.05,
+        "env-mid #0f1c1a": 17.46,
+        "env-bottom #060c0b": 17.92
+      }
+    },
+    {
+      "group": "guard",
+      "element": "text-primary #f2f8f6",
+      "foreground": "#f2f8f6",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 15.86,
+      "status": "PASS",
+      "note": "Body 15px",
+      "per_env": {
+        "env-top #162a26": 15.86,
+        "env-mid #0f1c1a": 16.24,
+        "env-bottom #060c0b": 16.67
+      }
+    },
+    {
+      "group": "guard",
+      "element": "intro/secondary #9cb5af",
+      "foreground": "#9cb5af",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 7.83,
+      "status": "PASS",
+      "note": "15px",
+      "per_env": {
+        "env-top #162a26": 7.83,
+        "env-mid #0f1c1a": 8.02,
+        "env-bottom #060c0b": 8.23
+      }
+    },
+    {
+      "group": "guard",
+      "element": "kicker muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 4.29,
+      "status": "FAIL",
+      "note": "11px bold, letter-spacing",
+      "per_env": {
+        "env-top #162a26": 4.29,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.51
+      }
+    },
+    {
+      "group": "guard",
+      "element": "footer muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 4.29,
+      "status": "FAIL",
+      "note": "12px",
+      "per_env": {
+        "env-top #162a26": 4.29,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.51
+      }
+    },
+    {
+      "group": "guard",
+      "element": "footer muted auf Fallback #111e1c",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1c",
+      "contrast": 4.31,
+      "status": "FAIL",
+      "note": "Reduced-Transparency/No-Blur-Fallback",
+      "per_env": {
+        "env-top #162a26": 4.31,
+        "env-mid #0f1c1a": 4.31,
+        "env-bottom #060c0b": 4.31
+      }
+    },
+    {
+      "group": "guard",
+      "element": "stat-label secondary #9cb5af (analog)",
+      "foreground": "#9cb5af",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 7.83,
+      "status": "PASS",
+      "note": "Vergleich",
+      "per_env": {
+        "env-top #162a26": 7.83,
+        "env-mid #0f1c1a": 8.02,
+        "env-bottom #060c0b": 8.23
+      }
+    },
+    {
+      "group": "guard",
+      "element": "badge accent #3ecaa8",
+      "foreground": "#3ecaa8",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#16332d",
+      "contrast": 6.6,
+      "status": "PASS",
+      "note": "11px bold",
+      "per_env": {
+        "env-top #162a26": 6.6,
+        "env-mid #0f1c1a": 6.79,
+        "env-bottom #060c0b": 7.01
+      }
+    },
+    {
+      "group": "guard",
+      "element": "danger eyebrow #ff5c73",
+      "foreground": "#ff5c73",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#2c161b",
+      "contrast": 5.71,
+      "status": "PASS",
+      "note": "12px bold",
+      "per_env": {
+        "env-top #162a26": 5.71,
+        "env-mid #0f1c1a": 5.74,
+        "env-bottom #060c0b": 5.78
+      }
+    },
+    {
+      "group": "guard",
+      "element": "host #ffb8c2",
+      "foreground": "#ffb8c2",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#2c161b",
+      "contrast": 10.46,
+      "status": "PASS",
+      "note": "18-22px bold -> eigentlich 3:1, hier 4.5 angesetzt",
+      "per_env": {
+        "env-top #162a26": 10.46,
+        "env-mid #0f1c1a": 10.52,
+        "env-bottom #060c0b": 10.59
+      }
+    },
+    {
+      "group": "guard",
+      "element": "reasons #dfcecf",
+      "foreground": "#dfcecf",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#2c161b",
+      "contrast": 11.25,
+      "status": "PASS",
+      "note": "13.5px",
+      "per_env": {
+        "env-top #162a26": 11.25,
+        "env-mid #0f1c1a": 11.32,
+        "env-bottom #060c0b": 11.4
+      }
+    },
+    {
+      "group": "guard",
+      "element": "official eyebrow #3ecaa8",
+      "foreground": "#3ecaa8",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#0f2823",
+      "contrast": 7.62,
+      "status": "PASS",
+      "note": "12px bold",
+      "per_env": {
+        "env-top #162a26": 7.62,
+        "env-mid #0f1c1a": 7.68,
+        "env-bottom #060c0b": 7.75
+      }
+    },
+    {
+      "group": "guard",
+      "element": "official-name #a8f5df",
+      "foreground": "#a8f5df",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#0f2823",
+      "contrast": 12.52,
+      "status": "PASS",
+      "note": "18px bold",
+      "per_env": {
+        "env-top #162a26": 12.52,
+        "env-mid #0f1c1a": 12.62,
+        "env-bottom #060c0b": 12.74
+      }
+    },
+    {
+      "group": "guard",
+      "element": "btn-primary Text #ffffff",
+      "foreground": "#ffffff",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#1f7d6e",
+      "contrast": 4.98,
+      "status": "PASS",
+      "note": "14.5px 650",
+      "per_env": {
+        "env-top #162a26": 4.98,
+        "env-mid #0f1c1a": 4.98,
+        "env-bottom #060c0b": 4.98
+      }
+    },
+    {
+      "group": "guard",
+      "element": "btn-primary Verlauf unten",
+      "foreground": "#ffffff",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#155e53",
+      "contrast": 7.61,
+      "status": "PASS",
+      "note": "14.5px 650, Gradient-Endpunkt",
+      "per_env": {
+        "env-top #162a26": 7.61,
+        "env-mid #0f1c1a": 7.61,
+        "env-bottom #060c0b": 7.61
+      }
+    },
+    {
+      "group": "guard",
+      "element": "btn-secondary Text",
+      "foreground": "#f2f8f6",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#1c2e2a",
+      "contrast": 13.31,
+      "status": "PASS",
+      "note": "14.5px 650",
+      "per_env": {
+        "env-top #162a26": 13.31,
+        "env-mid #0f1c1a": 13.44,
+        "env-bottom #060c0b": 13.58
+      }
+    },
+    {
+      "group": "guard",
+      "element": "btn-link #e6a7ad",
+      "foreground": "#e6a7ad",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 8.52,
+      "status": "PASS",
+      "note": "13px 600, unterstrichen",
+      "per_env": {
+        "env-top #162a26": 8.52,
+        "env-mid #0f1c1a": 8.73,
+        "env-bottom #060c0b": 8.96
+      }
+    },
+    {
+      "group": "guard",
+      "element": "confirm strong #ff5c73",
+      "foreground": "#ff5c73",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#291319",
+      "contrast": 5.86,
+      "status": "PASS",
+      "note": "13px bold",
+      "per_env": {
+        "env-top #162a26": 5.86,
+        "env-mid #0f1c1a": 5.87,
+        "env-bottom #060c0b": 5.89
+      }
+    },
+    {
+      "group": "guard",
+      "element": "confirm p #dec8ca",
+      "foreground": "#dec8ca",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#291319",
+      "contrast": 11.01,
+      "status": "PASS",
+      "note": "12.5px",
+      "per_env": {
+        "env-top #162a26": 11.01,
+        "env-mid #0f1c1a": 11.04,
+        "env-bottom #060c0b": 11.08
+      }
+    },
+    {
+      "group": "guard",
+      "element": "btn-critical #ffffff",
+      "foreground": "#ffffff",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#a3273c",
+      "contrast": 7.21,
+      "status": "PASS",
+      "note": "13.5px",
+      "per_env": {
+        "env-top #162a26": 7.21,
+        "env-mid #0f1c1a": 7.21,
+        "env-bottom #060c0b": 7.21
+      }
+    },
+    {
+      "group": "guard",
+      "element": "error #ffd1d8",
+      "foreground": "#ffd1d8",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#3e141a",
+      "contrast": 11.64,
+      "status": "PASS",
+      "note": "13px",
+      "per_env": {
+        "env-top #162a26": 11.64,
+        "env-mid #0f1c1a": 11.68,
+        "env-bottom #060c0b": 11.72
+      }
+    },
+    {
+      "group": "guard",
+      "element": "Fokusring #52c2ff (Ring auf Environment)",
+      "foreground": "#52c2ff",
+      "required": 3.0,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 8.54,
+      "status": "PASS",
+      "note": "2.4.11/1.4.11 non-text",
+      "per_env": {
+        "env-top #162a26": 8.54,
+        "env-mid #0f1c1a": 8.75,
+        "env-bottom #060c0b": 8.98
+      }
+    },
+    {
+      "group": "guard",
+      "element": "Fokusring auf Fallback",
+      "foreground": "#52c2ff",
+      "required": 3.0,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1c",
+      "contrast": 8.58,
+      "status": "PASS",
+      "note": "non-text",
+      "per_env": {
+        "env-top #162a26": 8.58,
+        "env-mid #0f1c1a": 8.58,
+        "env-bottom #060c0b": 8.58
+      }
+    },
+    {
+      "group": "popup",
+      "element": "h1 #ffffff",
+      "foreground": "#ffffff",
+      "required": 3.0,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 17.18,
+      "status": "PASS",
+      "note": "16px bold -> 4.5 eigentlich; 3.0 konservativ",
+      "per_env": {
+        "env-top #162a26": 17.18,
+        "env-mid #0f1c1a": 17.46,
+        "env-bottom #060c0b": 17.77
+      }
+    },
+    {
+      "group": "popup",
+      "element": "kicker muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 4.33,
+      "status": "FAIL",
+      "note": "10px bold",
+      "per_env": {
+        "env-top #162a26": 4.33,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.47
+      }
+    },
+    {
+      "group": "popup",
+      "element": "stat-label secondary #9cb5af",
+      "foreground": "#9cb5af",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#142320",
+      "contrast": 7.46,
+      "status": "PASS",
+      "note": "11px",
+      "per_env": {
+        "env-top #162a26": 7.46,
+        "env-mid #0f1c1a": 7.51,
+        "env-bottom #060c0b": 7.56
+      }
+    },
+    {
+      "group": "popup",
+      "element": "stat-value accent #3ecaa8",
+      "foreground": "#3ecaa8",
+      "required": 3.0,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#142320",
+      "contrast": 7.9,
+      "status": "PASS",
+      "note": "18px bold",
+      "per_env": {
+        "env-top #162a26": 7.9,
+        "env-mid #0f1c1a": 7.95,
+        "env-bottom #060c0b": 8.01
+      }
+    },
+    {
+      "group": "popup",
+      "element": "version-pill accent #3ecaa8",
+      "foreground": "#3ecaa8",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#16322c",
+      "contrast": 6.66,
+      "status": "PASS",
+      "note": "10px bold",
+      "per_env": {
+        "env-top #162a26": 6.66,
+        "env-mid #0f1c1a": 6.79,
+        "env-bottom #060c0b": 6.94
+      }
+    },
+    {
+      "group": "popup",
+      "element": "toggle-label #f2f8f6",
+      "foreground": "#f2f8f6",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#142320",
+      "contrast": 15.11,
+      "status": "PASS",
+      "note": "12.5px 600",
+      "per_env": {
+        "env-top #162a26": 15.11,
+        "env-mid #0f1c1a": 15.2,
+        "env-bottom #060c0b": 15.31
+      }
+    },
+    {
+      "group": "popup",
+      "element": "option-note secondary #9cb5af",
+      "foreground": "#9cb5af",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#142320",
+      "contrast": 7.46,
+      "status": "PASS",
+      "note": "11px",
+      "per_env": {
+        "env-top #162a26": 7.46,
+        "env-mid #0f1c1a": 7.51,
+        "env-bottom #060c0b": 7.56
+      }
+    },
+    {
+      "group": "popup",
+      "element": "section-title muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 4.33,
+      "status": "FAIL",
+      "note": "12px bold uppercase",
+      "per_env": {
+        "env-top #162a26": 4.33,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.47
+      }
+    },
+    {
+      "group": "popup",
+      "element": "input Text #ffffff",
+      "foreground": "#ffffff",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#0c1514",
+      "contrast": 18.56,
+      "status": "PASS",
+      "note": "12.5px",
+      "per_env": {
+        "env-top #162a26": 18.56,
+        "env-mid #0f1c1a": 18.62,
+        "env-bottom #060c0b": 18.68
+      }
+    },
+    {
+      "group": "popup",
+      "element": "btn-check #ffffff",
+      "foreground": "#ffffff",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#1f7d6e",
+      "contrast": 4.98,
+      "status": "PASS",
+      "note": "12.5px 650",
+      "per_env": {
+        "env-top #162a26": 4.98,
+        "env-mid #0f1c1a": 4.98,
+        "env-bottom #060c0b": 4.98
+      }
+    },
+    {
+      "group": "popup",
+      "element": "btn-check Verlauf unten",
+      "foreground": "#ffffff",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#155e53",
+      "contrast": 7.61,
+      "status": "PASS",
+      "note": "12.5px 650",
+      "per_env": {
+        "env-top #162a26": 7.61,
+        "env-mid #0f1c1a": 7.61,
+        "env-bottom #060c0b": 7.61
+      }
+    },
+    {
+      "group": "popup",
+      "element": "result block #ffc4cc",
+      "foreground": "#ffc4cc",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#2d151a",
+      "contrast": 11.38,
+      "status": "PASS",
+      "note": "12px",
+      "per_env": {
+        "env-top #162a26": 11.38,
+        "env-mid #0f1c1a": 11.42,
+        "env-bottom #060c0b": 11.47
+      }
+    },
+    {
+      "group": "popup",
+      "element": "result safe #a8f5df",
+      "foreground": "#a8f5df",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#0f2823",
+      "contrast": 12.51,
+      "status": "PASS",
+      "note": "12px",
+      "per_env": {
+        "env-top #162a26": 12.51,
+        "env-mid #0f1c1a": 12.57,
+        "env-bottom #060c0b": 12.63
+      }
+    },
+    {
+      "group": "popup",
+      "element": "result skip secondary",
+      "foreground": "#9cb5af",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#1c2d2a",
+      "contrast": 6.59,
+      "status": "PASS",
+      "note": "12px",
+      "per_env": {
+        "env-top #162a26": 6.59,
+        "env-mid #0f1c1a": 6.63,
+        "env-bottom #060c0b": 6.68
+      }
+    },
+    {
+      "group": "popup",
+      "element": "footer muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 4.33,
+      "status": "FAIL",
+      "note": "10.5px",
+      "per_env": {
+        "env-top #162a26": 4.33,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.47
+      }
+    },
+    {
+      "group": "popup",
+      "element": "footer muted auf Fallback",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1c",
+      "contrast": 4.31,
+      "status": "FAIL",
+      "note": "Fallback",
+      "per_env": {
+        "env-top #162a26": 4.31,
+        "env-mid #0f1c1a": 4.31,
+        "env-bottom #060c0b": 4.31
+      }
+    },
+    {
+      "group": "popup",
+      "element": "Fokusring #52c2ff auf Glass",
+      "foreground": "#52c2ff",
+      "required": 3.0,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 8.61,
+      "status": "PASS",
+      "note": "non-text",
+      "per_env": {
+        "env-top #162a26": 8.61,
+        "env-mid #0f1c1a": 8.75,
+        "env-bottom #060c0b": 8.9
+      }
+    },
+    {
+      "group": "popup",
+      "element": "Fokusring vs Input-Hintergrund",
+      "foreground": "#52c2ff",
+      "required": 3.0,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#0c1514",
+      "contrast": 9.3,
+      "status": "PASS",
+      "note": "1px Border statt 2px Ring",
+      "per_env": {
+        "env-top #162a26": 9.3,
+        "env-mid #0f1c1a": 9.33,
+        "env-bottom #060c0b": 9.36
+      }
+    }
+  ],
+  "fails": [
+    {
+      "group": "guard",
+      "element": "kicker muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 4.29,
+      "status": "FAIL",
+      "note": "11px bold, letter-spacing",
+      "per_env": {
+        "env-top #162a26": 4.29,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.51
+      }
+    },
+    {
+      "group": "guard",
+      "element": "footer muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111f1c",
+      "contrast": 4.29,
+      "status": "FAIL",
+      "note": "12px",
+      "per_env": {
+        "env-top #162a26": 4.29,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.51
+      }
+    },
+    {
+      "group": "guard",
+      "element": "footer muted auf Fallback #111e1c",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1c",
+      "contrast": 4.31,
+      "status": "FAIL",
+      "note": "Reduced-Transparency/No-Blur-Fallback",
+      "per_env": {
+        "env-top #162a26": 4.31,
+        "env-mid #0f1c1a": 4.31,
+        "env-bottom #060c0b": 4.31
+      }
+    },
+    {
+      "group": "popup",
+      "element": "kicker muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 4.33,
+      "status": "FAIL",
+      "note": "10px bold",
+      "per_env": {
+        "env-top #162a26": 4.33,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.47
+      }
+    },
+    {
+      "group": "popup",
+      "element": "section-title muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 4.33,
+      "status": "FAIL",
+      "note": "12px bold uppercase",
+      "per_env": {
+        "env-top #162a26": 4.33,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.47
+      }
+    },
+    {
+      "group": "popup",
+      "element": "footer muted #6b857f",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1b",
+      "contrast": 4.33,
+      "status": "FAIL",
+      "note": "10.5px",
+      "per_env": {
+        "env-top #162a26": 4.33,
+        "env-mid #0f1c1a": 4.4,
+        "env-bottom #060c0b": 4.47
+      }
+    },
+    {
+      "group": "popup",
+      "element": "footer muted auf Fallback",
+      "foreground": "#6b857f",
+      "required": 4.5,
+      "worst_env": "env-top #162a26",
+      "worst_bg_hex": "#111e1c",
+      "contrast": 4.31,
+      "status": "FAIL",
+      "note": "Fallback",
+      "per_env": {
+        "env-top #162a26": 4.31,
+        "env-mid #0f1c1a": 4.31,
+        "env-bottom #060c0b": 4.31
+      }
+    }
+  ],
+  "notes": [
+    "Alpha-Compositing: Glass-Fill/Glass-Karten wurden ueber drei Stuetzfarben des Environment-Gradienten gerechnet; berichtet wird der schlechteste Wert.",
+    "Backdrop-Blur selbst veraendert die Hintergrundfarbe im Flaechentest nicht, veraendert aber die wahrgenommene Lesbarkeit ueber bewegtem Inhalt (hier nicht messbar, weil hinter dem Interstitial nur ein statischer Gradient liegt).",
+    "Platzhaltertext (#url) hat keine eigene ::placeholder-Farbe -> UA-Standard, nicht belastbar bewertbar => NOT_TESTED.",
+    "Fokusring popup: input[type=text] setzt outline:none mit Spezifitaet (0,1,1); die :where(...):focus-visible-Regel hat (0,1,0) und verliert => nur 1px Border + rgba(82,194,255,.25)-Schatten als Fokusindikator (2.4.11/1.4.11 Risiko)."
+  ]
+}

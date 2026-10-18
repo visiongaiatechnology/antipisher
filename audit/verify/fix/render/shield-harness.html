@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antipisher Shield — Visual QA Harness</title>
+  <style>
+    html, body { margin: 0; min-height: 100vh; background: #0a1210; }
+    body { display: grid; place-items: center; color: #93a7a1; font: 14px system-ui, sans-serif; }
+    .page { width: min(560px, 90vw); padding: 32px; border: 1px solid rgba(255,255,255,.09); border-radius: 20px; background: rgba(17,27,24,.65); }
+    h1 { color: #f2f7f5; font-size: 20px; margin: 0 0 8px; }
+    input, button { font: inherit; padding: 10px 12px; border-radius: 9px; border: 1px solid rgba(255,255,255,.15); background: #07100e; color: #f2f7f5; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Shop-Login (simulierte Fremdseite)</h1>
+    <p>Dieser Harness ruft das Content-Shield direkt auf, um das Interstitial visuell zu prüfen.</p>
+    <form id="f" action="https://paypa1.com/login" method="POST">
+      <input type="password" value="demo" aria-label="Passwort">
+      <button type="submit">Anmelden</button>
+    </form>
+  </div>
+  <script src="../../../../shared/sites.js"></script>
+  <script src="../../../../shared/detector.js"></script>
+  <script src="../../../../shared/shield-content.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const form = document.getElementById('f');
+        if (typeof form.requestSubmit === 'function') form.requestSubmit();
+        else form.submit();
+      }, 350);
+    });
+  </script>
+</body>
+</html>

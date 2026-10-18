@@ -1,0 +1,213 @@
+{
+  "probe": "probe06_guard_render_mock",
+  "timestamp_utc": "2026-10-18T15:35:32.958Z",
+  "environment": "Node v24.13.0 vm-Sandbox mit DOM-Stub (kein echter Browser)",
+  "assertions_total": 38,
+  "assertions_failed": 0,
+  "assertions": [
+    {
+      "name": "blocked:title",
+      "ok": true,
+      "detail": "Möglicher Domain-Betrug abgewehrt"
+    },
+    {
+      "name": "blocked:danger-visible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "blocked:host-textContent",
+      "ok": true,
+      "detail": "paypa1.com"
+    },
+    {
+      "name": "blocked:no-auto-navigation",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "blocked:reason-mapped",
+      "ok": true,
+      "detail": "Die Domain imitiert den geschützten Markennamen mit abweichender Schreibweise oder Zeichenersetzungen."
+    },
+    {
+      "name": "xss:no-innerHTML-writes",
+      "ok": true,
+      "detail": "innerHTML-Writes gefunden"
+    },
+    {
+      "name": "xss:host-only-text",
+      "ok": true,
+      "detail": "paypa1.com"
+    },
+    {
+      "name": "xss:navigation-blocked",
+      "ok": true,
+      "detail": "{\"replaced\":[],\"messages\":[],\"historyBack\":0,\"sendResponse\":{\"ok\":true}}"
+    },
+    {
+      "name": "safe:message-sent",
+      "ok": true,
+      "detail": "[{\"type\":\"allow-once\",\"url\":\"https://example.com/pfad?x=1&y=2#frag\",\"tabId\":7,\"recordBlock\":false}]"
+    },
+    {
+      "name": "safe:message-type-tabid",
+      "ok": true,
+      "detail": "{\"type\":\"allow-once\",\"url\":\"https://example.com/pfad?x=1&y=2#frag\",\"tabId\":7,\"recordBlock\":false}"
+    },
+    {
+      "name": "safe:message-url-exact",
+      "ok": true,
+      "detail": "\"https://example.com/pfad?x=1&y=2#frag\""
+    },
+    {
+      "name": "safe:recordBlock-false",
+      "ok": true,
+      "detail": "false"
+    },
+    {
+      "name": "safe:navigates-to-target",
+      "ok": true,
+      "detail": "[\"https://example.com/pfad?x=1&y=2#frag\"]"
+    },
+    {
+      "name": "xss-safe:no-innerHTML",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "xss-safe:message-url-raw-exact",
+      "ok": true,
+      "detail": "[{\"type\":\"allow-once\",\"url\":\"https://example.test/<img src=x onerror=alert(1)>\",\"tabId\":7,\"recordBlock\":false}]"
+    },
+    {
+      "name": "xss-safe:navigation-raw-exact",
+      "ok": true,
+      "detail": "[\"https://example.test/<img src=x onerror=alert(1)>\"]"
+    },
+    {
+      "name": "ui:proceed-handler-exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ui:safe-handler-exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ui:reveal-toggles-confirm",
+      "ok": true,
+      "detail": "{\"aria-expanded\":\"true\"}"
+    },
+    {
+      "name": "ui:proceed-sends-recordBlock",
+      "ok": true,
+      "detail": "{\"type\":\"allow-once\",\"url\":\"https://paypa1.com/\",\"tabId\":7,\"recordBlock\":true}"
+    },
+    {
+      "name": "ui:proceed-navigates",
+      "ok": true,
+      "detail": "[\"https://paypa1.com/\"]"
+    },
+    {
+      "name": "ui:proceed-tabid-bound",
+      "ok": true,
+      "detail": "{\"type\":\"allow-once\",\"url\":\"https://paypa1.com/\",\"tabId\":7,\"recordBlock\":true}"
+    },
+    {
+      "name": "ui:official-button-target",
+      "ok": true,
+      "detail": "{\"type\":\"allow-once\",\"url\":\"https://paypal.com/\",\"tabId\":7,\"recordBlock\":false}"
+    },
+    {
+      "name": "ui:official-button-no-recordBlock",
+      "ok": true,
+      "detail": "false"
+    },
+    {
+      "name": "ui:back-history",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "invalid:invalid-hash:no-message",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "invalid:invalid-hash:no-navigation",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "invalid:empty:no-message",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "invalid:empty:no-navigation",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "invalid:non-http-scheme:no-message",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "invalid:non-http-scheme:no-navigation",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "invalid:ftp-scheme:no-message",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "invalid:ftp-scheme:no-navigation",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "failclosed:no-tab-no-navigation",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "failclosed:no-tab-error-visible",
+      "ok": true,
+      "detail": "Navigation konnte nicht freigegeben werden: Tab-Identifikator nicht auflösbar"
+    },
+    {
+      "name": "failclosed:rejected-message-no-navigation",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "failclosed:rejected-message-error-visible",
+      "ok": true,
+      "detail": "Navigation konnte nicht freigegeben werden: simulierter Fehler"
+    },
+    {
+      "name": "parsing:query-wins-over-hash",
+      "ok": true,
+      "detail": "{\"type\":\"allow-once\",\"url\":\"https://example.com/query\",\"tabId\":7,\"recordBlock\":false}"
+    }
+  ],
+  "observations": [
+    {
+      "name": "xss:textContent-only",
+      "detail": "guard.js setzt alle untrusted Werte (host/reason/official/site/error) ausschließlich über textContent (guard.js:26-27,44-45,60-62,39); kein innerHTML/insertAdjacentHTML/eval im gesamten Repo (siehe probe09)."
+    },
+    {
+      "name": "guard:error-message-content",
+      "detail": "Fehlermeldungen der Schutzseite geben nur generische Texte/Fehlercodes aus, nicht die Ziel-URL (guard.js:21-24,39)."
+    },
+    {
+      "name": "clickjacking:tab-binding",
+      "detail": "guard.html ist in Chrome web-accessible; ein Einbetten/Öffnen aus Web-Origins ist möglich. Die Freigabe-Message ist aber an sender.url=guard.html UND tab.url=guard.html gebunden (chrome/background.js:91-95; Mock-Test probe04). Ein iframe aus einer Webseite kann tabId nicht auf einen Guard-Tab umbiegen — der Angriff scheitert fail-closed. Kein Browser-E2E verfügbar."
+    }
+  ]
+}

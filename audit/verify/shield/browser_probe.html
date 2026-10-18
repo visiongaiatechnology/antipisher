@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Antipisher Shield – Browser-Semantik-Probe (kein Extension-E2E)</title>
+<style>
+  /* Simuliert eine feindliche Seiten-CSS-Regel gegen den Shield-Host.
+     Der Shield setzt per JS nur position/zIndex/top/left/width/height/pointerEvents,
+     aber KEIN display – daher muss diese Regel (ohne !important) greifen. */
+  #antipisher-shield-root { display: none; }
+</style>
+</head>
+<body>
+<pre id="result">PENDING</pre>
+<script>
+(() => {
+  const out = { probe: 'browser_semantics', ua: navigator.userAgent, cases: [] };
+  const add = (id, observed, detail) => out.cases.push({ id, observed, detail: detail === undefined ? null : detail });
+  const selfNoHash = location.href.split('#')[0];
+
+  // ---- 1) Submit-Event und Shadow-DOM-Grenze (composed-Flag) ----
+  // Formular navigiert nur same-document (Fragment), damit diese Seite nie verlassen wird.
+  let windowCaptureFired = 0;
+  const shadowListener = e => { windowCaptureFired++; e.preventDefault(); };
+  window.addEventListener('submit', shadowListener, true);
+  const host = document.createElement('div');
+  document.body.appendChild(host);
+  const shadow = host.attachShadow({ mode: 'closed' });
+  const innerForm = document.createElement('form');
+  innerForm.action = selfNoHash + '#shadow-submit-test';
+  shadow.appendChild(innerForm);
+  try { innerForm.requestSubmit(); } catch (e) { windowCaptureFired = 'error:' + e.message; }
+  add('submit_event_window_capture_from_closed_shadow_root', windowCaptureFired,
+      '0 = window-Capture-Listener sieht Submit aus geschlossenem Shadow-Root NICHT; 1 = sieht ihn');
+  window.removeEventListener('submit', shadowListener, true);
+
+  // ---- 2) closed Shadow-DOM: Host durch Seiten-JS entfernbar + Seiten-CSS (ohne !important) ----
+  const host2 = document.createElement('div');
+  host2.id = 'antipisher-shield-root';
+  host2.style.position = 'fixed';
+  host2.style.zIndex = '2147483647';
+  host2.style.top = '0';
+  host2.style.left = '0';
+  host2.style.width = '100vw';
+  host2.style.height = '100vh';
+  host2.style.pointerEvents = 'auto';
+  host2.attachShadow({ mode: 'closed' });
+  document.documentElement.appendChild(host2);
+  add('host_found_by_page_js', !!document.getElementById('antipisher-shield-root'));
+  add('page_css_display_none_wins_without_inline_display', getComputedStyle(host2).display,
+      'erwartet "none": Seiten-CSS ohne !important schlägt den Host, weil inline display fehlt');
+  host2.remove();
+  add('closed_shadow_host_removable_by_page_js', !document.getElementById('antipisher-shield-root'));
+
+  // ---- 3) Inline-!important als Gegenprobe (Fix-Option) ----
+  const host3 = document.createElement('div');
+  host3.id = 'antipisher-shield-root';
+  host3.style.setProperty('display', 'block', 'important');
+  host3.attachShadow({ mode: 'closed' });
+  document.documentElement.appendChild(host3);
+  add('inline_important_display_beats_page_css', getComputedStyle(host3).display,
+      'erwartet "block": setProperty(display,block,important) gewinnt gegen Seiten-CSS ohne !important');
+
+  // ---- 4) Seiten-CSS mit !important gegen Inline-!important ----
+  const style2 = document.createElement('style');
+  style2.textContent = '#antipisher-shield-root { display: none !important; }';
+  document.head.appendChild(style2);
+  add('page_css_important_vs_inline_important', getComputedStyle(host3).display,
+      'erwartet "none": selbst Inline-!important verliert gegen Seiten-!important (Kaskade)');
+
+  // ---- 5) Formular-Submit per form.submit(): kein submit-Event ----
+  // Formular zielt in ein iframe (about:blank), Hauptseite und Messskript bleiben unberuehrt.
+  const sink = document.createElement('iframe');
+  sink.name = 'nativeSubmitSink';
+  sink.style.display = 'none';
+  document.body.appendChild(sink);
+  let nativeSubmitEventFired = 0;
+  const nativeGuard = () => { nativeSubmitEventFired++; };
+  window.addEventListener('submit', nativeGuard, true);
+  const f2 = document.createElement('form');
+  f2.action = 'about:blank';
+  f2.method = 'get';
+  f2.target = 'nativeSubmitSink';
+  document.body.appendChild(f2);
+  let nativeSubmitThrew = false;
+  try { HTMLFormElement.prototype.submit.call(f2); } catch (e) { nativeSubmitThrew = String(e && e.message || e); }
+  window.removeEventListener('submit', nativeGuard, true);
+  add('form_submit_native_fires_no_submit_event', nativeSubmitEventFired,
+      '0 = kein submit-Event; Shield kann diesen Weg nie sehen. threw=' + nativeSubmitThrew);
+
+  // ---- 6) requestSubmit feuert submit-Event (Gegenprobe) ----
+  let requestSubmitEventFired = 0;
+  const f3 = document.createElement('form');
+  f3.action = selfNoHash + '#request-submit-test';
+  document.body.appendChild(f3);
+  const stopper = e => { requestSubmitEventFired++; e.preventDefault(); };
+  window.addEventListener('submit', stopper, true);
+  f3.requestSubmit();
+  window.removeEventListener('submit', stopper, true);
+  add('request_submit_fires_submit_event', requestSubmitEventFired);
+
+  out.ok = true;
+  document.getElementById('result').textContent = 'RESULT_JSON:' + JSON.stringify(out);
+})();
+</script>
+</body>
+</html>

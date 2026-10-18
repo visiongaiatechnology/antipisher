@@ -1,0 +1,574 @@
+{
+  "generated": "2026-10-18T17:31:38.486Z",
+  "corpusVersion": "lead-probe-1",
+  "totals": {
+    "officialExpectedSafe": 26,
+    "officialFalsePositives": 0,
+    "phishingExpectedBlock": 40,
+    "undetectedPhishing": 0,
+    "knownOfficialSanity": 0,
+    "knownSpoofSanity": 0
+  },
+  "officialFalsePositives": [],
+  "undetectedPhishing": [],
+  "sanityFailures": {
+    "official": [],
+    "spoof": []
+  },
+  "all": {
+    "officialExpectedSafe": [
+      {
+        "url": "https://www.google.co.jp/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.google.co.kr/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.google.com.mx/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.google.co.za/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.google.com.sg/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.google.co.id/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.se/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.nl/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.pl/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.sg/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.ae/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.com.mx/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.com.tr/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.apple.com.cn/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.microsoft.co.jp/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.ing.nl/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.ing.be/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.ing.lu/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.chase.co.uk/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.visa.de/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.visa.co.jp/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.visa.co.uk/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.visa.fr/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.hsbc.co.jp/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.santander.com.mx/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.gls.de/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      }
+    ],
+    "phishingExpectedBlock": [
+      {
+        "url": "https://paypalsupport.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypalverify.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypalaccount.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypalcustomerservice.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypalhelp.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypal-inc.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypalsecure.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://netflixbilling.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Netflix",
+        "official": "netflix.com"
+      },
+      {
+        "url": "https://netflixsupport.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Netflix",
+        "official": "netflix.com"
+      },
+      {
+        "url": "https://amazonsupport.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Amazon",
+        "official": "amazon.com"
+      },
+      {
+        "url": "https://microsoftsupport.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Microsoft",
+        "official": "microsoft.com"
+      },
+      {
+        "url": "https://binancelogin.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Binance",
+        "official": "binance.com"
+      },
+      {
+        "url": "https://coinbasesupport.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Coinbase",
+        "official": "coinbase.com"
+      },
+      {
+        "url": "https://chatgptlogin.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "ChatGPT",
+        "official": "chatgpt.com"
+      },
+      {
+        "url": "https://appleid-apple.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Apple",
+        "official": "apple.com"
+      },
+      {
+        "url": "https://paypa1-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://secure-paypa1.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypa1-secure.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://netfl1x-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Netflix",
+        "official": "netflix.com"
+      },
+      {
+        "url": "https://g00gle-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Google",
+        "official": "google.com"
+      },
+      {
+        "url": "https://faceb00k-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Facebook",
+        "official": "facebook.com"
+      },
+      {
+        "url": "https://micros0ft-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Microsoft",
+        "official": "microsoft.com"
+      },
+      {
+        "url": "https://amaz0n-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Amazon",
+        "official": "amazon.com"
+      },
+      {
+        "url": "https://app1e-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Apple",
+        "official": "apple.com"
+      },
+      {
+        "url": "https://paypal-logln.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypal-l0gin.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://pаypal-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://gοοgle-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Google",
+        "official": "google.com"
+      },
+      {
+        "url": "https://facebооk-support.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Facebook",
+        "official": "facebook.com"
+      },
+      {
+        "url": "https://arnazon.com/",
+        "status": "block",
+        "reason": "brand-variant",
+        "site": "Amazon",
+        "official": "amazon.com"
+      },
+      {
+        "url": "https://rnicrosoft.com/",
+        "status": "block",
+        "reason": "brand-variant",
+        "site": "Microsoft",
+        "official": "microsoft.com"
+      },
+      {
+        "url": "https://paypa1.com-login.com/",
+        "status": "block",
+        "reason": "brand-variant",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypal-express.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypal-plus.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://amazon-deutschland.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Amazon",
+        "official": "amazon.com"
+      },
+      {
+        "url": "https://paypa1-login.co.uk/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://amazon-login.co.jp/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "Amazon",
+        "official": "amazon.com"
+      },
+      {
+        "url": "https://paypalcom-login.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypalcom-verify.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://www-paypal.com/",
+        "status": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "official": "paypal.com"
+      }
+    ],
+    "okOfficial": [
+      {
+        "url": "https://www.google.de/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.amazon.co.jp/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.paypal.com/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.sparkasse.de/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      },
+      {
+        "url": "https://www.bund.de/",
+        "status": "safe",
+        "reason": null,
+        "site": null,
+        "official": null
+      }
+    ],
+    "okSpoof": [
+      {
+        "url": "https://paypa1.com/",
+        "status": "block",
+        "reason": "brand-variant",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://amzaon.com/",
+        "status": "block",
+        "reason": "typosquat",
+        "site": "Amazon",
+        "official": "amazon.com"
+      },
+      {
+        "url": "https://g00gle.com/",
+        "status": "block",
+        "reason": "brand-variant",
+        "site": "Google",
+        "official": "google.com"
+      },
+      {
+        "url": "https://pаypal.com/",
+        "status": "block",
+        "reason": "unicode",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypal.com.evil.test/",
+        "status": "block",
+        "reason": "foreign-domain",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypal.com@evil.test/",
+        "status": "block",
+        "reason": "userinfo",
+        "site": "PayPal",
+        "official": "paypal.com"
+      },
+      {
+        "url": "https://paypal.github.io/",
+        "status": "block",
+        "reason": "foreign-domain",
+        "site": "PayPal",
+        "official": "paypal.com"
+      }
+    ]
+  }
+}

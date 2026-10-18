@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+
+# Node (not needed for this repo, kept for tools)
+node_modules/
+
+# Release artifacts (built outside the repo into ../)
+*.zip
+
+# Temporary
+*.tmp
+*.log

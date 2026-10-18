@@ -1,0 +1,406 @@
+{
+  "generated": "2026-10-18T17:32:34.771Z",
+  "totals": {
+    "total": 44,
+    "pass": 42,
+    "fail": 2
+  },
+  "results": [
+    {
+      "category": "bait",
+      "url": "https://sparkasse-sicherheit.net/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://deutschebank-konto.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://commerzbank-tan.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://dhl-zollgebuehr.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://paypal-gutschein.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://amazon-gutschein.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://netflix-abo.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://spotify-rechnung.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "combosquat",
+      "url": "https://tiktok-coin.com/",
+      "expected": "block",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": false
+    },
+    {
+      "category": "combosquat",
+      "url": "https://binance-kyc.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "combosquat",
+      "url": "https://coinbase-kyc.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "combosquat",
+      "url": "https://ledger-live.com/",
+      "expected": "block",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": false
+    },
+    {
+      "category": "bait",
+      "url": "https://paypal-sperre.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://amazon-paketstation.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://ing-konto.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://klarna-checkout.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "typo",
+      "url": "https://paypa1.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "brand-variant",
+      "ok": true
+    },
+    {
+      "category": "typo",
+      "url": "https://g00gle.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "brand-variant",
+      "ok": true
+    },
+    {
+      "category": "typo",
+      "url": "https://amzaon.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "typosquat",
+      "ok": true
+    },
+    {
+      "category": "concat",
+      "url": "https://microsoft365-login.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "concat",
+      "url": "https://amazonprime-login.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://paypal-support-center.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://dhl-sendungsverfolgung.de/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "db-gap",
+      "url": "https://bitpanda-login.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://n26-login.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "bait",
+      "url": "https://traderepublic-login.com/",
+      "expected": "block",
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.google.co.nz/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.amazon.com.au/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.apple.de/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.microsoft.co.jp/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.ing.nl/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.visa.es/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.sparkasse.at/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.elster.de/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.bund.de/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.telekom.de/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "benign-path",
+      "url": "https://www.heise.de/ratgeber/neue-paypal-login-regel-999.html",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "benign-path",
+      "url": "https://www.chip.de/ratgeber/paypal-konto-loeschen_888.html",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "benign",
+      "url": "https://de.wikipedia.org/wiki/PayPal",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "benign",
+      "url": "https://www.reddit.com/r/paypal/comments/xyz/login_problem/",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "benign",
+      "url": "https://stackoverflow.com/questions/999/paypal-login-api",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "benign-search",
+      "url": "https://www.ecosia.org/search?q=paypal.com%20login",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "benign",
+      "url": "https://github.com/paypal/paypal-js",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    },
+    {
+      "category": "official",
+      "url": "https://www.paypal.com/de/webapps/mpp/home",
+      "expected": "safe",
+      "got": "safe",
+      "action": "allow",
+      "reason": "",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,2798 @@
+{
+  "tool": "render_harness.py",
+  "generated": "2026-10-18T17:29:18.684305+02:00",
+  "type": "STATIC_RENDER_HARNESS (kein Extension-E2E)",
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "pages": [
+    {
+      "scenario": "guard-danger",
+      "kind": "guard",
+      "state": "danger",
+      "viewport": "1280x900",
+      "screenshot": "guard-danger-1280x900.png",
+      "frame": {
+        "w": 1267,
+        "h": 900
+      },
+      "metrics": {
+        "page": "guard-danger.html",
+        "viewport": {
+          "w": 1267,
+          "h": 900
+        },
+        "hasFocus": false,
+        "activeElement": "BODY",
+        "document": {
+          "scrollWidth": 1267,
+          "scrollHeight": 900,
+          "bodyScrollWidth": 1267,
+          "horizontalOverflow": false
+        },
+        "headings": [
+          "H1:Möglicher Domain-Betrug abgewehrt"
+        ],
+        "focusables": [
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "safe",
+            "text": "Offizielle Seite öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "back",
+            "text": "Zurück zur vorherigen Seite",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "reveal",
+            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "proceed",
+            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "visible": false,
+            "tabIndex": 0
+          }
+        ],
+        "rects": {
+          "wrap": {
+            "x": 294,
+            "y": 68,
+            "w": 680,
+            "h": 764
+          },
+          "danger": {
+            "x": 333,
+            "y": 301,
+            "w": 602,
+            "h": 421
+          },
+          "actions": {
+            "x": 333,
+            "y": 596,
+            "w": 602,
+            "h": 48
+          },
+          "safeBtn": {
+            "x": 333,
+            "y": 596,
+            "w": 216,
+            "h": 48
+          },
+          "backBtn": {
+            "x": 560,
+            "y": 596,
+            "w": 231,
+            "h": 48
+          },
+          "reveal": {
+            "x": 333,
+            "y": 699,
+            "w": 273,
+            "h": 23
+          },
+          "confirm": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "proceed": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "popupBody": {
+            "x": 0,
+            "y": 0,
+            "w": 1267,
+            "h": 900
+          },
+          "glassCard": null,
+          "urlInput": null,
+          "checkBtn": null,
+          "toggleRow": null,
+          "checkbox": null,
+          "result": null,
+          "footer": {
+            "x": 333,
+            "y": 750,
+            "w": 602,
+            "h": 37
+          },
+          "h1": {
+            "x": 333,
+            "y": 203,
+            "w": 602,
+            "h": 43
+          }
+        },
+        "computed": {
+          "#title": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "36px",
+            "fontWeight": "750",
+            "lineHeight": "43.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#description": {
+            "color": "rgb(156, 181, 175)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "15px",
+            "fontWeight": "400",
+            "lineHeight": "22.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(156, 181, 175)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#host": {
+            "color": "rgb(255, 184, 194)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "22px",
+            "fontWeight": "750",
+            "lineHeight": "33px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 184, 194)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#official": {
+            "color": "rgb(168, 245, 223)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "700",
+            "lineHeight": "27px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(168, 245, 223)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#reason": {
+            "color": "rgb(223, 206, 207)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "19.575px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(223, 206, 207)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#error": {
+            "color": "rgb(255, 209, 216)",
+            "background": "rgba(70, 18, 26, 0.85)",
+            "fontSize": "13px",
+            "fontWeight": "400",
+            "lineHeight": "19.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 92, 115, 0.4)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".kicker": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "fontWeight": "700",
+            "lineHeight": "16.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".footer": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "lineHeight": "18px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "h1": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "36px",
+            "fontWeight": "750",
+            "lineHeight": "43.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".wrap": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(16, 28, 26, 0.82)",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "24px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
+            "backdropFilter": "blur(18px) saturate(1.15)"
+          }
+        },
+        "focusTest": null
+      },
+      "dump_exit": 0,
+      "shot": {
+        "exit": 0,
+        "file": "guard-danger-1280x900.png",
+        "exists": true,
+        "bytes": 283534
+      }
+    },
+    {
+      "scenario": "guard-danger-mobile",
+      "kind": "guard",
+      "state": "danger",
+      "viewport": "390x844",
+      "screenshot": "guard-danger-390x844.png",
+      "frame": {
+        "w": 390,
+        "h": 844
+      },
+      "metrics": {
+        "page": "guard-danger.html",
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "hasFocus": false,
+        "activeElement": "BODY",
+        "document": {
+          "scrollWidth": 375,
+          "scrollHeight": 984,
+          "bodyScrollWidth": 375,
+          "horizontalOverflow": false
+        },
+        "headings": [
+          "H1:Möglicher Domain-Betrug abgewehrt"
+        ],
+        "focusables": [
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "safe",
+            "text": "Offizielle Seite öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "back",
+            "text": "Zurück zur vorherigen Seite",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "reveal",
+            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "proceed",
+            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "visible": false,
+            "tabIndex": 0
+          }
+        ],
+        "rects": {
+          "wrap": {
+            "x": 16,
+            "y": 24,
+            "w": 343,
+            "h": 936
+          },
+          "danger": {
+            "x": 37,
+            "y": 324,
+            "w": 301,
+            "h": 514
+          },
+          "actions": {
+            "x": 37,
+            "y": 652,
+            "w": 301,
+            "h": 108
+          },
+          "safeBtn": {
+            "x": 37,
+            "y": 652,
+            "w": 301,
+            "h": 48
+          },
+          "backBtn": {
+            "x": 37,
+            "y": 712,
+            "w": 301,
+            "h": 48
+          },
+          "reveal": {
+            "x": 37,
+            "y": 815,
+            "w": 273,
+            "h": 23
+          },
+          "confirm": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "proceed": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "popupBody": {
+            "x": 0,
+            "y": 0,
+            "w": 375,
+            "h": 984
+          },
+          "glassCard": null,
+          "urlInput": null,
+          "checkBtn": null,
+          "toggleRow": null,
+          "checkbox": null,
+          "result": null,
+          "footer": {
+            "x": 37,
+            "y": 866,
+            "w": 301,
+            "h": 63
+          },
+          "h1": {
+            "x": 37,
+            "y": 162,
+            "w": 301,
+            "h": 62
+          }
+        },
+        "computed": {
+          "#title": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "26px",
+            "fontWeight": "750",
+            "lineHeight": "31.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#description": {
+            "color": "rgb(156, 181, 175)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "15px",
+            "fontWeight": "400",
+            "lineHeight": "22.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(156, 181, 175)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#host": {
+            "color": "rgb(255, 184, 194)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "750",
+            "lineHeight": "27px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 184, 194)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#official": {
+            "color": "rgb(168, 245, 223)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "700",
+            "lineHeight": "27px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(168, 245, 223)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#reason": {
+            "color": "rgb(223, 206, 207)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "19.575px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(223, 206, 207)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#error": {
+            "color": "rgb(255, 209, 216)",
+            "background": "rgba(70, 18, 26, 0.85)",
+            "fontSize": "13px",
+            "fontWeight": "400",
+            "lineHeight": "19.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 92, 115, 0.4)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".kicker": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "fontWeight": "700",
+            "lineHeight": "16.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".footer": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "lineHeight": "18px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "h1": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "26px",
+            "fontWeight": "750",
+            "lineHeight": "31.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".wrap": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(16, 28, 26, 0.82)",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "24px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
+            "backdropFilter": "blur(18px) saturate(1.15)"
+          }
+        },
+        "focusTest": null
+      },
+      "dump_exit": 0,
+      "shot": {
+        "exit": 0,
+        "file": "guard-danger-390x844.png",
+        "exists": true,
+        "bytes": 71412
+      }
+    },
+    {
+      "scenario": "guard-confirm",
+      "kind": "guard",
+      "state": "confirm",
+      "viewport": "1280x1120",
+      "screenshot": "guard-confirm-1280x1120.png",
+      "frame": {
+        "w": 1267,
+        "h": 1120
+      },
+      "metrics": {
+        "page": "guard-confirm.html",
+        "viewport": {
+          "w": 1267,
+          "h": 1120
+        },
+        "hasFocus": false,
+        "activeElement": "BODY",
+        "document": {
+          "scrollWidth": 1267,
+          "scrollHeight": 1120,
+          "bodyScrollWidth": 1267,
+          "horizontalOverflow": false
+        },
+        "headings": [
+          "H1:Möglicher Domain-Betrug abgewehrt"
+        ],
+        "focusables": [
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "safe",
+            "text": "Offizielle Seite öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "back",
+            "text": "Zurück zur vorherigen Seite",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "reveal",
+            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "proceed",
+            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "visible": true,
+            "tabIndex": 0
+          }
+        ],
+        "rects": {
+          "wrap": {
+            "x": 294,
+            "y": 96,
+            "w": 680,
+            "h": 928
+          },
+          "danger": {
+            "x": 333,
+            "y": 329,
+            "w": 602,
+            "h": 585
+          },
+          "actions": {
+            "x": 333,
+            "y": 624,
+            "w": 602,
+            "h": 48
+          },
+          "safeBtn": {
+            "x": 333,
+            "y": 624,
+            "w": 216,
+            "h": 48
+          },
+          "backBtn": {
+            "x": 560,
+            "y": 624,
+            "w": 231,
+            "h": 48
+          },
+          "reveal": {
+            "x": 333,
+            "y": 727,
+            "w": 273,
+            "h": 23
+          },
+          "confirm": {
+            "x": 333,
+            "y": 762,
+            "w": 602,
+            "h": 152
+          },
+          "proceed": {
+            "x": 350,
+            "y": 851,
+            "w": 315,
+            "h": 46
+          },
+          "popupBody": {
+            "x": 0,
+            "y": 0,
+            "w": 1267,
+            "h": 1120
+          },
+          "glassCard": null,
+          "urlInput": null,
+          "checkBtn": null,
+          "toggleRow": null,
+          "checkbox": null,
+          "result": null,
+          "footer": {
+            "x": 333,
+            "y": 942,
+            "w": 602,
+            "h": 37
+          },
+          "h1": {
+            "x": 333,
+            "y": 231,
+            "w": 602,
+            "h": 43
+          }
+        },
+        "computed": {
+          "#title": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "36px",
+            "fontWeight": "750",
+            "lineHeight": "43.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#description": {
+            "color": "rgb(156, 181, 175)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "15px",
+            "fontWeight": "400",
+            "lineHeight": "22.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(156, 181, 175)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#host": {
+            "color": "rgb(255, 184, 194)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "22px",
+            "fontWeight": "750",
+            "lineHeight": "33px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 184, 194)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#official": {
+            "color": "rgb(168, 245, 223)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "700",
+            "lineHeight": "27px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(168, 245, 223)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#reason": {
+            "color": "rgb(223, 206, 207)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "19.575px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(223, 206, 207)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#error": {
+            "color": "rgb(255, 209, 216)",
+            "background": "rgba(70, 18, 26, 0.85)",
+            "fontSize": "13px",
+            "fontWeight": "400",
+            "lineHeight": "19.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 92, 115, 0.4)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".kicker": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "fontWeight": "700",
+            "lineHeight": "16.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".footer": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "lineHeight": "18px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "h1": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "36px",
+            "fontWeight": "750",
+            "lineHeight": "43.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".wrap": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(16, 28, 26, 0.82)",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "24px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
+            "backdropFilter": "blur(18px) saturate(1.15)"
+          }
+        },
+        "focusTest": null
+      },
+      "dump_exit": 0,
+      "shot": {
+        "exit": 0,
+        "file": "guard-confirm-1280x1120.png",
+        "exists": true,
+        "bytes": 351555
+      }
+    },
+    {
+      "scenario": "guard-invalid",
+      "kind": "guard",
+      "state": "invalid",
+      "viewport": "1280x900",
+      "screenshot": "guard-invalid-1280x900.png",
+      "frame": {
+        "w": 1267,
+        "h": 900
+      },
+      "metrics": {
+        "page": "guard-invalid.html",
+        "viewport": {
+          "w": 1267,
+          "h": 900
+        },
+        "hasFocus": false,
+        "activeElement": "BODY",
+        "document": {
+          "scrollWidth": 1267,
+          "scrollHeight": 900,
+          "bodyScrollWidth": 1267,
+          "horizontalOverflow": false
+        },
+        "headings": [
+          "H1:Ungültige Webadresse"
+        ],
+        "focusables": [
+          {
+            "tag": "LINK",
+            "id": "",
+            "text": "",
+            "visible": false,
+            "tabIndex": -1
+          },
+          {
+            "tag": "BUTTON",
+            "id": "safe",
+            "text": "Offizielle Seite öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "back",
+            "text": "Zurück zur vorherigen Seite",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "reveal",
+            "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "proceed",
+            "text": "Risiko akzeptieren und einmalig fortfahren",
+            "visible": false,
+            "tabIndex": 0
+          }
+        ],
+        "rects": {
+          "wrap": {
+            "x": 294,
+            "y": 120,
+            "w": 680,
+            "h": 659
+          },
+          "danger": {
+            "x": 333,
+            "y": 354,
+            "w": 602,
+            "h": 316
+          },
+          "actions": {
+            "x": 333,
+            "y": 544,
+            "w": 602,
+            "h": 48
+          },
+          "safeBtn": {
+            "x": 333,
+            "y": 544,
+            "w": 216,
+            "h": 48
+          },
+          "backBtn": {
+            "x": 560,
+            "y": 544,
+            "w": 231,
+            "h": 48
+          },
+          "reveal": {
+            "x": 333,
+            "y": 647,
+            "w": 273,
+            "h": 23
+          },
+          "confirm": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "proceed": {
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0
+          },
+          "popupBody": {
+            "x": 0,
+            "y": 0,
+            "w": 1267,
+            "h": 900
+          },
+          "glassCard": null,
+          "urlInput": null,
+          "checkBtn": null,
+          "toggleRow": null,
+          "checkbox": null,
+          "result": null,
+          "footer": {
+            "x": 333,
+            "y": 698,
+            "w": 602,
+            "h": 37
+          },
+          "h1": {
+            "x": 333,
+            "y": 256,
+            "w": 602,
+            "h": 43
+          }
+        },
+        "computed": {
+          "#title": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "36px",
+            "fontWeight": "750",
+            "lineHeight": "43.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#description": {
+            "color": "rgb(156, 181, 175)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "15px",
+            "fontWeight": "400",
+            "lineHeight": "22.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(156, 181, 175)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#host": {
+            "color": "rgb(255, 184, 194)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "22px",
+            "fontWeight": "750",
+            "lineHeight": "33px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 184, 194)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#official": {
+            "color": "rgb(168, 245, 223)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "700",
+            "lineHeight": "27px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(168, 245, 223)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#reason": {
+            "color": "rgb(223, 206, 207)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "13.5px",
+            "fontWeight": "400",
+            "lineHeight": "19.575px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(223, 206, 207)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#error": {
+            "color": "rgb(255, 209, 216)",
+            "background": "rgba(70, 18, 26, 0.85)",
+            "fontSize": "13px",
+            "fontWeight": "400",
+            "lineHeight": "19.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 92, 115, 0.4)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".kicker": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "fontWeight": "700",
+            "lineHeight": "16.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".footer": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "lineHeight": "18px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "h1": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "36px",
+            "fontWeight": "750",
+            "lineHeight": "43.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".wrap": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(16, 28, 26, 0.82)",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "24px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "boxShadow": "rgba(0, 0, 0, 0.55) 0px 28px 72px 0px",
+            "backdropFilter": "blur(18px) saturate(1.15)"
+          }
+        },
+        "focusTest": null
+      },
+      "dump_exit": 0,
+      "shot": {
+        "exit": 0,
+        "file": "guard-invalid-1280x900.png",
+        "exists": true,
+        "bytes": 275872
+      }
+    },
+    {
+      "scenario": "popup-danger",
+      "kind": "popup",
+      "state": "danger",
+      "viewport": "350x620",
+      "screenshot": "popup-danger-350x620.png",
+      "frame": {
+        "w": 350,
+        "h": 620
+      },
+      "metrics": {
+        "page": "popup-danger.html",
+        "viewport": {
+          "w": 350,
+          "h": 620
+        },
+        "hasFocus": false,
+        "activeElement": "BODY",
+        "document": {
+          "scrollWidth": 350,
+          "scrollHeight": 620,
+          "bodyScrollWidth": 350,
+          "horizontalOverflow": false
+        },
+        "headings": [
+          "H1:Antipisher"
+        ],
+        "focusables": [
+          {
+            "tag": "INPUT",
+            "id": "strict",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "url",
+            "text": "Webadresse zur Prüfung",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "check",
+            "text": "Prüfen",
+            "visible": true,
+            "tabIndex": 0
+          }
+        ],
+        "rects": {
+          "wrap": null,
+          "danger": null,
+          "actions": null,
+          "safeBtn": null,
+          "backBtn": null,
+          "reveal": null,
+          "confirm": null,
+          "proceed": null,
+          "popupBody": {
+            "x": 0,
+            "y": 0,
+            "w": 350,
+            "h": 445
+          },
+          "glassCard": {
+            "x": 18,
+            "y": 18,
+            "w": 314,
+            "h": 409
+          },
+          "urlInput": {
+            "x": 35,
+            "y": 290,
+            "w": 203,
+            "h": 36
+          },
+          "checkBtn": {
+            "x": 246,
+            "y": 290,
+            "w": 69,
+            "h": 36
+          },
+          "toggleRow": {
+            "x": 48,
+            "y": 185,
+            "w": 254,
+            "h": 18
+          },
+          "checkbox": {
+            "x": 286,
+            "y": 186,
+            "w": 16,
+            "h": 16
+          },
+          "result": {
+            "x": 35,
+            "y": 334,
+            "w": 280,
+            "h": 38
+          },
+          "footer": {
+            "x": 35,
+            "y": 384,
+            "w": 280,
+            "h": 26
+          },
+          "h1": {
+            "x": 69,
+            "y": 36,
+            "w": 75,
+            "h": 23
+          }
+        },
+        "computed": {
+          "#url": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(10, 18, 17, 0.75)",
+            "fontSize": "12.5px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.15)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#check": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "12.5px",
+            "fontWeight": "650",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(62, 202, 168, 0.45)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#strict": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#notice": {
+            "color": "rgb(156, 181, 175)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "fontWeight": "400",
+            "lineHeight": "15.4px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(156, 181, 175)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#sitecount": {
+            "color": "rgb(62, 202, 168)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "750",
+            "lineHeight": "26.1px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(62, 202, 168)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#blocked": {
+            "color": "rgb(62, 202, 168)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "750",
+            "lineHeight": "26.1px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(62, 202, 168)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#result": {
+            "color": "rgb(255, 196, 204)",
+            "background": "rgba(54, 18, 26, 0.75)",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "lineHeight": "16.8px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 92, 115, 0.35)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".kicker": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "10px",
+            "fontWeight": "700",
+            "lineHeight": "14.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".footer": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "10.5px",
+            "fontWeight": "400",
+            "lineHeight": "15.225px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "h1": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "16px",
+            "fontWeight": "750",
+            "lineHeight": "23.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".glass-card": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(16, 28, 26, 0.88)",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "23.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "boxShadow": "rgba(0, 0, 0, 0.45) 0px 16px 40px 0px",
+            "backdropFilter": "blur(16px) saturate(1.15)"
+          }
+        },
+        "focusTest": {
+          "activeIsInput": true,
+          "matchesFocusVisible": true,
+          "matchesFocus": true,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(255, 255, 255)",
+          "outlineOffset": "2px",
+          "borderColor": "rgba(255, 255, 255, 0.15)",
+          "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+          "hasVisibleOutline": false
+        }
+      },
+      "dump_exit": 0,
+      "shot": {
+        "exit": 0,
+        "file": "popup-danger-350x620.png",
+        "exists": true,
+        "bytes": 68840
+      }
+    },
+    {
+      "scenario": "popup-safe",
+      "kind": "popup",
+      "state": "safe",
+      "viewport": "350x620",
+      "screenshot": "popup-safe-350x620.png",
+      "frame": {
+        "w": 350,
+        "h": 620
+      },
+      "metrics": {
+        "page": "popup-safe.html",
+        "viewport": {
+          "w": 350,
+          "h": 620
+        },
+        "hasFocus": false,
+        "activeElement": "BODY",
+        "document": {
+          "scrollWidth": 350,
+          "scrollHeight": 620,
+          "bodyScrollWidth": 350,
+          "horizontalOverflow": false
+        },
+        "headings": [
+          "H1:Antipisher"
+        ],
+        "focusables": [
+          {
+            "tag": "INPUT",
+            "id": "strict",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "url",
+            "text": "Webadresse zur Prüfung",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "check",
+            "text": "Prüfen",
+            "visible": true,
+            "tabIndex": 0
+          }
+        ],
+        "rects": {
+          "wrap": null,
+          "danger": null,
+          "actions": null,
+          "safeBtn": null,
+          "backBtn": null,
+          "reveal": null,
+          "confirm": null,
+          "proceed": null,
+          "popupBody": {
+            "x": 0,
+            "y": 0,
+            "w": 350,
+            "h": 461
+          },
+          "glassCard": {
+            "x": 18,
+            "y": 18,
+            "w": 314,
+            "h": 425
+          },
+          "urlInput": {
+            "x": 35,
+            "y": 290,
+            "w": 203,
+            "h": 36
+          },
+          "checkBtn": {
+            "x": 246,
+            "y": 290,
+            "w": 69,
+            "h": 36
+          },
+          "toggleRow": {
+            "x": 48,
+            "y": 185,
+            "w": 254,
+            "h": 18
+          },
+          "checkbox": {
+            "x": 286,
+            "y": 186,
+            "w": 16,
+            "h": 16
+          },
+          "result": {
+            "x": 35,
+            "y": 334,
+            "w": 280,
+            "h": 54
+          },
+          "footer": {
+            "x": 35,
+            "y": 399,
+            "w": 280,
+            "h": 26
+          },
+          "h1": {
+            "x": 69,
+            "y": 36,
+            "w": 75,
+            "h": 23
+          }
+        },
+        "computed": {
+          "#url": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(10, 18, 17, 0.75)",
+            "fontSize": "12.5px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.15)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#check": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "12.5px",
+            "fontWeight": "650",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(62, 202, 168, 0.45)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#strict": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#notice": {
+            "color": "rgb(156, 181, 175)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "fontWeight": "400",
+            "lineHeight": "15.4px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(156, 181, 175)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#sitecount": {
+            "color": "rgb(62, 202, 168)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "750",
+            "lineHeight": "26.1px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(62, 202, 168)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#blocked": {
+            "color": "rgb(62, 202, 168)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "750",
+            "lineHeight": "26.1px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(62, 202, 168)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#result": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(14, 43, 37, 0.75)",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "lineHeight": "16.8px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(62, 202, 168, 0.35)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".kicker": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "10px",
+            "fontWeight": "700",
+            "lineHeight": "14.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".footer": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "10.5px",
+            "fontWeight": "400",
+            "lineHeight": "15.225px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "h1": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "16px",
+            "fontWeight": "750",
+            "lineHeight": "23.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".glass-card": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(16, 28, 26, 0.88)",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "23.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "boxShadow": "rgba(0, 0, 0, 0.45) 0px 16px 40px 0px",
+            "backdropFilter": "blur(16px) saturate(1.15)"
+          }
+        },
+        "focusTest": {
+          "activeIsInput": true,
+          "matchesFocusVisible": true,
+          "matchesFocus": true,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(255, 255, 255)",
+          "outlineOffset": "2px",
+          "borderColor": "rgba(255, 255, 255, 0.15)",
+          "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+          "hasVisibleOutline": false
+        }
+      },
+      "dump_exit": 0,
+      "shot": {
+        "exit": 0,
+        "file": "popup-safe-350x620.png",
+        "exists": true,
+        "bytes": 68073
+      }
+    },
+    {
+      "scenario": "popup-zoom175",
+      "kind": "popup",
+      "state": "danger",
+      "viewport": "175x620",
+      "screenshot": "popup-zoom-sim-200pct-175x620.png",
+      "frame": {
+        "w": 175,
+        "h": 620
+      },
+      "metrics": {
+        "page": "popup-danger.html",
+        "viewport": {
+          "w": 175,
+          "h": 620
+        },
+        "hasFocus": false,
+        "activeElement": "BODY",
+        "document": {
+          "scrollWidth": 350,
+          "scrollHeight": 605,
+          "bodyScrollWidth": 350,
+          "horizontalOverflow": true
+        },
+        "headings": [
+          "H1:Antipisher"
+        ],
+        "focusables": [
+          {
+            "tag": "INPUT",
+            "id": "strict",
+            "text": "",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "INPUT",
+            "id": "url",
+            "text": "Webadresse zur Prüfung",
+            "visible": true,
+            "tabIndex": 0
+          },
+          {
+            "tag": "BUTTON",
+            "id": "check",
+            "text": "Prüfen",
+            "visible": true,
+            "tabIndex": 0
+          }
+        ],
+        "rects": {
+          "wrap": null,
+          "danger": null,
+          "actions": null,
+          "safeBtn": null,
+          "backBtn": null,
+          "reveal": null,
+          "confirm": null,
+          "proceed": null,
+          "popupBody": {
+            "x": 0,
+            "y": 0,
+            "w": 350,
+            "h": 445
+          },
+          "glassCard": {
+            "x": 18,
+            "y": 18,
+            "w": 314,
+            "h": 409
+          },
+          "urlInput": {
+            "x": 35,
+            "y": 290,
+            "w": 203,
+            "h": 36
+          },
+          "checkBtn": {
+            "x": 246,
+            "y": 290,
+            "w": 69,
+            "h": 36
+          },
+          "toggleRow": {
+            "x": 48,
+            "y": 185,
+            "w": 254,
+            "h": 18
+          },
+          "checkbox": {
+            "x": 286,
+            "y": 186,
+            "w": 16,
+            "h": 16
+          },
+          "result": {
+            "x": 35,
+            "y": 334,
+            "w": 280,
+            "h": 38
+          },
+          "footer": {
+            "x": 35,
+            "y": 384,
+            "w": 280,
+            "h": 26
+          },
+          "h1": {
+            "x": 69,
+            "y": 36,
+            "w": 75,
+            "h": 23
+          }
+        },
+        "computed": {
+          "#url": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(10, 18, 17, 0.75)",
+            "fontSize": "12.5px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.15)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#check": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "12.5px",
+            "fontWeight": "650",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(62, 202, 168, 0.45)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#strict": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "13.3333px",
+            "fontWeight": "400",
+            "lineHeight": "normal",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#notice": {
+            "color": "rgb(156, 181, 175)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "fontWeight": "400",
+            "lineHeight": "15.4px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(156, 181, 175)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#sitecount": {
+            "color": "rgb(62, 202, 168)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "750",
+            "lineHeight": "26.1px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(62, 202, 168)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#blocked": {
+            "color": "rgb(62, 202, 168)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "18px",
+            "fontWeight": "750",
+            "lineHeight": "26.1px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(62, 202, 168)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "#result": {
+            "color": "rgb(255, 196, 204)",
+            "background": "rgba(54, 18, 26, 0.75)",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "lineHeight": "16.8px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 92, 115, 0.35)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".kicker": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "10px",
+            "fontWeight": "700",
+            "lineHeight": "14.5px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".footer": {
+            "color": "rgb(107, 133, 127)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "10.5px",
+            "fontWeight": "400",
+            "lineHeight": "15.225px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.08) rgb(107, 133, 127) rgb(107, 133, 127)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          "h1": {
+            "color": "rgb(255, 255, 255)",
+            "background": "rgba(0, 0, 0, 0)",
+            "fontSize": "16px",
+            "fontWeight": "750",
+            "lineHeight": "23.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "backdropFilter": "none"
+          },
+          ".glass-card": {
+            "color": "rgb(242, 248, 246)",
+            "background": "rgba(16, 28, 26, 0.88)",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "lineHeight": "23.2px",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "borderColor": "rgba(255, 255, 255, 0.12)",
+            "boxShadow": "rgba(0, 0, 0, 0.45) 0px 16px 40px 0px",
+            "backdropFilter": "blur(16px) saturate(1.15)"
+          }
+        },
+        "focusTest": {
+          "activeIsInput": true,
+          "matchesFocusVisible": true,
+          "matchesFocus": true,
+          "outlineStyle": "none",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(255, 255, 255)",
+          "outlineOffset": "2px",
+          "borderColor": "rgba(255, 255, 255, 0.15)",
+          "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+          "hasVisibleOutline": false
+        }
+      },
+      "dump_exit": 0,
+      "shot": {
+        "exit": 0,
+        "file": "popup-zoom-sim-200pct-175x620.png",
+        "exists": true,
+        "bytes": 23359
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "guard-danger-1280x900.png",
+      "bytes": 283534
+    },
+    {
+      "file": "guard-danger-390x844.png",
+      "bytes": 71412
+    },
+    {
+      "file": "guard-confirm-1280x1120.png",
+      "bytes": 351555
+    },
+    {
+      "file": "guard-invalid-1280x900.png",
+      "bytes": 275872
+    },
+    {
+      "file": "popup-danger-350x620.png",
+      "bytes": 68840
+    },
+    {
+      "file": "popup-safe-350x620.png",
+      "bytes": 68073
+    },
+    {
+      "file": "popup-zoom-sim-200pct-175x620.png",
+      "bytes": 23359
+    }
+  ],
+  "summary": {
+    "guard-danger": {
+      "iframeViewport": {
+        "w": 1267,
+        "h": 900
+      },
+      "innerViewport": {
+        "w": 1267,
+        "h": 900
+      },
+      "horizontalOverflow": false,
+      "scrollWidth": 1267,
+      "scrollHeight": 900,
+      "activeElement": "BODY",
+      "hasFocus": false,
+      "focusTest": null,
+      "focusables": [
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "safe",
+          "text": "Offizielle Seite öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "back",
+          "text": "Zurück zur vorherigen Seite",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "reveal",
+          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "proceed",
+          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "visible": false,
+          "tabIndex": 0
+        }
+      ],
+      "headings": [
+        "H1:Möglicher Domain-Betrug abgewehrt"
+      ],
+      "rects": {
+        "wrap": {
+          "x": 294,
+          "y": 68,
+          "w": 680,
+          "h": 764
+        },
+        "danger": {
+          "x": 333,
+          "y": 301,
+          "w": 602,
+          "h": 421
+        },
+        "actions": {
+          "x": 333,
+          "y": 596,
+          "w": 602,
+          "h": 48
+        },
+        "safeBtn": {
+          "x": 333,
+          "y": 596,
+          "w": 216,
+          "h": 48
+        },
+        "backBtn": {
+          "x": 560,
+          "y": 596,
+          "w": 231,
+          "h": 48
+        },
+        "reveal": {
+          "x": 333,
+          "y": 699,
+          "w": 273,
+          "h": 23
+        },
+        "confirm": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "proceed": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "popupBody": {
+          "x": 0,
+          "y": 0,
+          "w": 1267,
+          "h": 900
+        },
+        "glassCard": null,
+        "urlInput": null,
+        "checkBtn": null,
+        "toggleRow": null,
+        "checkbox": null,
+        "result": null,
+        "footer": {
+          "x": 333,
+          "y": 750,
+          "w": 602,
+          "h": 37
+        },
+        "h1": {
+          "x": 333,
+          "y": 203,
+          "w": 602,
+          "h": 43
+        }
+      }
+    },
+    "guard-danger-mobile": {
+      "iframeViewport": {
+        "w": 390,
+        "h": 844
+      },
+      "innerViewport": {
+        "w": 390,
+        "h": 844
+      },
+      "horizontalOverflow": false,
+      "scrollWidth": 375,
+      "scrollHeight": 984,
+      "activeElement": "BODY",
+      "hasFocus": false,
+      "focusTest": null,
+      "focusables": [
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "safe",
+          "text": "Offizielle Seite öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "back",
+          "text": "Zurück zur vorherigen Seite",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "reveal",
+          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "proceed",
+          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "visible": false,
+          "tabIndex": 0
+        }
+      ],
+      "headings": [
+        "H1:Möglicher Domain-Betrug abgewehrt"
+      ],
+      "rects": {
+        "wrap": {
+          "x": 16,
+          "y": 24,
+          "w": 343,
+          "h": 936
+        },
+        "danger": {
+          "x": 37,
+          "y": 324,
+          "w": 301,
+          "h": 514
+        },
+        "actions": {
+          "x": 37,
+          "y": 652,
+          "w": 301,
+          "h": 108
+        },
+        "safeBtn": {
+          "x": 37,
+          "y": 652,
+          "w": 301,
+          "h": 48
+        },
+        "backBtn": {
+          "x": 37,
+          "y": 712,
+          "w": 301,
+          "h": 48
+        },
+        "reveal": {
+          "x": 37,
+          "y": 815,
+          "w": 273,
+          "h": 23
+        },
+        "confirm": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "proceed": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "popupBody": {
+          "x": 0,
+          "y": 0,
+          "w": 375,
+          "h": 984
+        },
+        "glassCard": null,
+        "urlInput": null,
+        "checkBtn": null,
+        "toggleRow": null,
+        "checkbox": null,
+        "result": null,
+        "footer": {
+          "x": 37,
+          "y": 866,
+          "w": 301,
+          "h": 63
+        },
+        "h1": {
+          "x": 37,
+          "y": 162,
+          "w": 301,
+          "h": 62
+        }
+      }
+    },
+    "guard-confirm": {
+      "iframeViewport": {
+        "w": 1267,
+        "h": 1120
+      },
+      "innerViewport": {
+        "w": 1267,
+        "h": 1120
+      },
+      "horizontalOverflow": false,
+      "scrollWidth": 1267,
+      "scrollHeight": 1120,
+      "activeElement": "BODY",
+      "hasFocus": false,
+      "focusTest": null,
+      "focusables": [
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "safe",
+          "text": "Offizielle Seite öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "back",
+          "text": "Zurück zur vorherigen Seite",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "reveal",
+          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "proceed",
+          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "visible": true,
+          "tabIndex": 0
+        }
+      ],
+      "headings": [
+        "H1:Möglicher Domain-Betrug abgewehrt"
+      ],
+      "rects": {
+        "wrap": {
+          "x": 294,
+          "y": 96,
+          "w": 680,
+          "h": 928
+        },
+        "danger": {
+          "x": 333,
+          "y": 329,
+          "w": 602,
+          "h": 585
+        },
+        "actions": {
+          "x": 333,
+          "y": 624,
+          "w": 602,
+          "h": 48
+        },
+        "safeBtn": {
+          "x": 333,
+          "y": 624,
+          "w": 216,
+          "h": 48
+        },
+        "backBtn": {
+          "x": 560,
+          "y": 624,
+          "w": 231,
+          "h": 48
+        },
+        "reveal": {
+          "x": 333,
+          "y": 727,
+          "w": 273,
+          "h": 23
+        },
+        "confirm": {
+          "x": 333,
+          "y": 762,
+          "w": 602,
+          "h": 152
+        },
+        "proceed": {
+          "x": 350,
+          "y": 851,
+          "w": 315,
+          "h": 46
+        },
+        "popupBody": {
+          "x": 0,
+          "y": 0,
+          "w": 1267,
+          "h": 1120
+        },
+        "glassCard": null,
+        "urlInput": null,
+        "checkBtn": null,
+        "toggleRow": null,
+        "checkbox": null,
+        "result": null,
+        "footer": {
+          "x": 333,
+          "y": 942,
+          "w": 602,
+          "h": 37
+        },
+        "h1": {
+          "x": 333,
+          "y": 231,
+          "w": 602,
+          "h": 43
+        }
+      }
+    },
+    "guard-invalid": {
+      "iframeViewport": {
+        "w": 1267,
+        "h": 900
+      },
+      "innerViewport": {
+        "w": 1267,
+        "h": 900
+      },
+      "horizontalOverflow": false,
+      "scrollWidth": 1267,
+      "scrollHeight": 900,
+      "activeElement": "BODY",
+      "hasFocus": false,
+      "focusTest": null,
+      "focusables": [
+        {
+          "tag": "LINK",
+          "id": "",
+          "text": "",
+          "visible": false,
+          "tabIndex": -1
+        },
+        {
+          "tag": "BUTTON",
+          "id": "safe",
+          "text": "Offizielle Seite öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "back",
+          "text": "Zurück zur vorherigen Seite",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "reveal",
+          "text": "Erweitert: Verdächtige Seite dennoch öffnen",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "proceed",
+          "text": "Risiko akzeptieren und einmalig fortfahren",
+          "visible": false,
+          "tabIndex": 0
+        }
+      ],
+      "headings": [
+        "H1:Ungültige Webadresse"
+      ],
+      "rects": {
+        "wrap": {
+          "x": 294,
+          "y": 120,
+          "w": 680,
+          "h": 659
+        },
+        "danger": {
+          "x": 333,
+          "y": 354,
+          "w": 602,
+          "h": 316
+        },
+        "actions": {
+          "x": 333,
+          "y": 544,
+          "w": 602,
+          "h": 48
+        },
+        "safeBtn": {
+          "x": 333,
+          "y": 544,
+          "w": 216,
+          "h": 48
+        },
+        "backBtn": {
+          "x": 560,
+          "y": 544,
+          "w": 231,
+          "h": 48
+        },
+        "reveal": {
+          "x": 333,
+          "y": 647,
+          "w": 273,
+          "h": 23
+        },
+        "confirm": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "proceed": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "popupBody": {
+          "x": 0,
+          "y": 0,
+          "w": 1267,
+          "h": 900
+        },
+        "glassCard": null,
+        "urlInput": null,
+        "checkBtn": null,
+        "toggleRow": null,
+        "checkbox": null,
+        "result": null,
+        "footer": {
+          "x": 333,
+          "y": 698,
+          "w": 602,
+          "h": 37
+        },
+        "h1": {
+          "x": 333,
+          "y": 256,
+          "w": 602,
+          "h": 43
+        }
+      }
+    },
+    "popup-danger": {
+      "iframeViewport": {
+        "w": 350,
+        "h": 620
+      },
+      "innerViewport": {
+        "w": 350,
+        "h": 620
+      },
+      "horizontalOverflow": false,
+      "scrollWidth": 350,
+      "scrollHeight": 620,
+      "activeElement": "BODY",
+      "hasFocus": false,
+      "focusTest": {
+        "activeIsInput": true,
+        "matchesFocusVisible": true,
+        "matchesFocus": true,
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(255, 255, 255)",
+        "outlineOffset": "2px",
+        "borderColor": "rgba(255, 255, 255, 0.15)",
+        "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+        "hasVisibleOutline": false
+      },
+      "focusables": [
+        {
+          "tag": "INPUT",
+          "id": "strict",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "url",
+          "text": "Webadresse zur Prüfung",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "check",
+          "text": "Prüfen",
+          "visible": true,
+          "tabIndex": 0
+        }
+      ],
+      "headings": [
+        "H1:Antipisher"
+      ],
+      "rects": {
+        "wrap": null,
+        "danger": null,
+        "actions": null,
+        "safeBtn": null,
+        "backBtn": null,
+        "reveal": null,
+        "confirm": null,
+        "proceed": null,
+        "popupBody": {
+          "x": 0,
+          "y": 0,
+          "w": 350,
+          "h": 445
+        },
+        "glassCard": {
+          "x": 18,
+          "y": 18,
+          "w": 314,
+          "h": 409
+        },
+        "urlInput": {
+          "x": 35,
+          "y": 290,
+          "w": 203,
+          "h": 36
+        },
+        "checkBtn": {
+          "x": 246,
+          "y": 290,
+          "w": 69,
+          "h": 36
+        },
+        "toggleRow": {
+          "x": 48,
+          "y": 185,
+          "w": 254,
+          "h": 18
+        },
+        "checkbox": {
+          "x": 286,
+          "y": 186,
+          "w": 16,
+          "h": 16
+        },
+        "result": {
+          "x": 35,
+          "y": 334,
+          "w": 280,
+          "h": 38
+        },
+        "footer": {
+          "x": 35,
+          "y": 384,
+          "w": 280,
+          "h": 26
+        },
+        "h1": {
+          "x": 69,
+          "y": 36,
+          "w": 75,
+          "h": 23
+        }
+      }
+    },
+    "popup-safe": {
+      "iframeViewport": {
+        "w": 350,
+        "h": 620
+      },
+      "innerViewport": {
+        "w": 350,
+        "h": 620
+      },
+      "horizontalOverflow": false,
+      "scrollWidth": 350,
+      "scrollHeight": 620,
+      "activeElement": "BODY",
+      "hasFocus": false,
+      "focusTest": {
+        "activeIsInput": true,
+        "matchesFocusVisible": true,
+        "matchesFocus": true,
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(255, 255, 255)",
+        "outlineOffset": "2px",
+        "borderColor": "rgba(255, 255, 255, 0.15)",
+        "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+        "hasVisibleOutline": false
+      },
+      "focusables": [
+        {
+          "tag": "INPUT",
+          "id": "strict",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "url",
+          "text": "Webadresse zur Prüfung",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "check",
+          "text": "Prüfen",
+          "visible": true,
+          "tabIndex": 0
+        }
+      ],
+      "headings": [
+        "H1:Antipisher"
+      ],
+      "rects": {
+        "wrap": null,
+        "danger": null,
+        "actions": null,
+        "safeBtn": null,
+        "backBtn": null,
+        "reveal": null,
+        "confirm": null,
+        "proceed": null,
+        "popupBody": {
+          "x": 0,
+          "y": 0,
+          "w": 350,
+          "h": 461
+        },
+        "glassCard": {
+          "x": 18,
+          "y": 18,
+          "w": 314,
+          "h": 425
+        },
+        "urlInput": {
+          "x": 35,
+          "y": 290,
+          "w": 203,
+          "h": 36
+        },
+        "checkBtn": {
+          "x": 246,
+          "y": 290,
+          "w": 69,
+          "h": 36
+        },
+        "toggleRow": {
+          "x": 48,
+          "y": 185,
+          "w": 254,
+          "h": 18
+        },
+        "checkbox": {
+          "x": 286,
+          "y": 186,
+          "w": 16,
+          "h": 16
+        },
+        "result": {
+          "x": 35,
+          "y": 334,
+          "w": 280,
+          "h": 54
+        },
+        "footer": {
+          "x": 35,
+          "y": 399,
+          "w": 280,
+          "h": 26
+        },
+        "h1": {
+          "x": 69,
+          "y": 36,
+          "w": 75,
+          "h": 23
+        }
+      }
+    },
+    "popup-zoom175": {
+      "iframeViewport": {
+        "w": 175,
+        "h": 620
+      },
+      "innerViewport": {
+        "w": 175,
+        "h": 620
+      },
+      "horizontalOverflow": true,
+      "scrollWidth": 350,
+      "scrollHeight": 605,
+      "activeElement": "BODY",
+      "hasFocus": false,
+      "focusTest": {
+        "activeIsInput": true,
+        "matchesFocusVisible": true,
+        "matchesFocus": true,
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(255, 255, 255)",
+        "outlineOffset": "2px",
+        "borderColor": "rgba(255, 255, 255, 0.15)",
+        "boxShadow": "rgba(82, 194, 255, 0.25) 0px 0px 0px 2px",
+        "hasVisibleOutline": false
+      },
+      "focusables": [
+        {
+          "tag": "INPUT",
+          "id": "strict",
+          "text": "",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "INPUT",
+          "id": "url",
+          "text": "Webadresse zur Prüfung",
+          "visible": true,
+          "tabIndex": 0
+        },
+        {
+          "tag": "BUTTON",
+          "id": "check",
+          "text": "Prüfen",
+          "visible": true,
+          "tabIndex": 0
+        }
+      ],
+      "headings": [
+        "H1:Antipisher"
+      ],
+      "rects": {
+        "wrap": null,
+        "danger": null,
+        "actions": null,
+        "safeBtn": null,
+        "backBtn": null,
+        "reveal": null,
+        "confirm": null,
+        "proceed": null,
+        "popupBody": {
+          "x": 0,
+          "y": 0,
+          "w": 350,
+          "h": 445
+        },
+        "glassCard": {
+          "x": 18,
+          "y": 18,
+          "w": 314,
+          "h": 409
+        },
+        "urlInput": {
+          "x": 35,
+          "y": 290,
+          "w": 203,
+          "h": 36
+        },
+        "checkBtn": {
+          "x": 246,
+          "y": 290,
+          "w": 69,
+          "h": 36
+        },
+        "toggleRow": {
+          "x": 48,
+          "y": 185,
+          "w": 254,
+          "h": 18
+        },
+        "checkbox": {
+          "x": 286,
+          "y": 186,
+          "w": 16,
+          "h": 16
+        },
+        "result": {
+          "x": 35,
+          "y": 334,
+          "w": 280,
+          "h": 38
+        },
+        "footer": {
+          "x": 35,
+          "y": 384,
+          "w": 280,
+          "h": 26
+        },
+        "h1": {
+          "x": 69,
+          "y": 36,
+          "w": 75,
+          "h": 23
+        }
+      }
+    }
+  }
+}

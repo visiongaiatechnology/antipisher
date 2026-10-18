@@ -1,0 +1,67 @@
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Unit tests
+        run: node --test tests/*.test.cjs
+
+      - name: Syntax checks
+        run: |
+          for file in shared/detector.js shared/shield-content.js shared/guard.js shared/popup.js chrome/background.js firefox/background.js; do
+            node --check "$file"
+          done
+          python -m py_compile build.py build_sites.py
+
+      - name: Manifest / data validation
+        run: |
+          node -e "for (const f of ['chrome/manifest.json','firefox/manifest.json','sites-100.json']) JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('JSON OK')"
+
+      - name: Build and verify deterministic ZIPs
+        run: |
+          python build.py
+          sha256sum ../Antipisher-*.zip > /tmp/build1.txt
+          python build.py
+          sha256sum ../Antipisher-*.zip > /tmp/build2.txt
+          diff /tmp/build1.txt /tmp/build2.txt
+          cd ..
+          sha256sum -c SHA256SUMS.txt
+
+      - name: Check release ZIP contents
+        run: |
+          python - <<'PY'
+          import zipfile, glob, sys
+          ok = True
+          for path in glob.glob('../Antipisher-Chrome-*.zip') + glob.glob('../Antipisher-Firefox-*.zip'):
+              with zipfile.ZipFile(path) as z:
+                  names = set(z.namelist())
+                  for required in ('manifest.json', 'guard.html', 'popup.html', 'design-tokens.css', 'popup.css', 'shared/detector.js', 'shared/shield-content.js'):
+                      if required not in names:
+                          print(f"FAIL {path}: missing {required}"); ok = False
+          with zipfile.ZipFile(glob.glob('../Antipisher-Source-*.zip')[0]) as z:
+              if any('audit/' in n or n.endswith('SHA256SUMS.txt') for n in z.namelist()):
+                  print("FAIL source zip contains audit/ or checksums"); ok = False
+          sys.exit(0 if ok else 1)
+          PY

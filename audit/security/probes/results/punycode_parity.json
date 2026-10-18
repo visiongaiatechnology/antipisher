@@ -1,0 +1,209 @@
+{
+  "probe": "probe03_punycode_parity",
+  "timestamp_utc": "2026-10-18T15:35:30.363Z",
+  "node_version": "v24.13.0",
+  "homograph_substitution": {
+    "cases": 165,
+    "detected_unicode": 165,
+    "detected_punycode": 165,
+    "missed_full": 0,
+    "unicode_punycode_inconsistent": 0,
+    "detection_rate": 1,
+    "by_confusable": {
+      "р": {
+        "total": 4,
+        "detected": 4
+      },
+      "ρ": {
+        "total": 4,
+        "detected": 4
+      },
+      "а": {
+        "total": 11,
+        "detected": 11
+      },
+      "α": {
+        "total": 11,
+        "detected": 11
+      },
+      "у": {
+        "total": 2,
+        "detected": 2
+      },
+      "γ": {
+        "total": 2,
+        "detected": 2
+      },
+      "ӏ": {
+        "total": 6,
+        "detected": 6
+      },
+      "ɡ": {
+        "total": 3,
+        "detected": 3
+      },
+      "ԍ": {
+        "total": 3,
+        "detected": 3
+      },
+      "о": {
+        "total": 11,
+        "detected": 11
+      },
+      "ο": {
+        "total": 11,
+        "detected": 11
+      },
+      "е": {
+        "total": 10,
+        "detected": 10
+      },
+      "ε": {
+        "total": 10,
+        "detected": 10
+      },
+      "м": {
+        "total": 4,
+        "detected": 4
+      },
+      "μ": {
+        "total": 4,
+        "detected": 4
+      },
+      "п": {
+        "total": 8,
+        "detected": 8
+      },
+      "і": {
+        "total": 8,
+        "detected": 8
+      },
+      "ι": {
+        "total": 8,
+        "detected": 8
+      },
+      "с": {
+        "total": 5,
+        "detected": 5
+      },
+      "ϲ": {
+        "total": 5,
+        "detected": 5
+      },
+      "г": {
+        "total": 4,
+        "detected": 4
+      },
+      "ѕ": {
+        "total": 5,
+        "detected": 5
+      },
+      "т": {
+        "total": 6,
+        "detected": 6
+      },
+      "τ": {
+        "total": 6,
+        "detected": 6
+      },
+      "в": {
+        "total": 4,
+        "detected": 4
+      },
+      "к": {
+        "total": 2,
+        "detected": 2
+      },
+      "κ": {
+        "total": 2,
+        "detected": 2
+      },
+      "х": {
+        "total": 1,
+        "detected": 1
+      },
+      "χ": {
+        "total": 1,
+        "detected": 1
+      },
+      "ԁ": {
+        "total": 3,
+        "detected": 3
+      },
+      "ν": {
+        "total": 1,
+        "detected": 1
+      }
+    },
+    "by_brand": {
+      "paypal": {
+        "total": 11,
+        "detected": 11
+      },
+      "google": {
+        "total": 11,
+        "detected": 11
+      },
+      "apple": {
+        "total": 9,
+        "detected": 9
+      },
+      "amazon": {
+        "total": 9,
+        "detected": 9
+      },
+      "microsoft": {
+        "total": 14,
+        "detected": 14
+      },
+      "facebook": {
+        "total": 13,
+        "detected": 13
+      },
+      "netflix": {
+        "total": 10,
+        "detected": 10
+      },
+      "instagram": {
+        "total": 15,
+        "detected": 15
+      },
+      "binance": {
+        "total": 11,
+        "detected": 11
+      },
+      "coinbase": {
+        "total": 13,
+        "detected": 13
+      },
+      "steam": {
+        "total": 9,
+        "detected": 9
+      },
+      "discord": {
+        "total": 10,
+        "detected": 10
+      },
+      "linkedin": {
+        "total": 12,
+        "detected": 12
+      },
+      "youtube": {
+        "total": 9,
+        "detected": 9
+      },
+      "revolut": {
+        "total": 9,
+        "detected": 9
+      }
+    },
+    "missed_examples": [],
+    "inconsistent_examples": []
+  },
+  "decoder_parity": {
+    "valid_idn_cases": 480,
+    "mismatches": 0,
+    "mismatch_examples": [],
+    "note": "Referenz = Node url.domainToUnicode (IDNA/UTS46). IDNA-disallowte Labels werden ausgefiltert (nicht registrierbar)."
+  }
+}

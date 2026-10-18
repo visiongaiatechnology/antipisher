@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>#antipisher-shield-root{display:none}</style></head><body><pre id="result">PENDING</pre>
+<script>
+(() => {
+  const out = {probe:'browser_semantics_css_only', ua:navigator.userAgent, cases:[]};
+  const add=(id,observed,detail)=>out.cases.push({id,observed,detail:detail===undefined?null:detail});
+  const h=document.createElement('div');
+  h.id='antipisher-shield-root';
+  h.style.position='fixed'; h.style.zIndex='2147483647'; h.style.top='0'; h.style.left='0';
+  h.style.width='100vw'; h.style.height='100vh'; h.style.pointerEvents='auto';
+  h.attachShadow({mode:'closed'});
+  document.documentElement.appendChild(h);
+  add('host_found_by_page_js', !!document.getElementById('antipisher-shield-root'));
+  add('page_css_display_none_wins_without_inline_display', getComputedStyle(h).display, 'erwartet none');
+  h.remove();
+  add('closed_shadow_host_removable_by_page_js', !document.getElementById('antipisher-shield-root'));
+  const h3=document.createElement('div'); h3.id='antipisher-shield-root';
+  h3.style.setProperty('display','block','important'); h3.attachShadow({mode:'closed'});
+  document.documentElement.appendChild(h3);
+  add('inline_important_display_beats_page_css', getComputedStyle(h3).display, 'erwartet block');
+  const s=document.createElement('style'); s.textContent='#antipisher-shield-root{display:none !important}'; document.head.appendChild(s);
+  add('page_css_important_vs_inline_important', getComputedStyle(h3).display, 'erwartet none');
+  out.ok=true;
+  document.getElementById('result').textContent='RESULT_JSON:'+JSON.stringify(out);
+})();
+</script></body></html>

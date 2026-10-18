@@ -1,0 +1,324 @@
+/*
+ * Antipisher — Guard interstitial layout (GLASS 2100).
+ * Tokens/material/branding live in design-tokens.css. No nested card walls.
+ */
+
+body.vgt-guard {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(22px, 5vw, 56px) 18px 48px;
+  overflow-x: hidden;
+}
+
+/* Controlled ambient light behind the glass — no grid, no pattern. */
+.guard-ambient {
+  position: fixed;
+  inset: -12%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(520px 420px at 24% 18%, rgba(111, 227, 189, 0.20), transparent 62%),
+    radial-gradient(640px 500px at 82% 78%, rgba(86, 126, 146, 0.18), transparent 66%);
+  filter: blur(64px);
+  opacity: 0.9;
+}
+
+.guard-shell {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.brandbar {
+  min-width: 0;
+}
+
+.brand {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.brand-copy {
+  min-width: 0;
+}
+
+.brand-org {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-chip {
+  flex: 0 0 auto;
+}
+
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  padding: 2px 4px;
+  margin: 0 4px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--vgt-text-muted);
+  font-size: 10px;
+  font-weight: 650;
+  padding: 3px 7px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.lang-btn:hover {
+  color: #ffffff;
+}
+
+.lang-btn.active {
+  background: var(--vgt-accent);
+  color: #0b1a14;
+  font-weight: 700;
+}
+
+.guard-panel {
+  padding: clamp(26px, 4.5vw, 46px);
+}
+
+.state-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.state-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--vgt-accent);
+  box-shadow: 0 0 0 4px var(--vgt-accent-soft);
+}
+
+body[data-state="block"] .state-dot {
+  background: var(--vgt-danger);
+  box-shadow: 0 0 0 4px var(--vgt-danger-soft);
+}
+
+body[data-state="warn"] .state-dot {
+  background: var(--vgt-warn);
+  box-shadow: 0 0 0 4px var(--vgt-warn-soft);
+}
+
+body[data-state="invalid"] .state-dot {
+  background: var(--vgt-text-3);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+}
+
+body[data-state="safe"] .state-dot {
+  background: var(--vgt-accent);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(27px, 4.2vw, 40px);
+  font-weight: 680;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+}
+
+h1:focus {
+  outline: none;
+}
+
+.lead {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--vgt-text-2);
+}
+
+.state-body {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 6px;
+}
+
+.data-grid {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--vgt-hairline);
+}
+
+.data-row {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 18px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--vgt-hairline);
+}
+
+.data-value {
+  font-size: 15px;
+  color: var(--vgt-text);
+  overflow-wrap: anywhere;
+}
+
+.data-value.vgt-mono {
+  font-size: 13.5px;
+}
+
+.data-reason {
+  margin: 0;
+  max-width: 54ch;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--vgt-text-2);
+}
+
+.official-value {
+  font-size: 15px;
+  font-weight: 640;
+  color: var(--vgt-accent);
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.disclosure {
+  padding-top: 16px;
+  border-top: 1px solid var(--vgt-hairline);
+}
+
+.disclosure-toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--vgt-text-3);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--vgt-hairline-2);
+  text-underline-offset: 4px;
+}
+
+.disclosure-toggle:hover {
+  color: var(--vgt-text-2);
+}
+
+.disclosure-panel {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--vgt-danger-line);
+  border-radius: var(--vgt-radius-lg);
+  background: var(--vgt-surface-inset);
+}
+
+.disclosure-panel strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--vgt-danger-text);
+}
+
+.disclosure-panel p {
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--vgt-text-2);
+}
+
+.panel-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid var(--vgt-hairline);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vgt-text-3);
+}
+
+.panel-footer .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.panel-meta {
+  margin-left: auto;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.error {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--vgt-danger-line);
+  border-radius: var(--vgt-radius-md);
+  background: var(--vgt-danger-soft);
+  color: var(--vgt-danger-text);
+  font-size: 13px;
+}
+
+@media (max-width: 560px) {
+  body.vgt-guard {
+    padding: 18px 12px 28px;
+  }
+
+  .guard-panel {
+    padding: 24px 20px;
+  }
+
+  .data-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions .vgt-btn {
+    width: 100%;
+  }
+
+  .panel-meta {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+
+  .brand-org {
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+  }
+
+  .status-chip {
+    padding: 5px 8px;
+    font-size: 8.5px;
+  }
+}

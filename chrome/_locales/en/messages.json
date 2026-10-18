@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "Antipisher",
+    "description": "The name of the extension."
+  },
+  "appShortName": {
+    "message": "Antipisher",
+    "description": "Short name for toolbars."
+  },
+  "appDesc": {
+    "message": "Offline anti-phishing, homograph and typosquatting protection. Fast, private, zero-telemetry.",
+    "description": "The description of the extension."
+  },
+  "actionTitle": {
+    "message": "Antipisher Domain Trust",
+    "description": "Tooltip title for browser action."
+  }
+}

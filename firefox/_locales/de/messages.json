@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "Antipisher",
+    "description": "Name der Erweiterung."
+  },
+  "appShortName": {
+    "message": "Antipisher",
+    "description": "Kurzname für die Symbolleiste."
+  },
+  "appDesc": {
+    "message": "Lokaler Offline-Schutz vor Phishing, gefälschten Domains, IDN-Homographen und Typosquatting. Alpha 0.1.",
+    "description": "Beschreibung der Erweiterung."
+  },
+  "actionTitle": {
+    "message": "Antipisher Domain Trust",
+    "description": "Tooltip für das Browser-Icon."
+  }
+}

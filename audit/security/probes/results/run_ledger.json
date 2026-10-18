@@ -1,0 +1,86 @@
+﻿[
+    {
+        "id":  "TR-01-baseline-tests",
+        "command":  "node --test tests/detector.test.cjs tests/chrome-worker.test.cjs tests/firefox-worker.test.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/baseline_tests.log"
+    },
+    {
+        "id":  "TR-02-syntax-check",
+        "command":  "node --check chrome/background.js \u0026\u0026 node --check firefox/background.js \u0026\u0026 node --check chrome/guard.js \u0026\u0026 node --check chrome/popup.js \u0026\u0026 node --check shared/detector.js \u0026\u0026 node --check shared/sites.js",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/syntax_check.log"
+    },
+    {
+        "id":  "TR-03-manifest-integrity",
+        "command":  "node audit/security/probes/probe01_manifest_integrity.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe01_manifest_integrity.log"
+    },
+    {
+        "id":  "TR-04-detector-corpus",
+        "command":  "node audit/security/probes/probe02_detector_corpus.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe02_detector_corpus.log"
+    },
+    {
+        "id":  "TR-05-punycode-parity",
+        "command":  "node audit/security/probes/probe03_punycode_parity.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe03_punycode_parity.log"
+    },
+    {
+        "id":  "TR-06-chrome-background-mock",
+        "command":  "node audit/security/probes/probe04_chrome_background_mock.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe04_chrome_background_mock.log"
+    },
+    {
+        "id":  "TR-07-firefox-background-mock",
+        "command":  "node audit/security/probes/probe05_firefox_background_mock.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe05_firefox_background_mock.log"
+    },
+    {
+        "id":  "TR-08-guard-render-mock",
+        "command":  "node audit/security/probes/probe06_guard_render_mock.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe06_guard_render_mock.log"
+    },
+    {
+        "id":  "TR-09-fuzz-perf",
+        "command":  "node audit/security/probes/probe07_fuzz_perf.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe07_fuzz_perf.log"
+    },
+    {
+        "id":  "TR-10-data-integrity",
+        "command":  "node audit/security/probes/probe08_data_integrity.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe08_data_integrity.log"
+    },
+    {
+        "id":  "TR-11-static-scan",
+        "command":  "python audit/security/probes/probe09_static_scan.py",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/probe09_static_scan.log"
+    },
+    {
+        "id":  "AUX-01-matrix-regenerate",
+        "command":  "node audit/security/probes/build_matrix.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/matrix_regenerate.log"
+    },
+    {
+        "id":  "AUX-02-coverage-embed",
+        "command":  "node audit/security/probes/embed_coverage.cjs",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/coverage_embed.log"
+    },
+    {
+        "id":  "TR-12-matrix-validate",
+        "command":  "python \"C:\\Users\\Masterboard\\.dsh\\skills\\vgt-security-master\\scripts\\validate_audit.py\" audit/security/AUDIT_MATRIX.json",
+        "exit_code":  0,
+        "log":  "audit/security/probes/logs/validate_audit.log"
+    }
+]

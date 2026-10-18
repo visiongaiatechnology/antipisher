@@ -1,0 +1,29 @@
+BUILD-REPRODUZIERBARKEIT - EXPERIMENT (Nachbau der build.py-Mechanik, AUDIT)
+Erzeugt: 2026-10-18T15:29:51Z
+Quelle: build.py:5-24 (shutil.copyfile + zipfile.ZipFile.write)
+
+Lauf 1: ZIP-SHA256 = e2761aec85a23c9247768e071427f26a6ed79677ae58d77584f528edc094a4ac
+Lauf 2: ZIP-SHA256 = 329623f413c33191918c564181a60594d31978993c06a4bf7b1723830e452ba9
+Reproduzierbar (byteidentisch): NEIN
+
+Ursache:
+  - shutil.copyfile() erhaelt den mtime der Quelle NICHT; die Build-Kopien bekommen den aktuellen Zeitstempel.
+    Quelle shared/detector.js mtime      = 2026-10-18 17:13:31
+    Kopie Lauf 1 mtime                   = 2026-10-18 17:29:51
+    Kopie Lauf 2 mtime                   = 2026-10-18 17:29:52
+  - zipfile.write() uebernimmt den mtime der jeweiligen Kopie in das ZIP-Entry-Datum -> ZIP-Bytes aendern sich.
+
+Befund: Die in build.py erzeugten Chrome-/Firefox-ZIPs sind NICHT byte-reproduzierbar, solange build.py die shared-Dateien
+         mit shutil.copyfile in die Build-Ordner kopiert (build.py:6-11) und anschliessend diese Kopien packt (build.py:20-24).
+
+Zusatzbeleg aus den vorhandenen Release-Artefakten im Elternordner:
+  Antipisher-Chrome-v0.1.0-alpha.zip: Entry-Zeitstempel (2026, 10, 18, 17, 4, 48) bis (2026, 10, 18, 17, 13, 34) (12 Eintraege)
+  Antipisher-Firefox-v0.1.0-alpha.zip: Entry-Zeitstempel (2026, 10, 18, 17, 4, 58) bis (2026, 10, 18, 17, 13, 36) (12 Eintraege)
+  Legacy-ZIP ist byteidentisch mit neuem ZIP (shutil.copyfile, build.py:27-28): True
+
+Weitere Build-Befunde:
+  - build.py schreibt Release-ZIPs nach ROOT.parent (ausserhalb des Quellbaums) - Reproduktion erzeugt Seiteneffekte ausserhalb des Repos.
+  - build.py packt fuer das Source-ZIP ALLE Dateien unter ROOT (build.py:32-34, nur __pycache__ ausgenommen). Ein Build nach diesem Audit
+    wuerde audit/code/* mit ausliefern; .tmp-Dateien/Node-Module wuerden ebenfalls erfasst.
+  - Es gibt keine Pruefsummen-/Signaturdatei und keine Versionsvalidierung (Manifest 0.1.0 vs. ZIP-Name v0.1.0-alpha).
+  - build_sites.py generiert shared/sites.js und sites-100.json, wird von build.py aber NICHT aufgerufen (kein Sync erzwungen).

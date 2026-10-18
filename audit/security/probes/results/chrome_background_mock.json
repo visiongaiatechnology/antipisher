@@ -1,0 +1,257 @@
+{
+  "probe": "probe04_chrome_background_mock",
+  "timestamp_utc": "2026-10-18T15:35:32.001Z",
+  "environment": "Node v24.13.0 vm-Sandbox mit gemockter chrome-API (kein echter Browser)",
+  "assertions_total": 46,
+  "assertions_failed": 0,
+  "assertions": [
+    {
+      "name": "install:redirect-rule-exists",
+      "ok": true,
+      "detail": "[{\"id\":1000,\"priority\":1,\"action\":{\"type\":\"redirect\",\"redirect\":{\"regexSubstitution\":\"chrome-extension://fakeid/guard.html#\\\\1\"}},\"condition\":{\"regexFilter\":\"^(https?://.+)$\",\"resourceTypes\":[\"main_frame\"],\"requestMethods\":[\"get\"]}}]"
+    },
+    {
+      "name": "install:redirect-rule-id",
+      "ok": true,
+      "detail": "1000"
+    },
+    {
+      "name": "install:priority-1",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "name": "install:resourceTypes-main_frame",
+      "ok": true,
+      "detail": "[\"main_frame\"]"
+    },
+    {
+      "name": "install:requestMethods-only-get",
+      "ok": true,
+      "detail": "[\"get\"]"
+    },
+    {
+      "name": "install:regex-all-http",
+      "ok": true,
+      "detail": "^(https?://.+)$"
+    },
+    {
+      "name": "install:redirect-target-guard-with-capture",
+      "ok": true,
+      "detail": "chrome-extension://fakeid/guard.html#\\1"
+    },
+    {
+      "name": "msg:web-origin-rejected",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Freigabe nur von der Schutzseite\"}"
+    },
+    {
+      "name": "msg:web-origin-created-no-rule",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "msg:missing-sender-url-rejected",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Freigabe nur von der Schutzseite\"}"
+    },
+    {
+      "name": "msg:guard-sender-accepted",
+      "ok": true,
+      "detail": "{\"ok\":true}"
+    },
+    {
+      "name": "msg:tab-not-on-guard-rejected",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Tab ist nicht mehr auf der Schutzseite\"}"
+    },
+    {
+      "name": "msg:tab-not-on-guard-no-rule",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "msg:scheme-rejected:javascript:alert(1)",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Ungültige Adresse\"}"
+    },
+    {
+      "name": "msg:scheme-rejected:file:///C:/Windows/win.i",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Ungültige Adresse\"}"
+    },
+    {
+      "name": "msg:scheme-rejected:data:text/html,<script>1",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Ungültige Adresse\"}"
+    },
+    {
+      "name": "msg:scheme-rejected:chrome://extensions/",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Ungültige Adresse\"}"
+    },
+    {
+      "name": "msg:scheme-rejected://evil.test/",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Invalid URL\"}"
+    },
+    {
+      "name": "msg:no-rule-after-scheme-rejects",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "allow:ok",
+      "ok": true,
+      "detail": "{\"ok\":true}"
+    },
+    {
+      "name": "allow:one-session-rule",
+      "ok": true,
+      "detail": "[{\"id\":10002,\"priority\":10,\"action\":{\"type\":\"allow\"},\"condition\":{\"regexFilter\":\"^https://paypa1\\\\.com/$\",\"resourceTypes\":[\"main_frame\"],\"tabIds\":[7]}}]"
+    },
+    {
+      "name": "allow:action-allow",
+      "ok": true,
+      "detail": "{\"type\":\"allow\"}"
+    },
+    {
+      "name": "allow:priority-above-redirect",
+      "ok": true,
+      "detail": "10"
+    },
+    {
+      "name": "allow:tab-scoped",
+      "ok": true,
+      "detail": "[7]"
+    },
+    {
+      "name": "allow:main-frame-only",
+      "ok": true,
+      "detail": "[\"main_frame\"]"
+    },
+    {
+      "name": "allow:id-in-alloc-range",
+      "ok": true,
+      "detail": "10002"
+    },
+    {
+      "name": "allow:regex-matches-exact-url",
+      "ok": true,
+      "detail": "^https://paypa1\\.com/$"
+    },
+    {
+      "name": "allow:regex-not-other-path",
+      "ok": true,
+      "detail": "^https://paypa1\\.com/$"
+    },
+    {
+      "name": "allow:regex-not-other-host",
+      "ok": true,
+      "detail": "^https://paypa1\\.com/$"
+    },
+    {
+      "name": "allow:metachar-escaped-exact",
+      "ok": true,
+      "detail": "^https://evil\\.test/a\\+b\\?c=d&e=\\(f\\)\\[g\\]$"
+    },
+    {
+      "name": "allow:second-replaces-first",
+      "ok": true,
+      "detail": "[{\"id\":10003,\"priority\":10,\"action\":{\"type\":\"allow\"},\"condition\":{\"regexFilter\":\"^https://paypa1\\\\.com/$\",\"resourceTypes\":[\"main_frame\"],\"tabIds\":[11]}}]"
+    },
+    {
+      "name": "allow:cleared-on-commit",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "allow:cleared-on-tab-close",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "allow:overlong-url-rejected",
+      "ok": true,
+      "detail": "{\"ok\":false,\"error\":\"Adresse zu lang für eine einmalige Freigabe\"}"
+    },
+    {
+      "name": "reduced:initial-rule-present",
+      "ok": true,
+      "detail": "[{\"id\":1000,\"priority\":1,\"action\":{\"type\":\"redirect\",\"redirect\":{\"regexSubstitution\":\"chrome-extension://fakeid/guard.html#\\\\1\"}},\"condition\":{\"regexFilter\":\"^(https?://.+)$\",\"resourceTypes\":[\"main_frame\"],\"requestMethods\":[\"get\"]}}]"
+    },
+    {
+      "name": "reduced:rule-removed",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reduced:observer-redirects-best-effort",
+      "ok": true,
+      "detail": "[{\"tabId\":5,\"url\":\"chrome-extension://fakeid/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"}]"
+    },
+    {
+      "name": "reduced:allow-once-ok-best-effort",
+      "ok": true,
+      "detail": "{\"ok\":true}"
+    },
+    {
+      "name": "reduced:no-dnr-rule-created",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "reduced:observer-bypass-skips-once",
+      "ok": true,
+      "detail": "[{\"tabId\":5,\"url\":\"chrome-extension://fakeid/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"}]"
+    },
+    {
+      "name": "reduced:next-navigation-redirected-again",
+      "ok": true,
+      "detail": "[{\"tabId\":5,\"url\":\"chrome-extension://fakeid/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"},{\"tabId\":5,\"url\":\"chrome-extension://fakeid/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"}]"
+    },
+    {
+      "name": "startup:purges-allow-rules",
+      "ok": true,
+      "detail": "[{\"id\":500,\"priority\":1,\"action\":{\"type\":\"block\"},\"condition\":{}}]"
+    },
+    {
+      "name": "startup:keeps-foreign-rules",
+      "ok": true,
+      "detail": "[{\"id\":500,\"priority\":1,\"action\":{\"type\":\"block\"},\"condition\":{}}]"
+    },
+    {
+      "name": "startup:restores-redirect-rule",
+      "ok": true,
+      "detail": "[{\"id\":1000,\"priority\":1,\"action\":{\"type\":\"redirect\",\"redirect\":{\"regexSubstitution\":\"chrome-extension://fakeid/guard.html#\\\\1\"}},\"condition\":{\"regexFilter\":\"^(https?://.+)$\",\"resourceTypes\":[\"main_frame\"],\"requestMethods\":[\"get\"]}}]"
+    },
+    {
+      "name": "failopen:observed-as-design-defect",
+      "ok": true,
+      "detail": "rule=undefined consoleErrors=[\"Error: simulierter storage.local.get-Fehler\"]"
+    },
+    {
+      "name": "counter:recordBlock-increments",
+      "ok": true,
+      "detail": "{\"blocked\":1}"
+    }
+  ],
+  "observations": [
+    {
+      "name": "allow:no-timeout-implementation",
+      "detail": "Kommentar background.js:42-43 verspricht \"Remove at first commit, timeout/next navigation, and on tab close\", im Code existieren jedoch weder setTimeout noch Alarm/TTL (background.js:44-65). Session-Regeln können bis zum nächsten Service-Worker-Start (configure purge) bestehen bleiben, wenn kein Commit erfolgt."
+    },
+    {
+      "name": "reduced:fail-open-by-design",
+      "detail": "strictMode=false entfernt die präventive DNR-Regel vollständig; Schutz nur noch best-effort über webNavigation/tabs.update (background.js:23,79-87). Popup weist darauf hin, dennoch ist dies ein bewusster Fail-open-Betriebsmodus ohne sicherheitsseitige Bestätigung/Trust-Indikator."
+    },
+    {
+      "name": "failopen:config-error-no-rule",
+      "detail": "storage.local.get-Fehler in configure(): configure() rejected (console.error), KEINE DNR-Regel registriert, KEINE Nutzeranzeige. Da strict weiterhin true ist, greift auch der Beobachter-Pfad nicht — Navigationen laufen ungeprüft (Fail-open, background.js:15,23,69-73,104)."
+    },
+    {
+      "name": "race:configure-interleaving",
+      "detail": "Synthetisches Interleaving zweier configure()-Läufe (strict false -> true, Remove aus Lauf A um 80 ms verzögert): Lauf B fügt die Redirect-Regel hinzu, der verzögerte Remove aus Lauf A löscht sie danach wieder. Ergebnis: DNR-Regel vorhanden=false bei gespeichertem strictMode=true. configure() ist nicht serialisiert (background.js:14-41,71-73); ein reales Auftreten im Browser ist NICHT_TESTED — das Scheduling ist plausibel, aber nicht beobachtet."
+    }
+  ]
+}

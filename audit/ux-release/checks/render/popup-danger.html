@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antipisher</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --vgt-bg-0: #060c0b;
+      --vgt-bg-1: #0f1c1a;
+      --vgt-text-primary: #f2f8f6;
+      --vgt-text-secondary: #9cb5af;
+      --vgt-text-muted: #6b857f;
+      --vgt-accent: #3ecaa8;
+      --vgt-accent-hover: #4de0bc;
+      --vgt-focus: #52c2ff;
+
+      --vgt-glass-fill: rgba(16, 28, 26, 0.88);
+      --vgt-glass-stroke: rgba(255, 255, 255, 0.12);
+      --vgt-glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+      --vgt-fallback-surface: #111e1c;
+
+      --vgt-danger: #ff5c73;
+      --vgt-danger-bg: rgba(54, 18, 26, 0.75);
+      --vgt-danger-stroke: rgba(255, 92, 115, 0.35);
+
+      --vgt-official-bg: rgba(14, 43, 37, 0.75);
+      --vgt-official-stroke: rgba(62, 202, 168, 0.35);
+
+      --vgt-radius-surface: 18px;
+      --vgt-radius-card: 12px;
+      --vgt-radius-btn: 9px;
+      --vgt-glass-blur: 16px;
+      --vgt-type-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 350px;
+      padding: 18px;
+      font-family: var(--vgt-type-ui);
+      background: radial-gradient(130% 130% at 50% 0%, #162a26 0%, var(--vgt-bg-1) 50%, var(--vgt-bg-0) 100%);
+      color: var(--vgt-text-primary);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glass-card {
+      background: var(--vgt-fallback-surface);
+      border: 1px solid var(--vgt-glass-stroke);
+      border-radius: var(--vgt-radius-surface);
+      padding: 16px;
+      box-shadow: var(--vgt-glass-shadow);
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+      .glass-card {
+        background: var(--vgt-glass-fill);
+        -webkit-backdrop-filter: blur(var(--vgt-glass-blur)) saturate(1.15);
+        backdrop-filter: blur(var(--vgt-glass-blur)) saturate(1.15);
+      }
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-badge {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, rgba(62, 202, 168, 0.25) 0%, rgba(20, 48, 43, 0.6) 100%);
+      border: 1px solid rgba(62, 202, 168, 0.4);
+      color: var(--vgt-accent);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+    }
+
+    h1 {
+      font-size: 16px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .version-pill {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--vgt-accent);
+      background: rgba(62, 202, 168, 0.12);
+      border: 1px solid rgba(62, 202, 168, 0.25);
+      padding: 3px 7px;
+      border-radius: 12px;
+    }
+
+    .kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--vgt-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stat-box {
+      background: rgba(22, 38, 35, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--vgt-radius-card);
+      padding: 10px 12px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--vgt-text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 750;
+      color: var(--vgt-accent);
+    }
+
+    .chrome-option {
+      background: rgba(22, 38, 35, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--vgt-radius-card);
+      padding: 10px 12px;
+      margin-bottom: 14px;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .toggle-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--vgt-text-primary);
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--vgt-accent);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .option-note {
+      font-size: 11px;
+      color: var(--vgt-text-secondary);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--vgt-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      background: rgba(10, 18, 17, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--vgt-radius-btn);
+      padding: 9px 11px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 12.5px;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--vgt-focus);
+      box-shadow: 0 0 0 2px rgba(82, 194, 255, 0.25);
+    }
+
+    .btn-check {
+      background: linear-gradient(180deg, #1f7d6e 0%, #155e53 100%);
+      color: #ffffff;
+      border: 1px solid rgba(62, 202, 168, 0.45);
+      border-radius: var(--vgt-radius-btn);
+      padding: 0 14px;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-check:hover {
+      filter: brightness(1.1);
+    }
+
+    .result-box {
+      min-height: 38px;
+      border-radius: var(--vgt-radius-card);
+      padding: 9px 12px;
+      font-size: 12px;
+      line-height: 1.4;
+      display: none;
+      margin-bottom: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .result-box.block {
+      display: block;
+      background: var(--vgt-danger-bg);
+      border: 1px solid var(--vgt-danger-stroke);
+      color: #ffc4cc;
+    }
+
+    .result-box.safe {
+      display: block;
+      background: var(--vgt-official-bg);
+      border: 1px solid var(--vgt-official-stroke);
+      color: var(--vgt-official-text);
+    }
+
+    .result-box.skip {
+      display: block;
+      background: rgba(33, 52, 48, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--vgt-text-secondary);
+    }
+
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 10px;
+      font-size: 10.5px;
+      color: var(--vgt-text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    :where(button, input):focus-visible {
+      outline: 2px solid var(--vgt-focus);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-card">
+    <div class="header">
+      <div class="title-group">
+        <div class="logo-badge" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h1>Antipisher</h1>
+      </div>
+      <span class="version-pill">ALPHA 0.1</span>
+    </div>
+    <div class="kicker">VISIONGAIATECHNOLOGY · ANTIPISHER</div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Schutzmarken</div>
+        <div class="stat-value" id="sitecount">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Abgewehrt</div>
+        <div class="stat-value" id="blocked">0</div>
+      </div>
+    </div>
+
+    <div id="chromeOption" class="chrome-option">
+      <label class="toggle-row">
+        <span class="toggle-label">Vorabprüfung (Chrome)</span>
+        <input type="checkbox" id="strict" aria-describedby="notice">
+      </label>
+      <div class="option-note" id="notice">Aktiv: HTTP(S)-GET-Navigationen werden vor der Netzwerkanfrage klassifiziert.</div>
+    </div>
+
+    <div class="section-title">Adresse lokal prüfen</div>
+    <div class="search-row">
+      <input id="url" type="text" placeholder="z. B. paypa1.com" aria-label="Webadresse zur Prüfung">
+      <button id="check" class="btn-check">Prüfen</button>
+    </div>
+    <div id="result" class="result-box" role="status"></div>
+
+    <div class="footer">
+      <span>AGPLv3 · 100% Offline</span>
+      <span>Antipisher Alpha</span>
+    </div>
+  </div>
+
+  
+  
+  
+<script>
+document.getElementById('sitecount').textContent = '165';
+document.getElementById('blocked').textContent = '3';
+document.getElementById('strict').checked = true;
+var r = document.getElementById('result');
+r.className = 'result-box block';
+r.textContent = '⚠ Verdächtig: Ähnlich zu PayPal (paypal.com)';
+</script>
+<script>
+(function () {
+  function rect(sel) {
+    var el = document.querySelector(sel);
+    if (!el) return null;
+    var r = el.getBoundingClientRect();
+    return {x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height)};
+  }
+  var metrics = {
+    page: location.pathname.split('/').pop(),
+    viewport: {w: window.innerWidth, h: window.innerHeight},
+    hasFocus: document.hasFocus(),
+    activeElement: document.activeElement ? (document.activeElement.id || document.activeElement.tagName) : null,
+    document: {
+      scrollWidth: document.documentElement.scrollWidth,
+      scrollHeight: document.documentElement.scrollHeight,
+      bodyScrollWidth: document.body.scrollWidth,
+      horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1
+    },
+    headings: Array.prototype.map.call(document.querySelectorAll('h1,h2,h3,h4,h5,h6'),
+      function (h) { return h.tagName + ':' + (h.textContent || '').trim().slice(0, 80); }),
+    focusables: Array.prototype.map.call(
+      document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'),
+      function (el) {
+        var r = el.getBoundingClientRect();
+        return {tag: el.tagName, id: el.id || '', text: (el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 50),
+                visible: !!(r.width && r.height), tabIndex: el.tabIndex};
+      }),
+    rects: {
+      wrap: rect('.wrap'), danger: rect('#danger'), actions: rect('.actions'),
+      safeBtn: rect('#safe'), backBtn: rect('#back'), reveal: rect('#reveal'),
+      confirm: rect('#confirm'), proceed: rect('#proceed'),
+      popupBody: rect('body'), glassCard: rect('.glass-card'), urlInput: rect('#url'),
+      checkBtn: rect('#check'), toggleRow: rect('.toggle-row'), checkbox: rect('#strict'),
+      result: rect('#result'), footer: rect('.footer'), h1: rect('h1')
+    },
+    computed: {},
+    focusTest: null
+  };
+  ['#title', '#description', '#host', '#official', '#reason', '#error',
+   '#url', '#check', '#strict', '#notice', '#sitecount', '#blocked',
+   '#result', '.kicker', '.footer', 'h1', '.wrap', '.glass-card'].forEach(function (sel) {
+    var el = document.querySelector(sel);
+    if (!el) return;
+    var cs = getComputedStyle(el);
+    metrics.computed[sel] = {
+      color: cs.color, background: cs.backgroundColor, fontSize: cs.fontSize,
+      fontWeight: cs.fontWeight, lineHeight: cs.lineHeight,
+      outlineStyle: cs.outlineStyle, outlineWidth: cs.outlineWidth,
+      borderColor: cs.borderColor, boxShadow: cs.boxShadow,
+      backdropFilter: cs.backdropFilter || cs.webkitBackdropFilter
+    };
+  });
+  var urlInput = document.querySelector('#url');
+  if (urlInput) {
+    urlInput.focus();
+    var cs2 = getComputedStyle(urlInput);
+    metrics.focusTest = {
+      activeIsInput: document.activeElement === urlInput,
+      matchesFocusVisible: urlInput.matches(':focus-visible'),
+      matchesFocus: urlInput.matches(':focus'),
+      outlineStyle: cs2.outlineStyle, outlineWidth: cs2.outlineWidth,
+      outlineColor: cs2.outlineColor, outlineOffset: cs2.outlineOffset,
+      borderColor: cs2.borderColor, boxShadow: cs2.boxShadow,
+      hasVisibleOutline: cs2.outlineStyle !== 'none' && parseFloat(cs2.outlineWidth) >= 2
+    };
+  }
+  var pre = document.createElement('pre');
+  pre.id = 'audit-metrics';
+  pre.style.display = 'none';
+  pre.textContent = 'AUDIT_METRICS_JSON:' + JSON.stringify(metrics);
+  document.body.appendChild(pre);
+})();
+</script>
+</body>
+</html>

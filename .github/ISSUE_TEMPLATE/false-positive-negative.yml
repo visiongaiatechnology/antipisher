@@ -1,0 +1,71 @@
+name: Falsch-positiv / Falsch-negativ
+description: Eine Seite wurde fälschlich blockiert oder eine Phishing-Domain nicht erkannt
+title: "[Detection] "
+labels: ["detection"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bitte **keine aktiven Phishing-Links** posten. Für Fälle reservierte Domains wie
+        `paypa1.example.test` verwenden oder die Domain mit `[.]` neutralisieren.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Art
+      options:
+        - Falsch-positiv (legitime Seite wurde gewarnt/blockiert)
+        - Falsch-negativ (verdächtige Seite wurde nicht erkannt)
+        - Warnstufe falsch (block vs. warn)
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: Domain / URL
+      description: Neutralisiert oder reservierte Testdomain.
+      placeholder: "z. B. paypa1[.]example[.]test/path"
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: Erwartetes Ergebnis
+      placeholder: "block / warn / safe"
+    validations:
+      required: true
+  - type: input
+    id: actual
+    attributes:
+      label: Tatsächliches Ergebnis
+      placeholder: "block / warn / safe, ggf. angezeigter Grund"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Antipisher-Version
+      placeholder: "0.1.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome (MV3)
+        - Firefox (MV3)
+        - Anderer Chromium-Browser
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Kontext
+      description: Warum ist die Domain legitim bzw. verdächtig? Screenshot (ohne sensible Daten) hilfreich.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Datenschutz
+      options:
+        - label: Ich habe keine aktiven Phishing-Links oder Zugangsdaten eingefügt.
+          required: true

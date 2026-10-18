@@ -1,0 +1,285 @@
+{
+  "tool": "docs_identity_check.py",
+  "generated": "2026-10-18T17:35:34.867100+02:00",
+  "source_root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+  "counts": {
+    "total": 25,
+    "confirmed": 10,
+    "conflicts": 14,
+    "not_verifiable": 1
+  },
+  "results": [
+    {
+      "claim": "165 fest eingetragene Marken (README:8)",
+      "source": "README.md:8",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "sites-100.json enthaelt 165 Eintraege",
+      "evidence": "checks/logs/detector_probe.log"
+    },
+    {
+      "claim": "Damerau-Levenshtein Distanz 1 (README:9)",
+      "source": "README.md:9",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "tests/detector.test.cjs deckt Transpositionen ab; 13/13-Testlauf PASS",
+      "evidence": "checks/logs/tests.log"
+    },
+    {
+      "claim": "Lueckenloser Subdomain-Schutz fuer alle Marken (README:10, Next.md:23)",
+      "source": "README.md:10; Next.md:23",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "6 Gegenbeispiele (u.a. office/target/medium/zoom/notion/line.attacker.com werden NICHT geblockt); zusaetzlich False Positives (apple.stackexchange.com)",
+      "evidence": "checks/detector_probe_results.json"
+    },
+    {
+      "claim": "Multi-Tenant-Trennung (README:11)",
+      "source": "README.md:11",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "microsoft.github.io/google.github.io safe; paypal.github.io/chase-login.pages.dev block",
+      "evidence": "checks/logs/detector_probe.log"
+    },
+    {
+      "claim": "Chrome MV3 POST-Schutz (README:13)",
+      "source": "README.md:13",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "DNR-Regel filtert requestMethods:['get'] (chrome/background.js:36-38)",
+      "evidence": "chrome/background.js:36-38"
+    },
+    {
+      "claim": "Manifest-Haertung verhindert Extension-Fingerprinting (README:15)",
+      "source": "README.md:15",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "WAR enthaelt guard.html fuer alle http/https-Origins; Chrome-Doku: WAR-Freigaben ermoeglichen Fingerprinting. Skripte sind entfernt, der Vektor ist aber nicht 'verhindert', sondern notwendiges Restrisiko des DNR-Redirects.",
+      "evidence": "chrome/manifest.json:31-41; https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources"
+    },
+    {
+      "claim": "VGT GLASS 2100 inkl. adaptiver Kontraste/Barrierefreiheit (README:14)",
+      "source": "README.md:14",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Kontrastpruefung: 7 FAILs (muted #6b857f 4.29-4.33:1 < 4.5:1); Popup ohne reduced-transparency/reduced-motion/forced-colors; Fokusindikator des Suchfelds per outline:none ueberschrieben; keine Light/System-Themes.",
+      "evidence": "checks/contrast_results.json; checks/ui_static_results.json; checks/render_metrics.json"
+    },
+    {
+      "claim": "100% Offline / Zero-Telemetry (README:16)",
+      "source": "README.md:16",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "keine fetch/XHR/WebSocket/sendBeacon-Aufrufe in den Runtime-Dateien; keine externen Assets",
+      "evidence": "grep ueber shared/, chrome/, firefox/"
+    },
+    {
+      "claim": "End-to-End-Browserlauf fehlt (README:62 - ehrliche Einschraenkung)",
+      "source": "README.md:62",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "wird durch diesen Audit bestaetigt: echter Extension-E2E NOT_TESTED",
+      "evidence": "checks/logs/e2e_attempt.log"
+    },
+    {
+      "claim": "SOURCE_IDENTITY_CONFIRMED (Next.md:11)",
+      "source": "Next.md:11",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Kein .git, kein Commit/Tag/Branch; Next.md:53 nennt selbst 'v0.1.0 uncommitted'. VGT-Qualitaetsgate 1 (Source identity + Git-/Dirty-Baseline) nicht erfuellt.",
+      "evidence": "Test-Path .git = False; checks/artifact_identity.json"
+    },
+    {
+      "claim": "Versionierung '0.1.0-alpha' konsistent implementiert (Next.md:21)",
+      "source": "Next.md:21",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "String '0.1.0-alpha' nur in ZIP-Namen + Next.md; Manifeste = 0.1.0; Chrome version_name='0.1 Alpha'; Firefox ohne Alpha-Marker; UI 'ALPHA 0.1'/'Alpha 0.1'.",
+      "evidence": "chrome/manifest.json:6-7; firefox/manifest.json:6; build.py:20,30; Next.md:9"
+    },
+    {
+      "claim": "Lueckenloser Subdomain-Schutz fuer alle Marken (Next.md:23)",
+      "source": "Next.md:23",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "siehe README:10 - Gegenbeispiele durch genericSubdomains & nicht gelistete Marken",
+      "evidence": "checks/detector_probe_results.json"
+    },
+    {
+      "claim": "Manifest-Fingerprinting-Vektoren geschlossen (Next.md:28)",
+      "source": "Next.md:28",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "WAR guard.html bleibt erforderlich (DNR-Redirect); Chrome-Doku nennt WAR ausdruecklich als Fingerprinting-Vektor.",
+      "evidence": "chrome/manifest.json:31-41"
+    },
+    {
+      "claim": "13/13 PASS (Next.md:30, Next.md:70)",
+      "source": "Next.md:30",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "node --test tests/*.test.cjs: tests=13 pass=13 fail=0",
+      "evidence": "checks/logs/tests.log"
+    },
+    {
+      "claim": "Reproduzierbare Build-Artefakte (Next.md:31, TASK-09)",
+      "source": "Next.md:31",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Rebuild derselben Kopie erzeugt andere ZIP-Bytes (Build-Zeitstempel); Source-ZIP-Prefix haengt vom Checkout-Ordnernamen ab; audit/ landet ungefiltert im Source-ZIP.",
+      "evidence": "checks/reproducibility_results.json"
+    },
+    {
+      "claim": "PLATIN VGT SUPREME (Next.md:71)",
+      "source": "Next.md:71",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Keine definierte VGT-Klasse 'PLATIN VGT SUPREME'; kein E2E-, Performance-, Recovery- oder Zielplattform-Beweis; SECURITY.md:3 und README:62 schliessen Zertifizierung aus.",
+      "evidence": "Next.md:71; SECURITY.md:3; README:62"
+    },
+    {
+      "claim": "Referenzierte ARCHITECTURE_AND_SECURITY_REVIEW.md existiert (Next.md:13,39)",
+      "source": "Next.md:13; Next.md:39",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Datei im Workspace nicht vorhanden",
+      "evidence": "glob/Test-Path"
+    },
+    {
+      "claim": "Doku-Checkpoint 002 '12/12 PASS' (Next.md:59) und TASK-01 '9/9 PASS' (Next.md:39)",
+      "source": "Next.md:39,59",
+      "ok": null,
+      "status": "NOT_VERIFIABLE",
+      "detail": "Aktueller Lauf = 13/13 PASS; die historischen Zwischenstaende sind ohne Git-Historie nicht nachpruefbar (kein Repo).",
+      "evidence": "checks/logs/tests.log"
+    },
+    {
+      "claim": "SECURITY.md: keine externe Sicherheitsaudit-Zertifizierung (ehrlich)",
+      "source": "SECURITY.md:3",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "bestaetigt; im Widerspruch zu Next.md:71 und den 'Diamant VGT Supreme'-Headern im Code",
+      "evidence": "SECURITY.md:3"
+    },
+    {
+      "claim": "Code-Header 'Diamant VGT Supreme Quality Gate' (detector.js:4) / 'Diamant VGT Supreme Design Standards' (guard.css:3)",
+      "source": "shared/detector.js:4; shared/guard.css:3",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Selbstklassifikation ohne Nachweis (kein E2E, keine Performance-Messung, keine visuelle QA-Historie, keine Screenshots im Repo).",
+      "evidence": "shared/detector.js:4; shared/guard.css:3"
+    },
+    {
+      "claim": "Security-Kontakt kanalisiert (SECURITY.md:9)",
+      "source": "SECURITY.md:9",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "'an den Repository-Maintainer ueber einen privaten Kanal' nennt keinen Kontakt, keine URL, keine security.txt -> fuer Melder nicht handlungsfaehig.",
+      "evidence": "SECURITY.md:9"
+    },
+    {
+      "claim": "Produktname 'Antipisher' vollstaendig in Code/Doku verankert (Next.md:19)",
+      "source": "Next.md:19",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Legacy-Bezuege gefunden: shared/guard.css:2: * VGT DomainGuard: Glass 2100 Security Interstitial Stylesheet | build_sites.py:2: VGT DomainGuard: Site Database Builder | shared/detector.js:357: globalThis.VGT_DomainGuard = Antipisher; // backwards compatibility alias | build.py:27: legacy_zip = ROOT.parent / f'VGT-DomainGuard-{target.capitalize()}-v0.1.0.zip' | build.py:35: shutil.copyfile(src_zip, ROOT.parent / 'VGT-DomainGuard-Source-v0.1.0.zip') | Next.md:7: - **Produkt:** Antipisher (vormals VGT DomainGuard) | Next.md:8: - **Repository / Workspace:** `c:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-sr (gesamt 7 Treffer)",
+      "evidence": "grep 'DomainGuard'"
+    },
+    {
+      "claim": "Datenbank-Doku aktuell (build_sites.py:3 '140+', Datei sites-100.json)",
+      "source": "build_sites.py:3",
+      "ok": false,
+      "status": "CONFLICT",
+      "detail": "Docstring nennt 140+, Datei heisst sites-100.json, tatsaechlich 165 Marken",
+      "evidence": "build_sites.py:3; sites-100.json"
+    },
+    {
+      "claim": "Kein .git / kein package.json / kein CHANGELOG / keine CI / keine Store-Assets",
+      "source": "Workspace",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "Repo-Zustand: {\"git_dir_exists\": false, \"package_json_exists\": false, \"gitignore_exists\": false, \"changelog_exists\": false, \"architecture_doc_exists\": false, \"privacy_policy_exists\": false, \"store_assets_dirs\": [], \"ci_dirs\": []}",
+      "evidence": "checks/artifact_identity.json"
+    },
+    {
+      "claim": "Release-ZIPs sind inhaltlich aktuell (identisch zu Quellstaenden)",
+      "source": "Elternordner",
+      "ok": true,
+      "status": "CONFIRMED",
+      "detail": "Chrome/Firefox/Source-ZIP: Datei-Hashes stimmen mit den aktuellen Quellen ueberein",
+      "evidence": "checks/artifact_identity.json"
+    }
+  ],
+  "source_identity_conflicts": [
+    {
+      "claim": "Lueckenloser Subdomain-Schutz fuer alle Marken (README:10, Next.md:23)",
+      "evidence": "checks/detector_probe_results.json",
+      "detail": "6 Gegenbeispiele (u.a. office/target/medium/zoom/notion/line.attacker.com werden NICHT geblockt); zusaetzlich False Positives (apple.stackexchange.com)"
+    },
+    {
+      "claim": "Manifest-Haertung verhindert Extension-Fingerprinting (README:15)",
+      "evidence": "chrome/manifest.json:31-41; https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources",
+      "detail": "WAR enthaelt guard.html fuer alle http/https-Origins; Chrome-Doku: WAR-Freigaben ermoeglichen Fingerprinting. Skripte sind entfernt, der Vektor ist aber nicht 'verhindert', sondern notwendiges Restrisiko des DNR-Redirects."
+    },
+    {
+      "claim": "VGT GLASS 2100 inkl. adaptiver Kontraste/Barrierefreiheit (README:14)",
+      "evidence": "checks/contrast_results.json; checks/ui_static_results.json; checks/render_metrics.json",
+      "detail": "Kontrastpruefung: 7 FAILs (muted #6b857f 4.29-4.33:1 < 4.5:1); Popup ohne reduced-transparency/reduced-motion/forced-colors; Fokusindikator des Suchfelds per outline:none ueberschrieben; keine Light/System-Themes."
+    },
+    {
+      "claim": "SOURCE_IDENTITY_CONFIRMED (Next.md:11)",
+      "evidence": "Test-Path .git = False; checks/artifact_identity.json",
+      "detail": "Kein .git, kein Commit/Tag/Branch; Next.md:53 nennt selbst 'v0.1.0 uncommitted'. VGT-Qualitaetsgate 1 (Source identity + Git-/Dirty-Baseline) nicht erfuellt."
+    },
+    {
+      "claim": "Versionierung '0.1.0-alpha' konsistent implementiert (Next.md:21)",
+      "evidence": "chrome/manifest.json:6-7; firefox/manifest.json:6; build.py:20,30; Next.md:9",
+      "detail": "String '0.1.0-alpha' nur in ZIP-Namen + Next.md; Manifeste = 0.1.0; Chrome version_name='0.1 Alpha'; Firefox ohne Alpha-Marker; UI 'ALPHA 0.1'/'Alpha 0.1'."
+    },
+    {
+      "claim": "Lueckenloser Subdomain-Schutz fuer alle Marken (Next.md:23)",
+      "evidence": "checks/detector_probe_results.json",
+      "detail": "siehe README:10 - Gegenbeispiele durch genericSubdomains & nicht gelistete Marken"
+    },
+    {
+      "claim": "Manifest-Fingerprinting-Vektoren geschlossen (Next.md:28)",
+      "evidence": "chrome/manifest.json:31-41",
+      "detail": "WAR guard.html bleibt erforderlich (DNR-Redirect); Chrome-Doku nennt WAR ausdruecklich als Fingerprinting-Vektor."
+    },
+    {
+      "claim": "Reproduzierbare Build-Artefakte (Next.md:31, TASK-09)",
+      "evidence": "checks/reproducibility_results.json",
+      "detail": "Rebuild derselben Kopie erzeugt andere ZIP-Bytes (Build-Zeitstempel); Source-ZIP-Prefix haengt vom Checkout-Ordnernamen ab; audit/ landet ungefiltert im Source-ZIP."
+    },
+    {
+      "claim": "PLATIN VGT SUPREME (Next.md:71)",
+      "evidence": "Next.md:71; SECURITY.md:3; README:62",
+      "detail": "Keine definierte VGT-Klasse 'PLATIN VGT SUPREME'; kein E2E-, Performance-, Recovery- oder Zielplattform-Beweis; SECURITY.md:3 und README:62 schliessen Zertifizierung aus."
+    },
+    {
+      "claim": "Referenzierte ARCHITECTURE_AND_SECURITY_REVIEW.md existiert (Next.md:13,39)",
+      "evidence": "glob/Test-Path",
+      "detail": "Datei im Workspace nicht vorhanden"
+    },
+    {
+      "claim": "Code-Header 'Diamant VGT Supreme Quality Gate' (detector.js:4) / 'Diamant VGT Supreme Design Standards' (guard.css:3)",
+      "evidence": "shared/detector.js:4; shared/guard.css:3",
+      "detail": "Selbstklassifikation ohne Nachweis (kein E2E, keine Performance-Messung, keine visuelle QA-Historie, keine Screenshots im Repo)."
+    },
+    {
+      "claim": "Security-Kontakt kanalisiert (SECURITY.md:9)",
+      "evidence": "SECURITY.md:9",
+      "detail": "'an den Repository-Maintainer ueber einen privaten Kanal' nennt keinen Kontakt, keine URL, keine security.txt -> fuer Melder nicht handlungsfaehig."
+    },
+    {
+      "claim": "Produktname 'Antipisher' vollstaendig in Code/Doku verankert (Next.md:19)",
+      "evidence": "grep 'DomainGuard'",
+      "detail": "Legacy-Bezuege gefunden: shared/guard.css:2: * VGT DomainGuard: Glass 2100 Security Interstitial Stylesheet | build_sites.py:2: VGT DomainGuard: Site Database Builder | shared/detector.js:357: globalThis.VGT_DomainGuard = Antipisher; // backwards compatibility alias | build.py:27: legacy_zip = ROOT.parent / f'VGT-DomainGuard-{target.capitalize()}-v0.1.0.zip' | build.py:35: shutil.copyfile(src_zip, ROOT.parent / 'VGT-DomainGuard-Source-v0.1.0.zip') | Next.md:7: - **Produkt:** Antipisher (vormals VGT DomainGuard) | Next.md:8: - **Repository / Workspace:** `c:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-sr (gesamt 7 Treffer)"
+    },
+    {
+      "claim": "Datenbank-Doku aktuell (build_sites.py:3 '140+', Datei sites-100.json)",
+      "evidence": "build_sites.py:3; sites-100.json",
+      "detail": "Docstring nennt 140+, Datei heisst sites-100.json, tatsaechlich 165 Marken"
+    }
+  ]
+}

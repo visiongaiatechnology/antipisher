@@ -1,0 +1,66 @@
+ANTIPISHER 0.1 ALPHA - RUNTIME-PROBES (SIMULIERTE BROWSER-APIs, KEIN ECHTER BROWSER)
+Erzeugt: 2026-10-18T15:30:05.693Z | Node v24.13.0 | Befehl: node audit/code/probe_runtime.cjs
+Hinweis: Chrome-/Firefox-APIs sind Mocks; echte Browser-End-to-End-Laeufe wurden NICHT ausgefuehrt (NOT_TESTED).
+
+--- CHROME (Manifest V3 / declarativeNetRequest) ---
+[PASS] Chrome-Manifest: guard.html ist web_accessible_resource (Voraussetzung fuer DNR-Redirect auf Extension-Seite)
+       [{"resources":["guard.html"],"matches":["http://*/*","https://*/*"]}]
+[PASS] Chrome: DNR-Redirect-Regel wird beim Start installiert
+       {"id":1000,"priority":1,"action":{"type":"redirect","redirect":{"regexSubstitution":"chrome-extension://fakeid/guard.html#\\1"}},"condition":{"regexFilter":"^(https?://.+)$","resourceTypes":["main_frame"],"requestMethods":["get"]}}
+[FAIL] Chrome: DNR-Regel deckt nur GET ab -> POST-/Formular-Navigationen werden NICHT geprueft (Schutzluecke, README/Next.md-Gegenteilbehauptung)
+       condition.requestMethods = ["get"] (chrome/background.js:37; Quellzeile belegt die Luecke)
+[PASS] Chrome: allow-once erzeugt tab-gebundene Session-Allow-Regel (Prioritaet 10)
+       {"id":10002,"priority":10,"action":{"type":"allow"},"condition":{"regexFilter":"^https://paypa1\\.com/login\\?x=1$","resourceTypes":["main_frame"],"tabIds":[7]}}
+[WARN] Chrome: Allow-Regex wird ohne Fragment gebaut (Fragment-Trennung beim DNR-Matching; Hash-/Fragment-Verlust bei Umleitung ist plausibel, echter Browser NOT_TESTED)
+       regexFilter=^https://paypa1\.com/login\?x=1$ match(fragmentlos)=true
+[FAIL] Chrome: URL laenger als 1900 Zeichen kann nicht freigegeben werden -> Availability-Blocker (jede lange, harmlose URL bleibt auf der Schutzseite haengen)
+       {"ok":false,"error":"Adresse zu lang für eine einmalige Freigabe"}
+[FAIL] Chrome: Fehler in configure() (z.B. isRegexSupported negativ) fuehrt zu FAIL-OPEN (keine DNR-Regel, nur console.error; Popup zeigt Vorabpruefung dennoch als aktiv)
+       dynamicRules=0, console.errors=["Error: DNR regex unsupported: test-regex-unsupported"]
+[PASS] Chrome: Service-Worker-Neustart entfernt verwaiste Session-Allow-Regeln (fail-closed)
+       sessionRules nach configure=[]
+[PASS] Chrome Reduced Mode: DNR-Regel entfernt, webNavigation leitet best-effort auf guard.html?url=... um
+       dynamicRules=0, tabs.update=[{"tabId":5,"url":"chrome-extension://fakeid/guard.html?url=https%3A%2F%2Fpaypa1.com%2F"}]
+
+--- FIREFOX (Manifest V3 / webRequestBlocking) ---
+[FAIL] Firefox-Manifest: guard.html ist NICHT in web_accessible_resources -> Redirect auf Extension-Seite ist laut MDN-WebRequest-Doku unzulaessig (Firefox-Schutz funktional gebrochen)
+       web_accessible_resources = undefined | MDN webRequest.onBeforeRequest: "If an extension wants to redirect a public (e.g., HTTPS) URL to an extension page, the manifest.json file must contain a web_accessible_resources key that lists the URL for the extension page."
+[PASS] Firefox MV3: background.scripts ist fuer Firefox MV3 zulaessig (MDN background-Doku)
+       {"scripts":["shared/sites.js","shared/detector.js","background.js"]}
+[PASS] Firefox: webRequestBlocking-Permission ist vorhanden (in Firefox MV3 verfuegbar)
+       ["storage","tabs","webRequest","webRequestBlocking"]
+[PASS] Firefox: safe-URL passiert, verdaechtige main_frame-Navigation wird auf guard.html umgeleitet
+       safe={}, block={"redirectUrl":"moz-extension://fake/guard.html?url=https%3A%2F%2Fpaypa1.com%2F"}
+[FAIL] Firefox: Listener filtert NICHT nach HTTP-Methode -> POST-Navigationen werden ebenfalls abgefangen und in GET umgewandelt (Widerspruch zu README "POST vollstaendig nativ unberuehrt")
+       firefox/background.js enthaelt keinen Methodenfilter; types=["main_frame"] filtert alle Methoden
+[WARN] Firefox: POST-Navigation auf verdaechtige Domain wird abgefangen; Formulardaten gehen beim Proceed (GET) verloren
+       {"method":"POST","redirectUrl":"moz-extension://fake/guard.html?url=https%3A%2F%2Fpaypa1.com%2Flogin"}
+[PASS] Firefox: allow-once gilt exakt einmal pro Tab/URL (Bypass-Map), danach wieder Blockade
+       allow={"ok":true}, once={}, second={"redirectUrl":"moz-extension://fake/guard.html?url=https%3A%2F%2Fpaypa1.com%2F"}
+[WARN] Firefox: kein webNavigation-Cleanup; Allow-once-Eintrag bleibt bis zur exakten URL-Nutzung/Tab-Close bestehen (Unterschied zu Chrome)
+       bypass.clear erfolgt nur bei exaktem URL-Treffer oder tabs.onRemoved
+
+--- GUARD / POPUP / STATISCHE SICHERHEITSPRUEFUNGEN ---
+[PASS] XSS/DOM-Sinks: guard.js/popup.js/html verwenden ausschliesslich textContent (keine HTML-Sinks, kein eval)
+       keine Treffer fuer innerHTML/outerHTML/insertAdjacentHTML/document.write/eval/new Function
+[PASS] Offline-Versprechen: in Detector/Guard/Popup keine Netzwerk-APIs
+       keine fetch/XHR/WebSocket/sendBeacon-Aufrufe
+[PASS] Chrome: allow-once-Nachricht wird auf Absender (guard.html) und Guard-Tab geprueft
+       sender.url-Pruefung + tabs.get(tabId).url-Pruefung vorhanden
+[WARN] Guard: jede als safe klassifizierte Navigation wird automatisch per location.replace weitergeleitet -> zusaetzlicher Zwischenschritt/Flash fuer JEDE Navigation, History-/Referer-/Redirect-Ketten-Risiko (echter Browser NOT_TESTED)
+       shared/guard.js:50-54: bei safe wird go(target,false) ohne Nutzerentscheidung aufgerufen
+[WARN] Fingerprinting: guard.html ist web-accessible (statische Extension-URL) -> Websites koennen die Extension theoretisch erkennen; "Manifest-Fingerprinting geschlossen" (Next.md) ist damit nicht vollstaendig belegt
+       chrome/manifest.json web_accessible_resources = [{"resources":["guard.html"],"matches":["http://*/*","https://*/*"]}]
+
+--- DETEKTOR-FUNKTIONSPRUEFUNGEN (PROPERTY-/FUZZ-TESTS) ---
+[PASS] damerauDistanceOne(): exakte Uebereinstimmung mit Referenz-OSA-Distanz==1 (Alphabet {a,b}, Laenge 0..5)
+       3969 Paare geprueft, 0 Abweichungen
+[PASS] punycodeDecode(): dekodiert Punycode-Labels reproduzierbar in Unicode (HTML-Mapping) und Skeleton trifft die erwartete Marke
+       Vektoren: 10, Fehler: 0
+[PASS] withinDomain(): Label-Grenzen werden beachtet (kein Suffix-Fehltreffer)
+       [{"h":"google.com","d":"google.com","exp":true,"got":true},{"h":"mail.google.com","d":"google.com","exp":true,"got":true},{"h":"evilgoogle.com","d":"google.com","exp":false,"got":false},{"h":"google.com.evil.tld","d":"google.com","exp":false,"got":false}]
+[PASS] classify(): 1500 Zufalls-Strings ohne Exception und mit gueltigem Status
+       throws=0, invalidStatus=0
+
+ZUSAMMENFASSUNG: 16 PASS, 5 WARN, 5 FAIL (Mock-basiert; echte Browser-Laeufe NOT_TESTED)
+Wichtigste FAILs: Firefox-WAR-Luecke (Redirect verboten), Chrome-DNR-POST-Luecke, Chrome-Long-URL-Blocker, Chrome-Fail-open bei configure-Fehler.

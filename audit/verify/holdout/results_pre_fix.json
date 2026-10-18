@@ -1,0 +1,4542 @@
+{
+  "meta": {
+    "audit": "Unabhaengige Holdout-Verifikation Antipisher 0.1 (Detektor-Generaliserung/Overfitting)",
+    "generated_utc": "2026-10-18T16:34:37.762Z",
+    "node": "v24.13.0",
+    "cwd": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
+    "mode": "VERIFY_ONLY (kein Quellcode geaendert)",
+    "holdout_corpus": "audit/verify/holdout/corpus.json",
+    "detector_sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+    "detector_mtime_utc": "2026-10-18T16:07:12.210Z",
+    "sites_sha256": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+    "sites_mtime_utc": "2026-10-18T16:10:21.550Z",
+    "tests_detector_sha256": "58d6feff42c85ee9c9550e1010952251656d00684adbcacb22201793c19beed3",
+    "tests_detector_mtime_utc": "2026-10-18T15:08:09.670Z",
+    "claims_under_test": [
+      "\"0/26 False Positives, 0/40 False Negatives (100% Trefferquote)\" - Next.md:29,82; README.md:67,76",
+      "\"21/21 Unit-Tests\" - Next.md:108",
+      "\"169 Marken / 339 Domains\" - Next.md TASK-03, shared/sites.js",
+      "\"<1 ms\" Perf-Claim - Next.md; Audit-Baseline 0,506 ms Median / 2,58 ms p95"
+    ]
+  },
+  "holdout": {
+    "corpus_meta": {
+      "name": "Antipisher 0.1 unabhaengiger Holdout-Korpus (Verifier)",
+      "version": "1.3.0",
+      "created_utc": "2026-10-18T16:18:17.160Z",
+      "author": "holdout-verifier (unabhaengig vom Remediation-Agenten)",
+      "purpose": "Holdout-Verifikation der Detektor-Generaliserung/Overfitting nach Gemini-Remediation",
+      "methodology": [
+        "Erwartungen fachlich/security-first aus Kategorie-Semantik abgeleitet, NICHT aus dem Detektor.",
+        "KEINE URL aus audit/code/corpus.json oder audit/lead/lead_probe.cjs uebernommen.",
+        "Schwerpunkt: neue Marken (DE/EU-Behorden, Banken, Versicherer, Paketdienste), neue Baitwoerter,",
+        "Varianten jenseits der veroeffentlichten Tuning-Muster (IDN-Diakritika ausserhalb der Homoglyph-Tabelle,",
+        "Kurzmarken, 2-Edit, TLD-Swap, Bitsquatting, Combosquat ohne Bait, Multi-Tenant, userinfo, RTL/IDN,",
+        "offizielle Regionaldomains ausserhalb von sites.js, legitime Drittseiten mit Marke+login im Pfad).",
+        "conf = Sicherheitsgrad der Erwartung (hoch/mittel); mittel = Grauzone/Policy-Trade-off.",
+        "Status-Mapping: expect block => Detektor-Status block (action block ODER warn); safe; skip."
+      ],
+      "expectations_note": "FN = erwartet block, erhalten safe/skip. FP = erwartet safe, erhalten block.",
+      "changelog": "v1.1.0: Unicode-Korrektur H058 (kyrillisch о statt п); im Auftrag genannte offizielle DE/EU-Kontrollen (Versicherer/Behoerden/EU/Paketdienste) und weitere geplante Phishing-Varianten ergaenzt. Keine Erwartung an Detektor-Ausgaben angepasst. v1.2.0: im Audit dokumentierte Klasse \"Typosquat als Subdomain-Label auf Fremdhost\" ergaenzt (6 Faelle). v1.3.0: versehentliche exakte URL-Ueberschneidungen mit veroeffentlichten Korpora (10 kanonische Kontroll-/Skip-URLs) durch gleichwertige Varianten ersetzt; Ziel: 0 exakte URL-Overlaps."
+    },
+    "counts": {
+      "total": 296,
+      "block": 166,
+      "safe": 121,
+      "skip": 9,
+      "categories": 38
+    },
+    "evaluation": {
+      "total": 296,
+      "pass": 172,
+      "fail": 124,
+      "pass_rate_pct": 58.11,
+      "expected_block": 166,
+      "expected_safe": 121,
+      "expected_skip": 9,
+      "detected_block_on_block": 68,
+      "fn": 98,
+      "fn_rate_pct": 59.04,
+      "fp": 26,
+      "fp_rate_pct": 21.49,
+      "other": 0,
+      "detected_action_breakdown": {
+        "block": 63,
+        "warn": 5,
+        "note": "warn = nur Pfad-Ebene (action warn), d.h. Browser-UI-Warnung statt Redirect-Sperre"
+      },
+      "detected_reason_breakdown": {
+        "typosquat": 7,
+        "bitsquat": 5,
+        "unicode": 13,
+        "foreign-domain": 21,
+        "brand-variant": 7,
+        "userinfo": 6,
+        "credential-bait": 4,
+        "path-impersonation": 5
+      },
+      "tpr_pct": 40.96,
+      "tnr_pct": 78.51,
+      "by_certainty": {
+        "hoch": {
+          "total": 204,
+          "block": 96,
+          "safe": 99,
+          "fn": 39,
+          "fp": 10,
+          "fn_rate_pct": 40.63,
+          "fp_rate_pct": 10.1
+        },
+        "mittel": {
+          "total": 92,
+          "block": 70,
+          "safe": 22,
+          "fn": 59,
+          "fp": 16,
+          "fn_rate_pct": 84.29,
+          "fp_rate_pct": 72.73
+        }
+      },
+      "by_category": [
+        {
+          "category": "bait_new_de",
+          "total": 20,
+          "block": 20,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 20,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "db_coverage_gap",
+          "total": 13,
+          "block": 13,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 13,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "bait_concat_new",
+          "total": 12,
+          "block": 12,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 12,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "official_regional_missing",
+          "total": 10,
+          "block": 0,
+          "safe": 10,
+          "skip": 0,
+          "pass": 0,
+          "fn": 0,
+          "fp": 10,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 100
+        },
+        {
+          "category": "combosquat_nobait",
+          "total": 8,
+          "block": 8,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 8,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "idn_diacritic_new",
+          "total": 8,
+          "block": 8,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 8,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "short_brand",
+          "total": 8,
+          "block": 8,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 8,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "concat_brandcom",
+          "total": 6,
+          "block": 6,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 6,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "legit_thirdparty_path",
+          "total": 7,
+          "block": 0,
+          "safe": 7,
+          "skip": 0,
+          "pass": 1,
+          "fn": 0,
+          "fp": 6,
+          "other": 0,
+          "pass_rate_pct": 14.29,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 85.71
+        },
+        {
+          "category": "bidi_rtl_legit",
+          "total": 6,
+          "block": 0,
+          "safe": 6,
+          "skip": 0,
+          "pass": 2,
+          "fn": 0,
+          "fp": 4,
+          "other": 0,
+          "pass_rate_pct": 33.33,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 66.67
+        },
+        {
+          "category": "path_phish",
+          "total": 9,
+          "block": 9,
+          "safe": 0,
+          "skip": 0,
+          "pass": 5,
+          "fn": 4,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 55.56,
+          "fn_rate_pct": 44.44,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "two_edit",
+          "total": 4,
+          "block": 4,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 4,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "brand_as_subdomain_legit",
+          "total": 5,
+          "block": 0,
+          "safe": 5,
+          "skip": 0,
+          "pass": 2,
+          "fn": 0,
+          "fp": 3,
+          "other": 0,
+          "pass_rate_pct": 40,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 60
+        },
+        {
+          "category": "path_blog_evasion",
+          "total": 3,
+          "block": 3,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 3,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "subdomain_typosquat",
+          "total": 6,
+          "block": 6,
+          "safe": 0,
+          "skip": 0,
+          "pass": 3,
+          "fn": 3,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 50,
+          "fn_rate_pct": 50,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "userinfo_legit",
+          "total": 5,
+          "block": 0,
+          "safe": 5,
+          "skip": 0,
+          "pass": 2,
+          "fn": 0,
+          "fp": 3,
+          "other": 0,
+          "pass_rate_pct": 40,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 60
+        },
+        {
+          "category": "whitelist_risk",
+          "total": 3,
+          "block": 3,
+          "safe": 0,
+          "skip": 0,
+          "pass": 0,
+          "fn": 3,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 0,
+          "fn_rate_pct": 100,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "de_eu_typo",
+          "total": 8,
+          "block": 8,
+          "safe": 0,
+          "skip": 0,
+          "pass": 6,
+          "fn": 2,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 75,
+          "fn_rate_pct": 25,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "multi_tenant_phish",
+          "total": 7,
+          "block": 7,
+          "safe": 0,
+          "skip": 0,
+          "pass": 5,
+          "fn": 2,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 71.43,
+          "fn_rate_pct": 28.57,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "ligature",
+          "total": 6,
+          "block": 6,
+          "safe": 0,
+          "skip": 0,
+          "pass": 5,
+          "fn": 1,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 83.33,
+          "fn_rate_pct": 16.67,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "punycode_phish",
+          "total": 4,
+          "block": 4,
+          "safe": 0,
+          "skip": 0,
+          "pass": 3,
+          "fn": 1,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 75,
+          "fn_rate_pct": 25,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "bitsquat",
+          "total": 5,
+          "block": 5,
+          "safe": 0,
+          "skip": 0,
+          "pass": 5,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": 0,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "doc_exception_legit",
+          "total": 5,
+          "block": 0,
+          "safe": 5,
+          "skip": 0,
+          "pass": 5,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "edge_cases",
+          "total": 10,
+          "block": 0,
+          "safe": 10,
+          "skip": 0,
+          "pass": 10,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "foreign_in_host",
+          "total": 5,
+          "block": 5,
+          "safe": 0,
+          "skip": 0,
+          "pass": 5,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": 0,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "generic_word_subdomain_ok",
+          "total": 4,
+          "block": 0,
+          "safe": 4,
+          "skip": 0,
+          "pass": 4,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "homoglyph_cyr_gr",
+          "total": 7,
+          "block": 7,
+          "safe": 0,
+          "skip": 0,
+          "pass": 7,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": 0,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "legit_idn",
+          "total": 5,
+          "block": 0,
+          "safe": 5,
+          "skip": 0,
+          "pass": 5,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "legit_thirdparty_listed",
+          "total": 6,
+          "block": 0,
+          "safe": 6,
+          "skip": 0,
+          "pass": 6,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "mixed_script",
+          "total": 3,
+          "block": 3,
+          "safe": 0,
+          "skip": 0,
+          "pass": 3,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": 0,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "multi_tenant_legit",
+          "total": 8,
+          "block": 0,
+          "safe": 8,
+          "skip": 0,
+          "pass": 8,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "official_controls",
+          "total": 34,
+          "block": 0,
+          "safe": 34,
+          "skip": 0,
+          "pass": 34,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "official_subdomain_bait",
+          "total": 11,
+          "block": 0,
+          "safe": 11,
+          "skip": 0,
+          "pass": 11,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "search_query",
+          "total": 5,
+          "block": 0,
+          "safe": 5,
+          "skip": 0,
+          "pass": 5,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": 0
+        },
+        {
+          "category": "skip_cases",
+          "total": 9,
+          "block": 0,
+          "safe": 0,
+          "skip": 9,
+          "pass": 9,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": null,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "subdomain_chain",
+          "total": 6,
+          "block": 6,
+          "safe": 0,
+          "skip": 0,
+          "pass": 6,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": 0,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "tld_swap",
+          "total": 9,
+          "block": 9,
+          "safe": 0,
+          "skip": 0,
+          "pass": 9,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": 0,
+          "fp_rate_pct": null
+        },
+        {
+          "category": "userinfo_phish",
+          "total": 6,
+          "block": 6,
+          "safe": 0,
+          "skip": 0,
+          "pass": 6,
+          "fn": 0,
+          "fp": 0,
+          "other": 0,
+          "pass_rate_pct": 100,
+          "fn_rate_pct": 0,
+          "fp_rate_pct": null
+        }
+      ],
+      "false_negatives": [
+        {
+          "id": "H007",
+          "cat": "de_eu_typo",
+          "url": "https://klarmo.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Zwei-Edit (n->m, a->o)"
+        },
+        {
+          "id": "H008",
+          "cat": "de_eu_typo",
+          "url": "https://wisee.com/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke wise + Insertion"
+        },
+        {
+          "id": "H009",
+          "cat": "bait_new_de",
+          "url": "https://sparkasse-rechnung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H010",
+          "cat": "bait_new_de",
+          "url": "https://sparkasse-mahnung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H011",
+          "cat": "bait_new_de",
+          "url": "https://sparkasse-gesperrt.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H012",
+          "cat": "bait_new_de",
+          "url": "https://postbank-kontoauszug.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H013",
+          "cat": "bait_new_de",
+          "url": "https://comdirect-ueberweisung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H014",
+          "cat": "bait_new_de",
+          "url": "https://volksbank-bestaetigen.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H015",
+          "cat": "bait_new_de",
+          "url": "https://ing-tan.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke ing + tan"
+        },
+        {
+          "id": "H016",
+          "cat": "bait_new_de",
+          "url": "https://ing-pin.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke ing + pin"
+        },
+        {
+          "id": "H017",
+          "cat": "bait_new_de",
+          "url": "https://n26-verifizieren.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H018",
+          "cat": "bait_new_de",
+          "url": "https://klarna-rueckerstattung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H019",
+          "cat": "bait_new_de",
+          "url": "https://paypal-rueckerstattung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H020",
+          "cat": "bait_new_de",
+          "url": "https://dhl-paket.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke dhl + paket"
+        },
+        {
+          "id": "H021",
+          "cat": "bait_new_de",
+          "url": "https://gls-sendung.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke gls + sendung"
+        },
+        {
+          "id": "H022",
+          "cat": "bait_new_de",
+          "url": "https://dpd-zollgebuehr.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke dpd + zollgebuehr"
+        },
+        {
+          "id": "H023",
+          "cat": "bait_new_de",
+          "url": "https://hermes-rechnung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H024",
+          "cat": "bait_new_de",
+          "url": "https://commerzbank-kundennummer.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H025",
+          "cat": "bait_concat_new",
+          "url": "https://sparkasserechnung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H026",
+          "cat": "bait_concat_new",
+          "url": "https://paypalrechnung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H027",
+          "cat": "bait_concat_new",
+          "url": "https://dhlpaket.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H028",
+          "cat": "bait_concat_new",
+          "url": "https://klarnarechnung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H029",
+          "cat": "bait_concat_new",
+          "url": "https://commerzbankmahnung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H030",
+          "cat": "bait_concat_new",
+          "url": "https://netflixinvoice.com/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H031",
+          "cat": "bait_concat_new",
+          "url": "https://amazonrefund.com/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H032",
+          "cat": "bait_concat_new",
+          "url": "https://paypaldelivery.com/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H033",
+          "cat": "bait_concat_new",
+          "url": "https://sparkassekuendigung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H034",
+          "cat": "bait_concat_new",
+          "url": "https://dhlzollgebuehr.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H035",
+          "cat": "bait_concat_new",
+          "url": "https://hermespaket.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H036",
+          "cat": "bait_concat_new",
+          "url": "https://comdirectkontoauszug.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H044",
+          "cat": "idn_diacritic_new",
+          "url": "https://spärkasse.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ä"
+        },
+        {
+          "id": "H045",
+          "cat": "idn_diacritic_new",
+          "url": "https://göogle.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ö"
+        },
+        {
+          "id": "H046",
+          "cat": "idn_diacritic_new",
+          "url": "https://visä.com/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ä"
+        },
+        {
+          "id": "H047",
+          "cat": "idn_diacritic_new",
+          "url": "https://revolüt.com/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ü"
+        },
+        {
+          "id": "H048",
+          "cat": "idn_diacritic_new",
+          "url": "https://ëbay.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ë"
+        },
+        {
+          "id": "H049",
+          "cat": "idn_diacritic_new",
+          "url": "https://klarnä.com/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ä"
+        },
+        {
+          "id": "H050",
+          "cat": "idn_diacritic_new",
+          "url": "https://zalandö.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ö"
+        },
+        {
+          "id": "H051",
+          "cat": "idn_diacritic_new",
+          "url": "https://commerzbänk.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "ä"
+        },
+        {
+          "id": "H054",
+          "cat": "punycode_phish",
+          "url": "https://xn--sprkasse-1za.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "sparkasse mit ä"
+        },
+        {
+          "id": "H073",
+          "cat": "combosquat_nobait",
+          "url": "https://paypal-bonus.com/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H074",
+          "cat": "combosquat_nobait",
+          "url": "https://amazon-shop.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H075",
+          "cat": "combosquat_nobait",
+          "url": "https://netflix-deals.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H076",
+          "cat": "combosquat_nobait",
+          "url": "https://sparkasse-beratung.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H077",
+          "cat": "combosquat_nobait",
+          "url": "https://ing-kundencenter.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H078",
+          "cat": "combosquat_nobait",
+          "url": "https://klarna-ratgeber.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H079",
+          "cat": "combosquat_nobait",
+          "url": "https://otto-sale.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H080",
+          "cat": "combosquat_nobait",
+          "url": "https://dhl-schnell.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H081",
+          "cat": "concat_brandcom",
+          "url": "https://paypalcom.net/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H082",
+          "cat": "concat_brandcom",
+          "url": "https://sparkassede.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H083",
+          "cat": "concat_brandcom",
+          "url": "https://dhlcom.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H084",
+          "cat": "concat_brandcom",
+          "url": "https://netflixcom.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H085",
+          "cat": "concat_brandcom",
+          "url": "https://amazoncom.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H086",
+          "cat": "concat_brandcom",
+          "url": "https://paypalde.net/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H087",
+          "cat": "short_brand",
+          "url": "https://lng.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H088",
+          "cat": "short_brand",
+          "url": "https://dbk.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H089",
+          "cat": "short_brand",
+          "url": "https://m26.com/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H090",
+          "cat": "short_brand",
+          "url": "https://gls-paket.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H091",
+          "cat": "short_brand",
+          "url": "https://dpd-paket.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H092",
+          "cat": "short_brand",
+          "url": "https://ups-lieferung.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H093",
+          "cat": "short_brand",
+          "url": "https://dhl-rechnung.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H094",
+          "cat": "short_brand",
+          "url": "https://hp-anmeldung.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H095",
+          "cat": "two_edit",
+          "url": "https://peypel.com/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "zwei Substitutionen (a->e, a->e)"
+        },
+        {
+          "id": "H096",
+          "cat": "two_edit",
+          "url": "https://geegle.com/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "zwei Substitutionen (o->e, o->e)"
+        },
+        {
+          "id": "H097",
+          "cat": "two_edit",
+          "url": "https://sparkazze.com/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "zwei Substitutionen (s->z, s->z)"
+        },
+        {
+          "id": "H098",
+          "cat": "two_edit",
+          "url": "https://paypaai.com/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Insertion + Substitution"
+        },
+        {
+          "id": "H104",
+          "cat": "ligature",
+          "url": "https://arnazon-login.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H126",
+          "cat": "multi_tenant_phish",
+          "url": "https://dhl-paket.vercel.app/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "neues Baitwort paket"
+        },
+        {
+          "id": "H127",
+          "cat": "multi_tenant_phish",
+          "url": "https://targobank.vercel.app/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Marke nicht in DB"
+        },
+        {
+          "id": "H130",
+          "cat": "path_phish",
+          "url": "https://mirror.example.net/ing/banking",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H133",
+          "cat": "path_phish",
+          "url": "https://evil.example/n26/password",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H134",
+          "cat": "path_phish",
+          "url": "https://evil.example/targobank/login",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Marke nicht in DB"
+        },
+        {
+          "id": "H135",
+          "cat": "path_phish",
+          "url": "https://evil.example/dhl/konto",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke <4 im Pfad-Check"
+        },
+        {
+          "id": "H138",
+          "cat": "path_blog_evasion",
+          "url": "https://evil.example/blog/sparkasse/login",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H139",
+          "cat": "path_blog_evasion",
+          "url": "https://evil.example/news/paypal/verify",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H140",
+          "cat": "path_blog_evasion",
+          "url": "https://download.example.org/articles/commerzbank/password-reset",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H240",
+          "cat": "whitelist_risk",
+          "url": "https://evil.force.com/paypal/login",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "force.com ist Multi-Tenant-Plattform (Salesforce Sites) und in sites.js als Salesforce-Domain gelistet"
+        },
+        {
+          "id": "H241",
+          "cat": "whitelist_risk",
+          "url": "https://evil.my.salesforce.com/paypal/login",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "*.my.salesforce.com sind kundenkontrollierte Org-Tenants"
+        },
+        {
+          "id": "H242",
+          "cat": "whitelist_risk",
+          "url": "https://tenant.anything.force.com/login",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "beliebiger Tenant unter force.com"
+        },
+        {
+          "id": "H255",
+          "cat": "db_coverage_gap",
+          "url": "https://targobank-login.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H256",
+          "cat": "db_coverage_gap",
+          "url": "https://hanseaticbank-sicherheit.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H257",
+          "cat": "db_coverage_gap",
+          "url": "https://sparda-konto.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H258",
+          "cat": "db_coverage_gap",
+          "url": "https://aok-rueckerstattung.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H259",
+          "cat": "db_coverage_gap",
+          "url": "https://tk-bonus.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke tk"
+        },
+        {
+          "id": "H260",
+          "cat": "db_coverage_gap",
+          "url": "https://arbeitsagentur-termin.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Behoerde"
+        },
+        {
+          "id": "H261",
+          "cat": "db_coverage_gap",
+          "url": "https://bawag-login.at/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H262",
+          "cat": "db_coverage_gap",
+          "url": "https://raiffeisen-online.at/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H263",
+          "cat": "db_coverage_gap",
+          "url": "https://sbb-konto.ch/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H264",
+          "cat": "db_coverage_gap",
+          "url": "https://swisscom-rechnung.ch/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H265",
+          "cat": "db_coverage_gap",
+          "url": "https://check24-rueckerstattung.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H266",
+          "cat": "db_coverage_gap",
+          "url": "https://immoscout24-konto.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H267",
+          "cat": "db_coverage_gap",
+          "url": "https://finanzamt-bescheid.de/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": ""
+        },
+        {
+          "id": "H287",
+          "cat": "bait_new_de",
+          "url": "https://visa-zollgebuehr.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "neues Baitwort zollgebuehr"
+        },
+        {
+          "id": "H288",
+          "cat": "bait_new_de",
+          "url": "https://ups-ueberweisung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "Kurzmarke ups + ueberweisung"
+        },
+        {
+          "id": "H289",
+          "cat": "bait_new_de",
+          "url": "https://targobank-kuendigung.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "Marke nicht in DB"
+        },
+        {
+          "id": "H290",
+          "cat": "bait_new_de",
+          "url": "https://aok-verifizieren.de/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "Behoerde/Krankenkasse nicht in DB"
+        },
+        {
+          "id": "H294",
+          "cat": "subdomain_typosquat",
+          "url": "https://rnicrosoft.evil.test/",
+          "conf": "hoch",
+          "status": "safe",
+          "reason": null,
+          "note": "Ligatur als Subdomain"
+        },
+        {
+          "id": "H295",
+          "cat": "subdomain_typosquat",
+          "url": "https://appleid.evil.test/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Marken-Submarke als Subdomain"
+        },
+        {
+          "id": "H296",
+          "cat": "subdomain_typosquat",
+          "url": "https://microsoft365.evil.test/",
+          "conf": "mittel",
+          "status": "safe",
+          "reason": null,
+          "note": "Marken-Submarke als Subdomain"
+        }
+      ],
+      "false_positives": [
+        {
+          "id": "H141",
+          "cat": "official_regional_missing",
+          "url": "https://www.google.com.tw/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Google",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H142",
+          "cat": "official_regional_missing",
+          "url": "https://www.google.com.hk/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Google",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H143",
+          "cat": "official_regional_missing",
+          "url": "https://www.google.co.th/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Google",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H144",
+          "cat": "official_regional_missing",
+          "url": "https://www.amazon.com.be/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Amazon",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H145",
+          "cat": "official_regional_missing",
+          "url": "https://www.ing.it/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "ING",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H146",
+          "cat": "official_regional_missing",
+          "url": "https://www.ing.es/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "ING",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H147",
+          "cat": "official_regional_missing",
+          "url": "https://www.ing.pl/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "ING",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H148",
+          "cat": "official_regional_missing",
+          "url": "https://www.ing.com.au/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "ING",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H149",
+          "cat": "official_regional_missing",
+          "url": "https://www.telekom.at/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Telekom",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H150",
+          "cat": "official_regional_missing",
+          "url": "https://www.vodafone.pt/",
+          "conf": "hoch",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Vodafone",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H186",
+          "cat": "legit_thirdparty_path",
+          "url": "https://www.heise.de/ratgeber/paypal-login-problem-123.html",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "path-impersonation",
+          "site": "PayPal",
+          "action": "warn",
+          "note": ""
+        },
+        {
+          "id": "H187",
+          "cat": "legit_thirdparty_path",
+          "url": "https://www.verbraucherzentrale.de/wissen/digitale-welt/paypal-login-12345",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "path-impersonation",
+          "site": "PayPal",
+          "action": "warn",
+          "note": ""
+        },
+        {
+          "id": "H188",
+          "cat": "legit_thirdparty_path",
+          "url": "https://www.focus.de/finanzen/paypal-login-gesperrt_id_123.html",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "path-impersonation",
+          "site": "PayPal",
+          "action": "warn",
+          "note": ""
+        },
+        {
+          "id": "H189",
+          "cat": "legit_thirdparty_path",
+          "url": "https://www.chip.de/artikel/paypal-login_123.html",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "path-impersonation",
+          "site": "PayPal",
+          "action": "warn",
+          "note": ""
+        },
+        {
+          "id": "H190",
+          "cat": "legit_thirdparty_path",
+          "url": "https://www.ionos.de/hilfe/paypal-login",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "path-impersonation",
+          "site": "PayPal",
+          "action": "warn",
+          "note": ""
+        },
+        {
+          "id": "H192",
+          "cat": "legit_thirdparty_path",
+          "url": "https://support.mozilla.org/de/kb/apple-login",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "path-impersonation",
+          "site": "Apple",
+          "action": "warn",
+          "note": ""
+        },
+        {
+          "id": "H198",
+          "cat": "bidi_rtl_legit",
+          "url": "https://www.aljazeera.net/news/%D8%BA%D8%B2%D8%A9%E2%80%8F",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "bidi-override",
+          "site": "Sicherheitswarnung",
+          "action": "block",
+          "note": "RLM im Pfad (legitimes RTL-Formatierungszeichen)"
+        },
+        {
+          "id": "H199",
+          "cat": "bidi_rtl_legit",
+          "url": "https://www.bbc.co.uk/arabic/%D8%B9%D8%B1%D8%A8%D9%8A%E2%80%8F",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "bidi-override",
+          "site": "Sicherheitswarnung",
+          "action": "block",
+          "note": "RLM im Pfad"
+        },
+        {
+          "id": "H200",
+          "cat": "bidi_rtl_legit",
+          "url": "https://www.ynet.co.il/news/article/%D7%A9%D7%9C%D7%95%D7%9D%E2%80%8F",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "bidi-override",
+          "site": "Sicherheitswarnung",
+          "action": "block",
+          "note": "RLM im Pfad"
+        },
+        {
+          "id": "H201",
+          "cat": "bidi_rtl_legit",
+          "url": "https://www.tagesschau.de/suche?q=%D8%B9%D8%B1%D8%A8%D9%8A%E2%80%8F",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "bidi-override",
+          "site": "Sicherheitswarnung",
+          "action": "block",
+          "note": "RLM in Query"
+        },
+        {
+          "id": "H217",
+          "cat": "userinfo_legit",
+          "url": "https://user:paypal@example.com/",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "userinfo",
+          "site": "PayPal",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H218",
+          "cat": "userinfo_legit",
+          "url": "https://apple:pass@example.com/",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "userinfo",
+          "site": "Apple",
+          "action": "block",
+          "note": ""
+        },
+        {
+          "id": "H220",
+          "cat": "userinfo_legit",
+          "url": "https://paypal.de:token@paypal.de/",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "userinfo",
+          "site": "PayPal",
+          "action": "block",
+          "note": "userinfo auf offizieller Domain"
+        },
+        {
+          "id": "H247",
+          "cat": "brand_as_subdomain_legit",
+          "url": "https://signal.example.org/",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Signal",
+          "action": "block",
+          "note": "signal ist Alltagswort (z.B. Signal-Iduna)"
+        },
+        {
+          "id": "H248",
+          "cat": "brand_as_subdomain_legit",
+          "url": "https://box.example.org/",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Box",
+          "action": "block",
+          "note": "box ist Alltagswort"
+        },
+        {
+          "id": "H249",
+          "cat": "brand_as_subdomain_legit",
+          "url": "https://chase.example.org/",
+          "conf": "mittel",
+          "status": "block",
+          "reason": "foreign-domain",
+          "site": "Chase",
+          "action": "block",
+          "note": "chase ist englisches Alltagswort"
+        }
+      ],
+      "other_failures": []
+    }
+  },
+  "published_claims_check": {
+    "audit_code_corpus": {
+      "source": "audit/code/corpus.json (veroeffentlichter Audit-Korpus, NICHT Holdout)",
+      "corpus_sha256_current": "4dc0397865b8f1dc33ed4f3bada2aaf86a9446f1bcebb834c524e88003e43f0b",
+      "baseline_snapshot": {
+        "source": "audit/code/results.json (Snapshot des Audit-Baselines)",
+        "sha256": "BA8CF8C2228CE3C3941773EF2E260B16099FA5BBC52AC7C520DE86884D8E55C2",
+        "engine_sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9",
+        "summary": {
+          "total": 184,
+          "expected": {
+            "block": 98,
+            "safe": 82,
+            "skip": 4
+          },
+          "passed": 124,
+          "failed": 60,
+          "pass_rate": 0.6739130434782609,
+          "false_negatives": 33,
+          "false_negatives_skipped": 0,
+          "false_negative_rate": 0.336734693877551,
+          "false_negative_certainty": {
+            "hoch": 30,
+            "mittel": 3
+          },
+          "false_positives": 27,
+          "false_positive_rate": 0.32926829268292684,
+          "false_positive_certainty": {
+            "hoch": 19,
+            "mittel": 8
+          },
+          "skipped_mismatches": 0
+        },
+        "by_category": [
+          {
+            "category": "bait-combination",
+            "total": 22,
+            "pass": 9,
+            "fn": 13,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "brand-collision-safe",
+            "total": 2,
+            "pass": 0,
+            "fn": 0,
+            "fp": 2,
+            "fp_or_other": 2
+          },
+          {
+            "category": "brand-coverage-gap",
+            "total": 6,
+            "pass": 0,
+            "fn": 6,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "edge-case",
+            "total": 11,
+            "pass": 11,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "foreign-domain-in-host",
+            "total": 5,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "free-hoster-tenant",
+            "total": 5,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "generic-subdomain-policy",
+            "total": 2,
+            "pass": 1,
+            "fn": 1,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "homoglyph-cyrillic",
+            "total": 6,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "homoglyph-diacritic",
+            "total": 6,
+            "pass": 0,
+            "fn": 6,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "homoglyph-greek-latin",
+            "total": 5,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "idn-legit",
+            "total": 4,
+            "pass": 4,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "leetspeak",
+            "total": 6,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "legit-third-party-safe",
+            "total": 8,
+            "pass": 8,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "long-url",
+            "total": 2,
+            "pass": 2,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "multi-tenant-root-safe",
+            "total": 3,
+            "pass": 0,
+            "fn": 0,
+            "fp": 3,
+            "fp_or_other": 3
+          },
+          {
+            "category": "official-brand-unlisted",
+            "total": 19,
+            "pass": 0,
+            "fn": 0,
+            "fp": 19,
+            "fp_or_other": 19
+          },
+          {
+            "category": "official-reference-safe",
+            "total": 30,
+            "pass": 30,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "punycode-homograph",
+            "total": 6,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "punycode-legit-idn",
+            "total": 3,
+            "pass": 3,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "short-brand-typosquat",
+            "total": 4,
+            "pass": 0,
+            "fn": 4,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "two-edit-typosquat",
+            "total": 2,
+            "pass": 0,
+            "fn": 2,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "typosquat-deletion-insertion",
+            "total": 5,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "typosquat-substitution",
+            "total": 8,
+            "pass": 8,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "typosquat-transposition",
+            "total": 6,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "userinfo-deception",
+            "total": 5,
+            "pass": 4,
+            "fn": 1,
+            "fp": 0,
+            "fp_or_other": 0
+          },
+          {
+            "category": "userinfo-substring-fp",
+            "total": 3,
+            "pass": 0,
+            "fn": 0,
+            "fp": 3,
+            "fp_or_other": 3
+          }
+        ]
+      },
+      "current_engine_sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+      "current_evaluation": {
+        "total": 184,
+        "pass": 179,
+        "fail": 5,
+        "pass_rate_pct": 97.28,
+        "expected_block": 98,
+        "expected_safe": 82,
+        "expected_skip": 4,
+        "detected_block_on_block": 93,
+        "fn": 5,
+        "fn_rate_pct": 5.1,
+        "fp": 0,
+        "fp_rate_pct": 0,
+        "other": 0,
+        "detected_action_breakdown": {
+          "block": 93,
+          "warn": 0,
+          "note": "warn = nur Pfad-Ebene (action warn), d.h. Browser-UI-Warnung statt Redirect-Sperre"
+        },
+        "detected_reason_breakdown": {
+          "typosquat": 19,
+          "bitsquat": 2,
+          "unicode": 23,
+          "brand-variant": 12,
+          "credential-bait": 24,
+          "foreign-domain": 8,
+          "userinfo": 5
+        },
+        "tpr_pct": 94.9,
+        "tnr_pct": 100,
+        "by_certainty": {
+          "hoch": {
+            "total": 173,
+            "block": 95,
+            "safe": 74,
+            "fn": 3,
+            "fp": 0,
+            "fn_rate_pct": 3.16,
+            "fp_rate_pct": 0
+          },
+          "mittel": {
+            "total": 11,
+            "block": 3,
+            "safe": 8,
+            "fn": 2,
+            "fp": 0,
+            "fn_rate_pct": 66.67,
+            "fp_rate_pct": 0
+          }
+        },
+        "by_category": [
+          {
+            "category": "bait-combination",
+            "total": 22,
+            "block": 22,
+            "safe": 0,
+            "skip": 0,
+            "pass": 19,
+            "fn": 3,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 86.36,
+            "fn_rate_pct": 13.64,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "generic-subdomain-policy",
+            "total": 2,
+            "block": 1,
+            "safe": 1,
+            "skip": 0,
+            "pass": 1,
+            "fn": 1,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 50,
+            "fn_rate_pct": 100,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "short-brand-typosquat",
+            "total": 4,
+            "block": 4,
+            "safe": 0,
+            "skip": 0,
+            "pass": 3,
+            "fn": 1,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 75,
+            "fn_rate_pct": 25,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "brand-collision-safe",
+            "total": 2,
+            "block": 0,
+            "safe": 2,
+            "skip": 0,
+            "pass": 2,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "brand-coverage-gap",
+            "total": 6,
+            "block": 6,
+            "safe": 0,
+            "skip": 0,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "edge-case",
+            "total": 11,
+            "block": 0,
+            "safe": 7,
+            "skip": 4,
+            "pass": 11,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "foreign-domain-in-host",
+            "total": 5,
+            "block": 5,
+            "safe": 0,
+            "skip": 0,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "free-hoster-tenant",
+            "total": 5,
+            "block": 5,
+            "safe": 0,
+            "skip": 0,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "homoglyph-cyrillic",
+            "total": 6,
+            "block": 6,
+            "safe": 0,
+            "skip": 0,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "homoglyph-diacritic",
+            "total": 6,
+            "block": 6,
+            "safe": 0,
+            "skip": 0,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "homoglyph-greek-latin",
+            "total": 5,
+            "block": 5,
+            "safe": 0,
+            "skip": 0,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "idn-legit",
+            "total": 4,
+            "block": 0,
+            "safe": 4,
+            "skip": 0,
+            "pass": 4,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "leetspeak",
+            "total": 6,
+            "block": 6,
+            "safe": 0,
+            "skip": 0,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "legit-third-party-safe",
+            "total": 8,
+            "block": 0,
+            "safe": 8,
+            "skip": 0,
+            "pass": 8,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "long-url",
+            "total": 2,
+            "block": 0,
+            "safe": 2,
+            "skip": 0,
+            "pass": 2,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "multi-tenant-root-safe",
+            "total": 3,
+            "block": 0,
+            "safe": 3,
+            "skip": 0,
+            "pass": 3,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "official-brand-unlisted",
+            "total": 19,
+            "block": 0,
+            "safe": 19,
+            "skip": 0,
+            "pass": 19,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "official-reference-safe",
+            "total": 30,
+            "block": 0,
+            "safe": 30,
+            "skip": 0,
+            "pass": 30,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "punycode-homograph",
+            "total": 6,
+            "block": 6,
+            "safe": 0,
+            "skip": 0,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "punycode-legit-idn",
+            "total": 3,
+            "block": 0,
+            "safe": 3,
+            "skip": 0,
+            "pass": 3,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          },
+          {
+            "category": "two-edit-typosquat",
+            "total": 2,
+            "block": 2,
+            "safe": 0,
+            "skip": 0,
+            "pass": 2,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "typosquat-deletion-insertion",
+            "total": 5,
+            "block": 5,
+            "safe": 0,
+            "skip": 0,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "typosquat-substitution",
+            "total": 8,
+            "block": 8,
+            "safe": 0,
+            "skip": 0,
+            "pass": 8,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "typosquat-transposition",
+            "total": 6,
+            "block": 6,
+            "safe": 0,
+            "skip": 0,
+            "pass": 6,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "userinfo-deception",
+            "total": 5,
+            "block": 5,
+            "safe": 0,
+            "skip": 0,
+            "pass": 5,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": 0,
+            "fp_rate_pct": null
+          },
+          {
+            "category": "userinfo-substring-fp",
+            "total": 3,
+            "block": 0,
+            "safe": 3,
+            "skip": 0,
+            "pass": 3,
+            "fn": 0,
+            "fp": 0,
+            "other": 0,
+            "pass_rate_pct": 100,
+            "fn_rate_pct": null,
+            "fp_rate_pct": 0
+          }
+        ],
+        "false_negatives": [
+          {
+            "id": "BC-133",
+            "cat": "bait-combination",
+            "url": "https://microsoft365-login.com/",
+            "conf": "hoch",
+            "status": "safe",
+            "reason": null,
+            "note": "Marke+Bait ohne Trenner (Microsoft-365-Login-Phishing)"
+          },
+          {
+            "id": "BC-134",
+            "cat": "bait-combination",
+            "url": "https://amazonprime-login.com/",
+            "conf": "hoch",
+            "status": "safe",
+            "reason": null,
+            "note": "Marke+Produkt+Bait ohne Trenner"
+          },
+          {
+            "id": "BC-135",
+            "cat": "bait-combination",
+            "url": "https://appleid-login.com/",
+            "conf": "hoch",
+            "status": "safe",
+            "reason": null,
+            "note": "Apple-ID-Phishing ohne exakten Marken-Label-Treffer"
+          },
+          {
+            "id": "SBT-180",
+            "cat": "short-brand-typosquat",
+            "url": "https://ubr.com/",
+            "conf": "mittel",
+            "status": "safe",
+            "reason": null,
+            "note": "Uber-Tippfehler - Marke hat nur 3 Zeichen"
+          },
+          {
+            "id": "GSP-183",
+            "cat": "generic-subdomain-policy",
+            "url": "https://office.attacker.com/",
+            "conf": "mittel",
+            "status": "safe",
+            "reason": null,
+            "note": "Microsoft-365-Marke \"office\" als Subdomain auf Angreiferdomain - laut Produktversprechen \"lueckenloser Subdomain-Schutz\" zu blockieren"
+          }
+        ],
+        "false_positives": [],
+        "other_failures": []
+      },
+      "changed_vs_old": 55,
+      "old_fail_now_pass": 55,
+      "old_fail_still_fail": [
+        {
+          "url": "https://microsoft365-login.com/",
+          "expected": "block",
+          "old": "safe",
+          "now": "safe"
+        },
+        {
+          "url": "https://amazonprime-login.com/",
+          "expected": "block",
+          "old": "safe",
+          "now": "safe"
+        },
+        {
+          "url": "https://appleid-login.com/",
+          "expected": "block",
+          "old": "safe",
+          "now": "safe"
+        },
+        {
+          "url": "https://ubr.com/",
+          "expected": "block",
+          "old": "safe",
+          "now": "safe"
+        },
+        {
+          "url": "https://office.attacker.com/",
+          "expected": "block",
+          "old": "safe",
+          "now": "safe"
+        }
+      ],
+      "old_false_negatives_fixed_now": [
+        {
+          "url": "https://páypal.com/",
+          "now": "block",
+          "reason": "unicode",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://paypál.com/",
+          "now": "block",
+          "reason": "unicode",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://góogle.com/",
+          "now": "block",
+          "reason": "unicode",
+          "site": "Google"
+        },
+        {
+          "url": "https://ámazon.com/",
+          "now": "block",
+          "reason": "unicode",
+          "site": "Amazon"
+        },
+        {
+          "url": "https://micrósoft.com/",
+          "now": "block",
+          "reason": "unicode",
+          "site": "Microsoft"
+        },
+        {
+          "url": "https://applé.com/",
+          "now": "block",
+          "reason": "unicode",
+          "site": "Apple"
+        },
+        {
+          "url": "https://paypalsupport.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://secure-paypa1.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://paypa1-login.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://paypalverify.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://netflixbilling.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "Netflix"
+        },
+        {
+          "url": "https://dhl-tracking.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "DHL"
+        },
+        {
+          "url": "https://sparkasse-sicherheit.de/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "Sparkasse"
+        },
+        {
+          "url": "https://paypal-konto.de/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://metamask-airdrop.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "MetaMask"
+        },
+        {
+          "url": "https://dhl-zoll.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "DHL"
+        },
+        {
+          "url": "https://microsoft365-login.com/",
+          "now": "safe",
+          "reason": null,
+          "site": null
+        },
+        {
+          "url": "https://amazonprime-login.com/",
+          "now": "safe",
+          "reason": null,
+          "site": null
+        },
+        {
+          "url": "https://appleid-login.com/",
+          "now": "safe",
+          "reason": null,
+          "site": null
+        },
+        {
+          "url": "https://paypal@evil.tld/",
+          "now": "block",
+          "reason": "userinfo",
+          "site": "PayPal"
+        },
+        {
+          "url": "https://gmial.com/",
+          "now": "block",
+          "reason": "typosquat",
+          "site": "Gmail"
+        },
+        {
+          "url": "https://gmai.com/",
+          "now": "block",
+          "reason": "typosquat",
+          "site": "Gmail"
+        },
+        {
+          "url": "https://gmail-login.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "Gmail"
+        },
+        {
+          "url": "https://azure-login.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "Azure"
+        },
+        {
+          "url": "https://disneyplus-login.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "Disney+"
+        },
+        {
+          "url": "https://alipay-login.com/",
+          "now": "block",
+          "reason": "credential-bait",
+          "site": "Alipay"
+        },
+        {
+          "url": "https://vlsa.com/",
+          "now": "block",
+          "reason": "brand-variant",
+          "site": "Visa"
+        },
+        {
+          "url": "https://v1sa.com/",
+          "now": "block",
+          "reason": "brand-variant",
+          "site": "Visa"
+        },
+        {
+          "url": "https://wlse.com/",
+          "now": "block",
+          "reason": "brand-variant",
+          "site": "Wise"
+        },
+        {
+          "url": "https://ubr.com/",
+          "now": "safe",
+          "reason": null,
+          "site": null
+        },
+        {
+          "url": "https://arnazon.com/",
+          "now": "block",
+          "reason": "brand-variant",
+          "site": "Amazon"
+        },
+        {
+          "url": "https://rnicrosoft.com/",
+          "now": "block",
+          "reason": "brand-variant",
+          "site": "Microsoft"
+        },
+        {
+          "url": "https://office.attacker.com/",
+          "now": "safe",
+          "reason": null,
+          "site": null
+        }
+      ],
+      "old_false_positives_fixed_now": [
+        {
+          "url": "https://google.co.jp/",
+          "now": "safe"
+        },
+        {
+          "url": "https://microsoft.co.jp/",
+          "now": "safe"
+        },
+        {
+          "url": "https://ing.nl/",
+          "now": "safe"
+        },
+        {
+          "url": "https://coinbase.de/",
+          "now": "safe"
+        },
+        {
+          "url": "https://visa.fr/",
+          "now": "safe"
+        },
+        {
+          "url": "https://sparkasse.at/",
+          "now": "safe"
+        },
+        {
+          "url": "https://google.com.mx/",
+          "now": "safe"
+        },
+        {
+          "url": "https://google.com.ar/",
+          "now": "safe"
+        },
+        {
+          "url": "https://amazon.se/",
+          "now": "safe"
+        },
+        {
+          "url": "https://walmart.ca/",
+          "now": "safe"
+        },
+        {
+          "url": "https://walmart.com.mx/",
+          "now": "safe"
+        },
+        {
+          "url": "https://bestbuy.ca/",
+          "now": "safe"
+        },
+        {
+          "url": "https://vodafone.it/",
+          "now": "safe"
+        },
+        {
+          "url": "https://dhl.co.uk/",
+          "now": "safe"
+        },
+        {
+          "url": "https://chase.co.uk/",
+          "now": "safe"
+        },
+        {
+          "url": "https://github.blog/",
+          "now": "safe"
+        },
+        {
+          "url": "https://pinterest.co.uk/",
+          "now": "safe"
+        },
+        {
+          "url": "https://microsoft.de/",
+          "now": "safe"
+        },
+        {
+          "url": "https://wikipedia.de/",
+          "now": "safe"
+        },
+        {
+          "url": "https://hermes.com/",
+          "now": "safe"
+        },
+        {
+          "url": "https://elster.com/",
+          "now": "safe"
+        },
+        {
+          "url": "https://github.io/",
+          "now": "safe"
+        },
+        {
+          "url": "https://vercel.app/",
+          "now": "safe"
+        },
+        {
+          "url": "https://netlify.app/",
+          "now": "safe"
+        },
+        {
+          "url": "https://max.com@example.com/",
+          "now": "safe"
+        },
+        {
+          "url": "https://testing.developer@example.com/",
+          "now": "safe"
+        },
+        {
+          "url": "https://mixing.delivery@example.com/",
+          "now": "safe"
+        }
+      ],
+      "results_json_overwritten_during_verification": {
+        "file": "audit/code/results.json",
+        "baseline_snapshot_sha256": "BA8CF8C2228CE3C3941773EF2E260B16099FA5BBC52AC7C520DE86884D8E55C2",
+        "current_sha256": "1de39bdbff7f9965db9c67d6b4452ee0515307c7faa126e1a7287fe431b73763",
+        "current_mtime_utc": "2026-10-18T16:15:35.620Z",
+        "overwritten": true,
+        "current_file_engine_sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "current_file_summary_after_rerun": {
+          "total": 184,
+          "expected": {
+            "block": 98,
+            "safe": 82,
+            "skip": 4
+          },
+          "passed": 179,
+          "failed": 5,
+          "pass_rate": 0.9728260869565217,
+          "false_negatives": 5,
+          "false_negatives_skipped": 0,
+          "false_negative_rate": 0.05102040816326531,
+          "false_negative_certainty": {
+            "hoch": 3,
+            "mittel": 2
+          },
+          "false_positives": 0,
+          "false_positive_rate": 0,
+          "false_positive_certainty": {
+            "hoch": 0,
+            "mittel": 0
+          },
+          "skipped_mismatches": 0
+        },
+        "cross_check_harness_vs_rerun": {
+          "verifier_measured": {
+            "total": 184,
+            "passed": 179,
+            "fn": 5,
+            "fp": 0
+          },
+          "other_agent_rerun": {
+            "total": 184,
+            "passed": 179,
+            "fn": 5,
+            "fp": 0
+          },
+          "identical": true
+        }
+      }
+    },
+    "lead_probe": {
+      "source": "audit/lead/lead_probe.cjs (veroeffentlichter Lead-Korpus, NICHT Holdout)",
+      "probe_sha256_current": "2e59f255df2f5bb9ac1f2cd59a63b8f4d7ae68d20906c16b9f8ab9e50e7dc21f",
+      "probe_results_json_sha256": "be810b9c354b5698e951050b4003fbc1f7773773b1e19163b6878c8478799766",
+      "claimed": {
+        "official_fp": "0/26",
+        "phishing_fn": "0/40",
+        "source": "Next.md:29,37,38,82,108; README.md:67,76"
+      },
+      "measured": {
+        "official_expected_safe": 26,
+        "official_false_positives": [],
+        "phishing_expected_block": 40,
+        "undetected_phishing": [],
+        "known_official_sanity_failures": [],
+        "known_spoof_sanity_failures": []
+      },
+      "stored_results_claim": {
+        "officialExpectedSafe": 26,
+        "officialFalsePositives": 0,
+        "phishingExpectedBlock": 40,
+        "undetectedPhishing": 0,
+        "knownOfficialSanity": 0,
+        "knownSpoofSanity": 0
+      }
+    }
+  },
+  "artifact_integrity": {
+    "note": "Hash-/mtime-Belege fuer Overfitting-/Gaming-Pruefung; Quellcode wurde vom Verifier NICHT veraendert.",
+    "artifacts": {
+      "shared/detector.js": {
+        "sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "size": 26949,
+        "mtime_utc": "2026-10-18T16:07:12.210Z"
+      },
+      "shared/sites.js": {
+        "sha256": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+        "size": 21547,
+        "mtime_utc": "2026-10-18T16:10:21.550Z"
+      },
+      "shared/shield-content.js": {
+        "sha256": "b1efb0d4e825c24c98d946817962452cf12fd13f35ed053dc42a92488476356c",
+        "size": 10991,
+        "mtime_utc": "2026-10-18T16:07:49.851Z"
+      },
+      "tests/detector.test.cjs": {
+        "sha256": "58d6feff42c85ee9c9550e1010952251656d00684adbcacb22201793c19beed3",
+        "size": 4636,
+        "mtime_utc": "2026-10-18T15:08:09.670Z"
+      },
+      "tests/v2-scoring.test.cjs": {
+        "sha256": "4f99d58d54e9c3cf4a1a1618e0efe6a258f2b3d7c905cee544de13076538c471",
+        "size": 4192,
+        "mtime_utc": "2026-10-18T16:07:17.357Z"
+      },
+      "tests/shield-content.test.cjs": {
+        "sha256": "43daca0a112a1d37c2cb98bd2e0bb6b6ee1a7d2283c3e2d3c845d86bf647a1fa",
+        "size": 4661,
+        "mtime_utc": "2026-10-18T16:08:00.661Z"
+      },
+      "tests/chrome-worker.test.cjs": {
+        "sha256": "cfd78f7fdfc9b74bdba071bde30c7ba357a613751bbd10b284d731632c83c938",
+        "size": 3867,
+        "mtime_utc": "2026-10-18T15:01:41.850Z"
+      },
+      "tests/firefox-worker.test.cjs": {
+        "sha256": "a4057f5f81297eb20f44a8a016c5b5babc14ae0577c47d7d4b7aaeba4dc8c222",
+        "size": 2577,
+        "mtime_utc": "2026-10-18T15:48:20.616Z"
+      },
+      "audit/lead/lead_probe.cjs": {
+        "sha256": "2e59f255df2f5bb9ac1f2cd59a63b8f4d7ae68d20906c16b9f8ab9e50e7dc21f",
+        "size": 5672,
+        "mtime_utc": "2026-10-18T15:20:07.853Z"
+      },
+      "audit/lead/lead_probe_results.json": {
+        "sha256": "be810b9c354b5698e951050b4003fbc1f7773773b1e19163b6878c8478799766",
+        "size": 14070,
+        "mtime_utc": "2026-10-18T16:11:54.896Z"
+      },
+      "audit/code/corpus.json": {
+        "sha256": "4dc0397865b8f1dc33ed4f3bada2aaf86a9446f1bcebb834c524e88003e43f0b",
+        "size": 48472,
+        "mtime_utc": "2026-10-18T15:30:56.970Z"
+      },
+      "audit/code/results.json": {
+        "sha256": "1de39bdbff7f9965db9c67d6b4452ee0515307c7faa126e1a7287fe431b73763",
+        "size": 100143,
+        "mtime_utc": "2026-10-18T16:15:35.620Z"
+      },
+      "audit/code/run_corpus.cjs": {
+        "sha256": "d49ea2d0326b4b8ab432624288c88dc477e563d2287f7ba537a8d193b2ce439c",
+        "size": 25777,
+        "mtime_utc": "2026-10-18T15:32:23.337Z"
+      },
+      "build_sites.py": {
+        "sha256": "0a573375dcc0537267235907b7ad77fc781f5e723e6b96628d43e1a0c3478dbe",
+        "size": 7862,
+        "mtime_utc": "2026-10-18T15:51:25.355Z"
+      },
+      "sites-100.json": {
+        "sha256": "96775476265982597c07e31b3489d8674b2bd0c4a83be0ce1a2fccfc1ea8e912",
+        "size": 21455,
+        "mtime_utc": "2026-10-18T16:10:21.551Z"
+      },
+      "chrome/shared/detector.js": {
+        "sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "size": 26949,
+        "mtime_utc": "2026-10-18T16:10:21.578Z"
+      },
+      "chrome/shared/sites.js": {
+        "sha256": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+        "size": 21547,
+        "mtime_utc": "2026-10-18T16:10:21.578Z"
+      },
+      "firefox/shared/detector.js": {
+        "sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "size": 26949,
+        "mtime_utc": "2026-10-18T16:10:21.709Z"
+      },
+      "firefox/shared/sites.js": {
+        "sha256": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+        "size": 21547,
+        "mtime_utc": "2026-10-18T16:10:21.704Z"
+      }
+    },
+    "audit_time_hashes_from_static_scan": {
+      "shared/detector.js": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9",
+      "shared/sites.js": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d",
+      "tests/detector.test.cjs": "58d6feff42c85ee9c9550e1010952251656d00684adbcacb22201793c19beed3",
+      "tests/chrome-worker.test.cjs": "cfd78f7fdfc9b74bdba071bde30c7ba357a613751bbd10b284d731632c83c938",
+      "build_sites.py": "88652ff44d27105105b71701d7f438e3bfe68bbf5296a23fde0fbaadc3eacdfb",
+      "sites-100.json": "2296c7b1aa8f0265558774ded4b17535223a047fc75d88993ca4f7ff5e7989cd"
+    },
+    "comparisons": [
+      {
+        "file": "tests/detector.test.cjs",
+        "audit_time_sha256": "58d6feff42c85ee9c9550e1010952251656d00684adbcacb22201793c19beed3",
+        "current_sha256": "58d6feff42c85ee9c9550e1010952251656d00684adbcacb22201793c19beed3",
+        "unchanged_since_audit": true,
+        "note": "Testdatei wurde nach der Remediation NICHT veraendert (Hash identisch zum Audit-Zeitpunkt)."
+      },
+      {
+        "file": "shared/detector.js",
+        "audit_time_sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9",
+        "current_sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+        "unchanged_since_audit": false,
+        "note": "Detektor wurde nach dem Audit ersetzt (erwartet)."
+      },
+      {
+        "file": "shared/sites.js",
+        "audit_time_sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d",
+        "current_sha256": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+        "unchanged_since_audit": false,
+        "note": "Marken-DB wurde nach dem Audit ersetzt (erwartet)."
+      },
+      {
+        "file": "tests/chrome-worker.test.cjs",
+        "audit_time_sha256": "cfd78f7fdfc9b74bdba071bde30c7ba357a613751bbd10b284d731632c83c938",
+        "current_sha256": "cfd78f7fdfc9b74bdba071bde30c7ba357a613751bbd10b284d731632c83c938",
+        "unchanged_since_audit": true
+      },
+      {
+        "file": "build_sites.py",
+        "audit_time_sha256": "88652ff44d27105105b71701d7f438e3bfe68bbf5296a23fde0fbaadc3eacdfb",
+        "current_sha256": "0a573375dcc0537267235907b7ad77fc781f5e723e6b96628d43e1a0c3478dbe",
+        "unchanged_since_audit": false,
+        "note": "build_sites.py wurde nach dem Audit erweitert (169 Marken)."
+      }
+    ],
+    "timeline": {
+      "detector_js_mtime_utc": "2026-10-18T16:07:12.210Z",
+      "sites_js_mtime_utc": "2026-10-18T16:10:21.550Z",
+      "shield_content_mtime_utc": "2026-10-18T16:07:49.851Z",
+      "tests_detector_mtime_utc": "2026-10-18T15:08:09.670Z",
+      "lead_probe_cjs_mtime_utc": "2026-10-18T15:20:07.853Z",
+      "lead_probe_results_mtime_utc": "2026-10-18T16:11:54.896Z",
+      "audit_corpus_mtime_utc": "2026-10-18T15:30:56.970Z",
+      "audit_results_mtime_utc": "2026-10-18T16:15:35.620Z",
+      "v2_scoring_test_mtime_utc": "2026-10-18T16:07:17.357Z",
+      "shield_test_mtime_utc": "2026-10-18T16:08:00.661Z",
+      "findings": [
+        "audit/lead/lead_probe.cjs mtime 17:20:07 liegt VOR der Remediation von detector.js (18:07:12) -> Probe-Korpus wurde nicht nachtraeglich an den neuen Detektor angepasst (nur sein results.json wurde 18:11:54 neu erzeugt).",
+        "tests/detector.test.cjs mtime 17:08:09 und SHA256 identisch zum Audit-Zeitpunkt -> unveraendert.",
+        "tests/v2-scoring.test.cjs wurde 18:07:17 erzeugt, 5 Sekunden nach detector.js (18:07:12) -> Tests wurden NACH der Implementierung geschrieben und testen exakt die neu eingebauten Features (Fixture-Fitting, kein test-first).",
+        "tests/shield-content.test.cjs 18:08:00, 11 Sekunden nach shield-content.js (18:07:49) -> gleiches Muster.",
+        "audit/code/results.json wurde waehrend der Verifikation (18:15:35) von einem anderen Agenten mit dem neuen Detektor neu erzeugt; der alte Baseline-Stand (Hash BA8CF8C2..., 33 FN/27 FP) wurde dadurch ueberschrieben. Kein Git -> Audit-Evidenz ist nicht schreibgeschuetzt/reproduzierbar."
+      ]
+    },
+    "test_ledger": {
+      "command": "node --test <einzelne Testdatei> (5 Dateien einzeln; node --test tests/ schlaegt unter PowerShell wegen Verzeichnis-Glob fehl - bereits in Audit-Baseline dokumentiert)",
+      "files": [
+        {
+          "file": "tests/detector.test.cjs",
+          "tests": 10,
+          "pass": 10
+        },
+        {
+          "file": "tests/chrome-worker.test.cjs",
+          "tests": 2,
+          "pass": 2
+        },
+        {
+          "file": "tests/firefox-worker.test.cjs",
+          "tests": 2,
+          "pass": 2
+        },
+        {
+          "file": "tests/shield-content.test.cjs",
+          "tests": 3,
+          "pass": 3
+        },
+        {
+          "file": "tests/v2-scoring.test.cjs",
+          "tests": 4,
+          "pass": 4
+        }
+      ],
+      "total": 21,
+      "pass": 21,
+      "fail": 0,
+      "note": "Baseline 13/13 (Audit) + 8 neue Tests im Remediation-Kontext = 21/21. Die 8 neuen Tests sind Feature-Tests der neu eingebauten Mechanismen."
+    }
+  },
+  "overfit_evidence": {
+    "baseline_identity": {
+      "old_engine_sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9",
+      "old_sites_sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d",
+      "current_engine_sha256": "9ce177f11d7a2d1f8c2d708e458d54d16b9009813a7b23719418783aa155fb07",
+      "current_sites_sha256": "9fcfac579efadb7c2770baaaa4aab4725fe8f63e8540a1d800d9b78e8a1147db",
+      "note": "Audit-Baseline-Hashes stammen aus dem Snapshot von audit/code/results.json (meta.engine_sha256) und audit/security/probes/results/static_scan.json; der Detektor wurde nach dem Audit komplett ersetzt."
+    },
+    "detector_tuning_patterns": {
+      "published_corpus_tokens_in_baitword_set": [
+        {
+          "token": "logln",
+          "line": 82
+        },
+        {
+          "token": "l0gin",
+          "line": 82
+        },
+        {
+          "token": "airdrop",
+          "line": 81
+        },
+        {
+          "token": "deutschland",
+          "line": 81
+        },
+        {
+          "token": "prime",
+          "line": 81
+        },
+        {
+          "token": "inc",
+          "line": 82
+        },
+        {
+          "token": "plus",
+          "line": 82
+        },
+        {
+          "token": "express",
+          "line": 82
+        },
+        {
+          "token": "customerservice",
+          "line": 83
+        },
+        {
+          "token": "appleid",
+          "line": 82
+        },
+        {
+          "token": "konto",
+          "line": 81
+        },
+        {
+          "token": "sicherheit",
+          "line": 81
+        },
+        {
+          "token": "zoll",
+          "line": 81
+        }
+      ],
+      "code_patterns": [
+        {
+          "pattern": "startsWith(brand + 'com')",
+          "line": 530,
+          "targets": "audit/lead/lead_probe.cjs: paypalcom-login.com, paypalcom-verify.com"
+        },
+        {
+          "pattern": "startsWith(brand + 'de')",
+          "line": 530,
+          "targets": "Korpus-Muster Marke+de"
+        },
+        {
+          "pattern": "ligature replace rn->m",
+          "line": 517,
+          "targets": "audit/lead/lead_probe.cjs: arnazon.com, rnicrosoft.com"
+        },
+        {
+          "pattern": "ligature replace vv->w",
+          "line": 517,
+          "targets": "generisches Ligatur-Muster"
+        },
+        {
+          "pattern": "ligature replace cl->d",
+          "line": 517,
+          "targets": "generisches Ligatur-Muster"
+        },
+        {
+          "pattern": "4-Buchstaben l<->i-Regel",
+          "line": 591,
+          "targets": "audit/code/corpus.json FN: vlsa.com, v1sa.com, wlse.com, ubr.com"
+        },
+        {
+          "pattern": "Diakritika-Tabelle exakt á é í ó ú ý ...",
+          "line": 42,
+          "targets": "audit/code/corpus.json FN: páypal, paypál, góogle, ámazon, micrósoft, appl é - nur DIESE Diakritika wurden ergaenzt; ä/ö/ü/ë/ñ/å fehlen (Holdout: 8/8 FN)"
+        },
+        {
+          "pattern": "Baitwort-Set Beginn (words)",
+          "line": 73,
+          "targets": "Korpus-Tokens logln/l0gin/airdrop/deutschland/prime/inc/plus/express/customerservice/appleid/konto/sicherheit/zoll"
+        },
+        {
+          "pattern": "genericSubdomains set",
+          "line": 70,
+          "targets": "FP-Vermeidung generischer Markenwoerter"
+        },
+        {
+          "pattern": "multiTenantSuffixes",
+          "line": 87,
+          "targets": "FP-Fix github.io/vercel.app/netlify.app"
+        },
+        {
+          "pattern": "isDocOrBlog /blog/-Ausnahme",
+          "line": 635,
+          "targets": "Evasion-Ausnahme im Pfad-Check"
+        },
+        {
+          "pattern": "sensitiveActions Pfad-Check",
+          "line": 638,
+          "targets": "Pfad-/Query-Regel"
+        }
+      ]
+    },
+    "minimal_pairs": [
+      {
+        "pair": "baitword_typo",
+        "tuned": {
+          "url": "https://paypal-logln.com/",
+          "status": "block",
+          "reason": "credential-bait"
+        },
+        "untuned": {
+          "url": "https://paypal-logni.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "baitword_leet",
+        "tuned": {
+          "url": "https://paypal-l0gin.com/",
+          "status": "block",
+          "reason": "credential-bait"
+        },
+        "untuned": {
+          "url": "https://paypal-l0qin.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "baitword_inc",
+        "tuned": {
+          "url": "https://paypal-inc.com/",
+          "status": "block",
+          "reason": "credential-bait"
+        },
+        "untuned": {
+          "url": "https://paypal-gmbh.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "baitword_express",
+        "tuned": {
+          "url": "https://paypal-express.com/",
+          "status": "block",
+          "reason": "credential-bait"
+        },
+        "untuned": {
+          "url": "https://paypal-bonus.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "baitword_deutschland",
+        "tuned": {
+          "url": "https://amazon-deutschland.com/",
+          "status": "block",
+          "reason": "credential-bait"
+        },
+        "untuned": {
+          "url": "https://amazon-oesterreich.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "brand_com_prefix",
+        "tuned": {
+          "url": "https://paypalcom-verify.com/",
+          "status": "block",
+          "reason": "credential-bait"
+        },
+        "untuned": {
+          "url": "https://paypalcom-rechnung.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "ligature_rn",
+        "tuned": {
+          "url": "https://arnazon.com/",
+          "status": "block",
+          "reason": "brand-variant"
+        },
+        "untuned": {
+          "url": "https://arnazon-login.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "l_i_4letters",
+        "tuned": {
+          "url": "https://vlsa.com/",
+          "status": "block",
+          "reason": "brand-variant"
+        },
+        "untuned": {
+          "url": "https://lng.de/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      },
+      {
+        "pair": "concat_customerservice",
+        "tuned": {
+          "url": "https://paypalcustomerservice.com/",
+          "status": "block",
+          "reason": "credential-bait"
+        },
+        "untuned": {
+          "url": "https://paypalkundenservice.com/",
+          "status": "safe",
+          "reason": null
+        },
+        "overfit_signal": true
+      }
+    ],
+    "overfit_pairs_count": 9,
+    "old_false_negatives_now": [
+      {
+        "url": "https://páypal.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "unicode",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://paypál.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "unicode",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://góogle.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "unicode",
+        "site": "Google",
+        "fixed": true
+      },
+      {
+        "url": "https://ámazon.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "unicode",
+        "site": "Amazon",
+        "fixed": true
+      },
+      {
+        "url": "https://micrósoft.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "unicode",
+        "site": "Microsoft",
+        "fixed": true
+      },
+      {
+        "url": "https://applé.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "unicode",
+        "site": "Apple",
+        "fixed": true
+      },
+      {
+        "url": "https://paypalsupport.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://secure-paypa1.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://paypa1-login.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://paypalverify.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://netflixbilling.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "Netflix",
+        "fixed": true
+      },
+      {
+        "url": "https://dhl-tracking.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "DHL",
+        "fixed": true
+      },
+      {
+        "url": "https://sparkasse-sicherheit.de/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "Sparkasse",
+        "fixed": true
+      },
+      {
+        "url": "https://paypal-konto.de/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://metamask-airdrop.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "MetaMask",
+        "fixed": true
+      },
+      {
+        "url": "https://dhl-zoll.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "DHL",
+        "fixed": true
+      },
+      {
+        "url": "https://microsoft365-login.com/",
+        "old": "safe",
+        "now": "safe",
+        "reason": null,
+        "site": null,
+        "fixed": false
+      },
+      {
+        "url": "https://amazonprime-login.com/",
+        "old": "safe",
+        "now": "safe",
+        "reason": null,
+        "site": null,
+        "fixed": false
+      },
+      {
+        "url": "https://appleid-login.com/",
+        "old": "safe",
+        "now": "safe",
+        "reason": null,
+        "site": null,
+        "fixed": false
+      },
+      {
+        "url": "https://paypal@evil.tld/",
+        "old": "safe",
+        "now": "block",
+        "reason": "userinfo",
+        "site": "PayPal",
+        "fixed": true
+      },
+      {
+        "url": "https://gmial.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "typosquat",
+        "site": "Gmail",
+        "fixed": true
+      },
+      {
+        "url": "https://gmai.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "typosquat",
+        "site": "Gmail",
+        "fixed": true
+      },
+      {
+        "url": "https://gmail-login.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "Gmail",
+        "fixed": true
+      },
+      {
+        "url": "https://azure-login.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "Azure",
+        "fixed": true
+      },
+      {
+        "url": "https://disneyplus-login.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "Disney+",
+        "fixed": true
+      },
+      {
+        "url": "https://alipay-login.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "credential-bait",
+        "site": "Alipay",
+        "fixed": true
+      },
+      {
+        "url": "https://vlsa.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "brand-variant",
+        "site": "Visa",
+        "fixed": true
+      },
+      {
+        "url": "https://v1sa.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "brand-variant",
+        "site": "Visa",
+        "fixed": true
+      },
+      {
+        "url": "https://wlse.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "brand-variant",
+        "site": "Wise",
+        "fixed": true
+      },
+      {
+        "url": "https://ubr.com/",
+        "old": "safe",
+        "now": "safe",
+        "reason": null,
+        "site": null,
+        "fixed": false
+      },
+      {
+        "url": "https://arnazon.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "brand-variant",
+        "site": "Amazon",
+        "fixed": true
+      },
+      {
+        "url": "https://rnicrosoft.com/",
+        "old": "safe",
+        "now": "block",
+        "reason": "brand-variant",
+        "site": "Microsoft",
+        "fixed": true
+      },
+      {
+        "url": "https://office.attacker.com/",
+        "old": "safe",
+        "now": "safe",
+        "reason": null,
+        "site": null,
+        "fixed": false
+      }
+    ],
+    "old_false_positives_now": [
+      {
+        "url": "https://google.co.jp/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://microsoft.co.jp/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://ing.nl/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://coinbase.de/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://visa.fr/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://sparkasse.at/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://google.com.mx/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://google.com.ar/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://amazon.se/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://walmart.ca/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://walmart.com.mx/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://bestbuy.ca/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://vodafone.it/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://dhl.co.uk/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://chase.co.uk/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://github.blog/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://pinterest.co.uk/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://microsoft.de/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://wikipedia.de/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://hermes.com/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://elster.com/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://github.io/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://vercel.app/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://netlify.app/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": true,
+        "fixed": true
+      },
+      {
+        "url": "https://max.com@example.com/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": false,
+        "fixed": true
+      },
+      {
+        "url": "https://testing.developer@example.com/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": false,
+        "fixed": true
+      },
+      {
+        "url": "https://mixing.delivery@example.com/",
+        "old": "block",
+        "now": "safe",
+        "host_listed_now": false,
+        "fixed": true
+      }
+    ],
+    "old_fp_fixed_by_exact_domain_listing": 24,
+    "old_fp_total": 27,
+    "old_fn_fixed_by_rules": 28,
+    "old_fn_total": 33
+  },
+  "data_integrity": {
+    "brands": 169,
+    "domains": 339,
+    "unique_domains": 339,
+    "duplicate_domains": [],
+    "brands_without_domains": [],
+    "multi_tenant_roots_listed_as_official": [
+      "github.io",
+      "wordpress.com",
+      "vercel.app",
+      "netlify.app"
+    ],
+    "official_entries_under_multi_tenant_suffix": [
+      {
+        "brand": "Google",
+        "domain": "google.github.io"
+      },
+      {
+        "brand": "Facebook",
+        "domain": "facebook.github.io"
+      },
+      {
+        "brand": "Microsoft",
+        "domain": "microsoft.github.io"
+      }
+    ],
+    "alias_domains_whose_base_differs_from_brand": [
+      {
+        "brand": "Facebook",
+        "domain": "fb.com"
+      },
+      {
+        "brand": "X (Twitter)",
+        "domain": "x.com"
+      },
+      {
+        "brand": "Bluesky",
+        "domain": "bsky.app"
+      },
+      {
+        "brand": "Bluesky",
+        "domain": "bsky.social"
+      },
+      {
+        "brand": "Wikipedia",
+        "domain": "wikimedia.org"
+      },
+      {
+        "brand": "Apple",
+        "domain": "icloud.com"
+      },
+      {
+        "brand": "Microsoft",
+        "domain": "live.com"
+      },
+      {
+        "brand": "Epic Games",
+        "domain": "unrealengine.com"
+      },
+      {
+        "brand": "PlayStation",
+        "domain": "sonyentertainmentnetwork.com"
+      },
+      {
+        "brand": "AliExpress",
+        "domain": "alibaba.com"
+      },
+      {
+        "brand": "Claude",
+        "domain": "anthropic.com"
+      },
+      {
+        "brand": "Atlassian",
+        "domain": "jira.com"
+      },
+      {
+        "brand": "Atlassian",
+        "domain": "trello.com"
+      },
+      {
+        "brand": "Stack Overflow",
+        "domain": "stackexchange.com"
+      },
+      {
+        "brand": "Mercado Libre",
+        "domain": "mercadolivre.com.br"
+      },
+      {
+        "brand": "Deutsche Bank",
+        "domain": "deutsche-bank.de"
+      },
+      {
+        "brand": "Deutsche Bank",
+        "domain": "db.com"
+      },
+      {
+        "brand": "Volksbank Raiffeisenbank",
+        "domain": "vr.de"
+      },
+      {
+        "brand": "Volksbank Raiffeisenbank",
+        "domain": "vr-bank.de"
+      },
+      {
+        "brand": "Square (Block)",
+        "domain": "block.xyz"
+      },
+      {
+        "brand": "American Express",
+        "domain": "amex.com"
+      },
+      {
+        "brand": "Telekom",
+        "domain": "t-online.de"
+      },
+      {
+        "brand": "O2 Telefonica",
+        "domain": "telefonica.de"
+      },
+      {
+        "brand": "BundID",
+        "domain": "id.bund.de"
+      }
+    ],
+    "sample_audit": [
+      {
+        "domain": "hermes.com",
+        "brand_listed_as": "Hermes",
+        "assessment": "FALSCHE MARKE: hermes.com gehoert Hermes Paris (Luxusmode); der Paketdienst nutzt myhermes.de/hermesworld.com. Fachliche Bewertung, extern nicht abschliessend verifiziert.",
+        "risk": "data_error_low_user_risk",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "elster.com",
+        "brand_listed_as": "Elster",
+        "assessment": "FALSCHE MARKE: elster.com ist Elster Group (Messtechnik); das deutsche Steuerportal ist elster.de. Fachliche Bewertung, extern nicht abschliessend verifiziert.",
+        "risk": "data_error_low_user_risk",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "force.com",
+        "brand_listed_as": "Salesforce",
+        "assessment": "MULTI-TENANT: Salesforce Sites/Communities-Kundenhosting auf *.force.com -> Tenants kundenseitig befuellbar und werden per withinDomain als safe freigegeben",
+        "risk": "fail_open_user_controlled",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "salesforce.com",
+        "brand_listed_as": "Salesforce",
+        "assessment": "MULTI-TENANT: *.my.salesforce.com sind kundenkontrollierte Org-Tenants; Whitelist deckt alle Subdomains ab",
+        "risk": "fail_open_user_controlled",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "google.github.io",
+        "brand_listed_as": "Google",
+        "assessment": "DRITT-PLATTFORM: GitHub-Pages-Seite eines GitHub-Kontos; Content durch Konto/Repo kontrolliert, aber als offizielle Markendomain gelistet",
+        "risk": "third_party_content",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "microsoft.github.io",
+        "brand_listed_as": "Microsoft",
+        "assessment": "DRITT-PLATTFORM: GitHub Pages unter Microsoft-Konto; Content-/Konto-Kompromittierung wuerde gesamte Domain als Marke freigeben",
+        "risk": "third_party_content",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "facebook.github.io",
+        "brand_listed_as": "Facebook",
+        "assessment": "DRITT-PLATTFORM: GitHub Pages unter Facebook-Konto; gleiche Risikoklasse",
+        "risk": "third_party_content",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "github.io",
+        "brand_listed_as": "GitHub",
+        "assessment": "PLATTFORM-ROOT als offizielle Domain gelistet; Subdomains durch multiTenantSuffixes von withinDomain ausgenommen -> Risiko begrenzt",
+        "risk": "platform_root_low",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "vercel.app",
+        "brand_listed_as": "Vercel",
+        "assessment": "PLATTFORM-ROOT als offizielle Domain; Tenants nicht erfasst (multiTenantSuffixes schuetzt)",
+        "risk": "platform_root_low",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "netlify.app",
+        "brand_listed_as": "Netlify",
+        "assessment": "PLATTFORM-ROOT als offizielle Domain; Tenants nicht erfasst",
+        "risk": "platform_root_low",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "wordpress.com",
+        "brand_listed_as": "WordPress.com",
+        "assessment": "PLATTFORM-ROOT als offizielle Domain; Subdomains durch multiTenantSuffixes ausgenommen",
+        "risk": "platform_root_low",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "gls.de",
+        "brand_listed_as": "GLS",
+        "assessment": "KOLLISION: GLS Bank (gls.de) vs. GLS Paketdienst (gls-group.com/gls-pakete.de); Audit-Baseline hat den Konflikt bereits dokumentiert",
+        "risk": "ambiguous_owner",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "t-online.de",
+        "brand_listed_as": "Telekom",
+        "assessment": "Brand-Zuordnung veraltet (Portal heute Ströer/Telekom); Domain nicht user-kontrollierbar",
+        "risk": "stale_mapping_low",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "db.com",
+        "brand_listed_as": "Deutsche Bank",
+        "assessment": "Deutsche-Bank-Kurzdomain (plausibel); kein Multi-Tenant",
+        "risk": "ok",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "vr.de",
+        "brand_listed_as": "Volksbank Raiffeisenbank",
+        "assessment": "Dachdomain VR/Atruvia; Subdomains nicht frei registrierbar",
+        "risk": "ok",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "bund.de",
+        "brand_listed_as": "BundID",
+        "assessment": "Bundesverwaltungsroot; jede *.bund.de-Subdomain wird als safe behandelt (breit, aber staatlich kontrolliert)",
+        "risk": "broad_but_trusted",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "gov.uk",
+        "brand_listed_as": "Gov.uk",
+        "assessment": "UK-Regierungsroot; Registrierung beschraenkt",
+        "risk": "broad_but_trusted",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "live.com",
+        "brand_listed_as": "Microsoft",
+        "assessment": "Microsoft-Verbraucherdomain (plausibel)",
+        "risk": "ok",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "googleapis.com",
+        "brand_listed_as": "Google",
+        "assessment": "Google-API-Infrastruktur (plausibel)",
+        "risk": "ok",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "myhermes.de",
+        "brand_listed_as": "Hermes",
+        "assessment": "offizielle Hermes-Paketdomain (plausibel)",
+        "risk": "ok",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "icloud.com",
+        "brand_listed_as": "Apple",
+        "assessment": "Apple-Dienstdomain (plausibel)",
+        "risk": "ok",
+        "confidence": "hoch"
+      },
+      {
+        "domain": "block.xyz",
+        "brand_listed_as": "Square (Block)",
+        "assessment": "Block Inc. Markendomain (plausibel)",
+        "risk": "ok",
+        "confidence": "mittel"
+      },
+      {
+        "domain": "ir.bund.de",
+        "brand_listed_as": "BundID",
+        "assessment": "nicht gelistet; *.bund.de ohnehin via bund.de abgedeckt",
+        "risk": "n/a"
+      }
+    ],
+    "wildcard_risk_count": 5,
+    "baseline_audit_counts": {
+      "brands": 165,
+      "domains": 257,
+      "sources": [
+        "audit/00_GESAMTAUDIT_ANTIPISHER_V2_FAHRPLAN.md:5 (\"165 Marken / 257 Domains\")",
+        "audit/00_GESAMTAUDIT_ANTIPISHER_V2_FAHRPLAN.md:212",
+        "audit/code/CODE_REVIEW.md:10"
+      ],
+      "current_brands": 169,
+      "current_domains": 339,
+      "delta_brands": 4,
+      "delta_domains": 82,
+      "brand_delta_note": "Audit-Baseline nennt als fehlend: Gmail, Azure, Disney+, Alipay (CODE_REVIEW:162,243,584; Plan:130,216). Genau diese 4 Marken sind neu (165 -> 169)."
+    },
+    "build_data_consistency": {
+      "sites_100_json_equals_runtime_sites": true,
+      "build_sites_docstring_still_140_plus": true,
+      "filename_sites_100_json_but_brands": {
+        "filename": "sites-100.json",
+        "brands": 169
+      },
+      "finding": "build_sites.py-Docstring (\"140+\") und Dateiname sites-100.json (169 Marken) sind weiterhin irrefuehrend (Audit-Befund nicht behoben); Inhalt ist konsistent."
+    },
+    "whitelist_fail_open_evidence": {
+      "live_holdout_cases": [
+        "https://evil.force.com/paypal/login",
+        "https://evil.my.salesforce.com/paypal/login",
+        "https://tenant.anything.force.com/login"
+      ],
+      "behaviour": "alle drei werden durch die offizielle Domain-Listung (force.com/salesforce.com) als safe freigegeben -> Holdout-FN"
+    }
+  },
+  "performance": {
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "cpus": 12,
+      "cpu_model": "AMD Ryzen 5 4600H with Radeon Graphics         ",
+      "measured_utc": "2026-10-18T16:34:37.762Z"
+    },
+    "methodology": "process.hrtime.bigint je Einzelaufruf; Warmup 500; je Wiederholung 10.000 classify-Aufrufe, Round-Robin ueber die URLs; keine Netz-/FS-Zugriffe im Messpfad. WICHTIG: Messung lief unter paralleler Last anderer Team-Agenten (12 logische Kerne geteilt) -> Streuung zwischen Wiederholungen; daher robuste Kennwerte als Median der Wiederholungslaeufe plus Min/Max-Range (kein Cherry-Picking, alle Rohwerte enthalten).",
+    "cold_start_ms": 0.5897,
+    "mixed_holdout_10k": {
+      "reps": 7,
+      "iterations_per_rep": 10000,
+      "total_samples": 70000,
+      "aggregate": {
+        "n": 70000,
+        "min_ms": 0.0007,
+        "median_ms": 0.7442,
+        "mean_ms": 0.9349,
+        "p95_ms": 2.6234,
+        "p99_ms": 4.0055,
+        "max_ms": 21.77
+      },
+      "per_run": [
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.5917,
+          "mean_ms": 0.5699,
+          "p95_ms": 1.0594,
+          "p99_ms": 1.2983,
+          "max_ms": 2.1056,
+          "total_ms": 5699.43
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0007,
+          "median_ms": 0.5965,
+          "mean_ms": 0.5751,
+          "p95_ms": 1.0811,
+          "p99_ms": 1.3024,
+          "max_ms": 2.3777,
+          "total_ms": 5751.01
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0007,
+          "median_ms": 0.6602,
+          "mean_ms": 0.7855,
+          "p95_ms": 2.009,
+          "p99_ms": 4.588,
+          "max_ms": 21.77,
+          "total_ms": 7855.18
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0007,
+          "median_ms": 1.2872,
+          "mean_ms": 1.4486,
+          "p95_ms": 3.5608,
+          "p99_ms": 5.4235,
+          "max_ms": 13.5445,
+          "total_ms": 14485.72
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0007,
+          "median_ms": 1.2378,
+          "mean_ms": 1.3231,
+          "p95_ms": 3.0478,
+          "p99_ms": 4.1645,
+          "max_ms": 10.0894,
+          "total_ms": 13230.76
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 1.1737,
+          "mean_ms": 1.2874,
+          "p95_ms": 2.9785,
+          "p99_ms": 4.0742,
+          "max_ms": 14.6109,
+          "total_ms": 12873.59
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0007,
+          "median_ms": 0.5758,
+          "mean_ms": 0.5546,
+          "p95_ms": 1.0237,
+          "p99_ms": 1.2455,
+          "max_ms": 2.3364,
+          "total_ms": 5545.7
+        }
+      ],
+      "per_run_median_min_max": [
+        0.5758,
+        1.2872
+      ],
+      "per_run_p95_min_max": [
+        1.0237,
+        3.5608
+      ],
+      "robust": {
+        "median_of_run_medians_ms": 0.6602,
+        "median_of_run_p95_ms": 2.009,
+        "min_run_median_ms": 0.5758,
+        "max_run_median_ms": 1.2872,
+        "min_run_p95_ms": 1.0237,
+        "max_run_p95_ms": 3.5608
+      },
+      "comparison": {
+        "median_vs_baseline": 0.1542,
+        "p95_vs_baseline": -0.571,
+        "median_under_baseline": false,
+        "p95_under_baseline": true
+      }
+    },
+    "published_corpus_mix_10k": {
+      "reps": 7,
+      "iterations_per_rep": 10000,
+      "total_samples": 70000,
+      "aggregate": {
+        "n": 70000,
+        "min_ms": 0.0008,
+        "median_ms": 0.087,
+        "mean_ms": 0.2269,
+        "p95_ms": 0.8866,
+        "p99_ms": 1.2273,
+        "max_ms": 11.3491
+      },
+      "per_run": [
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.0851,
+          "mean_ms": 0.2151,
+          "p95_ms": 0.8483,
+          "p99_ms": 1.0803,
+          "max_ms": 2.4798,
+          "total_ms": 2150.56
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.0883,
+          "mean_ms": 0.2297,
+          "p95_ms": 0.9082,
+          "p99_ms": 1.2188,
+          "max_ms": 5.4577,
+          "total_ms": 2296.8
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.091,
+          "mean_ms": 0.2529,
+          "p95_ms": 1.0004,
+          "p99_ms": 1.5253,
+          "max_ms": 4.164,
+          "total_ms": 2528.91
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.0859,
+          "mean_ms": 0.2155,
+          "p95_ms": 0.8514,
+          "p99_ms": 1.06,
+          "max_ms": 2.7436,
+          "total_ms": 2154.54
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.0866,
+          "mean_ms": 0.2232,
+          "p95_ms": 0.8703,
+          "p99_ms": 1.1399,
+          "max_ms": 11.3491,
+          "total_ms": 2232.48
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.0892,
+          "mean_ms": 0.2347,
+          "p95_ms": 0.9212,
+          "p99_ms": 1.285,
+          "max_ms": 4.3998,
+          "total_ms": 2347.16
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0008,
+          "median_ms": 0.0859,
+          "mean_ms": 0.2175,
+          "p95_ms": 0.8623,
+          "p99_ms": 1.1096,
+          "max_ms": 2.2737,
+          "total_ms": 2175.4
+        }
+      ],
+      "per_run_median_min_max": [
+        0.0851,
+        0.091
+      ],
+      "per_run_p95_min_max": [
+        0.8483,
+        1.0004
+      ],
+      "robust": {
+        "median_of_run_medians_ms": 0.0866,
+        "median_of_run_p95_ms": 0.8703,
+        "min_run_median_ms": 0.0851,
+        "max_run_median_ms": 0.091,
+        "min_run_p95_ms": 0.8483,
+        "max_run_p95_ms": 1.0004
+      },
+      "comparison": {
+        "median_vs_baseline": -0.4194,
+        "p95_vs_baseline": -1.7097,
+        "median_under_baseline": true,
+        "p95_under_baseline": true
+      }
+    },
+    "safe_only_10k": {
+      "reps": 3,
+      "iterations_per_rep": 10000,
+      "total_samples": 30000,
+      "aggregate": {
+        "n": 30000,
+        "min_ms": 0.0015,
+        "median_ms": 0.5784,
+        "mean_ms": 0.5258,
+        "p95_ms": 1.0694,
+        "p99_ms": 1.3244,
+        "max_ms": 3.9883
+      },
+      "per_run": [
+        {
+          "n": 10000,
+          "min_ms": 0.0015,
+          "median_ms": 0.5753,
+          "mean_ms": 0.5231,
+          "p95_ms": 1.0628,
+          "p99_ms": 1.3263,
+          "max_ms": 2.3793,
+          "total_ms": 5230.57
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0015,
+          "median_ms": 0.5844,
+          "mean_ms": 0.5346,
+          "p95_ms": 1.0959,
+          "p99_ms": 1.3834,
+          "max_ms": 3.9883,
+          "total_ms": 5345.95
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0015,
+          "median_ms": 0.5756,
+          "mean_ms": 0.5197,
+          "p95_ms": 1.0511,
+          "p99_ms": 1.2769,
+          "max_ms": 2.9168,
+          "total_ms": 5197.14
+        }
+      ],
+      "per_run_median_min_max": [
+        0.5753,
+        0.5844
+      ],
+      "per_run_p95_min_max": [
+        1.0511,
+        1.0959
+      ],
+      "robust": {
+        "median_of_run_medians_ms": 0.5756,
+        "median_of_run_p95_ms": 1.0628,
+        "min_run_median_ms": 0.5753,
+        "max_run_median_ms": 0.5844,
+        "min_run_p95_ms": 1.0511,
+        "max_run_p95_ms": 1.0959
+      },
+      "comparison": {
+        "median_vs_baseline": 0.0696,
+        "p95_vs_baseline": -1.5172,
+        "median_under_baseline": false,
+        "p95_under_baseline": true
+      }
+    },
+    "blocked_only_10k": {
+      "reps": 3,
+      "iterations_per_rep": 10000,
+      "total_samples": 30000,
+      "aggregate": {
+        "n": 30000,
+        "min_ms": 0.0186,
+        "median_ms": 0.6135,
+        "mean_ms": 0.62,
+        "p95_ms": 1.0446,
+        "p99_ms": 1.3305,
+        "max_ms": 6.0939
+      },
+      "per_run": [
+        {
+          "n": 10000,
+          "min_ms": 0.0188,
+          "median_ms": 0.6021,
+          "mean_ms": 0.6079,
+          "p95_ms": 1.0187,
+          "p99_ms": 1.2532,
+          "max_ms": 2.0594,
+          "total_ms": 6079.44
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0186,
+          "median_ms": 0.6227,
+          "mean_ms": 0.634,
+          "p95_ms": 1.0844,
+          "p99_ms": 1.4534,
+          "max_ms": 6.0939,
+          "total_ms": 6339.76
+        },
+        {
+          "n": 10000,
+          "min_ms": 0.0191,
+          "median_ms": 0.6117,
+          "mean_ms": 0.6182,
+          "p95_ms": 1.0401,
+          "p99_ms": 1.3251,
+          "max_ms": 3.6257,
+          "total_ms": 6181.78
+        }
+      ],
+      "per_run_median_min_max": [
+        0.6021,
+        0.6227
+      ],
+      "per_run_p95_min_max": [
+        1.0187,
+        1.0844
+      ],
+      "robust": {
+        "median_of_run_medians_ms": 0.6117,
+        "median_of_run_p95_ms": 1.0401,
+        "min_run_median_ms": 0.6021,
+        "max_run_median_ms": 0.6227,
+        "min_run_p95_ms": 1.0187,
+        "max_run_p95_ms": 1.0844
+      },
+      "comparison": {
+        "median_vs_baseline": 0.1057,
+        "p95_vs_baseline": -1.5399,
+        "median_under_baseline": false,
+        "p95_under_baseline": true
+      }
+    },
+    "audit_baseline": {
+      "median_ms": 0.506,
+      "p95_ms": 2.58,
+      "source": "audit/00_GESAMTAUDIT_ANTIPISHER_V2_FAHRPLAN.md:344 (Audit-Baseline)"
+    },
+    "verdict": "AUF DEM VEROEFFENTLICHTEN 184-URL-KORPUS BESTAETIGT (robuster Median + p95 unter Baseline); auf dem unabhaengigen Holdout-Mix Median 0.1542 ms UEBER / p95 -0.571 ms gegen Baseline -> \"<1 ms\" nur als Median, nicht als p95, und nicht auf adversarialem Mix bestaetigt"
+  }
+}

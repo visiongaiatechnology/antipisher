@@ -1,0 +1,1478 @@
+/* Curated high-usage and high-risk phishing-targeted services. */
+globalThis.VGT_SITES = [
+  {
+    "name": "Google",
+    "brand": "google",
+    "domains": [
+      "google.com",
+      "google.de",
+      "google.co.uk",
+      "google.fr",
+      "google.es",
+      "google.it",
+      "google.ca",
+      "google.com.br",
+      "google.co.in",
+      "google.com.au",
+      "google.ch",
+      "google.at",
+      "googleapis.com",
+      "google.github.io",
+      "google.co.jp",
+      "google.co.kr",
+      "google.com.mx",
+      "google.com.ar",
+      "google.co.za",
+      "google.com.sg",
+      "google.co.id",
+      "google.se",
+      "google.nl",
+      "google.pl",
+      "google.be",
+      "google.com.tr"
+    ]
+  },
+  {
+    "name": "YouTube",
+    "brand": "youtube",
+    "domains": [
+      "youtube.com",
+      "youtu.be"
+    ]
+  },
+  {
+    "name": "Facebook",
+    "brand": "facebook",
+    "domains": [
+      "facebook.com",
+      "fb.com",
+      "facebook.github.io"
+    ]
+  },
+  {
+    "name": "Instagram",
+    "brand": "instagram",
+    "domains": [
+      "instagram.com"
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "brand": "whatsapp",
+    "domains": [
+      "whatsapp.com",
+      "whatsapp.net"
+    ]
+  },
+  {
+    "name": "TikTok",
+    "brand": "tiktok",
+    "domains": [
+      "tiktok.com"
+    ]
+  },
+  {
+    "name": "X (Twitter)",
+    "brand": "twitter",
+    "domains": [
+      "twitter.com",
+      "x.com"
+    ]
+  },
+  {
+    "name": "Threads",
+    "brand": "threads",
+    "domains": [
+      "threads.net"
+    ]
+  },
+  {
+    "name": "Bluesky",
+    "brand": "bluesky",
+    "domains": [
+      "bsky.app",
+      "bsky.social"
+    ]
+  },
+  {
+    "name": "Reddit",
+    "brand": "reddit",
+    "domains": [
+      "reddit.com",
+      "redd.it"
+    ]
+  },
+  {
+    "name": "Wikipedia",
+    "brand": "wikipedia",
+    "domains": [
+      "wikipedia.org",
+      "wikimedia.org",
+      "wikipedia.de"
+    ]
+  },
+  {
+    "name": "Amazon",
+    "brand": "amazon",
+    "domains": [
+      "amazon.com",
+      "amazon.de",
+      "amazon.co.uk",
+      "amazon.fr",
+      "amazon.es",
+      "amazon.it",
+      "amazon.ca",
+      "amazon.in",
+      "amazon.co.jp",
+      "amazon.com.au",
+      "amazon.com.br",
+      "aws.amazon.com",
+      "amazon.se",
+      "amazon.nl",
+      "amazon.pl",
+      "amazon.sg",
+      "amazon.ae",
+      "amazon.com.mx",
+      "amazon.com.tr"
+    ]
+  },
+  {
+    "name": "Apple",
+    "brand": "apple",
+    "domains": [
+      "apple.com",
+      "apple.de",
+      "apple.news",
+      "icloud.com",
+      "apple.com.cn",
+      "apple.co.uk",
+      "apple.fr",
+      "apple.it",
+      "apple.es",
+      "apple.ca",
+      "apple.com.au"
+    ]
+  },
+  {
+    "name": "Microsoft",
+    "brand": "microsoft",
+    "domains": [
+      "microsoft.com",
+      "microsoftonline.com",
+      "live.com",
+      "microsoft.github.io",
+      "microsoft.co.jp",
+      "microsoft.de",
+      "microsoft.co.uk",
+      "microsoft.fr",
+      "microsoft.es",
+      "microsoft.it",
+      "microsoft.ca",
+      "microsoft.com.au"
+    ]
+  },
+  {
+    "name": "Bing",
+    "brand": "bing",
+    "domains": [
+      "bing.com"
+    ]
+  },
+  {
+    "name": "Outlook",
+    "brand": "outlook",
+    "domains": [
+      "outlook.com",
+      "outlook.live.com"
+    ]
+  },
+  {
+    "name": "Microsoft 365",
+    "brand": "office",
+    "domains": [
+      "office.com",
+      "office365.com"
+    ]
+  },
+  {
+    "name": "GitHub",
+    "brand": "github",
+    "domains": [
+      "github.com",
+      "github.blog"
+    ]
+  },
+  {
+    "name": "GitLab",
+    "brand": "gitlab",
+    "domains": [
+      "gitlab.com"
+    ]
+  },
+  {
+    "name": "Bitbucket",
+    "brand": "bitbucket",
+    "domains": [
+      "bitbucket.org"
+    ]
+  },
+  {
+    "name": "LinkedIn",
+    "brand": "linkedin",
+    "domains": [
+      "linkedin.com"
+    ]
+  },
+  {
+    "name": "Netflix",
+    "brand": "netflix",
+    "domains": [
+      "netflix.com"
+    ]
+  },
+  {
+    "name": "Twitch",
+    "brand": "twitch",
+    "domains": [
+      "twitch.tv"
+    ]
+  },
+  {
+    "name": "Discord",
+    "brand": "discord",
+    "domains": [
+      "discord.com",
+      "discord.gg"
+    ]
+  },
+  {
+    "name": "Telegram",
+    "brand": "telegram",
+    "domains": [
+      "telegram.org",
+      "t.me"
+    ]
+  },
+  {
+    "name": "Signal",
+    "brand": "signal",
+    "domains": [
+      "signal.org"
+    ]
+  },
+  {
+    "name": "Pinterest",
+    "brand": "pinterest",
+    "domains": [
+      "pinterest.com",
+      "pinterest.co.uk",
+      "pinterest.de",
+      "pinterest.fr"
+    ]
+  },
+  {
+    "name": "Snapchat",
+    "brand": "snapchat",
+    "domains": [
+      "snapchat.com"
+    ]
+  },
+  {
+    "name": "Spotify",
+    "brand": "spotify",
+    "domains": [
+      "spotify.com"
+    ]
+  },
+  {
+    "name": "Steam",
+    "brand": "steam",
+    "domains": [
+      "steampowered.com",
+      "steamcommunity.com"
+    ]
+  },
+  {
+    "name": "Epic Games",
+    "brand": "epicgames",
+    "domains": [
+      "epicgames.com",
+      "unrealengine.com"
+    ]
+  },
+  {
+    "name": "Roblox",
+    "brand": "roblox",
+    "domains": [
+      "roblox.com"
+    ]
+  },
+  {
+    "name": "PlayStation",
+    "brand": "playstation",
+    "domains": [
+      "playstation.com",
+      "sonyentertainmentnetwork.com"
+    ]
+  },
+  {
+    "name": "Xbox",
+    "brand": "xbox",
+    "domains": [
+      "xbox.com"
+    ]
+  },
+  {
+    "name": "Nintendo",
+    "brand": "nintendo",
+    "domains": [
+      "nintendo.com",
+      "nintendo.de",
+      "nintendo.co.jp"
+    ]
+  },
+  {
+    "name": "eBay",
+    "brand": "ebay",
+    "domains": [
+      "ebay.com",
+      "ebay.de",
+      "ebay.co.uk"
+    ]
+  },
+  {
+    "name": "PayPal",
+    "brand": "paypal",
+    "domains": [
+      "paypal.com",
+      "paypal.me"
+    ]
+  },
+  {
+    "name": "AliExpress",
+    "brand": "aliexpress",
+    "domains": [
+      "aliexpress.com",
+      "alibaba.com"
+    ]
+  },
+  {
+    "name": "Temu",
+    "brand": "temu",
+    "domains": [
+      "temu.com"
+    ]
+  },
+  {
+    "name": "SHEIN",
+    "brand": "shein",
+    "domains": [
+      "shein.com"
+    ]
+  },
+  {
+    "name": "Booking.com",
+    "brand": "booking",
+    "domains": [
+      "booking.com"
+    ]
+  },
+  {
+    "name": "Airbnb",
+    "brand": "airbnb",
+    "domains": [
+      "airbnb.com",
+      "airbnb.de"
+    ]
+  },
+  {
+    "name": "Uber",
+    "brand": "uber",
+    "domains": [
+      "uber.com"
+    ]
+  },
+  {
+    "name": "Lyft",
+    "brand": "lyft",
+    "domains": [
+      "lyft.com"
+    ]
+  },
+  {
+    "name": "Target",
+    "brand": "target",
+    "domains": [
+      "target.com"
+    ]
+  },
+  {
+    "name": "Walmart",
+    "brand": "walmart",
+    "domains": [
+      "walmart.com",
+      "walmart.ca",
+      "walmart.com.mx"
+    ]
+  },
+  {
+    "name": "Best Buy",
+    "brand": "bestbuy",
+    "domains": [
+      "bestbuy.com",
+      "bestbuy.ca"
+    ]
+  },
+  {
+    "name": "Etsy",
+    "brand": "etsy",
+    "domains": [
+      "etsy.com"
+    ]
+  },
+  {
+    "name": "Shopify",
+    "brand": "shopify",
+    "domains": [
+      "shopify.com"
+    ]
+  },
+  {
+    "name": "Cloudflare",
+    "brand": "cloudflare",
+    "domains": [
+      "cloudflare.com"
+    ]
+  },
+  {
+    "name": "Fastly",
+    "brand": "fastly",
+    "domains": [
+      "fastly.com"
+    ]
+  },
+  {
+    "name": "Dropbox",
+    "brand": "dropbox",
+    "domains": [
+      "dropbox.com"
+    ]
+  },
+  {
+    "name": "Box",
+    "brand": "box",
+    "domains": [
+      "box.com"
+    ]
+  },
+  {
+    "name": "Zoom",
+    "brand": "zoom",
+    "domains": [
+      "zoom.us",
+      "zoom.com"
+    ]
+  },
+  {
+    "name": "Notion",
+    "brand": "notion",
+    "domains": [
+      "notion.so",
+      "notion.com"
+    ]
+  },
+  {
+    "name": "Slack",
+    "brand": "slack",
+    "domains": [
+      "slack.com"
+    ]
+  },
+  {
+    "name": "Canva",
+    "brand": "canva",
+    "domains": [
+      "canva.com"
+    ]
+  },
+  {
+    "name": "Adobe",
+    "brand": "adobe",
+    "domains": [
+      "adobe.com"
+    ]
+  },
+  {
+    "name": "Figma",
+    "brand": "figma",
+    "domains": [
+      "figma.com"
+    ]
+  },
+  {
+    "name": "OpenAI",
+    "brand": "openai",
+    "domains": [
+      "openai.com"
+    ]
+  },
+  {
+    "name": "ChatGPT",
+    "brand": "chatgpt",
+    "domains": [
+      "chatgpt.com"
+    ]
+  },
+  {
+    "name": "Claude",
+    "brand": "claude",
+    "domains": [
+      "claude.ai",
+      "anthropic.com"
+    ]
+  },
+  {
+    "name": "Gemini",
+    "brand": "gemini",
+    "domains": [
+      "gemini.google.com"
+    ]
+  },
+  {
+    "name": "Perplexity",
+    "brand": "perplexity",
+    "domains": [
+      "perplexity.ai"
+    ]
+  },
+  {
+    "name": "DeepSeek",
+    "brand": "deepseek",
+    "domains": [
+      "deepseek.com"
+    ]
+  },
+  {
+    "name": "Hugging Face",
+    "brand": "huggingface",
+    "domains": [
+      "huggingface.co"
+    ]
+  },
+  {
+    "name": "Midjourney",
+    "brand": "midjourney",
+    "domains": [
+      "midjourney.com"
+    ]
+  },
+  {
+    "name": "Cursor",
+    "brand": "cursor",
+    "domains": [
+      "cursor.com",
+      "cursor.sh"
+    ]
+  },
+  {
+    "name": "Atlassian",
+    "brand": "atlassian",
+    "domains": [
+      "atlassian.com",
+      "jira.com",
+      "trello.com"
+    ]
+  },
+  {
+    "name": "Asana",
+    "brand": "asana",
+    "domains": [
+      "asana.com"
+    ]
+  },
+  {
+    "name": "Monday.com",
+    "brand": "monday",
+    "domains": [
+      "monday.com"
+    ]
+  },
+  {
+    "name": "Stack Overflow",
+    "brand": "stackoverflow",
+    "domains": [
+      "stackoverflow.com",
+      "stackexchange.com"
+    ]
+  },
+  {
+    "name": "npm",
+    "brand": "npm",
+    "domains": [
+      "npmjs.com"
+    ]
+  },
+  {
+    "name": "PyPI",
+    "brand": "pypi",
+    "domains": [
+      "pypi.org"
+    ]
+  },
+  {
+    "name": "Docker",
+    "brand": "docker",
+    "domains": [
+      "docker.com",
+      "docker.io"
+    ]
+  },
+  {
+    "name": "WordPress.com",
+    "brand": "wordpress",
+    "domains": [
+      "wordpress.org"
+    ]
+  },
+  {
+    "name": "Medium",
+    "brand": "medium",
+    "domains": [
+      "medium.com"
+    ]
+  },
+  {
+    "name": "Substack",
+    "brand": "substack",
+    "domains": [
+      "substack.com"
+    ]
+  },
+  {
+    "name": "Quora",
+    "brand": "quora",
+    "domains": [
+      "quora.com"
+    ]
+  },
+  {
+    "name": "Yahoo",
+    "brand": "yahoo",
+    "domains": [
+      "yahoo.com",
+      "yahoo.de",
+      "yahoo.co.jp"
+    ]
+  },
+  {
+    "name": "Yandex",
+    "brand": "yandex",
+    "domains": [
+      "yandex.ru",
+      "yandex.com"
+    ]
+  },
+  {
+    "name": "Baidu",
+    "brand": "baidu",
+    "domains": [
+      "baidu.com"
+    ]
+  },
+  {
+    "name": "Weibo",
+    "brand": "weibo",
+    "domains": [
+      "weibo.com"
+    ]
+  },
+  {
+    "name": "VK",
+    "brand": "vk",
+    "domains": [
+      "vk.com"
+    ]
+  },
+  {
+    "name": "Mail.ru",
+    "brand": "mailru",
+    "domains": [
+      "mail.ru"
+    ]
+  },
+  {
+    "name": "Naver",
+    "brand": "naver",
+    "domains": [
+      "naver.com"
+    ]
+  },
+  {
+    "name": "LINE",
+    "brand": "line",
+    "domains": [
+      "line.me"
+    ]
+  },
+  {
+    "name": "Rakuten",
+    "brand": "rakuten",
+    "domains": [
+      "rakuten.co.jp"
+    ]
+  },
+  {
+    "name": "Mercado Libre",
+    "brand": "mercadolibre",
+    "domains": [
+      "mercadolibre.com",
+      "mercadolibre.com.mx",
+      "mercadolivre.com.br"
+    ]
+  },
+  {
+    "name": "Zalando",
+    "brand": "zalando",
+    "domains": [
+      "zalando.de",
+      "zalando.com"
+    ]
+  },
+  {
+    "name": "Otto",
+    "brand": "otto",
+    "domains": [
+      "otto.de"
+    ]
+  },
+  {
+    "name": "Samsung",
+    "brand": "samsung",
+    "domains": [
+      "samsung.com"
+    ]
+  },
+  {
+    "name": "Huawei",
+    "brand": "huawei",
+    "domains": [
+      "huawei.com"
+    ]
+  },
+  {
+    "name": "Xiaomi",
+    "brand": "xiaomi",
+    "domains": [
+      "xiaomi.com"
+    ]
+  },
+  {
+    "name": "NVIDIA",
+    "brand": "nvidia",
+    "domains": [
+      "nvidia.com"
+    ]
+  },
+  {
+    "name": "Intel",
+    "brand": "intel",
+    "domains": [
+      "intel.com"
+    ]
+  },
+  {
+    "name": "AMD",
+    "brand": "amd",
+    "domains": [
+      "amd.com"
+    ]
+  },
+  {
+    "name": "Sony",
+    "brand": "sony",
+    "domains": [
+      "sony.com",
+      "sony.de"
+    ]
+  },
+  {
+    "name": "Dell",
+    "brand": "dell",
+    "domains": [
+      "dell.com"
+    ]
+  },
+  {
+    "name": "Lenovo",
+    "brand": "lenovo",
+    "domains": [
+      "lenovo.com"
+    ]
+  },
+  {
+    "name": "HP",
+    "brand": "hp",
+    "domains": [
+      "hp.com"
+    ]
+  },
+  {
+    "name": "Asus",
+    "brand": "asus",
+    "domains": [
+      "asus.com"
+    ]
+  },
+  {
+    "name": "Salesforce",
+    "brand": "salesforce",
+    "domains": [
+      "salesforce.com"
+    ]
+  },
+  {
+    "name": "Oracle",
+    "brand": "oracle",
+    "domains": [
+      "oracle.com"
+    ]
+  },
+  {
+    "name": "SAP",
+    "brand": "sap",
+    "domains": [
+      "sap.com"
+    ]
+  },
+  {
+    "name": "IBM",
+    "brand": "ibm",
+    "domains": [
+      "ibm.com"
+    ]
+  },
+  {
+    "name": "Cisco",
+    "brand": "cisco",
+    "domains": [
+      "cisco.com"
+    ]
+  },
+  {
+    "name": "DigitalOcean",
+    "brand": "digitalocean",
+    "domains": [
+      "digitalocean.com"
+    ]
+  },
+  {
+    "name": "Hetzner",
+    "brand": "hetzner",
+    "domains": [
+      "hetzner.com",
+      "hetzner.de"
+    ]
+  },
+  {
+    "name": "Vercel",
+    "brand": "vercel",
+    "domains": [
+      "vercel.com"
+    ]
+  },
+  {
+    "name": "Netlify",
+    "brand": "netlify",
+    "domains": [
+      "netlify.com"
+    ]
+  },
+  {
+    "name": "DHL",
+    "brand": "dhl",
+    "domains": [
+      "dhl.com",
+      "dhl.de",
+      "dhl.co.uk",
+      "dhl.fr",
+      "dhl.es",
+      "dhl.it"
+    ]
+  },
+  {
+    "name": "FedEx",
+    "brand": "fedex",
+    "domains": [
+      "fedex.com"
+    ]
+  },
+  {
+    "name": "UPS",
+    "brand": "ups",
+    "domains": [
+      "ups.com"
+    ]
+  },
+  {
+    "name": "USPS",
+    "brand": "usps",
+    "domains": [
+      "usps.com"
+    ]
+  },
+  {
+    "name": "Deutsche Post",
+    "brand": "deutschepost",
+    "domains": [
+      "deutschepost.de"
+    ]
+  },
+  {
+    "name": "Hermes",
+    "brand": "hermes",
+    "domains": [
+      "myhermes.de",
+      "hermesworld.com",
+      "hermes.com"
+    ]
+  },
+  {
+    "name": "DPD",
+    "brand": "dpd",
+    "domains": [
+      "dpd.com",
+      "dpd.de"
+    ]
+  },
+  {
+    "name": "GLS",
+    "brand": "gls",
+    "domains": [
+      "gls-group.com",
+      "gls-pakete.de",
+      "gls.de"
+    ]
+  },
+  {
+    "name": "Deutsche Bank",
+    "brand": "deutschebank",
+    "domains": [
+      "deutsche-bank.de",
+      "db.com"
+    ]
+  },
+  {
+    "name": "Sparkasse",
+    "brand": "sparkasse",
+    "domains": [
+      "sparkasse.de",
+      "sparkasse.at"
+    ]
+  },
+  {
+    "name": "Postbank",
+    "brand": "postbank",
+    "domains": [
+      "postbank.de"
+    ]
+  },
+  {
+    "name": "Comdirect",
+    "brand": "comdirect",
+    "domains": [
+      "comdirect.de"
+    ]
+  },
+  {
+    "name": "ING",
+    "brand": "ing",
+    "domains": [
+      "ing.de",
+      "ing.com",
+      "ing.nl",
+      "ing.be",
+      "ing.lu"
+    ]
+  },
+  {
+    "name": "Commerzbank",
+    "brand": "commerzbank",
+    "domains": [
+      "commerzbank.de"
+    ]
+  },
+  {
+    "name": "DKB",
+    "brand": "dkb",
+    "domains": [
+      "dkb.de"
+    ]
+  },
+  {
+    "name": "N26",
+    "brand": "n26",
+    "domains": [
+      "n26.com"
+    ]
+  },
+  {
+    "name": "Targobank",
+    "brand": "targobank",
+    "domains": [
+      "targobank.de"
+    ]
+  },
+  {
+    "name": "Sparda-Bank",
+    "brand": "sparda",
+    "domains": [
+      "sparda.de"
+    ]
+  },
+  {
+    "name": "Hanseatic Bank",
+    "brand": "hanseatic",
+    "domains": [
+      "hanseaticbank.de"
+    ]
+  },
+  {
+    "name": "PSD Bank",
+    "brand": "psd",
+    "domains": [
+      "psd-bank.de"
+    ]
+  },
+  {
+    "name": "AOK",
+    "brand": "aok",
+    "domains": [
+      "aok.de"
+    ]
+  },
+  {
+    "name": "Techniker Krankenkasse",
+    "brand": "tk",
+    "domains": [
+      "tk.de"
+    ]
+  },
+  {
+    "name": "Deutsche Rentenversicherung",
+    "brand": "rentenversicherung",
+    "domains": [
+      "deutsche-rentenversicherung.de"
+    ]
+  },
+  {
+    "name": "Check24",
+    "brand": "check24",
+    "domains": [
+      "check24.de"
+    ]
+  },
+  {
+    "name": "ImmobilienScout24",
+    "brand": "immobilienscout24",
+    "domains": [
+      "immobilienscout24.de"
+    ]
+  },
+  {
+    "name": "Immoscout24",
+    "brand": "immoscout24",
+    "domains": [
+      "immoscout24.de"
+    ]
+  },
+  {
+    "name": "Kleinanzeigen",
+    "brand": "kleinanzeigen",
+    "domains": [
+      "kleinanzeigen.de"
+    ]
+  },
+  {
+    "name": "Arbeitsagentur",
+    "brand": "arbeitsagentur",
+    "domains": [
+      "arbeitsagentur.de"
+    ]
+  },
+  {
+    "name": "Bawag",
+    "brand": "bawag",
+    "domains": [
+      "bawag.at",
+      "bawaggroup.com"
+    ]
+  },
+  {
+    "name": "Raiffeisen",
+    "brand": "raiffeisen",
+    "domains": [
+      "raiffeisen.at"
+    ]
+  },
+  {
+    "name": "SBB",
+    "brand": "sbb",
+    "domains": [
+      "sbb.ch"
+    ]
+  },
+  {
+    "name": "Swisscom",
+    "brand": "swisscom",
+    "domains": [
+      "swisscom.ch"
+    ]
+  },
+  {
+    "name": "Finanzamt",
+    "brand": "finanzamt",
+    "domains": [
+      "finanzamt.de"
+    ]
+  },
+  {
+    "name": "Volksbank Raiffeisenbank",
+    "brand": "volksbank",
+    "domains": [
+      "vr.de",
+      "volksbank.de",
+      "vr-bank.de"
+    ]
+  },
+  {
+    "name": "Consorsbank",
+    "brand": "consorsbank",
+    "domains": [
+      "consorsbank.de"
+    ]
+  },
+  {
+    "name": "Trade Republic",
+    "brand": "traderepublic",
+    "domains": [
+      "traderepublic.com"
+    ]
+  },
+  {
+    "name": "Scalable Capital",
+    "brand": "scalable",
+    "domains": [
+      "scalable.capital"
+    ]
+  },
+  {
+    "name": "Klarna",
+    "brand": "klarna",
+    "domains": [
+      "klarna.com",
+      "klarna.de"
+    ]
+  },
+  {
+    "name": "Revolut",
+    "brand": "revolut",
+    "domains": [
+      "revolut.com"
+    ]
+  },
+  {
+    "name": "Wise",
+    "brand": "wise",
+    "domains": [
+      "wise.com"
+    ]
+  },
+  {
+    "name": "Stripe",
+    "brand": "stripe",
+    "domains": [
+      "stripe.com"
+    ]
+  },
+  {
+    "name": "Adyen",
+    "brand": "adyen",
+    "domains": [
+      "adyen.com"
+    ]
+  },
+  {
+    "name": "Square (Block)",
+    "brand": "squareup",
+    "domains": [
+      "squareup.com",
+      "block.xyz"
+    ]
+  },
+  {
+    "name": "Coinbase",
+    "brand": "coinbase",
+    "domains": [
+      "coinbase.com",
+      "coinbase.de"
+    ]
+  },
+  {
+    "name": "Binance",
+    "brand": "binance",
+    "domains": [
+      "binance.com"
+    ]
+  },
+  {
+    "name": "Kraken",
+    "brand": "kraken",
+    "domains": [
+      "kraken.com"
+    ]
+  },
+  {
+    "name": "OKX",
+    "brand": "okx",
+    "domains": [
+      "okx.com"
+    ]
+  },
+  {
+    "name": "Bybit",
+    "brand": "bybit",
+    "domains": [
+      "bybit.com"
+    ]
+  },
+  {
+    "name": "KuCoin",
+    "brand": "kucoin",
+    "domains": [
+      "kucoin.com"
+    ]
+  },
+  {
+    "name": "Crypto.com",
+    "brand": "cryptocom",
+    "domains": [
+      "crypto.com"
+    ]
+  },
+  {
+    "name": "MetaMask",
+    "brand": "metamask",
+    "domains": [
+      "metamask.io"
+    ]
+  },
+  {
+    "name": "Ledger",
+    "brand": "ledger",
+    "domains": [
+      "ledger.com"
+    ]
+  },
+  {
+    "name": "Trezor",
+    "brand": "trezor",
+    "domains": [
+      "trezor.io"
+    ]
+  },
+  {
+    "name": "Bitpanda",
+    "brand": "bitpanda",
+    "domains": [
+      "bitpanda.com"
+    ]
+  },
+  {
+    "name": "Uniswap",
+    "brand": "uniswap",
+    "domains": [
+      "uniswap.org"
+    ]
+  },
+  {
+    "name": "OpenSea",
+    "brand": "opensea",
+    "domains": [
+      "opensea.io"
+    ]
+  },
+  {
+    "name": "Chase",
+    "brand": "chase",
+    "domains": [
+      "chase.com",
+      "chase.co.uk"
+    ]
+  },
+  {
+    "name": "Bank of America",
+    "brand": "bankofamerica",
+    "domains": [
+      "bankofamerica.com"
+    ]
+  },
+  {
+    "name": "Wells Fargo",
+    "brand": "wellsfargo",
+    "domains": [
+      "wellsfargo.com"
+    ]
+  },
+  {
+    "name": "Citi",
+    "brand": "citi",
+    "domains": [
+      "citi.com",
+      "citibank.com"
+    ]
+  },
+  {
+    "name": "HSBC",
+    "brand": "hsbc",
+    "domains": [
+      "hsbc.com",
+      "hsbc.co.uk",
+      "hsbc.co.jp",
+      "hsbc.com.hk"
+    ]
+  },
+  {
+    "name": "Barclays",
+    "brand": "barclays",
+    "domains": [
+      "barclays.com",
+      "barclays.co.uk"
+    ]
+  },
+  {
+    "name": "Santander",
+    "brand": "santander",
+    "domains": [
+      "santander.com",
+      "santander.de",
+      "santander.co.uk",
+      "santander.com.mx",
+      "santander.com.br"
+    ]
+  },
+  {
+    "name": "American Express",
+    "brand": "americanexpress",
+    "domains": [
+      "americanexpress.com",
+      "amex.com"
+    ]
+  },
+  {
+    "name": "Visa",
+    "brand": "visa",
+    "domains": [
+      "visa.com",
+      "visa.de",
+      "visa.co.uk",
+      "visa.co.jp",
+      "visa.fr",
+      "visa.es",
+      "visa.it",
+      "visa.ca",
+      "visa.com.au",
+      "visa.at",
+      "visa.ch"
+    ]
+  },
+  {
+    "name": "Mastercard",
+    "brand": "mastercard",
+    "domains": [
+      "mastercard.com"
+    ]
+  },
+  {
+    "name": "Telekom",
+    "brand": "telekom",
+    "domains": [
+      "telekom.de",
+      "t-online.de",
+      "telekom.com"
+    ]
+  },
+  {
+    "name": "Vodafone",
+    "brand": "vodafone",
+    "domains": [
+      "vodafone.de",
+      "vodafone.com",
+      "vodafone.co.uk",
+      "vodafone.it",
+      "vodafone.es",
+      "vodafone.nl",
+      "vodafone.ie"
+    ]
+  },
+  {
+    "name": "O2 Telefonica",
+    "brand": "o2online",
+    "domains": [
+      "o2online.de",
+      "telefonica.de"
+    ]
+  },
+  {
+    "name": "Elster",
+    "brand": "elster",
+    "domains": [
+      "elster.de",
+      "elster.com"
+    ]
+  },
+  {
+    "name": "BundID",
+    "brand": "bundid",
+    "domains": [
+      "id.bund.de",
+      "bund.de"
+    ]
+  },
+  {
+    "name": "Gov.uk",
+    "brand": "govuk",
+    "domains": [
+      "gov.uk"
+    ]
+  },
+  {
+    "name": "Gmail",
+    "brand": "gmail",
+    "domains": [
+      "gmail.com"
+    ]
+  },
+  {
+    "name": "Azure",
+    "brand": "azure",
+    "domains": [
+      "azure.com",
+      "portal.azure.com"
+    ]
+  },
+  {
+    "name": "Disney+",
+    "brand": "disneyplus",
+    "domains": [
+      "disneyplus.com",
+      "disney.com"
+    ]
+  },
+  {
+    "name": "Alipay",
+    "brand": "alipay",
+    "domains": [
+      "alipay.com"
+    ]
+  }
+];

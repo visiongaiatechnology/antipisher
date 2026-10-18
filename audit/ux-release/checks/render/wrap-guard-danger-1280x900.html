@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><title>wrap</title></head>
+<body style="margin:0;background:#050807;display:flex;justify-content:center;padding-top:8px">
+<iframe id="frame" src="guard-danger.html" style="width:1280px;height:900px;border:0;box-shadow:0 0 0 1px #222" referrerpolicy="no-referrer"></iframe>
+<script>
+function relay() {
+  try {
+    var f = document.getElementById('frame');
+    var d = f.contentDocument;
+    var inner = d.getElementById('audit-metrics');
+    var pre = document.createElement('pre');
+    pre.id = 'audit-metrics'; pre.style.display = 'none';
+    pre.textContent = (inner ? inner.textContent : 'AUDIT_METRICS_JSON:MISSING')
+      + '|FRAME:' + JSON.stringify({w: f.clientWidth, h: f.clientHeight});
+    document.body.appendChild(pre);
+  } catch (e) {
+    var pre2 = document.createElement('pre');
+    pre2.id = 'audit-metrics'; pre2.style.display = 'none';
+    pre2.textContent = 'AUDIT_METRICS_JSON:MISSING_CROSS_ORIGIN:' + e;
+    document.body.appendChild(pre2);
+  }
+}
+window.addEventListener('load', function () { setTimeout(relay, 50); });
+</script></body></html>

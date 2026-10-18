@@ -1,0 +1,1494 @@
+{
+  "meta": {
+    "id": "antipisher-detector-corpus",
+    "version": "1.0.1",
+    "created_utc": "2026-10-18T15:27:30.335Z",
+    "target": "shared/detector.js",
+    "target_sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9",
+    "expected_status_domain": [
+      "block",
+      "safe",
+      "skip"
+    ],
+    "certainty_legend": {
+      "hoch": "Erwartung fachlich eindeutig",
+      "mittel": "Erwartung begruendet, aber Randfall/Abgrenzung moeglich"
+    },
+    "notes": "Adversarialer Korpus fuer Antipisher 0.1 Alpha. Status-Erwartung ist Ground Truth der Sicherheitsbewertung, nicht das Ist-Verhalten der Engine.",
+    "changelog": "v1.0.1: zwei potentiell markeneigene Kandidatendomains durch eindeutig phishing-typische Login-Varianten ersetzt (Konservativitaet der Ground Truth)."
+  },
+  "entries": [
+    {
+      "id": "ORS-001",
+      "category": "official-reference-safe",
+      "url": "https://google.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-002",
+      "category": "official-reference-safe",
+      "url": "https://accounts.google.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-003",
+      "category": "official-reference-safe",
+      "url": "https://youtube.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-004",
+      "category": "official-reference-safe",
+      "url": "https://amazon.co.jp/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-005",
+      "category": "official-reference-safe",
+      "url": "https://aws.amazon.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-006",
+      "category": "official-reference-safe",
+      "url": "https://apple.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-007",
+      "category": "official-reference-safe",
+      "url": "https://microsoft.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-008",
+      "category": "official-reference-safe",
+      "url": "https://outlook.live.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-009",
+      "category": "official-reference-safe",
+      "url": "https://microsoft.github.io/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-010",
+      "category": "official-reference-safe",
+      "url": "https://github.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-011",
+      "category": "official-reference-safe",
+      "url": "https://paypal.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-012",
+      "category": "official-reference-safe",
+      "url": "https://paypal.me/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-013",
+      "category": "official-reference-safe",
+      "url": "https://netflix.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-014",
+      "category": "official-reference-safe",
+      "url": "https://discord.gg/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-015",
+      "category": "official-reference-safe",
+      "url": "https://t.me/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-016",
+      "category": "official-reference-safe",
+      "url": "https://booking.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-017",
+      "category": "official-reference-safe",
+      "url": "https://dropbox.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-018",
+      "category": "official-reference-safe",
+      "url": "https://zoom.us/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-019",
+      "category": "official-reference-safe",
+      "url": "https://openai.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-020",
+      "category": "official-reference-safe",
+      "url": "https://chatgpt.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-021",
+      "category": "official-reference-safe",
+      "url": "https://stackoverflow.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-022",
+      "category": "official-reference-safe",
+      "url": "https://deutsche-bank.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-023",
+      "category": "official-reference-safe",
+      "url": "https://sparkasse.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-024",
+      "category": "official-reference-safe",
+      "url": "https://ing.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-025",
+      "category": "official-reference-safe",
+      "url": "https://db.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-026",
+      "category": "official-reference-safe",
+      "url": "https://t-online.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-027",
+      "category": "official-reference-safe",
+      "url": "https://id.bund.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-028",
+      "category": "official-reference-safe",
+      "url": "https://gov.uk/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-029",
+      "category": "official-reference-safe",
+      "url": "https://store.steampowered.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "ORS-030",
+      "category": "official-reference-safe",
+      "url": "https://help.instagram.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain/Subdomain aus shared/sites.js; darf nie blockiert werden"
+    },
+    {
+      "id": "LTPS-031",
+      "category": "legit-third-party-safe",
+      "url": "https://heise.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "LTPS-032",
+      "category": "legit-third-party-safe",
+      "url": "https://www.spiegel.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "LTPS-033",
+      "category": "legit-third-party-safe",
+      "url": "https://tagesschau.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "LTPS-034",
+      "category": "legit-third-party-safe",
+      "url": "https://www.bbc.co.uk/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "LTPS-035",
+      "category": "legit-third-party-safe",
+      "url": "https://docs.python.org/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "LTPS-036",
+      "category": "legit-third-party-safe",
+      "url": "https://docs.mozilla.org/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "LTPS-037",
+      "category": "legit-third-party-safe",
+      "url": "https://mail.proton.me/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "LTPS-038",
+      "category": "legit-third-party-safe",
+      "url": "https://www.bundesregierung.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "populaere unabhaengige Seite ohne Markenaehnlichkeit"
+    },
+    {
+      "id": "OBU-039",
+      "category": "official-brand-unlisted",
+      "url": "https://google.co.jp/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Google Japan (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-040",
+      "category": "official-brand-unlisted",
+      "url": "https://microsoft.co.jp/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Microsoft Japan (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-041",
+      "category": "official-brand-unlisted",
+      "url": "https://ing.nl/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "ING Niederlande (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-042",
+      "category": "official-brand-unlisted",
+      "url": "https://coinbase.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Coinbase Deutschland (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-043",
+      "category": "official-brand-unlisted",
+      "url": "https://visa.fr/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Visa Frankreich (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-044",
+      "category": "official-brand-unlisted",
+      "url": "https://sparkasse.at/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Sparkasse Oesterreich (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-045",
+      "category": "official-brand-unlisted",
+      "url": "https://google.com.mx/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Google Mexiko (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-046",
+      "category": "official-brand-unlisted",
+      "url": "https://google.com.ar/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Google Argentinien (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-047",
+      "category": "official-brand-unlisted",
+      "url": "https://amazon.se/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Amazon Schweden (offizieller Marketplace)"
+    },
+    {
+      "id": "OBU-048",
+      "category": "official-brand-unlisted",
+      "url": "https://walmart.ca/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Walmart Kanada (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-049",
+      "category": "official-brand-unlisted",
+      "url": "https://walmart.com.mx/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Walmart Mexiko (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-050",
+      "category": "official-brand-unlisted",
+      "url": "https://bestbuy.ca/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Best Buy Kanada (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-051",
+      "category": "official-brand-unlisted",
+      "url": "https://vodafone.it/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Vodafone Italien (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-052",
+      "category": "official-brand-unlisted",
+      "url": "https://dhl.co.uk/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "DHL UK (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-053",
+      "category": "official-brand-unlisted",
+      "url": "https://chase.co.uk/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Chase UK (offizielle ccTLD)"
+    },
+    {
+      "id": "OBU-054",
+      "category": "official-brand-unlisted",
+      "url": "https://github.blog/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizieller GitHub-Blog"
+    },
+    {
+      "id": "OBU-055",
+      "category": "official-brand-unlisted",
+      "url": "https://pinterest.co.uk/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Pinterest UK (offizielle ccTLD, Weiterleitung)"
+    },
+    {
+      "id": "OBU-056",
+      "category": "official-brand-unlisted",
+      "url": "https://microsoft.de/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Microsoft Deutschland (Weiterleitungsdomain)"
+    },
+    {
+      "id": "OBU-057",
+      "category": "official-brand-unlisted",
+      "url": "https://wikipedia.de/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Wikimedia-Deutschland-Weiterleitung"
+    },
+    {
+      "id": "BCS-058",
+      "category": "brand-collision-safe",
+      "url": "https://hermes.com/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Hermes (Luxusmode) - Kollision mit Marke \"Hermes\" (Logistik) in sites.js"
+    },
+    {
+      "id": "BCS-059",
+      "category": "brand-collision-safe",
+      "url": "https://elster.com/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Elster Group (Honeywell) - Kollision mit deutscher Elster-Marke"
+    },
+    {
+      "id": "MTRS-060",
+      "category": "multi-tenant-root-safe",
+      "url": "https://github.io/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Plattform-Wurzeldomain, kein Phishing-Ziel"
+    },
+    {
+      "id": "MTRS-061",
+      "category": "multi-tenant-root-safe",
+      "url": "https://vercel.app/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Plattform-Wurzeldomain"
+    },
+    {
+      "id": "MTRS-062",
+      "category": "multi-tenant-root-safe",
+      "url": "https://netlify.app/",
+      "expected": "safe",
+      "certainty": "mittel",
+      "note": "Plattform-Wurzeldomain"
+    },
+    {
+      "id": "TS-063",
+      "category": "typosquat-substitution",
+      "url": "https://paypai.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TS-064",
+      "category": "typosquat-substitution",
+      "url": "https://facebock.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TS-065",
+      "category": "typosquat-substitution",
+      "url": "https://linkedim.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TS-066",
+      "category": "typosquat-substitution",
+      "url": "https://twittar.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TS-067",
+      "category": "typosquat-substitution",
+      "url": "https://spotifu.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TS-068",
+      "category": "typosquat-substitution",
+      "url": "https://netflox.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TS-069",
+      "category": "typosquat-substitution",
+      "url": "https://githup.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TS-070",
+      "category": "typosquat-substitution",
+      "url": "https://binanca.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ein-Zeichen-Substitution (Damerau-Levenshtein 1)"
+    },
+    {
+      "id": "TT-071",
+      "category": "typosquat-transposition",
+      "url": "https://amzaon.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "benachbarte Buchstabendrehung"
+    },
+    {
+      "id": "TT-072",
+      "category": "typosquat-transposition",
+      "url": "https://goolge.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "benachbarte Buchstabendrehung"
+    },
+    {
+      "id": "TT-073",
+      "category": "typosquat-transposition",
+      "url": "https://paypla.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "benachbarte Buchstabendrehung"
+    },
+    {
+      "id": "TT-074",
+      "category": "typosquat-transposition",
+      "url": "https://yuotube.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "benachbarte Buchstabendrehung"
+    },
+    {
+      "id": "TT-075",
+      "category": "typosquat-transposition",
+      "url": "https://netlfix.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "benachbarte Buchstabendrehung"
+    },
+    {
+      "id": "TT-076",
+      "category": "typosquat-transposition",
+      "url": "https://githbu.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "benachbarte Buchstabendrehung"
+    },
+    {
+      "id": "TDI-077",
+      "category": "typosquat-deletion-insertion",
+      "url": "https://microsft.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Loeschung/Einfuegung eines Zeichens"
+    },
+    {
+      "id": "TDI-078",
+      "category": "typosquat-deletion-insertion",
+      "url": "https://googl.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Loeschung/Einfuegung eines Zeichens"
+    },
+    {
+      "id": "TDI-079",
+      "category": "typosquat-deletion-insertion",
+      "url": "https://facebok.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Loeschung/Einfuegung eines Zeichens"
+    },
+    {
+      "id": "TDI-080",
+      "category": "typosquat-deletion-insertion",
+      "url": "https://amazn.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Loeschung/Einfuegung eines Zeichens"
+    },
+    {
+      "id": "TDI-081",
+      "category": "typosquat-deletion-insertion",
+      "url": "https://youtubee.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Loeschung/Einfuegung eines Zeichens"
+    },
+    {
+      "id": "HC-082",
+      "category": "homoglyph-cyrillic",
+      "url": "https://pаypal.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Kyrillische Homoglyphen (pаypal, аmazon, ...)"
+    },
+    {
+      "id": "HC-083",
+      "category": "homoglyph-cyrillic",
+      "url": "https://аmazon.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Kyrillische Homoglyphen (pаypal, аmazon, ...)"
+    },
+    {
+      "id": "HC-084",
+      "category": "homoglyph-cyrillic",
+      "url": "https://раураl.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Kyrillische Homoglyphen (pаypal, аmazon, ...)"
+    },
+    {
+      "id": "HC-085",
+      "category": "homoglyph-cyrillic",
+      "url": "https://аpple.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Kyrillische Homoglyphen (pаypal, аmazon, ...)"
+    },
+    {
+      "id": "HC-086",
+      "category": "homoglyph-cyrillic",
+      "url": "https://microѕoft.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Kyrillische Homoglyphen (pаypal, аmazon, ...)"
+    },
+    {
+      "id": "HC-087",
+      "category": "homoglyph-cyrillic",
+      "url": "https://linkedіn.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Kyrillische Homoglyphen (pаypal, аmazon, ...)"
+    },
+    {
+      "id": "HGL-088",
+      "category": "homoglyph-greek-latin",
+      "url": "https://gοοgle.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Griechische/Lateinische Homoglyphen"
+    },
+    {
+      "id": "HGL-089",
+      "category": "homoglyph-greek-latin",
+      "url": "https://amazοn.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Griechische/Lateinische Homoglyphen"
+    },
+    {
+      "id": "HGL-090",
+      "category": "homoglyph-greek-latin",
+      "url": "https://microsοft.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Griechische/Lateinische Homoglyphen"
+    },
+    {
+      "id": "HGL-091",
+      "category": "homoglyph-greek-latin",
+      "url": "https://αpple.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Griechische/Lateinische Homoglyphen"
+    },
+    {
+      "id": "HGL-092",
+      "category": "homoglyph-greek-latin",
+      "url": "https://νisa.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Griechische/Lateinische Homoglyphen"
+    },
+    {
+      "id": "HD-093",
+      "category": "homoglyph-diacritic",
+      "url": "https://páypal.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "IDN-Homograph mit diakritischem Zeichen (punycode-registrierbar, optisch nahezu identisch)"
+    },
+    {
+      "id": "HD-094",
+      "category": "homoglyph-diacritic",
+      "url": "https://paypál.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "IDN-Homograph mit diakritischem Zeichen (punycode-registrierbar, optisch nahezu identisch)"
+    },
+    {
+      "id": "HD-095",
+      "category": "homoglyph-diacritic",
+      "url": "https://góogle.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "IDN-Homograph mit diakritischem Zeichen (punycode-registrierbar, optisch nahezu identisch)"
+    },
+    {
+      "id": "HD-096",
+      "category": "homoglyph-diacritic",
+      "url": "https://ámazon.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "IDN-Homograph mit diakritischem Zeichen (punycode-registrierbar, optisch nahezu identisch)"
+    },
+    {
+      "id": "HD-097",
+      "category": "homoglyph-diacritic",
+      "url": "https://micrósoft.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "IDN-Homograph mit diakritischem Zeichen (punycode-registrierbar, optisch nahezu identisch)"
+    },
+    {
+      "id": "HD-098",
+      "category": "homoglyph-diacritic",
+      "url": "https://applé.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "IDN-Homograph mit diakritischem Zeichen (punycode-registrierbar, optisch nahezu identisch)"
+    },
+    {
+      "id": "PH-099",
+      "category": "punycode-homograph",
+      "url": "https://xn--pypal-4ve.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Punycode-Form eines Homoglyphen"
+    },
+    {
+      "id": "PH-100",
+      "category": "punycode-homograph",
+      "url": "https://xn--80ak6aa92e.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Punycode-Form eines Homoglyphen"
+    },
+    {
+      "id": "PH-101",
+      "category": "punycode-homograph",
+      "url": "https://xn--ggle-0nda.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Punycode-Form eines Homoglyphen"
+    },
+    {
+      "id": "PH-102",
+      "category": "punycode-homograph",
+      "url": "https://xn--mazon-3ve.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Punycode-Form eines Homoglyphen"
+    },
+    {
+      "id": "PH-103",
+      "category": "punycode-homograph",
+      "url": "https://xn--micrsoft-qbh.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Punycode-Form eines Homoglyphen"
+    },
+    {
+      "id": "PH-104",
+      "category": "punycode-homograph",
+      "url": "https://xn--l-7sba6dbr.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Punycode-Form eines Homoglyphen"
+    },
+    {
+      "id": "PLI-105",
+      "category": "punycode-legit-idn",
+      "url": "https://xn--bcher-kva.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "legitime internationale Domain (IDN)"
+    },
+    {
+      "id": "PLI-106",
+      "category": "punycode-legit-idn",
+      "url": "https://xn--mnchen-3ya.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "legitime internationale Domain (IDN)"
+    },
+    {
+      "id": "PLI-107",
+      "category": "punycode-legit-idn",
+      "url": "https://xn--e1afmkfd.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "legitime internationale Domain (IDN)"
+    },
+    {
+      "id": "L-108",
+      "category": "leetspeak",
+      "url": "https://paypa1.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ziffern-/Leetspeak-Ersetzung"
+    },
+    {
+      "id": "L-109",
+      "category": "leetspeak",
+      "url": "https://g00gle.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ziffern-/Leetspeak-Ersetzung"
+    },
+    {
+      "id": "L-110",
+      "category": "leetspeak",
+      "url": "https://micr0soft.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ziffern-/Leetspeak-Ersetzung"
+    },
+    {
+      "id": "L-111",
+      "category": "leetspeak",
+      "url": "https://amaz0n.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ziffern-/Leetspeak-Ersetzung"
+    },
+    {
+      "id": "L-112",
+      "category": "leetspeak",
+      "url": "https://5potify.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ziffern-/Leetspeak-Ersetzung"
+    },
+    {
+      "id": "L-113",
+      "category": "leetspeak",
+      "url": "https://dr0pbox.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Ziffern-/Leetspeak-Ersetzung"
+    },
+    {
+      "id": "BC-114",
+      "category": "bait-combination",
+      "url": "https://login-paypal.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-115",
+      "category": "bait-combination",
+      "url": "https://paypal-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-116",
+      "category": "bait-combination",
+      "url": "https://paypal-secure.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-117",
+      "category": "bait-combination",
+      "url": "https://secure-paypal.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-118",
+      "category": "bait-combination",
+      "url": "https://netflix-account.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-119",
+      "category": "bait-combination",
+      "url": "https://coinbase-verify.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-120",
+      "category": "bait-combination",
+      "url": "https://apple-id.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-121",
+      "category": "bait-combination",
+      "url": "https://google-support.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-122",
+      "category": "bait-combination",
+      "url": "https://paypal-billing.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke + Bait-Wort (Bindestrich bzw. Bait-Wort aus detector-Wortliste)"
+    },
+    {
+      "id": "BC-123",
+      "category": "bait-combination",
+      "url": "https://paypalsupport.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke+Bait ohne Trennzeichen - klassische Phishing-Domain"
+    },
+    {
+      "id": "BC-124",
+      "category": "bait-combination",
+      "url": "https://secure-paypa1.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Bait+Leet-Marke kombiniert"
+    },
+    {
+      "id": "BC-125",
+      "category": "bait-combination",
+      "url": "https://paypa1-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Leet-Marke + Bait (im Auftrag explizit genannt)"
+    },
+    {
+      "id": "BC-126",
+      "category": "bait-combination",
+      "url": "https://paypalverify.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke+Verify ohne Trenner"
+    },
+    {
+      "id": "BC-127",
+      "category": "bait-combination",
+      "url": "https://netflixbilling.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke+Billing ohne Trenner"
+    },
+    {
+      "id": "BC-128",
+      "category": "bait-combination",
+      "url": "https://dhl-tracking.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke+Tracking (typische Paket-Phishing-Domain)"
+    },
+    {
+      "id": "BC-129",
+      "category": "bait-combination",
+      "url": "https://sparkasse-sicherheit.de/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "deutsche Bait-Vokabel \"sicherheit\" fehlt in Wortliste"
+    },
+    {
+      "id": "BC-130",
+      "category": "bait-combination",
+      "url": "https://paypal-konto.de/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "deutsche Bait-Vokabel \"konto\" fehlt in Wortliste"
+    },
+    {
+      "id": "BC-131",
+      "category": "bait-combination",
+      "url": "https://metamask-airdrop.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Krypto-Bait \"airdrop\" fehlt in Wortliste"
+    },
+    {
+      "id": "BC-132",
+      "category": "bait-combination",
+      "url": "https://dhl-zoll.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "deutsche Bait-Vokabel \"zoll\" fehlt in Wortliste"
+    },
+    {
+      "id": "BC-133",
+      "category": "bait-combination",
+      "url": "https://microsoft365-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke+Bait ohne Trenner (Microsoft-365-Login-Phishing)"
+    },
+    {
+      "id": "BC-134",
+      "category": "bait-combination",
+      "url": "https://amazonprime-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke+Produkt+Bait ohne Trenner"
+    },
+    {
+      "id": "BC-135",
+      "category": "bait-combination",
+      "url": "https://appleid-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Apple-ID-Phishing ohne exakten Marken-Label-Treffer"
+    },
+    {
+      "id": "FDIH-136",
+      "category": "foreign-domain-in-host",
+      "url": "https://paypal.com.evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "offizielle Domain als Subdomain in fremdem Host"
+    },
+    {
+      "id": "FDIH-137",
+      "category": "foreign-domain-in-host",
+      "url": "https://www.paypal.com.evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "offizielle Domain als Subdomain in fremdem Host"
+    },
+    {
+      "id": "FDIH-138",
+      "category": "foreign-domain-in-host",
+      "url": "https://google.com.login-billing.evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "offizielle Domain als Subdomain in fremdem Host"
+    },
+    {
+      "id": "FDIH-139",
+      "category": "foreign-domain-in-host",
+      "url": "https://mail.ru.evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "offizielle Domain als Subdomain in fremdem Host"
+    },
+    {
+      "id": "FDIH-140",
+      "category": "foreign-domain-in-host",
+      "url": "https://apple.com.attacker.net/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "offizielle Domain als Subdomain in fremdem Host"
+    },
+    {
+      "id": "UD-141",
+      "category": "userinfo-deception",
+      "url": "https://paypal.com@evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "RFC-3986-userinfo-Taeuschung: Marke im Benutzernamen"
+    },
+    {
+      "id": "UD-142",
+      "category": "userinfo-deception",
+      "url": "https://paypal.com:pass@evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "RFC-3986-userinfo-Taeuschung: Marke im Benutzernamen"
+    },
+    {
+      "id": "UD-143",
+      "category": "userinfo-deception",
+      "url": "https://paypal%2ecom@evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "RFC-3986-userinfo-Taeuschung: Marke im Benutzernamen"
+    },
+    {
+      "id": "UD-144",
+      "category": "userinfo-deception",
+      "url": "https://paypal%2Ecom@evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "RFC-3986-userinfo-Taeuschung: Marke im Benutzernamen"
+    },
+    {
+      "id": "UD-145",
+      "category": "userinfo-deception",
+      "url": "https://paypal@evil.tld/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "RFC-3986-userinfo-Taeuschung: Marke im Benutzernamen"
+    },
+    {
+      "id": "USF-146",
+      "category": "userinfo-substring-fp",
+      "url": "https://max.com@example.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "harmlose userinfo, die zufaellig eine offizielle Domain als Teilstring enthaelt"
+    },
+    {
+      "id": "USF-147",
+      "category": "userinfo-substring-fp",
+      "url": "https://testing.developer@example.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "harmlose userinfo, die zufaellig eine offizielle Domain als Teilstring enthaelt"
+    },
+    {
+      "id": "USF-148",
+      "category": "userinfo-substring-fp",
+      "url": "https://mixing.delivery@example.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "harmlose userinfo, die zufaellig eine offizielle Domain als Teilstring enthaelt"
+    },
+    {
+      "id": "FHT-149",
+      "category": "free-hoster-tenant",
+      "url": "https://paypal.github.io/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke als Tenant-Label auf Public-Suffix-Hoster"
+    },
+    {
+      "id": "FHT-150",
+      "category": "free-hoster-tenant",
+      "url": "https://paypa1.github.io/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke als Tenant-Label auf Public-Suffix-Hoster"
+    },
+    {
+      "id": "FHT-151",
+      "category": "free-hoster-tenant",
+      "url": "https://chase-login.pages.dev/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke als Tenant-Label auf Public-Suffix-Hoster"
+    },
+    {
+      "id": "FHT-152",
+      "category": "free-hoster-tenant",
+      "url": "https://paypal.vercel.app/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke als Tenant-Label auf Public-Suffix-Hoster"
+    },
+    {
+      "id": "FHT-153",
+      "category": "free-hoster-tenant",
+      "url": "https://apple.netlify.app/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Marke als Tenant-Label auf Public-Suffix-Hoster"
+    },
+    {
+      "id": "EC-154",
+      "category": "edge-case",
+      "url": "https://1.2.3.4/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "IPv4-Literal"
+    },
+    {
+      "id": "EC-155",
+      "category": "edge-case",
+      "url": "https://[::1]/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "IPv6-Literal"
+    },
+    {
+      "id": "EC-156",
+      "category": "edge-case",
+      "url": "https://www.paypal.com:443/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain mit Port"
+    },
+    {
+      "id": "EC-157",
+      "category": "edge-case",
+      "url": "https://WWW.PAYPAL.COM./",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Grossschreibung + abschliessender Punkt"
+    },
+    {
+      "id": "EC-158",
+      "category": "edge-case",
+      "url": "https://paypal.com/#fragment",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Fragment wird nicht an Hostvergleich uebergeben"
+    },
+    {
+      "id": "EC-159",
+      "category": "edge-case",
+      "url": "https://paypal.com/?next=https%3A%2F%2Fevil.tld%2F",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Query-Parameter darf nicht als Host zaehlen"
+    },
+    {
+      "id": "EC-160",
+      "category": "edge-case",
+      "url": "https://evil.tld/paypal.com",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "Marke im Pfad ist kein Host"
+    },
+    {
+      "id": "EC-161",
+      "category": "edge-case",
+      "url": "not a url",
+      "expected": "skip",
+      "certainty": "hoch",
+      "note": "kein URL-Objekt"
+    },
+    {
+      "id": "EC-162",
+      "category": "edge-case",
+      "url": "file:///etc/passwd",
+      "expected": "skip",
+      "certainty": "hoch",
+      "note": "kein http(s)"
+    },
+    {
+      "id": "EC-163",
+      "category": "edge-case",
+      "url": "chrome://settings",
+      "expected": "skip",
+      "certainty": "hoch",
+      "note": "Browser-internes Schema"
+    },
+    {
+      "id": "EC-164",
+      "category": "edge-case",
+      "url": "javascript:alert(1)",
+      "expected": "skip",
+      "certainty": "hoch",
+      "note": "gefaehrliches Schema"
+    },
+    {
+      "id": "IL-165",
+      "category": "idn-legit",
+      "url": "https://www.bücher.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "legitime IDN ohne Markenbezug"
+    },
+    {
+      "id": "IL-166",
+      "category": "idn-legit",
+      "url": "https://münchen.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "legitime IDN ohne Markenbezug"
+    },
+    {
+      "id": "IL-167",
+      "category": "idn-legit",
+      "url": "https://пример.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "legitime IDN ohne Markenbezug"
+    },
+    {
+      "id": "IL-168",
+      "category": "idn-legit",
+      "url": "https://www.über.de/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "legitime IDN ohne Markenbezug"
+    },
+    {
+      "id": "LU-169",
+      "category": "long-url",
+      "url": "https://www.example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "sehr lange, harmlose URL (DNR-/Allow-once-Grenze 1900 Zeichen)"
+    },
+    {
+      "id": "LU-170",
+      "category": "long-url",
+      "url": "https://www.paypal.com/?x=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "offizielle Domain mit sehr langem Query-String"
+    },
+    {
+      "id": "BCG-171",
+      "category": "brand-coverage-gap",
+      "url": "https://gmial.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Gmail-Tippfehler (Marke \"gmail\" fehlt in sites.js)"
+    },
+    {
+      "id": "BCG-172",
+      "category": "brand-coverage-gap",
+      "url": "https://gmai.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Gmail-Tippfehler"
+    },
+    {
+      "id": "BCG-173",
+      "category": "brand-coverage-gap",
+      "url": "https://gmail-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Gmail+Bait"
+    },
+    {
+      "id": "BCG-174",
+      "category": "brand-coverage-gap",
+      "url": "https://azure-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Azure ist keine kuratierte Marke"
+    },
+    {
+      "id": "BCG-175",
+      "category": "brand-coverage-gap",
+      "url": "https://disneyplus-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Disney+ ist keine kuratierte Marke"
+    },
+    {
+      "id": "BCG-176",
+      "category": "brand-coverage-gap",
+      "url": "https://alipay-login.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Alipay ist keine kuratierte Marke"
+    },
+    {
+      "id": "SBT-177",
+      "category": "short-brand-typosquat",
+      "url": "https://vlsa.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Visa-Tippfehler - Marke hat nur 4 Zeichen -> Typosquat-Gate greift nicht"
+    },
+    {
+      "id": "SBT-178",
+      "category": "short-brand-typosquat",
+      "url": "https://v1sa.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "Visa-Tippfehler"
+    },
+    {
+      "id": "SBT-179",
+      "category": "short-brand-typosquat",
+      "url": "https://wlse.com/",
+      "expected": "block",
+      "certainty": "mittel",
+      "note": "Wise-Tippfehler - Marke hat nur 4 Zeichen"
+    },
+    {
+      "id": "SBT-180",
+      "category": "short-brand-typosquat",
+      "url": "https://ubr.com/",
+      "expected": "block",
+      "certainty": "mittel",
+      "note": "Uber-Tippfehler - Marke hat nur 3 Zeichen"
+    },
+    {
+      "id": "TET-181",
+      "category": "two-edit-typosquat",
+      "url": "https://arnazon.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "klassischer \"rn\"-statt-\"m\"-Trick (2 Edits)"
+    },
+    {
+      "id": "TET-182",
+      "category": "two-edit-typosquat",
+      "url": "https://rnicrosoft.com/",
+      "expected": "block",
+      "certainty": "hoch",
+      "note": "\"rn\"-statt-\"m\"-Trick bei Microsoft (2 Edits)"
+    },
+    {
+      "id": "GSP-183",
+      "category": "generic-subdomain-policy",
+      "url": "https://office.attacker.com/",
+      "expected": "block",
+      "certainty": "mittel",
+      "note": "Microsoft-365-Marke \"office\" als Subdomain auf Angreiferdomain - laut Produktversprechen \"lueckenloser Subdomain-Schutz\" zu blockieren"
+    },
+    {
+      "id": "GSP-184",
+      "category": "generic-subdomain-policy",
+      "url": "https://office.example.com/",
+      "expected": "safe",
+      "certainty": "hoch",
+      "note": "bewusste Ausnahme generischer Begriffe (generische Subdomain)"
+    }
+  ]
+}
