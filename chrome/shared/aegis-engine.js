@@ -61,6 +61,12 @@
     SANITIZE_URL_PARAMS: true,
     DEFUSE_BEACONS: true,
 
+    // VGT Ad Shield & Cosmetic Filtering (uBlock-inspired)
+    AD_SHIELD: true,
+    COSMETIC_FILTERING: true,
+    ANTI_ADBLOCK_DEFUSER: true,
+    POPUNDER_DEFENSE: true,
+
     // GeDefense Light (DOM Hypervisor & Script Inoculation)
     GEDEFENSE_LIGHT: true,
     SELF_XSS_WARNING: true,
@@ -74,6 +80,13 @@
     DOC.addEventListener('aegis:configure', (e) => {
       if (e && e.detail && typeof e.detail === 'object') {
         Object.assign(CONFIG, e.detail);
+        if (typeof injectCosmeticCSS === 'function') {
+          if (CONFIG.AD_SHIELD && CONFIG.COSMETIC_FILTERING) {
+            injectCosmeticCSS();
+          } else if (typeof removeCosmeticCSS === 'function') {
+            removeCosmeticCSS();
+          }
+        }
       }
     });
     DOC.addEventListener('aegis:rotate-seed', () => {
@@ -317,7 +330,10 @@
   const notifyTrackerBlocked = (detail) => {
     try {
       if (DOC && typeof DOC.dispatchEvent === 'function') {
-        DOC.dispatchEvent(new CustomEvent('aegis:tracker-blocked', { detail: { target: detail } }));
+        const CEvent = (WIN && WIN.CustomEvent) || (typeof CustomEvent !== 'undefined' ? CustomEvent : null);
+        if (CEvent) {
+          DOC.dispatchEvent(new CEvent('aegis:tracker-blocked', { detail: { target: detail } }));
+        }
       }
     } catch { /* ignore */ }
   };
@@ -746,6 +762,323 @@
     }
   };
 
+  // =========================================================================
+  // VGT AD SHIELD MODULES (uBlock Origin inspired · 100% Offline)
+  // =========================================================================
+
+  // 11. Zero-Flicker Cosmetic Element Hiding Engine
+  const AD_SELECTORS = [
+    'ins.adsbygoogle',
+    '[id^="google_ads_"]',
+    '[id^="div-gpt-ad"]',
+    '[id^="ad-slot-"]',
+    '[id^="ad_slot_"]',
+    '[id*="banner-ad"]',
+    '[class*="banner-ad"]',
+    '.ad-container',
+    '.ad-wrapper',
+    '.ad-box',
+    '.ad-slot',
+    '.ad-banner',
+    '.ad-holder',
+    '.ad-unit',
+    '.ad-placement',
+    '.advertisement',
+    '.advert',
+    '[data-ad-unit]',
+    '[data-ad-slot]',
+    '[data-ad-client]',
+    '[data-ad-name]',
+    '[id^="taboola-"]',
+    '.trc_rbox_div',
+    '.trc_related_container',
+    '.OUTBRAIN',
+    '[data-widget-id^="outbrain"]',
+    'iframe[src*="doubleclick"]',
+    'iframe[src*="googlesyndication"]',
+    'iframe[src*="adservice"]',
+    'iframe[src*="adnxs"]',
+    'iframe[src*="smartadserver"]',
+    'iframe[src*="criteo"]',
+    'iframe[src*="rubiconproject"]',
+    'iframe[src*="adform"]',
+    'iframe[src*="teads"]',
+    '.sponsored-post',
+    '.sponsored-content',
+    '[data-sponsored="true"]',
+    '.native-ad',
+    '[class*="floating-ad"]',
+    '[class*="sticky-ad"]',
+    '[id*="floating-video-ad"]',
+    '[class*="video-ad-unit"]'
+  ];
+
+  const COSMETIC_CSS = AD_SELECTORS.join(',\n') + ` {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+  }`;
+
+  let cosmeticStyleNode = null;
+  let cosmeticSheet = null;
+
+  const injectCosmeticCSS = () => {
+    if (!CONFIG.ENABLED || !CONFIG.AD_SHIELD || !CONFIG.COSMETIC_FILTERING) return;
+    if (!DOC) return;
+
+    try {
+      const CSSSheet = (WIN && WIN.CSSStyleSheet) || (typeof CSSStyleSheet !== 'undefined' ? CSSStyleSheet : null);
+      if (DOC.adoptedStyleSheets && CSSSheet) {
+        if (!cosmeticSheet) {
+          cosmeticSheet = new CSSSheet();
+          cosmeticSheet.replaceSync(COSMETIC_CSS);
+        }
+        if (!DOC.adoptedStyleSheets.includes(cosmeticSheet)) {
+          DOC.adoptedStyleSheets.push(cosmeticSheet);
+        }
+        return;
+      }
+    } catch { /* adoptedStyleSheets fallback */ }
+
+    const attachStyle = () => {
+      try {
+        const target = DOC.head || DOC.documentElement;
+        if (target && !DOC.getElementById('vgt-ad-shield-style')) {
+          cosmeticStyleNode = DOC.createElement('style');
+          cosmeticStyleNode.id = 'vgt-ad-shield-style';
+          cosmeticStyleNode.textContent = COSMETIC_CSS;
+          target.insertBefore(cosmeticStyleNode, target.firstChild);
+        }
+      } catch {}
+    };
+
+    if (DOC.head || DOC.documentElement) {
+      attachStyle();
+    } else if (typeof DOC.addEventListener === 'function') {
+      DOC.addEventListener('DOMContentLoaded', attachStyle, { once: true });
+    }
+  };
+
+  const removeCosmeticCSS = () => {
+    try {
+      if (cosmeticSheet && DOC && DOC.adoptedStyleSheets) {
+        DOC.adoptedStyleSheets = DOC.adoptedStyleSheets.filter(s => s !== cosmeticSheet);
+      }
+      if (cosmeticStyleNode && cosmeticStyleNode.parentNode) {
+        cosmeticStyleNode.parentNode.removeChild(cosmeticStyleNode);
+        cosmeticStyleNode = null;
+      }
+      const existing = DOC && DOC.getElementById && DOC.getElementById('vgt-ad-shield-style');
+      if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+    } catch {}
+  };
+
+  // 12. Dynamic Ad Element Observer & Collapser
+  const injectDynamicAdObserver = () => {
+    if (!CONFIG.ENABLED || !CONFIG.AD_SHIELD || !CONFIG.COSMETIC_FILTERING || !WIN.MutationObserver || !DOC) return;
+
+    const query = AD_SELECTORS.join(',');
+    let debounceTimer = null;
+    let pendingCount = 0;
+
+    const flushBlockedCount = () => {
+      if (pendingCount > 0) {
+        notifyTrackerBlocked(`ad-elements (${pendingCount})`);
+        pendingCount = 0;
+      }
+    };
+
+    const processElement = (el) => {
+      if (!el || el.nodeType !== 1) return;
+      try {
+        if (el.hasAttribute && el.hasAttribute('data-vgt-ad-blocked')) return;
+
+        // Skip anti-adblock honeypots/baits to avoid triggering script detection
+        const cls = typeof el.className === 'string' ? el.className : '';
+        if (cls.includes('adsbox') || cls.includes('pub_300x250') || cls.includes('ad-test')) return;
+
+        let matched = false;
+        if (el.matches && el.matches(query)) {
+          matched = true;
+          el.style.setProperty('display', 'none', 'important');
+          el.setAttribute('data-vgt-ad-blocked', 'true');
+          pendingCount++;
+        }
+        if (el.querySelectorAll) {
+          const descendants = el.querySelectorAll(query);
+          for (let i = 0; i < descendants.length; i++) {
+            const d = descendants[i];
+            const dCls = typeof d.className === 'string' ? d.className : '';
+            if (dCls.includes('adsbox') || dCls.includes('pub_300x250')) continue;
+            if (!d.hasAttribute('data-vgt-ad-blocked')) {
+              d.style.setProperty('display', 'none', 'important');
+              d.setAttribute('data-vgt-ad-blocked', 'true');
+              pendingCount++;
+              matched = true;
+            }
+          }
+        }
+      } catch {}
+    };
+
+    const observer = new WIN.MutationObserver((mutations) => {
+      if (!CONFIG.ENABLED || !CONFIG.AD_SHIELD || !CONFIG.COSMETIC_FILTERING) return;
+      for (const m of mutations) {
+        if (m.addedNodes) {
+          for (let i = 0; i < m.addedNodes.length; i++) {
+            processElement(m.addedNodes[i]);
+          }
+        }
+      }
+      if (pendingCount > 0) {
+        if (debounceTimer) {
+          if (WIN && WIN.clearTimeout) WIN.clearTimeout(debounceTimer);
+          else if (typeof clearTimeout !== 'undefined') clearTimeout(debounceTimer);
+        }
+        const timerFn = (WIN && WIN.setTimeout) || (typeof setTimeout !== 'undefined' ? setTimeout : null);
+        if (timerFn) {
+          debounceTimer = timerFn(flushBlockedCount, 200);
+        } else {
+          flushBlockedCount();
+        }
+      }
+    });
+
+    const start = () => {
+      try {
+        const root = DOC.documentElement || DOC.body;
+        if (root) {
+          observer.observe(root, { childList: true, subtree: true });
+          processElement(root);
+          flushBlockedCount();
+        }
+      } catch {}
+    };
+
+    if (DOC.readyState === 'loading') {
+      DOC.addEventListener('DOMContentLoaded', start, { once: true });
+    } else {
+      start();
+    }
+  };
+
+  // 13. Anti-Adblock Defusers & Script Inoculation (uBlock-inspired)
+  const injectAdBlockDefusers = () => {
+    if (!CONFIG.ENABLED || !CONFIG.AD_SHIELD) return;
+
+    // A. Google AdSense / AdManager (adsbygoogle) stub
+    try {
+      if (!WIN.adsbygoogle || !Array.isArray(WIN.adsbygoogle)) {
+        const ads = [];
+        ads.push = function(arg) {
+          notifyTrackerBlocked('adsbygoogle.push');
+          return 0;
+        };
+        ads.loaded = true;
+        cloak(ads.push, null, 'push');
+        WIN.adsbygoogle = ads;
+      } else if (typeof WIN.adsbygoogle.push === 'function') {
+        const origPush = WIN.adsbygoogle.push.bind(WIN.adsbygoogle);
+        WIN.adsbygoogle.push = function(...args) {
+          notifyTrackerBlocked('adsbygoogle.push');
+          try { return origPush(...args); } catch { return 0; }
+        };
+        cloak(WIN.adsbygoogle.push, null, 'push');
+      }
+    } catch {}
+
+    // B. Anti-Adblock Flags (uBlock set-constant inspired)
+    if (CONFIG.ANTI_ADBLOCK_DEFUSER !== false) {
+      try {
+        WIN.canRunAds = true;
+        WIN.isAdBlockActive = false;
+        WIN.adblock = false;
+        WIN.google_ad_status = 1;
+      } catch {}
+
+      // C. Bait Element Defuser (prevent-bab inspired)
+      try {
+        if (WIN.HTMLElement && WIN.HTMLElement.prototype) {
+          const origHeightDesc = Object.getOwnPropertyDescriptor(WIN.HTMLElement.prototype, 'offsetHeight');
+          const origWidthDesc = Object.getOwnPropertyDescriptor(WIN.HTMLElement.prototype, 'offsetWidth');
+
+          const isBaitElement = (el) => {
+            if (!el || !el.className || typeof el.className !== 'string') return false;
+            const cls = el.className;
+            return (
+              cls.includes('adsbox') ||
+              cls.includes('pub_300x250') ||
+              cls.includes('ad-test') ||
+              cls.includes('ad-probe') ||
+              cls.includes('ad_test') ||
+              cls.includes('ad_unit_test')
+            );
+          };
+
+          const origHeightGet = origHeightDesc && origHeightDesc.get;
+          Object.defineProperty(WIN.HTMLElement.prototype, 'offsetHeight', {
+            get: function() {
+              if (isBaitElement(this)) {
+                notifyTrackerBlocked('anti-adblock-bait:offsetHeight');
+                return 250;
+              }
+              return origHeightGet ? origHeightGet.call(this) : (this._offsetHeight || 0);
+            },
+            configurable: true,
+            enumerable: true
+          });
+          cloak(WIN.HTMLElement.prototype.offsetHeight, null, 'get offsetHeight');
+
+          const origWidthGet = origWidthDesc && origWidthDesc.get;
+          Object.defineProperty(WIN.HTMLElement.prototype, 'offsetWidth', {
+            get: function() {
+              if (isBaitElement(this)) {
+                return 300;
+              }
+              return origWidthGet ? origWidthGet.call(this) : (this._offsetWidth || 0);
+            },
+            configurable: true,
+            enumerable: true
+          });
+          cloak(WIN.HTMLElement.prototype.offsetWidth, null, 'get offsetWidth');
+        }
+      } catch {}
+    }
+
+    // D. Popunder & Click-Trap Defuser
+    if (CONFIG.POPUNDER_DEFENSE !== false && WIN.open) {
+      try {
+        const origOpen = WIN.open.bind(WIN);
+        const POPUNDER_DOMAINS = [
+          'popads.net', 'popcash.net', 'propellerads.com', 'adsterra.com',
+          'exoclick.com', 'juicyads.com', 'mgid.com', 'bidvertiser.com'
+        ];
+        const isPopunderTarget = (url) => {
+          if (!url || typeof url !== 'string') return false;
+          const lUrl = url.toLowerCase();
+          return POPUNDER_DOMAINS.some(d => lUrl.includes(d));
+        };
+
+        const defendedOpen = function(url, ...args) {
+          if (isPopunderTarget(url)) {
+            notifyTrackerBlocked('popunder: ' + url);
+            return null;
+          }
+          return origOpen(url, ...args);
+        };
+        cloak(defendedOpen, origOpen, 'open');
+        WIN.open = defendedOpen;
+      } catch {}
+    }
+  };
+
   // --- INITIALIZATION ---
   const applyAllDefenses = () => {
     try {
@@ -759,6 +1092,9 @@
       injectBeaconDefense();
       injectURLParamSanitizer();
       injectGeDefenseLight();
+      injectCosmeticCSS();
+      injectDynamicAdObserver();
+      injectAdBlockDefusers();
     } catch (e) {
       if (CONFIG.DEBUG_MODE) console.error('AEGIS PROTOCOL error:', e);
     }
@@ -783,6 +1119,10 @@
       return CONFIG;
     },
     sanitizeHTML: (s) => sanitizeHTMLRef(s),
+    injectCosmeticCSS,
+    removeCosmeticCSS,
+    injectAdBlockDefusers,
+    AD_SELECTORS,
     prng,
     cloak
   };

@@ -117,10 +117,16 @@ const TRACKER_DOMAINS = [
   'clarity.ms', 'c.clarity.ms', 'bat.bing.com', 'static.ads-twitter.com', 'analytics.twitter.com',
   'analytics.tiktok.com', 'mc.yandex.ru', 'metrika.yandex.net', 'an.yandex.ru',
   'static.hotjar.com', 'script.hotjar.com', 'vars.hotjar.com', 'criteo.com', 'criteo.net',
-  'scorecardresearch.com', 'trc.taboola.com', 'widgets.outbrain.com', 'quantserve.com',
-  'adnxs.com', 'rubiconproject.com', 'pubmatic.com', 'openx.net', 'api.segment.io',
-  'api.mixpanel.com', 'appboy.com', 'branch.io', 'app.adjust.com', 'onelink.appsflyer.com',
-  'mouseflow.com', 'fullstory.com', 'smartlook.com', 'crazyegg.com', 'luckyorange.com'
+  'scorecardresearch.com', 'trc.taboola.com', 'taboola.com', 'widgets.outbrain.com', 'outbrain.com',
+  'quantserve.com', 'adnxs.com', 'rubiconproject.com', 'pubmatic.com', 'openx.net', 'casalemedia.com',
+  'smartadserver.com', 'adform.net', 'yieldmo.com', 'teads.tv', 'aax.amazon-adsystem.com',
+  'api.segment.io', 'api.mixpanel.com', 'appboy.com', 'branch.io', 'app.adjust.com', 'onelink.appsflyer.com',
+  'mouseflow.com', 'fullstory.com', 'smartlook.com', 'crazyegg.com', 'luckyorange.com',
+  'adroll.com', 'adblade.com', 'advertising.com', 'adtechus.com', 'inmobi.com', 'popads.net',
+  'popcash.net', 'propellerads.com', 'adsterra.com', 'mgid.com', 'revcontent.com', 'bidvertiser.com',
+  'media.net', 'buysellads.com', 'carbonads.net', 'exoclick.com', 'juicyads.com', 'zedo.com',
+  'serving-sys.com', 'flashtalking.com', 'moatads.com', 'adcolony.com', 'applovin.com', 'ironsrc.com',
+  'vungle.com', 'connatix.com', 'sharethrough.com', 'sovrn.com', 'lijit.com', 'triplelift.com', 'gumgum.com'
 ];
 
 function isTrackerRequest(url) {
@@ -133,8 +139,8 @@ function isTrackerRequest(url) {
 if (api.webRequest && api.webRequest.onBeforeRequest) {
   api.webRequest.onBeforeRequest.addListener(details => {
     if (!isTrackerRequest(details.url)) return;
-    api.storage.local.get(['trackersBlocked', 'aegisTrackerShield', 'showBadgeCount']).then(res => {
-      if (res?.aegisTrackerShield === false) return;
+    api.storage.local.get(['trackersBlocked', 'aegisTrackerShield', 'adShieldEnabled', 'showBadgeCount']).then(res => {
+      if (res?.aegisTrackerShield === false && res?.adShieldEnabled === false) return;
       const total = (res?.trackersBlocked || 0) + 1;
       api.storage.local.set({ trackersBlocked: total }).catch(() => {});
       const tabId = details.tabId;

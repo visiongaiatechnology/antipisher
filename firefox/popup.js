@@ -178,7 +178,7 @@
   if ($('trackerToggle')) {
     $('trackerToggle').addEventListener('change', async () => {
       isTrackerShield = $('trackerToggle').checked;
-      await api.storage.local.set({ aegisTrackerShield: isTrackerShield });
+      await api.storage.local.set({ aegisTrackerShield: isTrackerShield, adShieldEnabled: isTrackerShield });
       if (api.declarativeNetRequest && typeof api.declarativeNetRequest.updateEnabledRulesets === 'function') {
         try {
           if (isTrackerShield) {

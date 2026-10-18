@@ -43,9 +43,15 @@ const TRACKER_DOMAINS = [
   'clarity.ms', 'bat.bing.com', 'static.ads-twitter.com', 'analytics.twitter.com',
   'analytics.tiktok.com', 'mc.yandex.ru', 'metrika.yandex.net', 'static.hotjar.com',
   'script.hotjar.com', 'criteo.com', 'criteo.net', 'scorecardresearch.com',
-  'trc.taboola.com', 'widgets.outbrain.com', 'quantserve.com', 'adnxs.com',
-  'rubiconproject.com', 'pubmatic.com', 'openx.net', 'api.segment.io',
-  'api.mixpanel.com', 'appboy.com', 'branch.io', 'app.adjust.com', 'onelink.appsflyer.com'
+  'trc.taboola.com', 'taboola.com', 'widgets.outbrain.com', 'outbrain.com', 'quantserve.com',
+  'adnxs.com', 'rubiconproject.com', 'pubmatic.com', 'openx.net', 'casalemedia.com',
+  'smartadserver.com', 'adform.net', 'yieldmo.com', 'teads.tv', 'aax.amazon-adsystem.com',
+  'api.segment.io', 'api.mixpanel.com', 'appboy.com', 'branch.io', 'app.adjust.com', 'onelink.appsflyer.com',
+  'adroll.com', 'adblade.com', 'advertising.com', 'adtechus.com', 'inmobi.com', 'popads.net',
+  'popcash.net', 'propellerads.com', 'adsterra.com', 'mgid.com', 'revcontent.com', 'bidvertiser.com',
+  'media.net', 'buysellads.com', 'carbonads.net', 'exoclick.com', 'juicyads.com', 'zedo.com',
+  'serving-sys.com', 'flashtalking.com', 'moatads.com', 'adcolony.com', 'applovin.com', 'ironsrc.com',
+  'vungle.com', 'connatix.com', 'sharethrough.com', 'sovrn.com', 'lijit.com', 'triplelift.com', 'gumgum.com'
 ];
 
 function isTrackerRequest(url) {
@@ -59,8 +65,8 @@ const tabTrackerCounts = new Map();
 
 function analyzeTrackerRequest(details) {
   if (!isTrackerRequest(details.url)) return {};
-  api.storage.local.get(['trackersBlocked', 'aegisTrackerShield']).then(res => {
-    if (res?.aegisTrackerShield === false) return;
+  api.storage.local.get(['trackersBlocked', 'aegisTrackerShield', 'adShieldEnabled']).then(res => {
+    if (res?.aegisTrackerShield === false && res?.adShieldEnabled === false) return;
     const count = (res?.trackersBlocked || 0) + 1;
     api.storage.local.set({ trackersBlocked: count }).catch(() => {});
   }).catch(() => {});

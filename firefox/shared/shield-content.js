@@ -572,6 +572,10 @@
           const spoofCanvas = res?.spoofCanvas !== false;
           const spoofWebGL = res?.spoofWebGL !== false;
           const spoofAudio = res?.spoofAudio !== false;
+          const adShield = res?.adShieldEnabled !== false;
+          const cosmetic = res?.cosmeticFiltering !== false;
+          const antiAdblock = res?.antiAdblockDefuser !== false;
+          const popunder = res?.popunderDefense !== false;
 
           if (typeof res?.formShieldEnabled === 'boolean') {
             isFormShieldEnabled = res.formShieldEnabled;
@@ -585,6 +589,7 @@
               window.sessionStorage.setItem('aegis_protection_enabled', enabled ? 'true' : 'false');
               window.sessionStorage.setItem('aegis_trackers_enabled', defuseTrackers ? 'true' : 'false');
               window.sessionStorage.setItem('aegis_gedefense_enabled', geDefense ? 'true' : 'false');
+              window.sessionStorage.setItem('aegis_adshield_enabled', adShield ? 'true' : 'false');
             }
           } catch { /* ignore */ }
           if (typeof document !== 'undefined' && typeof document.dispatchEvent === 'function') {
@@ -595,6 +600,10 @@
                   DEFUSE_TRACKERS: defuseTrackers,
                   SANITIZE_URL_PARAMS: sanitizeParams,
                   DEFUSE_BEACONS: defuseBeacons,
+                  AD_SHIELD: adShield,
+                  COSMETIC_FILTERING: cosmetic,
+                  ANTI_ADBLOCK_DEFUSER: antiAdblock,
+                  POPUNDER_DEFENSE: popunder,
                   GEDEFENSE_LIGHT: geDefense,
                   SELF_XSS_WARNING: selfXss,
                   BLOCK_PROTOCOL_INJECTION: blockProto,
@@ -608,6 +617,7 @@
         };
         const r = api.storage.local.get([
           'aegisProtection', 'aegisTrackerShield', 'sanitizeUrlParams', 'defuseBeacons',
+          'adShieldEnabled', 'cosmeticFiltering', 'antiAdblockDefuser', 'popunderDefense',
           'geDefenseLight', 'selfXssWarning', 'blockProtocolInjection',
           'spoofCanvas', 'spoofWebGL', 'spoofAudio', 'customWhitelist', 'formShieldEnabled'
         ], handler);

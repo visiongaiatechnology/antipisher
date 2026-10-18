@@ -80,7 +80,7 @@
 
       metricBrands: 'Brands',
       metricBlocked: 'Blocked',
-      metricTrackers: 'Trackers',
+      metricTrackers: 'Ads & Trackers',
       metricTrackersScope: 'Tab: {tab} · Total: {total}',
 
       settingPreflight: 'Strict Preflight Mode',
@@ -96,8 +96,8 @@
       noticeAegis: 'Offline defense against Canvas, WebGL, Audio & Font fingerprinting and cross-site tracking.',
       btnRotateSeed: 'Rotate Identity',
       toastAegisRotated: 'Identity seed refreshed',
-      settingTrackers: 'AEGIS Tracker & Telemetry Defense',
-      noticeTrackers: 'Blocks analytics networks, advertising telemetry, and strips tracking tokens from URLs.',
+      settingTrackers: 'AEGIS Ad & Tracker Defense',
+      noticeTrackers: 'Blocks advertising networks, analytics, banners, and strips tracking tokens from URLs.',
       settingGeDefense: 'GeDefense Light (DOM & Script Shield)',
       noticeGeDefense: 'Shields JavaScript against malicious DOM mutation, Self-XSS, prototype exploits, and dangerous script injections.',
 
@@ -105,6 +105,7 @@
       optionsTitle: 'Settings',
       optionsSubtitle: 'Local Configuration & VGT Protection Parameters',
       tabGeneral: 'Phishing & Core',
+      tabAds: 'Ad Blocker',
       tabTrackers: 'Trackers & Telemetry',
       tabGeDefense: 'GeDefense (DOM & Scripts)',
       tabFingerprinting: 'Anti-Fingerprinting',
@@ -119,6 +120,18 @@
       optDurationFast: 'Fast (1.5 seconds)',
       optDurationNormal: 'Standard (2.5 seconds)',
       optDurationLong: 'Long (4 seconds)',
+
+      // VGT Ad Shield
+      lblSecAds: 'VGT Ad Shield (Ad Blocker)',
+      lblSecAdsNote: 'Network request blocking, zero-flicker cosmetic element hiding, and anti-adblock defusal.',
+      optAdMasterTitle: 'VGT Ad Shield Master Protection',
+      optAdMasterNote: 'Blocks banner networks, video ads, sponsored feeds, and ad exchanges.',
+      optCosmeticTitle: 'Cosmetic Element Hiding',
+      optCosmeticNote: 'Collapses empty ad frames, banner slots, and sponsored containers with zero flicker.',
+      optAntiAdblockTitle: 'Anti-Adblock Defuser & Script Inoculation',
+      optAntiAdblockNote: 'Bypasses ad-blocker detection walls and inoculates bait element checks.',
+      optPopunderTitle: 'Popunder & Click-Trap Defense',
+      optPopunderNote: 'Neutralizes unsolicited background popups and invisible clickjacking overlays.',
 
       optUrlStripTitle: 'URL Tracking Token Stripper',
       optUrlStripNote: 'Automatically strips utm_*, fbclid, gclid and 16 other parameters from web addresses.',
@@ -258,7 +271,7 @@
 
       metricBrands: 'Marken',
       metricBlocked: 'Abgewehrt',
-      metricTrackers: 'Tracker',
+      metricTrackers: 'Werbung & Tracker',
       metricTrackersScope: 'Tab: {tab} · Gesamt: {total}',
 
       settingPreflight: 'Strenger Preflight-Modus',
@@ -274,8 +287,8 @@
       noticeAegis: 'Offline-Schutz vor Canvas-, WebGL-, Audio- & Schriftarten-Fingerprinting und Tracking.',
       btnRotateSeed: 'Identität neu würfeln',
       toastAegisRotated: 'Identitäts-Seed erneuert',
-      settingTrackers: 'AEGIS Tracker- & Telemetrie-Schutz',
-      noticeTrackers: 'Blockiert Analyse-Netzwerke, Werbe-Telemetrie und entfernt Tracking-Parameter aus URLs.',
+      settingTrackers: 'AEGIS Werbe- & Tracker-Schutz',
+      noticeTrackers: 'Blockiert Werbenetzwerke, Banner, Analyse-Dienste und entfernt Tracking-Parameter aus URLs.',
       settingGeDefense: 'GeDefense Light (DOM- & Script-Schutz)',
       noticeGeDefense: 'Schützt JavaScript vor schädlicher DOM-Manipulation, Self-XSS, Prototypen-Angriffen und bösartigen Skript-Injektionen.',
 
@@ -283,6 +296,7 @@
       optionsTitle: 'Einstellungen',
       optionsSubtitle: 'Lokale Konfiguration & VGT Schutzparameter',
       tabGeneral: 'Phishing & Basis-Schutz',
+      tabAds: 'Werbeblocker',
       tabTrackers: 'Tracker & Telemetrie',
       tabGeDefense: 'GeDefense (DOM & Skripte)',
       tabFingerprinting: 'Anti-Fingerprinting',
@@ -297,6 +311,18 @@
       optDurationFast: 'Schnell (1.5 Sekunden)',
       optDurationNormal: 'Standard (2.5 Sekunden)',
       optDurationLong: 'Lang (4 Sekunden)',
+
+      // VGT Ad Shield
+      lblSecAds: 'VGT Ad Shield (Werbeblocker)',
+      lblSecAdsNote: 'Netzwerk-Filterung, Zero-Flicker kosmetische Element-Ausblendung und Anti-Adblock-Entschärfung.',
+      optAdMasterTitle: 'VGT Ad Shield Master-Schutz',
+      optAdMasterNote: 'Blockiert Werbenetzwerke, Videoanzeigen, gesponserte Feeds und Werbe-Exchanges.',
+      optCosmeticTitle: 'Kosmetische Element-Ausblendung',
+      optCosmeticNote: 'Entfernt leere Anzeigenrahmen, Banner-Slots und Sponsoring-Container ohne Flackern.',
+      optAntiAdblockTitle: 'Anti-Adblock-Bypass & Skripthärtung',
+      optAntiAdblockNote: 'Umgeht Adblock-Erkennungsmauern und entschärft künstliche Köder-Elemente (Bait Traps).',
+      optPopunderTitle: 'Popunder- & Klickfalle-Abwehr',
+      optPopunderNote: 'Neutralisiert unaufgeforderte Hintergrund-Popups und unsichtbare Klick-Überlagerungen.',
 
       optUrlStripTitle: 'URL-Tracking-Token Stripper',
       optUrlStripNote: 'Entfernt utm_*, fbclid, gclid und 16 weitere Parameter automatisch aus der Adresszeile.',
@@ -434,7 +460,7 @@
 
       metricBrands: 'Бренды',
       metricBlocked: 'Отражено',
-      metricTrackers: 'Трекеры',
+      metricTrackers: 'Реклама и трекеры',
       metricTrackersScope: 'Вкладка: {tab} · Всего: {total}',
 
       settingPreflight: 'Строгий режим предпроверки',
@@ -450,8 +476,8 @@
       noticeAegis: 'Офлайн-защита от отслеживания через Canvas, WebGL, Audio и системные шрифты.',
       btnRotateSeed: 'Сменить цифровой след',
       toastAegisRotated: 'Цифровой след обновлен',
-      settingTrackers: 'AEGIS Блокировка трекеров и телеметрии',
-      noticeTrackers: 'Блокирует аналитические сети, рекламную телеметрию и удаляет метки отслеживания из URL.',
+      settingTrackers: 'AEGIS Защита от рекламы и трекеров',
+      noticeTrackers: 'Блокирует рекламные сети, баннеры, аналитику и удаляет метки отслеживания из URL.',
       settingGeDefense: 'GeDefense Light (Защита DOM и скриптов)',
       noticeGeDefense: 'Защищает JavaScript от вредоносных манипуляций с DOM, Self-XSS, атак на прототипы и инъекций скриптов.',
 
@@ -459,6 +485,7 @@
       optionsTitle: 'Настройки',
       optionsSubtitle: 'Локальная конфигурация и параметры защиты VGT',
       tabGeneral: 'Фишинг и защита',
+      tabAds: 'Блокировщик рекламы',
       tabTrackers: 'Трекеры и телеметрия',
       tabGeDefense: 'GeDefense (DOM и скрипты)',
       tabFingerprinting: 'Антифингерпринтинг',
@@ -473,6 +500,18 @@
       optDurationFast: 'Быстро (1.5 секунды)',
       optDurationNormal: 'Стандартно (2.5 секунды)',
       optDurationLong: 'Долго (4 секунды)',
+
+      // VGT Ad Shield
+      lblSecAds: 'VGT Ad Shield (Блокировка рекламы)',
+      lblSecAdsNote: 'Сетевая фильтрация, скрытие рекламных элементов без мерцания и обход анти-блокировщиков.',
+      optAdMasterTitle: 'Мастер-защита VGT Ad Shield',
+      optAdMasterNote: 'Блокирует баннерные сети, видеорекламу, спонсорские блоки и рекламные биржи.',
+      optCosmeticTitle: 'Косметическое скрытие элементов',
+      optCosmeticNote: 'Скрывает пустые рекламные блоки, баннеры и спонсорские контейнеры без мерцания.',
+      optAntiAdblockTitle: 'Нейтрализация анти-блокировщиков',
+      optAntiAdblockNote: 'Обходит экраны обнаружения блокировщиков и нейтрализует проверочные ловушки.',
+      optPopunderTitle: 'Защита от попандеров и клик-ловушек',
+      optPopunderNote: 'Блокирует фоновые всплывающие окна и скрытые клик-ловушки.',
 
       optUrlStripTitle: 'Очистка URL от меток слежения',
       optUrlStripNote: 'Автоматически удаляет utm_*, fbclid, gclid и еще 16 параметров из адреса.',
@@ -610,7 +649,7 @@
 
       metricBrands: '品牌数',
       metricBlocked: '已拦截',
-      metricTrackers: '跟踪器',
+      metricTrackers: '广告与追踪器',
       metricTrackersScope: '标签页: {tab} · 总计: {total}',
 
       settingPreflight: '严格预检模式',
@@ -626,8 +665,8 @@
       noticeAegis: '离线抵御 Canvas、WebGL、音频和字体指纹追踪及跨站跟踪。',
       btnRotateSeed: '重置数字身份',
       toastAegisRotated: '数字身份已刷新',
-      settingTrackers: 'AEGIS 追踪器与遥测拦截',
-      noticeTrackers: '拦截分析网络、广告遥测，并自动清除网址中的追踪参数。',
+      settingTrackers: 'AEGIS 广告与追踪防护',
+      noticeTrackers: '拦截分析网络、广告网络、横幅，并自动清除网址中的追踪参数。',
       settingGeDefense: 'GeDefense Light（DOM 与脚本防御）',
       noticeGeDefense: '防护 JavaScript 免受恶意 DOM 篡改、Self-XSS、原型链攻击和危险脚本注入。',
 
@@ -635,6 +674,7 @@
       optionsTitle: '设置',
       optionsSubtitle: '本地配置与 VGT 安全防护参数',
       tabGeneral: '钓鱼防护与基础',
+      tabAds: '广告拦截器',
       tabTrackers: '追踪器与遥测',
       tabGeDefense: 'GeDefense（DOM 与脚本）',
       tabFingerprinting: '反指纹追踪',
@@ -649,6 +689,18 @@
       optDurationFast: '快速（1.5 秒）',
       optDurationNormal: '标准（2.5 秒）',
       optDurationLong: '较长（4 秒）',
+
+      // VGT Ad Shield
+      lblSecAds: 'VGT Ad Shield（广告拦截）',
+      lblSecAdsNote: '网络请求过滤、无闪烁广告元素视觉隐藏与反广告拦截规避。',
+      optAdMasterTitle: 'VGT Ad Shield 主保护',
+      optAdMasterNote: '拦截横幅广告网络、视频广告、赞助内容和广告交易平台。',
+      optCosmeticTitle: '视觉元素隐藏（Element Hiding）',
+      optCosmeticNote: '无闪烁折叠空白广告框、横幅展位及赞助容器。',
+      optAntiAdblockTitle: '反广告拦截规避与脚本免疫',
+      optAntiAdblockNote: '绕过广告拦截检测墙并消除诱饵元素检查。',
+      optPopunderTitle: '弹窗与点击陷阱防御',
+      optPopunderNote: '阻断未请求的后台弹窗和不可见的隐形点击劫持覆盖层。',
 
       optUrlStripTitle: '网址追踪参数清理器',
       optUrlStripNote: '自动从网址中清除 utm_*、fbclid、gclid 等 19 种追踪参数。',

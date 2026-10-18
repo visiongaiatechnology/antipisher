@@ -25,6 +25,12 @@
     showSafeToast: true,
     toastDuration: 2500,
 
+    // VGT Ad Shield (Werbeblocker)
+    adShieldEnabled: true,
+    cosmeticFiltering: true,
+    antiAdblockDefuser: true,
+    popunderDefense: true,
+
     // Trackers & Telemetry
     aegisTrackerShield: true,
     sanitizeUrlParams: true,
@@ -125,7 +131,13 @@
     if ($('chkSafeToast')) $('chkSafeToast').checked = cfg.showSafeToast !== false;
     if ($('selToastDuration')) $('selToastDuration').value = String(cfg.toastDuration || 2500);
 
-    // 2. Trackers & Telemetry
+    // 2. VGT Ad Shield (Werbeblocker)
+    if ($('chkAdShield')) $('chkAdShield').checked = cfg.adShieldEnabled !== false;
+    if ($('chkCosmetic')) $('chkCosmetic').checked = cfg.cosmeticFiltering !== false;
+    if ($('chkAntiAdblock')) $('chkAntiAdblock').checked = cfg.antiAdblockDefuser !== false;
+    if ($('chkPopunder')) $('chkPopunder').checked = cfg.popunderDefense !== false;
+
+    // 3. Trackers & Telemetry
     if ($('chkTrackerShield')) $('chkTrackerShield').checked = cfg.aegisTrackerShield !== false;
     if ($('chkUrlStrip')) $('chkUrlStrip').checked = cfg.sanitizeUrlParams !== false;
     if ($('chkBeacon')) $('chkBeacon').checked = cfg.defuseBeacons !== false;
@@ -316,6 +328,10 @@
         formShieldEnabled: currentConfig.formShieldEnabled,
         showSafeToast: currentConfig.showSafeToast,
         toastDuration: currentConfig.toastDuration,
+        adShieldEnabled: currentConfig.adShieldEnabled,
+        cosmeticFiltering: currentConfig.cosmeticFiltering,
+        antiAdblockDefuser: currentConfig.antiAdblockDefuser,
+        popunderDefense: currentConfig.popunderDefense,
         aegisTrackerShield: currentConfig.aegisTrackerShield,
         sanitizeUrlParams: currentConfig.sanitizeUrlParams,
         defuseBeacons: currentConfig.defuseBeacons,
@@ -356,6 +372,7 @@
         const updated = { ...currentConfig };
         const allowedKeys = [
           'strictMode', 'formShieldEnabled', 'showSafeToast', 'toastDuration',
+          'adShieldEnabled', 'cosmeticFiltering', 'antiAdblockDefuser', 'popunderDefense',
           'aegisTrackerShield', 'sanitizeUrlParams', 'defuseBeacons', 'showBadgeCount',
           'geDefenseLight', 'selfXssWarning', 'blockProtocolInjection',
           'aegisProtection', 'spoofCanvas', 'spoofWebGL', 'spoofAudio',
@@ -415,6 +432,7 @@
     if ($('lblOfflineChip')) $('lblOfflineChip').textContent = i18n.t('footerOffline', currentLang);
 
     if ($('tabLblGeneral')) $('tabLblGeneral').textContent = i18n.t('tabGeneral', currentLang);
+    if ($('tabLblAds')) $('tabLblAds').textContent = i18n.t('tabAds', currentLang);
     if ($('tabLblTrackers')) $('tabLblTrackers').textContent = i18n.t('tabTrackers', currentLang);
     if ($('tabLblGeDefense')) $('tabLblGeDefense').textContent = i18n.t('tabGeDefense', currentLang);
     if ($('tabLblFingerprinting')) $('tabLblFingerprinting').textContent = i18n.t('tabFingerprinting', currentLang);
@@ -436,7 +454,19 @@
     if ($('optDurNormal')) $('optDurNormal').textContent = i18n.t('optDurationNormal', currentLang);
     if ($('optDurLong')) $('optDurLong').textContent = i18n.t('optDurationLong', currentLang);
 
-    // Section 2: Trackers
+    // Section 2: VGT Ad Shield
+    if ($('lblSecAds')) $('lblSecAds').textContent = i18n.t('lblSecAds', currentLang);
+    if ($('lblSecAdsNote')) $('lblSecAdsNote').textContent = i18n.t('lblSecAdsNote', currentLang);
+    if ($('optAdMasterTitle')) $('optAdMasterTitle').textContent = i18n.t('optAdMasterTitle', currentLang);
+    if ($('optAdMasterNote')) $('optAdMasterNote').textContent = i18n.t('optAdMasterNote', currentLang);
+    if ($('optCosmeticTitle')) $('optCosmeticTitle').textContent = i18n.t('optCosmeticTitle', currentLang);
+    if ($('optCosmeticNote')) $('optCosmeticNote').textContent = i18n.t('optCosmeticNote', currentLang);
+    if ($('optAntiAdblockTitle')) $('optAntiAdblockTitle').textContent = i18n.t('optAntiAdblockTitle', currentLang);
+    if ($('optAntiAdblockNote')) $('optAntiAdblockNote').textContent = i18n.t('optAntiAdblockNote', currentLang);
+    if ($('optPopunderTitle')) $('optPopunderTitle').textContent = i18n.t('optPopunderTitle', currentLang);
+    if ($('optPopunderNote')) $('optPopunderNote').textContent = i18n.t('optPopunderNote', currentLang);
+
+    // Section 3: Trackers
     if ($('lblSecTrackers')) $('lblSecTrackers').textContent = i18n.t('settingTrackers', currentLang);
     if ($('lblSecTrackersNote')) $('lblSecTrackersNote').textContent = i18n.t('noticeTrackers', currentLang);
     if ($('optTrackerMasterTitle')) $('optTrackerMasterTitle').textContent = i18n.t('settingTrackers', currentLang);
@@ -448,7 +478,7 @@
     if ($('optBadgeTitle')) $('optBadgeTitle').textContent = i18n.t('optBadgeTitle', currentLang);
     if ($('optBadgeNote')) $('optBadgeNote').textContent = i18n.t('optBadgeNote', currentLang);
 
-    // Section 3: GeDefense
+    // Section 4: GeDefense
     if ($('lblSecGeDefense')) $('lblSecGeDefense').textContent = i18n.t('settingGeDefense', currentLang);
     if ($('lblSecGeDefenseNote')) $('lblSecGeDefenseNote').textContent = i18n.t('noticeGeDefense', currentLang);
     if ($('optGeDefenseMasterTitle')) $('optGeDefenseMasterTitle').textContent = i18n.t('settingGeDefense', currentLang);
@@ -458,7 +488,7 @@
     if ($('optProtocolTitle')) $('optProtocolTitle').textContent = i18n.t('optProtocolTitle', currentLang);
     if ($('optProtocolNote')) $('optProtocolNote').textContent = i18n.t('optProtocolNote', currentLang);
 
-    // Section 4: Anti-Fingerprinting
+    // Section 5: Anti-Fingerprinting
     if ($('lblSecFingerprinting')) $('lblSecFingerprinting').textContent = i18n.t('settingAegis', currentLang);
     if ($('lblSecFingerprintingNote')) $('lblSecFingerprintingNote').textContent = i18n.t('noticeAegis', currentLang);
     if ($('optAegisMasterTitle')) $('optAegisMasterTitle').textContent = i18n.t('settingAegis', currentLang);
@@ -472,14 +502,14 @@
     if ($('optSeedTitle')) $('optSeedTitle').textContent = i18n.t('btnRotateSeed', currentLang);
     if ($('lblBtnRotate')) $('lblBtnRotate').textContent = i18n.t('btnRotateSeed', currentLang);
 
-    // Section 5: Whitelist
+    // Section 6: Whitelist
     if ($('optWhitelistTitle')) $('optWhitelistTitle').textContent = i18n.t('optWhitelistTitle', currentLang);
     if ($('optWhitelistNote')) $('optWhitelistNote').textContent = i18n.t('optWhitelistNote', currentLang);
     if ($('txtWhitelistInput')) $('txtWhitelistInput').placeholder = i18n.t('optWhitelistPlaceholder', currentLang);
     if ($('lblBtnAddWhitelist')) $('lblBtnAddWhitelist').textContent = i18n.t('optWhitelistAdd', currentLang);
     if ($('lblWhitelistEmpty')) $('lblWhitelistEmpty').textContent = i18n.t('optWhitelistEmpty', currentLang);
 
-    // Section 6: System & Data
+    // Section 7: System & Data
     if ($('lblSecData')) $('lblSecData').textContent = i18n.t('tabData', currentLang);
     if ($('optLangTitle')) $('optLangTitle').textContent = i18n.t('optLangTitle', currentLang);
     if ($('optLangNote')) $('optLangNote').textContent = i18n.t('optLangNote', currentLang);
@@ -509,7 +539,21 @@
       $('selToastDuration').addEventListener('change', (e) => saveSetting('toastDuration', Number(e.target.value)));
     }
 
-    // 2. Trackers
+    // 2. VGT Ad Shield
+    if ($('chkAdShield')) {
+      $('chkAdShield').addEventListener('change', (e) => saveSetting('adShieldEnabled', e.target.checked));
+    }
+    if ($('chkCosmetic')) {
+      $('chkCosmetic').addEventListener('change', (e) => saveSetting('cosmeticFiltering', e.target.checked));
+    }
+    if ($('chkAntiAdblock')) {
+      $('chkAntiAdblock').addEventListener('change', (e) => saveSetting('antiAdblockDefuser', e.target.checked));
+    }
+    if ($('chkPopunder')) {
+      $('chkPopunder').addEventListener('change', (e) => saveSetting('popunderDefense', e.target.checked));
+    }
+
+    // 3. Trackers
     if ($('chkTrackerShield')) {
       $('chkTrackerShield').addEventListener('change', (e) => saveSetting('aegisTrackerShield', e.target.checked));
     }

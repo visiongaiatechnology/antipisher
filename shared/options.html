@@ -39,6 +39,13 @@
         <span id="tabLblGeneral">Phishing & Basis</span>
       </button>
 
+      <button type="button" class="tab-btn" role="tab" id="tabAds" aria-selected="false" aria-controls="panelAds">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="18" height="18" x="3" y="3" rx="2"/><path d="m3 9 18 0"/><path d="m9 21 0-12"/><path d="m14 13 4 4m0-4-4 4"/>
+        </svg>
+        <span id="tabLblAds">Werbeblocker</span>
+      </button>
+
       <button type="button" class="tab-btn" role="tab" id="tabTrackers" aria-selected="false" aria-controls="panelTrackers">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/>
@@ -131,7 +138,61 @@
         </div>
       </section>
 
-      <!-- 2. TRACKERS -->
+      <!-- 2. VGT AD SHIELD -->
+      <section class="tab-panel" id="panelAds" role="tabpanel" aria-labelledby="tabAds" hidden>
+        <div class="section-lead">
+          <h2 id="lblSecAds">VGT Ad Shield (Werbeblocker)</h2>
+          <p id="lblSecAdsNote">Netzwerk-Filterung, Zero-Flicker kosmetische Element-Ausblendung und Anti-Adblock-Entschärfung.</p>
+        </div>
+
+        <div class="opt-card">
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optAdMasterTitle">VGT Ad Shield Master-Schutz</span>
+              <span class="opt-note" id="optAdMasterNote">Blockiert Werbenetzwerke, Videoanzeigen, gesponserte Feeds und Werbe-Exchanges.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkAdShield">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optCosmeticTitle">Kosmetische Element-Ausblendung</span>
+              <span class="opt-note" id="optCosmeticNote">Entfernt leere Anzeigenrahmen, Banner-Slots und Sponsoring-Container ohne Flackern.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkCosmetic">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optAntiAdblockTitle">Anti-Adblock-Bypass &amp; Skripthärtung</span>
+              <span class="opt-note" id="optAntiAdblockNote">Umgeht Adblock-Erkennungsmauern und entschärft künstliche Köder-Elemente (Bait Traps).</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkAntiAdblock">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="opt-row">
+            <div class="opt-copy">
+              <span class="opt-title" id="optPopunderTitle">Popunder- &amp; Klickfalle-Abwehr</span>
+              <span class="opt-note" id="optPopunderNote">Neutralisiert unaufgeforderte Hintergrund-Popups und unsichtbare Klick-Überlagerungen.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkPopunder">
+              <span class="switch-track" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. TRACKERS -->
       <section class="tab-panel" id="panelTrackers" role="tabpanel" aria-labelledby="tabTrackers" hidden>
         <div class="section-lead">
           <h2 id="lblSecTrackers">AEGIS Tracker- &amp; Telemetrie-Schutz</h2>
