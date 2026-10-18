@@ -600,9 +600,31 @@
     const SAFE_PROTOCOLS = /^(?:https?|mailto|tel|blob|data):/i;
     const killTags = ['script', 'iframe', 'object', 'embed', 'applet', 'base', 'meta'];
 
+    const isTrustedHTML = (val) => {
+      return Boolean(WIN.trustedTypes && typeof WIN.trustedTypes.isHTML === 'function' && WIN.trustedTypes.isHTML(val));
+    };
+
+    let _trustedTypesEnforced = null;
+    const isTrustedTypesEnforced = () => {
+      if (_trustedTypesEnforced !== null) return _trustedTypesEnforced;
+      if (!WIN.trustedTypes || !DOC || typeof DOC.createElement !== 'function') return (_trustedTypesEnforced = false);
+      try {
+        const dummy = DOC.createElement('div');
+        if (_origInnerHTML_set) {
+          _origInnerHTML_set.call(dummy, '');
+        } else {
+          dummy.innerHTML = '';
+        }
+        return (_trustedTypesEnforced = false);
+      } catch {
+        return (_trustedTypesEnforced = true);
+      }
+    };
+
     const sanitizeHTML = (dirtyHtml) => {
       if (typeof dirtyHtml !== 'string') return dirtyHtml;
       if (dirtyHtml.trim() === '') return '';
+      if (isTrustedHTML(dirtyHtml) || isTrustedTypesEnforced()) return dirtyHtml;
 
       // Cognitive Fast-Path Engine:
       const hasSusTag   = /<\s*(script|iframe|object|embed|applet|base|meta)/i.test(dirtyHtml);
@@ -691,12 +713,24 @@
     if (_origInnerHTMLDesc && _origInnerHTMLDesc.set) {
       const hookedInnerHTML = {
         set: function(value) {
-          if (!CONFIG.GEDEFENSE_LIGHT) {
-            _origInnerHTMLDesc.set.call(this, value);
+          if (!CONFIG.GEDEFENSE_LIGHT || isTrustedHTML(value) || isTrustedTypesEnforced()) {
+            if (_origInnerHTML_set) _origInnerHTML_set.call(this, value);
+            else this.innerHTML = value;
             return;
           }
-          const safeVal = vgtPolicy ? vgtPolicy.createHTML(value) : sanitizeHTML(value);
-          _origInnerHTMLDesc.set.call(this, safeVal);
+          try {
+            const safeVal = vgtPolicy ? vgtPolicy.createHTML(value) : sanitizeHTML(value);
+            if (_origInnerHTML_set) {
+              _origInnerHTML_set.call(this, safeVal);
+            } else {
+              this.innerHTML = safeVal;
+            }
+          } catch (err) {
+            try {
+              if (_origInnerHTML_set) _origInnerHTML_set.call(this, value);
+              else this.innerHTML = value;
+            } catch { /* suppress to prevent page breakage on strict CSP */ }
+          }
         },
         get: _origInnerHTMLDesc.get,
         configurable: true,
@@ -712,12 +746,24 @@
     if (_origOuterHTMLDesc && _origOuterHTMLDesc.set) {
       const hookedOuterHTML = {
         set: function(value) {
-          if (!CONFIG.GEDEFENSE_LIGHT) {
-            _origOuterHTMLDesc.set.call(this, value);
+          if (!CONFIG.GEDEFENSE_LIGHT || isTrustedHTML(value) || isTrustedTypesEnforced()) {
+            if (_origOuterHTMLDesc.set) _origOuterHTMLDesc.set.call(this, value);
+            else this.outerHTML = value;
             return;
           }
-          const safeVal = vgtPolicy ? vgtPolicy.createHTML(value) : sanitizeHTML(value);
-          _origOuterHTMLDesc.set.call(this, safeVal);
+          try {
+            const safeVal = vgtPolicy ? vgtPolicy.createHTML(value) : sanitizeHTML(value);
+            if (_origOuterHTMLDesc.set) {
+              _origOuterHTMLDesc.set.call(this, safeVal);
+            } else {
+              this.outerHTML = safeVal;
+            }
+          } catch (err) {
+            try {
+              if (_origOuterHTMLDesc.set) _origOuterHTMLDesc.set.call(this, value);
+              else this.outerHTML = value;
+            } catch { /* suppress to prevent page breakage on strict CSP */ }
+          }
         },
         get: _origOuterHTMLDesc.get,
         configurable: true,
@@ -732,11 +778,15 @@
     // Hook insertAdjacentHTML
     if (_origInsertAdjacentHTML) {
       const hookedInsertAdjacentHTML = function(position, text) {
-        if (!CONFIG.GEDEFENSE_LIGHT) {
+        if (!CONFIG.GEDEFENSE_LIGHT || isTrustedHTML(text) || isTrustedTypesEnforced()) {
           return _origInsertAdjacentHTML.call(this, position, text);
         }
-        const safeText = vgtPolicy ? vgtPolicy.createHTML(text) : sanitizeHTML(text);
-        return _origInsertAdjacentHTML.call(this, position, safeText);
+        try {
+          const safeText = vgtPolicy ? vgtPolicy.createHTML(text) : sanitizeHTML(text);
+          return _origInsertAdjacentHTML.call(this, position, safeText);
+        } catch {
+          return _origInsertAdjacentHTML.call(this, position, text);
+        }
       };
       cloak(hookedInsertAdjacentHTML, _origInsertAdjacentHTML, 'insertAdjacentHTML');
       WIN.Element.prototype.insertAdjacentHTML = hookedInsertAdjacentHTML;
@@ -810,7 +860,28 @@
     '[class*="floating-ad"]',
     '[class*="sticky-ad"]',
     '[id*="floating-video-ad"]',
-    '[class*="video-ad-unit"]'
+    '[class*="video-ad-unit"]',
+    // YouTube Cosmetic Filters (uBlock Origin inspired · 100% Offline)
+    'ytd-ad-slot-renderer',
+    '#masthead-ad',
+    'ytd-banner-promo-renderer',
+    'ytd-statement-banner-renderer',
+    'ytd-in-feed-ad-layout-renderer',
+    'ytd-player-legacy-desktop-watch-ads-renderer',
+    '.ytd-merch-shelf-renderer',
+    '.ytp-ad-module',
+    '.ytp-ad-overlay-container',
+    '.ytp-ad-player-overlay',
+    '.ytp-ad-image-overlay',
+    '.ytp-ad-text',
+    '#player-ads',
+    'ytd-promoted-video-renderer',
+    'ytd-compact-promoted-video-renderer',
+    '#shopping-timely-shelf',
+    '#panels > ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"]',
+    'ytd-rich-item-renderer:has(> #content > ytd-ad-slot-renderer)',
+    '#contents > ytd-rich-item-renderer:has(> ytd-ad-slot-renderer)',
+    '.ytd-watch-flexy > .ytd-watch-next-secondary-results-renderer > ytd-ad-slot-renderer'
   ];
 
   const COSMETIC_CSS = AD_SELECTORS.join(',\n') + ` {
@@ -1079,6 +1150,184 @@
     }
   };
 
+  // 14. YouTube Ad Shield Engine (uBlock Origin inspired · 100% Offline)
+  const injectYouTubeShield = () => {
+    if (!CONFIG.ENABLED || !CONFIG.AD_SHIELD) return;
+
+    const isYouTube = () => {
+      try {
+        const hn = WIN.location ? (WIN.location.hostname || '') : '';
+        return hn.includes('youtube.com') || hn.includes('youtube-nocookie.com') || hn.includes('youtubekids.com');
+      } catch {
+        return false;
+      }
+    };
+
+    if (!isYouTube()) return;
+
+    // Helper: Prune adPlacements, playerAds, and adSlots from YouTube JSON response
+    const prunePlayerResponse = (obj) => {
+      if (!obj || typeof obj !== 'object') return obj;
+      try {
+        delete obj.adPlacements;
+        delete obj.adSlots;
+        delete obj.playerAds;
+        if (obj.playerResponse && typeof obj.playerResponse === 'object') {
+          delete obj.playerResponse.adPlacements;
+          delete obj.playerResponse.adSlots;
+          delete obj.playerResponse.playerAds;
+        }
+      } catch {}
+      return obj;
+    };
+
+    // A. Intercept & neutralize window.ytInitialPlayerResponse
+    try {
+      let _ytPlayerResponse = WIN.ytInitialPlayerResponse;
+      if (_ytPlayerResponse) {
+        prunePlayerResponse(_ytPlayerResponse);
+      }
+      Object.defineProperty(WIN, 'ytInitialPlayerResponse', {
+        configurable: true,
+        enumerable: true,
+        get: () => _ytPlayerResponse,
+        set: (val) => {
+          _ytPlayerResponse = prunePlayerResponse(val);
+        }
+      });
+    } catch {}
+
+    // B. Intercept fetch for /youtubei/v1/player & /reel_watch_sequence
+    try {
+      const origFetch = WIN.fetch;
+      if (typeof origFetch === 'function') {
+        WIN.fetch = async function(...args) {
+          const url = typeof args[0] === 'string' ? args[0] : (args[0] && args[0].url) || '';
+          if (typeof url === 'string' && (url.includes('/youtubei/v1/player') || url.includes('/youtubei/v1/reel/reel_watch_sequence'))) {
+            try {
+              const response = await origFetch.apply(this, args);
+              const cloned = response.clone();
+              const data = await cloned.json();
+              if (data && typeof data === 'object') {
+                prunePlayerResponse(data);
+                notifyTrackerBlocked('adshield:youtube-player-pruned');
+                const ResponseCtor = (WIN && WIN.Response) || (typeof Response !== 'undefined' ? Response : null);
+                if (ResponseCtor) {
+                  return new ResponseCtor(JSON.stringify(data), {
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: response.headers
+                  });
+                }
+              }
+              return response;
+            } catch {
+              return origFetch.apply(this, args);
+            }
+          }
+          return origFetch.apply(this, args);
+        };
+        cloak(WIN.fetch, origFetch, 'fetch');
+      }
+    } catch {}
+
+    // C. Intercept XMLHttpRequest for /youtubei/v1/player
+    try {
+      if (WIN.XMLHttpRequest) {
+        const origOpen = WIN.XMLHttpRequest.prototype.open;
+        const _xhrUrls = new WeakMap();
+
+        WIN.XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+          if (typeof url === 'string') {
+            _xhrUrls.set(this, url);
+          }
+          return origOpen.call(this, method, url, ...rest);
+        };
+        cloak(WIN.XMLHttpRequest.prototype.open, origOpen, 'open');
+
+        const origResponseTextDesc = Object.getOwnPropertyDescriptor(WIN.XMLHttpRequest.prototype, 'responseText');
+        if (origResponseTextDesc && origResponseTextDesc.get) {
+          Object.defineProperty(WIN.XMLHttpRequest.prototype, 'responseText', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              const raw = origResponseTextDesc.get.call(this);
+              const url = _xhrUrls.get(this);
+              if (typeof url === 'string' && (url.includes('/youtubei/v1/player') || url.includes('/youtubei/v1/reel/reel_watch_sequence'))) {
+                try {
+                  const data = JSON.parse(raw);
+                  prunePlayerResponse(data);
+                  notifyTrackerBlocked('adshield:youtube-player-pruned');
+                  return JSON.stringify(data);
+                } catch {}
+              }
+              return raw;
+            }
+          });
+        }
+      }
+    } catch {}
+
+    // D. Video Ad Accelerator & Auto-Skip Fallback Engine
+    const runAdSkipper = () => {
+      if (!DOC) return;
+      try {
+        const player = DOC.querySelector('#movie_player, .html5-video-player');
+        if (player) {
+          const isAd = player.classList.contains('ad-showing') || 
+                       player.classList.contains('ad-interrupting') ||
+                       DOC.querySelector('.ytp-ad-player-overlay, .ytp-ad-module') !== null;
+
+          if (isAd) {
+            const video = player.querySelector('video') || DOC.querySelector('video');
+            if (video) {
+              video.muted = true;
+              if (isFinite(video.duration) && video.duration > 0) {
+                video.currentTime = video.duration;
+              }
+              video.playbackRate = 16.0;
+            }
+
+            const skipBtns = DOC.querySelectorAll([
+              '.ytp-ad-skip-button',
+              '.ytp-ad-skip-button-modern',
+              '.ytp-skip-ad-button',
+              'button.ytp-ad-skip-button-icon',
+              '.ytp-ad-overlay-close-button'
+            ].join(','));
+
+            for (let i = 0; i < skipBtns.length; i++) {
+              const btn = skipBtns[i];
+              if (typeof btn.click === 'function') {
+                btn.click();
+                notifyTrackerBlocked('adshield:youtube-video-skipped');
+              }
+            }
+          }
+        }
+
+        // Anti-Adblock Warning / Modal Auto-Dismissal
+        const modals = DOC.querySelectorAll('ytd-enforcement-message-view-model, #dialog[role="dialog"]:has(ytd-enforcement-message-view-model)');
+        for (let i = 0; i < modals.length; i++) {
+          modals[i].remove();
+          notifyTrackerBlocked('adshield:youtube-anti-adblock-dismissed');
+          const v = DOC.querySelector('video');
+          if (v && v.paused) v.play().catch(() => {});
+          if (DOC.body) DOC.body.style.overflow = 'auto';
+        }
+      } catch {}
+    };
+
+    try {
+      if (WIN.setInterval) {
+        WIN.setInterval(runAdSkipper, 150);
+      }
+      if (typeof DOC.addEventListener === 'function') {
+        DOC.addEventListener('timeupdate', runAdSkipper, true);
+      }
+    } catch {}
+  };
+
   // --- INITIALIZATION ---
   const applyAllDefenses = () => {
     try {
@@ -1095,6 +1344,7 @@
       injectCosmeticCSS();
       injectDynamicAdObserver();
       injectAdBlockDefusers();
+      injectYouTubeShield();
     } catch (e) {
       if (CONFIG.DEBUG_MODE) console.error('AEGIS PROTOCOL error:', e);
     }
@@ -1122,6 +1372,7 @@
     injectCosmeticCSS,
     removeCosmeticCSS,
     injectAdBlockDefusers,
+    injectYouTubeShield,
     AD_SELECTORS,
     prng,
     cloak

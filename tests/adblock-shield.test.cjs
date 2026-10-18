@@ -38,6 +38,11 @@ function createAdblockSandbox(opts = {}) {
       this.className = '';
       this.children = [];
       this.parentNode = null;
+      this.classList = {
+        contains: (c) => (this.className || '').split(/\s+/).includes(c),
+        add: (c) => { if (!this.classList.contains(c)) this.className = (this.className + ' ' + c).trim(); },
+        remove: (c) => { this.className = (this.className || '').split(/\s+/).filter(x => x !== c).join(' '); }
+      };
     }
     setAttribute(k, v) { this.attributes[k] = String(v); }
     getAttribute(k) { return this.attributes[k] || null; }
@@ -63,6 +68,9 @@ function createAdblockSandbox(opts = {}) {
       }
       return child;
     }
+    remove() {
+      if (this.parentNode) this.parentNode.removeChild(this);
+    }
     matches(sel) {
       if (!sel) return false;
       const parts = sel.split(',').map(s => s.trim().toLowerCase());
@@ -71,13 +79,22 @@ function createAdblockSandbox(opts = {}) {
       const id = (this.attributes['id'] || '').toLowerCase();
       for (const p of parts) {
         if (p === tag) return true;
-        if (p.startsWith('.') && cls.includes(p.slice(1))) return true;
+        if (p.startsWith('.') && cls.split(/\s+/).includes(p.slice(1))) return true;
         if (p.startsWith('#') && id === p.slice(1)) return true;
+        if (p.includes('movie_player') && id === 'movie_player') return true;
+        if (p.includes('html5-video-player') && cls.includes('html5-video-player')) return true;
+        if (p.includes('ad-showing') && cls.includes('ad-showing')) return true;
+        if (p.includes('ytp-ad-skip-button') && cls.includes('ytp-ad-skip-button')) return true;
+        if (p.includes('ytd-enforcement-message-view-model') && tag === 'ytd-enforcement-message-view-model') return true;
         if (p.includes('adsbygoogle') && (cls.includes('adsbygoogle') || tag === 'ins')) return true;
         if (p.includes('ad-container') && cls.includes('ad-container')) return true;
         if (p.includes('ad-banner') && cls.includes('ad-banner')) return true;
       }
       return false;
+    }
+    querySelector(sel) {
+      const all = this.querySelectorAll(sel);
+      return all.length > 0 ? all[0] : null;
     }
     querySelectorAll(sel) {
       const results = [];
@@ -91,6 +108,8 @@ function createAdblockSandbox(opts = {}) {
       return results;
     }
   }
+
+  const docListeners = new Map();
 
   const fakeDoc = {
     readyState: 'complete',
@@ -107,13 +126,24 @@ function createAdblockSandbox(opts = {}) {
       if (id === 'vgt-ad-shield-style') {
         return createdElements.find(e => e.id === 'vgt-ad-shield-style') || null;
       }
-      return null;
+      return this.querySelector('#' + id);
+    },
+    querySelector(sel) {
+      if (this.documentElement.matches && this.documentElement.matches(sel)) return this.documentElement;
+      return this.documentElement.querySelector(sel);
+    },
+    querySelectorAll(sel) {
+      return this.documentElement.querySelectorAll(sel);
     },
     addEventListener(type, fn) {
       if (type === 'DOMContentLoaded') setTimeout(fn, 1);
+      if (!docListeners.has(type)) docListeners.set(type, []);
+      docListeners.get(type).push(fn);
     },
     dispatchEvent(e) {
       eventsDispatched.push(e);
+      const fns = docListeners.get(e.type) || [];
+      for (const fn of fns) fn(e);
       return true;
     }
   };
@@ -302,3 +332,143 @@ test('VGT Ad Shield: MutationObserver detects and collapses dynamically added ad
   assert.equal(adBanner.style.getPropertyValue('display'), 'none', 'Ad banner must be hidden');
   assert.equal(adBanner.getAttribute('data-vgt-ad-blocked'), 'true', 'Ad banner must be stamped');
 });
+
+test('VGT Ad Shield: YouTube TrustedHTML resilience avoids Trusted Types errors', () => {
+  // Create YouTube sandbox with TrustedTypes simulation
+  const sandbox = createAdblockSandbox({
+    hostname: 'www.youtube.com',
+    href: 'https://www.youtube.com/watch?v=1vaCngYR7aU'
+  });
+  const { fakeWindow } = sandbox;
+
+  // Verify __AEGIS_OMEGA__ loaded cleanly
+  assert.ok(fakeWindow.__AEGIS_OMEGA__, 'Aegis engine must initialize on YouTube');
+  const aegis = fakeWindow.__AEGIS_OMEGA__;
+
+  // Verify sanitizeHTML handles non-string and trusted types safely
+  assert.equal(aegis.sanitizeHTML(''), '');
+  const dummyObj = { type: 'TrustedHTML' };
+  assert.equal(aegis.sanitizeHTML(dummyObj), dummyObj);
+
+  // Verify YouTube cosmetic selectors are present
+  assert.ok(aegis.AD_SELECTORS.includes('ytd-ad-slot-renderer'), 'ytd-ad-slot-renderer must be in AD_SELECTORS');
+  assert.ok(aegis.AD_SELECTORS.includes('#masthead-ad'), '#masthead-ad must be in AD_SELECTORS');
+  assert.ok(aegis.AD_SELECTORS.includes('.ytp-ad-module'), '.ytp-ad-module must be in AD_SELECTORS');
+});
+
+test('VGT Ad Shield: YouTube ytInitialPlayerResponse strips adPlacements, playerAds, and adSlots', () => {
+  const sandbox = createAdblockSandbox({
+    hostname: 'www.youtube.com',
+    href: 'https://www.youtube.com/watch?v=1vaCngYR7aU'
+  });
+  const { fakeWindow } = sandbox;
+
+  // Set mock ytInitialPlayerResponse as YouTube inline script would
+  fakeWindow.ytInitialPlayerResponse = {
+    videoDetails: { title: 'Test Video', videoId: '1vaCngYR7aU' },
+    adPlacements: [{ adPlacementRenderer: { cueRange: { startOffsetMs: 0 } } }],
+    playerAds: [{ playerLegacyDesktopWatchAdsRenderer: {} }],
+    adSlots: [{ adSlotRenderer: {} }],
+    playerResponse: {
+      adPlacements: [{ cue: 1 }],
+      adSlots: [{ slot: 1 }]
+    }
+  };
+
+  const response = fakeWindow.ytInitialPlayerResponse;
+  assert.ok(response, 'ytInitialPlayerResponse must exist');
+  assert.equal(response.videoDetails.title, 'Test Video');
+  assert.equal(response.adPlacements, undefined, 'adPlacements must be pruned');
+  assert.equal(response.playerAds, undefined, 'playerAds must be pruned');
+  assert.equal(response.adSlots, undefined, 'adSlots must be pruned');
+  assert.equal(response.playerResponse.adPlacements, undefined, 'nested playerResponse adPlacements must be pruned');
+});
+
+test('VGT Ad Shield: YouTube fetch interception prunes /youtubei/v1/player JSON', async () => {
+  const sandbox = createAdblockSandbox({
+    hostname: 'www.youtube.com',
+    href: 'https://www.youtube.com/watch?v=1vaCngYR7aU'
+  });
+  const { fakeWindow, ctx } = sandbox;
+
+  // Inject a mock native fetch
+  ctx.Response = class FakeResponse {
+    constructor(bodyText, init = {}) {
+      this._body = bodyText;
+      this.status = init.status || 200;
+      this.statusText = init.statusText || 'OK';
+      this.headers = init.headers || {};
+    }
+    clone() {
+      return new FakeResponse(this._body, { status: this.status, headers: this.headers });
+    }
+    async json() {
+      return JSON.parse(this._body);
+    }
+    async text() {
+      return this._body;
+    }
+  };
+
+  fakeWindow.fetch = async (url) => {
+    return new ctx.Response(JSON.stringify({
+      playabilityStatus: { status: 'OK' },
+      adPlacements: [{ ad: 1 }],
+      adSlots: [{ slot: 1 }]
+    }));
+  };
+
+  // Re-run injectYouTubeShield to hook fetch
+  fakeWindow.__AEGIS_OMEGA__.injectYouTubeShield();
+
+  const res = await fakeWindow.fetch('https://www.youtube.com/youtubei/v1/player?key=123');
+  const data = await res.json();
+
+  assert.equal(data.playabilityStatus.status, 'OK');
+  assert.equal(data.adPlacements, undefined, 'Fetch adPlacements must be pruned');
+  assert.equal(data.adSlots, undefined, 'Fetch adSlots must be pruned');
+});
+
+test('VGT Ad Shield: YouTube Video Ad Accelerator fast-forwards and auto-skips video ads', () => {
+  const sandbox = createAdblockSandbox({
+    hostname: 'www.youtube.com',
+    href: 'https://www.youtube.com/watch?v=1vaCngYR7aU'
+  });
+  const { fakeDoc, fakeWindow, ctx } = sandbox;
+
+  // Construct YouTube player DOM structure
+  const player = fakeDoc.createElement('div');
+  player.id = 'movie_player';
+  player.className = 'html5-video-player ad-showing';
+  fakeDoc.body.appendChild(player);
+
+  const video = fakeDoc.createElement('video');
+  video.duration = 30;
+  video.currentTime = 2;
+  video.muted = false;
+  video.playbackRate = 1.0;
+  player.appendChild(video);
+
+  let skipClicked = false;
+  const skipBtn = fakeDoc.createElement('button');
+  skipBtn.className = 'ytp-ad-skip-button ytp-button';
+  skipBtn.click = () => { skipClicked = true; };
+  player.appendChild(skipBtn);
+
+  // Also simulate YouTube Anti-Adblock modal
+  const antiAdblockModal = fakeDoc.createElement('ytd-enforcement-message-view-model');
+  fakeDoc.body.appendChild(antiAdblockModal);
+
+  // Trigger ad skipper
+  fakeDoc.dispatchEvent(new ctx.CustomEvent('timeupdate'));
+
+  // Video must be muted and fast-forwarded
+  assert.equal(video.muted, true, 'Ad video must be muted');
+  assert.equal(video.playbackRate, 16.0, 'Ad video playbackRate must be set to 16x');
+  assert.equal(video.currentTime, 30, 'Ad video must be jumped to duration end');
+  assert.equal(skipClicked, true, 'Skip button must be clicked automatically');
+
+  // Anti-adblock modal must be removed
+  assert.equal(antiAdblockModal.parentNode, null, 'Anti-adblock modal must be removed from DOM');
+});
+

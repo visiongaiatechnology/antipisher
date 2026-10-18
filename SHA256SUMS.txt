@@ -1,3 +1,3 @@
-ae59720fc0db00eabcb67fcfe708d9918d247441309cae3eb1d8e9896bdb844b  Antipisher-Chrome-v0.2.1-alpha.zip
-e606583868b161ccb225995ab5e49f369744be4a86cf1bc0a2d6dad069ce9bfc  Antipisher-Firefox-v0.2.1-alpha.zip
-6a17d77b429f2ad892ab407e4368055b5fe8d4581cba64b9174a716a281e9f84  Antipisher-Source-v0.2.1-alpha.zip
+3f4ec4c36a1026a39bc1b2c9bba411f6414f7a738ab3e25fb856c7a00f0d9dd6  Antipisher-Chrome-v0.2.1-alpha.zip
+04749715a2d329fbc8a0317c5a40d0fc0381f2a611d3368bacf3facb86d0b731  Antipisher-Firefox-v0.2.1-alpha.zip
+e8b0b979e5b5630d40c8e97d5b5bd932581a44bb91c34d8f2b3e5e5059da7124  Antipisher-Source-v0.2.1-alpha.zip
