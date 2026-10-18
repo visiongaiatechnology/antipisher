@@ -99,11 +99,19 @@
   - `node audit/lead/lead_probe.cjs` → **0/26 FP, 0/40 FN (100 % PASS)**
   - `powershell -ExecutionPolicy Bypass -File scripts/verify-release.ps1` → **3/3 OK**
 
+### 2026-10-18 19:44 — Checkpoint 010: **DNR Rule Unique ID Fix (Chrome MV3)**
+- **Fehlerbefund:** Chrome warf beim Installieren `Error: Rule with id 1000 does not have a unique ID` (Stacktrace `background.js:77`), da `onInstalled` und Top-Level-Initialisierung parallel liefen und `getDynamicRules()` vor dem Einfügen keine ID fand, wodurch `removeRuleIds: []` übergeben wurde.
+- **Fix:**
+  1. `configure()` serialisiert: Mutex-Promise verhindert parallele Ausführung bei gleichzeitigem `onInstalled` / Service-Worker-Start.
+  2. `removeRuleIds: [RULE_ID]` bedingungslos übergeben: Chrome ignoriert nicht existierende IDs fehlerfrei und entfernt Regel 1000 atomar vor dem Neueinfügen.
+  3. `tests/chrome-worker.test.cjs` erweitert um Unique-ID-Validierung im Mock und Concurrent-Startup-Test.
+- **Tests:** `node --test tests/*.test.cjs` → **39/39 PASS (100 %)**.
+
 ## Test-Ledger (zuletzt ausgeführt)
 
 | Befehl | Ergebnis |
 |---|---|
-| `node --test tests/*.test.cjs` (7 Dateien) | 38 pass / 0 fail, Exit 0 |
+| `node --test tests/*.test.cjs` (7 Dateien) | 39 pass / 0 fail, Exit 0 |
 | `node audit/verify/holdout/run_holdout.cjs` | 289/296, FN 0/166, FP 7/121, Exit 0 |
 | `node audit/verify/fix/fresh_sanity.cjs` | 42/44, Exit 0 |
 | `node audit/lead/lead_probe.cjs` | 0/26 FP, 0/40 FN, Exit 0 |

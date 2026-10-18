@@ -20,16 +20,27 @@ function markHealthy(){
   degraded=false;
   api.storage.local.set({protectionDegraded:false}).catch(()=>{});
 }
-async function configure() {
+let configPromise = null;
+function configure() {
+  if (configPromise) return configPromise;
+  configPromise = doConfigure().finally(() => {
+    configPromise = null;
+  });
+  return configPromise;
+}
+
+async function doConfigure() {
   const {strictMode=true}=await api.storage.local.get('strictMode');strict=strictMode;
   // Session allow rules can outlive MV3 service-worker instances. Fail closed on startup.
   const oldSessions=await api.declarativeNetRequest.getSessionRules();
   const stale=oldSessions.filter(r=>r.id>=ALLOW_START).map(r=>r.id);
   if(stale.length)await api.declarativeNetRequest.updateSessionRules({removeRuleIds:stale});
   pending.clear();
-  const existing=await api.declarativeNetRequest.getDynamicRules();
-  const ids=existing.filter(x=>x.id===RULE_ID).map(x=>x.id);
-  if(!strict){await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:ids});markHealthy();return;}
+  if(!strict){
+    await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:[RULE_ID]});
+    markHealthy();
+    return;
+  }
   const regex='^(https?://.+)$';
   const supported=await api.declarativeNetRequest.isRegexSupported({regex,requireCapturing:true});
   if(!supported.isSupported) throw Error('DNR regex unsupported: '+supported.reason);
@@ -46,7 +57,7 @@ async function configure() {
       requestMethods: ['get']
     }
   };
-  await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:ids,addRules:[rule]});
+  await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:[RULE_ID],addRules:[rule]});
   markHealthy();
 }
 // Retry exact original URL in one tab. The temporary allow rule is scoped to the

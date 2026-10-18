@@ -27,10 +27,16 @@ function sandbox(opts={}) {
     async isRegexSupported(){return opts.regexUnsupported?{isSupported:false,reason:'test'}:{isSupported:true};},
     async updateDynamicRules({removeRuleIds=[],addRules=[]}) {
       for(const id of removeRuleIds){const k=dynamic.findIndex(x=>x.id===id);if(k>=0)dynamic.splice(k,1);}
+      for(const r of addRules){
+        if(dynamic.some(x=>x.id===r.id)) throw new Error('Rule with id '+r.id+' does not have a unique ID.');
+      }
       dynamic.push(...addRules);
     },
     async updateSessionRules({removeRuleIds=[],addRules=[]}) {
       for(const id of removeRuleIds){const k=session.findIndex(x=>x.id===id);if(k>=0)session.splice(k,1);}
+      for(const r of addRules){
+        if(session.some(x=>x.id===r.id)) throw new Error('Rule with id '+r.id+' does not have a unique ID.');
+      }
       session.push(...addRules);
     }
   }
@@ -93,4 +99,14 @@ test('Chrome configure failure marks degraded and falls back to observer mode',a
  await delay();
  assert.equal(x.updated.length,1,'degraded mode must still perform best-effort guard redirect');
  assert.match(x.updated[0].url,/chrome-extension:\/\/fakeid\/guard\.html/);
+});
+test('Chrome concurrent startup/onInstalled configure calls do not produce duplicate rule errors',async()=>{
+ const x=sandbox();await delay();
+ await Promise.all([
+  ...x.events.installed.listeners.map(l=>l()),
+  ...x.events.start.listeners.map(l=>l())
+ ]);
+ await delay();
+ assert.equal(x.dynamic.length,1);
+ assert.equal(x.local.protectionDegraded||false,false);
 });
