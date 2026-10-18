@@ -116,6 +116,19 @@ def create_or_get_release(tag, name, body):
     print(f"Created release '{name}' ({tag}). ID={created['id']}")
     return created
 
+def sync_release_assets(release_obj, assets_to_upload):
+    upload_url = release_obj["upload_url"]
+    existing = {a["name"]: a["id"] for a in release_obj.get("assets", [])}
+    for file_path, mime in assets_to_upload:
+        if file_path.name in existing:
+            asset_id = existing[file_path.name]
+            print(f"Deleting existing asset {file_path.name} (ID={asset_id})...")
+            try:
+                api_request(f"https://api.github.com/repos/{REPO}/releases/assets/{asset_id}", method="DELETE", content_type=None)
+            except Exception as e:
+                print(f"Warning deleting {file_path.name}: {e}")
+        upload_asset(upload_url, file_path, mime)
+
 def main():
     print("Verifying build assets...")
     assert CHROME_ZIP.exists(), f"Missing {CHROME_ZIP}"
@@ -196,34 +209,22 @@ Fully localized UI, settings, and heuristic explanation verdicts in **English (`
 
     print("\n--- Publishing Chrome Release ---")
     rel_chrome = create_or_get_release("chrome-v0.1.1-alpha", "Antipisher for Google Chrome v0.1.1-alpha", chrome_body)
-    upload_url_chrome = rel_chrome["upload_url"]
-    existing_chrome_assets = {a["name"] for a in rel_chrome.get("assets", [])}
-    print(f"Current Chrome assets: {existing_chrome_assets}")
-    if CHROME_ZIP.name not in existing_chrome_assets:
-        upload_asset(upload_url_chrome, CHROME_ZIP, "application/zip")
-    if SHA256_FILE.name not in existing_chrome_assets:
-        upload_asset(upload_url_chrome, SHA256_FILE, "text/plain")
+    sync_release_assets(rel_chrome, [(CHROME_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Firefox Release ---")
     rel_firefox = create_or_get_release("firefox-v0.1.1-alpha", "Antipisher for Mozilla Firefox v0.1.1-alpha", firefox_body)
-    upload_url_firefox = rel_firefox["upload_url"]
-    existing_firefox_assets = {a["name"] for a in rel_firefox.get("assets", [])}
-    print(f"Current Firefox assets: {existing_firefox_assets}")
-    if FIREFOX_ZIP.name not in existing_firefox_assets:
-        upload_asset(upload_url_firefox, FIREFOX_ZIP, "application/zip")
-    if SHA256_FILE.name not in existing_firefox_assets:
-        upload_asset(upload_url_firefox, SHA256_FILE, "text/plain")
+    sync_release_assets(rel_firefox, [(FIREFOX_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Unified Release ---")
     rel_unified = create_or_get_release("v0.1.1-alpha", "Antipisher v0.1.1-alpha (Universal Alpha)", unified_body)
-    upload_url_unified = rel_unified["upload_url"]
-    existing_unified_assets = {a["name"] for a in rel_unified.get("assets", [])}
-    print(f"Current Unified assets: {existing_unified_assets}")
-    for asset, mime in [(CHROME_ZIP, "application/zip"), (FIREFOX_ZIP, "application/zip"), (SOURCE_ZIP, "application/zip"), (SHA256_FILE, "text/plain")]:
-        if asset.name not in existing_unified_assets:
-            upload_asset(upload_url_unified, asset, mime)
+    sync_release_assets(rel_unified, [
+        (CHROME_ZIP, "application/zip"),
+        (FIREFOX_ZIP, "application/zip"),
+        (SOURCE_ZIP, "application/zip"),
+        (SHA256_FILE, "text/plain")
+    ])
 
-    print("\nAll releases successfully published to GitHub!")
+    print("\nAll releases successfully updated on GitHub!")
 
 if __name__ == "__main__":
     main()
