@@ -72,7 +72,7 @@ for target in ('chrome', 'firefox'):
                  '_locales/ru/messages.json', '_locales/zh_CN/messages.json'):
         assert (dst / file).exists(), file
 
-    zip_path = ROOT.parent / f'Antipisher-{target.capitalize()}-v0.2.1-alpha.zip'
+    zip_path = ROOT.parent / f'Antipisher-{target.capitalize()}-v0.2.2-alpha.zip'
     with zipfile.ZipFile(zip_path, 'w') as z:
         for file in sorted(dst.rglob('*')):
             if file.is_file() and '_metadata' not in file.parts:
@@ -82,7 +82,7 @@ for target in ('chrome', 'firefox'):
     print(f"Generated: {zip_path.name}")
 
 # Source archive (clean source only, excluding audit/, temp files and generated checksums)
-src_zip = ROOT.parent / 'Antipisher-Source-v0.2.1-alpha.zip'
+src_zip = ROOT.parent / 'Antipisher-Source-v0.2.2-alpha.zip'
 EXCLUDE_DIRS = {'audit', '__pycache__', '.git', '.tmp', 'node_modules', '_metadata'}
 EXCLUDE_EXTS = {'.zip', '.log', '.tmp'}
 EXCLUDE_FILES = {'SHA256SUMS.txt'}

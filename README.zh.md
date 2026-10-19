@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.1 (Alpha)
+# 🛡️ Antipisher 0.2.2 (Alpha)
 
-**适用于 Google Chrome 与 Mozilla Firefox 的离线高精度反网络钓鱼、IDN 同形字与拼写抢注（Typosquatting）防护扩展**  
+**适用于 Google Chrome 与 Mozilla Firefox 的离线高精度反网络钓鱼、IDN 同形字、追踪器与广告拦截防护扩展**  
 *遵循 GNU Affero 通用公共许可证 v3.0 (AGPLv3) 开源*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.1-alpha](https://img.shields.io/badge/Version-0.2.1--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 69/69 Passing](https://img.shields.io/badge/Tests-69%2F69_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
+[![Version: 0.2.2-alpha](https://img.shields.io/badge/Version-0.2.2--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 80/80 Passing](https://img.shields.io/badge/Tests-80%2F80_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge)](#隐私保护与离线保证)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_就绪-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,7 +22,7 @@
 
 </div>
 
-> **状态：** `SILVER` · 版本 `0.2.1` · 截至 2026-10-18 · AEGIS 追踪器防护与设置面板里程碑版本。  
+> **状态：** `SILVER` · 版本 `0.2.2` · 截至 2026-10-19 · VGT Ad Shield 广告防御与 YouTube 拦截里程碑版本。  
 > **非最终应用商店发行版：** 浏览器自动化端到端测试（E2E）、应用商店官方上架审核、签名更新分发流与完整的 V2 图引擎正在持续演进中（详见 [已知边界与限制](#已知边界与限制)）。
 
 ---
@@ -55,25 +55,36 @@
 - **URL 追踪查询参数智能净化：** 通过 `history.replaceState` 自动无痕剥离商业追踪参数（`utm_source`、`utm_medium`、`fbclid`、`gclid` 等）。
 - **实时动态追踪器计数器：** 工具栏扩展图标角标与弹出菜单实时展示拦截总数（`标签页: X · 总计: Y`），即使对于延迟加载或异步动态注入的脚本也能即时捕捉并刷新。
 
-### ⚡ 3. DOM 与前端脚本安全 (GeDefense Light)
+### 🛑 3. 广告拦截与 YouTube 深度防御 (VGT Ad Shield)
+- **无频闪隐形元素隐藏（Element Hiding）：** 在 `document_start` 阶段通过 `adoptedStyleSheets` 直接注入，瞬时折叠横幅广告、推广位及嵌入式广告 iframe，杜绝页面排版抖动（CLS）。
+- **YouTube 视频广告防御与极速跳过加速器：**
+  - `window.ytInitialPlayerResponse` 属性陷阱在页面初始化时彻底剔除 `adPlacements`、`playerAds` 和 `adSlots`。
+  - 针对 `fetch` 与 `XMLHttpRequest` 的实时 JSON 剪枝拦截 `/youtubei/v1/player` 与 `/reel_watch_sequence` 数据包。
+  - 自主视频广告加速器对漏网广告瞬间执行静音（`video.muted = true`）、以 16 倍速极速快进至片尾（`duration`），并在毫秒级时间内自动触发“跳过广告”按钮。
+  - 自动清理反广告拦截警告弹窗（`ytd-enforcement-message-view-model`）并无缝恢复视频播放。
+- **反去广告探测（Anti-Adblock Defusers）与蜜罐诱饵中和：** 对诱饵探测元素（`.adsbox`、`.pub_300x250`、`.ad-test`）伪装真实尺寸（`offsetHeight: 250`、`offsetWidth: 300`），中和检测标志位。
+- **弹窗与底层跳出防御（Popunder Defense）：** 拦截针对第三方广告网络的非受邀 `window.open` 弹出/底层窗口。
+
+### ⚡ 4. DOM 与前端脚本安全 (GeDefense Light)
 - **控制台防社工钓鱼 Self-XSS 警示：** 在开发者工具控制台输出醒目的安全警告横幅，防范诱导用户粘贴恶意代码的社工盗号攻击。
 - **认知快速通道（Cognitive Fast-Path）：** 超低开销启发式扫描引擎，无需对整个 DOM 树进行昂贵的二次解析即可高速验证安全 HTML。
 - **动态恶意注入与伪协议中和：** 拆解拦截恶意 `<script>` 与 `<iframe>` 注入，自动剥离内联事件处理器（`onerror`、`onclick`），并在原型链层级（`Element.prototype.setAttribute`）阻断 `javascript:` 伪协议执行。
+- **TrustedHTML / CSP 强固兼容：** 完美适配启用严格 Trusted Types CSP（`require-trusted-types-for 'script'`）的高防护网站，避免触发 `TrustedHTML` 赋值异常。
 
-### 🎭 4. 隐私保护与反浏览器指纹 (Anti-Fingerprinting)
+### 🎭 5. 隐私保护与反浏览器指纹 (Anti-Fingerprinting)
 - **Canvas 与 WebGL 伪装保护：** 在 Canvas 像素读取中注入肉眼完全不可见的 1-bit 微量平滑噪声，并伪装 WebGL 渲染器字符串，粉碎跨站指纹追踪。
 - **屏幕几何参数混淆：** 对屏幕视口与分辨率指标进行归一化混淆，挫败基于硬件设备属性的指纹关联。
 - **轮换会话数字身份种子：** 生成加密会话凭证，支持在弹出菜单与设置页面一键点击“重新生成身份”。
 - **100% 离线与零遥测：** 零外部网络请求、零云端依赖、无需 API 密钥、绝不收集与保存浏览历史。
 
-### ⚙️ 5. 用户体验、设置面板与白名单
-- **独立设置控制面板 (`options.html`)：** 采用完整 Glass 2100 玻璃拟物风格的偏好设置中心，可通过弹出菜单齿轮按钮或浏览器扩展管理直接访问。
+### ⚙️ 6. 用户体验、设置面板与白名单
+- **独立设置控制面板 (`options.html`)：** 采用完整 Glass 2100 玻璃拟物风格的偏好设置中心，可通过弹出菜单齿轮按钮或浏览器扩展管理直接访问，提供广告拦截、追踪器、GeDefense、反指纹及白名单专属配置页。
 - **本地自定义域名白名单：** 方便快捷地维护受信任域名与内网系统（如企业 SSO），即时放行且无需任何网络外联。
 - **静默安全浏览与 Glass 2100 状态提示气泡：** 安全合规网站直接瞬间加载（0 ms 额外延迟）。访问验证网站时在角落优雅浮现微晶毛玻璃状态胶囊（*“域名已验证 · Antipisher”*），并在数秒后自动隐退，不干扰鼠标操作（`pointer-events: none`）。
 - **标准直达 vs. 严格预检自由切换：** 默认标准模式确保顺畅无感的浏览与按需拦截；严格模式可为高威胁环境提供全屏隔离预检。
 - **4 种母语原生支持：** 中文（`zh`）、德语（`de`）、英语（`en`）、俄语（`ru`）实现 100% 词条对齐，支持自动跟随浏览器语言或手动锁定。
 
-### 🏗️ 6. 浏览器架构、无障碍设计与构建保证
+### 🏗️ 7. 浏览器架构、无障碍设计与构建保证
 - **Chrome MV3 预检与消除安全静默失效（Fail-Open）：** 基于 DNR 机制过滤 GET 请求；若遇到配置异常立即持久化降级状态并启动备用观察模式，并在界面明确告警。消除 URL 长度限制。
 - **Firefox MV3 规范对接：** 同步 `webRequestBlocking` + 页面内嵌防护盾，严格配置 `web_accessible_resources` 并声明 `data_collection_permissions: {"required":["none"]}`，符合 AMO 与 MDN 规范。
 - **Glass 2100 设计系统：** 统一设计令牌（`shared/design-tokens.css`），深邃矿物玻璃材质，符合 WCAG-AA 级对比度（≥ 4.5:1），配备清晰的 2px 键盘焦点轮廓环，支持减少动效与高对比度模式。

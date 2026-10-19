@@ -34,9 +34,9 @@ REPO = "visiongaiatechnology/antipisher"
 ROOT = Path(__file__).resolve().parent.parent
 DIST_DIR = ROOT.parent
 
-CHROME_ZIP = DIST_DIR / "Antipisher-Chrome-v0.2.1-alpha.zip"
-FIREFOX_ZIP = DIST_DIR / "Antipisher-Firefox-v0.2.1-alpha.zip"
-SOURCE_ZIP = DIST_DIR / "Antipisher-Source-v0.2.1-alpha.zip"
+CHROME_ZIP = DIST_DIR / "Antipisher-Chrome-v0.2.2-alpha.zip"
+FIREFOX_ZIP = DIST_DIR / "Antipisher-Firefox-v0.2.2-alpha.zip"
+SOURCE_ZIP = DIST_DIR / "Antipisher-Source-v0.2.2-alpha.zip"
 SHA256_FILE = DIST_DIR / "SHA256SUMS.txt"
 
 sha_text = SHA256_FILE.read_text(encoding="utf-8") if SHA256_FILE.exists() else ""
@@ -137,21 +137,20 @@ def main():
     assert SHA256_FILE.exists(), f"Missing {SHA256_FILE}"
 
     # 1. Chrome Release
-    chrome_body = f"""# 🛡️ Antipisher for Google Chrome v0.2.0-alpha (MV3)
+    chrome_body = f"""# 🛡️ Antipisher for Google Chrome v0.2.2-alpha (MV3)
 
-**High-precision offline anti-phishing, IDN homograph & typosquatting protection extension for Google Chrome.**
+**High-precision offline anti-phishing, IDN homograph, tracker & ad blocking protection extension for Google Chrome.**
 
-### 🌟 What's New in v0.2.0
-- **Quiet Safe Browsing:** Safe pages load directly with 0ms added delay — eliminating disruptive full-screen redirects.
-- **Glass 2100 Status Toast:** Subtle, non-blocking floating pill badge briefly appears on verified sites and fades away.
-- **Standard vs. Strict Preflight Mode:** Standard mode provides smooth, instant browsing; Strict mode offers optional full-screen pre-request isolation.
-- **4 Languages Native Support:** English (`en`), Deutsch (`de`), Русский (`ru`), 中文 (`zh`). Defaults to browser language.
-- **In-Page Content Shield:** Intercepts credential theft during form submission (DOM Capture phase), closing Chrome MV3 DNR POST gap.
-- **Fail-Open Elimination:** Graceful degradation handling with visual indicator on configuration errors.
-- **100% Offline & Zero Telemetry:** No external network requests, no analytics, no credentials stored.
+### 🌟 What's New in v0.2.2
+- **VGT Ad Shield (Werbeblocker & Element Hiding):** Zero-flicker cosmetic element hiding engine via `adoptedStyleSheets` for ad slots, banners, and sponsored containers; dynamic mutation observer.
+- **YouTube Video Ad Defense & Fast-Forward Accelerator:** Suppresses pre-roll and mid-roll ads via `ytInitialPlayerResponse` pruning and `/youtubei/v1/player` JSON pruning. High-speed auto-skip (16x forward + immediate skip button trigger) for resilient ad interception.
+- **GeDefense Light TrustedHTML Hardening:** Fixed CSP `require-trusted-types-for 'script'` violation on YouTube and modern web applications.
+- **Anti-Adblock Defuser & Bait Shield:** Defuses anti-adblock detection bait traps and honeypots (`offsetHeight: 250`, `offsetWidth: 300`).
+- **Dedicated Options & Preferences:** Full Glass 2100 control center with granular toggles for ad blocking, trackers, and custom whitelist.
+- **100% Offline & Zero Telemetry:** Pure local heuristic engine, zero tracking, zero external dependencies.
 
 ### 📦 Installation (Google Chrome)
-1. Download `Antipisher-Chrome-v0.2.0-alpha.zip` below and unzip it.
+1. Download `Antipisher-Chrome-v0.2.2-alpha.zip` below and unzip it.
 2. Open `chrome://extensions` in Google Chrome.
 3. Enable **Developer mode** (top right toggle).
 4. Click **Load unpacked** and select the extracted folder.
@@ -163,20 +162,19 @@ def main():
 """
 
     # 2. Firefox Release
-    firefox_body = f"""# 🛡️ Antipisher for Mozilla Firefox v0.2.0-alpha (MV3)
+    firefox_body = f"""# 🛡️ Antipisher for Mozilla Firefox v0.2.2-alpha (MV3)
 
-**High-precision offline anti-phishing, IDN homograph & typosquatting protection extension for Mozilla Firefox.**
+**High-precision offline anti-phishing, IDN homograph, tracker & ad blocking protection extension for Mozilla Firefox.**
 
-### 🌟 What's New in v0.2.0
-- **Quiet Safe Browsing:** Instant synchronous safe navigation via `webRequestBlocking` with zero full-screen interruptions.
-- **Glass 2100 Status Toast:** Soft, non-blocking floating pill badge appears on verified sites.
-- **4 Languages Native Support:** English (`en`), Deutsch (`de`), Русский (`ru`), 中文 (`zh`). Defaults to browser language.
-- **In-Page Content Shield:** Closed Shadow DOM modal protection with zero style leakage.
+### 🌟 What's New in v0.2.2
+- **VGT Ad Shield (Werbeblocker & Element Hiding):** Zero-flicker element hiding for ad slots, banners, and sponsored containers.
+- **YouTube Video Ad Defense & Fast-Forward Accelerator:** Suppresses video ads via player response pruning, fetch interception, and automatic ad skipping.
+- **GeDefense Light TrustedHTML Hardening:** Full compatibility with strict CSP Trusted Types environments.
 - **AMO MV3 Compliance:** Declares `web_accessible_resources` for `guard.html` and explicit `data_collection_permissions: {{"required":["none"]}}`.
 - **100% Offline & Zero Telemetry:** Pure local heuristic engine, zero tracking, zero external dependencies.
 
 ### 📦 Installation (Mozilla Firefox)
-1. Download `Antipisher-Firefox-v0.2.0-alpha.zip` below and unzip it.
+1. Download `Antipisher-Firefox-v0.2.2-alpha.zip` below and unzip it.
 2. Open `about:debugging#/runtime/this-firefox` in Firefox.
 3. Click **Load Temporary Add-on…**.
 4. Select `manifest.json` from the extracted directory.
@@ -188,20 +186,20 @@ def main():
 """
 
     # 3. Unified Release
-    unified_body = f"""# 🛡️ Antipisher v0.2.0-alpha — Quiet Safe Browsing & Universal Multilingual Milestone
+    unified_body = f"""# 🛡️ Antipisher v0.2.2-alpha — VGT Ad Shield & YouTube Ad Defense Milestone
 
-**Offline, High-Precision Anti-Phishing, IDN Homograph & Typosquatting Protection for Google Chrome & Mozilla Firefox.**
+**Offline, High-Precision Anti-Phishing, IDN Homograph, Tracker & Ad Protection for Google Chrome & Mozilla Firefox.**
 
 *Licensed under the GNU Affero General Public License v3.0 (AGPLv3)*
 
-### 🚀 Highlights in v0.2.0
-- **Quiet Safe Browsing:** Benign and verified websites now load immediately with zero full-screen interstitials.
-- **Glass 2100 Floating Toast:** Verified websites display a brief, unobtrusive glassmorphic status badge that automatically fades away.
-- **Preflight Mode Toggle:** Smooth Standard Mode (default) or Strict Preflight Mode (isolated gate on every GET) customizable via extension popup.
+### 🚀 Highlights in v0.2.2
+- **VGT Ad Shield (Werbeblocker):** Native network blocking for major ad networks & exchanges, zero-flicker element hiding (`adoptedStyleSheets`), and dynamic DOM mutation observer.
+- **YouTube Video Ad Defense & Fast-Forward Accelerator:** Instant player response and fetch JSON pruning (`adPlacements`, `playerAds`, `adSlots`), plus 16x zero-delay auto-skipping and anti-adblock modal auto-dismissal.
+- **GeDefense Light TrustedHTML Hardening:** Solved CSP Trusted Types violations (`require-trusted-types-for 'script'`) on YouTube and complex enterprise web apps.
+- **AEGIS Tracker Shield:** Declarative DNR blocking, script surrogates (`window.ga`, `window.dataLayer`, `window.fbq`, etc.), and URL parameter sanitizer.
+- **Dedicated Options Dashboard (`options.html`):** Glass 2100 settings panel with ad shield controls and custom whitelist management.
 - **4 Native Languages:** 100% complete key parity across **English (`en`)**, **Deutsch (`de`)**, **Русский (`ru`)**, and **中文 (`zh`)**.
-- **187 Brands & 353 Official Domains:** Financial institutions, crypto platforms, cloud/AI infrastructure, logistics, governments.
-- **In-Page Content Shield:** Intercepts form submission credential phishing in closed Shadow DOM (`attachShadow({{ mode: 'closed' }})`).
-- **Reproducible Builds:** Bit-identical deterministic ZIP packages.
+- **100% Offline & Zero Telemetry:** Zero external HTTP requests, zero cloud dependencies.
 
 ### 🔒 SHA-256 Verification
 ```
@@ -210,15 +208,15 @@ def main():
 """
 
     print("\n--- Publishing Chrome Release ---")
-    rel_chrome = create_or_get_release("chrome-v0.2.1-alpha", "Antipisher for Google Chrome v0.2.1-alpha", chrome_body)
+    rel_chrome = create_or_get_release("chrome-v0.2.2-alpha", "Antipisher for Google Chrome v0.2.2-alpha", chrome_body)
     sync_release_assets(rel_chrome, [(CHROME_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Firefox Release ---")
-    rel_firefox = create_or_get_release("firefox-v0.2.1-alpha", "Antipisher for Mozilla Firefox v0.2.1-alpha", firefox_body)
+    rel_firefox = create_or_get_release("firefox-v0.2.2-alpha", "Antipisher for Mozilla Firefox v0.2.2-alpha", firefox_body)
     sync_release_assets(rel_firefox, [(FIREFOX_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Unified Release ---")
-    rel_unified = create_or_get_release("v0.2.1-alpha", "Antipisher v0.2.1-alpha (AEGIS Tracker Shield & GeDefense Light)", unified_body)
+    rel_unified = create_or_get_release("v0.2.2-alpha", "Antipisher v0.2.2-alpha (VGT Ad Shield & YouTube Ad Defense)", unified_body)
     sync_release_assets(rel_unified, [
         (CHROME_ZIP, "application/zip"),
         (FIREFOX_ZIP, "application/zip"),

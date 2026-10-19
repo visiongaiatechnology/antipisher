@@ -3,6 +3,23 @@
 Alle wesentlichen Änderungen an Antipisher. Format orientiert an Keep a Changelog;
 Versionierung folgt der Alpha-Reihe `0.2.x`.
 
+## [0.2.2] — 2026-10-19 (Alpha)
+
+### Features & VGT Ad Shield
+- **VGT Ad Shield (Werbeblocker & Element Hiding):**
+  - Zero-Flicker kosmetische Filterung via `document.adoptedStyleSheets` (blendet Banner, Werbe-Slots, Sponsoren-Kacheln und Werbe-iFrames lautlos und ohne Cumulative Layout Shift aus).
+  - Dynamischer `MutationObserver` zum fortlaufenden Kollabieren asynchron nachgeladener Werbeeinheiten.
+  - Granulare Schalter im Einstellungsmenü (`options.html`): Master-Schalter, Kosmetische Filterung, Anti-Adblock-Bypass und Popunder-Schutz.
+  - Kombinierter Live-Metrik-Zähler für Werbung und Tracker im Popup und Toolbar-Badge.
+- **YouTube Video Ad Defense & Fast-Forward Accelerator:**
+  - `window.ytInitialPlayerResponse`-Property-Trap tilgt `adPlacements`, `playerAds` und `adSlots` beim Seitenstart im Keim.
+  - JSON-Pruning für `window.fetch` und `XMLHttpRequest` fängt Player-Requests (`/youtubei/v1/player` und `/reel_watch_sequence`) ab und filtert Werbeeinschübe heraus.
+  - Video Ad Fast-Forward & Auto-Skipper: Schaltet sporadisch verbleibende Video-Ads stumm (`muted = true`), spult mit 16-facher Geschwindigkeit an das Ende (`currentTime = duration`) und betätigt Skip-Buttons (`.ytp-ad-skip-button`) in Millisekunden.
+  - Anti-Adblock Modal Defuser: Beseitigt YouTube-Warnmeldungen („Werbeblocker verstoßen gegen die Nutzungsbedingungen...“), reaktiviert das Video und stellt das Seiten-Scrolling wieder her.
+- **GeDefense Light TrustedHTML Hardening:**
+  - Vollständige Kompatibilität mit strikten CSP-Direktiven (`require-trusted-types-for 'script'`).
+  - Native Trusted-Types-Erkennung (`isTrustedHTML`, `isTrustedTypesEnforced`) verhindert `This document requires 'TrustedHTML' assignment`-Fehler auf YouTube und modernen Webanwendungen.
+
 ## [0.2.1] — 2026-10-18 (Alpha)
 
 ### Features & Security

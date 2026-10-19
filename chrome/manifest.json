@@ -4,8 +4,8 @@
   "name": "Antipisher",
   "short_name": "Antipisher",
   "description": "__MSG_appDesc__",
-  "version": "0.2.1",
-  "version_name": "0.2.1 Alpha",
+  "version": "0.2.2",
+  "version_name": "0.2.2 Alpha",
   "minimum_chrome_version": "121",
   "permissions": [
     "storage",

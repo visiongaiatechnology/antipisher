@@ -65,7 +65,7 @@
       // Footer
       footerOffline: '100% offline',
       footerZeroTelemetry: 'Zero telemetry',
-      versionText: 'Version 0.2.1 · Alpha',
+      versionText: 'Version 0.2.2 · Alpha',
 
       // Popup
       statusActive: 'Protection Active',
@@ -257,7 +257,7 @@
 
       footerOffline: '100 % offline',
       footerZeroTelemetry: 'Zero telemetry',
-      versionText: 'Version 0.2.1 · Alpha',
+      versionText: 'Version 0.2.2 · Alpha',
 
       statusActive: 'Schutz aktiv',
       statusActiveSub: 'Verdächtige Seiten werden blockiert, sichere Seiten laden direkt.',
@@ -446,7 +446,7 @@
 
       footerOffline: '100% офлайн',
       footerZeroTelemetry: 'Без телеметрии',
-      versionText: 'Версия 0.2.1 · Альфа',
+      versionText: 'Версия 0.2.2 · Альфа',
 
       statusActive: 'Защита активна',
       statusActiveSub: 'Подозрительные домены блокируются, безопасные сайты открываются мгновенно.',
@@ -635,7 +635,7 @@
 
       footerOffline: '100% 离线运行',
       footerZeroTelemetry: '零遥测数据',
-      versionText: '版本 0.2.1 · Alpha',
+      versionText: '版本 0.2.2 · Alpha',
 
       statusActive: '防护已启用',
       statusActiveSub: '可疑域名被拦截，安全网页直接即时加载。',

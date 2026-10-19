@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.1 (Alpha)
+# 🛡️ Antipisher 0.2.2 (Alpha)
 
-**Offline-fähiger, hochpräziser Schutz vor Phishing, IDN-Homoglyphen & Typosquatting für Google Chrome & Mozilla Firefox**  
+**Offline-fähiger, hochpräziser Schutz vor Phishing, IDN-Homoglyphen, Trackern & Werbung für Google Chrome & Mozilla Firefox**  
 *Lizenziert unter der GNU Affero General Public License v3.0 (AGPLv3)*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.1-alpha](https://img.shields.io/badge/Version-0.2.1--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 69/69 Passing](https://img.shields.io/badge/Tests-69%2F69_Passing-2ea043.svg?style=for-the-badge)](#tests--entwicklung)
+[![Version: 0.2.2-alpha](https://img.shields.io/badge/Version-0.2.2--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 80/80 Passing](https://img.shields.io/badge/Tests-80%2F80_Passing-2ea043.svg?style=for-the-badge)](#tests--entwicklung)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Telemetrie-Keine_%2F_100%25_Offline-0284c7.svg?style=for-the-badge)](#datenschutz--offline-garantien)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Bereit-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_Bereit-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,7 +22,7 @@
 
 </div>
 
-> **Status:** `SILVER` · Version `0.2.1` · Stand: 18.10.2026 · AEGIS Tracker Shield & Options Meilenstein.  
+> **Status:** `SILVER` · Version `0.2.2` · Stand: 19.10.2026 · VGT Ad Shield & YouTube Defense Meilenstein.  
 > **Kein finales Store-Produkt:** Browser-E2E-Tests, offizielle Store-Listung, signierte Update-Feeds und die vollständige V2-Graph-Engine sind laufende Entwicklungsziele (siehe [Bekannte Grenzen & Einschränkungen](#bekannte-grenzen--einschränkungen)).
 
 ---
@@ -55,25 +55,36 @@
 - **URL-Tracking-Parameter-Sanitizer:** Bereinigt kommerzielle Tracking-Tokens (`utm_source`, `utm_medium`, `fbclid`, `gclid` etc.) automatisch und nahtlos via `history.replaceState`.
 - **Echtzeit Live-Tracker-Zähler:** Toolbar-Icon-Badge und Popup zeigen in Echtzeit geblockte Tracker (`Tab: X · Gesamt: Y`) und erfassen präzise auch dynamisch oder asynchron nachladende Tracker-Skripte.
 
-### ⚡ 3. DOM- & Skript-Sicherheit (GeDefense Light)
+### 🛑 3. Werbeblocker & YouTube-Abwehr (VGT Ad Shield)
+- **Zero-Flicker kosmetische Filterung (Element Hiding):** Injiziert direkt bei `document_start` via `adoptedStyleSheets`, blendet Banner, Werbeslots und Werbe-iFrames nahtlos und ohne Layoutverschiebungen (CLS) aus.
+- **YouTube Video-Werbung-Abwehr & Fast-Forward-Beschleuniger:**
+  - `window.ytInitialPlayerResponse`-Property-Trap tilgt `adPlacements`, `playerAds` und `adSlots` direkt bei der Initialisierung.
+  - In-Flight JSON-Pruning fängt `fetch`- und `XMLHttpRequest`-Aufrufe für `/youtubei/v1/player` und `/reel_watch_sequence` ab.
+  - Autonomer Video-Ad-Beschleuniger schaltet verbleibende Werbespots sofort stumm (`video.muted = true`), spult mit 16-facher Geschwindigkeit an das Ende (`duration`) und betätigt Überspringen-Schaltflächen in Millisekunden.
+  - Beseitigt Anti-Adblock-Meldungen (`ytd-enforcement-message-view-model`) und setzt die Wiedergabe automatisch fort.
+- **Anti-Adblock-Entschärfung & Honeypot-Neutralisierung:** Täuscht für Köder-Elemente (`.adsbox`, `.pub_300x250`, `.ad-test`) echte Abmessungen vor (`offsetHeight: 250`, `offsetWidth: 300`) und neutralisiert Adblock-Erkennungs-Flags.
+- **Popunder-Abwehr:** Blockiert unaufgeforderte Popup-/Popunder-Aufrufe (`window.open`) zu Werbenetzwerken.
+
+### ⚡ 4. DOM- & Skript-Sicherheit (GeDefense Light)
 - **Self-XSS Konsole-Schutz:** Warnt Anwender in den Entwicklertools mit einer deutlichen Sicherheitswarnung vor Social-Engineering-Paste-Attacken.
 - **Cognitive Fast-Path Engine:** Extrem performante Heuristik-Prüfung auf potenziell schädliche Tags (`<script>`, `<iframe>`) ohne unnötigen DOM-Parsing-Overhead.
 - **Dynamische Injektions- & Protokoll-Neutralisierung:** Entschärft gefährliche Script- und Iframe-Injektionen, entfernt Inline-Handler (`onerror`, `onclick`) und unterbindet `javascript:` URI-Ausführungen auf Prototyp-Ebene (`Element.prototype.setAttribute`).
+- **TrustedHTML / CSP-Härtung:** Funktioniert nahtlos auf Seiten mit strikter Trusted-Types-CSP (`require-trusted-types-for 'script'`) ohne `TrustedHTML`-Fehler.
 
-### 🎭 4. Privatsphäre & Anti-Fingerprinting
+### 🎭 5. Privatsphäre & Anti-Fingerprinting
 - **Canvas & WebGL Cloaking:** Injiziert subtiles, unmerkliches 1-Bit-Rauschen bei Canvas-Ausleseoperationen und maskiert WebGL-Renderer-Strings gegen geräteübergreifendes Fingerprinting.
 - **Screen-Geometrie-Fuzzing:** Normalisiert und fuzzt Bildschirmmaße zur Verhinderung hardwarebasierter Geräte-Wiedererkennung.
 - **Rotierender digitaler Identitäts-Seed:** Generiert eine kryptografische Sitzungsidentität mit 1-Klick-Neu-Würfeln direkt im Popup oder Einstellungsmenü.
 - **100 % Offline & Null Telemetrie:** Keine externen HTTP-Aufrufe, keine Cloud-Abhängigkeiten, keine API-Schlüssel, keine Speicherung des Browserverlaufs.
 
-### ⚙️ 5. Benutzerfreundlichkeit, Einstellungen & Whitelist
-- **Dediziertes Einstellungsmenü (`options.html`):** Vollständiges Glass-2100-Options-Dashboard, erreichbar über das Zahnrad-Symbol im Popup oder die Browser-Erweiterungsverwaltung.
+### ⚙️ 6. Benutzerfreundlichkeit, Einstellungen & Whitelist
+- **Dediziertes Einstellungsmenü (`options.html`):** Vollständiges Glass-2100-Options-Dashboard, erreichbar über das Zahnrad-Symbol im Popup oder die Browser-Erweiterungsverwaltung, mit dedizierten Reitern für Werbeblocker, Tracker, GeDefense, Anti-Fingerprinting und Whitelist.
 - **Benutzerdefinierte Domain-Whitelist:** Schnelles Pflegen vertrauenswürdiger Domains und Intranet-Portale (z. B. Firmen-SSO), mit sofortiger lokaler Freigabe ohne externe Abfragen.
 - **Leises sicheres Surfen & Glass 2100 Status-Toast:** Saubere, verifizierte Webseiten öffnen direkt ohne zusätzliche Latenz (0 ms) und ohne störende Vollbild-Unterbrechungen. Beim Aufrufen verifizierter Webseiten erscheint kurz ein dezenter, schwebender Glass-2100-Status-Toast (*„Domain verifiziert · Antipisher“*), der sanft ausblendet, ohne Klicks zu blockieren (`pointer-events: none`).
 - **Standard- vs. Strenger Preflight-Modus:** Der Standard-Modus ermöglicht flüssiges Surfen mit gezielter Phishing-Abwehr; der optionale strenge Modus schaltet eine vollständige Vollbild-Vorabprüfung vor jeden GET-Aufruf.
 - **4 Muttersprachen:** 100 % Parität in Deutsch (`de`), Englisch (`en`), Russisch (`ru`) und Chinesisch (`zh`), automatische Erkennung der Browsersprache mit manuellem Override.
 
-### 🏗️ 6. Architektur, Barrierefreiheit & Build-Integrität
+### 🏗️ 7. Architektur, Barrierefreiheit & Build-Integrität
 - **Chrome MV3 Preflight & Beseitigung von Fail-Open:** Führt GET-Anfragen über DNR; bei einem DNR-Konfigurationsfehler schaltet Antipisher sofort in einen klar signalisierten Degraded-Modus mit Observer-Fallback. Beseitigt willkürliche URL-Längenbeschränkungen.
 - **Firefox MV3 Konformität:** Synchrones `webRequestBlocking` + In-Page Shield mit deklarierten `web_accessible_resources` und `data_collection_permissions: {"required":["none"]}` gemäß MDN- und AMO-Richtlinien.
 - **Glass 2100 Design System:** Gemeinsame Design-Tokens (`shared/design-tokens.css`), WCAG-AA-konforme Kontrastwerte (≥ 4.5:1), vollständige Tastatursteuerung mit 2px Fokusringen, ARIA `alertdialog`, Unterstützung für Prefers-Reduced-Motion und Forced-Colors.

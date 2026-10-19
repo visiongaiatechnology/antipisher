@@ -4,7 +4,7 @@
   "name": "Antipisher",
   "short_name": "Antipisher",
   "description": "__MSG_appDesc__",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "permissions": [
     "storage",
     "tabs",

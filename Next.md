@@ -6,7 +6,7 @@
 
 - **Produkt:** Antipisher (vormals VGT DomainGuard)
 - **Workspace:** `c:\Users\Masterboard\Downloads\VGT-DomainGuard-Source-v0.1.0\vgt-domainguard-src`
-- **Version:** `0.2.1` (Manifeste), Anzeige `0.2.1 Alpha`; ZIPs `v0.2.1-alpha`
+- **Version:** `0.2.2` (Manifeste), Anzeige `0.2.2 Alpha`; ZIPs `v0.2.2-alpha`
 - **Lizenz:** GNU Affero General Public License v3.0 (AGPLv3) — [`LICENSE`](LICENSE)
 - **Source Identity:** Git-Repository auf `main`, Remote `https://github.com/visiongaiatechnology/antipisher.git`.
 - **Zielplattformen:** Chrome MV3, Firefox MV3
@@ -228,15 +228,32 @@
 - **Echte Screenshots generiert:** Echte Chromium-Headless Renders von Popup (`v2-popup.png`), Options-Dashboard (`v2-options.png`) und Whitelist-Management (`v2-options-whitelist.png`) in `audit/verify/fix/screenshots/` abgelegt und in die READMEs eingebettet.
 - **Deterministischer Release-Build:** Bit-identische ZIP-Dateien für Chrome, Firefox und Source (`v0.2.1-alpha`) erzeugt und über `scripts/verify-release.ps1` validiert.
 
+### 2026-10-19 17:45 — Checkpoint 009: Release 0.2.2-Alpha & VGT Ad Shield / YouTube Defense
+- **VGT Ad Shield (Werbeblocker & Element Hiding):**
+  - Zero-Flicker kosmetische Filterung via `document.adoptedStyleSheets` (blendet Banner, Werbe-Slots, Sponsoren-Kacheln und Werbe-iFrames lautlos und ohne Cumulative Layout Shift aus).
+  - Dynamischer `MutationObserver` zum fortlaufenden Kollabieren asynchron nachgeladener Werbeeinheiten.
+  - Granulare Schalter im Einstellungsmenü (`options.html`): Master-Schalter, Kosmetische Filterung, Anti-Adblock-Bypass und Popunder-Schutz.
+  - Kombinierter Live-Metrik-Zähler für Werbung und Tracker im Popup und Toolbar-Badge.
+- **YouTube Video Ad Defense & Fast-Forward Accelerator:**
+  - `window.ytInitialPlayerResponse`-Property-Trap tilgt `adPlacements`, `playerAds` und `adSlots` beim Seitenstart im Keim.
+  - JSON-Pruning für `window.fetch` und `XMLHttpRequest` fängt Player-Requests (`/youtubei/v1/player` und `/reel_watch_sequence`) ab und filtert Werbeeinschübe heraus.
+  - Video Ad Fast-Forward & Auto-Skipper: Schaltet sporadisch verbleibende Video-Ads stumm (`muted = true`), spult mit 16-facher Geschwindigkeit an das Ende (`currentTime = duration`) und betätigt Skip-Buttons (`.ytp-ad-skip-button`) in Millisekunden.
+  - Anti-Adblock Modal Defuser: Beseitigt YouTube-Warnmeldungen („Werbeblocker verstoßen gegen die Nutzungsbedingungen...“), reaktiviert das Video und stellt das Seiten-Scrolling wieder her.
+- **GeDefense Light TrustedHTML Hardening:**
+  - Vollständige Kompatibilität mit strikten CSP-Direktiven (`require-trusted-types-for 'script'`).
+  - Native Trusted-Types-Erkennung (`isTrustedHTML`, `isTrustedTypesEnforced`) verhindert `This document requires 'TrustedHTML' assignment`-Fehler auf YouTube und modernen Webanwendungen.
+- **Multilinguale Parität & Dokumentation:** Alle 4 Sprachen (`de`, `en`, `ru`, `zh`) vollständig auf 0.2.2 aktualisiert; `README.md`, `README.de.md`, `README.ru.md`, `README.zh.md`, `CHANGELOG.md` und Options-UI synchronisiert.
+- **Deterministischer Release-Build:** Bit-identische ZIP-Dateien für Chrome, Firefox und Source (`v0.2.2-alpha`) erzeugt und über `scripts/verify-release.ps1` validiert.
+
 ## Test-Ledger (zuletzt ausgeführt)
 
 | Befehl | Ergebnis |
 |---|---|
-| `node --test tests/*.test.cjs` (11 Dateien) | 69 pass / 0 fail, Exit 0 |
+| `node --test tests/*.test.cjs` (12 Dateien) | 80 pass / 0 fail, Exit 0 |
 | `node audit/verify/holdout/run_holdout.cjs` | 289/296, FN 0/166, FP 7/121, Exit 0 |
 | `node audit/verify/fix/fresh_sanity.cjs` | 42/44, Exit 0 |
 | `node audit/lead/lead_probe.cjs` | 0/26 FP, 0/40 FN, Exit 0 |
-| `python build.py` (2×) | byte-identische ZIPs (`v0.2.1-alpha`), `SHA256SUMS.txt`, Exit 0 |
+| `python build.py` (2×) | byte-identische ZIPs (`v0.2.2-alpha`), `SHA256SUMS.txt`, Exit 0 |
 | `powershell -ExecutionPolicy Bypass -File scripts/verify-release.ps1` | 3 Dateien OK, Source-ZIP-Hygiene OK, Exit 0 |
 | `node --check` (detector/shield/guard/popup/options/i18n/background/aegis) | Exit 0 |
 

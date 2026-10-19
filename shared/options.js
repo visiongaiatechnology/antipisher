@@ -320,7 +320,7 @@
   // --- EXPORT & IMPORT ---
   function exportConfig() {
     const exportData = {
-      version: '0.2.1',
+      version: '0.2.2',
       exportedAt: new Date().toISOString(),
       generator: 'Antipisher / VisionGaiaTechnology',
       settings: {
