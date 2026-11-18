@@ -37,9 +37,9 @@ const cm = manifests.chrome, fm = manifests.firefox;
 
 chk('manifest:mv3-both', cm && fm && cm.manifest_version === 3 && fm.manifest_version === 3,
   `chrome=${cm && cm.manifest_version} firefox=${fm && fm.manifest_version}`);
-chk('manifest:version-consistent', cm && fm && cm.version === '0.2.3' && fm.version === '0.2.3',
+chk('manifest:version-consistent', cm && fm && cm.version === '0.2.4' && fm.version === '0.2.4',
   `chrome=${cm && cm.version} firefox=${fm && fm.version}`);
-chk('manifest:name-consistent', cm && fm && cm.name === 'Antipisher' && fm.name === 'Antipisher');
+chk('manifest:name-consistent', cm && fm && cm.name === 'Antipisher by GeDefense' && fm.name === 'Antipisher by GeDefense');
 
 /* ---------- 2. Referenzierte Dateien existieren ---------- */
 function manifestRefs(base, m) {

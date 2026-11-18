@@ -1,7 +1,15 @@
 # Changelog
 
-Alle wesentlichen Änderungen an Antipisher. Format orientiert an Keep a Changelog;
+Alle wesentlichen Änderungen an **Antipisher by GeDefense**. Format orientiert an Keep a Changelog;
 Versionierung folgt der Alpha-Reihe `0.2.x`.
+
+## [0.2.4] — 2026-11-18 (Antipisher by GeDefense · Dark Navy Blue UI & Rebrand)
+
+### Rebrand & UI-Design („Antipisher by GeDefense“)
+- **Offizielles Rebranding:** Alle Erweiterungs-Manifeste (`chrome/manifest.json`, `firefox/manifest.json`), `_locales/{en,de,ru,zh_CN}/messages.json`, `shared/i18n.js`, Popup, Options, Guard-Page, In-Page-Shield und Self-XSS-Konsolenbanner tragen nun das vereinheitlichte Branding **Antipisher by GeDefense** (`GeDefense · VisionGaiaTechnology`).
+- **GeDefense-Wappen überall integriert:** Neue deterministische Browser-Tray-Icons (`icons/icon16.png`, `icons/icon48.png`, `icons/icon128.png`) sowie Integration des GeDefense-Logos in Popup, Options, Guard-Interstitial und als Inline-Wappen im geschlossenen Shadow-DOM von `shared/shield-content.js` (ohne Aufweichung von `web_accessible_resources: ['guard.html']`).
+- **GeDefense Dark Navy Blue Theme (`shared/design-tokens.css`, `popup.css`, `options.css`, `guard.css`, `shield-content.js`):** Umstellung der gesamten Glas-UI vom bisherigen Emerald-Schema auf tiefes GeDefense-Mitternachtsblau (`#040914` – `#0b1830`) mit präzisen Cyan-Blue-Akzenten (`#38bdf8` / `#0ea5e9`).
+- **Release- & Spiegel-Infrastruktur:** Synchronisierte `v0.2.4-alpha`-Builds für Chrome MV3, Firefox MV3 und Source inkl. `SHA256SUMS.txt` & CycloneDX 1.5 `sbom.json` auf GitHub und GitFlic.
 
 ## [0.2.3] — 2026-11-17 (Platin Security Hardened)
 

@@ -49,9 +49,11 @@
   }
 
   const BRAND_MARK = `
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 2.6 20 5.6v6.1c0 5-3.4 8.2-8 9.7-4.6-1.5-8-4.7-8-9.7V5.6L12 2.6Z"/>
-      <path d="M8.4 8.8 12 14l3.6-5.2"/>
+    <svg width="24" height="24" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <path d="M32 4 54 12.2v18.6c0 14.2-9.4 24.4-22 29.2C19.4 55.2 10 45 10 30.8V12.2L32 4Z" fill="#081326" stroke="#e5b84b" stroke-width="3.2"/>
+      <path d="M32 10 48 16v14.5c0 10.6-6.9 18.4-16 22.1-9.1-3.7-16-11.5-16-22.1V16l16-6Z" fill="#0c1b36" stroke="#38bdf8" stroke-width="1.6"/>
+      <circle cx="32" cy="31" r="10.5" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="14 6"/>
+      <path d="M25.5 31.5 30 36l9-10" stroke="#e5b84b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`;
 
   const SHIELD_STYLE = `
@@ -59,16 +61,16 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     .backdrop {
       position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-      padding: 20px; background: rgba(4, 8, 7, 0.78);
+      padding: 20px; background: rgba(4, 9, 20, 0.80);
       -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color: #f2f7f5; -webkit-font-smoothing: antialiased;
+      color: #eef5ff; -webkit-font-smoothing: antialiased;
     }
     .panel {
       position: relative; width: 100%; max-width: 560px; padding: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 24px;
-      background: linear-gradient(180deg, rgba(23, 36, 32, 0.97), rgba(12, 20, 18, 0.96));
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(148, 194, 255, 0.14); border-radius: 24px;
+      background: linear-gradient(180deg, rgba(14, 27, 52, 0.97), rgba(7, 14, 29, 0.96));
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
     .panel::before {
       content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -78,30 +80,30 @@
     .brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
     .mark {
       width: 36px; height: 36px; flex: 0 0 auto; display: grid; place-items: center;
-      color: #6fe3bd; border: 1px solid rgba(111, 227, 189, 0.32); border-radius: 11px;
-      background: linear-gradient(145deg, rgba(111, 227, 189, 0.16), rgba(111, 227, 189, 0.03));
+      color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.34); border-radius: 11px;
+      background: linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(14, 165, 233, 0.04));
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
     }
     .brand-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; line-height: 1.2; }
-    .brand-org { font-size: 9px; font-weight: 650; letter-spacing: 0.2em; text-transform: uppercase; color: #93a7a1; white-space: nowrap; }
-    .brand-product { font-size: 14px; font-weight: 680; color: #f2f7f5; }
-    .brand-product span { margin-left: 7px; padding-left: 7px; border-left: 1px solid rgba(255, 255, 255, 0.15); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #93a7a1; }
+    .brand-org { font-size: 9px; font-weight: 650; letter-spacing: 0.2em; text-transform: uppercase; color: #8399b8; white-space: nowrap; }
+    .brand-product { font-size: 14px; font-weight: 680; color: #eef5ff; }
+    .brand-product span { margin-left: 7px; padding-left: 7px; border-left: 1px solid rgba(148, 194, 255, 0.18); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #8399b8; }
     .status {
       display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border-radius: 999px;
       border: 1px solid rgba(239, 143, 157, 0.34); background: rgba(239, 143, 157, 0.10);
       color: #ef8f9d; font-size: 9px; font-weight: 720; letter-spacing: 0.13em; text-transform: uppercase; white-space: nowrap;
     }
     .status::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 720; letter-spacing: 0.16em; text-transform: uppercase; color: #bfcec8; margin-bottom: 10px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 720; letter-spacing: 0.16em; text-transform: uppercase; color: #b9cae3; margin-bottom: 10px; }
     .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #ef8f9d; box-shadow: 0 0 0 4px rgba(239, 143, 157, 0.10); }
     h2 { font-size: 26px; line-height: 1.12; letter-spacing: -0.03em; font-weight: 680; color: #ffffff; margin-bottom: 8px; }
-    .explanation { font-size: 13.5px; line-height: 1.55; color: #bfcec8; }
-    .facts { margin: 20px 0 4px; border-top: 1px solid rgba(255, 255, 255, 0.09); }
-    .fact { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px; padding: 11px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.09); align-items: baseline; }
-    .fact-label { font-size: 9.5px; font-weight: 650; letter-spacing: 0.15em; text-transform: uppercase; color: #93a7a1; }
-    .fact-value { font-size: 13px; color: #f2f7f5; overflow-wrap: anywhere; }
+    .explanation { font-size: 13.5px; line-height: 1.55; color: #b9cae3; }
+    .facts { margin: 20px 0 4px; border-top: 1px solid rgba(148, 194, 255, 0.12); }
+    .fact { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px; padding: 11px 0; border-bottom: 1px solid rgba(148, 194, 255, 0.12); align-items: baseline; }
+    .fact-label { font-size: 9.5px; font-weight: 650; letter-spacing: 0.15em; text-transform: uppercase; color: #8399b8; }
+    .fact-value { font-size: 13px; color: #eef5ff; overflow-wrap: anywhere; }
     .fact-value.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
-    .fact-value.official { color: #6fe3bd; font-weight: 640; }
+    .fact-value.official { color: #38bdf8; font-weight: 640; }
     .actions { display: flex; gap: 10px; margin-top: 20px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px;
@@ -110,12 +112,12 @@
     }
     .btn:focus-visible { outline: 2px solid #9cc9ff; outline-offset: 3px; }
     .btn-safe {
-      color: #f6fffb; background: linear-gradient(180deg, #227f69, #186452);
-      border-color: rgba(111, 227, 189, 0.42); box-shadow: 0 10px 24px rgba(20, 90, 72, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      color: #f0f9ff; background: linear-gradient(180deg, #0284c7, #0369a1);
+      border-color: rgba(56, 189, 248, 0.45); box-shadow: 0 10px 24px rgba(2, 132, 199, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.16);
     }
-    .btn-safe:hover { background: linear-gradient(180deg, #2a9178, #1c715c); }
+    .btn-safe:hover { background: linear-gradient(180deg, #0ea5e9, #0284c7); }
     .btn-proceed { color: #ffd9df; background: rgba(239, 143, 157, 0.08); border-color: rgba(239, 143, 157, 0.34); }
-    .footer { margin-top: 18px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.09); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: #93a7a1; }
+    .footer { margin-top: 18px; padding-top: 12px; border-top: 1px solid rgba(148, 194, 255, 0.12); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: #8399b8; }
     @media (max-width: 520px) {
       .panel { padding: 22px 18px; }
       h2 { font-size: 22px; }
@@ -150,11 +152,11 @@
       official: 'Official Domain',
       btnCancel: 'Cancel – Keep My Input',
       btnProceed: 'Send Anyway',
-      footer: 'Verified locally · zero data transmitted to Antipisher · VisionGaiaTechnology',
-      badge: 'Possible Phishing Site · Antipisher Warning',
+      footer: 'Verified locally · zero data transmitted · GeDefense · VisionGaiaTechnology',
+      badge: 'Possible Phishing Site · Antipisher by GeDefense Warning',
       defaultDesc: 'This address impersonates a protected brand or uses a deceptive domain structure.',
       toastTitle: 'Domain verified',
-      toastSub: 'Antipisher · Protected'
+      toastSub: 'Antipisher by GeDefense · Protected'
     },
     de: {
       tag: 'Formularschutz',
@@ -166,11 +168,11 @@
       official: 'Offizielle Domain',
       btnCancel: 'Abbrechen – Daten bleiben erhalten',
       btnProceed: 'Trotzdem senden',
-      footer: 'Lokal geprüft · keine Übertragung an Antipisher · VisionGaiaTechnology',
-      badge: 'Mögliche Phishing-Seite · Antipisher warnt',
+      footer: 'Lokal geprüft · keine Übertragung · GeDefense · VisionGaiaTechnology',
+      badge: 'Mögliche Phishing-Seite · Antipisher by GeDefense warnt',
       defaultDesc: 'Diese Adresse imitiert eine geschützte Marke oder nutzt eine verdächtige Domainstruktur.',
       toastTitle: 'Domain verifiziert',
-      toastSub: 'Antipisher · Geschützt'
+      toastSub: 'Antipisher by GeDefense · Geschützt'
     },
     ru: {
       tag: 'Защита форм',
@@ -182,11 +184,11 @@
       official: 'Официальный домен',
       btnCancel: 'Отмена — сохранить данные',
       btnProceed: 'Все равно отправить',
-      footer: 'Проверено локально · данные не передаются в Antipisher · VisionGaiaTechnology',
-      badge: 'Возможный фишинг · Предупреждение Antipisher',
+      footer: 'Проверено локально · без передачи данных · GeDefense · VisionGaiaTechnology',
+      badge: 'Возможный фишинг · Предупреждение Antipisher by GeDefense',
       defaultDesc: 'Этот адрес имитирует защищенный бренд или использует подозрительную структуру домена.',
       toastTitle: 'Домен проверен',
-      toastSub: 'Antipisher · Защищено'
+      toastSub: 'Antipisher by GeDefense · Защищено'
     },
     zh: {
       tag: '表单防护',
@@ -198,11 +200,11 @@
       official: '官方域名',
       btnCancel: '取消 — 保留输入数据',
       btnProceed: '仍然发送',
-      footer: '本地验证 · 无数据传输至 Antipisher · VisionGaiaTechnology',
-      badge: '疑似钓鱼网站 · Antipisher 提醒',
+      footer: '本地验证 · 无数据传输 · GeDefense · VisionGaiaTechnology',
+      badge: '疑似钓鱼网站 · Antipisher by GeDefense 提醒',
       defaultDesc: '该地址假冒受保护的品牌或采用可疑的域名结构。',
       toastTitle: '域名已验证',
-      toastSub: 'Antipisher · 安全守护'
+      toastSub: 'Antipisher by GeDefense · 安全守护'
     }
   };
 
@@ -243,7 +245,7 @@
             <div class="brand">
               <div class="mark">${BRAND_MARK}</div>
               <div class="brand-copy">
-                <span class="brand-org">VisionGaiaTechnology</span>
+                <span class="brand-org">by GeDefense</span>
                 <span class="brand-product">Antipisher<span>${escapeHtml(str.tag)}</span></span>
               </div>
             </div>
@@ -442,13 +444,13 @@
           gap: 10px;
           padding: 8px 14px 8px 10px;
           border-radius: 999px;
-          border: 1px solid rgba(111, 227, 189, 0.35);
-          background: linear-gradient(135deg, rgba(16, 28, 24, 0.94), rgba(8, 16, 14, 0.96));
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+          border: 1px solid rgba(56, 189, 248, 0.36);
+          background: linear-gradient(135deg, rgba(12, 24, 48, 0.95), rgba(6, 13, 28, 0.97));
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.16);
           -webkit-backdrop-filter: blur(16px);
           backdrop-filter: blur(16px);
           font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-          color: #f2f7f5;
+          color: #eef5ff;
           user-select: none;
           pointer-events: none;
           animation: vgt-toast-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -462,15 +464,15 @@
           flex: 0 0 auto;
           display: grid;
           place-items: center;
-          color: #6fe3bd;
-          border: 1px solid rgba(111, 227, 189, 0.4);
+          color: #38bdf8;
+          border: 1px solid rgba(56, 189, 248, 0.42);
           border-radius: 50%;
-          background: linear-gradient(145deg, rgba(111, 227, 189, 0.22), rgba(111, 227, 189, 0.05));
-          box-shadow: 0 0 10px rgba(111, 227, 189, 0.28);
+          background: linear-gradient(145deg, rgba(56, 189, 248, 0.22), rgba(14, 165, 233, 0.06));
+          box-shadow: 0 0 12px rgba(56, 189, 248, 0.28);
         }
         .toast-mark svg {
-          width: 14px;
-          height: 14px;
+          width: 15px;
+          height: 15px;
         }
         .toast-copy {
           display: flex;
@@ -489,7 +491,7 @@
           font-size: 8.5px;
           font-weight: 600;
           letter-spacing: 0.05em;
-          color: #6fe3bd;
+          color: #38bdf8;
           text-transform: uppercase;
           white-space: nowrap;
         }

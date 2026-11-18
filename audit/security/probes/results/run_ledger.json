@@ -79,7 +79,7 @@
     },
     {
         "id":  "TR-12-matrix-validate",
-        "command":  "python \"C:\\Users\\Masterboard\\.gemini\\config\\skills\\vgt-security-master\\scripts\\validate_audit.py\" audit/security/AUDIT_MATRIX.json",
+        "command":  "python \"%USERPROFILE%\\.gemini\\config\\skills\\vgt-security-master\\scripts\\validate_audit.py\" audit/security/AUDIT_MATRIX.json",
         "exit_code":  0,
         "log":  "audit/security/probes/logs/validate_audit.log"
     }

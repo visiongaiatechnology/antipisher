@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Antipisher",
+    "message": "Antipisher by GeDefense",
     "description": "Название расширения."
   },
   "appShortName": {
@@ -8,11 +8,11 @@
     "description": "Краткое название."
   },
   "appDesc": {
-    "message": "Локальная офлайн-защита от фишинга, поддельных доменов, IDN-гомографов и тайпосквоттинга.",
+    "message": "Antipisher by GeDefense — Локальная офлайн-защита от фишинга, гомографов, трекеров и Supply-Chain-атак.",
     "description": "Описание расширения."
   },
   "actionTitle": {
-    "message": "Antipisher Domain Trust",
+    "message": "Antipisher by GeDefense",
     "description": "Подсказка для значка в панели инструментов."
   }
 }

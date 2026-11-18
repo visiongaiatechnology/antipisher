@@ -1,6 +1,6 @@
 {
   "probe": "probe01_manifest_integrity",
-  "timestamp_utc": "2026-11-18T09:08:41.033Z",
+  "timestamp_utc": "2026-11-18T09:48:17.206Z",
   "root": ".",
   "assertions_total": 27,
   "assertions_failed": 0,
@@ -23,7 +23,7 @@
     {
       "name": "manifest:version-consistent",
       "ok": true,
-      "detail": "chrome=0.2.3 firefox=0.2.3"
+      "detail": "chrome=0.2.4 firefox=0.2.4"
     },
     {
       "name": "manifest:name-consistent",

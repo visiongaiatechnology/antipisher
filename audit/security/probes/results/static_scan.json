@@ -1,6 +1,6 @@
 {
   "probe": "probe09_static_scan",
-  "timestamp_utc": "2026-11-18T09:08:46.180139+00:00",
+  "timestamp_utc": "2026-11-18T09:48:22.461266+00:00",
   "python": "3.14.2",
   "root": ".",
   "file_count": 115,
@@ -42,33 +42,33 @@
     },
     {
       "path": "_locales/de/messages.json",
-      "size": 514,
-      "sha256": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+      "size": 536,
+      "sha256": "bbdfb7c722813a77a6661d539ad9d919c97b8fed674ad0806a4331a8ea5197ca"
     },
     {
       "path": "_locales/en/messages.json",
-      "size": 508,
-      "sha256": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+      "size": 537,
+      "sha256": "48c1980b8839b52318c463e02ca4f2cd5669fdc28e2212626446841fe553b976"
     },
     {
       "path": "_locales/ru/messages.json",
-      "size": 649,
-      "sha256": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+      "size": 658,
+      "sha256": "ea986a4774111049ad0535268be99c183a846239d2d393054bdc358e74c35d66"
     },
     {
       "path": "_locales/zh_CN/messages.json",
-      "size": 507,
-      "sha256": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
+      "size": 524,
+      "sha256": "54a25712675003faa87c4126db48bea30538487c301c922950a5ceed98f33878"
     },
     {
       "path": "ARCHITECTURE_AND_SECURITY_REVIEW.md",
-      "size": 7069,
-      "sha256": "137109c27a2747745fa8d5a2d76845c4603e95179a105ed2dbdd258b2005a179"
+      "size": 7095,
+      "sha256": "e36e8d099d2ed818f5000c374aebe4cac6c60c060be0880eb82fbf6377e0563f"
     },
     {
       "path": "build.py",
       "size": 6907,
-      "sha256": "a76fead0782ce73cddf7e131b78074e83e64e29d6c2d260fe5bd2db439f7bad1"
+      "sha256": "6e5bf2be1bca841348a6ebb37e4fbe87e18ef7ff9ad282fb99377acd6168c264"
     },
     {
       "path": "build_sites.py",
@@ -77,28 +77,28 @@
     },
     {
       "path": "CHANGELOG.md",
-      "size": 13252,
-      "sha256": "858691fa7dc4168a843dcb4f4f662cfd28347c3fbcdfaf3d297de238130e7621"
+      "size": 14636,
+      "sha256": "5de1331b3ab53095074f720104cc8b18bfa3086f2f9e42fba988c630b2532136"
     },
     {
       "path": "chrome/_locales/de/messages.json",
-      "size": 514,
-      "sha256": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+      "size": 536,
+      "sha256": "bbdfb7c722813a77a6661d539ad9d919c97b8fed674ad0806a4331a8ea5197ca"
     },
     {
       "path": "chrome/_locales/en/messages.json",
-      "size": 508,
-      "sha256": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+      "size": 537,
+      "sha256": "48c1980b8839b52318c463e02ca4f2cd5669fdc28e2212626446841fe553b976"
     },
     {
       "path": "chrome/_locales/ru/messages.json",
-      "size": 649,
-      "sha256": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+      "size": 658,
+      "sha256": "ea986a4774111049ad0535268be99c183a846239d2d393054bdc358e74c35d66"
     },
     {
       "path": "chrome/_locales/zh_CN/messages.json",
-      "size": 507,
-      "sha256": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
+      "size": 524,
+      "sha256": "54a25712675003faa87c4126db48bea30538487c301c922950a5ceed98f33878"
     },
     {
       "path": "chrome/background.js",
@@ -107,18 +107,18 @@
     },
     {
       "path": "chrome/design-tokens.css",
-      "size": 7784,
-      "sha256": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
+      "size": 7991,
+      "sha256": "8156d48f2f1e6c1e42ec1acf35f17395a5fd0d546684edb4065d161515967884"
     },
     {
       "path": "chrome/guard.css",
-      "size": 5501,
-      "sha256": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
+      "size": 5499,
+      "sha256": "bdd68f3d6ab62588fefdd98a86d01b6e11f3fd5da4a9c27fd438aee79e2faf91"
     },
     {
       "path": "chrome/guard.html",
-      "size": 4321,
-      "sha256": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
+      "size": 4174,
+      "sha256": "3f00910644f468f826613065dd97dbf3e4346b481fa32e161becee9e81e568ef"
     },
     {
       "path": "chrome/guard.js",
@@ -127,48 +127,48 @@
     },
     {
       "path": "chrome/icons/icon128.png",
-      "size": 9114,
-      "sha256": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+      "size": 25985,
+      "sha256": "1f4a8268c0a2690c7b313b5de266aaf939937d9dfdf45596a7b81c1ef071c7e8"
     },
     {
       "path": "chrome/icons/icon16.png",
-      "size": 813,
-      "sha256": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+      "size": 869,
+      "sha256": "d67f13f73c6ef855403864f873ef6e6aeaf84ff8cde724e2b7a4d99f5885a3e4"
     },
     {
       "path": "chrome/icons/icon48.png",
-      "size": 3323,
-      "sha256": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+      "size": 4882,
+      "sha256": "2943e5fb2aa03aa120e1bc6675dbad470c3b9ae4cbab10a8104ba1d3976b6a74"
     },
     {
       "path": "chrome/manifest.json",
-      "size": 1763,
-      "sha256": "970b3ed6d3c093f7eb2314522aaf9f565508a26bd9e26dff5cdb796353b4bdc9"
+      "size": 1789,
+      "sha256": "c506211cf2cf99a7e66d222729535e43feddb1c1ae160cf0c98864793c2f8a7f"
     },
     {
       "path": "chrome/options.css",
-      "size": 10318,
-      "sha256": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+      "size": 10445,
+      "sha256": "2c54ee0f9218806c3b492387692a2e587a40cb5faf70792ce3a9b05b6c5ecf0c"
     },
     {
       "path": "chrome/options.html",
-      "size": 22773,
-      "sha256": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+      "size": 22559,
+      "sha256": "5e0ca33852a056eac5c6e18b3ba5dbd48fe4d39941211058b59b0e1a6e83234c"
     },
     {
       "path": "chrome/options.js",
-      "size": 27177,
-      "sha256": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+      "size": 27190,
+      "sha256": "16683f1efe6f24113c5ee1bc2c2ec8394f32759c624b0701aecf2c389d95920d"
     },
     {
       "path": "chrome/popup.css",
-      "size": 9011,
-      "sha256": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
+      "size": 9000,
+      "sha256": "3fbdd7f59f665298265cd365c615dd49c47ef4e2e9e89f99769fe09a065bd7f2"
     },
     {
       "path": "chrome/popup.html",
-      "size": 8371,
-      "sha256": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
+      "size": 8138,
+      "sha256": "ed8df883f08076c4a505b6c9f4097e5ca91a3bced6f86c6cf620ab78563c23b8"
     },
     {
       "path": "chrome/popup.js",
@@ -182,23 +182,23 @@
     },
     {
       "path": "chrome/shared/aegis-engine.js",
-      "size": 64153,
-      "sha256": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
+      "size": 64179,
+      "sha256": "99f5de2e3b480c617e226a554e0bd89199cfb531950bb27d10b57417959349de"
     },
     {
       "path": "chrome/shared/detector.js",
-      "size": 47687,
-      "sha256": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
+      "size": 47713,
+      "sha256": "1472ff14f00c4af17c59377a4dc9b0bc4234c73402733e86416de6192a1d6e56"
     },
     {
       "path": "chrome/shared/i18n.js",
-      "size": 50174,
-      "sha256": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+      "size": 50316,
+      "sha256": "337b0ca1d27e6e68db83680566eafcc6bf1f34533cabde670df6d9474cfc394b"
     },
     {
       "path": "chrome/shared/shield-content.js",
-      "size": 30509,
-      "sha256": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
+      "size": 30889,
+      "sha256": "c782ca9a57730fdb5b6657f659ebbe763bf8caef5f757dcd5babf7a725db7f17"
     },
     {
       "path": "chrome/shared/sites.js",
@@ -227,23 +227,23 @@
     },
     {
       "path": "firefox/_locales/de/messages.json",
-      "size": 514,
-      "sha256": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+      "size": 536,
+      "sha256": "bbdfb7c722813a77a6661d539ad9d919c97b8fed674ad0806a4331a8ea5197ca"
     },
     {
       "path": "firefox/_locales/en/messages.json",
-      "size": 508,
-      "sha256": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+      "size": 537,
+      "sha256": "48c1980b8839b52318c463e02ca4f2cd5669fdc28e2212626446841fe553b976"
     },
     {
       "path": "firefox/_locales/ru/messages.json",
-      "size": 649,
-      "sha256": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+      "size": 658,
+      "sha256": "ea986a4774111049ad0535268be99c183a846239d2d393054bdc358e74c35d66"
     },
     {
       "path": "firefox/_locales/zh_CN/messages.json",
-      "size": 507,
-      "sha256": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
+      "size": 524,
+      "sha256": "54a25712675003faa87c4126db48bea30538487c301c922950a5ceed98f33878"
     },
     {
       "path": "firefox/background.js",
@@ -252,18 +252,18 @@
     },
     {
       "path": "firefox/design-tokens.css",
-      "size": 7784,
-      "sha256": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
+      "size": 7991,
+      "sha256": "8156d48f2f1e6c1e42ec1acf35f17395a5fd0d546684edb4065d161515967884"
     },
     {
       "path": "firefox/guard.css",
-      "size": 5501,
-      "sha256": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
+      "size": 5499,
+      "sha256": "bdd68f3d6ab62588fefdd98a86d01b6e11f3fd5da4a9c27fd438aee79e2faf91"
     },
     {
       "path": "firefox/guard.html",
-      "size": 4321,
-      "sha256": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
+      "size": 4174,
+      "sha256": "3f00910644f468f826613065dd97dbf3e4346b481fa32e161becee9e81e568ef"
     },
     {
       "path": "firefox/guard.js",
@@ -272,48 +272,48 @@
     },
     {
       "path": "firefox/icons/icon128.png",
-      "size": 9114,
-      "sha256": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+      "size": 25985,
+      "sha256": "1f4a8268c0a2690c7b313b5de266aaf939937d9dfdf45596a7b81c1ef071c7e8"
     },
     {
       "path": "firefox/icons/icon16.png",
-      "size": 813,
-      "sha256": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+      "size": 869,
+      "sha256": "d67f13f73c6ef855403864f873ef6e6aeaf84ff8cde724e2b7a4d99f5885a3e4"
     },
     {
       "path": "firefox/icons/icon48.png",
-      "size": 3323,
-      "sha256": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+      "size": 4882,
+      "sha256": "2943e5fb2aa03aa120e1bc6675dbad470c3b9ae4cbab10a8104ba1d3976b6a74"
     },
     {
       "path": "firefox/manifest.json",
-      "size": 1764,
-      "sha256": "61105fd6ab4bbec0b38cb829b39da55ab1a644e7c7a0d32e194cebfaacd6c599"
+      "size": 1790,
+      "sha256": "8a9fb700bf8dfa4012ebfeb762f00ac40881116b5f2d3117d717c26017a90291"
     },
     {
       "path": "firefox/options.css",
-      "size": 10318,
-      "sha256": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+      "size": 10445,
+      "sha256": "2c54ee0f9218806c3b492387692a2e587a40cb5faf70792ce3a9b05b6c5ecf0c"
     },
     {
       "path": "firefox/options.html",
-      "size": 22773,
-      "sha256": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+      "size": 22559,
+      "sha256": "5e0ca33852a056eac5c6e18b3ba5dbd48fe4d39941211058b59b0e1a6e83234c"
     },
     {
       "path": "firefox/options.js",
-      "size": 27177,
-      "sha256": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+      "size": 27190,
+      "sha256": "16683f1efe6f24113c5ee1bc2c2ec8394f32759c624b0701aecf2c389d95920d"
     },
     {
       "path": "firefox/popup.css",
-      "size": 9011,
-      "sha256": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
+      "size": 9000,
+      "sha256": "3fbdd7f59f665298265cd365c615dd49c47ef4e2e9e89f99769fe09a065bd7f2"
     },
     {
       "path": "firefox/popup.html",
-      "size": 8371,
-      "sha256": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
+      "size": 8138,
+      "sha256": "ed8df883f08076c4a505b6c9f4097e5ca91a3bced6f86c6cf620ab78563c23b8"
     },
     {
       "path": "firefox/popup.js",
@@ -327,23 +327,23 @@
     },
     {
       "path": "firefox/shared/aegis-engine.js",
-      "size": 64153,
-      "sha256": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
+      "size": 64179,
+      "sha256": "99f5de2e3b480c617e226a554e0bd89199cfb531950bb27d10b57417959349de"
     },
     {
       "path": "firefox/shared/detector.js",
-      "size": 47687,
-      "sha256": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
+      "size": 47713,
+      "sha256": "1472ff14f00c4af17c59377a4dc9b0bc4234c73402733e86416de6192a1d6e56"
     },
     {
       "path": "firefox/shared/i18n.js",
-      "size": 50174,
-      "sha256": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+      "size": 50316,
+      "sha256": "337b0ca1d27e6e68db83680566eafcc6bf1f34533cabde670df6d9474cfc394b"
     },
     {
       "path": "firefox/shared/shield-content.js",
-      "size": 30509,
-      "sha256": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
+      "size": 30889,
+      "sha256": "c782ca9a57730fdb5b6657f659ebbe763bf8caef5f757dcd5babf7a725db7f17"
     },
     {
       "path": "firefox/shared/sites.js",
@@ -352,18 +352,18 @@
     },
     {
       "path": "icons/icon128.png",
-      "size": 9114,
-      "sha256": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+      "size": 25985,
+      "sha256": "1f4a8268c0a2690c7b313b5de266aaf939937d9dfdf45596a7b81c1ef071c7e8"
     },
     {
       "path": "icons/icon16.png",
-      "size": 813,
-      "sha256": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+      "size": 869,
+      "sha256": "d67f13f73c6ef855403864f873ef6e6aeaf84ff8cde724e2b7a4d99f5885a3e4"
     },
     {
       "path": "icons/icon48.png",
-      "size": 3323,
-      "sha256": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+      "size": 4882,
+      "sha256": "2943e5fb2aa03aa120e1bc6675dbad470c3b9ae4cbab10a8104ba1d3976b6a74"
     },
     {
       "path": "LICENSE",
@@ -377,23 +377,23 @@
     },
     {
       "path": "README.de.md",
-      "size": 24153,
-      "sha256": "7bed9717c758bc8b9bef5ec1f59e8015e793125079f386aeff5c89fee659582c"
+      "size": 24977,
+      "sha256": "ae207d7a099dcc6389c25bf3767c2449a69ae98270185a65f750fbd0a7126d05"
     },
     {
       "path": "README.md",
-      "size": 22855,
-      "sha256": "218577e9d7943253754289699baa0cc30b1435ccc482e2a37e680dbe4a186568"
+      "size": 23646,
+      "sha256": "282a8d5bc54ba2ad92d7066883c27b243b74eeeea51ad9becfd51b018914d227"
     },
     {
       "path": "README.ru.md",
-      "size": 32493,
-      "sha256": "489a7e105c69a7199c9fa80122cdf1283d3a1e99eb67b71804b4a9a8464d1db1"
+      "size": 33492,
+      "sha256": "c6ac20a70ae0b6be8613cda0586b9a6a7e2ede5c39a02a2f6c4d41ab20b89163"
     },
     {
       "path": "README.zh.md",
-      "size": 21564,
-      "sha256": "bbd92741b3b64c17466ce4c02b0259b3c45719fd4eb0ff85e47d34ee9c06ef81"
+      "size": 22396,
+      "sha256": "9158d0ae3b7b3ae9aa241951c191155d87b1a398d4cf83ec55b557f4345808e0"
     },
     {
       "path": "rulesets/trackers.json",
@@ -403,7 +403,7 @@
     {
       "path": "sbom.json",
       "size": 8287,
-      "sha256": "19dde6529e35a247f8998d60657c6c2fcdbca0f62e89a1c9167f3681c1964e15"
+      "sha256": "c34bd822e49f3a05bf0d1a0a24a98f9293c25b6b84f9b57618dab8d739a1a26e"
     },
     {
       "path": "scripts/generate_screenshots.py",
@@ -412,8 +412,8 @@
     },
     {
       "path": "scripts/publish_github_releases.py",
-      "size": 10180,
-      "sha256": "1a6672c3aad498b23b5e27eba049b07e6f3258c64f54de3ebc8be5182cdf8612"
+      "size": 12013,
+      "sha256": "0418f5cb1b6f494c917a7afac8aa27e30ef8144c1535f2778eaa2e3cfa0cfdec"
     },
     {
       "path": "scripts/verify-release.ps1",
@@ -427,38 +427,38 @@
     },
     {
       "path": "SECURITY.md",
-      "size": 6451,
-      "sha256": "a90db529f983594644e1347c3836af2c50480c4b05ed14bb351111dd23d27143"
+      "size": 6497,
+      "sha256": "b0b889873ca97011e3bc603fef3d2e951ca3bdc719751eae980e98250433b88e"
     },
     {
       "path": "SHA256SUMS.txt",
       "size": 307,
-      "sha256": "d3b0ad86e3b230a60ba8c97d52dfe999ab37ca82a6809f1ee6fa7d9773c04db3"
+      "sha256": "c54642931877f2eec9d870bd66e76569d1fa800f7df6f07f5d7cb145f1f9b27c"
     },
     {
       "path": "shared/aegis-engine.js",
-      "size": 64153,
-      "sha256": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
+      "size": 64179,
+      "sha256": "99f5de2e3b480c617e226a554e0bd89199cfb531950bb27d10b57417959349de"
     },
     {
       "path": "shared/design-tokens.css",
-      "size": 7784,
-      "sha256": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
+      "size": 7991,
+      "sha256": "8156d48f2f1e6c1e42ec1acf35f17395a5fd0d546684edb4065d161515967884"
     },
     {
       "path": "shared/detector.js",
-      "size": 47687,
-      "sha256": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
+      "size": 47713,
+      "sha256": "1472ff14f00c4af17c59377a4dc9b0bc4234c73402733e86416de6192a1d6e56"
     },
     {
       "path": "shared/guard.css",
-      "size": 5501,
-      "sha256": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
+      "size": 5499,
+      "sha256": "bdd68f3d6ab62588fefdd98a86d01b6e11f3fd5da4a9c27fd438aee79e2faf91"
     },
     {
       "path": "shared/guard.html",
-      "size": 4321,
-      "sha256": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
+      "size": 4174,
+      "sha256": "3f00910644f468f826613065dd97dbf3e4346b481fa32e161becee9e81e568ef"
     },
     {
       "path": "shared/guard.js",
@@ -467,33 +467,33 @@
     },
     {
       "path": "shared/i18n.js",
-      "size": 50174,
-      "sha256": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+      "size": 50316,
+      "sha256": "337b0ca1d27e6e68db83680566eafcc6bf1f34533cabde670df6d9474cfc394b"
     },
     {
       "path": "shared/options.css",
-      "size": 10318,
-      "sha256": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+      "size": 10445,
+      "sha256": "2c54ee0f9218806c3b492387692a2e587a40cb5faf70792ce3a9b05b6c5ecf0c"
     },
     {
       "path": "shared/options.html",
-      "size": 22773,
-      "sha256": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+      "size": 22559,
+      "sha256": "5e0ca33852a056eac5c6e18b3ba5dbd48fe4d39941211058b59b0e1a6e83234c"
     },
     {
       "path": "shared/options.js",
-      "size": 27177,
-      "sha256": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+      "size": 27190,
+      "sha256": "16683f1efe6f24113c5ee1bc2c2ec8394f32759c624b0701aecf2c389d95920d"
     },
     {
       "path": "shared/popup.css",
-      "size": 9011,
-      "sha256": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
+      "size": 9000,
+      "sha256": "3fbdd7f59f665298265cd365c615dd49c47ef4e2e9e89f99769fe09a065bd7f2"
     },
     {
       "path": "shared/popup.html",
-      "size": 8371,
-      "sha256": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
+      "size": 8138,
+      "sha256": "ed8df883f08076c4a505b6c9f4097e5ca91a3bced6f86c6cf620ab78563c23b8"
     },
     {
       "path": "shared/popup.js",
@@ -502,8 +502,8 @@
     },
     {
       "path": "shared/shield-content.js",
-      "size": 30509,
-      "sha256": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
+      "size": 30889,
+      "sha256": "c782ca9a57730fdb5b6657f659ebbe763bf8caef5f757dcd5babf7a725db7f17"
     },
     {
       "path": "shared/sites.js",
@@ -547,8 +547,8 @@
     },
     {
       "path": "tests/i18n.test.cjs",
-      "size": 3809,
-      "sha256": "38a11c08ff6d4ae24379015a9c6f0eb0c4e00da810b17d59c978de4166566330"
+      "size": 3902,
+      "sha256": "d7a8a91c78520bb79acff4db30b12326b15649c593938d83002e32e51ae20384"
     },
     {
       "path": "tests/options-and-whitelist.test.cjs",
@@ -558,12 +558,12 @@
     {
       "path": "tests/p0-regressions.test.cjs",
       "size": 5629,
-      "sha256": "75ff37c9f9a98551b102038b558449b04b4cdfccdf56592feab198efa3e9668c"
+      "sha256": "fd3d2cc032d7f12fb7a976e803101a33cfd8a0b2f511baa67d382793e6a7cd12"
     },
     {
       "path": "tests/platin-security.test.cjs",
       "size": 13129,
-      "sha256": "3054ff93379824222df8a09b17454471500fcd067d1684994245da817404ed79"
+      "sha256": "bbd4e86084f3ed7a1bceb85d3b7da530b1c5c1fd7c638f1e68e59fdc7f12cf26"
     },
     {
       "path": "tests/shield-content.test.cjs",
@@ -585,32 +585,32 @@
     "network_fetch": [
       {
         "file": "README.de.md",
-        "line": 54,
+        "line": 60,
         "code": "Am 16. November 2026 schleusten Angreifer über kompromittiertes `projectJS` bei Optimizely schädlichen JavaScript-Code auf 178 namhafte Webseiten (darunter GitLab, Salesforce, IKEA, Zoom, CNN, BBC und Ledger). Nachgelade"
       },
       {
         "file": "README.de.md",
-        "line": 60,
+        "line": 66,
         "code": "| **3. Zahlungs-Skimming (`sendBeacon('/card.php')`)** | Telemetrie-`sendBeacon` blockiert, aber `fetch`-Exfiltration an Skimmer-Pfade nicht gesperrt | **Abgewehrt:** Anti-Magecart Guard blockiert sowohl `navigator.sendB"
       },
       {
         "file": "README.md",
-        "line": 54,
+        "line": 60,
         "code": "On November 16, 2026, attackers compromised Optimizely's `projectJS` delivery to inject malicious JavaScript across 178 high-profile websites (including GitLab, Salesforce, IKEA, Zoom, CNN, BBC, and Ledger), loading `168"
       },
       {
         "file": "README.md",
-        "line": 60,
+        "line": 66,
         "code": "| **3. Payment Skimming (`sendBeacon('/card.php')`)** | `sendBeacon` telemetry dropped for analytics, but `fetch` exfiltration to skimmer paths was not blocked | **Blocked:** Anti-Magecart Guard intercepts both `navigato"
       },
       {
         "file": "README.ru.md",
-        "line": 51,
+        "line": 57,
         "code": "16 ноября 2026 года злоумышленники внедрили вредоносный JS через `projectJS` Optimizely на 178 крупных сайтах (GitLab, Salesforce, IKEA, Zoom, Ledger и др.), загружая `1688360.cc/track.js`, `webshell.lol`, `eval(atob(..."
       },
       {
         "file": "README.zh.md",
-        "line": 51,
+        "line": 57,
         "code": "2026 年 11 月 16 日，攻击者通过被攻陷的 Optimizely `projectJS` 向 178 家知名网站（含 GitLab、Salesforce、IKEA、Zoom、Ledger 等）注入恶意 JS，加载 `1688360.cc/track.js`、`webshell.lol`、`eval(atob(...))`、Magecart 窃密脚本（`sendBeacon('/card.php')`）、钱包剪贴板劫持及 `.i"
       },
       {
@@ -652,67 +652,67 @@
     "eval_like": [
       {
         "file": "CHANGELOG.md",
-        "line": 30,
+        "line": 38,
         "code": "- Neutralisiert inline verschleierte Loader-Payloads (`eval(atob(...))`, `window._k7`, `data-channel-code=\"02111110\"`), ohne legitime First-Party-Skripte oder Zahlungs-CDNs (Stripe, Adyen, PayPal) einzuschränken."
       },
       {
         "file": "README.de.md",
-        "line": 42,
+        "line": 48,
         "code": "- **Cross-Origin `<script>` & `<iframe>` Gatekeeper:** Abfang auf DOM-Prototyp-Ebene (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) gegen C2-Loader, Hochrisiko-TLDs (`.i"
       },
       {
         "file": "README.de.md",
-        "line": 54,
+        "line": 60,
         "code": "Am 16. November 2026 schleusten Angreifer über kompromittiertes `projectJS` bei Optimizely schädlichen JavaScript-Code auf 178 namhafte Webseiten (darunter GitLab, Salesforce, IKEA, Zoom, CNN, BBC und Ledger). Nachgelade"
       },
       {
         "file": "README.de.md",
-        "line": 59,
+        "line": 65,
         "code": "| **2. Verschleierte Fallback-Loader (`eval(atob(...))`)** | `innerHTML` / `javascript:` entschärft, aber `window._k7` / `data-channel-code` Inline-C2-Loader nicht gezielt erkannt | **Entschärft:** Verschleierte Inline-C"
       },
       {
         "file": "README.md",
-        "line": 42,
+        "line": 48,
         "code": "- Cross-Origin `<script>` & `<iframe>` Gatekeeper at DOM prototype level (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) blocking malicious C2 loaders, high-risk TLDs (`."
       },
       {
         "file": "README.md",
-        "line": 54,
+        "line": 60,
         "code": "On November 16, 2026, attackers compromised Optimizely's `projectJS` delivery to inject malicious JavaScript across 178 high-profile websites (including GitLab, Salesforce, IKEA, Zoom, CNN, BBC, and Ledger), loading `168"
       },
       {
         "file": "README.md",
-        "line": 59,
+        "line": 65,
         "code": "| **2. Obfuscated Fallback (`eval(atob(...))`)** | `innerHTML`/`javascript:` neutralized, but `window._k7` / `data-channel-code` inline C2 loaders were not specifically matched | **Neutralized:** Inline obfuscated C2 loa"
       },
       {
         "file": "README.ru.md",
-        "line": 42,
+        "line": 48,
         "code": "- Перехват динамических инъекций `<script>` и `<iframe>` на уровне DOM-прототипов (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) против C2-загрузчиков, зон риска (`.icu`"
       },
       {
         "file": "README.ru.md",
-        "line": 51,
+        "line": 57,
         "code": "16 ноября 2026 года злоумышленники внедрили вредоносный JS через `projectJS` Optimizely на 178 крупных сайтах (GitLab, Salesforce, IKEA, Zoom, Ledger и др.), загружая `1688360.cc/track.js`, `webshell.lol`, `eval(atob(..."
       },
       {
         "file": "README.zh.md",
-        "line": 42,
+        "line": 48,
         "code": "- 在 DOM 原型层（`setAttribute`、`HTMLScriptElement.src`、`HTMLIFrameElement.src`、`appendChild`、`insertBefore`）拦截恶意跨域 `<script>`/`<iframe>` 注入（C2 加载器、`.icu`/`.lol` 等高危后缀、裸 IPv4 以及 `eval(atob(...))` / `window._k7` 载荷）。"
       },
       {
         "file": "README.zh.md",
-        "line": 51,
+        "line": 57,
         "code": "2026 年 11 月 16 日，攻击者通过被攻陷的 Optimizely `projectJS` 向 178 家知名网站（含 GitLab、Salesforce、IKEA、Zoom、Ledger 等）注入恶意 JS，加载 `1688360.cc/track.js`、`webshell.lol`、`eval(atob(...))`、Magecart 窃密脚本（`sendBeacon('/card.php')`）、钱包剪贴板劫持及 `.i"
       },
       {
         "file": "scripts/publish_github_releases.py",
-        "line": 145,
+        "line": 150,
         "code": "- **GeDefense Light Supply-Chain, Magecart & Crypto-Clipper Fortress:** Cross-origin `<script>`/`<iframe>` prototype gatekeeper (`1688360.cc`, `webshell.lol`, `.icu` exploit kits, `eval(atob(...))`), Anti-Magecart `sendB"
       },
       {
         "file": "scripts/publish_github_releases.py",
-        "line": 193,
+        "line": 204,
         "code": "- **GeDefense Light Supply-Chain & Magecart Defense:** Blocks Optimizely-style supply-chain loaders (`1688360.cc`, `webshell.lol`, `.icu` exploit kits, `eval(atob(...))`), Magecart `sendBeacon`/`fetch` card skimmers, and"
       },
       {
@@ -734,7 +734,7 @@
       },
       {
         "file": "chrome/options.html",
-        "line": 260,
+        "line": 257,
         "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
       },
       {
@@ -859,22 +859,22 @@
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 238,
+        "line": 240,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 387,
+        "line": 389,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 428,
+        "line": 430,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "firefox/options.html",
-        "line": 260,
+        "line": 257,
         "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
       },
       {
@@ -999,27 +999,27 @@
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 238,
+        "line": 240,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 387,
+        "line": 389,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 428,
+        "line": 430,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "README.de.md",
-        "line": 59,
+        "line": 65,
         "code": "| **2. Verschleierte Fallback-Loader (`eval(atob(...))`)** | `innerHTML` / `javascript:` entschärft, aber `window._k7` / `data-channel-code` Inline-C2-Loader nicht gezielt erkannt | **Entschärft:** Verschleierte Inline-C"
       },
       {
         "file": "README.md",
-        "line": 59,
+        "line": 65,
         "code": "| **2. Obfuscated Fallback (`eval(atob(...))`)** | `innerHTML`/`javascript:` neutralized, but `window._k7` / `data-channel-code` inline C2 loaders were not specifically matched | **Neutralized:** Inline obfuscated C2 loa"
       },
       {
@@ -1159,7 +1159,7 @@
       },
       {
         "file": "shared/options.html",
-        "line": 260,
+        "line": 257,
         "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
       },
       {
@@ -1174,17 +1174,17 @@
       },
       {
         "file": "shared/shield-content.js",
-        "line": 238,
+        "line": 240,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 387,
+        "line": 389,
         "code": "shadow.innerHTML = `"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 428,
+        "line": 430,
         "code": "shadow.innerHTML = `"
       },
       {
@@ -1246,7 +1246,7 @@
     "dom_url_sinks": [
       {
         "file": "CHANGELOG.md",
-        "line": 139,
+        "line": 147,
         "code": "- Chrome-Redirect-All und DNR-`regexSubstitution` nicht browser-verifiziert."
       },
       {
@@ -1306,37 +1306,37 @@
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 336,
+        "line": 338,
         "code": "}, window.location.href, () => {}, () => {});"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 347,
+        "line": 349,
         "code": "let targetUrl = window.location.href;"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 350,
+        "line": 352,
         "code": "targetUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 358,
+        "line": 360,
         "code": "let freshUrl = window.location.href;"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 361,
+        "line": 363,
         "code": "freshUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 524,
+        "line": 526,
         "code": "if (typeof window === 'undefined' || !window.location) return;"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 525,
+        "line": 527,
         "code": "const protocol = window.location.protocol;"
       },
       {
@@ -1391,57 +1391,57 @@
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 336,
+        "line": 338,
         "code": "}, window.location.href, () => {}, () => {});"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 347,
+        "line": 349,
         "code": "let targetUrl = window.location.href;"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 350,
+        "line": 352,
         "code": "targetUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 358,
+        "line": 360,
         "code": "let freshUrl = window.location.href;"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 361,
+        "line": 363,
         "code": "freshUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 524,
+        "line": 526,
         "code": "if (typeof window === 'undefined' || !window.location) return;"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 525,
+        "line": 527,
         "code": "const protocol = window.location.protocol;"
       },
       {
         "file": "README.de.md",
-        "line": 101,
+        "line": 107,
         "code": "- **Popunder-Abwehr:** Blockiert unaufgeforderte Popup-/Popunder-Aufrufe (`window.open`) zu Werbenetzwerken."
       },
       {
         "file": "README.md",
-        "line": 100,
+        "line": 106,
         "code": "- **Popunder Defense:** Intercepts unsolicited popup/popunder triggers (`window.open`) targeting advertising networks."
       },
       {
         "file": "README.ru.md",
-        "line": 93,
+        "line": 99,
         "code": "- **Защита от всплывающих окон (Popunder):** Блокирует нежелательные триггеры `window.open`, ведущие на рекламные сети."
       },
       {
         "file": "README.zh.md",
-        "line": 93,
+        "line": 99,
         "code": "- **弹窗与底层跳出防御（Popunder Defense）：** 拦截针对第三方广告网络的非受邀 `window.open` 弹出/底层窗口。"
       },
       {
@@ -1486,37 +1486,37 @@
       },
       {
         "file": "shared/shield-content.js",
-        "line": 336,
+        "line": 338,
         "code": "}, window.location.href, () => {}, () => {});"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 347,
+        "line": 349,
         "code": "let targetUrl = window.location.href;"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 350,
+        "line": 352,
         "code": "targetUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 358,
+        "line": 360,
         "code": "let freshUrl = window.location.href;"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 361,
+        "line": 363,
         "code": "freshUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 524,
+        "line": 526,
         "code": "if (typeof window === 'undefined' || !window.location) return;"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 525,
+        "line": 527,
         "code": "const protocol = window.location.protocol;"
       },
       {
@@ -2020,22 +2020,22 @@
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 534,
+        "line": 536,
         "code": "const getRes = api.storage.local.get(['showSafeToast', 'toastDuration', 'customWhitelist'], (res) => {"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 618,
+        "line": 620,
         "code": "const r = api.storage.local.get(["
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 638,
+        "line": 640,
         "code": "api.storage.local.get(['trackersBlocked'], (res) => {"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 640,
+        "line": 642,
         "code": "api.storage.local.set({ trackersBlocked: count }).catch(() => {});"
       },
       {
@@ -2155,22 +2155,22 @@
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 534,
+        "line": 536,
         "code": "const getRes = api.storage.local.get(['showSafeToast', 'toastDuration', 'customWhitelist'], (res) => {"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 618,
+        "line": 620,
         "code": "const r = api.storage.local.get(["
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 638,
+        "line": 640,
         "code": "api.storage.local.get(['trackersBlocked'], (res) => {"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 640,
+        "line": 642,
         "code": "api.storage.local.set({ trackersBlocked: count }).catch(() => {});"
       },
       {
@@ -2255,29 +2255,29 @@
       },
       {
         "file": "shared/shield-content.js",
-        "line": 534,
+        "line": 536,
         "code": "const getRes = api.storage.local.get(['showSafeToast', 'toastDuration', 'customWhitelist'], (res) => {"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 618,
+        "line": 620,
         "code": "const r = api.storage.local.get(["
       },
       {
         "file": "shared/shield-content.js",
-        "line": 638,
+        "line": 640,
         "code": "api.storage.local.get(['trackersBlocked'], (res) => {"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 640,
+        "line": 642,
         "code": "api.storage.local.set({ trackersBlocked: count }).catch(() => {});"
       }
     ],
     "runtime_message": [
       {
         "file": "CHANGELOG.md",
-        "line": 37,
+        "line": 45,
         "code": "- Behebt fehlenden `typeof api.runtime.sendMessage === 'function'`-Guard in `firefox/background.js`."
       },
       {
@@ -2332,22 +2332,22 @@
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 644,
+        "line": 646,
         "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 646,
+        "line": 648,
         "code": "api.runtime.sendMessage({ type: 'tracker-blocked-event', detail: e?.detail }).catch(() => {});"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 652,
+        "line": 654,
         "code": "if (api && api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
       },
       {
         "file": "chrome/shared/shield-content.js",
-        "line": 654,
+        "line": 656,
         "code": "api.runtime.onMessage.addListener((msg) => {"
       },
       {
@@ -2412,22 +2412,22 @@
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 644,
+        "line": 646,
         "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 646,
+        "line": 648,
         "code": "api.runtime.sendMessage({ type: 'tracker-blocked-event', detail: e?.detail }).catch(() => {});"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 652,
+        "line": 654,
         "code": "if (api && api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
       },
       {
         "file": "firefox/shared/shield-content.js",
-        "line": 654,
+        "line": 656,
         "code": "api.runtime.onMessage.addListener((msg) => {"
       },
       {
@@ -2467,22 +2467,22 @@
       },
       {
         "file": "shared/shield-content.js",
-        "line": 644,
+        "line": 646,
         "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 646,
+        "line": 648,
         "code": "api.runtime.sendMessage({ type: 'tracker-blocked-event', detail: e?.detail }).catch(() => {});"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 652,
+        "line": 654,
         "code": "if (api && api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
       },
       {
         "file": "shared/shield-content.js",
-        "line": 654,
+        "line": 656,
         "code": "api.runtime.onMessage.addListener((msg) => {"
       }
     ],
@@ -3181,407 +3181,427 @@
     },
     {
       "file": "README.de.md",
-      "line": 8,
+      "line": 10,
       "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
     },
     {
       "file": "README.de.md",
-      "line": 9,
-      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
-    },
-    {
-      "file": "README.de.md",
-      "line": 9,
-      "url": "https://github.com/visiongaiatechnology/antipisher"
-    },
-    {
-      "file": "README.de.md",
-      "line": 10,
-      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+      "line": 11,
+      "url": "https://img.shields.io/badge/Version-0.2.4--alpha-0ea5e9.svg?style=for-the-badge"
     },
     {
       "file": "README.de.md",
       "line": 11,
+      "url": "https://github.com/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.de.md",
+      "line": 12,
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.de.md",
+      "line": 13,
       "url": "https://img.shields.io/badge/Telemetrie-Keine_%2F_100%25_Offline-0284c7.svg?style=for-the-badge"
     },
     {
       "file": "README.de.md",
-      "line": 12,
+      "line": 14,
       "url": "https://img.shields.io/badge/Chrome-MV3_Bereit-f59e0b.svg?style=for-the-badge"
     },
     {
       "file": "README.de.md",
-      "line": 13,
+      "line": 15,
       "url": "https://img.shields.io/badge/Firefox-MV3_Bereit-ef4444.svg?style=for-the-badge"
     },
     {
       "file": "README.de.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.de.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
-    },
-    {
-      "file": "README.de.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.de.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.4-alpha/Antipisher-Chrome-v0.2.4-alpha.zip"
     },
     {
       "file": "README.de.md",
       "line": 34,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.4-alpha"
     },
     {
       "file": "README.de.md",
-      "line": 58,
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.4-alpha/Antipisher-Firefox-v0.2.4-alpha.zip"
+    },
+    {
+      "file": "README.de.md",
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.4-alpha"
+    },
+    {
+      "file": "README.de.md",
+      "line": 36,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.4-alpha"
+    },
+    {
+      "file": "README.de.md",
+      "line": 36,
+      "url": "https://gitflic.ru/project/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.de.md",
+      "line": 64,
       "url": "https://1688360.cc/track.js"
     },
     {
       "file": "README.de.md",
-      "line": 77,
+      "line": 83,
       "url": "https://paypal.com@evil.com/`"
     },
     {
       "file": "README.de.md",
-      "line": 78,
+      "line": 84,
       "url": "https://unrelated.com/paypal/login`,"
     },
     {
       "file": "README.de.md",
-      "line": 78,
+      "line": 84,
       "url": "https://phish-host.org/paypal.com/verify`"
     },
     {
       "file": "README.de.md",
-      "line": 253,
+      "line": 259,
       "url": "https://www.unicode.org/reports/tr39/"
     },
     {
       "file": "README.de.md",
-      "line": 254,
+      "line": 260,
       "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
     },
     {
       "file": "README.de.md",
-      "line": 255,
+      "line": 261,
       "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
     },
     {
       "file": "README.de.md",
-      "line": 256,
+      "line": 262,
       "url": "https://publicsuffix.org/"
     },
     {
       "file": "README.de.md",
-      "line": 257,
+      "line": 263,
       "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
     },
     {
       "file": "README.md",
-      "line": 8,
+      "line": 10,
       "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
     },
     {
       "file": "README.md",
-      "line": 9,
-      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
-    },
-    {
-      "file": "README.md",
-      "line": 9,
-      "url": "https://github.com/visiongaiatechnology/antipisher"
-    },
-    {
-      "file": "README.md",
-      "line": 10,
-      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+      "line": 11,
+      "url": "https://img.shields.io/badge/Version-0.2.4--alpha-0ea5e9.svg?style=for-the-badge"
     },
     {
       "file": "README.md",
       "line": 11,
+      "url": "https://github.com/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.md",
+      "line": 12,
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.md",
+      "line": 13,
       "url": "https://img.shields.io/badge/Telemetry-Zero_%2F_100%25_Offline-0284c7.svg?style=for-the-badge"
     },
     {
       "file": "README.md",
-      "line": 12,
+      "line": 14,
       "url": "https://img.shields.io/badge/Chrome-MV3_Ready-f59e0b.svg?style=for-the-badge"
     },
     {
       "file": "README.md",
-      "line": 13,
+      "line": 15,
       "url": "https://img.shields.io/badge/Firefox-MV3_Ready-ef4444.svg?style=for-the-badge"
     },
     {
       "file": "README.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
-    },
-    {
-      "file": "README.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.4-alpha/Antipisher-Chrome-v0.2.4-alpha.zip"
     },
     {
       "file": "README.md",
       "line": 34,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.4-alpha"
     },
     {
       "file": "README.md",
-      "line": 58,
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.4-alpha/Antipisher-Firefox-v0.2.4-alpha.zip"
+    },
+    {
+      "file": "README.md",
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.4-alpha"
+    },
+    {
+      "file": "README.md",
+      "line": 36,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.4-alpha"
+    },
+    {
+      "file": "README.md",
+      "line": 36,
+      "url": "https://gitflic.ru/project/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.md",
+      "line": 64,
       "url": "https://1688360.cc/track.js"
     },
     {
       "file": "README.md",
-      "line": 77,
+      "line": 83,
       "url": "https://paypal.com@evil.com/`"
     },
     {
       "file": "README.md",
-      "line": 78,
+      "line": 84,
       "url": "https://unrelated.com/paypal/login`,"
     },
     {
       "file": "README.md",
-      "line": 78,
+      "line": 84,
       "url": "https://phish-host.org/paypal.com/verify`"
     },
     {
       "file": "README.md",
-      "line": 252,
+      "line": 258,
       "url": "https://www.unicode.org/reports/tr39/"
     },
     {
       "file": "README.md",
-      "line": 253,
+      "line": 259,
       "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
     },
     {
       "file": "README.md",
-      "line": 254,
+      "line": 260,
       "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
     },
     {
       "file": "README.md",
-      "line": 255,
+      "line": 261,
       "url": "https://publicsuffix.org/"
     },
     {
       "file": "README.md",
-      "line": 256,
+      "line": 262,
       "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
     },
     {
       "file": "README.ru.md",
-      "line": 8,
+      "line": 10,
       "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
     },
     {
       "file": "README.ru.md",
-      "line": 9,
-      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
-    },
-    {
-      "file": "README.ru.md",
-      "line": 9,
-      "url": "https://github.com/visiongaiatechnology/antipisher"
-    },
-    {
-      "file": "README.ru.md",
-      "line": 10,
-      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+      "line": 11,
+      "url": "https://img.shields.io/badge/Version-0.2.4--alpha-0ea5e9.svg?style=for-the-badge"
     },
     {
       "file": "README.ru.md",
       "line": 11,
+      "url": "https://github.com/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 12,
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 13,
       "url": "https://img.shields.io/badge/Телеметрия-0_%2F_100%25_Офлайн-0284c7.svg?style=for-the-badge"
     },
     {
       "file": "README.ru.md",
-      "line": 12,
+      "line": 14,
       "url": "https://img.shields.io/badge/Chrome-MV3_Готов-f59e0b.svg?style=for-the-badge"
     },
     {
       "file": "README.ru.md",
-      "line": 13,
+      "line": 15,
       "url": "https://img.shields.io/badge/Firefox-MV3_Готов-ef4444.svg?style=for-the-badge"
     },
     {
       "file": "README.ru.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.ru.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
-    },
-    {
-      "file": "README.ru.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.ru.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.4-alpha/Antipisher-Chrome-v0.2.4-alpha.zip"
     },
     {
       "file": "README.ru.md",
       "line": 34,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.4-alpha"
     },
     {
       "file": "README.ru.md",
-      "line": 69,
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.4-alpha/Antipisher-Firefox-v0.2.4-alpha.zip"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.4-alpha"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 36,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.4-alpha"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 36,
+      "url": "https://gitflic.ru/project/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 75,
       "url": "https://paypal.com@evil.com/`"
     },
     {
       "file": "README.ru.md",
-      "line": 70,
+      "line": 76,
       "url": "https://unrelated.com/paypal/login`,"
     },
     {
       "file": "README.ru.md",
-      "line": 70,
+      "line": 76,
       "url": "https://phish-host.org/paypal.com/verify`"
     },
     {
       "file": "README.ru.md",
-      "line": 245,
+      "line": 251,
       "url": "https://www.unicode.org/reports/tr39/"
     },
     {
       "file": "README.ru.md",
-      "line": 246,
+      "line": 252,
       "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
     },
     {
       "file": "README.ru.md",
-      "line": 247,
+      "line": 253,
       "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
     },
     {
       "file": "README.ru.md",
-      "line": 248,
+      "line": 254,
       "url": "https://publicsuffix.org/"
     },
     {
       "file": "README.ru.md",
-      "line": 249,
+      "line": 255,
       "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
     },
     {
       "file": "README.zh.md",
-      "line": 8,
+      "line": 10,
       "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
     },
     {
       "file": "README.zh.md",
-      "line": 9,
-      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
-    },
-    {
-      "file": "README.zh.md",
-      "line": 9,
-      "url": "https://github.com/visiongaiatechnology/antipisher"
-    },
-    {
-      "file": "README.zh.md",
-      "line": 10,
-      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+      "line": 11,
+      "url": "https://img.shields.io/badge/Version-0.2.4--alpha-0ea5e9.svg?style=for-the-badge"
     },
     {
       "file": "README.zh.md",
       "line": 11,
-      "url": "https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge"
+      "url": "https://github.com/visiongaiatechnology/antipisher"
     },
     {
       "file": "README.zh.md",
       "line": 12,
-      "url": "https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge"
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
     },
     {
       "file": "README.zh.md",
       "line": 13,
+      "url": "https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 14,
+      "url": "https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 15,
       "url": "https://img.shields.io/badge/Firefox-MV3_就绪-ef4444.svg?style=for-the-badge"
     },
     {
       "file": "README.zh.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.zh.md",
-      "line": 32,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
-    },
-    {
-      "file": "README.zh.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
-    },
-    {
-      "file": "README.zh.md",
-      "line": 33,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.4-alpha/Antipisher-Chrome-v0.2.4-alpha.zip"
     },
     {
       "file": "README.zh.md",
       "line": 34,
-      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.4-alpha"
     },
     {
       "file": "README.zh.md",
-      "line": 69,
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.4-alpha/Antipisher-Firefox-v0.2.4-alpha.zip"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 35,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.4-alpha"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 36,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.4-alpha"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 36,
+      "url": "https://gitflic.ru/project/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 75,
       "url": "https://paypal.com@evil.com/`）。"
     },
     {
       "file": "README.zh.md",
-      "line": 70,
+      "line": 76,
       "url": "https://unrelated.com/paypal/login`、`https://phish-host.org/paypal.com/verify`），同时放行合法的开发者文档、API"
     },
     {
       "file": "README.zh.md",
-      "line": 245,
+      "line": 251,
       "url": "https://www.unicode.org/reports/tr39/"
     },
     {
       "file": "README.zh.md",
-      "line": 246,
+      "line": 252,
       "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
     },
     {
       "file": "README.zh.md",
-      "line": 247,
+      "line": 253,
       "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
     },
     {
       "file": "README.zh.md",
-      "line": 248,
+      "line": 254,
       "url": "https://publicsuffix.org/"
     },
     {
       "file": "README.zh.md",
-      "line": 249,
+      "line": 255,
       "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
     },
     {
@@ -4041,7 +4061,7 @@
     },
     {
       "file": "tests/i18n.test.cjs",
-      "line": 80,
+      "line": 81,
       "url": "https://paypa1.com"
     },
     {
@@ -4505,7 +4525,7 @@
   "manifests": {
     "chrome": {
       "manifest_version": 3,
-      "version": "0.2.3",
+      "version": "0.2.4",
       "permissions": [
         "declarativeNetRequest",
         "storage",
@@ -4538,7 +4558,7 @@
     },
     "firefox": {
       "manifest_version": 3,
-      "version": "0.2.3",
+      "version": "0.2.4",
       "permissions": [
         "storage",
         "tabs",
@@ -4591,10 +4611,10 @@
     "sbom_present": true
   },
   "version_claims": {
-    "README.md": "0.2.3",
-    "chrome/manifest.json": "0.2.3",
-    "firefox/manifest.json": "0.2.3",
-    "SECURITY.md": "0.2.3"
+    "README.md": "0.2.4",
+    "chrome/manifest.json": "0.2.4",
+    "firefox/manifest.json": "0.2.4",
+    "SECURITY.md": "0.2.4"
   },
   "license_present": true,
   "license_size": 34427

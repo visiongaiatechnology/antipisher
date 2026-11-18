@@ -12,9 +12,9 @@
 
   const DICTIONARY = {
     en: {
-      appName: 'Antipisher',
+      appName: 'Antipisher by GeDefense',
       appDesc: 'Local offline protection against phishing, homograph attacks, typosquatting and fake domains.',
-      brandOrg: 'VisionGaiaTechnology',
+      brandOrg: 'by GeDefense',
       brandProduct: 'Antipisher',
       brandTag: 'Domain Trust',
       formShieldTitle: 'Form Shield',
@@ -65,7 +65,7 @@
       // Footer
       footerOffline: '100% offline',
       footerZeroTelemetry: 'Zero telemetry',
-      versionText: 'Version 0.2.3 · Alpha',
+      versionText: 'Version 0.2.4 · Alpha',
 
       // Popup
       statusActive: 'Protection Active',
@@ -91,7 +91,7 @@
       settingSafeToast: 'Status Toast on Safe Pages',
       noticeSafeToast: 'Briefly displays a soft glass badge upon opening verified websites.',
       toastSafeTitle: 'Domain verified',
-      toastSafeSub: 'Antipisher · Protected',
+      toastSafeSub: 'Antipisher by GeDefense · Protected',
       settingAegis: 'AEGIS Anti-Fingerprinting',
       noticeAegis: 'Offline defense against Canvas, WebGL, Audio & Font fingerprinting and cross-site tracking.',
       btnRotateSeed: 'Rotate Identity',
@@ -103,7 +103,7 @@
 
       // Options Page
       optionsTitle: 'Settings',
-      optionsSubtitle: 'Local Configuration & VGT Protection Parameters',
+      optionsSubtitle: 'Local Configuration & GeDefense Protection Parameters',
       tabGeneral: 'Phishing & Core',
       tabAds: 'Ad Blocker',
       tabTrackers: 'Trackers & Telemetry',
@@ -187,8 +187,8 @@
       shieldOfficial: 'Official Domain',
       shieldBtnCancel: 'Cancel – Keep My Input',
       shieldBtnProceed: 'Send Anyway',
-      shieldFooter: 'Verified locally · zero data transmitted to Antipisher · VisionGaiaTechnology',
-      shieldBadgeText: 'Possible Phishing Site · Antipisher Warning',
+      shieldFooter: 'Verified locally · zero data transmitted · GeDefense · VisionGaiaTechnology',
+      shieldBadgeText: 'Possible Phishing Site · Antipisher by GeDefense Warning',
       shieldEngineUnavailable: 'The local verification engine is unavailable. For your security, password submission is blocked. Please reload the extension.',
 
       // Reasons
@@ -208,9 +208,9 @@
     },
 
     de: {
-      appName: 'Antipisher',
+      appName: 'Antipisher by GeDefense',
       appDesc: 'Lokaler Offline-Schutz vor Phishing, gefälschten Domains, IDN-Homographen und Typosquatting.',
-      brandOrg: 'VisionGaiaTechnology',
+      brandOrg: 'by GeDefense',
       brandProduct: 'Antipisher',
       brandTag: 'Domain Trust',
       formShieldTitle: 'Formularschutz',
@@ -257,7 +257,7 @@
 
       footerOffline: '100 % offline',
       footerZeroTelemetry: 'Zero telemetry',
-      versionText: 'Version 0.2.3 · Alpha',
+      versionText: 'Version 0.2.4 · Alpha',
 
       statusActive: 'Schutz aktiv',
       statusActiveSub: 'Verdächtige Seiten werden blockiert, sichere Seiten laden direkt.',
@@ -282,7 +282,7 @@
       settingSafeToast: 'Status-Toast bei sicheren Seiten',
       noticeSafeToast: 'Blendet beim Öffnen verifizierter Websites kurz ein dezentes Glas-Badge ein.',
       toastSafeTitle: 'Domain verifiziert',
-      toastSafeSub: 'Antipisher · Geschützt',
+      toastSafeSub: 'Antipisher by GeDefense · Geschützt',
       settingAegis: 'AEGIS Anti-Fingerprinting',
       noticeAegis: 'Offline-Schutz vor Canvas-, WebGL-, Audio- & Schriftarten-Fingerprinting und Tracking.',
       btnRotateSeed: 'Identität neu würfeln',
@@ -294,7 +294,7 @@
 
       // Options Page
       optionsTitle: 'Einstellungen',
-      optionsSubtitle: 'Lokale Konfiguration & VGT Schutzparameter',
+      optionsSubtitle: 'Lokale Konfiguration & GeDefense Schutzparameter',
       tabGeneral: 'Phishing & Basis-Schutz',
       tabAds: 'Werbeblocker',
       tabTrackers: 'Tracker & Telemetrie',
@@ -377,8 +377,8 @@
       shieldOfficial: 'Offizielle Domain',
       shieldBtnCancel: 'Abbrechen – Daten bleiben erhalten',
       shieldBtnProceed: 'Trotzdem senden',
-      shieldFooter: 'Lokal geprüft · keine Übertragung an Antipisher · VisionGaiaTechnology',
-      shieldBadgeText: 'Mögliche Phishing-Seite · Antipisher warnt',
+      shieldFooter: 'Lokal geprüft · keine Übertragung · GeDefense · VisionGaiaTechnology',
+      shieldBadgeText: 'Mögliche Phishing-Seite · Antipisher by GeDefense warnt',
       shieldEngineUnavailable: 'Die lokale Prüf-Engine ist nicht verfügbar. Aus Sicherheitsgründen wird die Übertragung von Passwortdaten blockiert. Bitte lade die Erweiterung neu.',
 
       reasons: {
@@ -397,9 +397,9 @@
     },
 
     ru: {
-      appName: 'Antipisher',
+      appName: 'Antipisher by GeDefense',
       appDesc: 'Локальная офлайн-защита от фишинга, поддельных доменов, IDN-гомографов и тайпосквоттинга.',
-      brandOrg: 'VisionGaiaTechnology',
+      brandOrg: 'by GeDefense',
       brandProduct: 'Antipisher',
       brandTag: 'Domain Trust',
       formShieldTitle: 'Защита форм',
@@ -446,7 +446,7 @@
 
       footerOffline: '100% офлайн',
       footerZeroTelemetry: 'Без телеметрии',
-      versionText: 'Версия 0.2.3 · Альфа',
+      versionText: 'Версия 0.2.4 · Альфа',
 
       statusActive: 'Защита активна',
       statusActiveSub: 'Подозрительные домены блокируются, безопасные сайты открываются мгновенно.',
@@ -471,7 +471,7 @@
       settingSafeToast: 'Уведомление для безопасных сайтов',
       noticeSafeToast: 'Кратковременно показывает аккуратный стеклянный бейдж при открытии проверенных сайтов.',
       toastSafeTitle: 'Домен проверен',
-      toastSafeSub: 'Antipisher · Защищено',
+      toastSafeSub: 'Antipisher by GeDefense · Защищено',
       settingAegis: 'AEGIS Защита от фингерпринтинга',
       noticeAegis: 'Офлайн-защита от отслеживания через Canvas, WebGL, Audio и системные шрифты.',
       btnRotateSeed: 'Сменить цифровой след',
@@ -483,7 +483,7 @@
 
       // Options Page
       optionsTitle: 'Настройки',
-      optionsSubtitle: 'Локальная конфигурация и параметры защиты VGT',
+      optionsSubtitle: 'Локальная конфигурация и параметры защиты GeDefense',
       tabGeneral: 'Фишинг и защита',
       tabAds: 'Блокировщик рекламы',
       tabTrackers: 'Трекеры и телеметрия',
@@ -566,8 +566,8 @@
       shieldOfficial: 'Официальный домен',
       shieldBtnCancel: 'Отмена — сохранить данные',
       shieldBtnProceed: 'Все равно отправить',
-      shieldFooter: 'Проверено локально · данные не передаются в Antipisher · VisionGaiaTechnology',
-      shieldBadgeText: 'Возможный фишинг · Предупреждение Antipisher',
+      shieldFooter: 'Проверено локально · без передачи данных · GeDefense · VisionGaiaTechnology',
+      shieldBadgeText: 'Возможный фишинг · Предупреждение Antipisher by GeDefense',
       shieldEngineUnavailable: 'Локальный модуль проверки недоступен. В целях безопасности отправка паролей заблокирована. Перезагрузите расширение.',
 
       reasons: {
@@ -586,9 +586,9 @@
     },
 
     zh: {
-      appName: 'Antipisher',
+      appName: 'Antipisher by GeDefense',
       appDesc: '本地离线防护，抵御钓鱼网站、仿冒域名、IDN 同形异义词攻击和误植域名。',
-      brandOrg: 'VisionGaiaTechnology',
+      brandOrg: 'by GeDefense',
       brandProduct: 'Antipisher',
       brandTag: 'Domain Trust',
       formShieldTitle: '表单防护',
@@ -635,7 +635,7 @@
 
       footerOffline: '100% 离线运行',
       footerZeroTelemetry: '零遥测数据',
-      versionText: '版本 0.2.3 · Alpha',
+      versionText: '版本 0.2.4 · Alpha',
 
       statusActive: '防护已启用',
       statusActiveSub: '可疑域名被拦截，安全网页直接即时加载。',
@@ -660,7 +660,7 @@
       settingSafeToast: '安全网站状态气泡提示',
       noticeSafeToast: '在访问已验证网站时短暂显示微晶毛玻璃徽标。',
       toastSafeTitle: '域名已验证',
-      toastSafeSub: 'Antipisher · 安全守护',
+      toastSafeSub: 'Antipisher by GeDefense · 安全守护',
       settingAegis: 'AEGIS 反指纹追踪',
       noticeAegis: '离线抵御 Canvas、WebGL、音频和字体指纹追踪及跨站跟踪。',
       btnRotateSeed: '重置数字身份',
@@ -672,7 +672,7 @@
 
       // Options Page
       optionsTitle: '设置',
-      optionsSubtitle: '本地配置与 VGT 安全防护参数',
+      optionsSubtitle: '本地配置与 GeDefense 安全防护参数',
       tabGeneral: '钓鱼防护与基础',
       tabAds: '广告拦截器',
       tabTrackers: '追踪器与遥测',
@@ -755,8 +755,8 @@
       shieldOfficial: '官方域名',
       shieldBtnCancel: '取消 — 保留输入数据',
       shieldBtnProceed: '仍然发送',
-      shieldFooter: '本地验证 · 无数据传输至 Antipisher · VisionGaiaTechnology',
-      shieldBadgeText: '疑似钓鱼网站 · Antipisher 提醒',
+      shieldFooter: '本地验证 · 无数据传输 · GeDefense · VisionGaiaTechnology',
+      shieldBadgeText: '疑似钓鱼网站 · Antipisher by GeDefense 提醒',
       shieldEngineUnavailable: '本地验证引擎不可用。为了您的账户安全，密码提交已被阻止。请重新加载扩展。',
 
       reasons: {

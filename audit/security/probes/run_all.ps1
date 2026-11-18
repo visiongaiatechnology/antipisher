@@ -33,7 +33,7 @@ Run-Step 'TR-10-data-integrity' 'node audit/security/probes/probe08_data_integri
 Run-Step 'TR-11-static-scan' 'python audit/security/probes/probe09_static_scan.py' 'probe09_static_scan.log'
 Run-Step 'AUX-01-matrix-regenerate' 'node audit/security/probes/build_matrix.cjs' 'matrix_regenerate.log'
 Run-Step 'AUX-02-coverage-embed' 'node audit/security/probes/embed_coverage.cjs' 'coverage_embed.log'
-Run-Step 'TR-12-matrix-validate' 'python "C:\Users\Masterboard\.gemini\config\skills\vgt-security-master\scripts\validate_audit.py" audit/security/AUDIT_MATRIX.json' 'validate_audit.log'
+Run-Step 'TR-12-matrix-validate' 'python "%USERPROFILE%\.gemini\config\skills\vgt-security-master\scripts\validate_audit.py" audit/security/AUDIT_MATRIX.json' 'validate_audit.log'
 
 $ledger | ConvertTo-Json -Depth 4 | Set-Content -Encoding utf8 (Join-Path $PSScriptRoot 'results\run_ledger.json')
 Write-Host ''

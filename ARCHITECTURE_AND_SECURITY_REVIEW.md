@@ -1,6 +1,6 @@
-# Antipisher 0.2.3 — Architektur- und Security-Review (Platin-Status)
+# Antipisher by GeDefense 0.2.4 — Architektur- und Security-Review (Platin-Status)
 
-> **Qualitäts- & Sicherheitsstatus:** **`PLATIN`** (`VGT-100: 48/52 anwendbare Kontrollen PASS, 0 FAIL` · `Release Gate: CONDITIONAL` nur für externe Store-Codesignierung `VGT-056` / GUI-Browser-Smoke-Test `VGT-090`) · Stand: `17.11.2026`.
+> **Qualitäts- & Sicherheitsstatus:** **`PLATIN`** (`VGT-100: 48/52 anwendbare Kontrollen PASS, 0 FAIL` · `Release Gate: CONDITIONAL` nur für externe Store-Codesignierung `VGT-056` / GUI-Browser-Smoke-Test `VGT-090`) · Stand: `18.11.2026`.
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Parameter | Verifizierter Wert |
 |---|---|
-| Produkt / Version | **Antipisher `0.2.3`** (Chrome MV3 & Firefox MV3) |
+| Produkt / Version | **Antipisher by GeDefense `0.2.4`** (Chrome MV3 & Firefox MV3) |
 | Lizenz | GNU Affero General Public License v3.0 (`AGPL-3.0-only`) |
 | Marken-Datenbank | `shared/sites.js` ≡ `sites-100.json` (**187 Marken / 353 offizielle Domains**, RFC-1123-validiert) |
 | Detektor-Engine | `shared/detector.js` (RFC-1035-Längenbudgets, Label-Precomputation, `p50 = 0,023 ms`, `p95 = 0,39 ms`) |
@@ -75,7 +75,7 @@ Web-Navigation / Seitenaufruf / Formular-Interaktion
 
 ---
 
-## 4. Qualitäts- und Security-Bewertung (`v0.2.3`)
+## 4. Qualitäts- und Security-Bewertung (`v0.2.4`)
 
 | Achse | Bewertung | Nachweis |
 |---|---|---|

@@ -1,5 +1,5 @@
 Antipisher 0.1 - unabhaengige Perfmessung Holdout-Verifier
-Datum: 2026-11-17T16:08:41.980Z
+Datum: 2026-11-18T09:47:59.351Z
 Node: v24.13.0 | Plattform: win32 | CPUs: 12 | CPU: AMD Ryzen 5 4600H with Radeon Graphics         
 
 Methodik: process.hrtime.bigint pro Einzelaufruf; 500 Warmup-Aufrufe; je Wiederholung 10.000 classify-Aufrufe
@@ -7,26 +7,26 @@ Round-Robin ueber die URLs; keine Netz-/Dateisystemzugriffe im Messpfad.
 Hinweis: Messung unter paralleler Last anderer Team-Agenten (12 logische Kerne geteilt) -> Streuung;
 deshalb robuste Kennwerte = Median der Wiederholungslaeufe, zusaetzlich Min/Max-Range und gepoolte Aggregate.
 
-Kaltstart (erster classify-Aufruf nach Modulladen): 0.1569 ms
+Kaltstart (erster classify-Aufruf nach Modulladen): 0.1646 ms
 
 A) Gemischt (Holdout, 7 x 10.000 = 70000 Proben):
-  robust: Median der Run-Mediane 0.1634 ms | Median der Run-p95 0.3855 ms
-  Range  Mediane 0.1612 - 0.1705 ms | p95 0.3671 - 0.4598 ms
-  gepoolt: Median 0.1641 ms, p95 0.411 ms, p99 0.7367 ms, mean 0.1802 ms, max 9.7609 ms
-  per-Run Mediane: 0.1705 / 0.1648 / 0.1657 / 0.1621 / 0.1612 / 0.1634 / 0.1621
-  per-Run p95:     0.4554 / 0.3852 / 0.4598 / 0.3797 / 0.3671 / 0.4392 / 0.3855
+  robust: Median der Run-Mediane 0.1519 ms | Median der Run-p95 0.3444 ms
+  Range  Mediane 0.1509 - 0.161 ms | p95 0.3398 - 0.3672 ms
+  gepoolt: Median 0.153 ms, p95 0.3473 ms, p99 0.6091 ms, mean 0.1592 ms, max 5.4026 ms
+  per-Run Mediane: 0.161 / 0.1542 / 0.152 / 0.1518 / 0.151 / 0.1519 / 0.1509
+  per-Run p95:     0.3672 / 0.3482 / 0.3484 / 0.3444 / 0.3398 / 0.3436 / 0.3408
   vs Audit-Baseline 0,506 ms Median / 2,58 ms p95:
-    robuster Median UNTER Baseline (Differenz -0.3426 ms)
-    robuster p95    UNTER Baseline (Differenz -2.1945 ms)
+    robuster Median UNTER Baseline (Differenz -0.3541 ms)
+    robuster p95    UNTER Baseline (Differenz -2.2356 ms)
 
 B) Apples-to-apples: veroeffentlichter 184-URL-Audit-Korpus (7 x 10.000 = 70000 Proben):
-  robust: Median der Run-Mediane 0.0622 ms | Median der Run-p95 0.2758 ms
-  Range  Mediane 0.0612 - 0.0645 ms | p95 0.2743 - 0.291 ms
-  gepoolt: Median 0.0622 ms, p95 0.2774 ms, p99 0.6043 ms
+  robust: Median der Run-Mediane 0.0607 ms | Median der Run-p95 0.2718 ms
+  Range  Mediane 0.0602 - 0.0627 ms | p95 0.264 - 0.2788 ms
+  gepoolt: Median 0.0606 ms, p95 0.272 ms, p99 0.5837 ms
   Baseline 0,506 / 2,58: robuster Median UNTER, robuster p95 UNTER Baseline
 
-C) Nur erwartete safe-URLs (3 x 10.000): robust Median 0.1638 ms / p95 0.5035 ms; gepoolt Median 0.1643 ms, p95 0.5035 ms
-D) Nur erwartete block-URLs (3 x 10.000): robust Median 0.1557 ms / p95 0.3493 ms; gepoolt Median 0.1558 ms, p95 0.3491 ms
+C) Nur erwartete safe-URLs (3 x 10.000): robust Median 0.1624 ms / p95 0.4071 ms; gepoolt Median 0.1627 ms, p95 0.4078 ms
+D) Nur erwartete block-URLs (3 x 10.000): robust Median 0.1526 ms / p95 0.3407 ms; gepoolt Median 0.1533 ms, p95 0.3423 ms
 
 Hinweis: Audit-Baseline stammt aus dem Gesamtaudit (audit/00_GESAMTAUDIT_ANTIPISHER_V2_FAHRPLAN.md:344,
 Median 0,506 ms / p95 2,580 ms, dort ebenfalls unter paralleler Audit-Last erhoben).
@@ -35,4 +35,4 @@ nennt fuer den 184-URL-Mix Median 0,2525 ms / p95 0,6297 ms (abweichende Methodi
 Wiederholte Vollaeufe dieses Runners zeigten unter Team-Last Streuung (z.B. Holdout-Median 0,61 - 0,85 ms,
 p95 1,12 - 4,28 ms); deshalb sind die robusten Median-Kennwerte und die Range die belastbare Aussage.
 
-FAZIT: AUF DEM VEROEFFENTLICHTEN 184-URL-KORPUS BESTAETIGT (robuster Median + p95 unter Baseline); auf dem unabhaengigen Holdout-Mix Median -0.3426 ms UEBER / p95 -2.1945 ms gegen Baseline -> "<1 ms" nur als Median, nicht als p95, und nicht auf adversarialem Mix bestaetigt
+FAZIT: AUF DEM VEROEFFENTLICHTEN 184-URL-KORPUS BESTAETIGT (robuster Median + p95 unter Baseline); auf dem unabhaengigen Holdout-Mix Median -0.3541 ms UEBER / p95 -2.2356 ms gegen Baseline -> "<1 ms" nur als Median, nicht als p95, und nicht auf adversarialem Mix bestaetigt

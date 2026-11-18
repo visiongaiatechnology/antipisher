@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "default_locale": "en",
-  "name": "Antipisher",
+  "name": "Antipisher by GeDefense",
   "short_name": "Antipisher",
   "description": "__MSG_appDesc__",
-  "version": "0.2.3",
-  "version_name": "0.2.3 Alpha",
+  "version": "0.2.4",
+  "version_name": "0.2.4 Alpha",
   "minimum_chrome_version": "121",
   "permissions": [
     "storage",
@@ -22,7 +22,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Antipisher",
+    "default_title": "Antipisher by GeDefense",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",

@@ -11,7 +11,7 @@ html, body {
   font-family: var(--vgt-font-ui);
   color: var(--vgt-text);
   scrollbar-width: thin;
-  scrollbar-color: rgba(111, 227, 189, 0.28) rgba(10, 18, 16, 0.65);
+  scrollbar-color: rgba(56, 189, 248, 0.32) rgba(7, 16, 34, 0.7);
 }
 
 /* Glass 2100 Custom Scrollbar */
@@ -21,18 +21,18 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(8, 15, 13, 0.65);
+  background: rgba(5, 11, 22, 0.72);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(111, 227, 189, 0.24);
+  background: rgba(56, 189, 248, 0.26);
   border-radius: var(--vgt-radius-pill);
-  border: 1px solid rgba(111, 227, 189, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.16);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(111, 227, 189, 0.44);
-  border-color: rgba(111, 227, 189, 0.34);
+  background: rgba(56, 189, 248, 0.46);
+  border-color: rgba(56, 189, 248, 0.36);
 }
 
 .options-ambient {
@@ -41,8 +41,8 @@ html, body {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(450px 380px at 15% 10%, rgba(111, 227, 189, 0.12), transparent 70%),
-    radial-gradient(550px 420px at 85% 90%, rgba(74, 104, 120, 0.15), transparent 72%);
+    radial-gradient(480px 390px at 15% 10%, rgba(14, 165, 233, 0.18), transparent 70%),
+    radial-gradient(560px 440px at 85% 90%, rgba(37, 99, 235, 0.16), transparent 72%);
   filter: blur(54px);
   opacity: 0.95;
 }
@@ -78,8 +78,17 @@ html, body {
   color: var(--vgt-accent);
   border: 1px solid var(--vgt-accent-line);
   border-radius: 14px;
-  background: linear-gradient(145deg, rgba(111, 227, 189, 0.18), rgba(111, 227, 189, 0.04));
+  background: linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(14, 165, 233, 0.05));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.brand-mark .brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+  display: block;
 }
 
 .brand-copy {
@@ -148,7 +157,7 @@ html, body {
   overflow-x: auto;
   margin-bottom: 22px;
   padding: 4px;
-  background: rgba(10, 18, 16, 0.5);
+  background: rgba(7, 15, 32, 0.62);
   border: 1px solid var(--vgt-hairline);
   border-radius: 16px;
   -webkit-backdrop-filter: blur(16px);
@@ -179,19 +188,19 @@ html, body {
 
 .tab-btn:hover {
   color: var(--vgt-text);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(56, 189, 248, 0.08);
 }
 
 .tab-btn.active {
-  color: #0c1a15;
+  color: #04101f;
   background: var(--vgt-accent);
   border-color: var(--vgt-accent);
   font-weight: 700;
-  box-shadow: 0 4px 16px rgba(111, 227, 189, 0.3);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.28);
 }
 
 .tab-btn.active svg {
-  stroke: #0c1a15;
+  stroke: #04101f;
 }
 
 /* Main Content Panel */
@@ -309,7 +318,7 @@ html, body {
   padding: 8px 14px;
   border: 1px solid var(--vgt-hairline-2);
   border-radius: var(--vgt-radius-md);
-  background: rgba(6, 11, 10, 0.7);
+  background: rgba(5, 11, 24, 0.78);
   color: var(--vgt-text);
   font-family: inherit;
   font-size: 12.5px;
@@ -328,7 +337,7 @@ html, body {
   padding: 0 14px;
   border: 1px solid var(--vgt-hairline-2);
   border-radius: var(--vgt-radius-md);
-  background: rgba(6, 11, 10, 0.7);
+  background: rgba(5, 11, 24, 0.78);
   color: var(--vgt-text);
   font-family: inherit;
   font-size: 13px;
@@ -355,7 +364,7 @@ html, body {
 }
 
 .vgt-btn-primary {
-  color: #0b1a14;
+  color: #04101f;
   background: var(--vgt-accent);
   border: 1px solid var(--vgt-accent);
 }
@@ -500,11 +509,11 @@ html, body {
   gap: 8px;
   padding: 10px 18px;
   border-radius: var(--vgt-radius-pill);
-  background: rgba(15, 25, 23, 0.95);
+  background: rgba(8, 17, 36, 0.95);
   border: 1px solid var(--vgt-accent-line);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(111, 227, 189, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.52), 0 0 22px rgba(56, 189, 248, 0.22);
   color: var(--vgt-accent);
   font-size: 12px;
   font-weight: 650;

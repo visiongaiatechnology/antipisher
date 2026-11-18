@@ -1,7 +1,7 @@
 /*
- * Antipisher 0.2.3 (Platin Security Hardened): Advanced Offline Anti-Phishing & Homograph Detector
+ * Antipisher by GeDefense 0.2.4 (Platin Security Hardened): Advanced Offline Anti-Phishing & Homograph Detector
  * Licensed under the GNU Affero General Public License v3.0 (AGPLv3)
- * VisionGaiaTechnology · Intelligence Master · Platin VGT Supreme Quality Gate
+ * GeDefense · VisionGaiaTechnology · Intelligence Master · Platin VGT Supreme Quality Gate
  * No remote requests, no telemetry, no tracking. High-performance deterministic engine.
  */
 (() => {

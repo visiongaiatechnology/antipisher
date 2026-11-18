@@ -284,8 +284,8 @@ test('VGT-051/055/059: CycloneDX SBOM exists, has zero external dependencies, an
   const sbom = JSON.parse(fs.readFileSync(sbomPath, 'utf8'));
   assert.equal(sbom.bomFormat, 'CycloneDX');
   assert.equal(sbom.specVersion, '1.5');
-  assert.equal(sbom.metadata.component.version, '0.2.3');
-  assert.deepEqual(sbom.dependencies, [{ ref: 'antipisher@0.2.3', dependsOn: [] }]);
+  assert.equal(sbom.metadata.component.version, '0.2.4');
+  assert.deepEqual(sbom.dependencies, [{ ref: 'antipisher@0.2.4', dependsOn: [] }]);
 
   for (const comp of sbom.components) {
     const rel = comp.name.startsWith('chrome/') || comp.name.startsWith('firefox/')

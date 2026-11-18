@@ -11,7 +11,7 @@ html {
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(111, 227, 189, 0.28) rgba(10, 18, 16, 0.65);
+  scrollbar-color: rgba(56, 189, 248, 0.32) rgba(7, 16, 34, 0.7);
 }
 
 body.vgt-popup {
@@ -31,18 +31,18 @@ body.vgt-popup {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(8, 15, 13, 0.65);
+  background: rgba(5, 11, 22, 0.72);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(111, 227, 189, 0.24);
+  background: rgba(56, 189, 248, 0.26);
   border-radius: var(--vgt-radius-pill);
-  border: 1px solid rgba(111, 227, 189, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.16);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(111, 227, 189, 0.44);
-  border-color: rgba(111, 227, 189, 0.34);
+  background: rgba(56, 189, 248, 0.46);
+  border-color: rgba(56, 189, 248, 0.36);
 }
 
 .popup-ambient {
@@ -51,10 +51,10 @@ body.vgt-popup {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(260px 220px at 18% 6%, rgba(111, 227, 189, 0.18), transparent 65%),
-    radial-gradient(300px 240px at 92% 96%, rgba(86, 126, 146, 0.16), transparent 68%);
+    radial-gradient(280px 220px at 18% 6%, rgba(14, 165, 233, 0.22), transparent 65%),
+    radial-gradient(320px 240px at 92% 96%, rgba(37, 99, 235, 0.18), transparent 68%);
   filter: blur(42px);
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .popup-shell {
@@ -129,8 +129,8 @@ body.vgt-popup {
 }
 
 .btn-icon {
-  background: rgba(14, 26, 23, 0.7);
-  border: 1px solid var(--vgt-glass-border);
+  background: rgba(10, 22, 44, 0.75);
+  border: 1px solid var(--vgt-hairline-2);
   border-radius: var(--vgt-radius-sm);
   color: var(--vgt-text-2);
   width: 26px;
@@ -145,7 +145,7 @@ body.vgt-popup {
 
 .btn-icon:hover {
   color: var(--vgt-accent);
-  background: rgba(111, 227, 189, 0.12);
+  background: rgba(56, 189, 248, 0.14);
   border-color: var(--vgt-accent-line);
   box-shadow: var(--vgt-glow-subtle);
   transform: translateY(-1px);
@@ -365,7 +365,7 @@ input[type="text"] {
   padding: 0 12px;
   border: 1px solid var(--vgt-hairline-2);
   border-radius: var(--vgt-radius-md);
-  background: rgba(6, 11, 10, 0.55);
+  background: rgba(5, 11, 24, 0.65);
   color: var(--vgt-text);
   font-family: inherit;
   font-size: 12.5px;
@@ -378,8 +378,8 @@ input[type="text"]::placeholder {
 }
 
 input[type="text"]:focus {
-  border-color: rgba(156, 201, 255, 0.5);
-  background: rgba(6, 11, 10, 0.72);
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(6, 14, 30, 0.8);
 }
 
 input[type="text"]:focus-visible {
@@ -425,7 +425,7 @@ input[type="text"]:focus-visible {
   display: block;
   border-color: var(--vgt-accent-line);
   background: var(--vgt-accent-soft);
-  color: #c9f7e7;
+  color: #bae6fd;
 }
 
 .result.skip {
@@ -465,7 +465,7 @@ input[type="text"]:focus-visible {
 
 .popup-lang-btn.active {
   background: var(--vgt-accent);
-  color: #0b1a14;
+  color: #04101f;
   font-weight: 700;
 }
 

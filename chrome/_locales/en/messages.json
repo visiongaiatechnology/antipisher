@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Antipisher",
+    "message": "Antipisher by GeDefense",
     "description": "The name of the extension."
   },
   "appShortName": {
@@ -8,11 +8,11 @@
     "description": "Short name for toolbars."
   },
   "appDesc": {
-    "message": "Offline anti-phishing, homograph and typosquatting protection. Fast, private, zero-telemetry.",
+    "message": "Antipisher by GeDefense — Offline anti-phishing, homograph, tracker & supply-chain defense. Zero telemetry.",
     "description": "The description of the extension."
   },
   "actionTitle": {
-    "message": "Antipisher Domain Trust",
+    "message": "Antipisher by GeDefense",
     "description": "Tooltip title for browser action."
   }
 }

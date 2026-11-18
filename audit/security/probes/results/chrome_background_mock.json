@@ -1,6 +1,6 @@
 {
   "probe": "probe04_chrome_background_mock",
-  "timestamp_utc": "2026-11-18T09:08:42.892Z",
+  "timestamp_utc": "2026-11-18T09:48:19.147Z",
   "environment": "Node v24.13.0 vm-Sandbox mit gemockter chrome-API (kein echter Browser)",
   "assertions_total": 47,
   "assertions_failed": 0,
@@ -238,7 +238,7 @@
     {
       "name": "counter:recordBlock-increments",
       "ok": true,
-      "detail": "{\"protectionDegraded\":false,\"securityEvents\":[{\"ts\":1794992922792,\"type\":\"healthy\",\"detail\":\"standard-observer\"},{\"ts\":1794992922858,\"type\":\"allow-once\",\"detail\":\"observer-bypass\"},{\"ts\":1794992922858,\"type\":\"block\",\"detail\":\"strict-guard\"}],\"blocked\":1}"
+      "detail": "{\"protectionDegraded\":false,\"securityEvents\":[{\"ts\":1794995299041,\"type\":\"healthy\",\"detail\":\"standard-observer\"},{\"ts\":1794995299116,\"type\":\"allow-once\",\"detail\":\"observer-bypass\"},{\"ts\":1794995299116,\"type\":\"block\",\"detail\":\"strict-guard\"}],\"blocked\":1}"
     }
   ],
   "observations": []

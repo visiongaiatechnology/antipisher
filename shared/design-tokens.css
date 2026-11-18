@@ -12,21 +12,21 @@
     "Helvetica Neue", Arial, sans-serif;
   --vgt-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
-  /* Environment */
-  --vgt-bg-0: #070c0b;
-  --vgt-bg-1: #0a1210;
-  --vgt-bg-2: #0e1714;
+  /* Environment — GeDefense Dark Navy */
+  --vgt-bg-0: #040914;
+  --vgt-bg-1: #071022;
+  --vgt-bg-2: #0b1830;
 
   /* Text */
-  --vgt-text: #f2f7f5;
-  --vgt-text-2: #bfcec8;
-  --vgt-text-3: #93a7a1;
+  --vgt-text: #eef5ff;
+  --vgt-text-2: #b9cae3;
+  --vgt-text-3: #8399b8;
 
-  /* Signal */
-  --vgt-accent: #6fe3bd;
-  --vgt-accent-2: #4fd0a7;
-  --vgt-accent-soft: rgba(111, 227, 189, 0.12);
-  --vgt-accent-line: rgba(111, 227, 189, 0.32);
+  /* Signal — GeDefense Cyan-Blue */
+  --vgt-accent: #38bdf8;
+  --vgt-accent-2: #0ea5e9;
+  --vgt-accent-soft: rgba(56, 189, 248, 0.13);
+  --vgt-accent-line: rgba(56, 189, 248, 0.34);
 
   --vgt-danger: #ef8f9d;
   --vgt-danger-soft: rgba(239, 143, 157, 0.10);
@@ -40,12 +40,12 @@
 
   --vgt-focus: #9cc9ff;
 
-  /* Material */
-  --vgt-hairline: rgba(255, 255, 255, 0.09);
-  --vgt-hairline-2: rgba(255, 255, 255, 0.15);
-  --vgt-surface-solid: #0f1917;
-  --vgt-surface-glass: linear-gradient(180deg, rgba(23, 36, 32, 0.80), rgba(12, 20, 18, 0.74));
-  --vgt-surface-inset: rgba(7, 13, 11, 0.55);
+  /* Material — GeDefense Midnight Glass */
+  --vgt-hairline: rgba(148, 194, 255, 0.12);
+  --vgt-hairline-2: rgba(148, 194, 255, 0.22);
+  --vgt-surface-solid: #0a1428;
+  --vgt-surface-glass: linear-gradient(180deg, rgba(14, 27, 52, 0.84), rgba(7, 14, 29, 0.78));
+  --vgt-surface-inset: rgba(5, 10, 21, 0.62);
   --vgt-shadow: 0 34px 90px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
   --vgt-shadow-soft: 0 18px 48px rgba(0, 0, 0, 0.38);
   --vgt-blur: 22px;
@@ -86,9 +86,9 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background:
-    radial-gradient(1100px 700px at 12% -12%, rgba(111, 227, 189, 0.13), transparent 58%),
-    radial-gradient(900px 620px at 104% 108%, rgba(74, 104, 120, 0.16), transparent 60%),
-    linear-gradient(180deg, #070c0b 0%, #0a1210 52%, #070b0a 100%);
+    radial-gradient(1100px 700px at 12% -12%, rgba(14, 165, 233, 0.16), transparent 58%),
+    radial-gradient(900px 620px at 104% 108%, rgba(37, 99, 235, 0.16), transparent 60%),
+    linear-gradient(180deg, #040914 0%, #071022 52%, #050b18 100%);
   background-attachment: fixed;
 }
 
@@ -144,8 +144,17 @@ body {
   color: var(--vgt-accent);
   border: 1px solid var(--vgt-accent-line);
   border-radius: 12px;
-  background: linear-gradient(145deg, rgba(111, 227, 189, 0.16), rgba(111, 227, 189, 0.03));
+  background: linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(14, 165, 233, 0.04));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.brand-mark .brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 3px;
+  display: block;
 }
 
 .brand-copy {
@@ -282,14 +291,14 @@ body[data-state="invalid"] .status-chip {
 }
 
 .vgt-btn-primary {
-  color: #f6fffb;
-  background: linear-gradient(180deg, #227f69, #186452);
-  border-color: rgba(111, 227, 189, 0.42);
-  box-shadow: 0 10px 24px rgba(20, 90, 72, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  color: #f0f9ff;
+  background: linear-gradient(180deg, #0284c7, #0369a1);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 10px 24px rgba(2, 132, 199, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .vgt-btn-primary:hover {
-  background: linear-gradient(180deg, #2a9178, #1c715c);
+  background: linear-gradient(180deg, #0ea5e9, #0284c7);
 }
 
 .vgt-btn-ghost {

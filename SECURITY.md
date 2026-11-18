@@ -1,6 +1,6 @@
-# Sicherheitshinweise & Incident-Runbook — Antipisher 0.2.3 (Platin Security Hardened)
+# Sicherheitshinweise & Incident-Runbook — Antipisher by GeDefense 0.2.4 (Platin Security Hardened)
 
-Antipisher ist eine 100 % lokale, datensparsame Browser-Schutzerweiterung (Chrome MV3 & Firefox MV3) unter der GNU Affero General Public License v3.0 (AGPLv3). Dieses Dokument definiert die unterstützten Versionen, den verantwortungsvollen Meldeweg, die verifizierten Sicherheitsgrenzen (VGT-100) sowie das Incident-Response- und Recovery-Runbook.
+Antipisher by GeDefense ist eine 100 % lokale, datensparsame Browser-Schutzerweiterung (Chrome MV3 & Firefox MV3) unter der GNU Affero General Public License v3.0 (AGPLv3). Dieses Dokument definiert die unterstützten Versionen, den verantwortungsvollen Meldeweg, die verifizierten Sicherheitsgrenzen (VGT-100) sowie das Incident-Response- und Recovery-Runbook.
 
 ---
 
@@ -8,20 +8,20 @@ Antipisher ist eine 100 % lokale, datensparsame Browser-Schutzerweiterung (Chrom
 
 | Version | Qualitätsstufe | Status |
 |---|---|---|
-| **`0.2.3`** | **`PLATIN`** (`VGT-100: 48/52 PASS, 0 FAIL`) | **Aktuell unterstützt** |
-| `0.2.0` – `0.2.2` | `GOLD` / `SILBER` | Veraltet — Upgrade auf `0.2.3` empfohlen |
+| **`0.2.4`** | **`PLATIN`** (`VGT-100: 48/52 PASS, 0 FAIL`) | **Aktuell unterstützt** |
+| `0.2.0` – `0.2.3` | `PLATIN` / `GOLD` | Vorgängerversionen — Upgrade auf `0.2.4` empfohlen |
 | `0.1.x` und älter | `ALPHA` | Nicht mehr unterstützt |
 
 ---
 
 ## 2. Sicherheitslücken melden (Coordinated Vulnerability Disclosure)
 
-Bitte **keine** ungepatchten Sicherheitslücken in öffentlichen GitHub-Issues posten.
+Bitte **keine** ungepatchten Sicherheitslücken in öffentlichen GitHub-/GitFlic-Issues posten.
 
 1. **Primärer Meldekanal:**
    **GitHub → Security → Advisories → „Report a vulnerability“** (private Security Advisory des Repositories).
 2. **Inhalt der Meldung:**
-   - Betroffene Version (`0.2.3`) und Komponente (`shared/detector.js`, `chrome/background.js`, `firefox/background.js`, `shared/shield-content.js`, `shared/aegis-engine.js`, `build.py`).
+   - Betroffene Version (`0.2.4`) und Komponente (`shared/detector.js`, `chrome/background.js`, `firefox/background.js`, `shared/shield-content.js`, `shared/aegis-engine.js`, `build.py`).
    - Minimale Reproduktionsschritte (PoC) sowie erwartetes vs. tatsächliches Verhalten.
    - **Wichtig:** Keine echten Zugangsdaten, keine fremden personenbezogenen Daten (PII) und keine scharfen Credential-Harvesting-Infrastrukturen übermitteln.
 3. **Safe Harbor:**

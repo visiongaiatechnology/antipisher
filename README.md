@@ -1,12 +1,14 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.3 (Alpha)
+<img src="icons/icon128.png" alt="GeDefense" width="76" height="76">
 
-**Offline, High-Precision Anti-Phishing, IDN Homograph, Tracker & Ad Protection for Google Chrome & Mozilla Firefox**  
-*Licensed under the GNU Affero General Public License v3.0 (AGPLv3)*
+# 🛡️ Antipisher by GeDefense `0.2.4` (Alpha)
+
+**Offline, High-Precision Anti-Phishing, IDN Homograph, Supply-Chain, Tracker & Ad Protection for Google Chrome & Mozilla Firefox**  
+*Licensed under the GNU Affero General Public License v3.0 (AGPLv3) · GeDefense / VisionGaiaTechnology*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.3-alpha](https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Version: 0.2.4-alpha](https://img.shields.io/badge/Version-0.2.4--alpha-0ea5e9.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
 [![Tests: 91/91 Passing](https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge)](#tests--development)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Telemetry-Zero_%2F_100%25_Offline-0284c7.svg?style=for-the-badge)](#privacy)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Ready-f59e0b.svg?style=for-the-badge)](chrome/)
@@ -22,22 +24,26 @@
 
 </div>
 
-> **Status:** `PLATIN` · Version `0.2.3` · As of 18.11.2026 · VGT-100 Security Hardened (`48/52 PASS, 0 FAIL`), GeDefense Light Supply-Chain & YouTube Playback Hardening Milestone.  
+> **Status:** `PLATIN` · Version `0.2.4` · As of 18.11.2026 · **Antipisher by GeDefense** Dark Navy Blue Edition, VGT-100 Security Hardened (`48/52 PASS, 0 FAIL`), GeDefense Light Supply-Chain & YouTube Playback Hardening.  
 > **Not a store-release product:** Browser E2E, official store submission, signed update feeds, and full V2 graph engine are ongoing milestones (see [Known Boundaries & Limitations](#known-boundaries--limitations)).
 
-### ⬇️ Direct Downloads (`v0.2.3-alpha`)
+### ⬇️ Direct Downloads (`v0.2.4-alpha`)
 
-| Browser | Direct ZIP Download | Checksums & Release |
+| Browser | Direct ZIP Download (GitHub) | Checksums, Releases & Mirrors |
 |---|---|---|
-| **Google Chrome (MV3)** | [**Download Antipisher-Chrome-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip) | [Chrome Release & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha) |
-| **Mozilla Firefox (MV3)** | [**Download Antipisher-Firefox-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip) | [Firefox Release & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha) |
-| **Full Release & Source** | [**v0.2.3-alpha Release Page**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha) | [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
+| **Google Chrome (MV3)** | [**Download Antipisher-Chrome-v0.2.4-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.4-alpha/Antipisher-Chrome-v0.2.4-alpha.zip) | [Chrome Release & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.4-alpha) |
+| **Mozilla Firefox (MV3)** | [**Download Antipisher-Firefox-v0.2.4-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.4-alpha/Antipisher-Firefox-v0.2.4-alpha.zip) | [Firefox Release & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.4-alpha) |
+| **Full Release & Mirrors** | [**v0.2.4-alpha Release Page (GitHub)**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.4-alpha) | [GitFlic Mirror & Releases](https://gitflic.ru/project/visiongaiatechnology/antipisher) · [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
 
 ---
 
-## 🛡️ Security Updates in `v0.2.3` & Supply-Chain Case Study
+## 🛡️ Release Updates (`v0.2.3` – `v0.2.4`) & Supply-Chain Case Study
 
-### 🔒 Changelog Highlights (`0.2.3` — Platin Security Hardened)
+### 🎨 What's New in `0.2.4` (Antipisher by GeDefense)
+- **Official GeDefense Branding & Tray Icons:** Rebranded across extension manifests, locales (`EN/DE/RU/ZH`), Popup, Options, Guard interstitial, Self-XSS console banner, and Shadow-DOM Form Shield, powered by crisp GeDefense crest tray icons (`16x16`, `48x48`, `128x128`).
+- **Dark Navy Blue Glass UI (`#040914` – `#0b1830`):** Unified GeDefense midnight navy aesthetic paired with `#38bdf8` cyan-blue controls and glass highlights.
+
+### 🔒 Security Highlights (`0.2.3` Platin Foundation)
 - **GeDefense Light Supply-Chain, Magecart & Crypto-Clipper Fortress (`shared/aegis-engine.js`):**
   - Cross-Origin `<script>` & `<iframe>` Gatekeeper at DOM prototype level (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) blocking malicious C2 loaders, high-risk TLDs (`.icu`, `.lol`, `.top`, `.click`, `.gq`, `.tk`), raw IPv4 script hosts, and obfuscated `eval(atob(...))` / `window._k7` payloads.
   - **Anti-Magecart Exfiltration Guard:** Intercepts `navigator.sendBeacon` and `window.fetch` payloads attempting to exfiltrate payment/card data (`/card.php`, `/hit.php`, `/skimmer.php`, or suspicious third-party endpoints).

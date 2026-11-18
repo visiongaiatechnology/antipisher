@@ -563,8 +563,8 @@
       try {
         if (typeof console !== 'undefined' && console.log) {
         console.log(
-          "%cVisionGaiaTechnology",
-          "color: #6fe3bd; font-family: 'Arial Black', sans-serif; font-size: 20px; font-weight: 900; text-shadow: 1px 1px 0 rgba(111, 227, 189, 0.4);"
+          "%cAntipisher by GeDefense · VisionGaiaTechnology",
+          "color: #38bdf8; font-family: 'Arial Black', sans-serif; font-size: 20px; font-weight: 900; text-shadow: 1px 1px 0 rgba(56, 189, 248, 0.4);"
         );
         console.log(
           "%c⚠️ HALT! / STOP! ⚠️",

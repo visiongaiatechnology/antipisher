@@ -71,7 +71,8 @@ test('i18n: WebExtension _locales directories are valid and present for all 4 la
     const p = path.join(root, '_locales', loc, 'messages.json');
     assert.ok(fs.existsSync(p), `_locales/${loc}/messages.json must exist`);
     const data = JSON.parse(fs.readFileSync(p, 'utf8'));
-    assert.ok(data.appName && data.appName.message === 'Antipisher');
+    assert.ok(data.appName && data.appName.message === 'Antipisher by GeDefense');
+    assert.ok(data.appShortName && data.appShortName.message === 'Antipisher');
     assert.ok(data.appDesc && typeof data.appDesc.message === 'string');
   }
 });

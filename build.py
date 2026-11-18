@@ -82,7 +82,7 @@ for target in ('chrome', 'firefox'):
         assert (dst / file).exists(), f"Missing required package file in {target}: {file}"
 
     packed_arcnames = set()
-    zip_path = ROOT.parent / f'Antipisher-{target.capitalize()}-v0.2.3-alpha.zip'
+    zip_path = ROOT.parent / f'Antipisher-{target.capitalize()}-v0.2.4-alpha.zip'
     with zipfile.ZipFile(zip_path, 'w') as z:
         for file in sorted(dst.rglob('*')):
             if file.is_file() and '_metadata' not in file.parts:
@@ -106,7 +106,7 @@ for rel_path in sorted(ALLOWED_PACKAGE_FILES):
     sbom_components.append({
         "type": "file",
         "name": rel_path,
-        "version": "0.2.3",
+        "version": "0.2.4",
         "hashes": [{"alg": "SHA-256", "content": digest}]
     })
 for extra_rel in ('chrome/background.js', 'firefox/background.js', 'chrome/manifest.json', 'firefox/manifest.json'):
@@ -115,7 +115,7 @@ for extra_rel in ('chrome/background.js', 'firefox/background.js', 'chrome/manif
     sbom_components.append({
         "type": "file",
         "name": extra_rel,
-        "version": "0.2.3",
+        "version": "0.2.4",
         "hashes": [{"alg": "SHA-256", "content": digest}]
     })
 sbom_doc = {
@@ -127,17 +127,17 @@ sbom_doc = {
         "component": {
             "type": "application",
             "name": "antipisher",
-            "version": "0.2.3",
+            "version": "0.2.4",
             "licenses": [{"license": {"id": "AGPL-3.0-only"}}]
         }
     },
     "components": sbom_components,
-    "dependencies": [{"ref": "antipisher@0.2.3", "dependsOn": []}]
+    "dependencies": [{"ref": "antipisher@0.2.4", "dependsOn": []}]
 }
 (ROOT / 'sbom.json').write_text(json.dumps(sbom_doc, indent=2) + '\n', encoding='utf-8')
 
 # Source archive (clean source only, excluding audit/, temp files and generated checksums)
-src_zip = ROOT.parent / 'Antipisher-Source-v0.2.3-alpha.zip'
+src_zip = ROOT.parent / 'Antipisher-Source-v0.2.4-alpha.zip'
 EXCLUDE_DIRS = {'audit', '__pycache__', '.git', '.tmp', 'node_modules', '_metadata'}
 EXCLUDE_EXTS = {'.zip', '.log', '.tmp'}
 EXCLUDE_FILES = {'SHA256SUMS.txt'}

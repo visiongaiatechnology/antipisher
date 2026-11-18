@@ -1,12 +1,14 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.3 (Alpha)
+<img src="icons/icon128.png" alt="GeDefense" width="76" height="76">
 
-**Автономная, высокоточная защита от фишинга, IDN-омографов, трекеров и рекламы для Google Chrome и Mozilla Firefox**  
-*Лицензировано под GNU Affero General Public License v3.0 (AGPLv3)*
+# 🛡️ Antipisher by GeDefense `0.2.4` (Alpha)
+
+**Автономная, высокоточная защита от фишинга, IDN-омографов, Supply-Chain-атак, трекеров и рекламы для Google Chrome и Mozilla Firefox**  
+*Лицензировано под GNU Affero General Public License v3.0 (AGPLv3) · GeDefense / VisionGaiaTechnology*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.3-alpha](https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Version: 0.2.4-alpha](https://img.shields.io/badge/Version-0.2.4--alpha-0ea5e9.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
 [![Tests: 91/91 Passing](https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge)](#тестирование-и-разработка)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Телеметрия-0_%2F_100%25_Офлайн-0284c7.svg?style=for-the-badge)](#конфиденциальность-и-гарантии-автономности)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Готов-f59e0b.svg?style=for-the-badge)](chrome/)
@@ -22,22 +24,26 @@
 
 </div>
 
-> **Статус:** `PLATIN` · Версия `0.2.3` · По состоянию на 18.11.2026 · Аудит безопасности VGT-100 (`48/52 PASS, 0 FAIL`), GeDefense Light Supply-Chain и защита YouTube.  
+> **Статус:** `PLATIN` · Версия `0.2.4` · По состоянию на 18.11.2026 · **Antipisher by GeDefense** Dark Navy Blue Edition, аудит безопасности VGT-100 (`48/52 PASS, 0 FAIL`), GeDefense Light Supply-Chain и защита YouTube.  
 > **Не финальный релиз для каталогов:** Сквозное тестирование браузера (E2E), публикация в официальных магазинах, каналы подписанных обновлений и полномасштабный графовый движок V2 находятся в активной разработке (см. [Известные границы и ограничения](#известные-границы-и-ограничения)).
 
-### ⬇️ Прямые загрузки (`v0.2.3-alpha`)
+### ⬇️ Прямые загрузки (`v0.2.4-alpha`)
 
-| Браузер | Прямая ссылка (ZIP) | Контрольные суммы и релиз |
+| Браузер | Прямая ссылка (ZIP · GitHub) | Контрольные суммы, релизы и зеркало |
 |---|---|---|
-| **Google Chrome (MV3)** | [**Скачать Antipisher-Chrome-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip) | [Релиз Chrome и SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha) |
-| **Mozilla Firefox (MV3)** | [**Скачать Antipisher-Firefox-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip) | [Релиз Firefox и SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha) |
-| **Общий релиз и исходный код** | [**Страница релиза v0.2.3-alpha**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha) | [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
+| **Google Chrome (MV3)** | [**Скачать Antipisher-Chrome-v0.2.4-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.4-alpha/Antipisher-Chrome-v0.2.4-alpha.zip) | [Релиз Chrome и SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.4-alpha) |
+| **Mozilla Firefox (MV3)** | [**Скачать Antipisher-Firefox-v0.2.4-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.4-alpha/Antipisher-Firefox-v0.2.4-alpha.zip) | [Релиз Firefox и SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.4-alpha) |
+| **Общий релиз и зеркало** | [**Страница релиза v0.2.4-alpha (GitHub)**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.4-alpha) | [Зеркало и релизы на GitFlic](https://gitflic.ru/project/visiongaiatechnology/antipisher) · [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
 
 ---
 
-## 🛡️ Обновления безопасности `v0.2.3` и разбор инцидента (Supply-Chain)
+## 🛡️ Обновления безопасности (`v0.2.3` – `v0.2.4`) и разбор инцидента (Supply-Chain)
 
-### 🔒 Основные изменения (`0.2.3` — Platin Security Hardened)
+### 🎨 Новое в `0.2.4` (Antipisher by GeDefense)
+- **Официальный ребрендинг и логотип GeDefense:** Единое брендирование **Antipisher by GeDefense** в манифестах, локализациях (`EN/DE/RU/ZH`), Popup, Options, странице Guard, баннере Self-XSS и встроенном Form Shield, а также новые иконки в панели браузера (`16×16`, `48×48`, `128×128`).
+- **Тема Dark Navy Blue (`#040914` – `#0b1830`):** Глубокий темно-синий интерфейс GeDefense с акцентами `#38bdf8` / `#0ea5e9`.
+
+### 🔒 Основные меры защиты (`0.2.3` — Platin Security Hardened)
 - **Защита GeDefense Light от атак на цепочки поставок, Magecart и Crypto-Clipper (`shared/aegis-engine.js`):**
   - Перехват динамических инъекций `<script>` и `<iframe>` на уровне DOM-прототипов (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) против C2-загрузчиков, зон риска (`.icu`, `.lol`, `.top`, `.click`, `.gq`, `.tk`), сырых IPv4 и обфусцированных `eval(atob(...))` / `window._k7`.
   - **Anti-Magecart Exfiltration Guard:** Блокирует утечку данных карт и паролей через `navigator.sendBeacon` и `window.fetch` на скиммер-эндпоинты (`/card.php`, `/hit.php`, `/skimmer.php`).

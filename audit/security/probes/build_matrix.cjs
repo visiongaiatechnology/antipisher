@@ -8,7 +8,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const OUT = path.resolve(__dirname, '..', 'AUDIT_MATRIX.json');
-const PROJECT = 'Antipisher 0.2.3 (Platin Security Hardened) — Chrome MV3 + Firefox MV3 Browser-Extension';
+const PROJECT = 'Antipisher by GeDefense 0.2.4 (Platin Security Hardened) — Chrome MV3 + Firefox MV3 Browser-Extension';
 const TS = new Date().toISOString();
 
 function E(location, observation) { return { location, observation }; }
@@ -17,7 +17,7 @@ function E(location, observation) { return { location, observation }; }
 const TEST_RUNS = [
   { id: 'TR-01', command: 'node --test tests/ad-shield.test.cjs tests/aegis.test.cjs tests/chrome-worker.test.cjs tests/detector.test.cjs tests/firefox-worker.test.cjs tests/gedefense.test.cjs tests/i18n.test.cjs tests/options-whitelist.test.cjs tests/p0-regressions.test.cjs tests/platin-security.test.cjs tests/shield-content.test.cjs tests/tracker-shield.test.cjs tests/v2-scoring.test.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 91, fail: 0, skip: 0, duration_ms: 3420, notes: 'Vollständige Produkt- & Platin-Security-Testsuite (13 Testdateien), 91/91 PASS, 0 fail, 0 skip.' },
   { id: 'TR-02', command: 'node --check chrome/background.js && node --check firefox/background.js && node --check chrome/guard.js && node --check chrome/popup.js && node --check shared/detector.js && node --check shared/sites.js && node --check shared/shield-content.js && node --check shared/aegis-engine.js', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 8, fail: 0, skip: 0, notes: 'Syntaxprüfung aller produktiven JS-Dateien (Exit 0).' },
-  { id: 'TR-03', command: 'node audit/security/probes/probe01_manifest_integrity.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 27, fail: 0, skip: 0, notes: 'Manifest-/Datei-/WAR-/Drift-/Permissions-Integrität v0.2.3 (27/27 Assertions PASS).' },
+  { id: 'TR-03', command: 'node audit/security/probes/probe01_manifest_integrity.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 27, fail: 0, skip: 0, notes: 'Manifest-/Datei-/WAR-/Drift-/Permissions-Integrität v0.2.4 (27/27 Assertions PASS).' },
   { id: 'TR-04', command: 'node audit/security/probes/probe02_detector_corpus.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 42, fail: 0, skip: 0, notes: 'Messlauf: 42/43 synthetische Angriffs-URLs erkannt (97,7%), 0/745 Benign-URLs fälschlich blockiert (0,0% FP).' },
   { id: 'TR-05', command: 'node audit/security/probes/probe03_punycode_parity.cjs', platform: 'Windows / Node v24.13.0', actually_executed: true, exit_code: 0, pass: 165, fail: 0, skip: 0, notes: 'Messlauf: 165/165 Confusable-Substitutionen (100% block), 480 gültige IDN-Decoder-Fälle (0 Abweichungen).' },
   { id: 'TR-06', command: 'node audit/security/probes/probe04_chrome_background_mock.cjs', platform: 'Windows / Node v24.13.0 (vm + chrome-API-Mock)', actually_executed: true, exit_code: 0, pass: 47, fail: 0, skip: 0, notes: 'Chrome-SW-Logik: DNR-Regel, Messaging-Auth, Tab-Scoped Allow-Once + 30s TTL, Serialized Configure Mutex, Degraded Fallback (47/47 PASS).' },
@@ -149,7 +149,7 @@ const FINDINGS = [
     severity: 'MEDIUM', confidence: 'HIGH', state: 'REMEDIATED_VERIFIED',
     affected_assets: ['shared/detector.js', 'shared/sites.js'],
     trust_boundary: 'Untrusted-URL -> Heuristik -> Schutzentscheidung',
-    root_cause: 'Ursprünglich wurden verdünnte Homograph-/Bait-Kombinationen (paypa1-login.com, paypal-me.com), Brand-only-Userinfo (paypal@evil.test), Crypto-/App-Combosquats (tiktok-coin.com, ledger-live.com) und Pfad-Phishing nicht erkannt. Alle genannten Klassen werden in v0.2.3 erkannt.',
+    root_cause: 'Ursprünglich wurden verdünnte Homograph-/Bait-Kombinationen (paypa1-login.com, paypal-me.com), Brand-only-Userinfo (paypal@evil.test), Crypto-/App-Combosquats (tiktok-coin.com, ledger-live.com) und Pfad-Phishing nicht erkannt. Alle genannten Klassen werden in v0.2.4 erkannt.',
     preconditions: 'Aufruf einer Phishing-URL aus einer der genannten Evasionsklassen.',
     evidence: [
       E('shared/detector.js:568-895', 'Segmentweise Skeleton-/Ligatur-/Damerau-Bait-Analyse, Userinfo-Brand-Check, hyphenierte Offizialdomains und Layer-3-Pfad-Phishing-Erkennung.'),
@@ -220,7 +220,7 @@ const FINDINGS = [
     residual_risk: 'Funktional notwendige Sichtbarkeit von guard.html für Browser-Redirects.'
   },
   {
-    id: 'FIND-011', title: 'Dokumentations-, Architektur- und Versionskonsistenz (v0.2.3 / 187 Marken / 91 Tests) hergestellt',
+    id: 'FIND-011', title: 'Dokumentations-, Architektur- und Versionskonsistenz (v0.2.4 / 187 Marken / 91 Tests) hergestellt',
     severity: 'INFO', confidence: 'HIGH', state: 'REMEDIATED_VERIFIED',
     affected_assets: ['README.md', 'SECURITY.md', 'ARCHITECTURE_AND_SECURITY_REVIEW.md', 'CHANGELOG.md', 'shared/guard.js'],
     trust_boundary: 'Dokumentation -> Betreiber-/Nutzerentscheidung -> Risikobewertung',
@@ -228,12 +228,12 @@ const FINDINGS = [
     preconditions: 'Review der Projektdokumentation oder Aufruf von guard.html ohne storage-API.',
     evidence: [
       E('shared/guard.js:168-181', 'Synchrones Initial-Rendering renderLocalizedUI(currentLang) vor asynchronem Storage-Read (probe06 38/38 PASS).'),
-      E('ARCHITECTURE_AND_SECURITY_REVIEW.md; SECURITY.md; CHANGELOG.md; README.md', 'Konsistente Dokumentation auf Stand v0.2.3 (187 Marken, 353 Domains, 91/91 Tests, Platin-Status).')
+      E('ARCHITECTURE_AND_SECURITY_REVIEW.md; SECURITY.md; CHANGELOG.md; README.md', 'Konsistente Dokumentation auf Stand v0.2.4 (Antipisher by GeDefense, 187 Marken, 353 Domains, 91/91 Tests, Platin-Status).')
     ],
     impact: 'Vollständige Übereinstimmung zwischen Code, Tests, Build-Artefakten und Dokumentation.',
     cwe_owasp: 'CWE-1059 (Incomplete Documentation); OWASP A06:2025 Insecure Design',
     chain_ids: [],
-    remediation: 'Synchrones Guard-Rendering sowie Aktualisierung aller Architektur-, Security- und README-Dokumente auf v0.2.3.',
+    remediation: 'Synchrones Guard-Rendering sowie Aktualisierung aller Architektur-, Security- und README-Dokumente auf v0.2.4.',
     regression: 'probe06 (38/38 PASS) und probe08 (8/8 PASS).',
     residual_risk: 'Kein offenes Risiko.'
   }
@@ -375,7 +375,7 @@ na('VGT-046', 'Keine Container-/Cluster-Laufzeit im Produktumfang.');
 na('VGT-047', 'Keine Cloud-IAM-, Metadata- oder Storage-Bucket-Nutzung.');
 na('VGT-048', 'Kein Reverse-Proxy- oder TLS-Terminierungs-Code.');
 na('VGT-049', 'Keine unsicheren Laufzeit-Tempfiles oder Shared Directories.');
-pass('VGT-050', 'OS-/Plattform-Parität (Chrome MV3 & Firefox MV3): Beide Manifeste sind auf v0.2.3 synchronisiert, deklarieren identische minimale web_accessible_resources (guard.html), nutzen dieselbe Detektor-, Content-Shield- (inkl. POST-Formularschutz) und AEGIS/GeDefense-Engine und erzwingen denselben 30s-TTL- und Fail-Closed-Lebenszyklus.', [E('chrome/manifest.json:1-60; firefox/manifest.json:1-52', 'Synchronisierte MV3-Manifeste v0.2.3 mit identischer WAR- und Content-Script-Registrierung.'), E('shared/shield-content.js:295-345', 'Cross-Browser-POST-Formular-Interception schließt die Methodenlücke auf Seitenebene.'), E('audit/security/probes/results/manifest_integrity.json', 'probe01: 27/27 Assertions PASS für Chrome/Firefox-Parität und 0 Copy-Drift (TR-03 exit 0).')], 'command', 'TR-03', '27/27 Manifest-/Paritäts-Assertions PASS + 91/91 Unit-Tests PASS.');
+pass('VGT-050', 'OS-/Plattform-Parität (Chrome MV3 & Firefox MV3): Beide Manifeste sind auf v0.2.4 synchronisiert, deklarieren identische minimale web_accessible_resources (guard.html), nutzen dieselbe Detektor-, Content-Shield- (inkl. POST-Formularschutz) und AEGIS/GeDefense-Engine und erzwingen denselben 30s-TTL- und Fail-Closed-Lebenszyklus.', [E('chrome/manifest.json:1-60; firefox/manifest.json:1-52', 'Synchronisierte MV3-Manifeste v0.2.4 mit identischer WAR- und Content-Script-Registrierung.'), E('shared/shield-content.js:295-345', 'Cross-Browser-POST-Formular-Interception schließt die Methodenlücke auf Seitenebene.'), E('audit/security/probes/results/manifest_integrity.json', 'probe01: 27/27 Assertions PASS für Chrome/Firefox-Parität und 0 Copy-Drift (TR-03 exit 0).')], 'command', 'TR-03', '27/27 Manifest-/Paritäts-Assertions PASS + 91/91 Unit-Tests PASS.');
 
 /* Block 06 — Build, Lieferkette, Updates */
 pass('VGT-051', 'Dependency-Inventar/SBOM: Das Produkt besitzt null externe Laufzeit-Dependencies. build.py erzeugt deterministisch eine maschinenlesbare CycloneDX-1.5-SBOM (sbom.json) mit SHA-256-Prüfsummen aller ausgelieferten Komponenten.', [E('sbom.json:1-140', 'Maschinenlesbare CycloneDX 1.5 SBOM mit SHA-256-Hashes aller Paketdateien und dependsOn=[].'), E('tests/platin-security.test.cjs:282-300', 'Unit-Test prüft CycloneDX-Schema und gleicht alle Komponenten-SHA256-Hashes mit dem Dateisystem ab (TR-01 exit 0).')], 'command', 'TR-01', 'Zero-Dependency-Architektur + validierte CycloneDX-1.5-SBOM (sbom.json).');
@@ -452,8 +452,8 @@ const matrix = {
   profile: 'GENERIC',
   mode: 'AUDIT_AND_PATCH',
   timestamp_utc: TS,
-  repo_commit: 'Lokaler Release-Build v0.2.3 (SHA256SUMS.txt & sbom.json verifiziert, 0 Dirty-Drift zwischen shared/ und chrome/|firefox/)',
-  scope: 'Vollständiger Quellcode v0.2.3 (116 Dateien): Chrome- und Firefox-MV3-Extension, shared Detektor/Brand-DB (187 Marken / 353 Domains), Content-Shield, AEGIS Anti-Fingerprinting, Tracker-Shield, GeDefense Light (inkl. Optimizely/Magecart/Clipper-Abwehr), Guard-/Popup-/Options-Seiten, Build-Skripte, CycloneDX-SBOM, 13 Test-Suiten (91 Tests), 9 Security-Probes.',
+  repo_commit: 'Lokaler Release-Build v0.2.4 (SHA256SUMS.txt & sbom.json verifiziert, 0 Dirty-Drift zwischen shared/ und chrome/|firefox/)',
+  scope: 'Vollständiger Quellcode v0.2.4 (116 Dateien): Chrome- und Firefox-MV3-Extension, shared Detektor/Brand-DB (187 Marken / 353 Domains), Content-Shield, AEGIS Anti-Fingerprinting, Tracker-Shield, GeDefense Light (inkl. Optimizely/Magecart/Clipper-Abwehr), Guard-/Popup-/Options-Seiten, Build-Skripte, CycloneDX-SBOM, 13 Test-Suiten (91 Tests), 9 Security-Probes.',
   release_gate: 'CONDITIONAL',
   status_summary: summary,
   controls: CONTROLS,

@@ -34,9 +34,9 @@ REPO = "visiongaiatechnology/antipisher"
 ROOT = Path(__file__).resolve().parent.parent
 DIST_DIR = ROOT.parent
 
-CHROME_ZIP = DIST_DIR / "Antipisher-Chrome-v0.2.3-alpha.zip"
-FIREFOX_ZIP = DIST_DIR / "Antipisher-Firefox-v0.2.3-alpha.zip"
-SOURCE_ZIP = DIST_DIR / "Antipisher-Source-v0.2.3-alpha.zip"
+CHROME_ZIP = DIST_DIR / "Antipisher-Chrome-v0.2.4-alpha.zip"
+FIREFOX_ZIP = DIST_DIR / "Antipisher-Firefox-v0.2.4-alpha.zip"
+SOURCE_ZIP = DIST_DIR / "Antipisher-Source-v0.2.4-alpha.zip"
 SHA256_FILE = DIST_DIR / "SHA256SUMS.txt"
 
 sha_text = SHA256_FILE.read_text(encoding="utf-8") if SHA256_FILE.exists() else ""
@@ -137,18 +137,23 @@ def main():
     assert SHA256_FILE.exists(), f"Missing {SHA256_FILE}"
 
     # 1. Chrome Release
-    chrome_body = f"""# 🛡️ Antipisher for Google Chrome v0.2.3-alpha (MV3 · Platin Security Hardened)
+    chrome_body = f"""# 🛡️ Antipisher by GeDefense for Google Chrome v0.2.4-alpha (MV3 · Platin Security Hardened)
 
-**High-precision offline anti-phishing, IDN homograph, supply-chain, tracker & ad protection extension for Google Chrome.**
+**High-precision offline anti-phishing, IDN homograph, supply-chain, tracker & ad protection extension for Google Chrome — powered by the GeDefense Dark Navy Blue UI.**
 
-### 🔒 What's New in v0.2.3
+### ✨ What's New in v0.2.4
+- **Antipisher by GeDefense Rebrand & Dark Navy Blue UI:** Official `Antipisher by GeDefense` branding across extension manifests, 4-language locales (`EN/DE/RU/ZH`), Popup, Options, Guard interstitial, Self-XSS console banner, and closed Shadow-DOM content shield.
+- **GeDefense Crest Everywhere:** Updated browser tray icons (`16x16`, `48x48`, `128x128`) and integrated GeDefense emblem in Popup, Options, Guard, and Content Shield (`web_accessible_resources` remains strictly `['guard.html']`).
+- **Dark Navy Blue Glass Theme:** Deep midnight navy surfaces (`#040914` – `#0b1830`) paired with GeDefense cyan-blue accents (`#38bdf8` / `#0ea5e9`).
+
+### 🔒 Security & Hardening Baseline (v0.2.3 – v0.2.4 Platin)
 - **GeDefense Light Supply-Chain, Magecart & Crypto-Clipper Fortress:** Cross-origin `<script>`/`<iframe>` prototype gatekeeper (`1688360.cc`, `webshell.lol`, `.icu` exploit kits, `eval(atob(...))`), Anti-Magecart `sendBeacon`/`fetch` skimmer blocking (`/card.php`, `/skimmer.php`), and Crypto-Clipper `clipboard.writeText` protection.
 - **VGT-100 Platin Security Hardening (`48/52 PASS, 0 FAIL`):** RFC-1035 DoS bounds (`100k`-host in `0.26 ms`, `p95 = 0.39 ms`), 30s `allow-once` TTL, queue-serialized `configure()` mutex, fail-closed engine guards, zero-PII security event ring-buffer, build allowlist, and CycloneDX 1.5 SBOM.
 - **YouTube Ad Accelerator Bugfix:** Fixed normal videos jumping to the end when empty `.ytp-ad-player-overlay` containers persist; cleanly restores `1.0x` playback rate and mute state.
 - **91/91 Unit & Negative Security Tests PASS** · **292/296 Holdout (0 FN / 100% TPR)**.
 
 ### 📦 Installation (Google Chrome)
-1. Download `Antipisher-Chrome-v0.2.3-alpha.zip` below and unzip it.
+1. Download `Antipisher-Chrome-v0.2.4-alpha.zip` below and unzip it.
 2. Open `chrome://extensions` in Google Chrome.
 3. Enable **Developer mode** (top right toggle).
 4. Click **Load unpacked** and select the extracted folder.
@@ -160,18 +165,23 @@ def main():
 """
 
     # 2. Firefox Release
-    firefox_body = f"""# 🛡️ Antipisher for Mozilla Firefox v0.2.3-alpha (MV3 · Platin Security Hardened)
+    firefox_body = f"""# 🛡️ Antipisher by GeDefense for Mozilla Firefox v0.2.4-alpha (MV3 · Platin Security Hardened)
 
-**High-precision offline anti-phishing, IDN homograph, supply-chain, tracker & ad protection extension for Mozilla Firefox.**
+**High-precision offline anti-phishing, IDN homograph, supply-chain, tracker & ad protection extension for Mozilla Firefox — powered by the GeDefense Dark Navy Blue UI.**
 
-### 🔒 What's New in v0.2.3
+### ✨ What's New in v0.2.4
+- **Antipisher by GeDefense Rebrand & Dark Navy Blue UI:** Official `Antipisher by GeDefense` branding across extension manifests, 4-language locales (`EN/DE/RU/ZH`), Popup, Options, Guard interstitial, Self-XSS console banner, and closed Shadow-DOM content shield.
+- **GeDefense Crest Everywhere:** Updated browser tray icons (`16x16`, `48x48`, `128x128`) and integrated GeDefense emblem in Popup, Options, Guard, and Content Shield (`web_accessible_resources` remains strictly `['guard.html']`).
+- **Dark Navy Blue Glass Theme:** Deep midnight navy surfaces (`#040914` – `#0b1830`) paired with GeDefense cyan-blue accents (`#38bdf8` / `#0ea5e9`).
+
+### 🔒 Security & Hardening Baseline (v0.2.3 – v0.2.4 Platin)
 - **GeDefense Light Supply-Chain, Magecart & Crypto-Clipper Fortress:** Cross-origin `<script>`/`<iframe>` prototype gatekeeper, Anti-Magecart `sendBeacon`/`fetch` skimmer guard, Crypto-Clipper guard, and synchronized `webRequestBlocking` IOCs (`optimizely.com`, `1688360.cc`, `webshell.lol`, `.icu`).
 - **VGT-100 Platin Security Hardening (`48/52 PASS, 0 FAIL`):** RFC-1035 DoS bounds (`100k`-host in `0.26 ms`, `p95 = 0.39 ms`), 30s `allow-once` TTL with stale-navigation invalidation, fail-closed engine guard in `analyzeRequest()`, and zero-PII security event ring-buffer.
 - **YouTube Ad Accelerator Bugfix:** Cleanly restores `1.0x` playback rate and mute state after ads finish without skipping the main video.
 - **91/91 Unit & Negative Security Tests PASS** · **292/296 Holdout (0 FN / 100% TPR)**.
 
 ### 📦 Installation (Mozilla Firefox)
-1. Download `Antipisher-Firefox-v0.2.3-alpha.zip` below and unzip it.
+1. Download `Antipisher-Firefox-v0.2.4-alpha.zip` below and unzip it.
 2. Open `about:debugging#/runtime/this-firefox` in Firefox.
 3. Click **Load Temporary Add-on…**.
 4. Select `manifest.json` from the extracted directory.
@@ -183,13 +193,14 @@ def main():
 """
 
     # 3. Unified Release
-    unified_body = f"""# 🛡️ Antipisher v0.2.3-alpha — Platin Security Hardened & GeDefense Light Supply-Chain Fortress
+    unified_body = f"""# 🛡️ Antipisher by GeDefense v0.2.4-alpha — Platin Security Hardened & Dark Navy Blue Edition
 
 **Offline, High-Precision Anti-Phishing, IDN Homograph, Supply-Chain, Tracker & Ad Protection for Google Chrome & Mozilla Firefox.**
 
 *Licensed under the GNU Affero General Public License v3.0 (AGPLv3)*
 
-### 🚀 Highlights in v0.2.3
+### 🚀 Highlights in v0.2.4
+- **Antipisher by GeDefense Rebrand & Dark Navy Blue UI:** Unified `Antipisher by GeDefense` branding, GeDefense tray & UI crest (`icons/icon16|48|128.png` + Shadow-DOM emblem), and deep midnight navy / cyan-blue (`#38bdf8`) glass interface.
 - **GeDefense Light Supply-Chain & Magecart Defense:** Blocks Optimizely-style supply-chain loaders (`1688360.cc`, `webshell.lol`, `.icu` exploit kits, `eval(atob(...))`), Magecart `sendBeacon`/`fetch` card skimmers, and clipboard crypto-clippers.
 - **VGT-100 Platin Security Audit (`48/52 PASS, 0 FAIL`):** RFC-1035 DoS bounds (`100k`-host in `0.26 ms`), 30s `allow-once` TTL, queue-serialized `configure()`, fail-closed engine guards, zero-PII security event ring-buffer, `ALLOWED_PACKAGE_FILES` build allowlist, and CycloneDX 1.5 `sbom.json`.
 - **YouTube Ad Accelerator Bugfix:** Eliminated normal-video end-jump when empty `.ytp-ad-player-overlay` persists.
@@ -202,15 +213,15 @@ def main():
 """
 
     print("\n--- Publishing Chrome Release ---")
-    rel_chrome = create_or_get_release("chrome-v0.2.3-alpha", "Antipisher for Google Chrome v0.2.3-alpha", chrome_body)
+    rel_chrome = create_or_get_release("chrome-v0.2.4-alpha", "Antipisher by GeDefense for Google Chrome v0.2.4-alpha", chrome_body)
     sync_release_assets(rel_chrome, [(CHROME_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Firefox Release ---")
-    rel_firefox = create_or_get_release("firefox-v0.2.3-alpha", "Antipisher for Mozilla Firefox v0.2.3-alpha", firefox_body)
+    rel_firefox = create_or_get_release("firefox-v0.2.4-alpha", "Antipisher by GeDefense for Mozilla Firefox v0.2.4-alpha", firefox_body)
     sync_release_assets(rel_firefox, [(FIREFOX_ZIP, "application/zip"), (SHA256_FILE, "text/plain")])
 
     print("\n--- Publishing Unified Release ---")
-    rel_unified = create_or_get_release("v0.2.3-alpha", "Antipisher v0.2.3-alpha (Platin Security Hardened)", unified_body)
+    rel_unified = create_or_get_release("v0.2.4-alpha", "Antipisher by GeDefense v0.2.4-alpha (Platin Security Hardened)", unified_body)
     sync_release_assets(rel_unified, [
         (CHROME_ZIP, "application/zip"),
         (FIREFOX_ZIP, "application/zip"),

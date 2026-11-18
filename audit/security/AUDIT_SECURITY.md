@@ -1,11 +1,11 @@
-# VGT Security Master — Sicherheitsaudit & Remediation-Bericht: Antipisher 0.2.3 (Platin)
+# VGT Security Master — Sicherheitsaudit & Remediation-Bericht: Antipisher by GeDefense 0.2.4 (Platin)
 
-- **Projekt:** `Antipisher 0.2.3` — Chrome MV3 + Firefox MV3 Browser-Extension (inkl. AEGIS Anti-Fingerprinting, Tracker-Shield, Content-Shield & GeDefense Light)
+- **Projekt:** `Antipisher by GeDefense 0.2.4` — Chrome MV3 + Firefox MV3 Browser-Extension (inkl. AEGIS Anti-Fingerprinting, Tracker-Shield, Content-Shield & GeDefense Light)
 - **Audit-ID:** `VGT-AUDIT-20261117-0230`
 - **Zeitstempel (UTC):** `2026-11-17T16:33:00Z`
 - **Profil / Modus:** `PROFILE=GENERIC` · `MODE=AUDIT_AND_PATCH` (`FULL_REMEDIATION`)
-- **Commit / Snapshot:** Lokaler Release-Stand `v0.2.3` (`SHA256SUMS.txt` & CycloneDX 1.5 `sbom.json` verifiziert; 0 Copy-Drift zwischen `shared/` und `chrome/` bzw. `firefox/`)
-- **Geprüfter Scope:** Vollständiger Quellcode-Stand `antipisher` (`v0.2.3`, 115+ Dateien): Manifeste (`chrome/manifest.json`, `firefox/manifest.json`), Hintergrundskripte (`chrome/background.js`, `firefox/background.js`), Schutzseite (`shared/guard.html`, `shared/guard.css`, `shared/guard.js`), Popup & Optionen (`shared/popup.*`, `shared/options.*`), Detektor & Marken-Datenbank (`shared/detector.js`, `shared/sites.js`, `sites-100.json`, `build_sites.py`), In-Page-Schutz (`shared/shield-content.js`, `shared/aegis-engine.js`, `rulesets/trackers.json`), Build- & Release-Pipeline (`build.py`, `scripts/verify-release.ps1`, `.github/workflows/ci.yml`, `sbom.json`, `SHA256SUMS.txt`), 13 Unit- & Security-Testsuiten (`tests/*.test.cjs`, 91 Tests) sowie 9 Security-Audit-Probes (`audit/security/probes/probe01..09`).
+- **Commit / Snapshot:** Lokaler Release-Stand `v0.2.4` (`SHA256SUMS.txt` & CycloneDX 1.5 `sbom.json` verifiziert; 0 Copy-Drift zwischen `shared/` und `chrome/` bzw. `firefox/`)
+- **Geprüfter Scope:** Vollständiger Quellcode-Stand `antipisher` (`v0.2.4`, 115+ Dateien): Manifeste (`chrome/manifest.json`, `firefox/manifest.json`), Hintergrundskripte (`chrome/background.js`, `firefox/background.js`), Schutzseite (`shared/guard.html`, `shared/guard.css`, `shared/guard.js`), Popup & Optionen (`shared/popup.*`, `shared/options.*`), Detektor & Marken-Datenbank (`shared/detector.js`, `shared/sites.js`, `sites-100.json`, `build_sites.py`), In-Page-Schutz (`shared/shield-content.js`, `shared/aegis-engine.js`, `rulesets/trackers.json`), Build- & Release-Pipeline (`build.py`, `scripts/verify-release.ps1`, `.github/workflows/ci.yml`, `sbom.json`, `SHA256SUMS.txt`), 13 Unit- & Security-Testsuiten (`tests/*.test.cjs`, 91 Tests) sowie 9 Security-Audit-Probes (`audit/security/probes/probe01..09`).
 
 ---
 
@@ -79,7 +79,7 @@
 | `FIND-008` | LOW | False Positives bei kurzen Marken-Subdomains und Wörterbuch-Domains eliminiert (`0/745` FP in `probe02`) | `REMEDIATED_VERIFIED` | `TR-04`, `TR-10` |
 | `FIND-009` | LOW | RFC-1035-Eingabebudgets & Label-Precomputation (`100k`-Hostlabel in `0,26 ms` statt `2.753 ms`, `p95=0,39 ms`) | `REMEDIATED_VERIFIED` | `TR-01`, `TR-09` |
 | `FIND-010` | INFO | Minimale WAR-Exposition (`guard.html` only) + doppelte Sender-/Tab-Bindung | `REMEDIATED_VERIFIED` | `TR-03`, `TR-06` |
-| `FIND-011` | INFO | Synchrones Initial-Rendering in `guard.js` + vollständige Dokumentations-Synchronisation auf `v0.2.3` | `REMEDIATED_VERIFIED` | `TR-08`, `TR-10` |
+| `FIND-011` | INFO | Synchrones Initial-Rendering in `guard.js` + vollständige Dokumentations-Synchronisation auf `v0.2.4` | `REMEDIATED_VERIFIED` | `TR-08`, `TR-10` |
 
 ---
 
@@ -146,7 +146,7 @@
 | VGT-047 | NOT_APPLICABLE | — | — | — | Keine Cloud-IAM-, Metadata- oder Storage-Bucket-Nutzung. |
 | VGT-048 | NOT_APPLICABLE | — | — | — | Kein Reverse-Proxy- oder TLS-Terminierungs-Code. |
 | VGT-049 | NOT_APPLICABLE | — | — | — | Keine unsicheren Laufzeit-Tempfiles oder Shared Directories. |
-| VGT-050 | PASS | chrome/manifest.json | chrome/manifest.json:1-60; firefox/manifest.json:1-52<br>shared/shield-content.js:295-345<br>audit/security/probes/results/manifest_integrity.json | TR-03 (Exit 0) | OS-/Plattform-Parität (Chrome MV3 & Firefox MV3): Beide Manifeste sind auf v0.2.3 synchronisiert, deklarieren identische minimale web_accessible_resources (guard.html), nutzen dieselbe Detektor-, Con… |
+| VGT-050 | PASS | chrome/manifest.json | chrome/manifest.json:1-60; firefox/manifest.json:1-52<br>shared/shield-content.js:295-345<br>audit/security/probes/results/manifest_integrity.json | TR-03 (Exit 0) | OS-/Plattform-Parität (Chrome MV3 & Firefox MV3): Beide Manifeste sind auf v0.2.4 synchronisiert, deklarieren identische minimale web_accessible_resources (guard.html), nutzen dieselbe Detektor-, Con… |
 | VGT-051 | PASS | sbom.json | sbom.json:1-140<br>tests/platin-security.test.cjs:282-300 | TR-01 (Exit 0) | Dependency-Inventar/SBOM: Das Produkt besitzt null externe Laufzeit-Dependencies. build.py erzeugt deterministisch eine maschinenlesbare CycloneDX-1.5-SBOM (sbom.json) mit SHA-256-Prüfsummen aller au… |
 | VGT-052 | NOT_APPLICABLE | — | — | — | Keine Third-Party-Laufzeit-Dependencies, daher keine offenen Third-Party-CVEs im Paket. |
 | VGT-053 | NOT_APPLICABLE | — | — | — | Keine Package-Registry-Installationen oder pre/postinstall-Skripte im Build. |
@@ -200,4 +200,4 @@
 ## Verbleibende Umgebungs-Grenzen vor externer Store-Veröffentlichung
 
 1. **`VGT-056` (`BLOCKED`):** Externe kryptografische Store-Signierung durch den Chrome Web Store / Mozilla Add-ons (AMO) erfolgt erst beim Upload in die jeweiligen Entwickler-Portale.
-2. **`VGT-090` / `VGT-093` (`NOT_TESTED`):** Vor der produktiven Store-Einreichung wird ein abschließender manueller Smoke-Test der gepackten ZIP-Archive (`Antipisher-Chrome-v0.2.3-alpha.zip`, `Antipisher-Firefox-v0.2.3-alpha.zip`) in einer grafischen Chrome- und Firefox-Instanz empfohlen.
+2. **`VGT-090` / `VGT-093` (`NOT_TESTED`):** Vor der produktiven Store-Einreichung wird ein abschließender manueller Smoke-Test der gepackten ZIP-Archive (`Antipisher-Chrome-v0.2.4-alpha.zip`, `Antipisher-Firefox-v0.2.4-alpha.zip`) in einer grafischen Chrome- und Firefox-Instanz empfohlen.

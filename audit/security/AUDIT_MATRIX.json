@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "audit_id": "VGT-AUDIT-20261117-0230",
-  "project": "Antipisher 0.2.3 (Platin Security Hardened) — Chrome MV3 + Firefox MV3 Browser-Extension",
+  "project": "Antipisher by GeDefense 0.2.4 (Platin Security Hardened) — Chrome MV3 + Firefox MV3 Browser-Extension",
   "profile": "GENERIC",
   "mode": "AUDIT_AND_PATCH",
-  "timestamp_utc": "2026-11-18T09:08:46.260Z",
-  "repo_commit": "Lokaler Release-Build v0.2.3 (SHA256SUMS.txt & sbom.json verifiziert, 0 Dirty-Drift zwischen shared/ und chrome/|firefox/)",
-  "scope": "Vollständiger Quellcode v0.2.3 (116 Dateien): Chrome- und Firefox-MV3-Extension, shared Detektor/Brand-DB (187 Marken / 353 Domains), Content-Shield, AEGIS Anti-Fingerprinting, Tracker-Shield, GeDefense Light (inkl. Optimizely/Magecart/Clipper-Abwehr), Guard-/Popup-/Options-Seiten, Build-Skripte, CycloneDX-SBOM, 13 Test-Suiten (91 Tests), 9 Security-Probes.",
+  "timestamp_utc": "2026-11-18T09:48:22.552Z",
+  "repo_commit": "Lokaler Release-Build v0.2.4 (SHA256SUMS.txt & sbom.json verifiziert, 0 Dirty-Drift zwischen shared/ und chrome/|firefox/)",
+  "scope": "Vollständiger Quellcode v0.2.4 (116 Dateien): Chrome- und Firefox-MV3-Extension, shared Detektor/Brand-DB (187 Marken / 353 Domains), Content-Shield, AEGIS Anti-Fingerprinting, Tracker-Shield, GeDefense Light (inkl. Optimizely/Magecart/Clipper-Abwehr), Guard-/Popup-/Options-Seiten, Build-Skripte, CycloneDX-SBOM, 13 Test-Suiten (91 Tests), 9 Security-Probes.",
   "release_gate": "CONDITIONAL",
   "status_summary": {
     "PASS": 48,
@@ -780,11 +780,11 @@
     {
       "id": "VGT-050",
       "status": "PASS",
-      "rationale": "OS-/Plattform-Parität (Chrome MV3 & Firefox MV3): Beide Manifeste sind auf v0.2.3 synchronisiert, deklarieren identische minimale web_accessible_resources (guard.html), nutzen dieselbe Detektor-, Content-Shield- (inkl. POST-Formularschutz) und AEGIS/GeDefense-Engine und erzwingen denselben 30s-TTL- und Fail-Closed-Lebenszyklus.",
+      "rationale": "OS-/Plattform-Parität (Chrome MV3 & Firefox MV3): Beide Manifeste sind auf v0.2.4 synchronisiert, deklarieren identische minimale web_accessible_resources (guard.html), nutzen dieselbe Detektor-, Content-Shield- (inkl. POST-Formularschutz) und AEGIS/GeDefense-Engine und erzwingen denselben 30s-TTL- und Fail-Closed-Lebenszyklus.",
       "evidence": [
         {
           "location": "chrome/manifest.json:1-60; firefox/manifest.json:1-52",
-          "observation": "Synchronisierte MV3-Manifeste v0.2.3 mit identischer WAR- und Content-Script-Registrierung."
+          "observation": "Synchronisierte MV3-Manifeste v0.2.4 mit identischer WAR- und Content-Script-Registrierung."
         },
         {
           "location": "shared/shield-content.js:295-345",
@@ -1832,7 +1832,7 @@
         "shared/sites.js"
       ],
       "trust_boundary": "Untrusted-URL -> Heuristik -> Schutzentscheidung",
-      "root_cause": "Ursprünglich wurden verdünnte Homograph-/Bait-Kombinationen (paypa1-login.com, paypal-me.com), Brand-only-Userinfo (paypal@evil.test), Crypto-/App-Combosquats (tiktok-coin.com, ledger-live.com) und Pfad-Phishing nicht erkannt. Alle genannten Klassen werden in v0.2.3 erkannt.",
+      "root_cause": "Ursprünglich wurden verdünnte Homograph-/Bait-Kombinationen (paypa1-login.com, paypal-me.com), Brand-only-Userinfo (paypal@evil.test), Crypto-/App-Combosquats (tiktok-coin.com, ledger-live.com) und Pfad-Phishing nicht erkannt. Alle genannten Klassen werden in v0.2.4 erkannt.",
       "preconditions": "Aufruf einer Phishing-URL aus einer der genannten Evasionsklassen.",
       "evidence": [
         {
@@ -1961,7 +1961,7 @@
     },
     {
       "id": "FIND-011",
-      "title": "Dokumentations-, Architektur- und Versionskonsistenz (v0.2.3 / 187 Marken / 91 Tests) hergestellt",
+      "title": "Dokumentations-, Architektur- und Versionskonsistenz (v0.2.4 / 187 Marken / 91 Tests) hergestellt",
       "severity": "INFO",
       "confidence": "HIGH",
       "state": "REMEDIATED_VERIFIED",
@@ -1982,13 +1982,13 @@
         },
         {
           "location": "ARCHITECTURE_AND_SECURITY_REVIEW.md; SECURITY.md; CHANGELOG.md; README.md",
-          "observation": "Konsistente Dokumentation auf Stand v0.2.3 (187 Marken, 353 Domains, 91/91 Tests, Platin-Status)."
+          "observation": "Konsistente Dokumentation auf Stand v0.2.4 (Antipisher by GeDefense, 187 Marken, 353 Domains, 91/91 Tests, Platin-Status)."
         }
       ],
       "impact": "Vollständige Übereinstimmung zwischen Code, Tests, Build-Artefakten und Dokumentation.",
       "cwe_owasp": "CWE-1059 (Incomplete Documentation); OWASP A06:2025 Insecure Design",
       "chain_ids": [],
-      "remediation": "Synchrones Guard-Rendering sowie Aktualisierung aller Architektur-, Security- und README-Dokumente auf v0.2.3.",
+      "remediation": "Synchrones Guard-Rendering sowie Aktualisierung aller Architektur-, Security- und README-Dokumente auf v0.2.4.",
       "regression": "probe06 (38/38 PASS) und probe08 (8/8 PASS).",
       "residual_risk": "Kein offenes Risiko."
     }
@@ -2144,7 +2144,7 @@
       "pass": 27,
       "fail": 0,
       "skip": 0,
-      "notes": "Manifest-/Datei-/WAR-/Drift-/Permissions-Integrität v0.2.3 (27/27 Assertions PASS)."
+      "notes": "Manifest-/Datei-/WAR-/Drift-/Permissions-Integrität v0.2.4 (27/27 Assertions PASS)."
     },
     {
       "id": "TR-04",

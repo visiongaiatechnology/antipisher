@@ -7,7 +7,7 @@
     "component": {
       "type": "application",
       "name": "antipisher",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "licenses": [
         {
           "license": {
@@ -21,51 +21,51 @@
     {
       "type": "file",
       "name": "_locales/de/messages.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+          "content": "bbdfb7c722813a77a6661d539ad9d919c97b8fed674ad0806a4331a8ea5197ca"
         }
       ]
     },
     {
       "type": "file",
       "name": "_locales/en/messages.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+          "content": "48c1980b8839b52318c463e02ca4f2cd5669fdc28e2212626446841fe553b976"
         }
       ]
     },
     {
       "type": "file",
       "name": "_locales/ru/messages.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+          "content": "ea986a4774111049ad0535268be99c183a846239d2d393054bdc358e74c35d66"
         }
       ]
     },
     {
       "type": "file",
       "name": "_locales/zh_CN/messages.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
+          "content": "54a25712675003faa87c4126db48bea30538487c301c922950a5ceed98f33878"
         }
       ]
     },
     {
       "type": "file",
       "name": "background.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -76,40 +76,40 @@
     {
       "type": "file",
       "name": "design-tokens.css",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
+          "content": "8156d48f2f1e6c1e42ec1acf35f17395a5fd0d546684edb4065d161515967884"
         }
       ]
     },
     {
       "type": "file",
       "name": "guard.css",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
+          "content": "bdd68f3d6ab62588fefdd98a86d01b6e11f3fd5da4a9c27fd438aee79e2faf91"
         }
       ]
     },
     {
       "type": "file",
       "name": "guard.html",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
+          "content": "3f00910644f468f826613065dd97dbf3e4346b481fa32e161becee9e81e568ef"
         }
       ]
     },
     {
       "type": "file",
       "name": "guard.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -120,106 +120,106 @@
     {
       "type": "file",
       "name": "icons/icon128.png",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+          "content": "1f4a8268c0a2690c7b313b5de266aaf939937d9dfdf45596a7b81c1ef071c7e8"
         }
       ]
     },
     {
       "type": "file",
       "name": "icons/icon16.png",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+          "content": "d67f13f73c6ef855403864f873ef6e6aeaf84ff8cde724e2b7a4d99f5885a3e4"
         }
       ]
     },
     {
       "type": "file",
       "name": "icons/icon48.png",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+          "content": "2943e5fb2aa03aa120e1bc6675dbad470c3b9ae4cbab10a8104ba1d3976b6a74"
         }
       ]
     },
     {
       "type": "file",
       "name": "manifest.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "970b3ed6d3c093f7eb2314522aaf9f565508a26bd9e26dff5cdb796353b4bdc9"
+          "content": "c506211cf2cf99a7e66d222729535e43feddb1c1ae160cf0c98864793c2f8a7f"
         }
       ]
     },
     {
       "type": "file",
       "name": "options.css",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+          "content": "2c54ee0f9218806c3b492387692a2e587a40cb5faf70792ce3a9b05b6c5ecf0c"
         }
       ]
     },
     {
       "type": "file",
       "name": "options.html",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+          "content": "5e0ca33852a056eac5c6e18b3ba5dbd48fe4d39941211058b59b0e1a6e83234c"
         }
       ]
     },
     {
       "type": "file",
       "name": "options.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+          "content": "16683f1efe6f24113c5ee1bc2c2ec8394f32759c624b0701aecf2c389d95920d"
         }
       ]
     },
     {
       "type": "file",
       "name": "popup.css",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
+          "content": "3fbdd7f59f665298265cd365c615dd49c47ef4e2e9e89f99769fe09a065bd7f2"
         }
       ]
     },
     {
       "type": "file",
       "name": "popup.html",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
+          "content": "ed8df883f08076c4a505b6c9f4097e5ca91a3bced6f86c6cf620ab78563c23b8"
         }
       ]
     },
     {
       "type": "file",
       "name": "popup.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -230,7 +230,7 @@
     {
       "type": "file",
       "name": "rulesets/trackers.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -241,51 +241,51 @@
     {
       "type": "file",
       "name": "shared/aegis-engine.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
+          "content": "99f5de2e3b480c617e226a554e0bd89199cfb531950bb27d10b57417959349de"
         }
       ]
     },
     {
       "type": "file",
       "name": "shared/detector.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
+          "content": "1472ff14f00c4af17c59377a4dc9b0bc4234c73402733e86416de6192a1d6e56"
         }
       ]
     },
     {
       "type": "file",
       "name": "shared/i18n.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+          "content": "337b0ca1d27e6e68db83680566eafcc6bf1f34533cabde670df6d9474cfc394b"
         }
       ]
     },
     {
       "type": "file",
       "name": "shared/shield-content.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
+          "content": "c782ca9a57730fdb5b6657f659ebbe763bf8caef5f757dcd5babf7a725db7f17"
         }
       ]
     },
     {
       "type": "file",
       "name": "shared/sites.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -296,7 +296,7 @@
     {
       "type": "file",
       "name": "chrome/background.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -307,7 +307,7 @@
     {
       "type": "file",
       "name": "firefox/background.js",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -318,29 +318,29 @@
     {
       "type": "file",
       "name": "chrome/manifest.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "970b3ed6d3c093f7eb2314522aaf9f565508a26bd9e26dff5cdb796353b4bdc9"
+          "content": "c506211cf2cf99a7e66d222729535e43feddb1c1ae160cf0c98864793c2f8a7f"
         }
       ]
     },
     {
       "type": "file",
       "name": "firefox/manifest.json",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "61105fd6ab4bbec0b38cb829b39da55ab1a644e7c7a0d32e194cebfaacd6c599"
+          "content": "8a9fb700bf8dfa4012ebfeb762f00ac40881116b5f2d3117d717c26017a90291"
         }
       ]
     }
   ],
   "dependencies": [
     {
-      "ref": "antipisher@0.2.3",
+      "ref": "antipisher@0.2.4",
       "dependsOn": []
     }
   ]

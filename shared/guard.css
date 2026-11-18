@@ -18,8 +18,8 @@ body.vgt-guard {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(520px 420px at 24% 18%, rgba(111, 227, 189, 0.20), transparent 62%),
-    radial-gradient(640px 500px at 82% 78%, rgba(86, 126, 146, 0.18), transparent 66%);
+    radial-gradient(540px 420px at 24% 18%, rgba(14, 165, 233, 0.22), transparent 62%),
+    radial-gradient(640px 500px at 82% 78%, rgba(37, 99, 235, 0.18), transparent 66%);
   filter: blur(64px);
   opacity: 0.9;
 }
@@ -83,7 +83,7 @@ body.vgt-guard {
 
 .lang-btn.active {
   background: var(--vgt-accent);
-  color: #0b1a14;
+  color: #04101f;
   font-weight: 700;
 }
 

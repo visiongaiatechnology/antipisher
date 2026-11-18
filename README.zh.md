@@ -1,12 +1,14 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.3 (Alpha)
+<img src="icons/icon128.png" alt="GeDefense" width="76" height="76">
 
-**适用于 Google Chrome 与 Mozilla Firefox 的离线高精度反网络钓鱼、IDN 同形字、追踪器与广告拦截防护扩展**  
-*遵循 GNU Affero 通用公共许可证 v3.0 (AGPLv3) 开源*
+# 🛡️ Antipisher by GeDefense `0.2.4` (Alpha)
+
+**适用于 Google Chrome 与 Mozilla Firefox 的离线高精度反网络钓鱼、IDN 同形字、供应链脚本、追踪器与广告拦截防护扩展**  
+*遵循 GNU Affero 通用公共许可证 v3.0 (AGPLv3) 开源 · GeDefense / VisionGaiaTechnology*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.3-alpha](https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Version: 0.2.4-alpha](https://img.shields.io/badge/Version-0.2.4--alpha-0ea5e9.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
 [![Tests: 91/91 Passing](https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge)](#隐私保护与离线保证)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge)](chrome/)
@@ -22,22 +24,26 @@
 
 </div>
 
-> **状态：** `PLATIN` · 版本 `0.2.3` · 截至 2026-11-18 · VGT-100 安全加固认证（`48/52 PASS, 0 FAIL`）、GeDefense Light 供应链防御与 YouTube 播放修复里程碑版本。  
+> **状态：** `PLATIN` · 版本 `0.2.4` · 截至 2026-11-18 · **Antipisher by GeDefense** 深海蓝玻璃版本、VGT-100 安全加固认证（`48/52 PASS, 0 FAIL`）、GeDefense Light 供应链防御与 YouTube 播放修复。  
 > **非最终应用商店发行版：** 浏览器自动化端到端测试（E2E）、应用商店官方上架审核、签名更新分发流与完整的 V2 图引擎正在持续演进中（详见 [已知边界与限制](#已知边界与限制)）。
 
-### ⬇️ 直接下载 (`v0.2.3-alpha`)
+### ⬇️ 直接下载 (`v0.2.4-alpha`)
 
-| 浏览器 | ZIP 直接下载 | 校验和与发布页 |
+| 浏览器 | ZIP 直接下载 (GitHub) | 校验和、发布页与镜像 |
 |---|---|---|
-| **Google Chrome (MV3)** | [**下载 Antipisher-Chrome-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip) | [Chrome 发布页 & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha) |
-| **Mozilla Firefox (MV3)** | [**下载 Antipisher-Firefox-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip) | [Firefox 发布页 & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha) |
-| **完整发布与源码** | [**v0.2.3-alpha 发布总览**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha) | [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
+| **Google Chrome (MV3)** | [**下载 Antipisher-Chrome-v0.2.4-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.4-alpha/Antipisher-Chrome-v0.2.4-alpha.zip) | [Chrome 发布页 & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.4-alpha) |
+| **Mozilla Firefox (MV3)** | [**下载 Antipisher-Firefox-v0.2.4-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.4-alpha/Antipisher-Firefox-v0.2.4-alpha.zip) | [Firefox 发布页 & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.4-alpha) |
+| **完整发布与镜像** | [**v0.2.4-alpha 发布总览 (GitHub)**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.4-alpha) | [GitFlic 镜像与发布](https://gitflic.ru/project/visiongaiatechnology/antipisher) · [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
 
 ---
 
-## 🛡️ `v0.2.3` 安全更新与实战案例分析（供应链攻击）
+## 🛡️ 安全更新 (`v0.2.3` – `v0.2.4`) 与实战案例分析（供应链攻击）
 
-### 🔒 核心安全更新 (`0.2.3` — Platin Security Hardened)
+### 🎨 `0.2.4` 新增亮点（Antipisher by GeDefense）
+- **全新 GeDefense 品牌标识与托盘图标：** 在扩展清单、四语本地化（`EN/DE/RU/ZH`）、弹窗、设置页、拦截警告页、Self-XSS 控制台横幅与页面表单防御中全面升级为 **Antipisher by GeDefense**，并配备 GeDefense 盾徽托盘图标（`16×16`、`48×48`、`128×128`）。
+- **深海蓝（Dark Navy Blue）玻璃界面：** 采用 `#040914` – `#0b1830` 深海蓝底色搭配 `#38bdf8` / `#0ea5e9` 青蓝高亮。
+
+### 🔒 核心安全基础 (`0.2.3` — Platin Security Hardened)
 - **GeDefense Light 供应链、Magecart 与剪贴板劫持防御 (`shared/aegis-engine.js`)：**
   - 在 DOM 原型层（`setAttribute`、`HTMLScriptElement.src`、`HTMLIFrameElement.src`、`appendChild`、`insertBefore`）拦截恶意跨域 `<script>`/`<iframe>` 注入（C2 加载器、`.icu`/`.lol` 等高危后缀、裸 IPv4 以及 `eval(atob(...))` / `window._k7` 载荷）。
   - **Anti-Magecart 防窃密守卫：** 拦截向盗刷端点（`/card.php`、`/hit.php`、`/skimmer.php`）发送支付数据的 `navigator.sendBeacon` 和 `window.fetch` 请求。

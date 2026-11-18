@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Antipisher",
+    "message": "Antipisher by GeDefense",
     "description": "Name der Erweiterung."
   },
   "appShortName": {
@@ -8,11 +8,11 @@
     "description": "Kurzname für die Symbolleiste."
   },
   "appDesc": {
-    "message": "Lokaler Offline-Schutz vor Phishing, gefälschten Domains, IDN-Homographen und Typosquatting. Alpha 0.1.",
+    "message": "Antipisher by GeDefense — Lokaler Offline-Schutz vor Phishing, Homographen, Trackern und Supply-Chain-Skripten.",
     "description": "Beschreibung der Erweiterung."
   },
   "actionTitle": {
-    "message": "Antipisher Domain Trust",
+    "message": "Antipisher by GeDefense",
     "description": "Tooltip für das Browser-Icon."
   }
 }
