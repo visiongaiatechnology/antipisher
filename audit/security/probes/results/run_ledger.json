@@ -1,13 +1,13 @@
 ﻿[
     {
         "id":  "TR-01-baseline-tests",
-        "command":  "node --test tests/detector.test.cjs tests/chrome-worker.test.cjs tests/firefox-worker.test.cjs",
+        "command":  "node --test tests/ad-shield.test.cjs tests/aegis.test.cjs tests/chrome-worker.test.cjs tests/detector.test.cjs tests/firefox-worker.test.cjs tests/gedefense.test.cjs tests/i18n.test.cjs tests/options-whitelist.test.cjs tests/p0-regressions.test.cjs tests/platin-security.test.cjs tests/shield-content.test.cjs tests/tracker-shield.test.cjs tests/v2-scoring.test.cjs",
         "exit_code":  0,
         "log":  "audit/security/probes/logs/baseline_tests.log"
     },
     {
         "id":  "TR-02-syntax-check",
-        "command":  "node --check chrome/background.js \u0026\u0026 node --check firefox/background.js \u0026\u0026 node --check chrome/guard.js \u0026\u0026 node --check chrome/popup.js \u0026\u0026 node --check shared/detector.js \u0026\u0026 node --check shared/sites.js",
+        "command":  "node --check chrome/background.js \u0026\u0026 node --check firefox/background.js \u0026\u0026 node --check chrome/guard.js \u0026\u0026 node --check chrome/popup.js \u0026\u0026 node --check shared/detector.js \u0026\u0026 node --check shared/sites.js \u0026\u0026 node --check shared/shield-content.js \u0026\u0026 node --check shared/aegis-engine.js",
         "exit_code":  0,
         "log":  "audit/security/probes/logs/syntax_check.log"
     },
@@ -79,7 +79,7 @@
     },
     {
         "id":  "TR-12-matrix-validate",
-        "command":  "python \"C:\\Users\\Masterboard\\.dsh\\skills\\vgt-security-master\\scripts\\validate_audit.py\" audit/security/AUDIT_MATRIX.json",
+        "command":  "python \"C:\\Users\\Masterboard\\.gemini\\config\\skills\\vgt-security-master\\scripts\\validate_audit.py\" audit/security/AUDIT_MATRIX.json",
         "exit_code":  0,
         "log":  "audit/security/probes/logs/validate_audit.log"
     }

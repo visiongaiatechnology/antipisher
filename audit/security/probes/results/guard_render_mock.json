@@ -1,6 +1,6 @@
 {
   "probe": "probe06_guard_render_mock",
-  "timestamp_utc": "2026-10-18T15:35:32.958Z",
+  "timestamp_utc": "2026-11-18T09:08:43.681Z",
   "environment": "Node v24.13.0 vm-Sandbox mit DOM-Stub (kein echter Browser)",
   "assertions_total": 38,
   "assertions_failed": 0,
@@ -28,7 +28,7 @@
     {
       "name": "blocked:reason-mapped",
       "ok": true,
-      "detail": "Die Domain imitiert den geschützten Markennamen mit abweichender Schreibweise oder Zeichenersetzungen."
+      "detail": "Die Domain imitiert einen Markennamen mit abweichender Schreibweise oder Zeichenersetzung."
     },
     {
       "name": "xss:no-innerHTML-writes",

@@ -1,0 +1,347 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-01-01T00:00:00Z",
+    "component": {
+      "type": "application",
+      "name": "antipisher",
+      "version": "0.2.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-only"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "file",
+      "name": "_locales/de/messages.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "_locales/en/messages.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "_locales/ru/messages.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "_locales/zh_CN/messages.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "background.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5f38878e2579342e5abda040b9a52d090669c824d0018be74581668162bf2b4d"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "design-tokens.css",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "guard.css",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "guard.html",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "guard.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "10fb063b3a1905d76aa7103210b4a24c683a5e5b33faf3c15717ff7bc0ee73af"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "icons/icon128.png",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "129a509b0a3f68f027c38f33165f05a922d3ab625a456773f2cca5573791a979"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "icons/icon16.png",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "97ef5347cbb1cb1d05f186c414e4f646de7647b10d9975a9b12c9cf70f70baa8"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "icons/icon48.png",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3871c2b87e3f1310b6e9879a2c02793d4f43adba045f81fc550d42e65cf9f71a"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "manifest.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "970b3ed6d3c093f7eb2314522aaf9f565508a26bd9e26dff5cdb796353b4bdc9"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "options.css",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "options.html",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "options.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "popup.css",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "popup.html",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "popup.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a7f9883a0389787d67e9cbf11a4aa7db7987c019f80802958631e96c1b7f564a"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "rulesets/trackers.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fb7142af3be1f9360e03c38de1f1215c5486abef3b68a8907720a2cfff10f130"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "shared/aegis-engine.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "shared/detector.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "shared/i18n.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "shared/shield-content.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "shared/sites.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5d993720d19c846e8a44e91d755df3583b937481e8ee673db21e45ad8e3bd3db"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "chrome/background.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5f38878e2579342e5abda040b9a52d090669c824d0018be74581668162bf2b4d"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "firefox/background.js",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a2419f96c90d30235234312f2f95339a1206adcd385a33f7212c621af31d0cf7"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "chrome/manifest.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "970b3ed6d3c093f7eb2314522aaf9f565508a26bd9e26dff5cdb796353b4bdc9"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "firefox/manifest.json",
+      "version": "0.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "61105fd6ab4bbec0b38cb829b39da55ab1a644e7c7a0d32e194cebfaacd6c599"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "antipisher@0.2.3",
+      "dependsOn": []
+    }
+  ]
+}

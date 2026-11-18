@@ -21,3 +21,13 @@ node_modules/
 *.tmp
 *.log
 _metadata/
+
+# Internal agent handoff & session notes (vgt-github-pusher policy)
+Next.md
+NEXT.md
+HANDOFF.md
+SESSION_NOTES.md
+CURRENT_TASK.md
+AGENT_NOTES.md
+WORKLOG.md
+*.local.*

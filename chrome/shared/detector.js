@@ -1,7 +1,7 @@
 /*
- * Antipisher 0.1 (Alpha): Advanced Offline Anti-Phishing & Homograph Detector
+ * Antipisher 0.2.3 (Platin Security Hardened): Advanced Offline Anti-Phishing & Homograph Detector
  * Licensed under the GNU Affero General Public License v3.0 (AGPLv3)
- * VisionGaiaTechnology · Intelligence Master · Diamant VGT Supreme Quality Gate
+ * VisionGaiaTechnology · Intelligence Master · Platin VGT Supreme Quality Gate
  * No remote requests, no telemetry, no tracking. High-performance deterministic engine.
  */
 (() => {
@@ -75,7 +75,15 @@
   }
 
   // Words that are legitimate dictionary terms frequently used as generic corporate subdomains
-  const genericSubdomains = new Set(['office', 'line', 'medium', 'zoom', 'notion', 'target']);
+  const genericSubdomains = new Set([
+    'office', 'line', 'medium', 'zoom', 'notion', 'target',
+    'box', 'signal', 'wise', 'cursor', 'gemini', 'temu', 'visa'
+  ]);
+
+  // Common legitimate dictionary words that lie at edit-distance 1 from short 4-5 letter brands
+  const legitDictionaryWords = new Set([
+    'apply', 'applet', 'blocks', 'boxen', 'overs', 'visum', 'firma', 'firmen'
+  ]);
 
   // Phishing bait vocabulary (English + German/EU). Deliberately broader than the
   // former test-case tokens; matching is token- and fuzzy-based (see isBaitToken),
@@ -107,7 +115,7 @@
     'schnell', 'lieferung', 'bestellung', 'abholung', 'retoure', 'umtausch',
     'anmeldung', 'abmeldung', 'registrierung', 'aktivierung', 'freischaltung',
     'termin', 'bescheid', 'entsperren', 'gutschein', 'abo', 'sperre',
-    'paketstation', 'sendungsverfolgung', 'kyc'
+    'paketstation', 'sendungsverfolgung', 'kyc', 'coin', 'coins', 'live'
   ]);
 
   // TLD tokens that attackers concatenate with a brand (paypalcom.net, sparkassede.de).
@@ -126,7 +134,7 @@
   ];
 
   function punycodeDecode(label) {
-    if (!label.startsWith('xn--')) return label;
+    if (typeof label !== 'string' || label.length > 63 || !label.startsWith('xn--')) return label;
     const src = label.slice(4);
     let n = 128, i = 0, bias = 72, result = [];
     const cut = src.lastIndexOf('-');
@@ -228,15 +236,15 @@
   }
 
   // Bait matching is deliberate fuzzy: exact token, skeleton/leet spelling, or
-  // Damerau-Levenshtein-1 to a >=4-letter bait word. This generalises to unknown
+  // Damerau-Levenshtein-1 to a >=5-letter bait word. This generalises to unknown
   // compounds without appending fixture tokens to the lexicon.
   const baitSkeletons = [...new Set([...words].map(w => skeleton(w)))];
   function isBaitToken(value) {
-    if (!value) return false;
+    if (!value || value.length > 63) return false;
     const s = skeleton(value);
     if (words.has(value) || baitSkeletons.includes(s)) return true;
-    if (s.length < 4) return false;
-    return baitSkeletons.some(w => w.length >= 4 && damerauDistanceOne(s, w));
+    if (s.length < 5) return false;
+    return baitSkeletons.some(w => w.length >= 5 && damerauDistanceOne(s, w));
   }
 
   function isTranspositionOne(a, b) {
@@ -315,7 +323,15 @@
     return labels.length - 2;
   }
 
+  // RFC 1035 / DNS & URL resource bounds (VGT-020 DoS prevention)
+  const MAX_URL_INPUT_LEN = 262144;
+  const MAX_HOST_LEN = 253;
+  const MAX_LABEL_LEN = 63;
+  const MAX_LABELS = 32;
+  const MAX_PATH_SCAN_LEN = 2048;
+
   function validPublicUrl(input) {
+    if (typeof input !== 'string' || input.length === 0 || input.length > MAX_URL_INPUT_LEN) return null;
     try {
       const u = new URL(input);
       if (!['http:', 'https:'].includes(u.protocol) || !u.hostname) return null;
@@ -511,11 +527,40 @@
     return false;
   }
 
+  const genericLikeCctld = new Set(['co', 'io', 'me', 'tv', 'cc', 'ws', 'ai', 'ly', 'to', 'fm', 'gg']);
+
   function classify(input, options) {
     const url = validPublicUrl(input);
     if (!url) return formatVerdict({ status: 'skip' });
 
     const host = url.hostname.toLowerCase().replace(/\.$/, '');
+
+    // Check for bidirectional override characters early on bounded slices (UTS #39 / RFC 8264)
+    const boundedHost = host.length > 512 ? host.slice(0, 512) : host;
+    const boundedHref = url.href.length > 4096 ? url.href.slice(0, 4096) : url.href;
+    const boundedInput = input.length > 4096 ? input.slice(0, 4096) : input;
+    let decodedUrlStr = '';
+    try { decodedUrlStr = decodeURI(boundedHref); } catch {}
+    const bidiInHost = bidiStrongRegex.test(boundedHost) || bidiWeakRegex.test(boundedHost);
+    const bidiStrong = bidiStrongRegex.test(boundedHref) || bidiStrongRegex.test(boundedInput) || bidiStrongRegex.test(decodedUrlStr);
+    if (bidiInHost || bidiStrong) {
+      return formatVerdict({
+        status: 'block',
+        action: 'block',
+        host: host.slice(0, MAX_HOST_LEN),
+        site: { name: 'Sicherheitswarnung', domains: ['Bidi-Override erkannt'] },
+        official: 'Bidi-Override erkannt',
+        reason: 'bidi-override',
+        weight: 120,
+        decodedHost: host.slice(0, MAX_HOST_LEN),
+        isIDN: /[^\x00-\x7F]/.test(boundedHost)
+      });
+    }
+
+    // Enforce RFC 1035 DNS hostname and label length budget before per-brand loops (VGT-020)
+    if (host.length > MAX_HOST_LEN) {
+      return formatVerdict({ status: 'skip', host: host.slice(0, MAX_HOST_LEN) });
+    }
 
     // User-configured Whitelist exemption: trusted domains are never flagged
     if (isWhitelisted(host, options)) {
@@ -526,7 +571,7 @@
     // Skip this on the brand's own official domains (e.g. https://paypal@paypal.com/)
     // to avoid false positives for legitimate userinfo on official hosts.
     if ((url.username || url.password) && !isOfficialHost(host)) {
-      const rawUserinfo = (url.username + ':' + url.password).toLowerCase();
+      const rawUserinfo = (url.username.slice(0, 256) + ':' + url.password.slice(0, 256)).toLowerCase();
       let decodedUserinfo = rawUserinfo;
       try { decodedUserinfo = decodeURIComponent(rawUserinfo); } catch {}
       const impersonated = sites.find(site => {
@@ -535,10 +580,10 @@
           const regex = new RegExp('(?:^|[^a-z0-9.-])' + escapedD + '(?:$|[^a-z0-9.-])');
           if (regex.test(rawUserinfo) || regex.test(decodedUserinfo)) return true;
         }
-        // Only a username that is exactly the brand is treated as deception. A brand
-        // word in the password (user:paypal@example.com) is not domain impersonation.
-        const usernameLower = url.username.toLowerCase();
-        if (site.brand.length >= 4 && usernameLower === site.brand) return true;
+        // Only a passwordless username that is exactly the brand is treated as deception.
+        // A user:password@ pair without a domain dot or a brand word in the password is not domain impersonation.
+        const usernameLower = url.username.slice(0, 256).toLowerCase();
+        if (!url.password && site.brand.length >= 4 && usernameLower === site.brand) return true;
         return false;
       });
       if (impersonated) {
@@ -566,6 +611,9 @@
     }
 
     const labels = host.split('.');
+    if (labels.length > MAX_LABELS || labels.some(l => l.length > MAX_LABEL_LEN)) {
+      return formatVerdict({ status: 'skip', host });
+    }
     if (labels.length < 2 || /^\d+(?:\.\d+){3}$/.test(host) || host.includes(':')) {
       return formatVerdict({ status: 'safe', host, decodedHost: host, isIDN: false });
     }
@@ -590,28 +638,33 @@
       }
     }
 
-    // Check for bidirectional override characters (UTS #39 / RFC 8264 Bidi spoofing).
-    // Weak RTL marks in paths/queries are legitimate; strong overrides never are.
-    let decodedUrlStr = '';
-    try { decodedUrlStr = decodeURI(url.href); } catch {}
-    const bidiInHost = bidiStrongRegex.test(host) || bidiWeakRegex.test(host);
-    const bidiStrong = bidiStrongRegex.test(url.href) || bidiStrongRegex.test(input) || bidiStrongRegex.test(decodedUrlStr);
-    if (bidiInHost || bidiStrong) {
-      return formatVerdict({
-        status: 'block',
-        action: 'block',
-        host,
-        site: { name: 'Sicherheitswarnung', domains: ['Bidi-Override erkannt'] },
-        official: 'Bidi-Override erkannt',
-        reason: 'bidi-override',
-        weight: 120,
-        decodedHost: decoded.join('.'),
-        isIDN: hasUnicode
-      });
-    }
-
     const baseIndex = domainBaseIndex(labels);
     const isMultiTenant = multiTenantSuffixes.some(suf => withinDomain(host, suf));
+
+    // Precompute per-label normalized forms once per URL (avoids 187x redundant NFKD/skeleton work)
+    const labelCache = new Array(baseIndex + 1);
+    for (let j = 0; j <= baseIndex; j++) {
+      const original = decoded[j].toLowerCase();
+      const sk = skeleton(original);
+      const normalized = original.normalize('NFKC');
+      const normalizedNoHyphen = normalized.replace(/-/g, '');
+      const isNonAscii = /[^\x00-\x7F]/.test(original);
+      const hasTableChar = [...original].some(ch => Object.prototype.hasOwnProperty.call(homoglyphs, ch));
+      const ligature = original.replace(/rn/g, 'm').replace(/vv/g, 'w').replace(/cl/g, 'd');
+      const ligatureSkeleton = ligature !== original ? skeleton(ligature) : sk;
+      const skLigated = sk.replace(/rn/g, 'm').replace(/vv/g, 'w').replace(/cl/g, 'd');
+      const segments = original.split(/[-_.]/).filter(Boolean);
+      const segmentSkeletons = segments.map(skeleton);
+      const segmentLigated = segmentSkeletons.map(s => s.replace(/rn/g, 'm').replace(/vv/g, 'w').replace(/cl/g, 'd'));
+      const hasBaitOrWww = segments.some(isBaitToken) || segments.includes('www');
+      const prevIsBait = j > 0 && isBaitToken(decoded[j - 1]);
+      const nextIsBait = j < decoded.length - 2 && isBaitToken(decoded[j + 1]);
+      labelCache[j] = {
+        original, sk, normalized, normalizedNoHyphen, isNonAscii, hasTableChar,
+        ligature, ligatureSkeleton, skLigated, segments, segmentSkeletons, segmentLigated,
+        hasBaitOrWww, prevIsBait, nextIsBait, skI: sk.replace(/l/g, 'i')
+      };
+    }
 
     for (const site of sites) {
       // If the host is legitimately within one of the site's official domains:
@@ -620,7 +673,8 @@
       }
 
       const brand = site.brand;
-      const brandSkeleton = skeleton(brand);
+      const brandSkeleton = site._brandSkeleton || (site._brandSkeleton = skeleton(brand));
+      const brandSkeletonI = site._brandSkeletonI || (site._brandSkeletonI = brandSkeleton.replace(/l/g, 'i'));
       let reason = null, weight = 0, action = null;
 
       // An official domain hidden inside an unrelated host: e.g. paypal.com.attacker.com
@@ -653,20 +707,18 @@
 
       for (let j = 0; j <= baseIndex; j++) {
         const isBase = (j === baseIndex);
-        const original = decoded[j].toLowerCase();
-        const sk = skeleton(original);
-        const normalized = original.normalize('NFKC');
-        const isExactBrand = (original === brand || normalized.replace(/-/g, '') === brand);
+        const lc = labelCache[j];
+        const original = lc.original;
+        const sk = lc.sk;
+        const isExactBrand = (original === brand || lc.normalizedNoHyphen === brand);
 
         // 1. Lookalike unicode substitutions or diacritics matching brand skeleton
         if (sk === brandSkeleton && original !== brand) {
-          const hasTableChar = [...original].some(ch => Object.prototype.hasOwnProperty.call(homoglyphs, ch));
-          const isNonAscii = /[^\x00-\x7F]/.test(original);
           // For brands >= 5 chars any non-ASCII skeleton collision is treated as a
           // homograph/diacritic spoof (e.g. p\u00e4ypal, appl\u00e8, m\u00efcrosoft). Short
           // brands stay table-only to avoid blocking legitimate words like "über".
-          if (hasTableChar || (isNonAscii && (brandSkeleton.length >= 5 || !legitDiacriticWords.has(sk)))) {
-            reason = isNonAscii ? 'unicode' : 'brand-variant';
+          if (lc.hasTableChar || (lc.isNonAscii && (brandSkeleton.length >= 5 || !legitDiacriticWords.has(sk)))) {
+            reason = lc.isNonAscii ? 'unicode' : 'brand-variant';
             weight = 110;
             break;
           }
@@ -687,8 +739,9 @@
             // exact brand + ccTLD is treated as official (data completes over time);
             // ccTLDs that are commonly re-registered like gTLDs (co, io, me, tv, ...)
             // are excluded and stay at warning level.
-            const genericLikeCctld = new Set(['co', 'io', 'me', 'tv', 'cc', 'ws', 'ai', 'ly', 'to', 'fm', 'gg']);
-            const officialCcTldCount = site.domains.filter(d => /\.[a-z]{2}$/i.test(d)).length;
+            const officialCcTldCount = site._ccTldCount !== undefined
+              ? site._ccTldCount
+              : (site._ccTldCount = site.domains.filter(d => /\.[a-z]{2}$/i.test(d)).length);
             if (isCcTld && !genericLikeCctld.has(tld) && officialCcTldCount >= 3) {
               return formatVerdict({ status: 'safe', host, decodedHost: decoded.join('.'), isIDN: hasUnicode });
             }
@@ -698,7 +751,7 @@
             break;
           } else {
             // Brand appears as a subdomain (e.g. apple.attacker.com or paypal.github.io)
-            if (!genericSubdomains.has(brand) || isMultiTenant) {
+            if ((brand.length >= 4 && !genericSubdomains.has(brand)) || isMultiTenant) {
               reason = 'foreign-domain';
               weight = 100;
               break;
@@ -707,43 +760,47 @@
         }
 
         // Visual ligatures: e.g. "rn" resembling "m" (arnazon.com, rnicrosoft.com)
-        if (isBase) {
-          const ligature = original.replace(/rn/g, 'm').replace(/vv/g, 'w').replace(/cl/g, 'd');
-          if (ligature !== original && skeleton(ligature) === brandSkeleton) {
-            reason = 'brand-variant';
-            weight = 105;
-            break;
-          }
+        if (isBase && lc.ligature !== original && lc.ligatureSkeleton === brandSkeleton) {
+          reason = 'brand-variant';
+          weight = 105;
+          break;
         }
 
-        // 3. Credential bait words appended (with separator or directly concatenated)
-        const segments = original.split(/[-_.]/).filter(Boolean);
-        const segmentSkeletons = segments.map(skeleton);
-        const matchesBrandSegment = segments.some((s, idx) => {
-          if (s === brand || segmentSkeletons[idx] === brandSkeleton) return true;
-          // Brand used as prefix of a longer segment (microsoft365, amazonprime, appleid).
-          if (s.length > brand.length && s.startsWith(brand)) return true;
-          // Visual ligatures inside a segment (arnazon-login -> amazon-login).
-          const ligated = segmentSkeletons[idx].replace(/rn/g, 'm').replace(/vv/g, 'w').replace(/cl/g, 'd');
-          if (ligated === brandSkeleton) return true;
-          if (s.length >= 4 && brand.length >= 4 && damerauDistanceOne(segmentSkeletons[idx], brandSkeleton)) return true;
-          return false;
-        });
-        if (matchesBrandSegment && (segments.some(isBaitToken) || segments.includes('www'))) {
+        // Official domain hyphenated as registrable label (e.g. paypal-me.com for paypal.me)
+        if (isBase && original.includes('-') && site.domains.some(d => original === d.replace(/\./g, '-'))) {
           reason = 'credential-bait';
           weight = 98;
           break;
+        }
+
+        // 3. Credential bait words appended (with separator or directly concatenated)
+        const segments = lc.segments;
+        const segmentSkeletons = lc.segmentSkeletons;
+        if (lc.hasBaitOrWww) {
+          const matchesBrandSegment = segments.some((s, idx) => {
+            if (s === brand || segmentSkeletons[idx] === brandSkeleton) return true;
+            // Brand used as prefix of a longer segment (microsoft365, amazonprime, appleid).
+            if (s.length > brand.length && s.startsWith(brand)) return true;
+            // Visual ligatures inside a segment (arnazon-login -> amazon-login).
+            if (lc.segmentLigated[idx] === brandSkeleton) return true;
+            if (s.length >= 4 && brand.length >= 4 && damerauDistanceOne(segmentSkeletons[idx], brandSkeleton)) return true;
+            return false;
+          });
+          if (matchesBrandSegment) {
+            reason = 'credential-bait';
+            weight = 98;
+            break;
+          }
         }
 
         // Brand-like subdomain labels (e.g. rnicrosoft.evil.test, microsoft365.evil.test).
         // Generic dictionary brands and hyphenated documentation labels keep their
         // subdomain exemption to avoid false positives (mail.proton.me, paypal-guides.*).
         if (!isBase && brand.length >= 4 && !genericSubdomains.has(brand) &&
-            !original.includes('-') && !brandLabels.has(original)) {
-          const ligated = sk.replace(/rn/g, 'm').replace(/vv/g, 'w').replace(/cl/g, 'd');
+            !original.includes('-') && !brandLabels.has(original) && !legitDictionaryWords.has(original)) {
           const sameLength = original.length === brand.length;
           if (original.startsWith(brand) || sk.startsWith(brandSkeleton) ||
-              ligated === brandSkeleton || (sameLength && damerauDistanceOne(sk, brandSkeleton))) {
+              lc.skLigated === brandSkeleton || (sameLength && brand.length >= 6 && damerauDistanceOne(sk, brandSkeleton))) {
             reason = 'foreign-domain';
             weight = 100;
             break;
@@ -789,12 +846,12 @@
         }
 
         // Also check if adjacent subdomain labels combine brand + bait word
-        if (j > 0 && (original === brand || sk === brandSkeleton) && isBaitToken(decoded[j - 1])) {
+        if (lc.prevIsBait && (original === brand || sk === brandSkeleton)) {
           reason = 'credential-bait';
           weight = 97;
           break;
         }
-        if (j < decoded.length - 2 && (original === brand || sk === brandSkeleton) && isBaitToken(decoded[j + 1])) {
+        if (lc.nextIsBait && (original === brand || sk === brandSkeleton)) {
           reason = 'credential-bait';
           weight = 97;
           break;
@@ -802,8 +859,8 @@
 
         // Visual substitution of lowercase 'l' for 'i' (vlsa -> VISA, lng -> ING).
         // 3-letter brands stay warning-level to avoid hard-blocking legitimate words.
-        if (brand.length >= 3 && original.length === brand.length && !brandLabels.has(original)) {
-          if (sk.replace(/l/g, 'i') === brandSkeleton.replace(/l/g, 'i') && sk !== brandSkeleton) {
+        if (brand.length >= 3 && original.length === brand.length && !brandLabels.has(original) && !legitDictionaryWords.has(original)) {
+          if (lc.skI === brandSkeletonI && sk !== brandSkeleton) {
             reason = 'brand-variant';
             weight = brand.length >= 4 ? 100 : 84;
             break;
@@ -811,7 +868,8 @@
         }
 
         // 4. Bitsquatting: block for brands >=5, warning for 3-4 letter brands.
-        if (isBase && brand.length >= 3 && original.length === brand.length && !brandLabels.has(original)) {
+        if (isBase && brand.length >= 3 && original.length === brand.length &&
+            !brandLabels.has(original) && !legitDictionaryWords.has(original)) {
           if (isBitFlip(original, brand) || isBitFlip(sk, brandSkeleton)) {
             reason = 'bitsquat';
             weight = brand.length >= 5 ? 94 : 84;
@@ -822,6 +880,7 @@
         // 5. Typosquatting via Damerau-Levenshtein 1. For 3-letter brands only an
         // adjacent transposition (dbk -> dkb) is used; 4-letter brands warn.
         if (isBase && original.length >= 3 && !brandLabels.has(original) &&
+            !legitDictionaryWords.has(original) &&
             Math.abs(original.length - brand.length) <= 1) {
           const isTypo = brand.length >= 4
             ? damerauDistanceOne(sk, brandSkeleton)
@@ -845,6 +904,7 @@
         // 6. Two-edit lookalikes for longer brands are warning-level (peypel, geegle,
         // sparkazze) instead of being silently accepted.
         if (isBase && brand.length >= 6 && !brandLabels.has(original) &&
+            !legitDictionaryWords.has(original) &&
             original.length >= brand.length - 1 &&
             original.length <= brand.length + 1 && distanceAtMostTwo(original, brand)) {
           reason = 'typosquat';
@@ -873,8 +933,8 @@
     // auth/verification action segment. Article slugs such as
     // "how-to-fix-paypal-login" no longer match, query strings are ignored
     // (search engines) and there is no /blog|docs exemption that attackers can prepend.
-    const pathLower = url.pathname.toLowerCase();
-    const pathSegments = pathLower.split('/').filter(Boolean);
+    const pathLower = url.pathname.slice(0, MAX_PATH_SCAN_LEN).toLowerCase();
+    const pathSegments = pathLower.split('/').filter(Boolean).slice(0, 32);
     const sensitiveActions = new Set([
       'login', 'logon', 'signin', 'sign-in', 'log-in', 'auth', 'authentication',
       'verify', 'verification', 'password', 'passwort', 'reset-password', 'reset',

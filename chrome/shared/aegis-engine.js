@@ -499,18 +499,24 @@
     } catch { /* ignore */ }
   };
 
-  // 8. Beacon & Telemetry Defusal
+  // 8. Beacon & Telemetry Defusal (+ Anti-Magecart Exfiltration Guard)
+  let isMaliciousResourceUrlRef = () => false;
+
   const injectBeaconDefense = () => {
-    if (!CONFIG.ENABLED || !CONFIG.DEFUSE_TRACKERS || CONFIG.DEFUSE_BEACONS === false || !WIN.navigator || !WIN.navigator.sendBeacon) return;
+    if (!CONFIG.ENABLED || !WIN.navigator || !WIN.navigator.sendBeacon) return;
     try {
       const origSendBeacon = WIN.navigator.sendBeacon.bind(WIN.navigator);
-      const trackingRegex = /(google-analytics|analytics|telemetry|doubleclick|clarity|hotjar|facebook\.com\/tr|stats|collector|event-log|bat\.bing)/i;
+      const trackingRegex = /(google-analytics|analytics|telemetry|doubleclick|clarity|hotjar|facebook\.com\/tr|stats|collector|event-log|bat\.bing|optimizely|1688360\.cc|webshell\.lol|linkforge\.cc|ios-hack\.icu|\/card\.php|\/hit\.php)/i;
 
       const defendedSendBeacon = function(url, data) {
         const urlStr = String(url || '');
-        if (trackingRegex.test(urlStr)) {
+        if (CONFIG.DEFUSE_TRACKERS && CONFIG.DEFUSE_BEACONS !== false && trackingRegex.test(urlStr)) {
           notifyTrackerBlocked('sendBeacon: ' + urlStr);
           return true; // Fake success so telemetry payload is dropped without error
+        }
+        if (CONFIG.GEDEFENSE_LIGHT && isMaliciousResourceUrlRef(urlStr, 'beacon')) {
+          notifyTrackerBlocked('gedefense:magecart-beacon-blocked: ' + urlStr);
+          return true;
         }
         return origSendBeacon(url, data);
       };
@@ -792,25 +798,282 @@
       WIN.Element.prototype.insertAdjacentHTML = hookedInsertAdjacentHTML;
     }
 
-    // Hook setAttribute for protocol injection
-    if (_origSetAttribute) {
-      const hookedSetAttribute = function(name, value) {
-        if (CONFIG.GEDEFENSE_LIGHT && CONFIG.BLOCK_PROTOCOL_INJECTION !== false && typeof name === 'string' && typeof value === 'string') {
-          const lName = name.toLowerCase();
-          if (['href', 'src', 'data', 'formaction'].includes(lName)) {
-            const trimmed = value.trim();
-            if (/^(?:javascript|vbscript):/i.test(trimmed)) {
-              notifyTrackerBlocked('gedefense:attr-protocol');
-              return _origSetAttribute.call(this, name, '#vgt-blocked-protocol');
+      // E. Supply-Chain & Dynamic Script/Iframe Gatekeeper (Anti-Optimizely / Anti-Exploit-Kit)
+      const SUPPLY_CHAIN_IOCS = [
+        '1688360.cc', 'webshell.lol', 'linkforge.cc', 'ios-hack.icu',
+        '5vobauua3ojpklx.icu', 'eil786npto9u5bq.icu', 'l7bcsnwc7nzr3uo.icu',
+        'je4ft3gn8vxudum.icu', 'q1ls1ho9x7wsxlu.icu', 'p55abnw2pnsz0bo.icu',
+        '1y69gy2mdzaltz1.icu', 'gm38duxoihbmy5o.icu'
+      ];
+      const HIGH_RISK_SCRIPT_TLDS = [
+        '.icu', '.lol', '.top', '.xyz', '.click', '.gq', '.cf', '.tk', '.ml', '.ga', '.buzz', '.rest', '.fit'
+      ];
+
+      const isSameOrParentDomain = (targetHost, currentHost) => {
+        if (!targetHost || !currentHost) return false;
+        const t = targetHost.toLowerCase();
+        const c = currentHost.toLowerCase();
+        if (t === c || t.endsWith('.' + c) || c.endsWith('.' + t)) return true;
+        const tParts = t.split('.');
+        const cParts = c.split('.');
+        if (tParts.length >= 2 && cParts.length >= 2) {
+          const tBase = tParts.slice(-2).join('.');
+          const cBase = cParts.slice(-2).join('.');
+          if (tBase === cBase && tBase.length > 4) return true;
+        }
+        return false;
+      };
+
+      const isMaliciousResourceUrl = (rawUrl, tagContext = '') => {
+        if (!CONFIG.GEDEFENSE_LIGHT) return false;
+        if (!rawUrl || typeof rawUrl !== 'string') return false;
+        const trimmed = rawUrl.trim();
+        if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('blob:')) return false;
+
+        if (CONFIG.BLOCK_PROTOCOL_INJECTION !== false && /^(?:javascript|vbscript):/i.test(trimmed)) {
+          return true;
+        }
+
+        const lTag = String(tagContext || '').toLowerCase();
+        if (lTag === 'script' && /^data:/i.test(trimmed) && /(base64|_k7|1688360|webshell|card\.php|eval\()/i.test(trimmed)) {
+          return true;
+        }
+
+        try {
+          const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';
+          const parsed = new URL(trimmed, baseHref);
+          const targetHost = (parsed.hostname || '').toLowerCase();
+          if (!targetHost) return false;
+
+          // 1. Known Supply-Chain IOCs (always blocked)
+          if (SUPPLY_CHAIN_IOCS.some(ioc => targetHost === ioc || targetHost.endsWith('.' + ioc))) {
+            return true;
+          }
+
+          const currentHost = (WIN.location && WIN.location.hostname) ? WIN.location.hostname.toLowerCase() : '';
+          if (isSameOrParentDomain(targetHost, currentHost)) return false;
+
+          // 2. Cross-origin dynamic script / iframe / exfiltration to high-risk TLDs or raw public IPs
+          const isHighRiskTld = HIGH_RISK_SCRIPT_TLDS.some(tld => targetHost.endsWith(tld));
+          const isSuspiciousNumericCc = /^(?:\d{4,}|[a-z0-9]{12,})\.cc$/i.test(targetHost);
+          const isRawPublicIp = /^\d{1,3}(?:\.\d{1,3}){3}$/.test(targetHost) &&
+                                !/^(?:127\.|10\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.)/.test(targetHost);
+          const isSkimmerEndpoint = /\/(?:card|hit|skimmer|collect_card|gate)\.php$/i.test(parsed.pathname || '');
+
+          if (isHighRiskTld || isSuspiciousNumericCc || isRawPublicIp || (isSkimmerEndpoint && targetHost !== currentHost)) {
+            return true;
+          }
+        } catch {
+          // Ignore malformed relative URLs
+        }
+        return false;
+      };
+
+      const hasSensitivePaymentOrAuthInputs = () => {
+        if (!DOC || typeof DOC.querySelector !== 'function') return false;
+        try {
+          return Boolean(DOC.querySelector(
+            'input[type="password"], input[autocomplete*="cc-"], input[name*="card" i], input[name*="cvv" i], input[name*="cvc" i], input[id*="card" i], input[id*="cvv" i]'
+          ));
+        } catch {
+          return false;
+        }
+      };
+
+      const containsSensitiveCardOrAuthData = (payload) => {
+        if (!payload) return false;
+        try {
+          let str = '';
+          if (typeof payload === 'string') {
+            str = payload;
+          } else if (typeof URLSearchParams !== 'undefined' && payload instanceof URLSearchParams) {
+            str = payload.toString();
+          } else if (typeof payload === 'object') {
+            str = JSON.stringify(payload);
+          }
+          if (!str || str.length < 8) return false;
+          const hasCardDigits = /\b(?:\d[ -]*?){13,19}\b/.test(str);
+          const hasCardKeywords = /(?:card_?number|cc_?num|cvv|cvc|exp_?date|expiry|pan|password|passwd)/i.test(str);
+          return hasCardDigits || hasCardKeywords;
+        } catch {
+          return false;
+        }
+      };
+
+      // Hook setAttribute for protocol injection & supply-chain script/iframe sources
+      if (_origSetAttribute) {
+        const hookedSetAttribute = function(name, value) {
+          if (CONFIG.GEDEFENSE_LIGHT && typeof name === 'string' && typeof value === 'string') {
+            const lName = name.toLowerCase();
+            const tagName = (this && this.nodeName) ? String(this.nodeName).toLowerCase() : '';
+            if (['href', 'src', 'data', 'formaction', 'action'].includes(lName)) {
+              const trimmed = value.trim();
+              if (CONFIG.BLOCK_PROTOCOL_INJECTION !== false && /^(?:javascript|vbscript):/i.test(trimmed)) {
+                notifyTrackerBlocked('gedefense:attr-protocol');
+                return _origSetAttribute.call(this, name, '#vgt-blocked-protocol');
+              }
+              if ((lName === 'src' || lName === 'data' || lName === 'formaction' || lName === 'action') &&
+                  isMaliciousResourceUrl(trimmed, tagName)) {
+                notifyTrackerBlocked('gedefense:supply-chain-blocked:' + trimmed);
+                return _origSetAttribute.call(this, name, 'about:blank#vgt-blocked-supply-chain');
+              }
             }
           }
-        }
-        return _origSetAttribute.call(this, name, value);
+          return _origSetAttribute.call(this, name, value);
+        };
+        cloak(hookedSetAttribute, _origSetAttribute, 'setAttribute');
+        WIN.Element.prototype.setAttribute = hookedSetAttribute;
+      }
+
+      // Hook HTMLScriptElement.prototype.src and HTMLIFrameElement.prototype.src property setters
+      const hookSrcProperty = (Ctor, tagLabel) => {
+        if (!Ctor || !Ctor.prototype) return;
+        const desc = getDescriptor(Ctor.prototype, 'src');
+        if (!desc || !desc.set) return;
+        const origSet = desc.set;
+        const hookedSet = function(val) {
+          if (CONFIG.GEDEFENSE_LIGHT && isMaliciousResourceUrl(String(val || ''), tagLabel)) {
+            notifyTrackerBlocked(`gedefense:${tagLabel}-src-blocked:` + String(val || ''));
+            return;
+          }
+          return origSet.call(this, val);
+        };
+        cloak(hookedSet, origSet, 'set src');
+        try {
+          Object.defineProperty(Ctor.prototype, 'src', {
+            get: desc.get,
+            set: hookedSet,
+            configurable: true,
+            enumerable: true
+          });
+        } catch {}
       };
-      cloak(hookedSetAttribute, _origSetAttribute, 'setAttribute');
-      WIN.Element.prototype.setAttribute = hookedSetAttribute;
-    }
-  };
+      hookSrcProperty(WIN.HTMLScriptElement, 'script');
+      hookSrcProperty(WIN.HTMLIFrameElement, 'iframe');
+
+      // Hook Node.prototype.appendChild & insertBefore to inspect dynamically injected <script> / <iframe> nodes
+      if (WIN.Node && WIN.Node.prototype) {
+        const inspectInjectedNode = (node) => {
+          if (!CONFIG.GEDEFENSE_LIGHT || !node) return false;
+          const tag = (node.nodeName || node.tagName || '').toLowerCase();
+          if (tag !== 'script' && tag !== 'iframe' && tag !== 'object' && tag !== 'embed') return false;
+
+          let srcVal = '';
+          try {
+            srcVal = node.src || (typeof node.getAttribute === 'function' ? node.getAttribute('src') : '') || '';
+          } catch {}
+          if (srcVal && isMaliciousResourceUrl(srcVal, tag)) {
+            notifyTrackerBlocked(`gedefense:dom-inject-blocked:${tag}:${srcVal}`);
+            try {
+              if (typeof node.removeAttribute === 'function') node.removeAttribute('src');
+              node.src = 'about:blank#vgt-blocked';
+            } catch {}
+            return true;
+          }
+
+          // Check inline script content for Optimizely-style eval/atob/C2 loader signatures
+          if (tag === 'script') {
+            const code = String(node.textContent || node.innerText || '');
+            if (code && /(?:1688360\.cc|webshell\.lol|ios-hack\.icu|5vobauua3ojpklx\.icu|eil786npto9u5bq\.icu|window\._k7\b|data-channel-code=["']02111110["'])/i.test(code)) {
+              notifyTrackerBlocked('gedefense:inline-loader-blocked');
+              try { node.textContent = '/* blocked by GeDefense Light */'; } catch {}
+              return true;
+            }
+          }
+          return false;
+        };
+
+        const origAppendChild = WIN.Node.prototype.appendChild;
+        if (typeof origAppendChild === 'function') {
+          const hookedAppendChild = function(child) {
+            if (inspectInjectedNode(child)) return child;
+            return origAppendChild.call(this, child);
+          };
+          cloak(hookedAppendChild, origAppendChild, 'appendChild');
+          WIN.Node.prototype.appendChild = hookedAppendChild;
+        }
+
+        const origInsertBefore = WIN.Node.prototype.insertBefore;
+        if (typeof origInsertBefore === 'function') {
+          const hookedInsertBefore = function(newNode, referenceNode) {
+            if (inspectInjectedNode(newNode)) return newNode;
+            return origInsertBefore.call(this, newNode, referenceNode);
+          };
+          cloak(hookedInsertBefore, origInsertBefore, 'insertBefore');
+          WIN.Node.prototype.insertBefore = hookedInsertBefore;
+        }
+      }
+
+      // F. Anti-Magecart Exfiltration Guard (fetch & XMLHttpRequest)
+      try {
+        const origFetch = WIN.fetch;
+        if (typeof origFetch === 'function') {
+          const defendedFetch = async function(input, init) {
+            if (CONFIG.GEDEFENSE_LIGHT) {
+              const urlStr = typeof input === 'string' ? input : (input && input.url) || '';
+              const bodyPayload = (init && init.body) || (input && typeof input === 'object' && input.body) || null;
+              if (urlStr) {
+                if (isMaliciousResourceUrl(urlStr, 'fetch')) {
+                  notifyTrackerBlocked('gedefense:magecart-fetch-blocked:' + urlStr);
+                  const ResponseCtor = (WIN && WIN.Response) || (typeof Response !== 'undefined' ? Response : null);
+                  if (ResponseCtor) return new ResponseCtor('{}', { status: 200, statusText: 'OK' });
+                  return { ok: true, status: 200, json: async () => ({}), text: async () => '' };
+                }
+                if (bodyPayload && hasSensitivePaymentOrAuthInputs() && containsSensitiveCardOrAuthData(bodyPayload)) {
+                  try {
+                    const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';
+                    const parsed = new URL(urlStr, baseHref);
+                    const targetHost = (parsed.hostname || '').toLowerCase();
+                    const currentHost = (WIN.location && WIN.location.hostname) ? WIN.location.hostname.toLowerCase() : '';
+                    if (targetHost && currentHost && !isSameOrParentDomain(targetHost, currentHost) && isMaliciousResourceUrl(urlStr, 'skimmer')) {
+                      notifyTrackerBlocked('gedefense:card-skimmer-exfil-blocked:' + urlStr);
+                      const ResponseCtor = (WIN && WIN.Response) || (typeof Response !== 'undefined' ? Response : null);
+                      if (ResponseCtor) return new ResponseCtor('{}', { status: 200, statusText: 'OK' });
+                    }
+                  } catch {}
+                }
+              }
+            }
+            return origFetch.apply(this, arguments);
+          };
+          cloak(defendedFetch, origFetch, 'fetch');
+          WIN.fetch = defendedFetch;
+        }
+      } catch {}
+
+      // G. Crypto Address Clipper & Clipboard Hijack Guard
+      const CRYPTO_WALLET_REGEX = /\b(?:bc1[ac-hj-np-z02-9]{25,87}|[13][a-km-zA-HJ-NP-Z1-9]{25,34}|0x[a-fA-F0-9]{40}|T[A-Za-z1-9]{33})\b/;
+
+      if (WIN.navigator && WIN.navigator.clipboard && typeof WIN.navigator.clipboard.writeText === 'function') {
+        try {
+          const origWriteText = WIN.navigator.clipboard.writeText.bind(WIN.navigator.clipboard);
+          const defendedWriteText = async function(text) {
+            if (CONFIG.GEDEFENSE_LIGHT && typeof text === 'string' && CRYPTO_WALLET_REGEX.test(text)) {
+              try {
+                const selection = (WIN.getSelection && WIN.getSelection()) ? String(WIN.getSelection().toString()).trim() : '';
+                if (selection && CRYPTO_WALLET_REGEX.test(selection) && selection !== text.trim()) {
+                  notifyTrackerBlocked('gedefense:crypto-clipper-blocked');
+                  return origWriteText(selection);
+                }
+              } catch {}
+            }
+            return origWriteText(text);
+          };
+          cloak(defendedWriteText, origWriteText, 'writeText');
+          try {
+            WIN.navigator.clipboard.writeText = defendedWriteText;
+          } catch {
+            Object.defineProperty(WIN.navigator.clipboard, 'writeText', {
+              value: defendedWriteText,
+              configurable: true,
+              writable: true
+            });
+          }
+        } catch {}
+      }
+
+      isMaliciousResourceUrlRef = isMaliciousResourceUrl;
+    };
 
   // =========================================================================
   // VGT AD SHIELD MODULES (uBlock Origin inspired · 100% Offline)
@@ -1269,26 +1532,36 @@
     } catch {}
 
     // D. Video Ad Accelerator & Auto-Skip Fallback Engine
+    // IMPORTANT: Never rely on static `.ytp-ad-player-overlay` or `.ytp-ad-module` presence
+    // in the DOM, as YouTube keeps those containers persistently in the DOM after an ad ends!
+    // Only accelerate when `#movie_player` explicitly carries `ad-showing` or `ad-interrupting`,
+    // and always restore normal playbackRate (1.0) & mute state once the ad finishes.
     const runAdSkipper = () => {
       if (!DOC) return;
       try {
         const player = DOC.querySelector('#movie_player, .html5-video-player');
         if (player) {
           const isAd = player.classList.contains('ad-showing') || 
-                       player.classList.contains('ad-interrupting') ||
-                       DOC.querySelector('.ytp-ad-player-overlay, .ytp-ad-module') !== null;
+                       player.classList.contains('ad-interrupting');
+          const video = player.querySelector('video') || DOC.querySelector('video');
 
           if (isAd) {
-            const video = player.querySelector('video') || DOC.querySelector('video');
             if (video) {
-              video.muted = true;
-              if (isFinite(video.duration) && video.duration > 0) {
-                video.currentTime = video.duration;
+              if (!video._vgtAdActive) {
+                video._vgtAdActive = true;
+                video._vgtUserRate = (video.playbackRate && video.playbackRate < 8) ? video.playbackRate : 1.0;
+                video._vgtUserMuted = Boolean(video.muted);
               }
+              video.muted = true;
               video.playbackRate = 16.0;
+              // Only jump to the end if duration is finite and below 300s (prevents seeking the
+              // main video stream before YouTube swaps the media source to the ad clip).
+              if (isFinite(video.duration) && video.duration > 0.5 && video.duration <= 300) {
+                video.currentTime = Math.max(0, video.duration - 0.1);
+              }
             }
 
-            const skipBtns = DOC.querySelectorAll([
+            const skipBtns = player.querySelectorAll([
               '.ytp-ad-skip-button',
               '.ytp-ad-skip-button-modern',
               '.ytp-skip-ad-button',
@@ -1303,6 +1576,12 @@
                 notifyTrackerBlocked('adshield:youtube-video-skipped');
               }
             }
+          } else if (video && video._vgtAdActive) {
+            video._vgtAdActive = false;
+            try {
+              video.playbackRate = video._vgtUserRate || 1.0;
+              video.muted = Boolean(video._vgtUserMuted);
+            } catch {}
           }
         }
 
@@ -1369,6 +1648,7 @@
       return CONFIG;
     },
     sanitizeHTML: (s) => sanitizeHTMLRef(s),
+    isMaliciousResourceUrl: (u, tag) => isMaliciousResourceUrlRef(u, tag),
     injectCosmeticCSS,
     removeCosmeticCSS,
     injectAdBlockDefusers,

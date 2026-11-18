@@ -1,8 +1,8 @@
 {
   "probe": "probe04_chrome_background_mock",
-  "timestamp_utc": "2026-10-18T15:35:32.001Z",
+  "timestamp_utc": "2026-11-18T09:08:42.892Z",
   "environment": "Node v24.13.0 vm-Sandbox mit gemockter chrome-API (kein echter Browser)",
-  "assertions_total": 46,
+  "assertions_total": 47,
   "assertions_failed": 0,
   "assertions": [
     {
@@ -108,7 +108,7 @@
     {
       "name": "allow:one-session-rule",
       "ok": true,
-      "detail": "[{\"id\":10002,\"priority\":10,\"action\":{\"type\":\"allow\"},\"condition\":{\"regexFilter\":\"^https://paypa1\\\\.com/$\",\"resourceTypes\":[\"main_frame\"],\"tabIds\":[7]}}]"
+      "detail": "[{\"id\":10002,\"priority\":10,\"action\":{\"type\":\"allow\"},\"condition\":{\"resourceTypes\":[\"main_frame\"],\"tabIds\":[7]}}]"
     },
     {
       "name": "allow:action-allow",
@@ -136,29 +136,19 @@
       "detail": "10002"
     },
     {
-      "name": "allow:regex-matches-exact-url",
+      "name": "allow:no-regex-blocker",
       "ok": true,
-      "detail": "^https://paypa1\\.com/$"
+      "detail": ""
     },
     {
-      "name": "allow:regex-not-other-path",
+      "name": "allow:special-chars-accepted",
       "ok": true,
-      "detail": "^https://paypa1\\.com/$"
-    },
-    {
-      "name": "allow:regex-not-other-host",
-      "ok": true,
-      "detail": "^https://paypa1\\.com/$"
-    },
-    {
-      "name": "allow:metachar-escaped-exact",
-      "ok": true,
-      "detail": "^https://evil\\.test/a\\+b\\?c=d&e=\\(f\\)\\[g\\]$"
+      "detail": "{\"id\":10002,\"priority\":10,\"action\":{\"type\":\"allow\"},\"condition\":{\"resourceTypes\":[\"main_frame\"],\"tabIds\":[11]}}"
     },
     {
       "name": "allow:second-replaces-first",
       "ok": true,
-      "detail": "[{\"id\":10003,\"priority\":10,\"action\":{\"type\":\"allow\"},\"condition\":{\"regexFilter\":\"^https://paypa1\\\\.com/$\",\"resourceTypes\":[\"main_frame\"],\"tabIds\":[11]}}]"
+      "detail": "[{\"id\":10003,\"priority\":10,\"action\":{\"type\":\"allow\"},\"condition\":{\"resourceTypes\":[\"main_frame\"],\"tabIds\":[11]}}]"
     },
     {
       "name": "allow:cleared-on-commit",
@@ -171,9 +161,14 @@
       "detail": "[]"
     },
     {
-      "name": "allow:overlong-url-rejected",
+      "name": "allow:ttl-implemented",
       "ok": true,
-      "detail": "{\"ok\":false,\"error\":\"Adresse zu lang für eine einmalige Freigabe\"}"
+      "detail": "ALLOW_TTL_MS=30000 in chrome/background.js"
+    },
+    {
+      "name": "allow:overlong-url-supported",
+      "ok": true,
+      "detail": "{\"ok\":true}"
     },
     {
       "name": "reduced:initial-rule-present",
@@ -226,32 +221,25 @@
       "detail": "[{\"id\":1000,\"priority\":1,\"action\":{\"type\":\"redirect\",\"redirect\":{\"regexSubstitution\":\"chrome-extension://fakeid/guard.html#\\\\1\"}},\"condition\":{\"regexFilter\":\"^(https?://.+)$\",\"resourceTypes\":[\"main_frame\"],\"requestMethods\":[\"get\"]}}]"
     },
     {
-      "name": "failopen:observed-as-design-defect",
+      "name": "degraded:flag-set-on-config-error",
       "ok": true,
-      "detail": "rule=undefined consoleErrors=[\"Error: simulierter storage.local.get-Fehler\"]"
+      "detail": "{\"protectionDegraded\":true}"
+    },
+    {
+      "name": "degraded:observer-fallback-redirects",
+      "ok": true,
+      "detail": "[{\"tabId\":5,\"url\":\"chrome-extension://fakeid/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"}]"
+    },
+    {
+      "name": "race:configure-serialized-rule-preserved",
+      "ok": true,
+      "detail": "[{\"id\":1000,\"priority\":1,\"action\":{\"type\":\"redirect\",\"redirect\":{\"regexSubstitution\":\"chrome-extension://fakeid/guard.html#\\\\1\"}},\"condition\":{\"regexFilter\":\"^(https?://.+)$\",\"resourceTypes\":[\"main_frame\"],\"requestMethods\":[\"get\"]}}]"
     },
     {
       "name": "counter:recordBlock-increments",
       "ok": true,
-      "detail": "{\"blocked\":1}"
+      "detail": "{\"protectionDegraded\":false,\"securityEvents\":[{\"ts\":1794992922792,\"type\":\"healthy\",\"detail\":\"standard-observer\"},{\"ts\":1794992922858,\"type\":\"allow-once\",\"detail\":\"observer-bypass\"},{\"ts\":1794992922858,\"type\":\"block\",\"detail\":\"strict-guard\"}],\"blocked\":1}"
     }
   ],
-  "observations": [
-    {
-      "name": "allow:no-timeout-implementation",
-      "detail": "Kommentar background.js:42-43 verspricht \"Remove at first commit, timeout/next navigation, and on tab close\", im Code existieren jedoch weder setTimeout noch Alarm/TTL (background.js:44-65). Session-Regeln können bis zum nächsten Service-Worker-Start (configure purge) bestehen bleiben, wenn kein Commit erfolgt."
-    },
-    {
-      "name": "reduced:fail-open-by-design",
-      "detail": "strictMode=false entfernt die präventive DNR-Regel vollständig; Schutz nur noch best-effort über webNavigation/tabs.update (background.js:23,79-87). Popup weist darauf hin, dennoch ist dies ein bewusster Fail-open-Betriebsmodus ohne sicherheitsseitige Bestätigung/Trust-Indikator."
-    },
-    {
-      "name": "failopen:config-error-no-rule",
-      "detail": "storage.local.get-Fehler in configure(): configure() rejected (console.error), KEINE DNR-Regel registriert, KEINE Nutzeranzeige. Da strict weiterhin true ist, greift auch der Beobachter-Pfad nicht — Navigationen laufen ungeprüft (Fail-open, background.js:15,23,69-73,104)."
-    },
-    {
-      "name": "race:configure-interleaving",
-      "detail": "Synthetisches Interleaving zweier configure()-Läufe (strict false -> true, Remove aus Lauf A um 80 ms verzögert): Lauf B fügt die Redirect-Regel hinzu, der verzögerte Remove aus Lauf A löscht sie danach wieder. Ergebnis: DNR-Regel vorhanden=false bei gespeichertem strictMode=true. configure() ist nicht serialisiert (background.js:14-41,71-73); ein reales Auftreten im Browser ist NICHT_TESTED — das Scheduling ist plausibel, aber nicht beobachtet."
-    }
-  ]
+  "observations": []
 }

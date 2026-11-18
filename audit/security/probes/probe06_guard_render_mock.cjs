@@ -23,7 +23,8 @@ function makeElement(id) {
   const el = {
     id, hidden: ['danger', 'confirm', 'error'].includes(id), textContent: '', style: {}, attrs: {}, handlers: {}, writes,
     addEventListener(ev, fn) { this.handlers[ev] = fn; },
-    setAttribute(k, v) { this.attrs[k] = v; }
+    setAttribute(k, v) { this.attrs[k] = v; },
+    focus() {}
   };
   Object.defineProperty(el, 'innerHTML', {
     get() { return ''; },
@@ -56,7 +57,13 @@ function createGuardSandbox(opts) {
       async sendMessage(msg) { state.messages.push(JSON.parse(JSON.stringify(msg))); return state.sendResponse; }
     }
   };
-  const document = { getElementById: id => elements[id] || null };
+  const document = {
+    getElementById: id => elements[id] || null,
+    body: { dataset: {} },
+    documentElement: { lang: 'de' },
+    querySelectorAll: () => [],
+    addEventListener() {}
+  };
   const ctx = {
     browser: api, document, location, history: { back() { state.historyBack++; } },
     URL, Promise, String, Error, JSON, Object, Array, console: { log() { }, warn() { }, error() { } }, Map, Set

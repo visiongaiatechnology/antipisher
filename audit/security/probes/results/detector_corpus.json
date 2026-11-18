@@ -1,13 +1,13 @@
 {
   "probe": "probe02_detector_corpus",
-  "timestamp_utc": "2026-10-18T15:35:30.102Z",
+  "timestamp_utc": "2026-11-18T09:08:41.182Z",
   "engine": "shared/detector.js + shared/sites.js (v0.1.0)",
-  "brand_count": 165,
+  "brand_count": 187,
   "attack_corpus": {
     "total": 43,
-    "blocked": 37,
-    "missed": 6,
-    "detection_rate": 0.8605,
+    "blocked": 42,
+    "missed": 1,
+    "detection_rate": 0.9767,
     "by_class": {
       "typosquat-transposition": {
         "total": 5,
@@ -27,7 +27,7 @@
       },
       "userinfo-deception": {
         "total": 3,
-        "blocked": 2
+        "blocked": 3
       },
       "deceptive-subdomain": {
         "total": 6,
@@ -43,75 +43,17 @@
       },
       "dilution-or-path": {
         "total": 6,
-        "blocked": 1
+        "blocked": 5
       }
     }
   },
   "benign_corpus": {
-    "total_unique": 553,
-    "blocked_unique": 18,
-    "false_positive_rate": 0.0325,
-    "blocked_by_group": {
-      "short-brand-subdomain-fp": [
-        "box.firma.example.test [foreign-domain=>Box]",
-        "hp.firma.example.test [foreign-domain=>HP]",
-        "visa.firma.example.test [foreign-domain=>Visa]",
-        "ing.firma.example.test [foreign-domain=>ING]",
-        "ups.firma.example.test [foreign-domain=>UPS]",
-        "amd.firma.example.test [foreign-domain=>AMD]",
-        "sap.firma.example.test [foreign-domain=>SAP]",
-        "ibm.firma.example.test [foreign-domain=>IBM]",
-        "dhl.firma.example.test [foreign-domain=>DHL]",
-        "dpd.firma.example.test [foreign-domain=>DPD]",
-        "gls.firma.example.test [foreign-domain=>GLS]",
-        "wise.firma.example.test [foreign-domain=>Wise]",
-        "temu.firma.example.test [foreign-domain=>Temu]",
-        "cursor.firma.example.test [foreign-domain=>Cursor]",
-        "gemini.firma.example.test [foreign-domain=>Gemini]",
-        "signal.firma.example.test [foreign-domain=>Signal]"
-      ],
-      "word-damerau-fp": [
-        "apply.com [typosquat=>Apple]",
-        "applet.com [typosquat=>Apple]"
-      ]
-    }
+    "total_unique": 745,
+    "blocked_unique": 0,
+    "false_positive_rate": 0,
+    "blocked_by_group": {}
   },
   "missed_attacks": [
-    {
-      "class": "userinfo-deception",
-      "url": "https://paypal@evil.test/",
-      "host": "evil.test",
-      "status": "safe",
-      "note": "RFC-3986-Userinfo-Täuschung"
-    },
-    {
-      "class": "dilution-or-path",
-      "url": "https://paypa1-login.com/",
-      "host": "paypa1-login.com",
-      "status": "safe",
-      "note": "Homograph/Bait verdünnt oder Marke nur im Pfad"
-    },
-    {
-      "class": "dilution-or-path",
-      "url": "https://paypal-me.com/",
-      "host": "paypal-me.com",
-      "status": "safe",
-      "note": "Homograph/Bait verdünnt oder Marke nur im Pfad"
-    },
-    {
-      "class": "dilution-or-path",
-      "url": "https://g00gle-login.com/",
-      "host": "g00gle-login.com",
-      "status": "safe",
-      "note": "Homograph/Bait verdünnt oder Marke nur im Pfad"
-    },
-    {
-      "class": "dilution-or-path",
-      "url": "https://evil.test/paypal/login",
-      "host": "evil.test",
-      "status": "safe",
-      "note": "Homograph/Bait verdünnt oder Marke nur im Pfad"
-    },
     {
       "class": "dilution-or-path",
       "url": "https://evil.test/?brand=paypal",
@@ -120,152 +62,7 @@
       "note": "Homograph/Bait verdünnt oder Marke nur im Pfad"
     }
   ],
-  "blocked_benign": [
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "box.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "Box",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "hp.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "HP",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "visa.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "Visa",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "ing.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "ING",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "ups.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "UPS",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "amd.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "AMD",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "sap.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "SAP",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "ibm.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "IBM",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "dhl.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "DHL",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "dpd.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "DPD",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "gls.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "GLS",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "wise.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "Wise",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "temu.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "Temu",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "cursor.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "Cursor",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "gemini.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "Gemini",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "short-brand-subdomain-fp",
-      "host": "signal.firma.example.test",
-      "status": "block",
-      "reason": "foreign-domain",
-      "matched": "Signal",
-      "note": "legitime Subdomain-Bezeichnung"
-    },
-    {
-      "group": "word-damerau-fp",
-      "host": "apply.com",
-      "status": "block",
-      "reason": "typosquat",
-      "matched": "Apple",
-      "note": "Wortdomain nahe Markenname"
-    },
-    {
-      "group": "word-damerau-fp",
-      "host": "applet.com",
-      "status": "block",
-      "reason": "typosquat",
-      "matched": "Apple",
-      "note": "Wortdomain nahe Markenname"
-    }
-  ],
+  "blocked_benign": [],
   "attack_results": [
     {
       "id": "typosquat-transposition-1",
@@ -503,9 +300,9 @@
       "url": "https://paypal@evil.test/",
       "note": "RFC-3986-Userinfo-Täuschung",
       "host": "evil.test",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
+      "status": "block",
+      "reason": "userinfo",
+      "matchSite": "PayPal"
     },
     {
       "id": "deceptive-subdomain-25",
@@ -643,9 +440,9 @@
       "url": "https://paypa1-login.com/",
       "note": "Homograph/Bait verdünnt oder Marke nur im Pfad",
       "host": "paypa1-login.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
+      "status": "block",
+      "reason": "credential-bait",
+      "matchSite": "PayPal"
     },
     {
       "id": "dilution-or-path-39",
@@ -653,9 +450,9 @@
       "url": "https://paypal-me.com/",
       "note": "Homograph/Bait verdünnt oder Marke nur im Pfad",
       "host": "paypal-me.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
+      "status": "block",
+      "reason": "credential-bait",
+      "matchSite": "PayPal"
     },
     {
       "id": "dilution-or-path-40",
@@ -663,9 +460,9 @@
       "url": "https://g00gle-login.com/",
       "note": "Homograph/Bait verdünnt oder Marke nur im Pfad",
       "host": "g00gle-login.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
+      "status": "block",
+      "reason": "credential-bait",
+      "matchSite": "Google"
     },
     {
       "id": "dilution-or-path-41",
@@ -683,9 +480,9 @@
       "url": "https://evil.test/paypal/login",
       "note": "Homograph/Bait verdünnt oder Marke nur im Pfad",
       "host": "evil.test",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
+      "status": "block",
+      "reason": "path-impersonation",
+      "matchSite": "PayPal"
     },
     {
       "id": "dilution-or-path-43",
@@ -982,6 +779,246 @@
     {
       "id": "benign-29",
       "group": "official-domain",
+      "url": "https://google.co.jp/",
+      "note": "Google",
+      "host": "google.co.jp",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-30",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.co.jp/",
+      "note": "Google",
+      "host": "accounts.google.co.jp",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-31",
+      "group": "official-domain",
+      "url": "https://google.co.kr/",
+      "note": "Google",
+      "host": "google.co.kr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-32",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.co.kr/",
+      "note": "Google",
+      "host": "accounts.google.co.kr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-33",
+      "group": "official-domain",
+      "url": "https://google.com.mx/",
+      "note": "Google",
+      "host": "google.com.mx",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-34",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.com.mx/",
+      "note": "Google",
+      "host": "accounts.google.com.mx",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-35",
+      "group": "official-domain",
+      "url": "https://google.com.ar/",
+      "note": "Google",
+      "host": "google.com.ar",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-36",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.com.ar/",
+      "note": "Google",
+      "host": "accounts.google.com.ar",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-37",
+      "group": "official-domain",
+      "url": "https://google.co.za/",
+      "note": "Google",
+      "host": "google.co.za",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-38",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.co.za/",
+      "note": "Google",
+      "host": "accounts.google.co.za",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-39",
+      "group": "official-domain",
+      "url": "https://google.com.sg/",
+      "note": "Google",
+      "host": "google.com.sg",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-40",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.com.sg/",
+      "note": "Google",
+      "host": "accounts.google.com.sg",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-41",
+      "group": "official-domain",
+      "url": "https://google.co.id/",
+      "note": "Google",
+      "host": "google.co.id",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-42",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.co.id/",
+      "note": "Google",
+      "host": "accounts.google.co.id",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-43",
+      "group": "official-domain",
+      "url": "https://google.se/",
+      "note": "Google",
+      "host": "google.se",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-44",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.se/",
+      "note": "Google",
+      "host": "accounts.google.se",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-45",
+      "group": "official-domain",
+      "url": "https://google.nl/",
+      "note": "Google",
+      "host": "google.nl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-46",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.nl/",
+      "note": "Google",
+      "host": "accounts.google.nl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-47",
+      "group": "official-domain",
+      "url": "https://google.pl/",
+      "note": "Google",
+      "host": "google.pl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-48",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.pl/",
+      "note": "Google",
+      "host": "accounts.google.pl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-49",
+      "group": "official-domain",
+      "url": "https://google.be/",
+      "note": "Google",
+      "host": "google.be",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-50",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.be/",
+      "note": "Google",
+      "host": "accounts.google.be",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-51",
+      "group": "official-domain",
+      "url": "https://google.com.tr/",
+      "note": "Google",
+      "host": "google.com.tr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-52",
+      "group": "official-subdomain",
+      "url": "https://accounts.google.com.tr/",
+      "note": "Google",
+      "host": "accounts.google.com.tr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-53",
+      "group": "official-domain",
       "url": "https://youtube.com/",
       "note": "YouTube",
       "host": "youtube.com",
@@ -990,7 +1027,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-30",
+      "id": "benign-54",
       "group": "official-subdomain",
       "url": "https://accounts.youtube.com/",
       "note": "YouTube",
@@ -1000,7 +1037,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-31",
+      "id": "benign-55",
       "group": "official-domain",
       "url": "https://youtu.be/",
       "note": "YouTube",
@@ -1010,7 +1047,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-32",
+      "id": "benign-56",
       "group": "official-subdomain",
       "url": "https://accounts.youtu.be/",
       "note": "YouTube",
@@ -1020,7 +1057,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-33",
+      "id": "benign-57",
       "group": "official-domain",
       "url": "https://facebook.com/",
       "note": "Facebook",
@@ -1030,7 +1067,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-34",
+      "id": "benign-58",
       "group": "official-subdomain",
       "url": "https://accounts.facebook.com/",
       "note": "Facebook",
@@ -1040,7 +1077,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-35",
+      "id": "benign-59",
       "group": "official-domain",
       "url": "https://fb.com/",
       "note": "Facebook",
@@ -1050,7 +1087,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-36",
+      "id": "benign-60",
       "group": "official-subdomain",
       "url": "https://accounts.fb.com/",
       "note": "Facebook",
@@ -1060,7 +1097,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-37",
+      "id": "benign-61",
       "group": "official-domain",
       "url": "https://facebook.github.io/",
       "note": "Facebook",
@@ -1070,7 +1107,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-38",
+      "id": "benign-62",
       "group": "official-subdomain",
       "url": "https://accounts.facebook.github.io/",
       "note": "Facebook",
@@ -1080,7 +1117,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-39",
+      "id": "benign-63",
       "group": "official-domain",
       "url": "https://instagram.com/",
       "note": "Instagram",
@@ -1090,7 +1127,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-40",
+      "id": "benign-64",
       "group": "official-subdomain",
       "url": "https://accounts.instagram.com/",
       "note": "Instagram",
@@ -1100,7 +1137,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-41",
+      "id": "benign-65",
       "group": "official-domain",
       "url": "https://whatsapp.com/",
       "note": "WhatsApp",
@@ -1110,7 +1147,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-42",
+      "id": "benign-66",
       "group": "official-subdomain",
       "url": "https://accounts.whatsapp.com/",
       "note": "WhatsApp",
@@ -1120,7 +1157,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-43",
+      "id": "benign-67",
       "group": "official-domain",
       "url": "https://whatsapp.net/",
       "note": "WhatsApp",
@@ -1130,7 +1167,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-44",
+      "id": "benign-68",
       "group": "official-subdomain",
       "url": "https://accounts.whatsapp.net/",
       "note": "WhatsApp",
@@ -1140,7 +1177,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-45",
+      "id": "benign-69",
       "group": "official-domain",
       "url": "https://tiktok.com/",
       "note": "TikTok",
@@ -1150,7 +1187,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-46",
+      "id": "benign-70",
       "group": "official-subdomain",
       "url": "https://accounts.tiktok.com/",
       "note": "TikTok",
@@ -1160,7 +1197,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-47",
+      "id": "benign-71",
       "group": "official-domain",
       "url": "https://twitter.com/",
       "note": "X (Twitter)",
@@ -1170,7 +1207,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-48",
+      "id": "benign-72",
       "group": "official-subdomain",
       "url": "https://accounts.twitter.com/",
       "note": "X (Twitter)",
@@ -1180,7 +1217,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-49",
+      "id": "benign-73",
       "group": "official-domain",
       "url": "https://x.com/",
       "note": "X (Twitter)",
@@ -1190,7 +1227,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-50",
+      "id": "benign-74",
       "group": "official-subdomain",
       "url": "https://accounts.x.com/",
       "note": "X (Twitter)",
@@ -1200,7 +1237,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-51",
+      "id": "benign-75",
       "group": "official-domain",
       "url": "https://threads.net/",
       "note": "Threads",
@@ -1210,7 +1247,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-52",
+      "id": "benign-76",
       "group": "official-subdomain",
       "url": "https://accounts.threads.net/",
       "note": "Threads",
@@ -1220,7 +1257,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-53",
+      "id": "benign-77",
       "group": "official-domain",
       "url": "https://bsky.app/",
       "note": "Bluesky",
@@ -1230,7 +1267,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-54",
+      "id": "benign-78",
       "group": "official-subdomain",
       "url": "https://accounts.bsky.app/",
       "note": "Bluesky",
@@ -1240,7 +1277,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-55",
+      "id": "benign-79",
       "group": "official-domain",
       "url": "https://bsky.social/",
       "note": "Bluesky",
@@ -1250,7 +1287,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-56",
+      "id": "benign-80",
       "group": "official-subdomain",
       "url": "https://accounts.bsky.social/",
       "note": "Bluesky",
@@ -1260,7 +1297,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-57",
+      "id": "benign-81",
       "group": "official-domain",
       "url": "https://reddit.com/",
       "note": "Reddit",
@@ -1270,7 +1307,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-58",
+      "id": "benign-82",
       "group": "official-subdomain",
       "url": "https://accounts.reddit.com/",
       "note": "Reddit",
@@ -1280,7 +1317,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-59",
+      "id": "benign-83",
       "group": "official-domain",
       "url": "https://redd.it/",
       "note": "Reddit",
@@ -1290,7 +1327,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-60",
+      "id": "benign-84",
       "group": "official-subdomain",
       "url": "https://accounts.redd.it/",
       "note": "Reddit",
@@ -1300,7 +1337,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-61",
+      "id": "benign-85",
       "group": "official-domain",
       "url": "https://wikipedia.org/",
       "note": "Wikipedia",
@@ -1310,7 +1347,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-62",
+      "id": "benign-86",
       "group": "official-subdomain",
       "url": "https://accounts.wikipedia.org/",
       "note": "Wikipedia",
@@ -1320,7 +1357,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-63",
+      "id": "benign-87",
       "group": "official-domain",
       "url": "https://wikimedia.org/",
       "note": "Wikipedia",
@@ -1330,7 +1367,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-64",
+      "id": "benign-88",
       "group": "official-subdomain",
       "url": "https://accounts.wikimedia.org/",
       "note": "Wikipedia",
@@ -1340,7 +1377,27 @@
       "matchSite": null
     },
     {
-      "id": "benign-65",
+      "id": "benign-89",
+      "group": "official-domain",
+      "url": "https://wikipedia.de/",
+      "note": "Wikipedia",
+      "host": "wikipedia.de",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-90",
+      "group": "official-subdomain",
+      "url": "https://accounts.wikipedia.de/",
+      "note": "Wikipedia",
+      "host": "accounts.wikipedia.de",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-91",
       "group": "official-domain",
       "url": "https://amazon.com/",
       "note": "Amazon",
@@ -1350,7 +1407,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-66",
+      "id": "benign-92",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.com/",
       "note": "Amazon",
@@ -1360,7 +1417,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-67",
+      "id": "benign-93",
       "group": "official-domain",
       "url": "https://amazon.de/",
       "note": "Amazon",
@@ -1370,7 +1427,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-68",
+      "id": "benign-94",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.de/",
       "note": "Amazon",
@@ -1380,7 +1437,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-69",
+      "id": "benign-95",
       "group": "official-domain",
       "url": "https://amazon.co.uk/",
       "note": "Amazon",
@@ -1390,7 +1447,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-70",
+      "id": "benign-96",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.co.uk/",
       "note": "Amazon",
@@ -1400,7 +1457,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-71",
+      "id": "benign-97",
       "group": "official-domain",
       "url": "https://amazon.fr/",
       "note": "Amazon",
@@ -1410,7 +1467,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-72",
+      "id": "benign-98",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.fr/",
       "note": "Amazon",
@@ -1420,7 +1477,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-73",
+      "id": "benign-99",
       "group": "official-domain",
       "url": "https://amazon.es/",
       "note": "Amazon",
@@ -1430,7 +1487,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-74",
+      "id": "benign-100",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.es/",
       "note": "Amazon",
@@ -1440,7 +1497,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-75",
+      "id": "benign-101",
       "group": "official-domain",
       "url": "https://amazon.it/",
       "note": "Amazon",
@@ -1450,7 +1507,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-76",
+      "id": "benign-102",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.it/",
       "note": "Amazon",
@@ -1460,7 +1517,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-77",
+      "id": "benign-103",
       "group": "official-domain",
       "url": "https://amazon.ca/",
       "note": "Amazon",
@@ -1470,7 +1527,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-78",
+      "id": "benign-104",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.ca/",
       "note": "Amazon",
@@ -1480,7 +1537,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-79",
+      "id": "benign-105",
       "group": "official-domain",
       "url": "https://amazon.in/",
       "note": "Amazon",
@@ -1490,7 +1547,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-80",
+      "id": "benign-106",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.in/",
       "note": "Amazon",
@@ -1500,7 +1557,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-81",
+      "id": "benign-107",
       "group": "official-domain",
       "url": "https://amazon.co.jp/",
       "note": "Amazon",
@@ -1510,7 +1567,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-82",
+      "id": "benign-108",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.co.jp/",
       "note": "Amazon",
@@ -1520,7 +1577,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-83",
+      "id": "benign-109",
       "group": "official-domain",
       "url": "https://amazon.com.au/",
       "note": "Amazon",
@@ -1530,7 +1587,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-84",
+      "id": "benign-110",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.com.au/",
       "note": "Amazon",
@@ -1540,7 +1597,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-85",
+      "id": "benign-111",
       "group": "official-domain",
       "url": "https://amazon.com.br/",
       "note": "Amazon",
@@ -1550,7 +1607,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-86",
+      "id": "benign-112",
       "group": "official-subdomain",
       "url": "https://accounts.amazon.com.br/",
       "note": "Amazon",
@@ -1560,7 +1617,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-87",
+      "id": "benign-113",
       "group": "official-domain",
       "url": "https://aws.amazon.com/",
       "note": "Amazon",
@@ -1570,7 +1627,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-88",
+      "id": "benign-114",
       "group": "official-subdomain",
       "url": "https://accounts.aws.amazon.com/",
       "note": "Amazon",
@@ -1580,7 +1637,147 @@
       "matchSite": null
     },
     {
-      "id": "benign-89",
+      "id": "benign-115",
+      "group": "official-domain",
+      "url": "https://amazon.se/",
+      "note": "Amazon",
+      "host": "amazon.se",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-116",
+      "group": "official-subdomain",
+      "url": "https://accounts.amazon.se/",
+      "note": "Amazon",
+      "host": "accounts.amazon.se",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-117",
+      "group": "official-domain",
+      "url": "https://amazon.nl/",
+      "note": "Amazon",
+      "host": "amazon.nl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-118",
+      "group": "official-subdomain",
+      "url": "https://accounts.amazon.nl/",
+      "note": "Amazon",
+      "host": "accounts.amazon.nl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-119",
+      "group": "official-domain",
+      "url": "https://amazon.pl/",
+      "note": "Amazon",
+      "host": "amazon.pl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-120",
+      "group": "official-subdomain",
+      "url": "https://accounts.amazon.pl/",
+      "note": "Amazon",
+      "host": "accounts.amazon.pl",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-121",
+      "group": "official-domain",
+      "url": "https://amazon.sg/",
+      "note": "Amazon",
+      "host": "amazon.sg",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-122",
+      "group": "official-subdomain",
+      "url": "https://accounts.amazon.sg/",
+      "note": "Amazon",
+      "host": "accounts.amazon.sg",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-123",
+      "group": "official-domain",
+      "url": "https://amazon.ae/",
+      "note": "Amazon",
+      "host": "amazon.ae",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-124",
+      "group": "official-subdomain",
+      "url": "https://accounts.amazon.ae/",
+      "note": "Amazon",
+      "host": "accounts.amazon.ae",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-125",
+      "group": "official-domain",
+      "url": "https://amazon.com.mx/",
+      "note": "Amazon",
+      "host": "amazon.com.mx",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-126",
+      "group": "official-subdomain",
+      "url": "https://accounts.amazon.com.mx/",
+      "note": "Amazon",
+      "host": "accounts.amazon.com.mx",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-127",
+      "group": "official-domain",
+      "url": "https://amazon.com.tr/",
+      "note": "Amazon",
+      "host": "amazon.com.tr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-128",
+      "group": "official-subdomain",
+      "url": "https://accounts.amazon.com.tr/",
+      "note": "Amazon",
+      "host": "accounts.amazon.com.tr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-129",
       "group": "official-domain",
       "url": "https://apple.com/",
       "note": "Apple",
@@ -1590,7 +1787,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-90",
+      "id": "benign-130",
       "group": "official-subdomain",
       "url": "https://accounts.apple.com/",
       "note": "Apple",
@@ -1600,7 +1797,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-91",
+      "id": "benign-131",
       "group": "official-domain",
       "url": "https://apple.de/",
       "note": "Apple",
@@ -1610,7 +1807,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-92",
+      "id": "benign-132",
       "group": "official-subdomain",
       "url": "https://accounts.apple.de/",
       "note": "Apple",
@@ -1620,7 +1817,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-93",
+      "id": "benign-133",
       "group": "official-domain",
       "url": "https://apple.news/",
       "note": "Apple",
@@ -1630,7 +1827,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-94",
+      "id": "benign-134",
       "group": "official-subdomain",
       "url": "https://accounts.apple.news/",
       "note": "Apple",
@@ -1640,7 +1837,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-95",
+      "id": "benign-135",
       "group": "official-domain",
       "url": "https://icloud.com/",
       "note": "Apple",
@@ -1650,7 +1847,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-96",
+      "id": "benign-136",
       "group": "official-subdomain",
       "url": "https://accounts.icloud.com/",
       "note": "Apple",
@@ -1660,7 +1857,147 @@
       "matchSite": null
     },
     {
-      "id": "benign-97",
+      "id": "benign-137",
+      "group": "official-domain",
+      "url": "https://apple.com.cn/",
+      "note": "Apple",
+      "host": "apple.com.cn",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-138",
+      "group": "official-subdomain",
+      "url": "https://accounts.apple.com.cn/",
+      "note": "Apple",
+      "host": "accounts.apple.com.cn",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-139",
+      "group": "official-domain",
+      "url": "https://apple.co.uk/",
+      "note": "Apple",
+      "host": "apple.co.uk",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-140",
+      "group": "official-subdomain",
+      "url": "https://accounts.apple.co.uk/",
+      "note": "Apple",
+      "host": "accounts.apple.co.uk",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-141",
+      "group": "official-domain",
+      "url": "https://apple.fr/",
+      "note": "Apple",
+      "host": "apple.fr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-142",
+      "group": "official-subdomain",
+      "url": "https://accounts.apple.fr/",
+      "note": "Apple",
+      "host": "accounts.apple.fr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-143",
+      "group": "official-domain",
+      "url": "https://apple.it/",
+      "note": "Apple",
+      "host": "apple.it",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-144",
+      "group": "official-subdomain",
+      "url": "https://accounts.apple.it/",
+      "note": "Apple",
+      "host": "accounts.apple.it",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-145",
+      "group": "official-domain",
+      "url": "https://apple.es/",
+      "note": "Apple",
+      "host": "apple.es",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-146",
+      "group": "official-subdomain",
+      "url": "https://accounts.apple.es/",
+      "note": "Apple",
+      "host": "accounts.apple.es",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-147",
+      "group": "official-domain",
+      "url": "https://apple.ca/",
+      "note": "Apple",
+      "host": "apple.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-148",
+      "group": "official-subdomain",
+      "url": "https://accounts.apple.ca/",
+      "note": "Apple",
+      "host": "accounts.apple.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-149",
+      "group": "official-domain",
+      "url": "https://apple.com.au/",
+      "note": "Apple",
+      "host": "apple.com.au",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-150",
+      "group": "official-subdomain",
+      "url": "https://accounts.apple.com.au/",
+      "note": "Apple",
+      "host": "accounts.apple.com.au",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-151",
       "group": "official-domain",
       "url": "https://microsoft.com/",
       "note": "Microsoft",
@@ -1670,7 +2007,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-98",
+      "id": "benign-152",
       "group": "official-subdomain",
       "url": "https://accounts.microsoft.com/",
       "note": "Microsoft",
@@ -1680,7 +2017,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-99",
+      "id": "benign-153",
       "group": "official-domain",
       "url": "https://microsoftonline.com/",
       "note": "Microsoft",
@@ -1690,7 +2027,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-100",
+      "id": "benign-154",
       "group": "official-subdomain",
       "url": "https://accounts.microsoftonline.com/",
       "note": "Microsoft",
@@ -1700,7 +2037,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-101",
+      "id": "benign-155",
       "group": "official-domain",
       "url": "https://live.com/",
       "note": "Microsoft",
@@ -1710,7 +2047,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-102",
+      "id": "benign-156",
       "group": "official-subdomain",
       "url": "https://accounts.live.com/",
       "note": "Microsoft",
@@ -1720,7 +2057,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-103",
+      "id": "benign-157",
       "group": "official-domain",
       "url": "https://microsoft.github.io/",
       "note": "Microsoft",
@@ -1730,7 +2067,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-104",
+      "id": "benign-158",
       "group": "official-subdomain",
       "url": "https://accounts.microsoft.github.io/",
       "note": "Microsoft",
@@ -1740,7 +2077,167 @@
       "matchSite": null
     },
     {
-      "id": "benign-105",
+      "id": "benign-159",
+      "group": "official-domain",
+      "url": "https://microsoft.co.jp/",
+      "note": "Microsoft",
+      "host": "microsoft.co.jp",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-160",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.co.jp/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.co.jp",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-161",
+      "group": "official-domain",
+      "url": "https://microsoft.de/",
+      "note": "Microsoft",
+      "host": "microsoft.de",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-162",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.de/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.de",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-163",
+      "group": "official-domain",
+      "url": "https://microsoft.co.uk/",
+      "note": "Microsoft",
+      "host": "microsoft.co.uk",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-164",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.co.uk/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.co.uk",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-165",
+      "group": "official-domain",
+      "url": "https://microsoft.fr/",
+      "note": "Microsoft",
+      "host": "microsoft.fr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-166",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.fr/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.fr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-167",
+      "group": "official-domain",
+      "url": "https://microsoft.es/",
+      "note": "Microsoft",
+      "host": "microsoft.es",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-168",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.es/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.es",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-169",
+      "group": "official-domain",
+      "url": "https://microsoft.it/",
+      "note": "Microsoft",
+      "host": "microsoft.it",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-170",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.it/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.it",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-171",
+      "group": "official-domain",
+      "url": "https://microsoft.ca/",
+      "note": "Microsoft",
+      "host": "microsoft.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-172",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.ca/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-173",
+      "group": "official-domain",
+      "url": "https://microsoft.com.au/",
+      "note": "Microsoft",
+      "host": "microsoft.com.au",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-174",
+      "group": "official-subdomain",
+      "url": "https://accounts.microsoft.com.au/",
+      "note": "Microsoft",
+      "host": "accounts.microsoft.com.au",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-175",
       "group": "official-domain",
       "url": "https://bing.com/",
       "note": "Bing",
@@ -1750,7 +2247,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-106",
+      "id": "benign-176",
       "group": "official-subdomain",
       "url": "https://accounts.bing.com/",
       "note": "Bing",
@@ -1760,7 +2257,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-107",
+      "id": "benign-177",
       "group": "official-domain",
       "url": "https://outlook.com/",
       "note": "Outlook",
@@ -1770,7 +2267,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-108",
+      "id": "benign-178",
       "group": "official-subdomain",
       "url": "https://accounts.outlook.com/",
       "note": "Outlook",
@@ -1780,7 +2277,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-109",
+      "id": "benign-179",
       "group": "official-domain",
       "url": "https://outlook.live.com/",
       "note": "Outlook",
@@ -1790,7 +2287,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-110",
+      "id": "benign-180",
       "group": "official-subdomain",
       "url": "https://accounts.outlook.live.com/",
       "note": "Outlook",
@@ -1800,7 +2297,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-111",
+      "id": "benign-181",
       "group": "official-domain",
       "url": "https://office.com/",
       "note": "Microsoft 365",
@@ -1810,7 +2307,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-112",
+      "id": "benign-182",
       "group": "official-subdomain",
       "url": "https://accounts.office.com/",
       "note": "Microsoft 365",
@@ -1820,7 +2317,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-113",
+      "id": "benign-183",
       "group": "official-domain",
       "url": "https://office365.com/",
       "note": "Microsoft 365",
@@ -1830,7 +2327,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-114",
+      "id": "benign-184",
       "group": "official-subdomain",
       "url": "https://accounts.office365.com/",
       "note": "Microsoft 365",
@@ -1840,7 +2337,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-115",
+      "id": "benign-185",
       "group": "official-domain",
       "url": "https://github.com/",
       "note": "GitHub",
@@ -1850,7 +2347,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-116",
+      "id": "benign-186",
       "group": "official-subdomain",
       "url": "https://accounts.github.com/",
       "note": "GitHub",
@@ -1860,7 +2357,27 @@
       "matchSite": null
     },
     {
-      "id": "benign-117",
+      "id": "benign-187",
+      "group": "official-domain",
+      "url": "https://github.blog/",
+      "note": "GitHub",
+      "host": "github.blog",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-188",
+      "group": "official-subdomain",
+      "url": "https://accounts.github.blog/",
+      "note": "GitHub",
+      "host": "accounts.github.blog",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-189",
       "group": "official-domain",
       "url": "https://gitlab.com/",
       "note": "GitLab",
@@ -1870,7 +2387,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-118",
+      "id": "benign-190",
       "group": "official-subdomain",
       "url": "https://accounts.gitlab.com/",
       "note": "GitLab",
@@ -1880,7 +2397,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-119",
+      "id": "benign-191",
       "group": "official-domain",
       "url": "https://bitbucket.org/",
       "note": "Bitbucket",
@@ -1890,7 +2407,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-120",
+      "id": "benign-192",
       "group": "official-subdomain",
       "url": "https://accounts.bitbucket.org/",
       "note": "Bitbucket",
@@ -1900,7 +2417,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-121",
+      "id": "benign-193",
       "group": "official-domain",
       "url": "https://linkedin.com/",
       "note": "LinkedIn",
@@ -1910,7 +2427,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-122",
+      "id": "benign-194",
       "group": "official-subdomain",
       "url": "https://accounts.linkedin.com/",
       "note": "LinkedIn",
@@ -1920,7 +2437,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-123",
+      "id": "benign-195",
       "group": "official-domain",
       "url": "https://netflix.com/",
       "note": "Netflix",
@@ -1930,7 +2447,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-124",
+      "id": "benign-196",
       "group": "official-subdomain",
       "url": "https://accounts.netflix.com/",
       "note": "Netflix",
@@ -1940,7 +2457,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-125",
+      "id": "benign-197",
       "group": "official-domain",
       "url": "https://twitch.tv/",
       "note": "Twitch",
@@ -1950,7 +2467,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-126",
+      "id": "benign-198",
       "group": "official-subdomain",
       "url": "https://accounts.twitch.tv/",
       "note": "Twitch",
@@ -1960,7 +2477,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-127",
+      "id": "benign-199",
       "group": "official-domain",
       "url": "https://discord.com/",
       "note": "Discord",
@@ -1970,7 +2487,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-128",
+      "id": "benign-200",
       "group": "official-subdomain",
       "url": "https://accounts.discord.com/",
       "note": "Discord",
@@ -1980,7 +2497,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-129",
+      "id": "benign-201",
       "group": "official-domain",
       "url": "https://discord.gg/",
       "note": "Discord",
@@ -1990,7 +2507,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-130",
+      "id": "benign-202",
       "group": "official-subdomain",
       "url": "https://accounts.discord.gg/",
       "note": "Discord",
@@ -2000,7 +2517,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-131",
+      "id": "benign-203",
       "group": "official-domain",
       "url": "https://telegram.org/",
       "note": "Telegram",
@@ -2010,7 +2527,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-132",
+      "id": "benign-204",
       "group": "official-subdomain",
       "url": "https://accounts.telegram.org/",
       "note": "Telegram",
@@ -2020,7 +2537,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-133",
+      "id": "benign-205",
       "group": "official-domain",
       "url": "https://t.me/",
       "note": "Telegram",
@@ -2030,7 +2547,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-134",
+      "id": "benign-206",
       "group": "official-subdomain",
       "url": "https://accounts.t.me/",
       "note": "Telegram",
@@ -2040,7 +2557,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-135",
+      "id": "benign-207",
       "group": "official-domain",
       "url": "https://signal.org/",
       "note": "Signal",
@@ -2050,7 +2567,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-136",
+      "id": "benign-208",
       "group": "official-subdomain",
       "url": "https://accounts.signal.org/",
       "note": "Signal",
@@ -2060,7 +2577,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-137",
+      "id": "benign-209",
       "group": "official-domain",
       "url": "https://pinterest.com/",
       "note": "Pinterest",
@@ -2070,7 +2587,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-138",
+      "id": "benign-210",
       "group": "official-subdomain",
       "url": "https://accounts.pinterest.com/",
       "note": "Pinterest",
@@ -2080,7 +2597,67 @@
       "matchSite": null
     },
     {
-      "id": "benign-139",
+      "id": "benign-211",
+      "group": "official-domain",
+      "url": "https://pinterest.co.uk/",
+      "note": "Pinterest",
+      "host": "pinterest.co.uk",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-212",
+      "group": "official-subdomain",
+      "url": "https://accounts.pinterest.co.uk/",
+      "note": "Pinterest",
+      "host": "accounts.pinterest.co.uk",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-213",
+      "group": "official-domain",
+      "url": "https://pinterest.de/",
+      "note": "Pinterest",
+      "host": "pinterest.de",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-214",
+      "group": "official-subdomain",
+      "url": "https://accounts.pinterest.de/",
+      "note": "Pinterest",
+      "host": "accounts.pinterest.de",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-215",
+      "group": "official-domain",
+      "url": "https://pinterest.fr/",
+      "note": "Pinterest",
+      "host": "pinterest.fr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-216",
+      "group": "official-subdomain",
+      "url": "https://accounts.pinterest.fr/",
+      "note": "Pinterest",
+      "host": "accounts.pinterest.fr",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-217",
       "group": "official-domain",
       "url": "https://snapchat.com/",
       "note": "Snapchat",
@@ -2090,7 +2667,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-140",
+      "id": "benign-218",
       "group": "official-subdomain",
       "url": "https://accounts.snapchat.com/",
       "note": "Snapchat",
@@ -2100,7 +2677,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-141",
+      "id": "benign-219",
       "group": "official-domain",
       "url": "https://spotify.com/",
       "note": "Spotify",
@@ -2110,7 +2687,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-142",
+      "id": "benign-220",
       "group": "official-subdomain",
       "url": "https://accounts.spotify.com/",
       "note": "Spotify",
@@ -2120,7 +2697,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-143",
+      "id": "benign-221",
       "group": "official-domain",
       "url": "https://steampowered.com/",
       "note": "Steam",
@@ -2130,7 +2707,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-144",
+      "id": "benign-222",
       "group": "official-subdomain",
       "url": "https://accounts.steampowered.com/",
       "note": "Steam",
@@ -2140,7 +2717,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-145",
+      "id": "benign-223",
       "group": "official-domain",
       "url": "https://steamcommunity.com/",
       "note": "Steam",
@@ -2150,7 +2727,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-146",
+      "id": "benign-224",
       "group": "official-subdomain",
       "url": "https://accounts.steamcommunity.com/",
       "note": "Steam",
@@ -2160,7 +2737,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-147",
+      "id": "benign-225",
       "group": "official-domain",
       "url": "https://epicgames.com/",
       "note": "Epic Games",
@@ -2170,7 +2747,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-148",
+      "id": "benign-226",
       "group": "official-subdomain",
       "url": "https://accounts.epicgames.com/",
       "note": "Epic Games",
@@ -2180,7 +2757,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-149",
+      "id": "benign-227",
       "group": "official-domain",
       "url": "https://unrealengine.com/",
       "note": "Epic Games",
@@ -2190,7 +2767,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-150",
+      "id": "benign-228",
       "group": "official-subdomain",
       "url": "https://accounts.unrealengine.com/",
       "note": "Epic Games",
@@ -2200,7 +2777,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-151",
+      "id": "benign-229",
       "group": "official-domain",
       "url": "https://roblox.com/",
       "note": "Roblox",
@@ -2210,7 +2787,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-152",
+      "id": "benign-230",
       "group": "official-subdomain",
       "url": "https://accounts.roblox.com/",
       "note": "Roblox",
@@ -2220,7 +2797,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-153",
+      "id": "benign-231",
       "group": "official-domain",
       "url": "https://playstation.com/",
       "note": "PlayStation",
@@ -2230,7 +2807,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-154",
+      "id": "benign-232",
       "group": "official-subdomain",
       "url": "https://accounts.playstation.com/",
       "note": "PlayStation",
@@ -2240,7 +2817,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-155",
+      "id": "benign-233",
       "group": "official-domain",
       "url": "https://sonyentertainmentnetwork.com/",
       "note": "PlayStation",
@@ -2250,7 +2827,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-156",
+      "id": "benign-234",
       "group": "official-subdomain",
       "url": "https://accounts.sonyentertainmentnetwork.com/",
       "note": "PlayStation",
@@ -2260,7 +2837,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-157",
+      "id": "benign-235",
       "group": "official-domain",
       "url": "https://xbox.com/",
       "note": "Xbox",
@@ -2270,7 +2847,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-158",
+      "id": "benign-236",
       "group": "official-subdomain",
       "url": "https://accounts.xbox.com/",
       "note": "Xbox",
@@ -2280,7 +2857,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-159",
+      "id": "benign-237",
       "group": "official-domain",
       "url": "https://nintendo.com/",
       "note": "Nintendo",
@@ -2290,7 +2867,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-160",
+      "id": "benign-238",
       "group": "official-subdomain",
       "url": "https://accounts.nintendo.com/",
       "note": "Nintendo",
@@ -2300,7 +2877,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-161",
+      "id": "benign-239",
       "group": "official-domain",
       "url": "https://nintendo.de/",
       "note": "Nintendo",
@@ -2310,7 +2887,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-162",
+      "id": "benign-240",
       "group": "official-subdomain",
       "url": "https://accounts.nintendo.de/",
       "note": "Nintendo",
@@ -2320,7 +2897,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-163",
+      "id": "benign-241",
       "group": "official-domain",
       "url": "https://nintendo.co.jp/",
       "note": "Nintendo",
@@ -2330,7 +2907,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-164",
+      "id": "benign-242",
       "group": "official-subdomain",
       "url": "https://accounts.nintendo.co.jp/",
       "note": "Nintendo",
@@ -2340,7 +2917,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-165",
+      "id": "benign-243",
       "group": "official-domain",
       "url": "https://ebay.com/",
       "note": "eBay",
@@ -2350,7 +2927,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-166",
+      "id": "benign-244",
       "group": "official-subdomain",
       "url": "https://accounts.ebay.com/",
       "note": "eBay",
@@ -2360,7 +2937,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-167",
+      "id": "benign-245",
       "group": "official-domain",
       "url": "https://ebay.de/",
       "note": "eBay",
@@ -2370,7 +2947,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-168",
+      "id": "benign-246",
       "group": "official-subdomain",
       "url": "https://accounts.ebay.de/",
       "note": "eBay",
@@ -2380,7 +2957,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-169",
+      "id": "benign-247",
       "group": "official-domain",
       "url": "https://ebay.co.uk/",
       "note": "eBay",
@@ -2390,7 +2967,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-170",
+      "id": "benign-248",
       "group": "official-subdomain",
       "url": "https://accounts.ebay.co.uk/",
       "note": "eBay",
@@ -2400,7 +2977,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-171",
+      "id": "benign-249",
       "group": "official-domain",
       "url": "https://paypal.com/",
       "note": "PayPal",
@@ -2410,7 +2987,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-172",
+      "id": "benign-250",
       "group": "official-subdomain",
       "url": "https://accounts.paypal.com/",
       "note": "PayPal",
@@ -2420,7 +2997,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-173",
+      "id": "benign-251",
       "group": "official-domain",
       "url": "https://paypal.me/",
       "note": "PayPal",
@@ -2430,7 +3007,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-174",
+      "id": "benign-252",
       "group": "official-subdomain",
       "url": "https://accounts.paypal.me/",
       "note": "PayPal",
@@ -2440,7 +3017,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-175",
+      "id": "benign-253",
       "group": "official-domain",
       "url": "https://aliexpress.com/",
       "note": "AliExpress",
@@ -2450,7 +3027,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-176",
+      "id": "benign-254",
       "group": "official-subdomain",
       "url": "https://accounts.aliexpress.com/",
       "note": "AliExpress",
@@ -2460,7 +3037,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-177",
+      "id": "benign-255",
       "group": "official-domain",
       "url": "https://alibaba.com/",
       "note": "AliExpress",
@@ -2470,7 +3047,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-178",
+      "id": "benign-256",
       "group": "official-subdomain",
       "url": "https://accounts.alibaba.com/",
       "note": "AliExpress",
@@ -2480,7 +3057,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-179",
+      "id": "benign-257",
       "group": "official-domain",
       "url": "https://temu.com/",
       "note": "Temu",
@@ -2490,7 +3067,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-180",
+      "id": "benign-258",
       "group": "official-subdomain",
       "url": "https://accounts.temu.com/",
       "note": "Temu",
@@ -2500,7 +3077,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-181",
+      "id": "benign-259",
       "group": "official-domain",
       "url": "https://shein.com/",
       "note": "SHEIN",
@@ -2510,7 +3087,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-182",
+      "id": "benign-260",
       "group": "official-subdomain",
       "url": "https://accounts.shein.com/",
       "note": "SHEIN",
@@ -2520,7 +3097,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-183",
+      "id": "benign-261",
       "group": "official-domain",
       "url": "https://booking.com/",
       "note": "Booking.com",
@@ -2530,7 +3107,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-184",
+      "id": "benign-262",
       "group": "official-subdomain",
       "url": "https://accounts.booking.com/",
       "note": "Booking.com",
@@ -2540,7 +3117,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-185",
+      "id": "benign-263",
       "group": "official-domain",
       "url": "https://airbnb.com/",
       "note": "Airbnb",
@@ -2550,7 +3127,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-186",
+      "id": "benign-264",
       "group": "official-subdomain",
       "url": "https://accounts.airbnb.com/",
       "note": "Airbnb",
@@ -2560,7 +3137,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-187",
+      "id": "benign-265",
       "group": "official-domain",
       "url": "https://airbnb.de/",
       "note": "Airbnb",
@@ -2570,7 +3147,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-188",
+      "id": "benign-266",
       "group": "official-subdomain",
       "url": "https://accounts.airbnb.de/",
       "note": "Airbnb",
@@ -2580,7 +3157,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-189",
+      "id": "benign-267",
       "group": "official-domain",
       "url": "https://uber.com/",
       "note": "Uber",
@@ -2590,7 +3167,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-190",
+      "id": "benign-268",
       "group": "official-subdomain",
       "url": "https://accounts.uber.com/",
       "note": "Uber",
@@ -2600,7 +3177,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-191",
+      "id": "benign-269",
       "group": "official-domain",
       "url": "https://lyft.com/",
       "note": "Lyft",
@@ -2610,7 +3187,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-192",
+      "id": "benign-270",
       "group": "official-subdomain",
       "url": "https://accounts.lyft.com/",
       "note": "Lyft",
@@ -2620,7 +3197,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-193",
+      "id": "benign-271",
       "group": "official-domain",
       "url": "https://target.com/",
       "note": "Target",
@@ -2630,7 +3207,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-194",
+      "id": "benign-272",
       "group": "official-subdomain",
       "url": "https://accounts.target.com/",
       "note": "Target",
@@ -2640,7 +3217,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-195",
+      "id": "benign-273",
       "group": "official-domain",
       "url": "https://walmart.com/",
       "note": "Walmart",
@@ -2650,7 +3227,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-196",
+      "id": "benign-274",
       "group": "official-subdomain",
       "url": "https://accounts.walmart.com/",
       "note": "Walmart",
@@ -2660,7 +3237,47 @@
       "matchSite": null
     },
     {
-      "id": "benign-197",
+      "id": "benign-275",
+      "group": "official-domain",
+      "url": "https://walmart.ca/",
+      "note": "Walmart",
+      "host": "walmart.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-276",
+      "group": "official-subdomain",
+      "url": "https://accounts.walmart.ca/",
+      "note": "Walmart",
+      "host": "accounts.walmart.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-277",
+      "group": "official-domain",
+      "url": "https://walmart.com.mx/",
+      "note": "Walmart",
+      "host": "walmart.com.mx",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-278",
+      "group": "official-subdomain",
+      "url": "https://accounts.walmart.com.mx/",
+      "note": "Walmart",
+      "host": "accounts.walmart.com.mx",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-279",
       "group": "official-domain",
       "url": "https://bestbuy.com/",
       "note": "Best Buy",
@@ -2670,7 +3287,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-198",
+      "id": "benign-280",
       "group": "official-subdomain",
       "url": "https://accounts.bestbuy.com/",
       "note": "Best Buy",
@@ -2680,7 +3297,27 @@
       "matchSite": null
     },
     {
-      "id": "benign-199",
+      "id": "benign-281",
+      "group": "official-domain",
+      "url": "https://bestbuy.ca/",
+      "note": "Best Buy",
+      "host": "bestbuy.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-282",
+      "group": "official-subdomain",
+      "url": "https://accounts.bestbuy.ca/",
+      "note": "Best Buy",
+      "host": "accounts.bestbuy.ca",
+      "status": "safe",
+      "reason": null,
+      "matchSite": null
+    },
+    {
+      "id": "benign-283",
       "group": "official-domain",
       "url": "https://etsy.com/",
       "note": "Etsy",
@@ -2690,7 +3327,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-200",
+      "id": "benign-284",
       "group": "official-subdomain",
       "url": "https://accounts.etsy.com/",
       "note": "Etsy",
@@ -2700,7 +3337,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-201",
+      "id": "benign-285",
       "group": "official-domain",
       "url": "https://shopify.com/",
       "note": "Shopify",
@@ -2710,7 +3347,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-202",
+      "id": "benign-286",
       "group": "official-subdomain",
       "url": "https://accounts.shopify.com/",
       "note": "Shopify",
@@ -2720,7 +3357,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-203",
+      "id": "benign-287",
       "group": "official-domain",
       "url": "https://cloudflare.com/",
       "note": "Cloudflare",
@@ -2730,7 +3367,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-204",
+      "id": "benign-288",
       "group": "official-subdomain",
       "url": "https://accounts.cloudflare.com/",
       "note": "Cloudflare",
@@ -2740,7 +3377,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-205",
+      "id": "benign-289",
       "group": "official-domain",
       "url": "https://fastly.com/",
       "note": "Fastly",
@@ -2750,7 +3387,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-206",
+      "id": "benign-290",
       "group": "official-subdomain",
       "url": "https://accounts.fastly.com/",
       "note": "Fastly",
@@ -2760,7 +3397,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-207",
+      "id": "benign-291",
       "group": "official-domain",
       "url": "https://dropbox.com/",
       "note": "Dropbox",
@@ -2770,7 +3407,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-208",
+      "id": "benign-292",
       "group": "official-subdomain",
       "url": "https://accounts.dropbox.com/",
       "note": "Dropbox",
@@ -2780,7 +3417,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-209",
+      "id": "benign-293",
       "group": "official-domain",
       "url": "https://box.com/",
       "note": "Box",
@@ -2790,7 +3427,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-210",
+      "id": "benign-294",
       "group": "official-subdomain",
       "url": "https://accounts.box.com/",
       "note": "Box",
@@ -2800,7 +3437,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-211",
+      "id": "benign-295",
       "group": "official-domain",
       "url": "https://zoom.us/",
       "note": "Zoom",
@@ -2810,7 +3447,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-212",
+      "id": "benign-296",
       "group": "official-subdomain",
       "url": "https://accounts.zoom.us/",
       "note": "Zoom",
@@ -2820,7 +3457,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-213",
+      "id": "benign-297",
       "group": "official-domain",
       "url": "https://zoom.com/",
       "note": "Zoom",
@@ -2830,7 +3467,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-214",
+      "id": "benign-298",
       "group": "official-subdomain",
       "url": "https://accounts.zoom.com/",
       "note": "Zoom",
@@ -2840,7 +3477,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-215",
+      "id": "benign-299",
       "group": "official-domain",
       "url": "https://notion.so/",
       "note": "Notion",
@@ -2850,7 +3487,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-216",
+      "id": "benign-300",
       "group": "official-subdomain",
       "url": "https://accounts.notion.so/",
       "note": "Notion",
@@ -2860,7 +3497,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-217",
+      "id": "benign-301",
       "group": "official-domain",
       "url": "https://notion.com/",
       "note": "Notion",
@@ -2870,7 +3507,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-218",
+      "id": "benign-302",
       "group": "official-subdomain",
       "url": "https://accounts.notion.com/",
       "note": "Notion",
@@ -2880,7 +3517,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-219",
+      "id": "benign-303",
       "group": "official-domain",
       "url": "https://slack.com/",
       "note": "Slack",
@@ -2890,7 +3527,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-220",
+      "id": "benign-304",
       "group": "official-subdomain",
       "url": "https://accounts.slack.com/",
       "note": "Slack",
@@ -2900,7 +3537,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-221",
+      "id": "benign-305",
       "group": "official-domain",
       "url": "https://canva.com/",
       "note": "Canva",
@@ -2910,7 +3547,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-222",
+      "id": "benign-306",
       "group": "official-subdomain",
       "url": "https://accounts.canva.com/",
       "note": "Canva",
@@ -2920,7 +3557,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-223",
+      "id": "benign-307",
       "group": "official-domain",
       "url": "https://adobe.com/",
       "note": "Adobe",
@@ -2930,7 +3567,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-224",
+      "id": "benign-308",
       "group": "official-subdomain",
       "url": "https://accounts.adobe.com/",
       "note": "Adobe",
@@ -2940,7 +3577,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-225",
+      "id": "benign-309",
       "group": "official-domain",
       "url": "https://figma.com/",
       "note": "Figma",
@@ -2950,7 +3587,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-226",
+      "id": "benign-310",
       "group": "official-subdomain",
       "url": "https://accounts.figma.com/",
       "note": "Figma",
@@ -2960,7 +3597,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-227",
+      "id": "benign-311",
       "group": "official-domain",
       "url": "https://openai.com/",
       "note": "OpenAI",
@@ -2970,7 +3607,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-228",
+      "id": "benign-312",
       "group": "official-subdomain",
       "url": "https://accounts.openai.com/",
       "note": "OpenAI",
@@ -2980,7 +3617,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-229",
+      "id": "benign-313",
       "group": "official-domain",
       "url": "https://chatgpt.com/",
       "note": "ChatGPT",
@@ -2990,7 +3627,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-230",
+      "id": "benign-314",
       "group": "official-subdomain",
       "url": "https://accounts.chatgpt.com/",
       "note": "ChatGPT",
@@ -3000,7 +3637,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-231",
+      "id": "benign-315",
       "group": "official-domain",
       "url": "https://claude.ai/",
       "note": "Claude",
@@ -3010,7 +3647,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-232",
+      "id": "benign-316",
       "group": "official-subdomain",
       "url": "https://accounts.claude.ai/",
       "note": "Claude",
@@ -3020,7 +3657,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-233",
+      "id": "benign-317",
       "group": "official-domain",
       "url": "https://anthropic.com/",
       "note": "Claude",
@@ -3030,7 +3667,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-234",
+      "id": "benign-318",
       "group": "official-subdomain",
       "url": "https://accounts.anthropic.com/",
       "note": "Claude",
@@ -3040,7 +3677,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-235",
+      "id": "benign-319",
       "group": "official-domain",
       "url": "https://gemini.google.com/",
       "note": "Gemini",
@@ -3050,7 +3687,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-236",
+      "id": "benign-320",
       "group": "official-subdomain",
       "url": "https://accounts.gemini.google.com/",
       "note": "Gemini",
@@ -3060,7 +3697,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-237",
+      "id": "benign-321",
       "group": "official-domain",
       "url": "https://perplexity.ai/",
       "note": "Perplexity",
@@ -3070,7 +3707,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-238",
+      "id": "benign-322",
       "group": "official-subdomain",
       "url": "https://accounts.perplexity.ai/",
       "note": "Perplexity",
@@ -3080,7 +3717,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-239",
+      "id": "benign-323",
       "group": "official-domain",
       "url": "https://deepseek.com/",
       "note": "DeepSeek",
@@ -3090,7 +3727,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-240",
+      "id": "benign-324",
       "group": "official-subdomain",
       "url": "https://accounts.deepseek.com/",
       "note": "DeepSeek",
@@ -3100,7 +3737,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-241",
+      "id": "benign-325",
       "group": "official-domain",
       "url": "https://huggingface.co/",
       "note": "Hugging Face",
@@ -3110,7 +3747,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-242",
+      "id": "benign-326",
       "group": "official-subdomain",
       "url": "https://accounts.huggingface.co/",
       "note": "Hugging Face",
@@ -3120,7 +3757,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-243",
+      "id": "benign-327",
       "group": "official-domain",
       "url": "https://midjourney.com/",
       "note": "Midjourney",
@@ -3130,7 +3767,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-244",
+      "id": "benign-328",
       "group": "official-subdomain",
       "url": "https://accounts.midjourney.com/",
       "note": "Midjourney",
@@ -3140,7 +3777,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-245",
+      "id": "benign-329",
       "group": "official-domain",
       "url": "https://cursor.com/",
       "note": "Cursor",
@@ -3150,7 +3787,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-246",
+      "id": "benign-330",
       "group": "official-subdomain",
       "url": "https://accounts.cursor.com/",
       "note": "Cursor",
@@ -3160,7 +3797,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-247",
+      "id": "benign-331",
       "group": "official-domain",
       "url": "https://cursor.sh/",
       "note": "Cursor",
@@ -3170,7 +3807,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-248",
+      "id": "benign-332",
       "group": "official-subdomain",
       "url": "https://accounts.cursor.sh/",
       "note": "Cursor",
@@ -3180,7 +3817,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-249",
+      "id": "benign-333",
       "group": "official-domain",
       "url": "https://atlassian.com/",
       "note": "Atlassian",
@@ -3190,7 +3827,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-250",
+      "id": "benign-334",
       "group": "official-subdomain",
       "url": "https://accounts.atlassian.com/",
       "note": "Atlassian",
@@ -3200,7 +3837,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-251",
+      "id": "benign-335",
       "group": "official-domain",
       "url": "https://jira.com/",
       "note": "Atlassian",
@@ -3210,7 +3847,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-252",
+      "id": "benign-336",
       "group": "official-subdomain",
       "url": "https://accounts.jira.com/",
       "note": "Atlassian",
@@ -3220,7 +3857,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-253",
+      "id": "benign-337",
       "group": "official-domain",
       "url": "https://trello.com/",
       "note": "Atlassian",
@@ -3230,7 +3867,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-254",
+      "id": "benign-338",
       "group": "official-subdomain",
       "url": "https://accounts.trello.com/",
       "note": "Atlassian",
@@ -3240,7 +3877,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-255",
+      "id": "benign-339",
       "group": "official-domain",
       "url": "https://asana.com/",
       "note": "Asana",
@@ -3250,7 +3887,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-256",
+      "id": "benign-340",
       "group": "official-subdomain",
       "url": "https://accounts.asana.com/",
       "note": "Asana",
@@ -3260,7 +3897,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-257",
+      "id": "benign-341",
       "group": "official-domain",
       "url": "https://monday.com/",
       "note": "Monday.com",
@@ -3270,7 +3907,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-258",
+      "id": "benign-342",
       "group": "official-subdomain",
       "url": "https://accounts.monday.com/",
       "note": "Monday.com",
@@ -3280,7 +3917,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-259",
+      "id": "benign-343",
       "group": "official-domain",
       "url": "https://stackoverflow.com/",
       "note": "Stack Overflow",
@@ -3290,7 +3927,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-260",
+      "id": "benign-344",
       "group": "official-subdomain",
       "url": "https://accounts.stackoverflow.com/",
       "note": "Stack Overflow",
@@ -3300,7 +3937,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-261",
+      "id": "benign-345",
       "group": "official-domain",
       "url": "https://stackexchange.com/",
       "note": "Stack Overflow",
@@ -3310,7 +3947,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-262",
+      "id": "benign-346",
       "group": "official-subdomain",
       "url": "https://accounts.stackexchange.com/",
       "note": "Stack Overflow",
@@ -3320,7 +3957,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-263",
+      "id": "benign-347",
       "group": "official-domain",
       "url": "https://npmjs.com/",
       "note": "npm",
@@ -3330,7 +3967,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-264",
+      "id": "benign-348",
       "group": "official-subdomain",
       "url": "https://accounts.npmjs.com/",
       "note": "npm",
@@ -3340,7 +3977,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-265",
+      "id": "benign-349",
       "group": "official-domain",
       "url": "https://pypi.org/",
       "note": "PyPI",
@@ -3350,7 +3987,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-266",
+      "id": "benign-350",
       "group": "official-subdomain",
       "url": "https://accounts.pypi.org/",
       "note": "PyPI",
@@ -3360,7 +3997,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-267",
+      "id": "benign-351",
       "group": "official-domain",
       "url": "https://docker.com/",
       "note": "Docker",
@@ -3370,7 +4007,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-268",
+      "id": "benign-352",
       "group": "official-subdomain",
       "url": "https://accounts.docker.com/",
       "note": "Docker",
@@ -3380,7 +4017,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-269",
+      "id": "benign-353",
       "group": "official-domain",
       "url": "https://docker.io/",
       "note": "Docker",
@@ -3390,7 +4027,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-270",
+      "id": "benign-354",
       "group": "official-subdomain",
       "url": "https://accounts.docker.io/",
       "note": "Docker",
@@ -3400,27 +4037,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-271",
-      "group": "official-domain",
-      "url": "https://wordpress.com/",
-      "note": "WordPress.com",
-      "host": "wordpress.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-272",
-      "group": "official-subdomain",
-      "url": "https://accounts.wordpress.com/",
-      "note": "WordPress.com",
-      "host": "accounts.wordpress.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-273",
+      "id": "benign-355",
       "group": "official-domain",
       "url": "https://wordpress.org/",
       "note": "WordPress.com",
@@ -3430,7 +4047,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-274",
+      "id": "benign-356",
       "group": "official-subdomain",
       "url": "https://accounts.wordpress.org/",
       "note": "WordPress.com",
@@ -3440,7 +4057,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-275",
+      "id": "benign-357",
       "group": "official-domain",
       "url": "https://medium.com/",
       "note": "Medium",
@@ -3450,7 +4067,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-276",
+      "id": "benign-358",
       "group": "official-subdomain",
       "url": "https://accounts.medium.com/",
       "note": "Medium",
@@ -3460,7 +4077,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-277",
+      "id": "benign-359",
       "group": "official-domain",
       "url": "https://substack.com/",
       "note": "Substack",
@@ -3470,7 +4087,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-278",
+      "id": "benign-360",
       "group": "official-subdomain",
       "url": "https://accounts.substack.com/",
       "note": "Substack",
@@ -3480,7 +4097,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-279",
+      "id": "benign-361",
       "group": "official-domain",
       "url": "https://quora.com/",
       "note": "Quora",
@@ -3490,7 +4107,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-280",
+      "id": "benign-362",
       "group": "official-subdomain",
       "url": "https://accounts.quora.com/",
       "note": "Quora",
@@ -3500,7 +4117,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-281",
+      "id": "benign-363",
       "group": "official-domain",
       "url": "https://yahoo.com/",
       "note": "Yahoo",
@@ -3510,7 +4127,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-282",
+      "id": "benign-364",
       "group": "official-subdomain",
       "url": "https://accounts.yahoo.com/",
       "note": "Yahoo",
@@ -3520,7 +4137,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-283",
+      "id": "benign-365",
       "group": "official-domain",
       "url": "https://yahoo.de/",
       "note": "Yahoo",
@@ -3530,7 +4147,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-284",
+      "id": "benign-366",
       "group": "official-subdomain",
       "url": "https://accounts.yahoo.de/",
       "note": "Yahoo",
@@ -3540,7 +4157,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-285",
+      "id": "benign-367",
       "group": "official-domain",
       "url": "https://yahoo.co.jp/",
       "note": "Yahoo",
@@ -3550,7 +4167,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-286",
+      "id": "benign-368",
       "group": "official-subdomain",
       "url": "https://accounts.yahoo.co.jp/",
       "note": "Yahoo",
@@ -3560,7 +4177,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-287",
+      "id": "benign-369",
       "group": "official-domain",
       "url": "https://yandex.ru/",
       "note": "Yandex",
@@ -3570,7 +4187,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-288",
+      "id": "benign-370",
       "group": "official-subdomain",
       "url": "https://accounts.yandex.ru/",
       "note": "Yandex",
@@ -3580,7 +4197,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-289",
+      "id": "benign-371",
       "group": "official-domain",
       "url": "https://yandex.com/",
       "note": "Yandex",
@@ -3590,7 +4207,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-290",
+      "id": "benign-372",
       "group": "official-subdomain",
       "url": "https://accounts.yandex.com/",
       "note": "Yandex",
@@ -3600,7 +4217,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-291",
+      "id": "benign-373",
       "group": "official-domain",
       "url": "https://baidu.com/",
       "note": "Baidu",
@@ -3610,7 +4227,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-292",
+      "id": "benign-374",
       "group": "official-subdomain",
       "url": "https://accounts.baidu.com/",
       "note": "Baidu",
@@ -3620,7 +4237,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-293",
+      "id": "benign-375",
       "group": "official-domain",
       "url": "https://weibo.com/",
       "note": "Weibo",
@@ -3630,7 +4247,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-294",
+      "id": "benign-376",
       "group": "official-subdomain",
       "url": "https://accounts.weibo.com/",
       "note": "Weibo",
@@ -3640,7 +4257,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-295",
+      "id": "benign-377",
       "group": "official-domain",
       "url": "https://vk.com/",
       "note": "VK",
@@ -3650,7 +4267,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-296",
+      "id": "benign-378",
       "group": "official-subdomain",
       "url": "https://accounts.vk.com/",
       "note": "VK",
@@ -3660,7 +4277,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-297",
+      "id": "benign-379",
       "group": "official-domain",
       "url": "https://mail.ru/",
       "note": "Mail.ru",
@@ -3670,7 +4287,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-298",
+      "id": "benign-380",
       "group": "official-subdomain",
       "url": "https://accounts.mail.ru/",
       "note": "Mail.ru",
@@ -3680,7 +4297,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-299",
+      "id": "benign-381",
       "group": "official-domain",
       "url": "https://naver.com/",
       "note": "Naver",
@@ -3690,7 +4307,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-300",
+      "id": "benign-382",
       "group": "official-subdomain",
       "url": "https://accounts.naver.com/",
       "note": "Naver",
@@ -3700,7 +4317,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-301",
+      "id": "benign-383",
       "group": "official-domain",
       "url": "https://line.me/",
       "note": "LINE",
@@ -3710,7 +4327,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-302",
+      "id": "benign-384",
       "group": "official-subdomain",
       "url": "https://accounts.line.me/",
       "note": "LINE",
@@ -3720,7 +4337,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-303",
+      "id": "benign-385",
       "group": "official-domain",
       "url": "https://rakuten.co.jp/",
       "note": "Rakuten",
@@ -3730,7 +4347,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-304",
+      "id": "benign-386",
       "group": "official-subdomain",
       "url": "https://accounts.rakuten.co.jp/",
       "note": "Rakuten",
@@ -3740,7 +4357,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-305",
+      "id": "benign-387",
       "group": "official-domain",
       "url": "https://mercadolibre.com/",
       "note": "Mercado Libre",
@@ -3750,7 +4367,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-306",
+      "id": "benign-388",
       "group": "official-subdomain",
       "url": "https://accounts.mercadolibre.com/",
       "note": "Mercado Libre",
@@ -3760,7 +4377,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-307",
+      "id": "benign-389",
       "group": "official-domain",
       "url": "https://mercadolibre.com.mx/",
       "note": "Mercado Libre",
@@ -3770,7 +4387,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-308",
+      "id": "benign-390",
       "group": "official-subdomain",
       "url": "https://accounts.mercadolibre.com.mx/",
       "note": "Mercado Libre",
@@ -3780,7 +4397,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-309",
+      "id": "benign-391",
       "group": "official-domain",
       "url": "https://mercadolivre.com.br/",
       "note": "Mercado Libre",
@@ -3790,7 +4407,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-310",
+      "id": "benign-392",
       "group": "official-subdomain",
       "url": "https://accounts.mercadolivre.com.br/",
       "note": "Mercado Libre",
@@ -3800,7 +4417,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-311",
+      "id": "benign-393",
       "group": "official-domain",
       "url": "https://zalando.de/",
       "note": "Zalando",
@@ -3810,7 +4427,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-312",
+      "id": "benign-394",
       "group": "official-subdomain",
       "url": "https://accounts.zalando.de/",
       "note": "Zalando",
@@ -3820,7 +4437,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-313",
+      "id": "benign-395",
       "group": "official-domain",
       "url": "https://zalando.com/",
       "note": "Zalando",
@@ -3830,7 +4447,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-314",
+      "id": "benign-396",
       "group": "official-subdomain",
       "url": "https://accounts.zalando.com/",
       "note": "Zalando",
@@ -3840,7 +4457,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-315",
+      "id": "benign-397",
       "group": "official-domain",
       "url": "https://otto.de/",
       "note": "Otto",
@@ -3850,7 +4467,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-316",
+      "id": "benign-398",
       "group": "official-subdomain",
       "url": "https://accounts.otto.de/",
       "note": "Otto",
@@ -3860,7 +4477,7 @@
       "matchSite": null
     },
     {
-      "id": "benign-317",
+      "id": "benign-399",
       "group": "official-domain",
       "url": "https://samsung.com/",
       "note": "Samsung",
@@ -3870,831 +4487,11 @@
       "matchSite": null
     },
     {
-      "id": "benign-318",
+      "id": "benign-400",
       "group": "official-subdomain",
       "url": "https://accounts.samsung.com/",
       "note": "Samsung",
       "host": "accounts.samsung.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-319",
-      "group": "official-domain",
-      "url": "https://huawei.com/",
-      "note": "Huawei",
-      "host": "huawei.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-320",
-      "group": "official-subdomain",
-      "url": "https://accounts.huawei.com/",
-      "note": "Huawei",
-      "host": "accounts.huawei.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-321",
-      "group": "official-domain",
-      "url": "https://xiaomi.com/",
-      "note": "Xiaomi",
-      "host": "xiaomi.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-322",
-      "group": "official-subdomain",
-      "url": "https://accounts.xiaomi.com/",
-      "note": "Xiaomi",
-      "host": "accounts.xiaomi.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-323",
-      "group": "official-domain",
-      "url": "https://nvidia.com/",
-      "note": "NVIDIA",
-      "host": "nvidia.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-324",
-      "group": "official-subdomain",
-      "url": "https://accounts.nvidia.com/",
-      "note": "NVIDIA",
-      "host": "accounts.nvidia.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-325",
-      "group": "official-domain",
-      "url": "https://intel.com/",
-      "note": "Intel",
-      "host": "intel.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-326",
-      "group": "official-subdomain",
-      "url": "https://accounts.intel.com/",
-      "note": "Intel",
-      "host": "accounts.intel.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-327",
-      "group": "official-domain",
-      "url": "https://amd.com/",
-      "note": "AMD",
-      "host": "amd.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-328",
-      "group": "official-subdomain",
-      "url": "https://accounts.amd.com/",
-      "note": "AMD",
-      "host": "accounts.amd.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-329",
-      "group": "official-domain",
-      "url": "https://sony.com/",
-      "note": "Sony",
-      "host": "sony.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-330",
-      "group": "official-subdomain",
-      "url": "https://accounts.sony.com/",
-      "note": "Sony",
-      "host": "accounts.sony.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-331",
-      "group": "official-domain",
-      "url": "https://sony.de/",
-      "note": "Sony",
-      "host": "sony.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-332",
-      "group": "official-subdomain",
-      "url": "https://accounts.sony.de/",
-      "note": "Sony",
-      "host": "accounts.sony.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-333",
-      "group": "official-domain",
-      "url": "https://dell.com/",
-      "note": "Dell",
-      "host": "dell.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-334",
-      "group": "official-subdomain",
-      "url": "https://accounts.dell.com/",
-      "note": "Dell",
-      "host": "accounts.dell.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-335",
-      "group": "official-domain",
-      "url": "https://lenovo.com/",
-      "note": "Lenovo",
-      "host": "lenovo.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-336",
-      "group": "official-subdomain",
-      "url": "https://accounts.lenovo.com/",
-      "note": "Lenovo",
-      "host": "accounts.lenovo.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-337",
-      "group": "official-domain",
-      "url": "https://hp.com/",
-      "note": "HP",
-      "host": "hp.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-338",
-      "group": "official-subdomain",
-      "url": "https://accounts.hp.com/",
-      "note": "HP",
-      "host": "accounts.hp.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-339",
-      "group": "official-domain",
-      "url": "https://asus.com/",
-      "note": "Asus",
-      "host": "asus.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-340",
-      "group": "official-subdomain",
-      "url": "https://accounts.asus.com/",
-      "note": "Asus",
-      "host": "accounts.asus.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-341",
-      "group": "official-domain",
-      "url": "https://salesforce.com/",
-      "note": "Salesforce",
-      "host": "salesforce.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-342",
-      "group": "official-subdomain",
-      "url": "https://accounts.salesforce.com/",
-      "note": "Salesforce",
-      "host": "accounts.salesforce.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-343",
-      "group": "official-domain",
-      "url": "https://force.com/",
-      "note": "Salesforce",
-      "host": "force.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-344",
-      "group": "official-subdomain",
-      "url": "https://accounts.force.com/",
-      "note": "Salesforce",
-      "host": "accounts.force.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-345",
-      "group": "official-domain",
-      "url": "https://oracle.com/",
-      "note": "Oracle",
-      "host": "oracle.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-346",
-      "group": "official-subdomain",
-      "url": "https://accounts.oracle.com/",
-      "note": "Oracle",
-      "host": "accounts.oracle.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-347",
-      "group": "official-domain",
-      "url": "https://sap.com/",
-      "note": "SAP",
-      "host": "sap.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-348",
-      "group": "official-subdomain",
-      "url": "https://accounts.sap.com/",
-      "note": "SAP",
-      "host": "accounts.sap.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-349",
-      "group": "official-domain",
-      "url": "https://ibm.com/",
-      "note": "IBM",
-      "host": "ibm.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-350",
-      "group": "official-subdomain",
-      "url": "https://accounts.ibm.com/",
-      "note": "IBM",
-      "host": "accounts.ibm.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-351",
-      "group": "official-domain",
-      "url": "https://cisco.com/",
-      "note": "Cisco",
-      "host": "cisco.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-352",
-      "group": "official-subdomain",
-      "url": "https://accounts.cisco.com/",
-      "note": "Cisco",
-      "host": "accounts.cisco.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-353",
-      "group": "official-domain",
-      "url": "https://digitalocean.com/",
-      "note": "DigitalOcean",
-      "host": "digitalocean.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-354",
-      "group": "official-subdomain",
-      "url": "https://accounts.digitalocean.com/",
-      "note": "DigitalOcean",
-      "host": "accounts.digitalocean.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-355",
-      "group": "official-domain",
-      "url": "https://hetzner.com/",
-      "note": "Hetzner",
-      "host": "hetzner.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-356",
-      "group": "official-subdomain",
-      "url": "https://accounts.hetzner.com/",
-      "note": "Hetzner",
-      "host": "accounts.hetzner.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-357",
-      "group": "official-domain",
-      "url": "https://hetzner.de/",
-      "note": "Hetzner",
-      "host": "hetzner.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-358",
-      "group": "official-subdomain",
-      "url": "https://accounts.hetzner.de/",
-      "note": "Hetzner",
-      "host": "accounts.hetzner.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-359",
-      "group": "official-domain",
-      "url": "https://vercel.com/",
-      "note": "Vercel",
-      "host": "vercel.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-360",
-      "group": "official-subdomain",
-      "url": "https://accounts.vercel.com/",
-      "note": "Vercel",
-      "host": "accounts.vercel.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-361",
-      "group": "official-domain",
-      "url": "https://netlify.com/",
-      "note": "Netlify",
-      "host": "netlify.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-362",
-      "group": "official-subdomain",
-      "url": "https://accounts.netlify.com/",
-      "note": "Netlify",
-      "host": "accounts.netlify.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-363",
-      "group": "official-domain",
-      "url": "https://dhl.com/",
-      "note": "DHL",
-      "host": "dhl.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-364",
-      "group": "official-subdomain",
-      "url": "https://accounts.dhl.com/",
-      "note": "DHL",
-      "host": "accounts.dhl.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-365",
-      "group": "official-domain",
-      "url": "https://dhl.de/",
-      "note": "DHL",
-      "host": "dhl.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-366",
-      "group": "official-subdomain",
-      "url": "https://accounts.dhl.de/",
-      "note": "DHL",
-      "host": "accounts.dhl.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-367",
-      "group": "official-domain",
-      "url": "https://fedex.com/",
-      "note": "FedEx",
-      "host": "fedex.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-368",
-      "group": "official-subdomain",
-      "url": "https://accounts.fedex.com/",
-      "note": "FedEx",
-      "host": "accounts.fedex.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-369",
-      "group": "official-domain",
-      "url": "https://ups.com/",
-      "note": "UPS",
-      "host": "ups.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-370",
-      "group": "official-subdomain",
-      "url": "https://accounts.ups.com/",
-      "note": "UPS",
-      "host": "accounts.ups.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-371",
-      "group": "official-domain",
-      "url": "https://usps.com/",
-      "note": "USPS",
-      "host": "usps.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-372",
-      "group": "official-subdomain",
-      "url": "https://accounts.usps.com/",
-      "note": "USPS",
-      "host": "accounts.usps.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-373",
-      "group": "official-domain",
-      "url": "https://deutschepost.de/",
-      "note": "Deutsche Post",
-      "host": "deutschepost.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-374",
-      "group": "official-subdomain",
-      "url": "https://accounts.deutschepost.de/",
-      "note": "Deutsche Post",
-      "host": "accounts.deutschepost.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-375",
-      "group": "official-domain",
-      "url": "https://myhermes.de/",
-      "note": "Hermes",
-      "host": "myhermes.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-376",
-      "group": "official-subdomain",
-      "url": "https://accounts.myhermes.de/",
-      "note": "Hermes",
-      "host": "accounts.myhermes.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-377",
-      "group": "official-domain",
-      "url": "https://hermesworld.com/",
-      "note": "Hermes",
-      "host": "hermesworld.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-378",
-      "group": "official-subdomain",
-      "url": "https://accounts.hermesworld.com/",
-      "note": "Hermes",
-      "host": "accounts.hermesworld.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-379",
-      "group": "official-domain",
-      "url": "https://dpd.com/",
-      "note": "DPD",
-      "host": "dpd.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-380",
-      "group": "official-subdomain",
-      "url": "https://accounts.dpd.com/",
-      "note": "DPD",
-      "host": "accounts.dpd.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-381",
-      "group": "official-domain",
-      "url": "https://dpd.de/",
-      "note": "DPD",
-      "host": "dpd.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-382",
-      "group": "official-subdomain",
-      "url": "https://accounts.dpd.de/",
-      "note": "DPD",
-      "host": "accounts.dpd.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-383",
-      "group": "official-domain",
-      "url": "https://gls-group.com/",
-      "note": "GLS",
-      "host": "gls-group.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-384",
-      "group": "official-subdomain",
-      "url": "https://accounts.gls-group.com/",
-      "note": "GLS",
-      "host": "accounts.gls-group.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-385",
-      "group": "official-domain",
-      "url": "https://gls-pakete.de/",
-      "note": "GLS",
-      "host": "gls-pakete.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-386",
-      "group": "official-subdomain",
-      "url": "https://accounts.gls-pakete.de/",
-      "note": "GLS",
-      "host": "accounts.gls-pakete.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-387",
-      "group": "official-domain",
-      "url": "https://deutsche-bank.de/",
-      "note": "Deutsche Bank",
-      "host": "deutsche-bank.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-388",
-      "group": "official-subdomain",
-      "url": "https://accounts.deutsche-bank.de/",
-      "note": "Deutsche Bank",
-      "host": "accounts.deutsche-bank.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-389",
-      "group": "official-domain",
-      "url": "https://db.com/",
-      "note": "Deutsche Bank",
-      "host": "db.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-390",
-      "group": "official-subdomain",
-      "url": "https://accounts.db.com/",
-      "note": "Deutsche Bank",
-      "host": "accounts.db.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-391",
-      "group": "official-domain",
-      "url": "https://sparkasse.de/",
-      "note": "Sparkasse",
-      "host": "sparkasse.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-392",
-      "group": "official-subdomain",
-      "url": "https://accounts.sparkasse.de/",
-      "note": "Sparkasse",
-      "host": "accounts.sparkasse.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-393",
-      "group": "official-domain",
-      "url": "https://postbank.de/",
-      "note": "Postbank",
-      "host": "postbank.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-394",
-      "group": "official-subdomain",
-      "url": "https://accounts.postbank.de/",
-      "note": "Postbank",
-      "host": "accounts.postbank.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-395",
-      "group": "official-domain",
-      "url": "https://comdirect.de/",
-      "note": "Comdirect",
-      "host": "comdirect.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-396",
-      "group": "official-subdomain",
-      "url": "https://accounts.comdirect.de/",
-      "note": "Comdirect",
-      "host": "accounts.comdirect.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-397",
-      "group": "official-domain",
-      "url": "https://ing.de/",
-      "note": "ING",
-      "host": "ing.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-398",
-      "group": "official-subdomain",
-      "url": "https://accounts.ing.de/",
-      "note": "ING",
-      "host": "accounts.ing.de",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-399",
-      "group": "official-domain",
-      "url": "https://ing.com/",
-      "note": "ING",
-      "host": "ing.com",
-      "status": "safe",
-      "reason": null,
-      "matchSite": null
-    },
-    {
-      "id": "benign-400",
-      "group": "official-subdomain",
-      "url": "https://accounts.ing.com/",
-      "note": "ING",
-      "host": "accounts.ing.com",
       "status": "safe",
       "reason": null,
       "matchSite": null

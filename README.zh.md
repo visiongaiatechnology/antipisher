@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.2 (Alpha)
+# 🛡️ Antipisher 0.2.3 (Alpha)
 
 **适用于 Google Chrome 与 Mozilla Firefox 的离线高精度反网络钓鱼、IDN 同形字、追踪器与广告拦截防护扩展**  
 *遵循 GNU Affero 通用公共许可证 v3.0 (AGPLv3) 开源*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.2-alpha](https://img.shields.io/badge/Version-0.2.2--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 80/80 Passing](https://img.shields.io/badge/Tests-80%2F80_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
+[![Version: 0.2.3-alpha](https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 91/91 Passing](https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge)](#测试与开发规范)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/遥测-零_%2F_100%25_离线-0284c7.svg?style=for-the-badge)](#隐私保护与离线保证)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_就绪-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_就绪-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,8 +22,35 @@
 
 </div>
 
-> **状态：** `SILVER` · 版本 `0.2.2` · 截至 2026-10-19 · VGT Ad Shield 广告防御与 YouTube 拦截里程碑版本。  
+> **状态：** `PLATIN` · 版本 `0.2.3` · 截至 2026-11-18 · VGT-100 安全加固认证（`48/52 PASS, 0 FAIL`）、GeDefense Light 供应链防御与 YouTube 播放修复里程碑版本。  
 > **非最终应用商店发行版：** 浏览器自动化端到端测试（E2E）、应用商店官方上架审核、签名更新分发流与完整的 V2 图引擎正在持续演进中（详见 [已知边界与限制](#已知边界与限制)）。
+
+### ⬇️ 直接下载 (`v0.2.3-alpha`)
+
+| 浏览器 | ZIP 直接下载 | 校验和与发布页 |
+|---|---|---|
+| **Google Chrome (MV3)** | [**下载 Antipisher-Chrome-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip) | [Chrome 发布页 & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha) |
+| **Mozilla Firefox (MV3)** | [**下载 Antipisher-Firefox-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip) | [Firefox 发布页 & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha) |
+| **完整发布与源码** | [**v0.2.3-alpha 发布总览**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha) | [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
+
+---
+
+## 🛡️ `v0.2.3` 安全更新与实战案例分析（供应链攻击）
+
+### 🔒 核心安全更新 (`0.2.3` — Platin Security Hardened)
+- **GeDefense Light 供应链、Magecart 与剪贴板劫持防御 (`shared/aegis-engine.js`)：**
+  - 在 DOM 原型层（`setAttribute`、`HTMLScriptElement.src`、`HTMLIFrameElement.src`、`appendChild`、`insertBefore`）拦截恶意跨域 `<script>`/`<iframe>` 注入（C2 加载器、`.icu`/`.lol` 等高危后缀、裸 IPv4 以及 `eval(atob(...))` / `window._k7` 载荷）。
+  - **Anti-Magecart 防窃密守卫：** 拦截向盗刷端点（`/card.php`、`/hit.php`、`/skimmer.php`）发送支付数据的 `navigator.sendBeacon` 和 `window.fetch` 请求。
+  - **Crypto-Clipper 剪贴板守卫：** 防止 `navigator.clipboard.writeText` 静默篡改用户复制的加密货币钱包地址（BTC、ETH/EVM、TRON）。
+- **VGT-100 白金级安全加固 (`48/52 PASS, 0 FAIL`)：**
+  - RFC-1035 输入长度预算（`MAX_HOST_LEN=253`、`MAX_LABEL_LEN=63`），将 `100k` 字符超长域名耗时从 `2,753 ms` 降至 **`0.26 ms`**（常规 `p95 = 0.39 ms`）。
+  - 30 秒 `allow-once` TTL、队列互斥锁 `configure()`、引擎异常 Fail-Closed 重定向、无 URL/PII 安全事件环形缓冲区（`securityEvents`）、构建文件白名单与 CycloneDX 1.5 SBOM（[`sbom.json`](sbom.json)）。
+- **YouTube 广告加速器修复：** 修复因残留空 `.ytp-ad-player-overlay` 容器导致正常视频跳转至结尾的缺陷，广告结束后自动恢复 `1.0x` 播放倍速与静音状态。
+
+### 🔥 实战案例：2026 年 11 月 16 日 Optimizely 供应链攻击（178 家网站）
+2026 年 11 月 16 日，攻击者通过被攻陷的 Optimizely `projectJS` 向 178 家知名网站（含 GitLab、Salesforce、IKEA、Zoom、Ledger 等）注入恶意 JS，加载 `1688360.cc/track.js`、`webshell.lol`、`eval(atob(...))`、Magecart 窃密脚本（`sendBeacon('/card.php')`）、钱包剪贴板劫持及 `.icu` iOS 漏洞利用套件。
+- **更新前 (`v0.2.2`)：** 仅部分拦截 `optimizely.com` 及基础 DOM 注入，尚未对 `1688360.cc`/`.icu` 动态 `<script>`/`<iframe>`、`fetch` 窃密和剪贴板劫持进行专项原型拦截。
+- **更新后 (`v0.2.3` Platin)：** 双层联动拦截——网络层（Chrome DNR + Firefox `webRequestBlocking`）阻断 `optimizely.com` 与 C2 IOC；GeDefense Light 在原型层拦截跨域动态脚本/框架、阻断 `sendBeacon`/`fetch` 窃密并保护剪贴板钱包地址。
 
 ---
 
@@ -116,11 +143,12 @@
 
 | 评测测试集 | 基准测试结果 |
 |---|---|
-| 独立 296 例保留测试集（审核验证员） | **289/296 = 97.6%** 准确率；0/166 假阴性（漏报），7/121 假阳性（误报）（高置信度误报率仅 2/99 = 2.0%） |
-| 全新未经标定的 44 例健全性校验集 | **42/44 = 95.5%**（在未收录的组合词 `tiktok-coin.com`、`ledger-live.com` 上出现 2 例漏报） |
-| 公开 184 例 URL 审计测试集 | 183/184 检出（1 例漏报，0 例误报） |
+| 独立 296 例保留测试集（审核验证员） | **292/296 = 98.65%** 准确率；**0/166 假阴性（100% 检出率）**，4/121 假阳性（`p50 = 0.16 ms`，`p95 = 0.39 ms`） |
+| 全新未经标定的 44 例健全性校验集 | **44/44 = 100%**（`tiktok-coin.com` 与 `ledger-live.com` 均已检出） |
+| 安全审计语料库（`probe02`，788 例） | **42/43 攻击检出（97.7%）**，**0/745 正常域名误报（0.0%）** |
 | 主任审计员 66 例对抗性探针 | **0/26 误报（0%）**，**0/40 漏报（0%）** —— 100% 全数通过 |
-| Node.js 单元与回归测试套件 | **69/69 全部通过（100%）** |
+| Node.js 单元与安全负向测试套件 | **91/91 全部通过（100%）**（覆盖 13 个测试套件） |
+| VGT-100 安全审计（`validate_audit.py`） | **48/52 适用控制项 PASS，0 FAIL**（[`AUDIT_SECURITY.md`](audit/security/AUDIT_SECURITY.md)） |
 
 > [!NOTE]
 > 以上数据基于实证测试，并不构成绝对零风险担保。在即将到来的 V2 版本中，将进一步引入完整的 UTS-39 机器对照表和基于图谱的品牌实体知识库。

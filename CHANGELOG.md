@@ -3,6 +3,48 @@
 Alle wesentlichen Änderungen an Antipisher. Format orientiert an Keep a Changelog;
 Versionierung folgt der Alpha-Reihe `0.2.x`.
 
+## [0.2.3] — 2026-11-17 (Platin Security Hardened)
+
+### VGT-100 Security Audit & Platin-Härtung (`48/52 PASS, 0 FAIL`)
+- **RFC-1035 Input- & DoS-Ressourcenbudgets (`shared/detector.js`, `shared/popup.html`, `shared/popup.js`):**
+  - Strikte Längenbudgets (`MAX_URL_INPUT_LEN = 262144`, `MAX_HOST_LEN = 253`, `MAX_LABEL_LEN = 63`, `MAX_LABELS = 32`, `MAX_PATH_SCAN_LEN = 2048`) und einmalige Label-Vorberechnung vor der 187-Marken-Schleife.
+  - Verarbeitungszeit eines `100.000`-Zeichen-Hostlabels sinkt von `2.753,4 ms` auf **`0,26 ms`** (**10.590× Speedup**); reguläre Klassifikationslatenz sinkt auf `p50 = 0,023 ms`, `p95 = 0,39 ms`, `p99 = 0,53 ms`.
+  - `#url`-Eingabefeld im Popup auf `maxlength="2048"` begrenzt.
+- **Allow-Once Lifecycle mit 30s-TTL, Stale-Bypass-Clear & Queue-Mutex (`chrome/background.js`, `firefox/background.js`):**
+  - Temporäre Einmal-Freigaben (`allow-once`) verfallen automatisch nach `ALLOW_TTL_MS = 30000` (30 Sekunden) oder sofort bei einer abweichenden Navigation im selben Tab.
+  - Queue-serialisiertes `configure()` (`configPromise` / `configPending`) verhindert Race-Conditions bei überlappenden Konfigurationsläufen; verwaiste Session-Regeln (`id >= 10001`) werden beim Start noch vor dem ersten Storage-Read bereinigt.
+- **Fail-Closed Engine Guard & Datensparsamer Security-Event-Ringpuffer (`chrome/background.js`, `firefox/background.js`):**
+  - Fehlt die Detektor-Engine oder wirft `classify()`, leiten Firefox (`analyzeRequest`) und Chrome (`onBeforeNavigate`) Navigationen **fail-closed** auf `guard.html` um und setzen `protectionDegraded = true`.
+  - Lokaler Ringpuffer `storage.local.securityEvents` (max. 50 Einträge, `{ ts, type, detail }`) protokolliert `block`, `allow-once`, `degraded` und `healthy` ohne Speicherung von URLs, Hostnamen oder PII.
+- **Detektor-Kalibrierung (`shared/detector.js`):**
+  - Eliminiert alle 20 Benign-FPs in `probe02` (`0/745 FP`, `0` Subdomain-FP-Kandidaten in `probe08`) und schließt Combosquat-Lücken (`tiktok-coin.com`, `ledger-live.com`, `paypal-me.com`): `42/43` in `probe02` (`97,7 %`), `44/44` in `fresh_sanity.cjs` (`100 %`), `292/296` mit **`0/166 FN` (`100 % TPR`)** im unabhängigen Holdout.
+- **Build-Allowlist, RFC-1123-Domain-Schema & CycloneDX 1.5 SBOM (`build.py`, `build_sites.py`, `sbom.json`):**
+  - `build_sites.py` validiert alle 187 Marken und 353 Domains gegen strikte RFC-1123-Hostname-Regexe.
+  - `build.py` prüft vor dem Packen eine explizite Datei-Positivliste (`ALLOWED_PACKAGE_FILES`, 22 Dateien) und generiert deterministisch `sbom.json` (CycloneDX 1.5, 0 externe Dependencies) sowie `SHA256SUMS.txt`.
+- **Platin-Security-Testsuite (`tests/platin-security.test.cjs`):**
+  - 6 neue Security-Testsuiten prüfen dauerhaft alle VGT-100-Negativ- und Grenzfälle in CI (**91/91 Tests in 13 Dateien PASS**).
+
+### Security & GeDefense Light (Optimizely Supply-Chain & Magecart Hardening)
+- **GeDefense Light Supply-Chain & Dynamic Script/Iframe Gatekeeper:**
+  - Blockiert bösartige dynamische `<script>`- und `<iframe>`-Injektionen (`Element.prototype.setAttribute`, `HTMLScriptElement.prototype.src`, `HTMLIFrameElement.prototype.src`, `Node.prototype.appendChild`, `Node.prototype.insertBefore`) zu kompromittierten C2-Endpunkten (`1688360.cc`, `webshell.lol`, `linkforge.cc`, `.icu` iOS-Exploit-Kits wie Coruna/DarkSword), Hochrisiko-TLDs (`.icu`, `.lol`, `.top`, `.click`, `.gq`, `.tk` etc.) und rohen öffentlichen IPv4-Hosts.
+  - Neutralisiert inline verschleierte Loader-Payloads (`eval(atob(...))`, `window._k7`, `data-channel-code="02111110"`), ohne legitime First-Party-Skripte oder Zahlungs-CDNs (Stripe, Adyen, PayPal) einzuschränken.
+- **Anti-Magecart Exfiltration Guard (`sendBeacon` & `fetch`):**
+  - Verhindert das stille Abfließen von Zahlungs-, Kreditkarten- und Passwortdaten über `navigator.sendBeacon` und `window.fetch` an Skimmer-Endpunkte (`/card.php`, `/hit.php`, `/skimmer.php` sowie fremde Hochrisiko-Domains).
+- **Crypto-Clipper & Clipboard Hijack Guard:**
+  - Schützt `navigator.clipboard.writeText` vor stillem Austausch kopierter Krypto-Wallet-Adressen (BTC, ETH/EVM, TRON) gegen Angreifer-Wallets, indem die tatsächlich im DOM markierte Nutzer-Auswahl wiederhergestellt wird.
+- **Plattform-Parität für Tracker- & Supply-Chain-Blocklisten (`rulesets/trackers.json`, `chrome/background.js`, `firefox/background.js`):**
+  - Synchronisiert `optimizely.com`, `logx.optimizely.com`, `browser.sentry-cdn.com`, `bam.nr-data.net` sowie die bekannten Supply-Chain-IOCs vom 16.11.2026 über Chrome MV3 (DNR + webRequest) und Firefox MV3 (`webRequestBlocking`).
+  - Behebt fehlenden `typeof api.runtime.sendMessage === 'function'`-Guard in `firefox/background.js`.
+
+### Bugfixes
+- **YouTube Video Ad Accelerator End-Jump-Bug behoben (`shared/aegis-engine.js`):**
+  - Behebt den Fehler, bei dem normale YouTube-Videos plötzlich ans Ende sprangen und sofort zum nächsten Video weiterleiteten. Ursache war die Abfrage auf statisch im DOM verbleibende leere Container (`.ytp-ad-player-overlay`, `.ytp-ad-module`) sowie das Nicht-Zurücksetzen von `video.playbackRate = 16.0` nach Werbeende.
+  - Der Beschleuniger greift nun ausschließlich, solange `#movie_player` aktiv die Klasse `ad-showing` oder `ad-interrupting` trägt (und `duration <= 300s`), und stellt danach die ursprüngliche Wiedergabegeschwindigkeit (`1.0x`) und Lautstärke automatisch wieder her.
+- **Safe-Toast Anzeigedauer (`shared/shield-content.js`), Synchrones Guard-Rendering (`shared/guard.js`) & Guard-Versionsmetadaten (`shared/guard.html`):**
+  - `renderSafeToast(duration)` übernimmt nun den konfigurierten `duration`-Parameter aus den Einstellungen.
+  - `shared/guard.js` rendert die lokalisierte Warn-UI sofort synchron beim Laden, noch bevor `storage.local.get('user_locale')` auflöst (behebt Optional-Chaining-Kurzschluss bei fehlendem `api.storage`).
+  - Synchronisiert alle Versionsangaben auf `0.2.3`.
+
 ## [0.2.2] — 2026-10-19 (Alpha)
 
 ### Features & VGT Ad Shield

@@ -32,6 +32,21 @@ FILES = ('guard.html', 'guard.css', 'guard.js', 'popup.html', 'popup.css', 'popu
          'options.html', 'options.css', 'options.js',
          'sites.js', 'detector.js', 'shield-content.js', 'design-tokens.css', 'i18n.js',
          'aegis-engine.js')
+
+# Explicit package file allowlist (VGT-059 artifact hygiene gate)
+ALLOWED_PACKAGE_FILES = {
+    'manifest.json', 'background.js',
+    'guard.html', 'guard.css', 'guard.js',
+    'popup.html', 'popup.css', 'popup.js',
+    'options.html', 'options.css', 'options.js',
+    'design-tokens.css',
+    'shared/sites.js', 'shared/detector.js',
+    'shared/shield-content.js', 'shared/i18n.js', 'shared/aegis-engine.js',
+    'rulesets/trackers.json',
+    'icons/icon16.png', 'icons/icon48.png', 'icons/icon128.png',
+    '_locales/en/messages.json', '_locales/de/messages.json',
+    '_locales/ru/messages.json', '_locales/zh_CN/messages.json',
+}
 generated_zips = []
 
 for target in ('chrome', 'firefox'):
@@ -63,26 +78,66 @@ for target in ('chrome', 'firefox'):
     assert manifest['manifest_version'] == 3
     assert 'options_ui' in manifest, f"options_ui missing in {target} manifest"
     assert manifest['options_ui']['page'] == 'options.html'
-    for file in ('guard.html', 'guard.css', 'guard.js', 'popup.html', 'popup.css', 'popup.js',
-                 'options.html', 'options.css', 'options.js',
-                 'design-tokens.css', 'background.js', 'shared/sites.js', 'shared/detector.js',
-                 'shared/shield-content.js', 'shared/i18n.js', 'shared/aegis-engine.js',
-                 'rulesets/trackers.json',
-                 '_locales/en/messages.json', '_locales/de/messages.json',
-                 '_locales/ru/messages.json', '_locales/zh_CN/messages.json'):
-        assert (dst / file).exists(), file
+    for file in sorted(ALLOWED_PACKAGE_FILES):
+        assert (dst / file).exists(), f"Missing required package file in {target}: {file}"
 
-    zip_path = ROOT.parent / f'Antipisher-{target.capitalize()}-v0.2.2-alpha.zip'
+    packed_arcnames = set()
+    zip_path = ROOT.parent / f'Antipisher-{target.capitalize()}-v0.2.3-alpha.zip'
     with zipfile.ZipFile(zip_path, 'w') as z:
         for file in sorted(dst.rglob('*')):
             if file.is_file() and '_metadata' not in file.parts:
                 arcname = file.relative_to(dst).as_posix()
+                assert arcname in ALLOWED_PACKAGE_FILES, (
+                    f"Unlisted file in {target} build directory (violates VGT-059 allowlist): {arcname}"
+                )
+                packed_arcnames.add(arcname)
                 add_deterministic(z, file, arcname)
+    assert packed_arcnames == ALLOWED_PACKAGE_FILES, (
+        f"Package file mismatch in {target}: diff={ALLOWED_PACKAGE_FILES ^ packed_arcnames}"
+    )
     generated_zips.append(zip_path)
     print(f"Generated: {zip_path.name}")
 
+# Generate deterministic CycloneDX 1.5 zero-dependency SBOM (VGT-051 / VGT-055)
+sbom_components = []
+for rel_path in sorted(ALLOWED_PACKAGE_FILES):
+    f_path = ROOT / 'chrome' / rel_path
+    digest = hashlib.sha256(f_path.read_bytes()).hexdigest()
+    sbom_components.append({
+        "type": "file",
+        "name": rel_path,
+        "version": "0.2.3",
+        "hashes": [{"alg": "SHA-256", "content": digest}]
+    })
+for extra_rel in ('chrome/background.js', 'firefox/background.js', 'chrome/manifest.json', 'firefox/manifest.json'):
+    f_path = ROOT / extra_rel
+    digest = hashlib.sha256(f_path.read_bytes()).hexdigest()
+    sbom_components.append({
+        "type": "file",
+        "name": extra_rel,
+        "version": "0.2.3",
+        "hashes": [{"alg": "SHA-256", "content": digest}]
+    })
+sbom_doc = {
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.5",
+    "version": 1,
+    "metadata": {
+        "timestamp": "2026-01-01T00:00:00Z",
+        "component": {
+            "type": "application",
+            "name": "antipisher",
+            "version": "0.2.3",
+            "licenses": [{"license": {"id": "AGPL-3.0-only"}}]
+        }
+    },
+    "components": sbom_components,
+    "dependencies": [{"ref": "antipisher@0.2.3", "dependsOn": []}]
+}
+(ROOT / 'sbom.json').write_text(json.dumps(sbom_doc, indent=2) + '\n', encoding='utf-8')
+
 # Source archive (clean source only, excluding audit/, temp files and generated checksums)
-src_zip = ROOT.parent / 'Antipisher-Source-v0.2.2-alpha.zip'
+src_zip = ROOT.parent / 'Antipisher-Source-v0.2.3-alpha.zip'
 EXCLUDE_DIRS = {'audit', '__pycache__', '.git', '.tmp', 'node_modules', '_metadata'}
 EXCLUDE_EXTS = {'.zip', '.log', '.tmp'}
 EXCLUDE_FILES = {'SHA256SUMS.txt'}

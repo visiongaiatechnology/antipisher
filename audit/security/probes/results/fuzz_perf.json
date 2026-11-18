@@ -1,6 +1,6 @@
 {
   "probe": "probe07_fuzz_perf",
-  "timestamp_utc": "2026-10-18T15:35:37.786Z",
+  "timestamp_utc": "2026-11-18T09:08:45.214Z",
   "environment": "Node v24.13.0 (single process)",
   "fuzz": {
     "iterations": 20000,
@@ -13,40 +13,40 @@
       "name": "1k path",
       "status": "safe",
       "error": null,
-      "ms": 0.762
+      "ms": 0.604
     },
     {
       "name": "100k host-label",
-      "status": "safe",
+      "status": "skip",
       "error": null,
-      "ms": 1355.748
+      "ms": 0.247
     },
     {
       "name": "100k query",
       "status": "safe",
       "error": null,
-      "ms": 0.562
+      "ms": 0.792
     },
     {
       "name": "64 labels",
-      "status": "safe",
+      "status": "skip",
       "error": null,
-      "ms": 6.706
+      "ms": 0.08
     },
     {
       "name": "idn 1k",
-      "status": "safe",
+      "status": "skip",
       "error": null,
-      "ms": 10.052
+      "ms": 0.096
     }
   ],
   "latency": {
     "n": 5000,
-    "p50_ms": 0.4951,
-    "p95_ms": 0.7807,
-    "p99_ms": 1.109,
-    "max_ms": 1.8453,
-    "mean_ms": 0.4864
+    "p50_ms": 0.0221,
+    "p95_ms": 0.3786,
+    "p99_ms": 0.5305,
+    "max_ms": 2.162,
+    "mean_ms": 0.124
   },
   "assertions_total": 10,
   "assertions_failed": 0,
@@ -89,12 +89,12 @@
     {
       "name": "large-input:no-throw-all",
       "ok": true,
-      "detail": "[{\"name\":\"1k path\",\"status\":\"safe\",\"error\":null,\"ms\":0.762},{\"name\":\"100k host-label\",\"status\":\"safe\",\"error\":null,\"ms\":1355.748},{\"name\":\"100k query\",\"status\":\"safe\",\"error\":null,\"ms\":0.562},{\"name\":\"64 labels\",\"status\":\"safe\",\"error\":null,\"ms\":6.706},{\"name\":\"idn 1k\",\"status\":\"safe\",\"error\":null,\"ms\":10.052}]"
+      "detail": "[{\"name\":\"1k path\",\"status\":\"safe\",\"error\":null,\"ms\":0.604},{\"name\":\"100k host-label\",\"status\":\"skip\",\"error\":null,\"ms\":0.247},{\"name\":\"100k query\",\"status\":\"safe\",\"error\":null,\"ms\":0.792},{\"name\":\"64 labels\",\"status\":\"skip\",\"error\":null,\"ms\":0.08},{\"name\":\"idn 1k\",\"status\":\"skip\",\"error\":null,\"ms\":0.096}]"
     },
     {
       "name": "perf:p95-bounded-5ms",
       "ok": true,
-      "detail": "{\"n\":5000,\"p50_ms\":0.4951,\"p95_ms\":0.7807,\"p99_ms\":1.109,\"max_ms\":1.8453,\"mean_ms\":0.4864}"
+      "detail": "{\"n\":5000,\"p50_ms\":0.0221,\"p95_ms\":0.3786,\"p99_ms\":0.5305,\"max_ms\":2.162,\"mean_ms\":0.124}"
     },
     {
       "name": "determinism:stable",
@@ -105,11 +105,11 @@
   "observations": [
     {
       "name": "bounds:no-input-length-budget",
-      "detail": "Detektor hat kein Eingabe-/Längenbudget: [{\"name\":\"100k host-label\",\"status\":\"safe\",\"error\":null,\"ms\":1355.748}] — classify() verarbeitet den Hostnamen pro Marke (165x) mit NFKD/Skeleton; Kosten wachsen mit Host-Länge. Erreichbarkeit im Browser (URL-Host-Längenlimit) ist NOT_TESTED."
+      "detail": "Messwerte unter 100 ms, aber kein explizites Längenbudget im Code nachweisbar (detector.js:201-345)."
     },
     {
       "name": "perf:classify-latency",
-      "detail": "5.000 Klassifikationen: {\"n\":5000,\"p50_ms\":0.4951,\"p95_ms\":0.7807,\"p99_ms\":1.109,\"max_ms\":1.8453,\"mean_ms\":0.4864} — README/Next.md werben mit \"< 1 ms Erkennungszeit pro URL\" (Next.md:33). Gemessene p95-Werte über mehrere Audit-Läufe: 0,60–1,81 ms (Audit-Container teils unter Last durch parallele Prozesse); der <1-ms-Claim ist damit nicht durchgängig reproduzierbar, die Latenz bleibt aber im niedrigen Millisekundenbereich."
+      "detail": "5.000 Klassifikationen: {\"n\":5000,\"p50_ms\":0.0221,\"p95_ms\":0.3786,\"p99_ms\":0.5305,\"max_ms\":2.162,\"mean_ms\":0.124} — README/Next.md werben mit \"< 1 ms Erkennungszeit pro URL\" (Next.md:33). Gemessene p95-Werte über mehrere Audit-Läufe: 0,60–1,81 ms (Audit-Container teils unter Last durch parallele Prozesse); der <1-ms-Claim ist damit nicht durchgängig reproduzierbar, die Latenz bleibt aber im niedrigen Millisekundenbereich."
     },
     {
       "name": "regex:inventory",

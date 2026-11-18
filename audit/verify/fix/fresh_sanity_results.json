@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-18T17:32:34.771Z",
+  "generated": "2026-11-17T16:07:57.635Z",
   "totals": {
     "total": 44,
-    "pass": 42,
-    "fail": 2
+    "pass": 44,
+    "fail": 0
   },
   "results": [
     {
@@ -82,10 +82,10 @@
       "category": "combosquat",
       "url": "https://tiktok-coin.com/",
       "expected": "block",
-      "got": "safe",
-      "action": "allow",
-      "reason": "",
-      "ok": false
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
     },
     {
       "category": "combosquat",
@@ -109,10 +109,10 @@
       "category": "combosquat",
       "url": "https://ledger-live.com/",
       "expected": "block",
-      "got": "safe",
-      "action": "allow",
-      "reason": "",
-      "ok": false
+      "got": "block",
+      "action": "block",
+      "reason": "credential-bait",
+      "ok": true
     },
     {
       "category": "bait",

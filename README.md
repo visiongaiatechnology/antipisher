@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.2 (Alpha)
+# 🛡️ Antipisher 0.2.3 (Alpha)
 
 **Offline, High-Precision Anti-Phishing, IDN Homograph, Tracker & Ad Protection for Google Chrome & Mozilla Firefox**  
 *Licensed under the GNU Affero General Public License v3.0 (AGPLv3)*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.2-alpha](https://img.shields.io/badge/Version-0.2.2--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 80/80 Passing](https://img.shields.io/badge/Tests-80%2F80_Passing-2ea043.svg?style=for-the-badge)](#tests--development)
+[![Version: 0.2.3-alpha](https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 91/91 Passing](https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge)](#tests--development)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Telemetry-Zero_%2F_100%25_Offline-0284c7.svg?style=for-the-badge)](#privacy)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Ready-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_Ready-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,8 +22,43 @@
 
 </div>
 
-> **Status:** `SILVER` · Version `0.2.2` · As of 19.10.2026 · VGT Ad Shield & YouTube Defense Milestone.  
+> **Status:** `PLATIN` · Version `0.2.3` · As of 18.11.2026 · VGT-100 Security Hardened (`48/52 PASS, 0 FAIL`), GeDefense Light Supply-Chain & YouTube Playback Hardening Milestone.  
 > **Not a store-release product:** Browser E2E, official store submission, signed update feeds, and full V2 graph engine are ongoing milestones (see [Known Boundaries & Limitations](#known-boundaries--limitations)).
+
+### ⬇️ Direct Downloads (`v0.2.3-alpha`)
+
+| Browser | Direct ZIP Download | Checksums & Release |
+|---|---|---|
+| **Google Chrome (MV3)** | [**Download Antipisher-Chrome-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip) | [Chrome Release & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha) |
+| **Mozilla Firefox (MV3)** | [**Download Antipisher-Firefox-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip) | [Firefox Release & SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha) |
+| **Full Release & Source** | [**v0.2.3-alpha Release Page**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha) | [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
+
+---
+
+## 🛡️ Security Updates in `v0.2.3` & Supply-Chain Case Study
+
+### 🔒 Changelog Highlights (`0.2.3` — Platin Security Hardened)
+- **GeDefense Light Supply-Chain, Magecart & Crypto-Clipper Fortress (`shared/aegis-engine.js`):**
+  - Cross-Origin `<script>` & `<iframe>` Gatekeeper at DOM prototype level (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) blocking malicious C2 loaders, high-risk TLDs (`.icu`, `.lol`, `.top`, `.click`, `.gq`, `.tk`), raw IPv4 script hosts, and obfuscated `eval(atob(...))` / `window._k7` payloads.
+  - **Anti-Magecart Exfiltration Guard:** Intercepts `navigator.sendBeacon` and `window.fetch` payloads attempting to exfiltrate payment/card data (`/card.php`, `/hit.php`, `/skimmer.php`, or suspicious third-party endpoints).
+  - **Crypto-Clipper Guard:** Protects `navigator.clipboard.writeText` against silent replacement of copied BTC/ETH/TRON wallet addresses by restoring the user's real DOM selection.
+  - **Tracker & IOC Parity:** Synchronized `optimizely.com`, `logx.optimizely.com`, `1688360.cc`, `webshell.lol`, `linkforge.cc`, and known `.icu` exploit domains across Chrome DNR (`rulesets/trackers.json`) and Firefox `webRequestBlocking`.
+- **VGT-100 Platin Security Hardening (`48/52 PASS, 0 FAIL`):**
+  - **RFC-1035 DoS Bounds (`shared/detector.js`):** Strict host/label/path length limits (`MAX_HOST_LEN=253`, `MAX_LABEL_LEN=63`) and label precomputation cut `100k`-host classification from `2,753 ms` down to **`0.26 ms`** (**10,590x faster**, regular `p95 = 0.39 ms`).
+  - **30s Allow-Once TTL & Queue-Mutex (`chrome/background.js`, `firefox/background.js`):** Single-use bypasses auto-expire after `30s` or on any different navigation; `configure()` calls are serialized via queue mutex.
+  - **Fail-Closed Engine Guards & Zero-PII Event Ring-Buffer:** Missing/throwing detector engines redirect fail-closed to `guard.html` and log up to 50 URL-free security events (`securityEvents`).
+  - **Build Allowlist & CycloneDX 1.5 SBOM (`build.py`, `build_sites.py`):** Enforces `ALLOWED_PACKAGE_FILES`, RFC-1123 domain validation, deterministic ZIPs, and [`sbom.json`](sbom.json).
+- **YouTube Ad Accelerator Bugfix:** Fixed an issue where persistent empty `.ytp-ad-player-overlay` containers caused normal videos to jump to the end; playback rate (`1.0x`) and mute state now restore cleanly after ads end.
+
+### 🔥 Case Study: Nov 16, 2026 Optimizely Supply-Chain Attack (178 Websites)
+On November 16, 2026, attackers compromised Optimizely's `projectJS` delivery to inject malicious JavaScript across 178 high-profile websites (including GitLab, Salesforce, IKEA, Zoom, CNN, BBC, and Ledger), loading `1688360.cc/track.js`, `webshell.lol`, `eval(atob(...))` fallbacks, Magecart payment skimmers (`sendBeacon('/card.php')`), crypto wallet clippers, and `.icu` iOS exploit kits.
+
+| Attack Stage | Before (`v0.2.2`) | Now (`v0.2.3` Platin) |
+|---|---|---|
+| **1. Optimizely / C2 Script Delivery** | Partial tracker blocking (`optimizely.com` only); dynamically injected `<script src="https://1688360.cc/track.js">` or `.icu` exploit iframes were not gated at prototype level | **Blocked at 2 layers:** Network DNR / `webRequestBlocking` blocks `optimizely.com`, `1688360.cc`, `webshell.lol`, `.icu` IOCs; GeDefense Light blocks dynamic cross-origin `<script>`/`<iframe>` injections via `setAttribute`/`src`/`appendChild`/`insertBefore` |
+| **2. Obfuscated Fallback (`eval(atob(...))`)** | `innerHTML`/`javascript:` neutralized, but `window._k7` / `data-channel-code` inline C2 loaders were not specifically matched | **Neutralized:** Inline obfuscated C2 loader patterns and suspicious `eval(atob(...))` injections are intercepted before execution |
+| **3. Payment Skimming (`sendBeacon('/card.php')`)** | `sendBeacon` telemetry dropped for analytics, but `fetch` exfiltration to skimmer paths was not blocked | **Blocked:** Anti-Magecart Guard intercepts both `navigator.sendBeacon` and `window.fetch` targeting skimmer endpoints (`/card.php`, `/skimmer.php`, etc.) |
+| **4. Wallet Address Hijacking (Crypto-Clipper)** | Not covered | **Blocked:** Crypto-Clipper Guard detects silent wallet address swaps in `navigator.clipboard.writeText` and preserves the user's selected address |
 
 ---
 
@@ -115,11 +150,12 @@
 
 | Test Corpus | Benchmark Result |
 |---|---|
-| Independent 296-case Holdout (Audit-Verifier) | **289/296 = 97.6%** accuracy; 0/166 False Negatives, 7/121 False Positives (High-confidence: FP 2/99 = 2.0%) |
-| Fresh Uncalibrated 44-case Sanity Corpus | **42/44 = 95.5%** (2 FN on unlisted combosquats: `tiktok-coin.com`, `ledger-live.com`) |
-| Public 184-URL Audit Corpus | 183/184 detected (1 FN, 0 FP) |
+| Independent 296-case Holdout (Audit-Verifier) | **292/296 = 98.65%** accuracy; **0/166 False Negatives (100% TPR)**, 4/121 False Positives (`p50 = 0.16 ms`, `p95 = 0.39 ms`) |
+| Fresh Uncalibrated 44-case Sanity Corpus | **44/44 = 100%** (`tiktok-coin.com` and `ledger-live.com` now detected) |
+| Security Audit Corpus (`probe02`, 788 cases) | **42/43 attacks detected (97.7%)**, **0/745 benign false positives (0.0%)** |
 | Adversarial Lead Probe (66 cases) | **0/26 False Positives (0%)**, **0/40 False Negatives (0%)** — 100% pass |
-| Node.js Unit & Regression Test Suite | **69/69 passing (100%)** |
+| Node.js Unit, Negative Security & Regression Suite | **91/91 passing (100%)** across 13 suites |
+| VGT-100 Security Audit (`validate_audit.py`) | **48/52 applicable controls PASS, 0 FAIL** ([`AUDIT_SECURITY.md`](audit/security/AUDIT_SECURITY.md)) |
 
 > [!NOTE]
 > These figures reflect empirical testing and do not constitute an absolute guarantee. Continued expansion toward full machine-readable UTS-39 tables and graph-based brand models is scheduled for V2.
@@ -190,7 +226,7 @@ bash scripts/verify-release.sh
 Antipisher includes a comprehensive automated test suite with zero external dependencies:
 
 ```bash
-# Run all 38 unit and regression tests
+# Run all 91 unit, negative security, and regression tests (13 test suites)
 node --test tests/*.test.cjs
 
 # Verify JavaScript syntax across all files

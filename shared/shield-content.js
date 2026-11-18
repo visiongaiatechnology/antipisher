@@ -405,7 +405,7 @@
     document.documentElement.appendChild(bannerHost);
   }
 
-  function renderSafeToast() {
+  function renderSafeToast(duration) {
     if (typeof document === 'undefined' || !document.documentElement) return null;
     if (document.getElementById('antipisher-safe-toast-root')) return null;
 

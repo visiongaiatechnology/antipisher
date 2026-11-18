@@ -462,13 +462,66 @@ test('VGT Ad Shield: YouTube Video Ad Accelerator fast-forwards and auto-skips v
   // Trigger ad skipper
   fakeDoc.dispatchEvent(new ctx.CustomEvent('timeupdate'));
 
-  // Video must be muted and fast-forwarded
+  // Video must be muted and fast-forwarded (duration - 0.1s)
   assert.equal(video.muted, true, 'Ad video must be muted');
   assert.equal(video.playbackRate, 16.0, 'Ad video playbackRate must be set to 16x');
-  assert.equal(video.currentTime, 30, 'Ad video must be jumped to duration end');
+  assert.ok(video.currentTime >= 29.8, 'Ad video must be jumped to duration end');
   assert.equal(skipClicked, true, 'Skip button must be clicked automatically');
 
   // Anti-adblock modal must be removed
   assert.equal(antiAdblockModal.parentNode, null, 'Anti-adblock modal must be removed from DOM');
 });
+
+test('VGT Ad Shield: YouTube Video Ad Accelerator does NOT skip normal video when empty .ytp-ad-player-overlay persists or ad ends', () => {
+  const sandbox = createAdblockSandbox({
+    hostname: 'www.youtube.com',
+    href: 'https://www.youtube.com/watch?v=1vaCngYR7aU'
+  });
+  const { fakeDoc, ctx } = sandbox;
+
+  // Construct YouTube player WITHOUT ad-showing class, but WITH a leftover .ytp-ad-player-overlay child
+  const player = fakeDoc.createElement('div');
+  player.id = 'movie_player';
+  player.className = 'html5-video-player playing-mode';
+  fakeDoc.body.appendChild(player);
+
+  const persistentAdContainer = fakeDoc.createElement('div');
+  persistentAdContainer.className = 'ytp-ad-player-overlay';
+  player.appendChild(persistentAdContainer);
+
+  const video = fakeDoc.createElement('video');
+  video.duration = 600; // 10-minute normal video
+  video.currentTime = 42;
+  video.muted = false;
+  video.playbackRate = 1.0;
+  player.appendChild(video);
+
+  // Trigger timeupdate during normal video playback
+  fakeDoc.dispatchEvent(new ctx.CustomEvent('timeupdate'));
+
+  assert.equal(video.currentTime, 42, 'Normal video currentTime must NOT be jumped to the end');
+  assert.equal(video.playbackRate, 1.0, 'Normal video playbackRate must stay 1.0');
+  assert.equal(video.muted, false, 'Normal video must NOT be muted');
+
+  // Now simulate an ad starting (ad-showing added, short 15s ad clip)
+  player.classList.add('ad-showing');
+  video.duration = 15;
+  video.currentTime = 1;
+  fakeDoc.dispatchEvent(new ctx.CustomEvent('timeupdate'));
+
+  assert.equal(video.playbackRate, 16.0, 'Ad must be accelerated to 16x');
+  assert.equal(video.muted, true, 'Ad must be muted');
+  assert.ok(video.currentTime >= 14.8, 'Ad must seek to near end');
+
+  // Now simulate the ad ending and main video resuming (ad-showing removed)
+  player.classList.remove('ad-showing');
+  video.duration = 600;
+  video.currentTime = 43;
+  fakeDoc.dispatchEvent(new ctx.CustomEvent('timeupdate'));
+
+  assert.equal(video.playbackRate, 1.0, 'Playback rate must be restored to 1.0 after ad finishes');
+  assert.equal(video.muted, false, 'Mute state must be restored to false after ad finishes');
+  assert.equal(video.currentTime, 43, 'Main video must continue smoothly at 43s without skipping to end');
+});
+
 

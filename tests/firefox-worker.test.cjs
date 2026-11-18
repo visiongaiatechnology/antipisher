@@ -45,3 +45,25 @@ test('Firefox manifest contains web_accessible_resources and data_collection_per
  assert.ok(hasGuard, 'guard.html must be in web_accessible_resources for webRequest redirect');
  assert.equal(manifest.browser_specific_settings?.gecko?.data_collection_permissions?.required?.[0], 'none');
 });
+
+test('Firefox tracker shield blocks Optimizely and Nov 16 supply-chain C2 domains', () => {
+ const { events } = fakeFirefox();
+ const trackerListener = events.before.listeners[1];
+ assert.ok(trackerListener, 'Firefox must register tracker webRequest listener');
+
+ for (const url of [
+   'https://cdn.optimizely.com/js/6395285578973184.js',
+   'https://logx.optimizely.com/v1/events',
+   'https://1688360.cc/track.js',
+   'https://5vobauua3ojpklx.icu/boot.js',
+   'https://webshell.lol/get.js'
+ ]) {
+   const res = trackerListener({ url, tabId: 3 });
+   assert.equal(res.cancel, true, `Firefox must cancel request to ${url}`);
+ }
+
+ // Legitimate first-party script is allowed
+ const safeRes = trackerListener({ url: 'https://gitlab.com/assets/application.js', tabId: 3 });
+ assert.equal(JSON.stringify(safeRes), '{}');
+});
+

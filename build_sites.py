@@ -5,9 +5,13 @@ Generates shared/sites.js and sites-100.json with the curated brand/official-dom
 exclusive official domains (they would whitelist customer-controlled subdomains).
 """
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+
+BRAND_RE = re.compile(r'^[a-z0-9]{2,32}$')
+HOSTNAME_RE = re.compile(r'^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$')
 
 # Roots where customers, not the brand, own the subdomain. Listing one of these as an
 # "official domain" would make every tenant URL look official (e.g. paypal.force.com).
@@ -221,9 +225,13 @@ assert len(records) >= 165, f"Expected >= 165 brands, got {len(records)}"
 brands = [r['brand'] for r in records]
 assert len(brands) == len(set(brands)), f"Duplicate brand found: {[b for b in brands if brands.count(b) > 1]}"
 
-# Data-integrity guard: never treat a shared-hosting root as an exclusive brand domain.
+# Data-integrity guard: strict RFC-1123 hostname & brand schema validation + shared-host root rejection.
 for r in records:
+    assert r['name'], "Empty brand display name"
+    assert BRAND_RE.match(r['brand']), f"Invalid brand token schema: {r['name']} -> {r['brand']}"
+    assert len(r['domains']) > 0, f"Brand has no official domains: {r['name']}"
     for domain in r['domains']:
+        assert HOSTNAME_RE.match(domain), f"Invalid RFC-1123 hostname in {r['name']}: {domain}"
         assert domain not in SHARED_HOST_ROOTS, (
             f"Shared-host root listed as official domain: {r['name']} -> {domain}"
         )

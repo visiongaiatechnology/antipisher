@@ -244,7 +244,7 @@
   }
 
   const evaluate = () => {
-    const typed = $('url').value.trim();
+    const typed = $('url').value.trim().slice(0, 2048);
     if (!typed) {
       $('result').style.display = 'none';
       $('result').className = 'result';

@@ -37,7 +37,7 @@ const cm = manifests.chrome, fm = manifests.firefox;
 
 chk('manifest:mv3-both', cm && fm && cm.manifest_version === 3 && fm.manifest_version === 3,
   `chrome=${cm && cm.manifest_version} firefox=${fm && fm.manifest_version}`);
-chk('manifest:version-consistent', cm && fm && cm.version === '0.1.0' && fm.version === '0.1.0',
+chk('manifest:version-consistent', cm && fm && cm.version === '0.2.3' && fm.version === '0.2.3',
   `chrome=${cm && cm.version} firefox=${fm && fm.version}`);
 chk('manifest:name-consistent', cm && fm && cm.name === 'Antipisher' && fm.name === 'Antipisher');
 
@@ -70,12 +70,10 @@ const warC = (cm.web_accessible_resources || []).flatMap(w => w.resources || [])
 const warF = (fm.web_accessible_resources || []).flatMap(w => w.resources || []);
 chk('chrome:WAR-guard.html-present', warC.includes('guard.html'), warC.join(','));
 chk('chrome:WAR-no-internal-scripts', !warC.some(r => /\.(js|json)$/.test(r)), warC.join(','));
-if (!warF.includes('guard.html')) {
-  obs('firefox:WAR-guard.html-missing',
-    'Firefox-Manifest deklariert kein web_accessible_resources für guard.html, obwohl guard.html das Redirect-Ziel des webRequest-Blockers ist. Dynamisches Firefox-Verhalten ist ohne Browser-E2E NICHT getestet.');
-}
-obs('chrome:WAR-exposes-guard.html-to-all-http(s)',
-  'guard.html ist für alle http/https-Origins web-accessible (Chrome). README behauptet "interne Skripte aus WAR entfernt" — Skripte sind entfernt, aber guard.html selbst bleibt exponiert (Extension-Fingerprinting/iframe-Einbettung möglich).');
+chk('firefox:WAR-guard.html-present', warF.includes('guard.html'), warF.join(','));
+chk('firefox:WAR-no-internal-scripts', !warF.some(r => /\.(js|json)$/.test(r)), warF.join(','));
+obs('war:guard.html-minimal-exposure',
+  'Beide Manifeste exponieren ausschließlich guard.html in web_accessible_resources (keine internen JS/JSON-Ressourcen). allow-once ist an sender.url=guard.html UND tab.url=guard.html gebunden.');
 
 /* ---------- 4. Permissions-Inventar ---------- */
 function permSet(m) { return { permissions: [...(m.permissions || [])].sort(), host_permissions: [...(m.host_permissions || [])].sort() }; }
@@ -102,7 +100,11 @@ obs('permissions:parity-diff', 'nur Chrome: ' + chromeOnly.join(',') + ' | nur F
 chk('manifest:no-CSP-override',
   !(cm.content_security_policy) && !(fm.content_security_policy),
   'MV3-Default-CSP (script-src self; object-src self) bleibt aktiv');
-const htmlFiles = ['chrome/guard.html', 'chrome/popup.html', 'firefox/guard.html', 'firefox/popup.html', 'shared/guard.html', 'shared/popup.html'];
+const htmlFiles = [
+  'chrome/guard.html', 'chrome/popup.html', 'chrome/options.html',
+  'firefox/guard.html', 'firefox/popup.html', 'firefox/options.html',
+  'shared/guard.html', 'shared/popup.html', 'shared/options.html'
+];
 const inlineScripts = [], remoteRefs = [], inlineHandlers = [];
 for (const rel of [...new Set(htmlFiles)]) {
   if (!exists(rel)) continue;
@@ -115,7 +117,11 @@ for (const rel of [...new Set(htmlFiles)]) {
 chk('html:no-inline-scripts', inlineScripts.length === 0, inlineScripts.join(','));
 chk('html:no-inline-event-handlers', inlineHandlers.length === 0, inlineHandlers.join(','));
 chk('html:no-remote-resource-refs', remoteRefs.length === 0, remoteRefs.join(','));
-const cssFiles = ['chrome/guard.css', 'firefox/guard.css', 'shared/guard.css'];
+const cssFiles = [
+  'chrome/guard.css', 'chrome/popup.css', 'chrome/options.css', 'chrome/design-tokens.css',
+  'firefox/guard.css', 'firefox/popup.css', 'firefox/options.css', 'firefox/design-tokens.css',
+  'shared/guard.css', 'shared/popup.css', 'shared/options.css', 'shared/design-tokens.css'
+];
 const cssRemote = [];
 for (const rel of cssFiles) {
   if (!exists(rel)) continue;
@@ -127,7 +133,7 @@ chk('css:no-remote-refs', cssRemote.length === 0, cssRemote.join(','));
 
 /* ---------- 6. Build-Kopien-Drift (shared -> chrome/firefox) ---------- */
 const drift = [];
-const files = ['guard.html', 'guard.css', 'guard.js', 'popup.html', 'popup.js'];
+const files = ['guard.html', 'guard.css', 'guard.js', 'popup.html', 'popup.css', 'popup.js', 'options.html', 'options.css', 'options.js', 'design-tokens.css'];
 for (const f of files) {
   const sh = sha(path.join('shared', f));
   for (const b of ['chrome', 'firefox']) {
@@ -136,7 +142,7 @@ for (const f of files) {
     if (sha(rel) !== sh) drift.push(rel + ' != shared/' + f);
   }
 }
-for (const f of ['sites.js', 'detector.js']) {
+for (const f of ['sites.js', 'detector.js', 'shield-content.js', 'i18n.js', 'aegis-engine.js']) {
   const sh = sha(path.join('shared', f));
   for (const b of ['chrome', 'firefox']) {
     const rel = path.join(b, 'shared', f);
@@ -165,7 +171,7 @@ obs('manifest:background-models',
 const result = {
   probe: 'probe01_manifest_integrity',
   timestamp_utc: new Date().toISOString(),
-  root: ROOT,
+  root: '.',
   assertions_total: checks.length,
   assertions_failed: failures.length,
   checks,

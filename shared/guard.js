@@ -165,18 +165,20 @@
     });
   }
 
-  // Initial load
+  // Initial synchronous render so warning text is immediately visible (fail-safe UI)
+  renderLocalizedUI(currentLang);
   try {
-    api?.storage?.local?.get('user_locale').then(res => {
-      if (res?.user_locale) {
-        renderLocalizedUI(res.user_locale);
-      } else {
-        renderLocalizedUI(currentLang);
-      }
-    }).catch(() => renderLocalizedUI(currentLang));
-  } catch {
-    renderLocalizedUI(currentLang);
-  }
+    const p = api && api.storage && api.storage.local && typeof api.storage.local.get === 'function'
+      ? api.storage.local.get('user_locale')
+      : null;
+    if (p && typeof p.then === 'function') {
+      p.then(res => {
+        if (res && res.user_locale && res.user_locale !== 'auto') {
+          renderLocalizedUI(res.user_locale);
+        }
+      }).catch(() => {});
+    }
+  } catch {}
 
   if (!target || result.status === 'skip') {
     hideResidualPanels();

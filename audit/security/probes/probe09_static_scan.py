@@ -138,16 +138,16 @@ def main() -> int:
         f = ROOT / path
         if not f.exists():
             return None
-        m = re.search(r"0\.1\.0", f.read_text(encoding="utf-8", errors="replace"))
+        m = re.search(r"0\.\d+\.\d+", f.read_text(encoding="utf-8", errors="replace"))
         return m.group(0) if m else None
 
-    version_claims = {p: find_version(p) for p in ["README.md", "Next.md", "chrome/manifest.json", "firefox/manifest.json", "SECURITY.md"]}
+    version_claims = {p: find_version(p) for p in ["README.md", "chrome/manifest.json", "firefox/manifest.json", "SECURITY.md"]}
 
     result = {
         "probe": "probe09_static_scan",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "python": sys.version.split()[0],
-        "root": str(ROOT),
+        "root": ".",
         "file_count": len(inventory),
         "inventory": inventory,
         "sink_hits": hits,

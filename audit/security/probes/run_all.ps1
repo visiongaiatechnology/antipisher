@@ -1,4 +1,4 @@
-# Audit runner — VGT-100 Security-Audit "Antipisher 0.1" (AUDIT_ONLY, nichtdestruktiv)
+﻿# Audit runner — VGT-100 Security-Audit "Antipisher 0.1" (AUDIT_ONLY, nichtdestruktiv)
 # Führt Baseline-Tests, Syntax-Checks und alle Audit-Probes aus und schreibt ein Ledger.
 # Schreibt ausschließlich unter audit/security/.
 $ErrorActionPreference = 'Continue'
@@ -17,9 +17,9 @@ function Run-Step([string]$id, [string]$cmd, [string]$logName) {
     Write-Host ("[{0}] exit={1}  {2}" -f $id, $code, $cmd)
 }
 
-# 1) Baseline-Produkt-Tests
-Run-Step 'TR-01-baseline-tests' 'node --test tests/detector.test.cjs tests/chrome-worker.test.cjs tests/firefox-worker.test.cjs' 'baseline_tests.log'
-Run-Step 'TR-02-syntax-check' 'node --check chrome/background.js && node --check firefox/background.js && node --check chrome/guard.js && node --check chrome/popup.js && node --check shared/detector.js && node --check shared/sites.js' 'syntax_check.log'
+# 1) Vollständige Produkt- & Security-Testsuite (13 Dateien, 91 Tests)
+Run-Step 'TR-01-baseline-tests' 'node --test tests/ad-shield.test.cjs tests/aegis.test.cjs tests/chrome-worker.test.cjs tests/detector.test.cjs tests/firefox-worker.test.cjs tests/gedefense.test.cjs tests/i18n.test.cjs tests/options-whitelist.test.cjs tests/p0-regressions.test.cjs tests/platin-security.test.cjs tests/shield-content.test.cjs tests/tracker-shield.test.cjs tests/v2-scoring.test.cjs' 'baseline_tests.log'
+Run-Step 'TR-02-syntax-check' 'node --check chrome/background.js && node --check firefox/background.js && node --check chrome/guard.js && node --check chrome/popup.js && node --check shared/detector.js && node --check shared/sites.js && node --check shared/shield-content.js && node --check shared/aegis-engine.js' 'syntax_check.log'
 
 # 2) Audit-Probes
 Run-Step 'TR-03-manifest-integrity' 'node audit/security/probes/probe01_manifest_integrity.cjs' 'probe01_manifest_integrity.log'
@@ -33,7 +33,7 @@ Run-Step 'TR-10-data-integrity' 'node audit/security/probes/probe08_data_integri
 Run-Step 'TR-11-static-scan' 'python audit/security/probes/probe09_static_scan.py' 'probe09_static_scan.log'
 Run-Step 'AUX-01-matrix-regenerate' 'node audit/security/probes/build_matrix.cjs' 'matrix_regenerate.log'
 Run-Step 'AUX-02-coverage-embed' 'node audit/security/probes/embed_coverage.cjs' 'coverage_embed.log'
-Run-Step 'TR-12-matrix-validate' 'python "C:\Users\Masterboard\.dsh\skills\vgt-security-master\scripts\validate_audit.py" audit/security/AUDIT_MATRIX.json' 'validate_audit.log'
+Run-Step 'TR-12-matrix-validate' 'python "C:\Users\Masterboard\.gemini\config\skills\vgt-security-master\scripts\validate_audit.py" audit/security/AUDIT_MATRIX.json' 'validate_audit.log'
 
 $ledger | ConvertTo-Json -Depth 4 | Set-Content -Encoding utf8 (Join-Path $PSScriptRoot 'results\run_ledger.json')
 Write-Host ''

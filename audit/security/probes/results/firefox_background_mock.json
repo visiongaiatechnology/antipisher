@@ -1,8 +1,8 @@
 {
   "probe": "probe05_firefox_background_mock",
-  "timestamp_utc": "2026-10-18T15:35:32.188Z",
+  "timestamp_utc": "2026-11-18T09:08:43.015Z",
   "environment": "Node v24.13.0 vm-Sandbox mit gemockter browser-API (kein echter Browser)",
-  "assertions_total": 14,
+  "assertions_total": 16,
   "assertions_failed": 0,
   "assertions": [
     {
@@ -74,17 +74,19 @@
       "name": "once:tab-close-clears-bypass",
       "ok": true,
       "detail": "{\"redirectUrl\":\"moz-extension://fake/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"}"
+    },
+    {
+      "name": "once:stale-bypass-cleared-on-other-nav",
+      "ok": true,
+      "detail": "{\"redirectUrl\":\"moz-extension://fake/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"}"
+    },
+    {
+      "name": "engine:missing-engine-fails-closed",
+      "ok": true,
+      "detail": "{\"threw\":null,\"failClosedRes\":{\"redirectUrl\":\"moz-extension://fake/guard.html?url=https%3A%2F%2Fpaypa1.com%2F\"}}"
     }
   ],
   "observations": [
-    {
-      "name": "once:no-ttl-stale-bypass",
-      "detail": "Ein gesetztes Einmal-Bypass bleibt unbegrenzt scharf, wenn die freigegebene Navigation nicht stattfindet (kein TTL/Alarm; firefox/background.js:6-9,29-34). Test: nach allow-once für A, einer anderen (geblockten) Navigation und erneutem A-Request wird A weiterhin erlaubt=true."
-    },
-    {
-      "name": "engine:missing-engine-throws",
-      "detail": "Ohne geladene Detektor-Engine wirft analyzeRequest beim Zugriff auf engine.classify (firefox/background.js:10-11). Beobachtet: Cannot read properties of undefined (reading 'classify'). Ob Firefox die Hauptnavigation bei einem werfenden blocking-Listener blockiert oder durchlässt, ist ohne Browser-E2E NICHT_TESTED (Fail-open-Hypothese)."
-    },
     {
       "name": "strict:ignored-in-firefox",
       "detail": "storage.local.strictMode=false hat in Firefox keine Wirkung (kein Lesen des Werts, firefox/background.js gesamt); Chrome-Popup blendet die Option für Firefox aus. Verhalten ist insofern konsistent, aber der gespeicherte Modus ist browserübergreifend nicht semantisch gleich. Block trotz strictMode=false=true."

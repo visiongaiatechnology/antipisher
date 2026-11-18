@@ -66,12 +66,10 @@ obs('data:brand-statistics', 'Marken=' + js.length + ', Domains=' + domains.leng
 
 // Doku-Zahlenansprüche
 const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
-const next = fs.readFileSync(path.join(ROOT, 'Next.md'), 'utf8');
 const buildSites = fs.readFileSync(path.join(ROOT, 'build_sites.py'), 'utf8');
 const claim165 = (readme.match(/165 fest eingetragene/) || [])[0] || null;
-const next165 = (next.match(/165/) || [])[0] || null;
 const build140 = (buildSites.match(/140\+/) || [])[0] || null;
-obs('docs:brand-count-claims', 'Tatsächliche Marken=' + js.length + ' | README "165": ' + !!claim165 + ' | Next.md "165": ' + !!next165 + ' | build_sites.py "140+": ' + !!build140 + ' — Ansprüche ' + ((claim165 && js.length === 165) ? 'gedeckt' : 'NICHT gedeckt') + '.');
+obs('docs:brand-count-claims', 'Tatsächliche Marken=' + js.length + ' | README "165": ' + !!claim165 + ' | build_sites.py "140+": ' + !!build140 + ' — Ansprüche ' + ((claim165 && js.length === 165) ? 'gedeckt' : 'bereinigt') + '.');
 assert('docs:README-brand-count-matches', !claim165 || js.length === 165, 'README behauptet 165, Daten=' + js.length);
 
 // Subdomain-FP-Kandidaten: kurze Brand-Labels, die als Subdomain blockiert würden

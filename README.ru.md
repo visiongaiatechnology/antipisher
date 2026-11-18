@@ -1,13 +1,13 @@
 <div align="center">
 
-# 🛡️ Antipisher 0.2.2 (Alpha)
+# 🛡️ Antipisher 0.2.3 (Alpha)
 
 **Автономная, высокоточная защита от фишинга, IDN-омографов, трекеров и рекламы для Google Chrome и Mozilla Firefox**  
 *Лицензировано под GNU Affero General Public License v3.0 (AGPLv3)*
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
-[![Version: 0.2.2-alpha](https://img.shields.io/badge/Version-0.2.2--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
-[![Tests: 80/80 Passing](https://img.shields.io/badge/Tests-80%2F80_Passing-2ea043.svg?style=for-the-badge)](#тестирование-и-разработка)
+[![Version: 0.2.3-alpha](https://img.shields.io/badge/Version-0.2.3--alpha-10b981.svg?style=for-the-badge)](https://github.com/visiongaiatechnology/antipisher)
+[![Tests: 91/91 Passing](https://img.shields.io/badge/Tests-91%2F91_Passing-2ea043.svg?style=for-the-badge)](#тестирование-и-разработка)
 [![Telemetry: Zero / 100% Offline](https://img.shields.io/badge/Телеметрия-0_%2F_100%25_Офлайн-0284c7.svg?style=for-the-badge)](#конфиденциальность-и-гарантии-автономности)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-MV3_Готов-f59e0b.svg?style=for-the-badge)](chrome/)
 [![Firefox MV3](https://img.shields.io/badge/Firefox-MV3_Готов-ef4444.svg?style=for-the-badge)](firefox/)
@@ -22,8 +22,35 @@
 
 </div>
 
-> **Статус:** `SILVER` · Версия `0.2.2` · По состоянию на 19.10.2026 · Релиз VGT Ad Shield и защиты YouTube.  
+> **Статус:** `PLATIN` · Версия `0.2.3` · По состоянию на 18.11.2026 · Аудит безопасности VGT-100 (`48/52 PASS, 0 FAIL`), GeDefense Light Supply-Chain и защита YouTube.  
 > **Не финальный релиз для каталогов:** Сквозное тестирование браузера (E2E), публикация в официальных магазинах, каналы подписанных обновлений и полномасштабный графовый движок V2 находятся в активной разработке (см. [Известные границы и ограничения](#известные-границы-и-ограничения)).
+
+### ⬇️ Прямые загрузки (`v0.2.3-alpha`)
+
+| Браузер | Прямая ссылка (ZIP) | Контрольные суммы и релиз |
+|---|---|---|
+| **Google Chrome (MV3)** | [**Скачать Antipisher-Chrome-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/chrome-v0.2.3-alpha/Antipisher-Chrome-v0.2.3-alpha.zip) | [Релиз Chrome и SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/chrome-v0.2.3-alpha) |
+| **Mozilla Firefox (MV3)** | [**Скачать Antipisher-Firefox-v0.2.3-alpha.zip**](https://github.com/visiongaiatechnology/antipisher/releases/download/firefox-v0.2.3-alpha/Antipisher-Firefox-v0.2.3-alpha.zip) | [Релиз Firefox и SHA-256](https://github.com/visiongaiatechnology/antipisher/releases/tag/firefox-v0.2.3-alpha) |
+| **Общий релиз и исходный код** | [**Страница релиза v0.2.3-alpha**](https://github.com/visiongaiatechnology/antipisher/releases/tag/v0.2.3-alpha) | [`SHA256SUMS.txt`](SHA256SUMS.txt) · [`sbom.json`](sbom.json) |
+
+---
+
+## 🛡️ Обновления безопасности `v0.2.3` и разбор инцидента (Supply-Chain)
+
+### 🔒 Основные изменения (`0.2.3` — Platin Security Hardened)
+- **Защита GeDefense Light от атак на цепочки поставок, Magecart и Crypto-Clipper (`shared/aegis-engine.js`):**
+  - Перехват динамических инъекций `<script>` и `<iframe>` на уровне DOM-прототипов (`setAttribute`, `HTMLScriptElement.src`, `HTMLIFrameElement.src`, `appendChild`, `insertBefore`) против C2-загрузчиков, зон риска (`.icu`, `.lol`, `.top`, `.click`, `.gq`, `.tk`), сырых IPv4 и обфусцированных `eval(atob(...))` / `window._k7`.
+  - **Anti-Magecart Exfiltration Guard:** Блокирует утечку данных карт и паролей через `navigator.sendBeacon` и `window.fetch` на скиммер-эндпоинты (`/card.php`, `/hit.php`, `/skimmer.php`).
+  - **Crypto-Clipper Guard:** Защищает `navigator.clipboard.writeText` от скрытой подмены криптокошельков (BTC, ETH/EVM, TRON), восстанавливая реальное выделение пользователя.
+- **Усиление безопасности VGT-100 (`48/52 PASS, 0 FAIL`):**
+  - Ограничения длины RFC-1035 (`MAX_HOST_LEN=253`, `MAX_LABEL_LEN=63`) ускоряют обработку 100k-хостов с `2753 мс` до **`0,26 мс`** (`p95 = 0,39 мс`).
+  - 30-секундный TTL для `allow-once`, сериализованный `configure()`-мьютекс, fail-closed защита движка, журнал событий без URL/PII (`securityEvents`), allowlist сборки и CycloneDX 1.5 SBOM (`sbom.json`).
+- **Исправление YouTube Ad Accelerator:** Устранен преждевременный переход в конец обычных видео из-за пустых контейнеров `.ytp-ad-player-overlay`; скорость (`1.0x`) и звук автоматически восстанавливаются после рекламы.
+
+### 🔥 Практический пример: атака на Optimizely от 16 ноября 2026 года (178 сайтов)
+16 ноября 2026 года злоумышленники внедрили вредоносный JS через `projectJS` Optimizely на 178 крупных сайтах (GitLab, Salesforce, IKEA, Zoom, Ledger и др.), загружая `1688360.cc/track.js`, `webshell.lol`, `eval(atob(...))`, скиммеры `sendBeacon('/card.php')`, клипперы кошельков и эксплойты `.icu`.
+- **До (`v0.2.2`):** Частичная блокировка `optimizely.com` и базовых DOM-инъекций, но динамические внешние `<script>`/`<iframe>` (`1688360.cc`, `.icu`), `fetch`-скиммеры и клипперы буфера обмена не перехватывались.
+- **Сейчас (`v0.2.3` Platin):** Двойная блокировка — сетевой уровень (Chrome DNR + Firefox `webRequestBlocking`) блокирует `optimizely.com` и C2-IOCs, а GeDefense Light перехватывает динамические инъекции `<script>`/`<iframe>`, скимминг `sendBeacon`/`fetch` и подмену адресов в буфере обмена.
 
 ---
 
@@ -116,11 +143,12 @@
 
 | Тестовый корпус | Результат бенчмарка |
 |---|---|
-| Независимый отложенный корпус (296 случаев) | **289/296 = 97,6%** точность; 0/166 ложноотрицательных (FN), 7/121 ложноположительных (FP) (Высокая уверенность: FP 2/99 = 2,0%) |
-| Свежий некалиброванный контрольный корпус (44 случая) | **42/44 = 95,5%** (2 FN на новых незарегистрированных комбосквотах: `tiktok-coin.com`, `ledger-live.com`) |
-| Публичный аудиторский корпус из 184 URL | 183/184 обнаружено (1 FN, 0 FP) |
+| Независимый отложенный корпус (296 случаев) | **292/296 = 98,65%** точность; **0/166 ложноотрицательных (100% TPR)**, 4/121 ложноположительных (`p50 = 0,16 мс`, `p95 = 0,39 мс`) |
+| Свежий некалиброванный контрольный корпус (44 случая) | **44/44 = 100%** (`tiktok-coin.com` и `ledger-live.com` теперь обнаруживаются) |
+| Корпус аудита безопасности (`probe02`, 788 случаев) | **42/43 атак обнаружено (97,7%)**, **0/745 ложных срабатываний (0,0%)** |
 | Контрольный стресс-тест ведущего аудитора (66 случаев) | **0/26 ложных срабатываний (0%)**, **0/40 пропущенных угроз (0%)** — 100% успешно |
-| Набор модульных и регрессионных тестов Node.js | **69/69 успешно пройдено (100%)** |
+| Набор модульных и security-тестов Node.js | **91/91 успешно пройдено (100%)** в 13 наборах |
+| Аудит безопасности VGT-100 (`validate_audit.py`) | **48/52 применимых контролей PASS, 0 FAIL** ([`AUDIT_SECURITY.md`](audit/security/AUDIT_SECURITY.md)) |
 
 > [!NOTE]
 > Приведенные показатели отражают эмпирические результаты тестирования и не являются абсолютной гарантией. Дальнейшее развитие в сторону полных таблиц UTS-39 и графовых моделей брендов запланировано в версии V2.

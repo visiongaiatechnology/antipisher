@@ -94,20 +94,18 @@ function sendMessage(sb, req, sender) { return sb.events.message.listeners[0](re
   const afterClose = beforeRequest(sb, { url: 'https://paypa1.com/', tabId: 7 });
   assert('once:tab-close-clears-bypass', !!afterClose.redirectUrl, JSON.stringify(afterClose));
 
-  /* ---------- D. Bypass-Lebensdauer (Beobachtung) ---------- */
+  /* ---------- D. Bypass-Lebensdauer (TTL & Stale-Nav-Invalidierung) ---------- */
   sb = createSandbox(); setTab(sb, 7, GUARD);
   r = await sendMessage(sb, { type: 'allow-once', url: 'https://paypa1.com/', tabId: 7 }, { url: GUARD });
-  beforeRequest(sb, { url: 'https://evil.test/', tabId: 7 }); // andere geblockte Navigation
+  beforeRequest(sb, { url: 'https://evil.test/', tabId: 7 }); // andere Navigation invalidiert den einmaligen Bypass
   const stale = beforeRequest(sb, { url: 'https://paypa1.com/', tabId: 7 });
-  obs('once:no-ttl-stale-bypass',
-    'Ein gesetztes Einmal-Bypass bleibt unbegrenzt scharf, wenn die freigegebene Navigation nicht stattfindet (kein TTL/Alarm; firefox/background.js:6-9,29-34). Test: nach allow-once für A, einer anderen (geblockten) Navigation und erneutem A-Request wird A weiterhin erlaubt=' + (JSON.stringify(stale) === '{}') + '.');
+  assert('once:stale-bypass-cleared-on-other-nav', !!stale.redirectUrl, JSON.stringify(stale));
 
-  /* ---------- E. Fehlende Engine / Fehlerverhalten (Beobachtung) ---------- */
+  /* ---------- E. Fehlende Engine / Fail-Closed-Verhalten ---------- */
   sb = createSandbox({ withEngine: false });
-  let threw = null;
-  try { beforeRequest(sb, { url: 'https://paypa1.com/', tabId: 7 }); } catch (e) { threw = e; }
-  obs('engine:missing-engine-throws',
-    'Ohne geladene Detektor-Engine wirft analyzeRequest beim Zugriff auf engine.classify (firefox/background.js:10-11). Beobachtet: ' + (threw ? String(threw.message || threw) : 'kein Throw') + '. Ob Firefox die Hauptnavigation bei einem werfenden blocking-Listener blockiert oder durchlässt, ist ohne Browser-E2E NICHT_TESTED (Fail-open-Hypothese).');
+  let threw = null, failClosedRes = null;
+  try { failClosedRes = beforeRequest(sb, { url: 'https://paypa1.com/', tabId: 7 }); } catch (e) { threw = e; }
+  assert('engine:missing-engine-fails-closed', threw === null && failClosedRes && /^moz-extension:\/\/fake\/guard\.html\?url=/.test(failClosedRes.redirectUrl || ''), JSON.stringify({ threw, failClosedRes }));
 
   /* ---------- F. strictMode wird ignoriert (Parität) ---------- */
   sb = createSandbox({ local: { strictMode: false } });
