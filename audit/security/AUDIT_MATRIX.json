@@ -4,7 +4,7 @@
   "project": "Antipisher by GeDefense 0.2.4 (Platin Security Hardened) — Chrome MV3 + Firefox MV3 Browser-Extension",
   "profile": "GENERIC",
   "mode": "AUDIT_AND_PATCH",
-  "timestamp_utc": "2026-11-18T09:48:22.552Z",
+  "timestamp_utc": "2026-11-18T10:04:07.617Z",
   "repo_commit": "Lokaler Release-Build v0.2.4 (SHA256SUMS.txt & sbom.json verifiziert, 0 Dirty-Drift zwischen shared/ und chrome/|firefox/)",
   "scope": "Vollständiger Quellcode v0.2.4 (116 Dateien): Chrome- und Firefox-MV3-Extension, shared Detektor/Brand-DB (187 Marken / 353 Domains), Content-Shield, AEGIS Anti-Fingerprinting, Tracker-Shield, GeDefense Light (inkl. Optimizely/Magecart/Clipper-Abwehr), Guard-/Popup-/Options-Seiten, Build-Skripte, CycloneDX-SBOM, 13 Test-Suiten (91 Tests), 9 Security-Probes.",
   "release_gate": "CONDITIONAL",

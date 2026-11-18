@@ -1,6 +1,6 @@
 {
   "probe": "probe01_manifest_integrity",
-  "timestamp_utc": "2026-11-18T09:48:17.206Z",
+  "timestamp_utc": "2026-11-18T10:04:01.901Z",
   "root": ".",
   "assertions_total": 27,
   "assertions_failed": 0,

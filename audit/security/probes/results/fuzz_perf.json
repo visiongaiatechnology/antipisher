@@ -1,6 +1,6 @@
 {
   "probe": "probe07_fuzz_perf",
-  "timestamp_utc": "2026-11-18T09:48:21.429Z",
+  "timestamp_utc": "2026-11-18T10:04:06.420Z",
   "environment": "Node v24.13.0 (single process)",
   "fuzz": {
     "iterations": 20000,
@@ -13,40 +13,40 @@
       "name": "1k path",
       "status": "safe",
       "error": null,
-      "ms": 1.603
+      "ms": 0.677
     },
     {
       "name": "100k host-label",
       "status": "skip",
       "error": null,
-      "ms": 0.658
+      "ms": 0.281
     },
     {
       "name": "100k query",
       "status": "safe",
       "error": null,
-      "ms": 0.903
+      "ms": 0.844
     },
     {
       "name": "64 labels",
       "status": "skip",
       "error": null,
-      "ms": 0.059
+      "ms": 0.125
     },
     {
       "name": "idn 1k",
       "status": "skip",
       "error": null,
-      "ms": 0.092
+      "ms": 0.144
     }
   ],
   "latency": {
     "n": 5000,
-    "p50_ms": 0.0224,
-    "p95_ms": 0.3902,
-    "p99_ms": 0.5408,
-    "max_ms": 2.9465,
-    "mean_ms": 0.1265
+    "p50_ms": 0.0243,
+    "p95_ms": 0.4932,
+    "p99_ms": 0.7802,
+    "max_ms": 5.6241,
+    "mean_ms": 0.1447
   },
   "assertions_total": 10,
   "assertions_failed": 0,
@@ -89,12 +89,12 @@
     {
       "name": "large-input:no-throw-all",
       "ok": true,
-      "detail": "[{\"name\":\"1k path\",\"status\":\"safe\",\"error\":null,\"ms\":1.603},{\"name\":\"100k host-label\",\"status\":\"skip\",\"error\":null,\"ms\":0.658},{\"name\":\"100k query\",\"status\":\"safe\",\"error\":null,\"ms\":0.903},{\"name\":\"64 labels\",\"status\":\"skip\",\"error\":null,\"ms\":0.059},{\"name\":\"idn 1k\",\"status\":\"skip\",\"error\":null,\"ms\":0.092}]"
+      "detail": "[{\"name\":\"1k path\",\"status\":\"safe\",\"error\":null,\"ms\":0.677},{\"name\":\"100k host-label\",\"status\":\"skip\",\"error\":null,\"ms\":0.281},{\"name\":\"100k query\",\"status\":\"safe\",\"error\":null,\"ms\":0.844},{\"name\":\"64 labels\",\"status\":\"skip\",\"error\":null,\"ms\":0.125},{\"name\":\"idn 1k\",\"status\":\"skip\",\"error\":null,\"ms\":0.144}]"
     },
     {
       "name": "perf:p95-bounded-5ms",
       "ok": true,
-      "detail": "{\"n\":5000,\"p50_ms\":0.0224,\"p95_ms\":0.3902,\"p99_ms\":0.5408,\"max_ms\":2.9465,\"mean_ms\":0.1265}"
+      "detail": "{\"n\":5000,\"p50_ms\":0.0243,\"p95_ms\":0.4932,\"p99_ms\":0.7802,\"max_ms\":5.6241,\"mean_ms\":0.1447}"
     },
     {
       "name": "determinism:stable",
@@ -109,7 +109,7 @@
     },
     {
       "name": "perf:classify-latency",
-      "detail": "5.000 Klassifikationen: {\"n\":5000,\"p50_ms\":0.0224,\"p95_ms\":0.3902,\"p99_ms\":0.5408,\"max_ms\":2.9465,\"mean_ms\":0.1265} — README/Next.md werben mit \"< 1 ms Erkennungszeit pro URL\" (Next.md:33). Gemessene p95-Werte über mehrere Audit-Läufe: 0,60–1,81 ms (Audit-Container teils unter Last durch parallele Prozesse); der <1-ms-Claim ist damit nicht durchgängig reproduzierbar, die Latenz bleibt aber im niedrigen Millisekundenbereich."
+      "detail": "5.000 Klassifikationen: {\"n\":5000,\"p50_ms\":0.0243,\"p95_ms\":0.4932,\"p99_ms\":0.7802,\"max_ms\":5.6241,\"mean_ms\":0.1447} — README/Next.md werben mit \"< 1 ms Erkennungszeit pro URL\" (Next.md:33). Gemessene p95-Werte über mehrere Audit-Läufe: 0,60–1,81 ms (Audit-Container teils unter Last durch parallele Prozesse); der <1-ms-Claim ist damit nicht durchgängig reproduzierbar, die Latenz bleibt aber im niedrigen Millisekundenbereich."
     },
     {
       "name": "regex:inventory",

@@ -1,6 +1,6 @@
 {
   "probe": "probe09_static_scan",
-  "timestamp_utc": "2026-11-18T09:48:22.461266+00:00",
+  "timestamp_utc": "2026-11-18T10:04:07.521476+00:00",
   "python": "3.14.2",
   "root": ".",
   "file_count": 115,
@@ -112,8 +112,8 @@
     },
     {
       "path": "chrome/guard.css",
-      "size": 5499,
-      "sha256": "bdd68f3d6ab62588fefdd98a86d01b6e11f3fd5da4a9c27fd438aee79e2faf91"
+      "size": 5554,
+      "sha256": "0ec4ec1b883237fd42a78e0f38af7d025f9f506100337c117b8719cad75bd9ba"
     },
     {
       "path": "chrome/guard.html",
@@ -147,13 +147,13 @@
     },
     {
       "path": "chrome/options.css",
-      "size": 10445,
-      "sha256": "2c54ee0f9218806c3b492387692a2e587a40cb5faf70792ce3a9b05b6c5ecf0c"
+      "size": 11309,
+      "sha256": "8ef193bff7c6b60b0b7d36e923a39cbed06c24c8a55cbec87fc250ae3da6f4b8"
     },
     {
       "path": "chrome/options.html",
-      "size": 22559,
-      "sha256": "5e0ca33852a056eac5c6e18b3ba5dbd48fe4d39941211058b59b0e1a6e83234c"
+      "size": 22635,
+      "sha256": "f76bd270ee42f8a4ba1a946cacbf9b848ec808c6504a907dabb92d41902d5c4c"
     },
     {
       "path": "chrome/options.js",
@@ -257,8 +257,8 @@
     },
     {
       "path": "firefox/guard.css",
-      "size": 5499,
-      "sha256": "bdd68f3d6ab62588fefdd98a86d01b6e11f3fd5da4a9c27fd438aee79e2faf91"
+      "size": 5554,
+      "sha256": "0ec4ec1b883237fd42a78e0f38af7d025f9f506100337c117b8719cad75bd9ba"
     },
     {
       "path": "firefox/guard.html",
@@ -292,13 +292,13 @@
     },
     {
       "path": "firefox/options.css",
-      "size": 10445,
-      "sha256": "2c54ee0f9218806c3b492387692a2e587a40cb5faf70792ce3a9b05b6c5ecf0c"
+      "size": 11309,
+      "sha256": "8ef193bff7c6b60b0b7d36e923a39cbed06c24c8a55cbec87fc250ae3da6f4b8"
     },
     {
       "path": "firefox/options.html",
-      "size": 22559,
-      "sha256": "5e0ca33852a056eac5c6e18b3ba5dbd48fe4d39941211058b59b0e1a6e83234c"
+      "size": 22635,
+      "sha256": "f76bd270ee42f8a4ba1a946cacbf9b848ec808c6504a907dabb92d41902d5c4c"
     },
     {
       "path": "firefox/options.js",
@@ -403,7 +403,7 @@
     {
       "path": "sbom.json",
       "size": 8287,
-      "sha256": "c34bd822e49f3a05bf0d1a0a24a98f9293c25b6b84f9b57618dab8d739a1a26e"
+      "sha256": "2af0a2faf1bf5f0a76943e02799effb6755eb82c3b77f8dd99ba1e97b9be8523"
     },
     {
       "path": "scripts/generate_screenshots.py",
@@ -433,7 +433,7 @@
     {
       "path": "SHA256SUMS.txt",
       "size": 307,
-      "sha256": "c54642931877f2eec9d870bd66e76569d1fa800f7df6f07f5d7cb145f1f9b27c"
+      "sha256": "1b80f24c87b2ce00adc37c318508238f634b2eb81669c7d84899bbf4c88d2c57"
     },
     {
       "path": "shared/aegis-engine.js",
@@ -452,8 +452,8 @@
     },
     {
       "path": "shared/guard.css",
-      "size": 5499,
-      "sha256": "bdd68f3d6ab62588fefdd98a86d01b6e11f3fd5da4a9c27fd438aee79e2faf91"
+      "size": 5554,
+      "sha256": "0ec4ec1b883237fd42a78e0f38af7d025f9f506100337c117b8719cad75bd9ba"
     },
     {
       "path": "shared/guard.html",
@@ -472,13 +472,13 @@
     },
     {
       "path": "shared/options.css",
-      "size": 10445,
-      "sha256": "2c54ee0f9218806c3b492387692a2e587a40cb5faf70792ce3a9b05b6c5ecf0c"
+      "size": 11309,
+      "sha256": "8ef193bff7c6b60b0b7d36e923a39cbed06c24c8a55cbec87fc250ae3da6f4b8"
     },
     {
       "path": "shared/options.html",
-      "size": 22559,
-      "sha256": "5e0ca33852a056eac5c6e18b3ba5dbd48fe4d39941211058b59b0e1a6e83234c"
+      "size": 22635,
+      "sha256": "f76bd270ee42f8a4ba1a946cacbf9b848ec808c6504a907dabb92d41902d5c4c"
     },
     {
       "path": "shared/options.js",
@@ -734,7 +734,7 @@
       },
       {
         "file": "chrome/options.html",
-        "line": 257,
+        "line": 258,
         "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
       },
       {
@@ -874,7 +874,7 @@
       },
       {
         "file": "firefox/options.html",
-        "line": 257,
+        "line": 258,
         "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
       },
       {
@@ -1159,7 +1159,7 @@
       },
       {
         "file": "shared/options.html",
-        "line": 257,
+        "line": 258,
         "code": "<span class=\"opt-note\" id=\"optGeDefenseMasterNote\">Schützt DOM-Sinks (innerHTML, outerHTML, insertAdjacentHTML) und bereinigt schädliche Injektionen.</span>"
       },
       {

@@ -1,6 +1,6 @@
 {
   "probe": "probe06_guard_render_mock",
-  "timestamp_utc": "2026-11-18T09:48:19.911Z",
+  "timestamp_utc": "2026-11-18T10:04:04.678Z",
   "environment": "Node v24.13.0 vm-Sandbox mit DOM-Stub (kein echter Browser)",
   "assertions_total": 38,
   "assertions_failed": 0,

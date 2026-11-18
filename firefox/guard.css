@@ -308,6 +308,11 @@ h1:focus {
     width: 100%;
   }
 
+  .brandbar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   .brand-tag {
     display: none;
   }
