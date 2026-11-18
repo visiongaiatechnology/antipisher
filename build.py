@@ -99,10 +99,16 @@ for target in ('chrome', 'firefox'):
     print(f"Generated: {zip_path.name}")
 
 # Generate deterministic CycloneDX 1.5 zero-dependency SBOM (VGT-051 / VGT-055)
+def hash_normalized(path: Path) -> str:
+    data = path.read_bytes()
+    if path.suffix.lower() != '.png':
+        data = data.replace(b'\r\n', b'\n')
+    return hashlib.sha256(data).hexdigest()
+
 sbom_components = []
 for rel_path in sorted(ALLOWED_PACKAGE_FILES):
     f_path = ROOT / 'chrome' / rel_path
-    digest = hashlib.sha256(f_path.read_bytes()).hexdigest()
+    digest = hash_normalized(f_path)
     sbom_components.append({
         "type": "file",
         "name": rel_path,
@@ -111,7 +117,7 @@ for rel_path in sorted(ALLOWED_PACKAGE_FILES):
     })
 for extra_rel in ('chrome/background.js', 'firefox/background.js', 'chrome/manifest.json', 'firefox/manifest.json'):
     f_path = ROOT / extra_rel
-    digest = hashlib.sha256(f_path.read_bytes()).hexdigest()
+    digest = hash_normalized(f_path)
     sbom_components.append({
         "type": "file",
         "name": extra_rel,

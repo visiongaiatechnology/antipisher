@@ -293,7 +293,11 @@ test('VGT-051/055/059: CycloneDX SBOM exists, has zero external dependencies, an
       : path.join('chrome', comp.name);
     const full = path.join(ROOT, rel);
     assert.ok(fs.existsSync(full), `SBOM component missing on disk: ${rel}`);
-    const actualHash = crypto.createHash('sha256').update(fs.readFileSync(full)).digest('hex');
+    let data = fs.readFileSync(full);
+    if (!full.endsWith('.png')) {
+      data = Buffer.from(data.toString('utf8').replace(/\r\n/g, '\n'), 'utf8');
+    }
+    const actualHash = crypto.createHash('sha256').update(data).digest('hex');
     assert.equal(comp.hashes[0].content, actualHash, `Hash mismatch in SBOM for ${comp.name}`);
   }
 });
